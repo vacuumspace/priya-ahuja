@@ -5,5 +5,12 @@ export async function SidebarWithAuth() {
   const session = await auth()
   const signedIn = !!session?.user
   const admin = checkAdmin(session?.user?.email)
-  return <Sidebar isSignedIn={signedIn} isAdmin={admin} />
+  return (
+    <Sidebar
+      isSignedIn={signedIn}
+      isAdmin={admin}
+      userName={session?.user?.name ?? undefined}
+      userEmail={session?.user?.email ?? undefined}
+    />
+  )
 }
