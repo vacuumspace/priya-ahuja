@@ -33,7 +33,7 @@ const topicGroups = [
   },
 ]
 
-const bottomItems = [{ label: "contact", href: "/contact", badge: null }]
+const bottomItems: { label: string; href: string; badge: null }[] = []
 
 export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEmail }: SidebarProps = {}) {
   const pathname = usePathname()
@@ -167,16 +167,6 @@ export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEma
         })}
       </nav>
 
-      {/* CTA */}
-      <div className={`px-4 py-4 border-t border-peach-dark/20 ${collapsed ? "hidden" : ""}`}>
-        <Link
-          href="/consult"
-          className="block w-full text-center bg-ink text-cream text-xs font-sans font-semibold py-2.5 px-4 rounded-lg hover:bg-ink/80 transition-colors"
-        >
-          consult with Priya
-        </Link>
-      </div>
-
       {/* Profile + Footer */}
       {!collapsed && (
         <div className="border-t border-peach-dark/20 px-4 pt-3 pb-4 flex flex-col gap-3">
@@ -199,12 +189,9 @@ export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEma
                 </a>
               </>
             ) : (
-              <>
-                <span className="text-[11px] font-sans text-ink/60 leading-tight">not signed in</span>
-                <a href="/signin" className="mt-1 text-[11px] font-sans font-medium text-ink hover:underline transition-colors">
-                  sign in →
-                </a>
-              </>
+              <a href="/signin" className="text-[11px] font-sans text-ink/50 hover:text-ink transition-colors text-center">
+                sign in
+              </a>
             )}
           </div>
 
@@ -222,9 +209,10 @@ export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEma
           </div>
 
           {/* Legal footer */}
-          <div className="flex gap-3">
-            <Link href="/privacy-policy" className="text-[10px] font-sans text-ink/40 hover:text-ink transition-colors">privacy policy</Link>
-            <Link href="/terms" className="text-[10px] font-sans text-ink/40 hover:text-ink transition-colors">terms & conditions</Link>
+          <div className="flex gap-3 whitespace-nowrap">
+            <Link href="/contact" className="text-[10px] font-sans text-ink/40 hover:text-ink transition-colors">contact</Link>
+            <Link href="/privacy-policy" className="text-[10px] font-sans text-ink/40 hover:text-ink transition-colors">privacy</Link>
+            <Link href="/terms" className="text-[10px] font-sans text-ink/40 hover:text-ink transition-colors">terms</Link>
           </div>
 
         </div>

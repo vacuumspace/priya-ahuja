@@ -100,6 +100,26 @@ export default function HomePage() {
               role: "co-founder, b2b saas",
               text: "i came in thinking i needed pitch help. we reworked my go-to-market entirely. practical and no-nonsense.",
             },
+            {
+              name: "rohit mehta",
+              role: "founder, edtech",
+              text: "one session with Priya was worth three months of advice from well-meaning people who hadn't actually raised. she cuts straight to what matters.",
+            },
+            {
+              name: "divya nair",
+              role: "co-founder, healthtech",
+              text: "she helped us see our unit economics from an investor's lens — not just as a model on a spreadsheet. we fixed the story before it became a red flag.",
+            },
+            {
+              name: "karan bhatia",
+              role: "founder, logistics",
+              text: "i was stuck on whether to raise or extend runway. Priya walked me through the tradeoffs in a way that made the decision obvious. clear thinking, no agenda.",
+            },
+            {
+              name: "simran oberoi",
+              role: "founder, consumer brand",
+              text: "i'd been stalling on the fundraise for weeks. after talking to Priya i had a plan i actually believed in. the follow-through from there was mine — but the clarity was hers.",
+            },
           ].map((t) => (
             <div key={t.name} className="pl-4 border-l-2 border-peach-dark/30">
               <p className="font-sans text-sm text-ink/60 leading-relaxed">&ldquo;{t.text}&rdquo;</p>
