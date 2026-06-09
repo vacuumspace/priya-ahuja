@@ -5,6 +5,8 @@ import { usePathname } from "next/navigation"
 import { useState, useEffect } from "react"
 import { ChevronDown, PanelLeftClose, PanelLeftOpen, Menu, X } from "lucide-react"
 
+type SidebarProps = { isAdmin?: boolean; isSignedIn?: boolean }
+
 const topItems = [
   { label: "home", href: "/", badge: null },
   { label: "consult", href: "/services", badge: null },
@@ -33,7 +35,7 @@ const topicGroups = [
 
 const bottomItems = [{ label: "contact", href: "/contact", badge: null }]
 
-export function Sidebar() {
+export function Sidebar({ isAdmin = false, isSignedIn = false }: SidebarProps = {}) {
   const pathname = usePathname()
   const [collapsed, setCollapsed] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -174,6 +176,26 @@ export function Sidebar() {
           consult with Priya
         </Link>
       </div>
+
+      {/* Admin / Auth */}
+      {!collapsed && (
+        <div className="px-4 pb-2">
+          {isAdmin && (
+            <Link href="/admin" className="block text-[11px] text-ink/50 hover:text-ink font-sans transition-colors mb-1">
+              admin
+            </Link>
+          )}
+          {isSignedIn ? (
+            <a href="/api/auth/signout" className="block text-[11px] text-ink/40 hover:text-ink font-sans transition-colors">
+              sign out
+            </a>
+          ) : (
+            <a href="/api/auth/signin" className="block text-[11px] text-ink/40 hover:text-ink font-sans transition-colors">
+              sign in
+            </a>
+          )}
+        </div>
+      )}
 
       {/* Footer */}
       <div className={`px-4 pb-4 pt-2 flex items-center justify-between ${collapsed ? "hidden" : ""}`}>
