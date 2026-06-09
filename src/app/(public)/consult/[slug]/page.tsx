@@ -25,9 +25,9 @@ export default async function ServiceDetailPage({ params }: Props) {
   return (
     <div className="min-h-screen bg-cream">
       <div className="flex justify-between items-center px-4 md:px-10 py-4 text-[11px] text-ink/50 font-sans border-b border-border">
-        <Link href="/services" className="flex items-center gap-1.5 hover:text-ink transition-colors">
+        <Link href="/consult" className="flex items-center gap-1.5 hover:text-ink transition-colors">
           <ArrowLeft size={11} />
-          all services
+          all consults
         </Link>
         <span className="text-[10px] bg-amber-tag text-ink/60 px-2 py-0.5 rounded font-sans">
           {service.tag}

@@ -66,7 +66,7 @@ export default function ServicesPage() {
           {filtered.map((service, i) => (
             <Link
               key={service.slug}
-              href={`/services/${service.slug}`}
+              href={`/consult/${service.slug}`}
               className="group block bg-card border border-border rounded-2xl p-6 hover:border-peach-dark/40 hover:shadow-sm transition-all"
             >
               <div className="flex items-start justify-between gap-6">

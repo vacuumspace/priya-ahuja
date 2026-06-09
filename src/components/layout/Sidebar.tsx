@@ -9,7 +9,7 @@ type SidebarProps = { isAdmin?: boolean; isSignedIn?: boolean; userName?: string
 
 const topItems = [
   { label: "home", href: "/", badge: null },
-  { label: "consult", href: "/services", badge: null },
+  { label: "consult", href: "/consult", badge: null },
 ]
 
 const topicGroups = [
@@ -170,7 +170,7 @@ export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEma
       {/* CTA */}
       <div className={`px-4 py-4 border-t border-peach-dark/20 ${collapsed ? "hidden" : ""}`}>
         <Link
-          href="/services"
+          href="/consult"
           className="block w-full text-center bg-ink text-cream text-xs font-sans font-semibold py-2.5 px-4 rounded-lg hover:bg-ink/80 transition-colors"
         >
           consult with Priya
@@ -201,7 +201,7 @@ export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEma
             ) : (
               <>
                 <span className="text-[11px] font-sans text-ink/60 leading-tight">not signed in</span>
-                <a href="/api/auth/signin" className="mt-1 text-[11px] font-sans font-medium text-ink hover:underline transition-colors">
+                <a href="/signin" className="mt-1 text-[11px] font-sans font-medium text-ink hover:underline transition-colors">
                   sign in →
                 </a>
               </>
