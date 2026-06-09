@@ -1,6 +1,6 @@
 import { db } from "@/lib/db"
-import { bookings, services, digitalProducts, users } from "@/lib/db/schema"
-import { eq, count, desc } from "drizzle-orm"
+import { bookings, services, digitalProducts } from "@/lib/db/schema"
+import { eq, count } from "drizzle-orm"
 
 async function getStats() {
   const [totalBookings, pendingBookings, paidBookings, activeServices, activeProducts] =
@@ -30,10 +30,7 @@ const statCards = (stats: Awaited<ReturnType<typeof getStats>>) => [
 ]
 
 export default async function AdminDashboard() {
-  const [stats, allUsers] = await Promise.all([
-    getStats(),
-    db.select().from(users).orderBy(desc(users.id)),
-  ])
+  const stats = await getStats()
   const cards = statCards(stats)
 
   return (
@@ -60,34 +57,6 @@ export default async function AdminDashboard() {
         ))}
       </div>
 
-      <div className="mt-12 max-w-2xl">
-        <div className="flex items-baseline gap-2 mb-4">
-          <h2 className="font-heading text-xl font-700 text-ink">Users</h2>
-          <span className="font-sans text-xs text-ink/40">{allUsers.length} signed in</span>
-        </div>
-        <div className="border border-border rounded-2xl overflow-hidden">
-          {allUsers.length === 0 ? (
-            <p className="font-sans text-sm text-ink/40 px-6 py-8 text-center">No users yet.</p>
-          ) : (
-            <table className="w-full">
-              <thead>
-                <tr className="border-b border-border bg-card">
-                  <th className="text-left font-sans text-[11px] text-ink/40 uppercase tracking-widest px-5 py-3">Name</th>
-                  <th className="text-left font-sans text-[11px] text-ink/40 uppercase tracking-widest px-5 py-3">Email</th>
-                </tr>
-              </thead>
-              <tbody>
-                {allUsers.map((user, i) => (
-                  <tr key={user.id} className={i !== allUsers.length - 1 ? "border-b border-border" : ""}>
-                    <td className="px-5 py-3 font-sans text-sm text-ink">{user.name ?? "—"}</td>
-                    <td className="px-5 py-3 font-sans text-sm text-ink/60">{user.email}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
-        </div>
-      </div>
     </div>
   )
 }

@@ -11,11 +11,13 @@ import {
   Briefcase,
   Package,
   BookOpen,
+  Users,
   LogOut,
 } from "lucide-react"
 
 const navItems = [
   { label: "Dashboard", href: "/admin", icon: LayoutDashboard },
+  { label: "Users", href: "/admin/users", icon: Users },
   { label: "Bookings", href: "/admin/bookings", icon: CalendarCheck },
   { label: "Services", href: "/admin/services", icon: Briefcase },
   { label: "Digital Products", href: "/admin/products", icon: Package },

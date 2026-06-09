@@ -83,6 +83,7 @@ export const users = pgTable("users", {
   email: text("email").notNull(),
   emailVerified: timestamp("email_verified"),
   image: text("image"),
+  createdAt: timestamp("created_at").defaultNow(),
 })
 
 export const accounts = pgTable("accounts", {
