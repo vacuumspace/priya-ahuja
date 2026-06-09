@@ -9,7 +9,14 @@ export const services = pgTable("services", {
   price: integer("price").notNull(), // in paise (₹100 = 10000)
   originalPrice: integer("original_price"), // for showing strikethrough
   durationMin: integer("duration_min"), // null for async (Priority DM)
-  type: varchar("type", { length: 20 }).notNull().default("call"), // call | dm | product
+  type: varchar("type", { length: 20 }).notNull().default("call"), // call | dm | report
+  tag: varchar("tag", { length: 50 }).notNull().default("general"),
+  highlights: text("highlights").array().notNull().default([]),
+  whoIsItFor: text("who_is_it_for"),
+  acceptsDeckLink: boolean("accepts_deck_link").notNull().default(false),
+  deckLinkLabel: text("deck_link_label"),
+  deckLinkPlaceholder: text("deck_link_placeholder"),
+  urgencyNote: text("urgency_note"),
   isActive: boolean("is_active").notNull().default(true),
   order: integer("order").notNull().default(0),
   createdAt: timestamp("created_at").notNull().defaultNow(),
@@ -46,6 +53,7 @@ export const digitalProducts = pgTable("digital_products", {
   title: text("title").notNull(),
   description: text("description").notNull(),
   shortDescription: text("short_description"),
+  tag: varchar("tag", { length: 50 }).notNull().default("template"),
   price: integer("price").notNull(), // in paise
   fileUrl: text("file_url"), // Vercel Blob URL
   previewImageUrl: text("preview_image_url"),

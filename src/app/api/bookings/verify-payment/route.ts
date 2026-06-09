@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { db } from "@/lib/db"
-import { bookings } from "@/lib/db/schema"
+import { bookings, availability } from "@/lib/db/schema"
 import { verifyPaymentSignature } from "@/lib/razorpay"
 import { eq } from "drizzle-orm"
 import { sendBookingConfirmation } from "@/lib/resend"
@@ -28,7 +28,14 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Booking not found" }, { status: 404 })
     }
 
-    // Send confirmation email (fire-and-forget — don't fail the response if email fails)
+    // Mark the slot as booked so it disappears from the picker
+    if (booking.slotId) {
+      await db
+        .update(availability)
+        .set({ isBooked: true })
+        .where(eq(availability.id, booking.slotId))
+    }
+
     sendBookingConfirmation({
       to: booking.userEmail,
       name: booking.userName,

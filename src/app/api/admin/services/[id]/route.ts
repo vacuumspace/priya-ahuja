@@ -14,7 +14,11 @@ export async function PATCH(
 
   const { id } = await params
   const body = await request.json()
-  const { isActive, order, price, title, description } = body
+  const {
+    isActive, order, price, title, description, shortDescription,
+    tag, highlights, whoIsItFor, acceptsDeckLink,
+    deckLinkLabel, deckLinkPlaceholder, urgencyNote,
+  } = body
 
   const update: Record<string, unknown> = {}
   if (isActive !== undefined) update.isActive = isActive
@@ -22,8 +26,31 @@ export async function PATCH(
   if (price !== undefined) update.price = price
   if (title !== undefined) update.title = title
   if (description !== undefined) update.description = description
+  if (shortDescription !== undefined) update.shortDescription = shortDescription
+  if (tag !== undefined) update.tag = tag
+  if (highlights !== undefined) update.highlights = highlights
+  if (whoIsItFor !== undefined) update.whoIsItFor = whoIsItFor
+  if (acceptsDeckLink !== undefined) update.acceptsDeckLink = acceptsDeckLink
+  if (deckLinkLabel !== undefined) update.deckLinkLabel = deckLinkLabel
+  if (deckLinkPlaceholder !== undefined) update.deckLinkPlaceholder = deckLinkPlaceholder
+  if (urgencyNote !== undefined) update.urgencyNote = urgencyNote
 
   await db.update(services).set(update).where(eq(services.id, id))
+
+  return Response.json({ ok: true })
+}
+
+export async function DELETE(
+  _request: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const session = await auth()
+  if (!session || !isAdmin(session.user?.email)) {
+    return new Response("Forbidden", { status: 403 })
+  }
+
+  const { id } = await params
+  await db.delete(services).where(eq(services.id, id))
 
   return Response.json({ ok: true })
 }

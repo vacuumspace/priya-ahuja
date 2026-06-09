@@ -1,39 +1,190 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { ChevronUp, ChevronDown } from "lucide-react"
+import { ChevronUp, ChevronDown, Trash2, Plus, X, CalendarDays } from "lucide-react"
 
 type Service = {
   id: string
   slug: string
   title: string
   description: string
+  shortDescription: string | null
   price: number
   originalPrice: number | null
   durationMin: number | null
   type: string
+  tag: string
+  highlights: string[]
+  whoIsItFor: string | null
+  acceptsDeckLink: boolean
+  deckLinkLabel: string | null
+  deckLinkPlaceholder: string | null
+  urgencyNote: string | null
   isActive: boolean
   order: number
 }
 
-function formatPrice(paise: number) {
-  return "₹" + (paise / 100).toLocaleString("en-IN")
+type Slot = {
+  id: string
+  serviceId: string
+  date: string
+  startTime: string
+  endTime: string
+  isBooked: boolean
 }
+
+// ─── Slots Panel ────────────────────────────────────────────────────────────
+
+function SlotsPanel({ service }: { service: Service }) {
+  const [slots, setSlots] = useState<Slot[]>([])
+  const [loading, setLoading] = useState(true)
+  const [date, setDate] = useState("")
+  const [startTime, setStartTime] = useState("")
+  const [endTime, setEndTime] = useState("")
+  const [saving, setSaving] = useState(false)
+
+  useEffect(() => {
+    fetch(`/api/admin/availability?serviceId=${service.id}`)
+      .then((r) => r.json())
+      .then((data) => { setSlots(data); setLoading(false) })
+  }, [service.id])
+
+  const addSlot = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setSaving(true)
+    const res = await fetch("/api/admin/availability", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ serviceId: service.id, date, startTime, endTime }),
+    })
+    const slot = await res.json()
+    setSlots((prev) => [...prev, slot].sort((a, b) => a.date.localeCompare(b.date) || a.startTime.localeCompare(b.startTime)))
+    setDate(""); setStartTime(""); setEndTime("")
+    setSaving(false)
+  }
+
+  const deleteSlot = async (id: string) => {
+    await fetch(`/api/admin/availability/${id}`, { method: "DELETE" })
+    setSlots((prev) => prev.filter((s) => s.id !== id))
+  }
+
+  const grouped = slots.reduce<Record<string, Slot[]>>((acc, slot) => {
+    if (!acc[slot.date]) acc[slot.date] = []
+    acc[slot.date].push(slot)
+    return acc
+  }, {})
+
+  const formatDate = (d: string) =>
+    new Date(d + "T00:00:00").toLocaleDateString("en-IN", { weekday: "short", day: "numeric", month: "short" })
+
+  return (
+    <div className="mt-3 border-t border-border pt-4">
+      <p className="text-[10px] font-sans text-ink/40 uppercase tracking-widest mb-3">Availability Slots</p>
+
+      {loading ? (
+        <p className="text-xs font-sans text-ink/30">Loading…</p>
+      ) : (
+        <>
+          {Object.keys(grouped).length === 0 ? (
+            <p className="text-xs font-sans text-ink/30 mb-3">No slots yet.</p>
+          ) : (
+            <div className="space-y-2 mb-4">
+              {Object.entries(grouped).map(([date, daySlots]) => (
+                <div key={date}>
+                  <p className="text-[10px] font-sans text-ink/50 mb-1">{formatDate(date)}</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {daySlots.map((slot) => (
+                      <div
+                        key={slot.id}
+                        className={`flex items-center gap-1.5 text-[11px] font-sans px-2.5 py-1 rounded-lg border ${
+                          slot.isBooked
+                            ? "bg-ink/5 border-border text-ink/30 line-through"
+                            : "bg-cream border-border text-ink/70"
+                        }`}
+                      >
+                        {slot.startTime}–{slot.endTime}
+                        {!slot.isBooked && (
+                          <button
+                            onClick={() => deleteSlot(slot.id)}
+                            className="text-ink/20 hover:text-red-400 transition-colors ml-0.5"
+                          >
+                            <X size={11} />
+                          </button>
+                        )}
+                        {slot.isBooked && <span className="text-[9px] text-ink/30 ml-0.5">booked</span>}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          <form onSubmit={addSlot} className="flex items-end gap-2 flex-wrap">
+            <div>
+              <label className="text-[10px] font-sans text-ink/40 block mb-1">Date</label>
+              <input
+                type="date"
+                required
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+                className="text-xs font-sans bg-cream border border-border rounded-lg px-2 py-1.5 text-ink focus:outline-none focus:border-peach-dark/50"
+              />
+            </div>
+            <div>
+              <label className="text-[10px] font-sans text-ink/40 block mb-1">Start</label>
+              <input
+                type="time"
+                required
+                value={startTime}
+                onChange={(e) => setStartTime(e.target.value)}
+                className="text-xs font-sans bg-cream border border-border rounded-lg px-2 py-1.5 text-ink focus:outline-none focus:border-peach-dark/50"
+              />
+            </div>
+            <div>
+              <label className="text-[10px] font-sans text-ink/40 block mb-1">End</label>
+              <input
+                type="time"
+                required
+                value={endTime}
+                onChange={(e) => setEndTime(e.target.value)}
+                className="text-xs font-sans bg-cream border border-border rounded-lg px-2 py-1.5 text-ink focus:outline-none focus:border-peach-dark/50"
+              />
+            </div>
+            <button
+              type="submit"
+              disabled={saving}
+              className="flex items-center gap-1.5 text-xs font-sans font-semibold bg-ink text-cream px-3 py-1.5 rounded-lg hover:bg-ink/80 disabled:opacity-50 transition-colors"
+            >
+              <Plus size={12} />
+              {saving ? "Adding…" : "Add Slot"}
+            </button>
+          </form>
+        </>
+      )}
+    </div>
+  )
+}
+
+// ─── Service Row ─────────────────────────────────────────────────────────────
 
 function ServiceRow({
   service,
   onUpdate,
   onMove,
+  onDelete,
   isFirst,
   isLast,
 }: {
   service: Service
   onUpdate: (id: string, patch: Partial<Service>) => void
   onMove: (id: string, direction: "up" | "down") => void
+  onDelete: (id: string) => void
   isFirst: boolean
   isLast: boolean
 }) {
   const [price, setPrice] = useState(String(service.price / 100))
+  const [showSlots, setShowSlots] = useState(false)
 
   const patch = async (data: Partial<Service>) => {
     await fetch(`/api/admin/services/${service.id}`, {
@@ -44,83 +195,255 @@ function ServiceRow({
     onUpdate(service.id, data)
   }
 
+  const handleDelete = async () => {
+    if (!confirm(`Delete "${service.title}"? This cannot be undone.`)) return
+    await fetch(`/api/admin/services/${service.id}`, { method: "DELETE" })
+    onDelete(service.id)
+  }
+
   return (
-    <div className={`bg-card border rounded-2xl p-5 flex items-start gap-4 ${service.isActive ? "border-border" : "border-border opacity-60"}`}>
-      {/* Reorder */}
-      <div className="flex flex-col gap-1 pt-0.5">
-        <button
-          onClick={() => onMove(service.id, "up")}
-          disabled={isFirst}
-          className="p-1 rounded text-ink/30 hover:text-ink/60 disabled:opacity-20 transition-colors"
-        >
-          <ChevronUp size={14} />
-        </button>
-        <button
-          onClick={() => onMove(service.id, "down")}
-          disabled={isLast}
-          className="p-1 rounded text-ink/30 hover:text-ink/60 disabled:opacity-20 transition-colors"
-        >
-          <ChevronDown size={14} />
-        </button>
-      </div>
-
-      {/* Info */}
-      <div className="flex-1 min-w-0">
-        <div className="flex items-center gap-2 mb-1">
-          <span className="text-[10px] font-mono text-ink/30">#{service.order}</span>
-          <span className="text-[10px] bg-amber-tag text-ink/60 px-2 py-0.5 rounded font-sans">{service.type}</span>
+    <div className={`bg-card border rounded-2xl p-5 ${service.isActive ? "border-border" : "border-border opacity-60"}`}>
+      <div className="flex items-start gap-4">
+        <div className="flex flex-col gap-1 pt-0.5">
+          <button onClick={() => onMove(service.id, "up")} disabled={isFirst} className="p-1 rounded text-ink/30 hover:text-ink/60 disabled:opacity-20 transition-colors">
+            <ChevronUp size={14} />
+          </button>
+          <button onClick={() => onMove(service.id, "down")} disabled={isLast} className="p-1 rounded text-ink/30 hover:text-ink/60 disabled:opacity-20 transition-colors">
+            <ChevronDown size={14} />
+          </button>
         </div>
-        <p className="font-heading text-base font-700 text-ink normal-case">{service.title}</p>
-        <p className="font-sans text-xs text-ink/50 mt-1 leading-relaxed line-clamp-2">{service.description}</p>
+
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-2 mb-1">
+            <span className="text-[10px] font-mono text-ink/30">#{service.order}</span>
+            <span className="text-[10px] bg-amber-tag text-ink/60 px-2 py-0.5 rounded font-sans">{service.type}</span>
+            <span className="text-[10px] bg-peach/40 text-ink/50 px-2 py-0.5 rounded font-sans">{service.tag}</span>
+            <span className="text-[10px] font-mono text-ink/25">{service.slug}</span>
+          </div>
+          <p className="font-heading text-base font-700 text-ink normal-case">{service.title}</p>
+          <p className="font-sans text-xs text-ink/50 mt-1 leading-relaxed line-clamp-2">{service.description}</p>
+          {service.highlights.length > 0 && (
+            <p className="text-[10px] text-ink/30 font-sans mt-1">{service.highlights.length} highlights · {service.whoIsItFor ? "who it's for set" : "no who-it's-for"}</p>
+          )}
+        </div>
+
+        <div className="flex items-center gap-1.5 mt-1">
+          <span className="text-sm font-sans text-ink/50">₹</span>
+          <input
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+            onBlur={() => {
+              const val = Math.round(parseFloat(price) * 100)
+              if (!isNaN(val)) patch({ price: val })
+            }}
+            className="w-24 text-sm font-sans bg-cream border border-border rounded-lg px-2 py-1 text-ink focus:outline-none focus:border-peach-dark/50"
+          />
+        </div>
+
+        {service.type === "call" && (
+          <button
+            onClick={() => setShowSlots((v) => !v)}
+            className={`mt-1 flex items-center gap-1.5 text-xs font-sans px-2.5 py-1 rounded-lg border transition-colors ${
+              showSlots ? "bg-ink text-cream border-ink" : "bg-transparent text-ink/50 border-border hover:border-ink/30 hover:text-ink"
+            }`}
+          >
+            <CalendarDays size={12} />
+            Slots
+          </button>
+        )}
+
+        <button
+          onClick={() => patch({ isActive: !service.isActive })}
+          className={`mt-1 flex-shrink-0 w-10 h-5 rounded-full transition-colors relative ${service.isActive ? "bg-ink" : "bg-border"}`}
+          aria-label={service.isActive ? "Deactivate" : "Activate"}
+        >
+          <span className={`absolute top-0.5 w-4 h-4 rounded-full bg-white shadow transition-all ${service.isActive ? "left-5" : "left-0.5"}`} />
+        </button>
+
+        <button onClick={handleDelete} className="mt-1 p-1.5 rounded-lg text-ink/25 hover:text-red-500 hover:bg-red-50 transition-colors" aria-label="Delete">
+          <Trash2 size={14} />
+        </button>
       </div>
 
-      {/* Price edit */}
-      <div className="flex items-center gap-1.5 mt-1">
-        <span className="text-sm font-sans text-ink/50">₹</span>
-        <input
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-          onBlur={() => {
-            const val = Math.round(parseFloat(price) * 100)
-            if (!isNaN(val)) patch({ price: val })
-          }}
-          className="w-24 text-sm font-sans bg-cream border border-border rounded-lg px-2 py-1 text-ink focus:outline-none focus:border-peach-dark/50"
-        />
-      </div>
-
-      {/* Active toggle */}
-      <button
-        onClick={() => patch({ isActive: !service.isActive })}
-        className={`mt-1 flex-shrink-0 w-10 h-5 rounded-full transition-colors relative ${service.isActive ? "bg-ink" : "bg-border"}`}
-        aria-label={service.isActive ? "Deactivate" : "Activate"}
-      >
-        <span
-          className={`absolute top-0.5 w-4 h-4 rounded-full bg-white shadow transition-all ${service.isActive ? "left-5" : "left-0.5"}`}
-        />
-      </button>
+      {showSlots && service.type === "call" && <SlotsPanel service={service} />}
     </div>
   )
 }
+
+// ─── Add Service Form ────────────────────────────────────────────────────────
+
+const SERVICE_TAGS = ["fundraising", "strategy", "deals", "career", "urgent", "async", "general"]
+
+function AddServiceForm({ onAdd }: { onAdd: (s: Service) => void }) {
+  const [open, setOpen] = useState(false)
+  const [saving, setSaving] = useState(false)
+  const [highlightsText, setHighlightsText] = useState("")
+  const [form, setForm] = useState({
+    slug: "", title: "", shortDescription: "", description: "",
+    price: "", originalPrice: "", durationMin: "", type: "call",
+    tag: "general", whoIsItFor: "", urgencyNote: "",
+    acceptsDeckLink: false, deckLinkLabel: "", deckLinkPlaceholder: "",
+  })
+
+  const set = (k: string, v: string | boolean) => setForm((f) => ({ ...f, [k]: v }))
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setSaving(true)
+    const highlights = highlightsText.split("\n").map((l) => l.trim()).filter(Boolean)
+    const res = await fetch("/api/admin/services", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        slug: form.slug, title: form.title,
+        shortDescription: form.shortDescription, description: form.description,
+        price: parseFloat(form.price),
+        originalPrice: form.originalPrice ? parseFloat(form.originalPrice) : null,
+        durationMin: form.durationMin ? parseInt(form.durationMin) : null,
+        type: form.type, tag: form.tag,
+        highlights, whoIsItFor: form.whoIsItFor || null,
+        urgencyNote: form.urgencyNote || null,
+        acceptsDeckLink: form.acceptsDeckLink,
+        deckLinkLabel: form.deckLinkLabel || null,
+        deckLinkPlaceholder: form.deckLinkPlaceholder || null,
+      }),
+    })
+    const data = await res.json()
+    onAdd(data)
+    setForm({ slug: "", title: "", shortDescription: "", description: "", price: "", originalPrice: "", durationMin: "", type: "call", tag: "general", whoIsItFor: "", urgencyNote: "", acceptsDeckLink: false, deckLinkLabel: "", deckLinkPlaceholder: "" })
+    setHighlightsText("")
+    setOpen(false)
+    setSaving(false)
+  }
+
+  if (!open) {
+    return (
+      <button onClick={() => setOpen(true)} className="flex items-center gap-2 text-sm font-sans font-semibold text-ink/60 border border-dashed border-border rounded-2xl px-5 py-3.5 hover:border-ink/30 hover:text-ink transition-colors w-full">
+        <Plus size={14} /> Add Service
+      </button>
+    )
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="bg-card border border-peach-dark/30 rounded-2xl p-5">
+      <div className="flex items-center justify-between mb-4">
+        <p className="font-heading text-base font-700 text-ink">New Service</p>
+        <button type="button" onClick={() => setOpen(false)} className="text-ink/30 hover:text-ink"><X size={16} /></button>
+      </div>
+
+      <div className="grid grid-cols-3 gap-3 mb-3">
+        <div className="col-span-2">
+          <label className="text-[10px] font-sans text-ink/40 uppercase tracking-wide block mb-1">Slug *</label>
+          <input required value={form.slug} onChange={(e) => set("slug", e.target.value)} placeholder="e.g. pitch-deck-analysis" className="w-full text-sm font-sans bg-cream border border-border rounded-lg px-3 py-1.5 text-ink focus:outline-none focus:border-peach-dark/50" />
+        </div>
+        <div>
+          <label className="text-[10px] font-sans text-ink/40 uppercase tracking-wide block mb-1">Type *</label>
+          <select value={form.type} onChange={(e) => set("type", e.target.value)} className="w-full text-sm font-sans bg-cream border border-border rounded-lg px-3 py-1.5 text-ink focus:outline-none focus:border-peach-dark/50">
+            <option value="call">call</option>
+            <option value="dm">dm</option>
+            <option value="report">report</option>
+          </select>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-2 gap-3 mb-3">
+        <div>
+          <label className="text-[10px] font-sans text-ink/40 uppercase tracking-wide block mb-1">Tag *</label>
+          <select value={form.tag} onChange={(e) => set("tag", e.target.value)} className="w-full text-sm font-sans bg-cream border border-border rounded-lg px-3 py-1.5 text-ink focus:outline-none focus:border-peach-dark/50">
+            {SERVICE_TAGS.map((t) => <option key={t} value={t}>{t}</option>)}
+          </select>
+        </div>
+        <div>
+          <label className="text-[10px] font-sans text-ink/40 uppercase tracking-wide block mb-1">Duration (min)</label>
+          <input type="number" value={form.durationMin} onChange={(e) => set("durationMin", e.target.value)} placeholder="30" className="w-full text-sm font-sans bg-cream border border-border rounded-lg px-3 py-1.5 text-ink focus:outline-none focus:border-peach-dark/50" />
+        </div>
+      </div>
+
+      <div className="mb-3">
+        <label className="text-[10px] font-sans text-ink/40 uppercase tracking-wide block mb-1">Title *</label>
+        <input required value={form.title} onChange={(e) => set("title", e.target.value)} className="w-full text-sm font-sans bg-cream border border-border rounded-lg px-3 py-1.5 text-ink focus:outline-none focus:border-peach-dark/50" />
+      </div>
+
+      <div className="mb-3">
+        <label className="text-[10px] font-sans text-ink/40 uppercase tracking-wide block mb-1">Short Description</label>
+        <input value={form.shortDescription} onChange={(e) => set("shortDescription", e.target.value)} placeholder="One-liner shown on listing" className="w-full text-sm font-sans bg-cream border border-border rounded-lg px-3 py-1.5 text-ink focus:outline-none focus:border-peach-dark/50" />
+      </div>
+
+      <div className="mb-3">
+        <label className="text-[10px] font-sans text-ink/40 uppercase tracking-wide block mb-1">Description *</label>
+        <textarea required rows={3} value={form.description} onChange={(e) => set("description", e.target.value)} className="w-full text-sm font-sans bg-cream border border-border rounded-lg px-3 py-1.5 text-ink focus:outline-none focus:border-peach-dark/50 resize-none" />
+      </div>
+
+      <div className="mb-3">
+        <label className="text-[10px] font-sans text-ink/40 uppercase tracking-wide block mb-1">What We&apos;ll Cover (one item per line)</label>
+        <textarea rows={4} value={highlightsText} onChange={(e) => setHighlightsText(e.target.value)} placeholder={"Slide-by-slide written feedback\nNarrative arc review\nRed flags flagged"} className="w-full text-sm font-sans bg-cream border border-border rounded-lg px-3 py-1.5 text-ink focus:outline-none focus:border-peach-dark/50 resize-none" />
+      </div>
+
+      <div className="mb-3">
+        <label className="text-[10px] font-sans text-ink/40 uppercase tracking-wide block mb-1">Who Is This For</label>
+        <textarea rows={2} value={form.whoIsItFor} onChange={(e) => set("whoIsItFor", e.target.value)} className="w-full text-sm font-sans bg-cream border border-border rounded-lg px-3 py-1.5 text-ink focus:outline-none focus:border-peach-dark/50 resize-none" />
+      </div>
+
+      <div className="grid grid-cols-2 gap-3 mb-3">
+        <div>
+          <label className="text-[10px] font-sans text-ink/40 uppercase tracking-wide block mb-1">Price (₹) *</label>
+          <input required type="number" value={form.price} onChange={(e) => set("price", e.target.value)} placeholder="3500" className="w-full text-sm font-sans bg-cream border border-border rounded-lg px-3 py-1.5 text-ink focus:outline-none focus:border-peach-dark/50" />
+        </div>
+        <div>
+          <label className="text-[10px] font-sans text-ink/40 uppercase tracking-wide block mb-1">Original Price (₹)</label>
+          <input type="number" value={form.originalPrice} onChange={(e) => set("originalPrice", e.target.value)} placeholder="optional" className="w-full text-sm font-sans bg-cream border border-border rounded-lg px-3 py-1.5 text-ink focus:outline-none focus:border-peach-dark/50" />
+        </div>
+      </div>
+
+      <div className="mb-3">
+        <label className="text-[10px] font-sans text-ink/40 uppercase tracking-wide block mb-1">Urgency Note</label>
+        <input value={form.urgencyNote} onChange={(e) => set("urgencyNote", e.target.value)} placeholder="e.g. scheduled within 48 hours of booking" className="w-full text-sm font-sans bg-cream border border-border rounded-lg px-3 py-1.5 text-ink focus:outline-none focus:border-peach-dark/50" />
+      </div>
+
+      <div className="mb-4">
+        <label className="flex items-center gap-2 text-sm font-sans text-ink/60 cursor-pointer">
+          <input type="checkbox" checked={form.acceptsDeckLink} onChange={(e) => set("acceptsDeckLink", e.target.checked)} className="rounded" />
+          Ask for deck / model link
+        </label>
+        {form.acceptsDeckLink && (
+          <div className="grid grid-cols-2 gap-3 mt-2">
+            <input value={form.deckLinkLabel} onChange={(e) => set("deckLinkLabel", e.target.value)} placeholder="Label, e.g. pitch deck link" className="text-sm font-sans bg-cream border border-border rounded-lg px-3 py-1.5 text-ink focus:outline-none focus:border-peach-dark/50" />
+            <input value={form.deckLinkPlaceholder} onChange={(e) => set("deckLinkPlaceholder", e.target.value)} placeholder="Input placeholder" className="text-sm font-sans bg-cream border border-border rounded-lg px-3 py-1.5 text-ink focus:outline-none focus:border-peach-dark/50" />
+          </div>
+        )}
+      </div>
+
+      <div className="flex items-center justify-end gap-3">
+        <button type="button" onClick={() => setOpen(false)} className="text-sm font-sans text-ink/40 hover:text-ink">Cancel</button>
+        <button type="submit" disabled={saving} className="text-sm font-sans font-semibold bg-ink text-cream px-4 py-2 rounded-lg hover:bg-ink/80 disabled:opacity-50 transition-colors">
+          {saving ? "Saving…" : "Add Service"}
+        </button>
+      </div>
+    </form>
+  )
+}
+
+// ─── Page ────────────────────────────────────────────────────────────────────
 
 export default function ServicesPage() {
   const [services, setServices] = useState<Service[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch("/api/admin/services")
-      .then((r) => r.json())
-      .then((data) => { setServices(data); setLoading(false) })
+    fetch("/api/admin/services").then((r) => r.json()).then((data) => { setServices(data); setLoading(false) })
   }, [])
 
-  const handleUpdate = (id: string, patch: Partial<Service>) => {
+  const handleUpdate = (id: string, patch: Partial<Service>) =>
     setServices((prev) => prev.map((s) => (s.id === id ? { ...s, ...patch } : s)))
-  }
+  const handleDelete = (id: string) =>
+    setServices((prev) => prev.filter((s) => s.id !== id))
+  const handleAdd = (s: Service) =>
+    setServices((prev) => [...prev, s])
 
   const handleMove = async (id: string, direction: "up" | "down") => {
     const idx = services.findIndex((s) => s.id === id)
     if (direction === "up" && idx === 0) return
     if (direction === "down" && idx === services.length - 1) return
-
     const swapIdx = direction === "up" ? idx - 1 : idx + 1
     const next = [...services]
     const aOrder = next[idx].order
@@ -129,18 +452,9 @@ export default function ServicesPage() {
     next[swapIdx] = { ...next[swapIdx], order: aOrder }
     ;[next[idx], next[swapIdx]] = [next[swapIdx], next[idx]]
     setServices(next)
-
     await Promise.all([
-      fetch(`/api/admin/services/${next[swapIdx].id}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ order: aOrder }),
-      }),
-      fetch(`/api/admin/services/${next[idx].id}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ order: bOrder }),
-      }),
+      fetch(`/api/admin/services/${next[swapIdx].id}`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ order: aOrder }) }),
+      fetch(`/api/admin/services/${next[idx].id}`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ order: bOrder }) }),
     ])
   }
 
@@ -150,21 +464,14 @@ export default function ServicesPage() {
         <h1 className="font-heading text-3xl font-800 text-ink">Services</h1>
         <p className="font-sans text-sm text-ink/50 mt-1">{services.length} services</p>
       </div>
-
       {loading ? (
         <p className="font-sans text-sm text-ink/40">Loading...</p>
       ) : (
         <div className="flex flex-col gap-3 max-w-2xl">
           {services.map((s, i) => (
-            <ServiceRow
-              key={s.id}
-              service={s}
-              onUpdate={handleUpdate}
-              onMove={handleMove}
-              isFirst={i === 0}
-              isLast={i === services.length - 1}
-            />
+            <ServiceRow key={s.id} service={s} onUpdate={handleUpdate} onMove={handleMove} onDelete={handleDelete} isFirst={i === 0} isLast={i === services.length - 1} />
           ))}
+          <AddServiceForm onAdd={handleAdd} />
         </div>
       )}
     </div>

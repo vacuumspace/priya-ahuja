@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(xargs sed -i 's/font-heading text-5xl font-800/font-heading text-3xl md:text-5xl font-800/g; s/font-heading text-4xl font-800/font-heading text-3xl md:text-4xl font-800/g')",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)"
+    ]
+  }
+}

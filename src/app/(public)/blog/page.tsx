@@ -1,17 +1,18 @@
-"use client"
-
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
-import { useState } from "react"
+import { Suspense } from "react"
 import { posts, STARTUP_SERIES_NAME } from "@/lib/blog-data"
+import { CategoryTabs } from "./CategoryTabs"
 
 const seriesPosts = posts.filter((p) => p.series?.name === STARTUP_SERIES_NAME)
 const nonSeriesPosts = posts.filter((p) => !p.series)
 const allCategories = ["all", ...Array.from(new Set(nonSeriesPosts.map((p) => p.tag)))]
 
-export default function BlogPage() {
-  const [active, setActive] = useState("all")
+type Props = { searchParams: Promise<{ tag?: string }> }
 
+export default async function BlogPage({ searchParams }: Props) {
+  const { tag } = await searchParams
+  const active = tag && allCategories.includes(tag) ? tag : "all"
   const filtered = active === "all" ? nonSeriesPosts : nonSeriesPosts.filter((p) => p.tag === active)
 
   return (
@@ -39,7 +40,7 @@ export default function BlogPage() {
             <div>
               <p className="font-sans text-[10px] text-ink/40 uppercase tracking-wide mb-0.5">Featured Series</p>
               <p className="font-heading text-lg font-700 text-ink">{STARTUP_SERIES_NAME}</p>
-              <p className="font-sans text-xs text-ink/60 mt-0.5">10-part guide from idea to funding — read in order or jump in anywhere.</p>
+              <p className="font-sans text-xs text-ink/60 mt-0.5">11-part guide from idea to funding — read in order or jump in anywhere.</p>
             </div>
             <span className="font-sans text-[10px] text-ink/40 bg-cream/60 px-2 py-1 rounded">
               {seriesPosts.length} parts
@@ -70,21 +71,9 @@ export default function BlogPage() {
 
       {/* Category tabs */}
       <div className="px-4 md:px-10 pb-6">
-        <div className="flex items-center gap-2 flex-wrap">
-          {allCategories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActive(cat)}
-              className={`text-[11px] font-sans px-3 py-1.5 rounded-full border transition-all ${
-                active === cat
-                  ? "bg-ink text-cream border-ink"
-                  : "bg-transparent text-ink/50 border-border hover:border-ink/30 hover:text-ink/70"
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
+        <Suspense>
+          <CategoryTabs categories={allCategories} active={active} />
+        </Suspense>
       </div>
 
       <div className="px-4 md:px-10 pb-16">

@@ -1,12 +1,12 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Service } from "@/lib/services-data"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
-import { CheckCircle, Loader2, Link2 } from "lucide-react"
+import { CheckCircle, Loader2, Link2, CalendarDays, Clock } from "lucide-react"
 
 interface RazorpayOptions {
   key: string
@@ -20,7 +20,118 @@ interface RazorpayOptions {
   theme: { color: string }
 }
 
+type Slot = {
+  id: string
+  date: string        // YYYY-MM-DD
+  startTime: string   // HH:MM
+  endTime: string     // HH:MM
+}
+
+function formatDate(d: string) {
+  return new Date(d + "T00:00:00").toLocaleDateString("en-IN", {
+    weekday: "long", day: "numeric", month: "long",
+  })
+}
+
+function SlotPicker({ slug, onSelect }: { slug: string; onSelect: (slot: Slot | null) => void }) {
+  const [slots, setSlots] = useState<Slot[]>([])
+  const [loading, setLoading] = useState(true)
+  const [selectedDate, setSelectedDate] = useState<string | null>(null)
+  const [selectedSlot, setSelectedSlot] = useState<Slot | null>(null)
+
+  useEffect(() => {
+    fetch(`/api/consult/${slug}/slots`)
+      .then((r) => r.json())
+      .then((data) => { setSlots(data); setLoading(false) })
+  }, [slug])
+
+  const dates = [...new Set(slots.map((s) => s.date))].sort()
+  const slotsForDate = selectedDate ? slots.filter((s) => s.date === selectedDate) : []
+
+  const select = (slot: Slot) => {
+    setSelectedSlot(slot)
+    onSelect(slot)
+  }
+
+  if (loading) {
+    return <p className="text-xs font-sans text-ink/40 py-2">Checking availability…</p>
+  }
+
+  if (slots.length === 0) {
+    return (
+      <div className="bg-peach/20 border border-peach-dark/20 rounded-xl p-4 text-center">
+        <p className="text-sm font-sans text-ink/60">No slots available right now.</p>
+        <p className="text-xs font-sans text-ink/40 mt-1">Check back soon or reach out directly.</p>
+      </div>
+    )
+  }
+
+  if (selectedSlot) {
+    return (
+      <div className="bg-peach/20 border border-peach-dark/30 rounded-xl p-3 flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <CalendarDays size={13} className="text-peach-dark" />
+          <div>
+            <p className="text-xs font-sans font-semibold text-ink">{formatDate(selectedSlot.date)}</p>
+            <p className="text-[11px] font-sans text-ink/60">{selectedSlot.startTime} – {selectedSlot.endTime}</p>
+          </div>
+        </div>
+        <button
+          onClick={() => { setSelectedSlot(null); setSelectedDate(selectedSlot.date); onSelect(null) }}
+          className="text-[11px] font-sans text-ink/40 hover:text-ink underline"
+        >
+          change
+        </button>
+      </div>
+    )
+  }
+
+  return (
+    <div className="space-y-3">
+      <div>
+        <p className="text-[10px] font-sans text-ink/40 uppercase tracking-wide mb-2">Pick a date</p>
+        <div className="flex flex-wrap gap-2">
+          {dates.map((d) => (
+            <button
+              key={d}
+              type="button"
+              onClick={() => setSelectedDate(d)}
+              className={`text-xs font-sans px-3 py-1.5 rounded-lg border transition-all ${
+                selectedDate === d
+                  ? "bg-ink text-cream border-ink"
+                  : "bg-transparent text-ink/60 border-border hover:border-ink/30 hover:text-ink"
+              }`}
+            >
+              {new Date(d + "T00:00:00").toLocaleDateString("en-IN", { day: "numeric", month: "short" })}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {selectedDate && (
+        <div>
+          <p className="text-[10px] font-sans text-ink/40 uppercase tracking-wide mb-2">Pick a time</p>
+          <div className="flex flex-wrap gap-2">
+            {slotsForDate.map((slot) => (
+              <button
+                key={slot.id}
+                type="button"
+                onClick={() => select(slot)}
+                className="flex items-center gap-1.5 text-xs font-sans px-3 py-1.5 rounded-lg border border-border bg-cream text-ink/70 hover:border-peach-dark/50 hover:text-ink transition-all"
+              >
+                <Clock size={11} className="text-peach-dark" />
+                {slot.startTime} – {slot.endTime}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
 export function BookingForm({ service }: { service: Service }) {
+  const [selectedSlot, setSelectedSlot] = useState<Slot | null>(null)
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [message, setMessage] = useState("")
@@ -29,8 +140,15 @@ export function BookingForm({ service }: { service: Service }) {
   const [success, setSuccess] = useState(false)
   const [error, setError] = useState("")
 
+  const needsSlot = service.type === "call"
+  const canSubmit = !needsSlot || selectedSlot !== null
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
+    if (needsSlot && !selectedSlot) {
+      setError("Please select a time slot.")
+      return
+    }
     setError("")
     setLoading(true)
 
@@ -43,7 +161,13 @@ export function BookingForm({ service }: { service: Service }) {
       const orderRes = await fetch("/api/bookings/create-order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ serviceSlug: service.slug, name, email, message: fullMessage }),
+        body: JSON.stringify({
+          serviceSlug: service.slug,
+          slotId: selectedSlot?.id ?? null,
+          name,
+          email,
+          message: fullMessage,
+        }),
       })
       const orderData = await orderRes.json()
       if (!orderRes.ok) throw new Error(orderData.error || "Failed to create order")
@@ -112,8 +236,8 @@ export function BookingForm({ service }: { service: Service }) {
             : service.type === "report"
             ? "i'll send your written analysis within 3 business days."
             : service.urgencyNote
-            ? "i'll reach out within a few hours to schedule."
-            : "check your email for confirmation and calendar invite."}
+            ? "i'll reach out within a few hours to confirm your slot."
+            : "your slot is confirmed — check your email for details."}
         </p>
       </div>
     )
@@ -123,32 +247,21 @@ export function BookingForm({ service }: { service: Service }) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
+      {/* Slot picker — only for call-type services */}
+      {needsSlot && (
+        <div>
+          <Label className="text-xs font-sans text-ink/60 mb-2 block">select a time slot</Label>
+          <SlotPicker slug={service.slug} onSelect={setSelectedSlot} />
+        </div>
+      )}
+
       <div>
-        <Label htmlFor="name" className="text-xs font-sans text-ink/60 mb-1 block">
-          your name
-        </Label>
-        <Input
-          id="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="ankit sharma"
-          required
-          className="bg-cream border-border text-sm"
-        />
+        <Label htmlFor="name" className="text-xs font-sans text-ink/60 mb-1 block">your name</Label>
+        <Input id="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="ankit sharma" required className="bg-cream border-border text-sm" />
       </div>
       <div>
-        <Label htmlFor="email" className="text-xs font-sans text-ink/60 mb-1 block">
-          email
-        </Label>
-        <Input
-          id="email"
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="you@startup.com"
-          required
-          className="bg-cream border-border text-sm"
-        />
+        <Label htmlFor="email" className="text-xs font-sans text-ink/60 mb-1 block">email</Label>
+        <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@startup.com" required className="bg-cream border-border text-sm" />
       </div>
 
       {service.acceptsDeckLink && (
@@ -168,9 +281,7 @@ export function BookingForm({ service }: { service: Service }) {
             required={service.type === "report"}
             className="bg-cream border-border text-sm"
           />
-          <p className="text-[10px] text-ink/40 mt-1 font-sans">
-            ensure view access is enabled before submitting
-          </p>
+          <p className="text-[10px] text-ink/40 mt-1 font-sans">ensure view access is enabled before submitting</p>
         </div>
       )}
 
@@ -185,11 +296,7 @@ export function BookingForm({ service }: { service: Service }) {
             id="message"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            placeholder={
-              service.type === "report"
-                ? "specific slides to focus on, investor stage, key concerns…"
-                : "what would you like to ask?"
-            }
+            placeholder={service.type === "report" ? "specific slides to focus on, investor stage, key concerns…" : "what would you like to ask?"}
             required={service.type === "dm"}
             rows={4}
             className="bg-cream border-border text-sm resize-none"
@@ -211,28 +318,24 @@ export function BookingForm({ service }: { service: Service }) {
         </div>
       )}
 
-      {error && (
-        <p className="text-xs font-sans text-red-500 bg-red-50 px-3 py-2 rounded-lg">{error}</p>
-      )}
+      {error && <p className="text-xs font-sans text-red-500 bg-red-50 px-3 py-2 rounded-lg">{error}</p>}
+
       <Button
         type="submit"
-        disabled={loading}
-        className="w-full bg-ink text-cream hover:bg-ink/80 font-sans font-semibold text-sm py-3 rounded-xl"
+        disabled={loading || !canSubmit}
+        className="w-full bg-ink text-cream hover:bg-ink/80 font-sans font-semibold text-sm py-3 rounded-xl disabled:opacity-40"
       >
         {loading ? (
-          <span className="flex items-center gap-2">
-            <Loader2 size={14} className="animate-spin" />
-            processing…
-          </span>
+          <span className="flex items-center gap-2"><Loader2 size={14} className="animate-spin" />processing…</span>
+        ) : needsSlot && !selectedSlot ? (
+          "select a slot to continue"
         ) : service.type === "report" ? (
           "pay & submit deck →"
         ) : (
           "pay & book →"
         )}
       </Button>
-      <p className="text-[10px] text-ink/30 text-center font-sans">
-        secure payment via razorpay
-      </p>
+      <p className="text-[10px] text-ink/30 text-center font-sans">secure payment via razorpay</p>
     </form>
   )
 }

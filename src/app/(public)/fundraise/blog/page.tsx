@@ -1,15 +1,17 @@
-"use client"
-
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
-import { useState } from "react"
+import { Suspense } from "react"
 import { posts } from "@/lib/blog-data"
+import { CategoryTabs } from "./CategoryTabs"
 
 const topicPosts = posts.filter((p) => p.topic === "fundraise" && !p.series)
 const allCategories = ["all", ...Array.from(new Set(topicPosts.map((p) => p.tag)))]
 
-export default function FundraiseBlogPage() {
-  const [active, setActive] = useState("all")
+type Props = { searchParams: Promise<{ tag?: string }> }
+
+export default async function FundraiseBlogPage({ searchParams }: Props) {
+  const { tag } = await searchParams
+  const active = tag && allCategories.includes(tag) ? tag : "all"
   const filtered = active === "all" ? topicPosts : topicPosts.filter((p) => p.tag === active)
 
   return (
@@ -33,21 +35,9 @@ export default function FundraiseBlogPage() {
 
       {/* Category tabs */}
       <div className="px-4 md:px-10 pb-6">
-        <div className="flex items-center gap-2 flex-wrap">
-          {allCategories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActive(cat)}
-              className={`text-[11px] font-sans px-3 py-1.5 rounded-full border transition-all ${
-                active === cat
-                  ? "bg-ink text-cream border-ink"
-                  : "bg-transparent text-ink/50 border-border hover:border-ink/30 hover:text-ink/70"
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
+        <Suspense>
+          <CategoryTabs categories={allCategories} active={active} />
+        </Suspense>
       </div>
 
       <div className="px-4 md:px-10 pb-16">

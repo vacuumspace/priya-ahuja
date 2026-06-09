@@ -14,14 +14,33 @@ export async function PATCH(
 
   const { id } = await params
   const body = await request.json()
-  const { isActive, title, price } = body
+  const { isActive, title, price, description, shortDescription, tag, fileUrl } = body
 
   const update: Record<string, unknown> = {}
   if (isActive !== undefined) update.isActive = isActive
   if (title !== undefined) update.title = title
   if (price !== undefined) update.price = price
+  if (description !== undefined) update.description = description
+  if (shortDescription !== undefined) update.shortDescription = shortDescription
+  if (tag !== undefined) update.tag = tag
+  if (fileUrl !== undefined) update.fileUrl = fileUrl
 
   await db.update(digitalProducts).set(update).where(eq(digitalProducts.id, id))
+
+  return Response.json({ ok: true })
+}
+
+export async function DELETE(
+  _request: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const session = await auth()
+  if (!session || !isAdmin(session.user?.email)) {
+    return new Response("Forbidden", { status: 403 })
+  }
+
+  const { id } = await params
+  await db.delete(digitalProducts).where(eq(digitalProducts.id, id))
 
   return Response.json({ ok: true })
 }

@@ -1,29 +1,44 @@
 import { NextRequest, NextResponse } from "next/server"
 import { db } from "@/lib/db"
-import { bookings, services as servicesTable } from "@/lib/db/schema"
-import { getService } from "@/lib/services-data"
+import { bookings, services as servicesTable, availability } from "@/lib/db/schema"
 import { getRazorpayInstance } from "@/lib/razorpay"
 import { eq } from "drizzle-orm"
 
 export async function POST(req: NextRequest) {
   try {
-    const { serviceSlug, name, email, message } = await req.json()
+    const { serviceSlug, slotId, name, email, message } = await req.json()
 
     if (!serviceSlug || !name || !email) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
     }
 
-    const service = getService(serviceSlug)
-    if (!service) {
-      return NextResponse.json({ error: "Service not found" }, { status: 404 })
-    }
-
-    // Find matching DB service by slug to get its UUID
-    const [dbService] = await db
-      .select({ id: servicesTable.id })
+    const [service] = await db
+      .select()
       .from(servicesTable)
       .where(eq(servicesTable.slug, serviceSlug))
       .limit(1)
+
+    if (!service || !service.isActive) {
+      return NextResponse.json({ error: "Service not found" }, { status: 404 })
+    }
+
+    // For call-type services, a slot must be provided
+    if (service.type === "call" && !slotId) {
+      return NextResponse.json({ error: "Please select a time slot" }, { status: 400 })
+    }
+
+    // Verify slot is still available
+    if (slotId) {
+      const [slot] = await db
+        .select()
+        .from(availability)
+        .where(eq(availability.id, slotId))
+        .limit(1)
+
+      if (!slot || slot.isBooked) {
+        return NextResponse.json({ error: "This slot is no longer available" }, { status: 409 })
+      }
+    }
 
     const razorpay = getRazorpayInstance()
     const order = await razorpay.orders.create({
@@ -32,9 +47,9 @@ export async function POST(req: NextRequest) {
       receipt: `booking_${Date.now()}`,
     })
 
-    // Create pending booking (serviceId may be null if DB not seeded yet)
     const [booking] = await db.insert(bookings).values({
-      serviceId: dbService?.id ?? "00000000-0000-0000-0000-000000000000",
+      serviceId: service.id,
+      slotId: slotId ?? null,
       userName: name,
       userEmail: email,
       message: message || null,

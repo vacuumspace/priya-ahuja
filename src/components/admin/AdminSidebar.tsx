@@ -13,6 +13,7 @@ import {
   BookOpen,
   Users,
   LogOut,
+  Home,
 } from "lucide-react"
 
 const navItems = [
@@ -76,6 +77,14 @@ export function AdminSidebar({ userEmail, collapsed, onToggle }: AdminSidebarPro
 
       {/* Footer */}
       <div className="px-2 py-3 border-t border-peach-dark/20">
+        <Link
+          href="/"
+          title={collapsed ? "View site" : undefined}
+          className="flex items-center gap-3 px-2.5 py-2 rounded-lg text-sm font-sans font-medium text-ink/70 hover:bg-peach-dark/20 hover:text-ink transition-colors mb-1"
+        >
+          <Home size={16} className="flex-shrink-0" />
+          {!collapsed && <span>View site</span>}
+        </Link>
         {!collapsed && (
           <p className="text-[10px] text-ink/40 font-sans truncate px-2.5 mb-2">{userEmail}</p>
         )}

@@ -36,6 +36,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
+function renderInline(text: string): React.ReactNode[] {
+  const parts = text.split(/(\*\*.*?\*\*|\*[^*]+\*)/)
+  return parts.map((part, idx) => {
+    if (part.startsWith("**") && part.endsWith("**") && part.length > 4) {
+      return <strong key={idx} className="text-ink font-semibold">{part.slice(2, -2)}</strong>
+    }
+    if (part.startsWith("*") && part.endsWith("*") && part.length > 2) {
+      return <em key={idx}>{part.slice(1, -1)}</em>
+    }
+    return part
+  })
+}
+
 function renderContent(content: string) {
   const lines = content.split("\n")
   const elements: React.ReactNode[] = []
@@ -51,10 +64,9 @@ function renderContent(content: string) {
         </h2>
       )
     } else if (line.startsWith("**") && line.endsWith("**") && line.length > 4) {
-      const text = line.slice(2, -2)
       elements.push(
         <p key={i} className="font-sans text-sm font-semibold text-ink mt-6 mb-2">
-          {text}
+          {line.slice(2, -2)}
         </p>
       )
     } else if (line.startsWith("- ")) {
@@ -67,28 +79,36 @@ function renderContent(content: string) {
         <ul key={`ul-${i}`} className="list-disc list-inside space-y-2 my-4 pl-2">
           {items.map((item, idx) => (
             <li key={idx} className="font-sans text-sm text-ink/70 leading-relaxed">
-              {item.replace(/\*\*(.*?)\*\*/g, "$1")}
+              {renderInline(item)}
             </li>
           ))}
         </ul>
       )
       continue
+    } else if (/^\d+\. /.test(line)) {
+      const items: string[] = []
+      while (i < lines.length && /^\d+\. /.test(lines[i])) {
+        items.push(lines[i].replace(/^\d+\. /, ""))
+        i++
+      }
+      elements.push(
+        <ol key={`ol-${i}`} className="list-decimal list-inside space-y-2 my-4 pl-2">
+          {items.map((item, idx) => (
+            <li key={idx} className="font-sans text-sm text-ink/70 leading-relaxed">
+              {renderInline(item)}
+            </li>
+          ))}
+        </ol>
+      )
+      continue
+    } else if (line.startsWith("|")) {
+      // skip markdown table rows
     } else if (line.trim() === "") {
       // skip blank lines
     } else {
-      // Regular paragraph — handle inline bold
-      const parts = line.split(/(\*\*.*?\*\*)/)
       elements.push(
         <p key={i} className="font-sans text-sm text-ink/75 leading-relaxed my-3">
-          {parts.map((part, idx) =>
-            part.startsWith("**") && part.endsWith("**") ? (
-              <strong key={idx} className="text-ink font-semibold">
-                {part.slice(2, -2)}
-              </strong>
-            ) : (
-              part
-            )
-          )}
+          {renderInline(line)}
         </p>
       )
     }
