@@ -4,7 +4,7 @@
 
 @custom-variant dark (&:is(.dark *));
 
-@theme inline {
+@theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-inter);
@@ -78,6 +78,43 @@
   --sidebar-accent-foreground: #2D2D2D;
   --sidebar-border: #FFB380;
   --sidebar-ring: #FFA07A;
+}
+
+.dark {
+  --color-cream: #111113;
+  --color-cream-light: #18181B;
+  --color-peach: #2A1F1A;
+  --color-peach-dark: #E8855A;
+  --color-amber-tag: #211D0E;
+  --color-ink: #EDE8DF;
+  --color-ink-muted: #9A9186;
+  --color-border: #2E2E32;
+
+  --background: #111113;
+  --foreground: #EDE8DF;
+  --card: #18181B;
+  --card-foreground: #EDE8DF;
+  --popover: #18181B;
+  --popover-foreground: #EDE8DF;
+  --primary: #E8855A;
+  --primary-foreground: #EDE8DF;
+  --secondary: #211D0E;
+  --secondary-foreground: #EDE8DF;
+  --muted: #1E1E21;
+  --muted-foreground: #9A9186;
+  --accent: #2A1F1A;
+  --accent-foreground: #EDE8DF;
+  --border: #2E2E32;
+  --input: #2E2E32;
+  --ring: #E8855A;
+  --sidebar: #1A1A1F;
+  --sidebar-foreground: #EDE8DF;
+  --sidebar-primary: #E8855A;
+  --sidebar-primary-foreground: #EDE8DF;
+  --sidebar-accent: #232328;
+  --sidebar-accent-foreground: #EDE8DF;
+  --sidebar-border: #2E2E32;
+  --sidebar-ring: #E8855A;
 }
 
 @layer base {

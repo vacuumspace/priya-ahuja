@@ -14,7 +14,10 @@ import {
   Users,
   LogOut,
   Home,
+  Sun,
+  Moon,
 } from "lucide-react"
+import { useAdminTheme } from "./AdminShell"
 
 const navItems = [
   { label: "Dashboard", href: "/admin", icon: LayoutDashboard },
@@ -33,6 +36,7 @@ interface AdminSidebarProps {
 
 export function AdminSidebar({ userEmail, collapsed, onToggle }: AdminSidebarProps) {
   const pathname = usePathname()
+  const { theme, toggleTheme } = useAdminTheme()
 
   return (
     <aside
@@ -88,6 +92,14 @@ export function AdminSidebar({ userEmail, collapsed, onToggle }: AdminSidebarPro
         {!collapsed && (
           <p className="text-[10px] text-ink/40 font-sans truncate px-2.5 mb-2">{userEmail}</p>
         )}
+        <button
+          onClick={toggleTheme}
+          title={collapsed ? (theme === "dark" ? "Light mode" : "Dark mode") : undefined}
+          className="flex items-center gap-3 w-full px-2.5 py-2 rounded-lg text-sm font-sans font-medium text-ink/70 hover:bg-peach-dark/20 hover:text-ink transition-colors mb-1"
+        >
+          {theme === "dark" ? <Sun size={16} className="flex-shrink-0" /> : <Moon size={16} className="flex-shrink-0" />}
+          {!collapsed && <span>{theme === "dark" ? "Light mode" : "Dark mode"}</span>}
+        </button>
         <button
           onClick={() => signOut({ callbackUrl: "/" })}
           title={collapsed ? "Sign out" : undefined}

@@ -84,6 +84,19 @@ export const blogPosts = pgTable("blog_posts", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
 })
 
+export const availabilitySchedule = pgTable("availability_schedule", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  dayOfWeek: integer("day_of_week").notNull(), // 0=Sun, 1=Mon, ..., 6=Sat
+  startTime: varchar("start_time", { length: 5 }).notNull(), // HH:MM
+  endTime: varchar("end_time", { length: 5 }).notNull(),     // HH:MM
+  isActive: boolean("is_active").notNull().default(false),
+})
+
+export const availabilityConfig = pgTable("availability_config", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  daysAhead: integer("days_ahead").notNull().default(14),
+})
+
 // Auth.js tables
 export const users = pgTable("users", {
   id: text("id").primaryKey(),

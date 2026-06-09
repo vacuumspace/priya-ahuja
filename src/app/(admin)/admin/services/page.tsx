@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { ChevronUp, ChevronDown, Trash2, Plus, X, CalendarDays } from "lucide-react"
+import { ChevronUp, ChevronDown, Trash2, Plus, X, CalendarDays, Clock } from "lucide-react"
 
 type Service = {
   id: string
@@ -24,19 +24,146 @@ type Service = {
   order: number
 }
 
-type Slot = {
+type ScheduleDay = {
   id: string
-  serviceId: string
-  date: string
+  dayOfWeek: number
   startTime: string
   endTime: string
-  isBooked: boolean
+  isActive: boolean
 }
 
-// ─── Slots Panel ────────────────────────────────────────────────────────────
+// ─── Availability Tab ─────────────────────────────────────────────────────────
+
+const DAY_LABELS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+
+function AvailabilityTab() {
+  const [daysAhead, setDaysAhead] = useState(14)
+  const [schedule, setSchedule] = useState<ScheduleDay[]>([])
+  const [loading, setLoading] = useState(true)
+  const [saving, setSaving] = useState(false)
+  const [saved, setSaved] = useState(false)
+
+  useEffect(() => {
+    fetch("/api/admin/availability-config")
+      .then((r) => r.json())
+      .then((data) => {
+        setDaysAhead(data.daysAhead)
+        setSchedule(data.schedule)
+        setLoading(false)
+      })
+  }, [])
+
+  const toggleDay = (id: string) =>
+    setSchedule((prev) => prev.map((d) => (d.id === id ? { ...d, isActive: !d.isActive } : d)))
+
+  const setDayField = (id: string, field: "startTime" | "endTime", value: string) =>
+    setSchedule((prev) => prev.map((d) => (d.id === id ? { ...d, [field]: value } : d)))
+
+  const save = async () => {
+    setSaving(true)
+    await fetch("/api/admin/availability-config", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ daysAhead, schedule }),
+    })
+    setSaving(false)
+    setSaved(true)
+    setTimeout(() => setSaved(false), 2000)
+  }
+
+  if (loading) return <p className="font-sans text-sm text-ink/40">Loading…</p>
+
+  return (
+    <div className="max-w-lg space-y-8">
+      {/* Days ahead */}
+      <div>
+        <p className="text-[10px] font-sans text-ink/40 uppercase tracking-widest mb-3">Booking Window</p>
+        <div className="flex items-center gap-3">
+          <label className="text-sm font-sans text-ink/60">Show slots for the next</label>
+          <input
+            type="number"
+            min={1}
+            max={90}
+            value={daysAhead}
+            onChange={(e) => setDaysAhead(Number(e.target.value))}
+            className="w-16 text-sm font-sans bg-cream border border-border rounded-lg px-2 py-1 text-ink text-center focus:outline-none focus:border-peach-dark/50"
+          />
+          <span className="text-sm font-sans text-ink/60">days</span>
+        </div>
+      </div>
+
+      {/* Weekly schedule */}
+      <div>
+        <p className="text-[10px] font-sans text-ink/40 uppercase tracking-widest mb-3">Weekly Schedule</p>
+        <div className="space-y-2">
+          {schedule.map((day) => (
+            <div
+              key={day.id}
+              className={`flex items-center gap-4 rounded-xl border px-4 py-3 transition-colors ${
+                day.isActive ? "border-border bg-card" : "border-border/50 bg-cream opacity-60"
+              }`}
+            >
+              {/* Toggle */}
+              <button
+                type="button"
+                onClick={() => toggleDay(day.id)}
+                className={`flex-shrink-0 w-9 h-5 rounded-full transition-colors relative ${day.isActive ? "bg-ink" : "bg-border"}`}
+                aria-label={`Toggle ${DAY_LABELS[day.dayOfWeek]}`}
+              >
+                <span className={`absolute top-0.5 w-4 h-4 rounded-full bg-white shadow transition-all ${day.isActive ? "left-4" : "left-0.5"}`} />
+              </button>
+
+              {/* Day label */}
+              <span className="w-8 text-sm font-sans font-semibold text-ink/70">{DAY_LABELS[day.dayOfWeek]}</span>
+
+              {/* Time range */}
+              {day.isActive ? (
+                <div className="flex items-center gap-2">
+                  <input
+                    type="time"
+                    value={day.startTime}
+                    onChange={(e) => setDayField(day.id, "startTime", e.target.value)}
+                    className="text-xs font-sans bg-cream border border-border rounded-lg px-2 py-1 text-ink focus:outline-none focus:border-peach-dark/50"
+                  />
+                  <span className="text-ink/30 text-xs">to</span>
+                  <input
+                    type="time"
+                    value={day.endTime}
+                    onChange={(e) => setDayField(day.id, "endTime", e.target.value)}
+                    className="text-xs font-sans bg-cream border border-border rounded-lg px-2 py-1 text-ink focus:outline-none focus:border-peach-dark/50"
+                  />
+                </div>
+              ) : (
+                <span className="text-xs font-sans text-ink/30">unavailable</span>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="flex items-center gap-3 pt-2">
+        <button
+          onClick={save}
+          disabled={saving}
+          className="flex items-center gap-2 text-sm font-sans font-semibold bg-ink text-cream px-5 py-2.5 rounded-xl hover:bg-ink/80 disabled:opacity-50 transition-colors"
+        >
+          <Clock size={13} />
+          {saving ? "Saving…" : "Save Schedule"}
+        </button>
+        {saved && <span className="text-xs font-sans text-ink/50">Saved ✓</span>}
+      </div>
+
+      <p className="text-[11px] font-sans text-ink/30 leading-relaxed">
+        Slot duration per booking is set by each service&apos;s duration. Slots are generated live — no pre-population needed.
+      </p>
+    </div>
+  )
+}
+
+// ─── Slots Panel (legacy, kept for manual overrides) ─────────────────────────
 
 function SlotsPanel({ service }: { service: Service }) {
-  const [slots, setSlots] = useState<Slot[]>([])
+  const [slots, setSlots] = useState<{ id: string; serviceId: string; date: string; startTime: string; endTime: string; isBooked: boolean }[]>([])
   const [loading, setLoading] = useState(true)
   const [date, setDate] = useState("")
   const [startTime, setStartTime] = useState("")
@@ -68,7 +195,7 @@ function SlotsPanel({ service }: { service: Service }) {
     setSlots((prev) => prev.filter((s) => s.id !== id))
   }
 
-  const grouped = slots.reduce<Record<string, Slot[]>>((acc, slot) => {
+  const grouped = slots.reduce<Record<string, typeof slots>>((acc, slot) => {
     if (!acc[slot.date]) acc[slot.date] = []
     acc[slot.date].push(slot)
     return acc
@@ -79,19 +206,20 @@ function SlotsPanel({ service }: { service: Service }) {
 
   return (
     <div className="mt-3 border-t border-border pt-4">
-      <p className="text-[10px] font-sans text-ink/40 uppercase tracking-widest mb-3">Availability Slots</p>
+      <p className="text-[10px] font-sans text-ink/40 uppercase tracking-widest mb-1">Manual Slot Overrides</p>
+      <p className="text-[11px] font-sans text-ink/30 mb-3">Add one-off slots outside the weekly schedule, or block specific times.</p>
 
       {loading ? (
         <p className="text-xs font-sans text-ink/30">Loading…</p>
       ) : (
         <>
           {Object.keys(grouped).length === 0 ? (
-            <p className="text-xs font-sans text-ink/30 mb-3">No slots yet.</p>
+            <p className="text-xs font-sans text-ink/30 mb-3">No manual slots.</p>
           ) : (
             <div className="space-y-2 mb-4">
-              {Object.entries(grouped).map(([date, daySlots]) => (
-                <div key={date}>
-                  <p className="text-[10px] font-sans text-ink/50 mb-1">{formatDate(date)}</p>
+              {Object.entries(grouped).map(([d, daySlots]) => (
+                <div key={d}>
+                  <p className="text-[10px] font-sans text-ink/50 mb-1">{formatDate(d)}</p>
                   <div className="flex flex-wrap gap-1.5">
                     {daySlots.map((slot) => (
                       <div
@@ -104,10 +232,7 @@ function SlotsPanel({ service }: { service: Service }) {
                       >
                         {slot.startTime}–{slot.endTime}
                         {!slot.isBooked && (
-                          <button
-                            onClick={() => deleteSlot(slot.id)}
-                            className="text-ink/20 hover:text-red-400 transition-colors ml-0.5"
-                          >
+                          <button onClick={() => deleteSlot(slot.id)} className="text-ink/20 hover:text-red-400 transition-colors ml-0.5">
                             <X size={11} />
                           </button>
                         )}
@@ -123,39 +248,17 @@ function SlotsPanel({ service }: { service: Service }) {
           <form onSubmit={addSlot} className="flex items-end gap-2 flex-wrap">
             <div>
               <label className="text-[10px] font-sans text-ink/40 block mb-1">Date</label>
-              <input
-                type="date"
-                required
-                value={date}
-                onChange={(e) => setDate(e.target.value)}
-                className="text-xs font-sans bg-cream border border-border rounded-lg px-2 py-1.5 text-ink focus:outline-none focus:border-peach-dark/50"
-              />
+              <input type="date" required value={date} onChange={(e) => setDate(e.target.value)} className="text-xs font-sans bg-cream border border-border rounded-lg px-2 py-1.5 text-ink focus:outline-none focus:border-peach-dark/50" />
             </div>
             <div>
               <label className="text-[10px] font-sans text-ink/40 block mb-1">Start</label>
-              <input
-                type="time"
-                required
-                value={startTime}
-                onChange={(e) => setStartTime(e.target.value)}
-                className="text-xs font-sans bg-cream border border-border rounded-lg px-2 py-1.5 text-ink focus:outline-none focus:border-peach-dark/50"
-              />
+              <input type="time" required value={startTime} onChange={(e) => setStartTime(e.target.value)} className="text-xs font-sans bg-cream border border-border rounded-lg px-2 py-1.5 text-ink focus:outline-none focus:border-peach-dark/50" />
             </div>
             <div>
               <label className="text-[10px] font-sans text-ink/40 block mb-1">End</label>
-              <input
-                type="time"
-                required
-                value={endTime}
-                onChange={(e) => setEndTime(e.target.value)}
-                className="text-xs font-sans bg-cream border border-border rounded-lg px-2 py-1.5 text-ink focus:outline-none focus:border-peach-dark/50"
-              />
+              <input type="time" required value={endTime} onChange={(e) => setEndTime(e.target.value)} className="text-xs font-sans bg-cream border border-border rounded-lg px-2 py-1.5 text-ink focus:outline-none focus:border-peach-dark/50" />
             </div>
-            <button
-              type="submit"
-              disabled={saving}
-              className="flex items-center gap-1.5 text-xs font-sans font-semibold bg-ink text-cream px-3 py-1.5 rounded-lg hover:bg-ink/80 disabled:opacity-50 transition-colors"
-            >
+            <button type="submit" disabled={saving} className="flex items-center gap-1.5 text-xs font-sans font-semibold bg-ink text-cream px-3 py-1.5 rounded-lg hover:bg-ink/80 disabled:opacity-50 transition-colors">
               <Plus size={12} />
               {saving ? "Adding…" : "Add Slot"}
             </button>
@@ -166,15 +269,10 @@ function SlotsPanel({ service }: { service: Service }) {
   )
 }
 
-// ─── Service Row ─────────────────────────────────────────────────────────────
+// ─── Service Row ──────────────────────────────────────────────────────────────
 
 function ServiceRow({
-  service,
-  onUpdate,
-  onMove,
-  onDelete,
-  isFirst,
-  isLast,
+  service, onUpdate, onMove, onDelete, isFirst, isLast,
 }: {
   service: Service
   onUpdate: (id: string, patch: Partial<Service>) => void
@@ -270,7 +368,7 @@ function ServiceRow({
   )
 }
 
-// ─── Add Service Form ────────────────────────────────────────────────────────
+// ─── Add Service Form ─────────────────────────────────────────────────────────
 
 const SERVICE_TAGS = ["fundraising", "strategy", "deals", "career", "urgent", "async", "general"]
 
@@ -423,9 +521,9 @@ function AddServiceForm({ onAdd }: { onAdd: (s: Service) => void }) {
   )
 }
 
-// ─── Page ────────────────────────────────────────────────────────────────────
+// ─── Services Tab ─────────────────────────────────────────────────────────────
 
-export default function ServicesPage() {
+function ServicesTab() {
   const [services, setServices] = useState<Service[]>([])
   const [loading, setLoading] = useState(true)
 
@@ -458,22 +556,47 @@ export default function ServicesPage() {
     ])
   }
 
+  if (loading) return <p className="font-sans text-sm text-ink/40">Loading...</p>
+
+  return (
+    <div className="flex flex-col gap-3 max-w-2xl">
+      {services.map((s, i) => (
+        <ServiceRow key={s.id} service={s} onUpdate={handleUpdate} onMove={handleMove} onDelete={handleDelete} isFirst={i === 0} isLast={i === services.length - 1} />
+      ))}
+      <AddServiceForm onAdd={handleAdd} />
+    </div>
+  )
+}
+
+// ─── Page ─────────────────────────────────────────────────────────────────────
+
+type Tab = "services" | "availability"
+
+export default function ServicesPage() {
+  const [tab, setTab] = useState<Tab>("services")
+
   return (
     <div className="px-10 py-10">
       <div className="mb-6">
-        <h1 className="font-heading text-3xl font-800 text-ink">Services</h1>
-        <p className="font-sans text-sm text-ink/50 mt-1">{services.length} services</p>
-      </div>
-      {loading ? (
-        <p className="font-sans text-sm text-ink/40">Loading...</p>
-      ) : (
-        <div className="flex flex-col gap-3 max-w-2xl">
-          {services.map((s, i) => (
-            <ServiceRow key={s.id} service={s} onUpdate={handleUpdate} onMove={handleMove} onDelete={handleDelete} isFirst={i === 0} isLast={i === services.length - 1} />
+        <h1 className="font-heading text-3xl font-800 text-ink">Consult</h1>
+        <div className="flex items-center gap-1 mt-3">
+          {(["services", "availability"] as Tab[]).map((t) => (
+            <button
+              key={t}
+              onClick={() => setTab(t)}
+              className={`text-[11px] font-sans px-3 py-1.5 rounded-full border transition-all capitalize ${
+                tab === t
+                  ? "bg-ink text-cream border-ink"
+                  : "bg-transparent text-ink/50 border-border hover:border-ink/30 hover:text-ink/70"
+              }`}
+            >
+              {t}
+            </button>
           ))}
-          <AddServiceForm onAdd={handleAdd} />
         </div>
-      )}
+      </div>
+
+      {tab === "services" ? <ServicesTab /> : <AvailabilityTab />}
     </div>
   )
 }
