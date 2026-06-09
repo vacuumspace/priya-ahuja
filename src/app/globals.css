@@ -105,3 +105,10 @@
     min-width: 240px;
   }
 }
+
+/* When desktop sidebar is collapsed, shift main content */
+@media (min-width: 768px) {
+  body.sidebar-collapsed main {
+    margin-left: 3rem; /* 48px = w-12 */
+  }
+}

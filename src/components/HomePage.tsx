@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowUpRight, Star } from "lucide-react"
+import { Star } from "lucide-react"
 
 const LinkedInIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
@@ -44,35 +44,41 @@ export default function HomePage() {
         {/* CTA top-right */}
         <Link
           href="/consult"
-          className="inline-flex items-center gap-1.5 text-xs font-sans font-semibold bg-peach-dark text-ink px-3.5 py-2 rounded-lg hover:bg-peach-dark/80 transition-colors group flex-shrink-0"
+          className="inline-flex items-center text-xs font-sans font-semibold bg-peach-dark text-ink px-3.5 py-2 rounded-lg hover:bg-peach-dark/80 transition-colors flex-shrink-0"
         >
-          consult with Priya
-          <ArrowUpRight size={11} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          consult
         </Link>
       </div>
 
       {/* ── Hero ── */}
       <div className="mb-14">
         <h1 className="font-heading text-[clamp(2.4rem,6vw,3.6rem)] font-800 text-ink leading-[0.95] tracking-tight mb-6">
-          the founder&apos;s<br />edge.
+          for the founder&apos;s<br />dream.
         </h1>
         <p className="font-sans text-sm text-ink/55 leading-relaxed">
-          clarity when it counts — strategy, fundraising, and conviction for early-stage founders, from someone inside the deal flow.
+          helps founders with actionable advice: strategy, fundraising, and conviction for early-stage founders, from someone who has seen the journey from idea to unicorn and ipo.
         </p>
       </div>
 
-      {/* ── Stats ── */}
-      <div className="flex gap-8 bg-peach/25 border border-peach-dark/15 rounded-xl px-6 py-5 mb-14">
-        {[
-          { value: "50+", label: "founders" },
-          { value: "5.0★", label: "rating" },
-          { value: "₹100cr+", label: "capital" },
-        ].map((s) => (
-          <div key={s.label}>
-            <p className="font-heading text-xl font-700 text-ink">{s.value}</p>
-            <p className="font-sans text-[10px] text-ink/40 mt-0.5">{s.label}</p>
-          </div>
-        ))}
+      {/* ── Achievements ── */}
+      <div className="mb-14">
+        <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">by the numbers</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {[
+            { value: "200+", label: "founders advised", sub: "across fintech, saas, consumer-tech & d2c" },
+            { value: "₹200cr+", label: "fundraise guided", sub: "across pre-seed to pre-series A & series A rounds" },
+            { value: "5.0★", label: "avg. session rating", sub: "from 50+ independent reviews" },
+            { value: "3 yrs", label: "inside startup investment", sub: "investment, strategy, m&a at groww, india's #1 retail investment app" },
+            { value: "12+", label: "sectors covered", sub: "fintech, edtech, healthtech, b2b, d2c, social platforms & more" },
+            { value: "0%", label: "confusion", sub: "with all actionable insights and advice" },
+          ].map((s) => (
+            <div key={s.label} className="bg-peach/20 border border-peach-dark/15 rounded-xl px-4 py-4">
+              <p className="font-heading text-2xl font-800 text-ink leading-none">{s.value}</p>
+              <p className="font-sans text-[11px] font-semibold text-ink/70 mt-1.5">{s.label}</p>
+              <p className="font-sans text-[10px] text-ink/35 mt-0.5 leading-snug">{s.sub}</p>
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* ── About ── */}
@@ -155,10 +161,9 @@ export default function HomePage() {
         </div>
         <Link
           href="/consult"
-          className="inline-flex items-center gap-1.5 bg-peach-dark text-ink text-xs font-sans font-semibold px-4 py-2.5 rounded-lg hover:bg-peach-dark/80 transition-colors group flex-shrink-0"
+          className="inline-flex items-center bg-peach-dark text-ink text-xs font-sans font-semibold px-4 py-2.5 rounded-lg hover:bg-peach-dark/80 transition-colors flex-shrink-0"
         >
-          consult now
-          <ArrowUpRight size={11} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          consult
         </Link>
       </div>
 

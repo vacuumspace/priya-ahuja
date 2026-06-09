@@ -46,6 +46,11 @@ export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEma
     return null
   })
 
+  // Sync sidebar-collapsed class on body for main margin adjustment
+  useEffect(() => {
+    document.body.classList.toggle("sidebar-collapsed", collapsed)
+  }, [collapsed])
+
   // Close mobile menu on route change
   useEffect(() => {
     setMobileOpen(false)
