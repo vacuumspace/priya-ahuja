@@ -54,7 +54,7 @@ export default function HomePage() {
           {/* Image */}
           <div className="flex-shrink-0">
             <div className="relative">
-              <div className="w-64 h-80 rounded-2xl border-2 border-peach-dark/20 overflow-hidden relative">
+              <div className="w-56 h-72 md:w-64 md:h-80 rounded-2xl border-2 border-peach-dark/20 overflow-hidden relative">
                 <Image
                   src="/priyadp.jpeg"
                   alt="Priya Ahuja"
