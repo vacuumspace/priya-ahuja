@@ -1,68 +1,93 @@
 import { db } from "@/lib/db"
-import { users, sessions } from "@/lib/db/schema"
-import { eq, desc } from "drizzle-orm"
+import { users } from "@/lib/db/schema"
+import { desc, ilike, or, count, and } from "drizzle-orm"
+import { UsersControls } from "./UsersControls"
 
-export default async function AdminUsersPage() {
-  const allUsers = await db
-    .select({
-      id: users.id,
-      name: users.name,
-      email: users.email,
-      emailVerified: users.emailVerified,
-      image: users.image,
-      createdAt: users.createdAt,
-    })
-    .from(users)
-    .orderBy(desc(users.createdAt))
+const PAGE_SIZE = 10
+
+interface Props {
+  searchParams: Promise<{ page?: string; search?: string }>
+}
+
+export default async function AdminUsersPage({ searchParams }: Props) {
+  const { page: pageParam, search: searchParam } = await searchParams
+  const page = Math.max(1, parseInt(pageParam ?? "1", 10))
+  const search = searchParam?.trim() ?? ""
+
+  const filter = search
+    ? or(ilike(users.name, `%${search}%`), ilike(users.email, `%${search}%`))
+    : undefined
+
+  const [totalResult, rows] = await Promise.all([
+    db.select({ count: count() }).from(users).where(filter),
+    db
+      .select({
+        id: users.id,
+        name: users.name,
+        email: users.email,
+        createdAt: users.createdAt,
+      })
+      .from(users)
+      .where(filter)
+      .orderBy(desc(users.createdAt))
+      .limit(PAGE_SIZE)
+      .offset((page - 1) * PAGE_SIZE),
+  ])
+
+  const total = totalResult[0].count
+  const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE))
+  const offset = (page - 1) * PAGE_SIZE
 
   return (
     <div className="px-10 py-10">
-      <div className="mb-8">
+      <div className="mb-6">
         <h1 className="font-heading text-3xl font-800 text-ink">Users</h1>
-        <p className="font-sans text-sm text-ink/50 mt-1">{allUsers.length} signed in</p>
+        <p className="font-sans text-sm text-ink/50 mt-1">{total} total</p>
       </div>
 
-      <div className="border border-border rounded-2xl overflow-hidden">
-        {allUsers.length === 0 ? (
-          <p className="font-sans text-sm text-ink/40 px-6 py-10 text-center">No users yet.</p>
-        ) : (
-          <table className="w-full">
-            <thead>
-              <tr className="border-b border-border bg-card">
-                <th className="text-left font-sans text-[11px] text-ink/40 uppercase tracking-widest px-5 py-3">Name</th>
-                <th className="text-left font-sans text-[11px] text-ink/40 uppercase tracking-widest px-5 py-3">Email</th>
-                <th className="text-left font-sans text-[11px] text-ink/40 uppercase tracking-widest px-5 py-3">Email Verified</th>
-                <th className="text-left font-sans text-[11px] text-ink/40 uppercase tracking-widest px-5 py-3">Signed Up</th>
-              </tr>
-            </thead>
-            <tbody>
-              {allUsers.map((user, i) => (
-                <tr key={user.id} className={i !== allUsers.length - 1 ? "border-b border-border" : ""}>
-                  <td className="px-5 py-3.5 font-sans text-sm text-ink font-medium">
-                    {user.name ?? "—"}
-                  </td>
-                  <td className="px-5 py-3.5 font-sans text-sm text-ink/70">{user.email}</td>
-                  <td className="px-5 py-3.5">
-                    {user.emailVerified ? (
-                      <span className="inline-flex items-center gap-1.5 font-sans text-xs text-green-700 bg-green-50 border border-green-200 px-2 py-0.5 rounded-full">
-                        ✓ verified
-                      </span>
-                    ) : (
-                      <span className="font-sans text-xs text-ink/30">—</span>
-                    )}
-                  </td>
-                  <td className="px-5 py-3.5 font-sans text-sm text-ink/50">
-                    {user.createdAt
-                      ? new Intl.DateTimeFormat("en-IN", {
-                          dateStyle: "medium",
-                          timeStyle: "short",
-                        }).format(new Date(user.createdAt))
-                      : "—"}
-                  </td>
+      <div className="flex flex-col gap-4">
+        <UsersControls total={total} page={page} totalPages={totalPages} search={search} />
+
+        <div className="border border-border rounded-2xl overflow-hidden">
+          {rows.length === 0 ? (
+            <p className="font-sans text-sm text-ink/40 px-6 py-10 text-center">
+              {search ? "No users match your search." : "No users yet."}
+            </p>
+          ) : (
+            <table className="w-full">
+              <thead>
+                <tr className="border-b border-border bg-card">
+                  <th className="text-left font-sans text-[11px] text-ink/40 uppercase tracking-widest px-5 py-3 w-12">S.No</th>
+                  <th className="text-left font-sans text-[11px] text-ink/40 uppercase tracking-widest px-5 py-3">Name</th>
+                  <th className="text-left font-sans text-[11px] text-ink/40 uppercase tracking-widest px-5 py-3">Email</th>
+                  <th className="text-left font-sans text-[11px] text-ink/40 uppercase tracking-widest px-5 py-3">Signed Up</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {rows.map((user, i) => (
+                  <tr key={user.id} className={i !== rows.length - 1 ? "border-b border-border" : ""}>
+                    <td className="px-5 py-3.5 font-sans text-sm text-ink/30">{offset + i + 1}</td>
+                    <td className="px-5 py-3.5 font-sans text-sm text-ink font-medium">{user.name ?? "—"}</td>
+                    <td className="px-5 py-3.5 font-sans text-sm text-ink/70">{user.email}</td>
+                    <td className="px-5 py-3.5 font-sans text-sm text-ink/50">
+                      {user.createdAt
+                        ? new Intl.DateTimeFormat("en-IN", {
+                            dateStyle: "medium",
+                            timeStyle: "short",
+                          }).format(new Date(user.createdAt))
+                        : "—"}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+        </div>
+
+        {totalPages > 1 && (
+          <p className="font-sans text-xs text-ink/30 text-right">
+            Page {page} of {totalPages}
+          </p>
         )}
       </div>
     </div>
