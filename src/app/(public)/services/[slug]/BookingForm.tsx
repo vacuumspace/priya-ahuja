@@ -8,12 +8,6 @@ import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 import { CheckCircle, Loader2, Link2 } from "lucide-react"
 
-declare global {
-  interface Window {
-    Razorpay: new (options: RazorpayOptions) => { open(): void }
-  }
-}
-
 interface RazorpayOptions {
   key: string
   amount: number
@@ -72,7 +66,7 @@ export function BookingForm({ service }: { service: Service }) {
           name: "Priya Ahuja",
           description: service.title,
           order_id: orderData.orderId,
-          handler: async (response) => {
+          handler: async (response: { razorpay_order_id: string; razorpay_payment_id: string; razorpay_signature: string }) => {
             try {
               const verifyRes = await fetch("/api/bookings/verify-payment", {
                 method: "POST",
