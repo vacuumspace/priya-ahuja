@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { useSession, signIn } from "next-auth/react"
+import SignInOptions from "@/components/SignInOptions"
 import { Service } from "@/lib/services-data"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -149,12 +150,7 @@ export function BookingForm({ service }: { service: Service }) {
           <p className="font-sans text-sm text-ink/60 leading-relaxed mb-4">
             a free account is required to complete your booking. no payment needed.
           </p>
-          <button
-            onClick={() => signIn("google", { callbackUrl: window.location.href })}
-            className="inline-flex items-center gap-2 bg-ink text-cream font-sans font-semibold text-sm px-5 py-2.5 rounded-xl hover:bg-ink/80 transition-colors"
-          >
-            continue with google
-          </button>
+          <SignInOptions callbackUrl={typeof window !== "undefined" ? window.location.href : "/"} />
         </div>
       </div>
     )

@@ -4,6 +4,7 @@ import { useState } from "react"
 import Script from "next/script"
 import Link from "next/link"
 import { ArrowRight, ArrowLeft, RotateCcw, CheckCircle } from "lucide-react"
+import SignInOptions from "@/components/SignInOptions"
 import {
   PILLARS,
   QUESTIONS,
@@ -82,20 +83,7 @@ function IntroView({ userEmail, onStart }: { userEmail: string | null; onStart: 
             Start <ArrowRight size={14} />
           </button>
         ) : (
-          <div className="space-y-3">
-            <form method="POST" action="/api/auth/signin/google">
-              <input type="hidden" name="callbackUrl" value="/tools/startup-score" />
-              <button
-                type="submit"
-                className="inline-flex items-center gap-2 bg-ink text-cream font-sans text-sm font-semibold px-6 py-3 rounded-xl hover:bg-ink/80 transition-colors"
-              >
-                sign in to start <ArrowRight size={14} />
-              </button>
-            </form>
-            <p className="text-[11px] font-sans text-ink/35">
-              google sign-in · ₹99 to unlock your full score
-            </p>
-          </div>
+          <SignInOptions callbackUrl="/tools/startup-score" compact googleLabel="sign in to start" />
         )}
       </div>
 
