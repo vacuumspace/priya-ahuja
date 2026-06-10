@@ -91,12 +91,15 @@ function IntroView({ userEmail, onStart }: { userEmail: string | null; onStart: 
           </button>
         ) : (
           <div className="space-y-3">
-            <a
-              href={`/api/auth/signin/google?callbackUrl=/tools/startup-score`}
-              className="inline-flex items-center gap-2 bg-ink text-cream font-sans text-sm font-semibold px-6 py-3 rounded-xl hover:bg-ink/80 transition-colors"
-            >
-              sign in &amp; start scoring <ArrowRight size={14} />
-            </a>
+            <form method="POST" action="/api/auth/signin/google">
+              <input type="hidden" name="callbackUrl" value="/tools/startup-score" />
+              <button
+                type="submit"
+                className="inline-flex items-center gap-2 bg-ink text-cream font-sans text-sm font-semibold px-6 py-3 rounded-xl hover:bg-ink/80 transition-colors"
+              >
+                sign in &amp; start scoring <ArrowRight size={14} />
+              </button>
+            </form>
             <p className="text-[11px] font-sans text-ink/35">
               sign in with google · free to try · full analysis ₹99
             </p>
