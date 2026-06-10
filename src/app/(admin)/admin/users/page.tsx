@@ -1,7 +1,8 @@
 import { db } from "@/lib/db"
-import { users } from "@/lib/db/schema"
-import { desc, ilike, or, count, and } from "drizzle-orm"
+import { users, userProfiles } from "@/lib/db/schema"
+import { desc, ilike, or, count, eq } from "drizzle-orm"
 import { UsersControls } from "./UsersControls"
+import Link from "next/link"
 
 const PAGE_SIZE = 10
 
@@ -26,8 +27,13 @@ export default async function AdminUsersPage({ searchParams }: Props) {
         name: users.name,
         email: users.email,
         createdAt: users.createdAt,
+        phone: userProfiles.phone,
+        businessName: userProfiles.businessName,
+        businessType: userProfiles.businessType,
+        stage: userProfiles.stage,
       })
       .from(users)
+      .leftJoin(userProfiles, eq(users.id, userProfiles.userId))
       .where(filter)
       .orderBy(desc(users.createdAt))
       .limit(PAGE_SIZE)
@@ -60,7 +66,10 @@ export default async function AdminUsersPage({ searchParams }: Props) {
                   <th className="text-left font-sans text-[11px] text-ink/40 uppercase tracking-widest px-5 py-3 w-12">S.No</th>
                   <th className="text-left font-sans text-[11px] text-ink/40 uppercase tracking-widest px-5 py-3">Name</th>
                   <th className="text-left font-sans text-[11px] text-ink/40 uppercase tracking-widest px-5 py-3">Email</th>
+                  <th className="text-left font-sans text-[11px] text-ink/40 uppercase tracking-widest px-5 py-3">Business</th>
+                  <th className="text-left font-sans text-[11px] text-ink/40 uppercase tracking-widest px-5 py-3">Phone</th>
                   <th className="text-left font-sans text-[11px] text-ink/40 uppercase tracking-widest px-5 py-3">Signed Up</th>
+                  <th className="px-5 py-3 w-8" />
                 </tr>
               </thead>
               <tbody>
@@ -69,6 +78,12 @@ export default async function AdminUsersPage({ searchParams }: Props) {
                     <td className="px-5 py-3.5 font-sans text-sm text-ink/30">{offset + i + 1}</td>
                     <td className="px-5 py-3.5 font-sans text-sm text-ink font-medium">{user.name ?? "—"}</td>
                     <td className="px-5 py-3.5 font-sans text-sm text-ink/70">{user.email}</td>
+                    <td className="px-5 py-3.5 font-sans text-sm text-ink/70">
+                      {user.businessName ? (
+                        <span>{user.businessName}{user.stage ? <span className="ml-1.5 text-[10px] text-ink/40">· {user.stage}</span> : null}</span>
+                      ) : "—"}
+                    </td>
+                    <td className="px-5 py-3.5 font-sans text-sm text-ink/60">{user.phone ?? "—"}</td>
                     <td className="px-5 py-3.5 font-sans text-sm text-ink/50">
                       {user.createdAt
                         ? new Intl.DateTimeFormat("en-IN", {
@@ -76,6 +91,14 @@ export default async function AdminUsersPage({ searchParams }: Props) {
                             timeStyle: "short",
                           }).format(new Date(user.createdAt))
                         : "—"}
+                    </td>
+                    <td className="px-5 py-3.5">
+                      <Link
+                        href={`/admin/users/${user.id}`}
+                        className="font-sans text-[11px] text-peach-dark hover:underline"
+                      >
+                        view
+                      </Link>
                     </td>
                   </tr>
                 ))}

@@ -24,7 +24,7 @@ export default async function ServicesPage() {
   return (
     <div className="min-h-screen bg-cream">
       <div className="flex justify-between items-center px-4 md:px-10 py-4 text-[11px] text-ink/50 font-sans border-b border-border">
-        <span>consult with me</span>
+        <span>connect with me</span>
         <span>{activeServices.length} offerings</span>
       </div>
 

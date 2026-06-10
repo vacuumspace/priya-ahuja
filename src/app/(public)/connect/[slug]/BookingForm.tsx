@@ -1,24 +1,13 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { useSession, signIn } from "next-auth/react"
 import { Service } from "@/lib/services-data"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
-import { CheckCircle, Loader2, Link2, CalendarDays, Clock } from "lucide-react"
-
-interface RazorpayOptions {
-  key: string
-  amount: number
-  currency: string
-  name: string
-  description: string
-  order_id: string
-  handler: (response: { razorpay_order_id: string; razorpay_payment_id: string; razorpay_signature: string }) => void
-  prefill: { name: string; email: string }
-  theme: { color: string }
-}
+import { CheckCircle, Loader2, Link2, CalendarDays, Clock, LogIn } from "lucide-react"
 
 type Slot = {
   id: string
@@ -40,7 +29,7 @@ function SlotPicker({ slug, onSelect }: { slug: string; onSelect: (slot: Slot | 
   const [selectedSlot, setSelectedSlot] = useState<Slot | null>(null)
 
   useEffect(() => {
-    fetch(`/api/consult/${slug}/slots`)
+    fetch(`/api/connect/${slug}/slots`)
       .then((r) => r.json())
       .then((data) => { setSlots(data); setLoading(false) })
   }, [slug])
@@ -131,17 +120,49 @@ function SlotPicker({ slug, onSelect }: { slug: string; onSelect: (slot: Slot | 
 }
 
 export function BookingForm({ service }: { service: Service }) {
+  const { data: session, status } = useSession()
   const [selectedSlot, setSelectedSlot] = useState<Slot | null>(null)
   const [name, setName] = useState("")
-  const [email, setEmail] = useState("")
   const [message, setMessage] = useState("")
   const [deckLink, setDeckLink] = useState("")
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
   const [error, setError] = useState("")
 
+  // Pre-fill name from session
+  useEffect(() => {
+    if (session?.user?.name && !name) {
+      setName(session.user.name)
+    }
+  }, [session])
+
   const needsSlot = service.type === "call"
   const canSubmit = !needsSlot || selectedSlot !== null
+
+  // Not signed in — show sign-in gate
+  if (status === "unauthenticated") {
+    return (
+      <div className="text-center py-6 space-y-4">
+        <div className="bg-peach/20 border border-peach-dark/20 rounded-2xl p-6">
+          <LogIn size={32} className="text-peach-dark mx-auto mb-3" />
+          <p className="font-heading text-base font-700 text-ink mb-1">sign in to book</p>
+          <p className="font-sans text-sm text-ink/60 leading-relaxed mb-4">
+            a free account is required to complete your booking. no payment needed.
+          </p>
+          <button
+            onClick={() => signIn("google", { callbackUrl: window.location.href })}
+            className="inline-flex items-center gap-2 bg-ink text-cream font-sans font-semibold text-sm px-5 py-2.5 rounded-xl hover:bg-ink/80 transition-colors"
+          >
+            continue with google
+          </button>
+        </div>
+      </div>
+    )
+  }
+
+  if (status === "loading") {
+    return <p className="text-xs font-sans text-ink/40 py-4 text-center">Loading…</p>
+  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -152,71 +173,20 @@ export function BookingForm({ service }: { service: Service }) {
     setError("")
     setLoading(true)
 
-    const fullMessage = [
-      deckLink ? `Deck/Model Link: ${deckLink}` : null,
-      message || null,
-    ].filter(Boolean).join("\n\n")
-
     try {
-      const orderRes = await fetch("/api/bookings/create-order", {
+      const res = await fetch("/api/bookings/book", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           serviceSlug: service.slug,
           slotId: selectedSlot?.id ?? null,
           name,
-          email,
-          message: fullMessage,
+          message,
+          deckLink: deckLink || null,
         }),
       })
-      const orderData = await orderRes.json()
-      if (!orderRes.ok) throw new Error(orderData.error || "Failed to create order")
-
-      if (!window.Razorpay) {
-        await new Promise<void>((resolve, reject) => {
-          const script = document.createElement("script")
-          script.src = "https://checkout.razorpay.com/v1/checkout.js"
-          script.onload = () => resolve()
-          script.onerror = () => reject(new Error("Failed to load Razorpay"))
-          document.body.appendChild(script)
-        })
-      }
-
-      await new Promise<void>((resolve, reject) => {
-        const rzp = new window.Razorpay({
-          key: orderData.keyId,
-          amount: orderData.amount,
-          currency: "INR",
-          name: "Priya Ahuja",
-          description: service.title,
-          order_id: orderData.orderId,
-          handler: async (response: { razorpay_order_id: string; razorpay_payment_id: string; razorpay_signature: string }) => {
-            try {
-              const verifyRes = await fetch("/api/bookings/verify-payment", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                  bookingId: orderData.bookingId,
-                  razorpayOrderId: response.razorpay_order_id,
-                  razorpayPaymentId: response.razorpay_payment_id,
-                  razorpaySignature: response.razorpay_signature,
-                }),
-              })
-              if (!verifyRes.ok) {
-                const d = await verifyRes.json()
-                throw new Error(d.error || "Payment verification failed")
-              }
-              resolve()
-            } catch (err) {
-              reject(err)
-            }
-          },
-          prefill: { name, email },
-          theme: { color: "#FFA07A" },
-        })
-        rzp.open()
-      })
-
+      const data = await res.json()
+      if (!res.ok) throw new Error(data.error || "Failed to book")
       setSuccess(true)
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong")
@@ -231,19 +201,13 @@ export function BookingForm({ service }: { service: Service }) {
         <CheckCircle size={40} className="text-peach-dark mx-auto mb-3" />
         <p className="font-heading text-lg font-700 text-ink mb-2">you&apos;re all set!</p>
         <p className="font-sans text-sm text-ink/60 leading-relaxed">
-          {service.type === "dm"
-            ? "i'll respond to your message within 2 business days."
-            : service.type === "report"
+          {service.type === "report"
             ? "i'll send your written analysis within 3 business days."
-            : service.urgencyNote
-            ? "i'll reach out within a few hours to confirm your slot."
-            : "your slot is confirmed — check your email for details."}
+            : "your slot is confirmed — i'll reach out with details shortly."}
         </p>
       </div>
     )
   }
-
-  const isAsyncType = service.type === "dm" || service.type === "report"
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
@@ -259,18 +223,29 @@ export function BookingForm({ service }: { service: Service }) {
         <Label htmlFor="name" className="text-xs font-sans text-ink/60 mb-1 block">your name</Label>
         <Input id="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="ankit sharma" required className="bg-cream border-border text-sm" />
       </div>
-      <div>
-        <Label htmlFor="email" className="text-xs font-sans text-ink/60 mb-1 block">email</Label>
-        <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@startup.com" required className="bg-cream border-border text-sm" />
+
+      {/* Signed in as — info chip */}
+      <div className="bg-peach/10 border border-peach-dark/20 rounded-xl px-3 py-2 flex items-center justify-between">
+        <p className="text-[11px] font-sans text-ink/60">
+          booking as <span className="font-semibold text-ink">{session?.user?.email}</span>
+        </p>
+        <button
+          type="button"
+          onClick={() => signIn("google", { callbackUrl: window.location.href })}
+          className="text-[10px] font-sans text-ink/40 hover:text-ink underline"
+        >
+          switch
+        </button>
       </div>
 
       {service.acceptsDeckLink && (
         <div>
           <Label htmlFor="deckLink" className="text-xs font-sans text-ink/60 mb-1 flex items-center gap-1.5">
             <Link2 size={11} />
-            {service.deckLinkLabel ?? "deck / model link"}
-            {service.type === "report" && <span className="text-red-400">*</span>}
-            {service.type !== "report" && <span className="text-ink/30">(optional)</span>}
+            {service.deckLinkLabel ?? "deck / doc link"}
+            {(service as any).deckLinkRequired || service.type === "report"
+              ? <span className="text-red-400">*</span>
+              : <span className="text-ink/30">(optional)</span>}
           </Label>
           <Input
             id="deckLink"
@@ -278,45 +253,27 @@ export function BookingForm({ service }: { service: Service }) {
             value={deckLink}
             onChange={(e) => setDeckLink(e.target.value)}
             placeholder={service.deckLinkPlaceholder ?? "google drive / docsend link"}
-            required={service.type === "report"}
+            required={(service as any).deckLinkRequired || service.type === "report"}
             className="bg-cream border-border text-sm"
           />
           <p className="text-[10px] text-ink/40 mt-1 font-sans">ensure view access is enabled before submitting</p>
         </div>
       )}
 
-      {isAsyncType ? (
-        <div>
-          <Label htmlFor="message" className="text-xs font-sans text-ink/60 mb-1 block">
-            {service.type === "report" ? "anything specific you want analysed?" : "your question"}
-            {service.type === "report" && <span className="text-ink/30 ml-1">(optional)</span>}
-            {service.type === "dm" && <span className="text-red-400 ml-1">*</span>}
-          </Label>
-          <Textarea
-            id="message"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            placeholder={service.type === "report" ? "specific slides to focus on, investor stage, key concerns…" : "what would you like to ask?"}
-            required={service.type === "dm"}
-            rows={4}
-            className="bg-cream border-border text-sm resize-none"
-          />
-        </div>
-      ) : (
-        <div>
-          <Label htmlFor="message" className="text-xs font-sans text-ink/60 mb-1 block">
-            what would you like to discuss? <span className="text-ink/30">(optional)</span>
-          </Label>
-          <Textarea
-            id="message"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            placeholder="brief context helps me prepare — stage, last round, what you're stuck on…"
-            rows={3}
-            className="bg-cream border-border text-sm resize-none"
-          />
-        </div>
-      )}
+      <div>
+        <Label htmlFor="message" className="text-xs font-sans text-ink/60 mb-1 block">
+          {service.type === "report" ? "anything specific you want analysed?" : "what would you like to discuss?"}
+          <span className="text-ink/30 ml-1">(optional)</span>
+        </Label>
+        <Textarea
+          id="message"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          placeholder={service.type === "report" ? "specific areas to focus on, key concerns…" : "brief context helps me prepare — stage, what you're stuck on…"}
+          rows={3}
+          className="bg-cream border-border text-sm resize-none"
+        />
+      </div>
 
       {error && <p className="text-xs font-sans text-red-500 bg-red-50 px-3 py-2 rounded-lg">{error}</p>}
 
@@ -326,16 +283,14 @@ export function BookingForm({ service }: { service: Service }) {
         className="w-full bg-ink text-cream hover:bg-ink/80 font-sans font-semibold text-sm py-3 rounded-xl disabled:opacity-40"
       >
         {loading ? (
-          <span className="flex items-center gap-2"><Loader2 size={14} className="animate-spin" />processing…</span>
+          <span className="flex items-center gap-2"><Loader2 size={14} className="animate-spin" />booking…</span>
         ) : needsSlot && !selectedSlot ? (
           "select a slot to continue"
-        ) : service.type === "report" ? (
-          "pay & submit deck →"
         ) : (
-          "pay & book →"
+          "confirm booking →"
         )}
       </Button>
-      <p className="text-[10px] text-ink/30 text-center font-sans">secure payment via razorpay</p>
+      <p className="text-[10px] text-ink/30 text-center font-sans">no payment required — just sign in</p>
     </form>
   )
 }

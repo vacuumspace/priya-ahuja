@@ -11,7 +11,7 @@ export default function PrivacyPolicyPage() {
 
         <section>
           <h2 className="font-semibold text-ink mb-2">Information We Collect</h2>
-          <p>When you sign in or book a consultation, we collect your name and email address. We use this solely to manage your bookings and communicate with you.</p>
+          <p>When you sign in or book a connect session, we collect your name and email address. We use this solely to manage your bookings and communicate with you.</p>
         </section>
 
         <section>

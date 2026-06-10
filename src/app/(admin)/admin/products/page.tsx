@@ -224,7 +224,7 @@ function AddProductForm({ onAdd }: { onAdd: (p: Product) => void }) {
   )
 }
 
-export default function ProductsPage() {
+function ListTab() {
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
 
@@ -234,30 +234,58 @@ export default function ProductsPage() {
 
   const handleUpdate = (id: string, patch: Partial<Product>) =>
     setProducts((prev) => prev.map((p) => (p.id === id ? { ...p, ...patch } : p)))
-
   const handleDelete = (id: string) =>
     setProducts((prev) => prev.filter((p) => p.id !== id))
-
   const handleAdd = (p: Product) =>
     setProducts((prev) => [p, ...prev])
+
+  if (loading) return <p className="font-sans text-sm text-ink/40">Loading...</p>
+
+  return (
+    <div className="flex flex-col gap-3 max-w-2xl">
+      {products.map((p) => (
+        <ProductCard key={p.id} product={p} onUpdate={handleUpdate} onDelete={handleDelete} />
+      ))}
+      <AddProductForm onAdd={handleAdd} />
+    </div>
+  )
+}
+
+function TemplateTransactionsTab() {
+  return (
+    <div className="max-w-2xl">
+      <p className="font-sans text-sm text-ink/40">No template purchases yet.</p>
+    </div>
+  )
+}
+
+type ProductTab = "transactions" | "list"
+
+export default function ProductsPage() {
+  const [tab, setTab] = useState<ProductTab>("transactions")
 
   return (
     <div className="px-10 py-10">
       <div className="mb-6">
-        <h1 className="font-heading text-3xl font-800 text-ink">Digital Products</h1>
-        <p className="font-sans text-sm text-ink/50 mt-1">{products.length} products</p>
+        <h1 className="font-heading text-3xl font-800 text-ink">Templates</h1>
+        <div className="flex items-center gap-1 mt-3">
+          {(["transactions", "list"] as ProductTab[]).map((t) => (
+            <button
+              key={t}
+              onClick={() => setTab(t)}
+              className={`text-[11px] font-sans px-3 py-1.5 rounded-full border transition-all capitalize ${
+                tab === t
+                  ? "bg-ink text-cream border-ink"
+                  : "bg-transparent text-ink/50 border-border hover:border-ink/30 hover:text-ink/70"
+              }`}
+            >
+              {t === "transactions" ? "Transactions" : "List"}
+            </button>
+          ))}
+        </div>
       </div>
 
-      {loading ? (
-        <p className="font-sans text-sm text-ink/40">Loading...</p>
-      ) : (
-        <div className="flex flex-col gap-3 max-w-2xl">
-          {products.map((p) => (
-            <ProductCard key={p.id} product={p} onUpdate={handleUpdate} onDelete={handleDelete} />
-          ))}
-          <AddProductForm onAdd={handleAdd} />
-        </div>
-      )}
+      {tab === "transactions" ? <TemplateTransactionsTab /> : <ListTab />}
     </div>
   )
 }

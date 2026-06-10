@@ -232,7 +232,7 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
                           startup idea score
                         </p>
                         <p className="font-sans text-sm text-ink/50 mt-0.5">
-                          {s.totalScore}/100 · {s.scoreBand}
+                          startup idea score
                         </p>
                       </div>
                       <div className="flex-shrink-0 text-right">

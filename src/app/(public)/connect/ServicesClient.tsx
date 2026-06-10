@@ -2,20 +2,19 @@
 
 import Link from "next/link"
 import { useState } from "react"
-import { ArrowRight, Clock, MessageSquare, FileText, Zap } from "lucide-react"
+import { ArrowRight, Clock, FileText, Zap } from "lucide-react"
 import { type Service, formatPrice, getDurationLabel } from "@/lib/services-data"
 
 const FUNDRAISE_TAGS = ["fundraising"]
 const STARTUP_TAGS = ["strategy", "deals", "career", "urgent"]
 
-const tabs = ["all", "fundraise", "startup", "dm"] as const
+const tabs = ["all", "fundraise", "startup"] as const
 type Tab = (typeof tabs)[number]
 
 function filterByTab(tab: Tab, services: Service[]) {
   if (tab === "all") return services
   if (tab === "fundraise") return services.filter((s) => FUNDRAISE_TAGS.includes(s.tag))
   if (tab === "startup") return services.filter((s) => STARTUP_TAGS.includes(s.tag))
-  if (tab === "dm") return services.filter((s) => s.type === "dm")
   return services
 }
 
@@ -48,7 +47,7 @@ export function ServicesClient({ services }: { services: Service[] }) {
           {filtered.map((service, i) => (
             <Link
               key={service.slug}
-              href={`/consult/${service.slug}`}
+              href={`/connect/${service.slug}`}
               className="group block bg-card border border-border rounded-2xl p-6 hover:border-peach-dark/40 hover:shadow-sm transition-all"
             >
               <div className="flex items-start justify-between gap-6">
@@ -76,9 +75,7 @@ export function ServicesClient({ services }: { services: Service[] }) {
                     </p>
                   )}
                   <div className="flex items-center justify-end gap-1 mt-2 text-ink/40">
-                    {service.type === "dm" ? (
-                      <MessageSquare size={12} />
-                    ) : service.type === "report" ? (
+                    {service.type === "report" ? (
                       <FileText size={12} />
                     ) : service.urgencyNote ? (
                       <Zap size={12} />
@@ -89,11 +86,7 @@ export function ServicesClient({ services }: { services: Service[] }) {
                   </div>
                   <div className="mt-3 opacity-0 group-hover:opacity-100 transition-opacity">
                     <span className="inline-flex items-center gap-1 text-xs font-sans text-peach-dark font-semibold">
-                      {service.type === "dm" ? (
-                        <>send message <MessageSquare size={11} /></>
-                      ) : (
-                        <>book now <ArrowRight size={11} /></>
-                      )}
+                      book now <ArrowRight size={11} />
                     </span>
                   </div>
                 </div>

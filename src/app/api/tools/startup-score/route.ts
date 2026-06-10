@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
+import { createHmac } from "crypto"
 import { auth } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { startupScores, siteSettings } from "@/lib/db/schema"
@@ -6,7 +7,6 @@ import { eq } from "drizzle-orm"
 import {
   computeTotal,
   computePillarScores,
-  getScoreBand,
   type Answers,
 } from "@/lib/startup-score-data"
 
@@ -26,11 +26,29 @@ export async function POST(req: NextRequest) {
   }
 
   const body = await req.json()
-  const answers: Answers = body.answers
+  const { answers, razorpayOrderId, razorpayPaymentId, razorpaySignature } = body as {
+    answers: Answers
+    razorpayOrderId: string
+    razorpayPaymentId: string
+    razorpaySignature: string
+  }
+
+  if (!answers || !razorpayOrderId || !razorpayPaymentId || !razorpaySignature) {
+    return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
+  }
+
+  // Verify Razorpay signature
+  const secret = process.env.RAZORPAY_KEY_SECRET!
+  const expected = createHmac("sha256", secret)
+    .update(`${razorpayOrderId}|${razorpayPaymentId}`)
+    .digest("hex")
+
+  if (expected !== razorpaySignature) {
+    return NextResponse.json({ error: "Payment verification failed" }, { status: 400 })
+  }
 
   const totalScore = computeTotal(answers)
   const pillarScores = computePillarScores(answers)
-  const band = getScoreBand(totalScore)
 
   const [row] = await db
     .insert(startupScores)
@@ -39,9 +57,12 @@ export async function POST(req: NextRequest) {
       answers,
       totalScore,
       pillarScores,
-      scoreBand: band.label,
+      scoreBand: "",
+      isPaid: true,
+      razorpayOrderId,
+      razorpayPaymentId,
     })
     .returning({ id: startupScores.id })
 
-  return NextResponse.json({ id: row.id, totalScore, pillarScores, scoreBand: band.label })
+  return NextResponse.json({ id: row.id, totalScore, pillarScores })
 }

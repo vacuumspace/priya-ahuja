@@ -11,7 +11,7 @@ export default function TermsPage() {
 
         <section>
           <h2 className="font-semibold text-ink mb-2">Services</h2>
-          <p>Priya Ahuja offers paid consultation sessions and digital products. All bookings are subject to availability and confirmed via email.</p>
+          <p>Priya Ahuja offers paid connect session sessions and digital products. All bookings are subject to availability and confirmed via email.</p>
         </section>
 
         <section>
@@ -31,7 +31,7 @@ export default function TermsPage() {
 
         <section>
           <h2 className="font-semibold text-ink mb-2">Limitation of Liability</h2>
-          <p>Advice provided is for informational purposes only. Priya Ahuja is not liable for business outcomes resulting from consultations.</p>
+          <p>Advice provided is for informational purposes only. Priya Ahuja is not liable for business outcomes resulting from connect sessions.</p>
         </section>
 
         <section>

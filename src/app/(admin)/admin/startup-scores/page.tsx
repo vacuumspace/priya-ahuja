@@ -10,17 +10,6 @@ interface Props {
   searchParams: Promise<{ page?: string }>
 }
 
-function bandColor(band: string) {
-  const map: Record<string, string> = {
-    "idea stage": "bg-red-100 text-red-600",
-    "early promise": "bg-amber-100 text-amber-600",
-    "fundable in 6–12 months": "bg-yellow-100 text-yellow-700",
-    "investor-ready": "bg-lime-100 text-lime-700",
-    "strong conviction": "bg-green-100 text-green-700",
-  }
-  return map[band] ?? "bg-ink/10 text-ink/50"
-}
-
 export default async function AdminStartupScoresPage({ searchParams }: Props) {
   const { page: pageParam } = await searchParams
   const page = Math.max(1, parseInt(pageParam ?? "1", 10))
@@ -31,7 +20,6 @@ export default async function AdminStartupScoresPage({ searchParams }: Props) {
       .select({
         id: startupScores.id,
         totalScore: startupScores.totalScore,
-        scoreBand: startupScores.scoreBand,
         pillarScores: startupScores.pillarScores,
         isPaid: startupScores.isPaid,
         createdAt: startupScores.createdAt,
@@ -67,9 +55,7 @@ export default async function AdminStartupScoresPage({ searchParams }: Props) {
                 <th className="text-left font-sans text-[11px] text-ink/40 uppercase tracking-widest px-5 py-3">Name</th>
                 <th className="text-left font-sans text-[11px] text-ink/40 uppercase tracking-widest px-5 py-3">Email</th>
                 <th className="text-left font-sans text-[11px] text-ink/40 uppercase tracking-widest px-5 py-3">Score</th>
-                <th className="text-left font-sans text-[11px] text-ink/40 uppercase tracking-widest px-5 py-3">Band</th>
-                <th className="text-left font-sans text-[11px] text-ink/40 uppercase tracking-widest px-5 py-3">Pillars</th>
-                <th className="text-left font-sans text-[11px] text-ink/40 uppercase tracking-widest px-5 py-3">Unlocked</th>
+                <th className="text-left font-sans text-[11px] text-ink/40 uppercase tracking-widest px-5 py-3">Segments</th>
                 <th className="text-left font-sans text-[11px] text-ink/40 uppercase tracking-widest px-5 py-3">Date</th>
               </tr>
             </thead>
@@ -84,11 +70,6 @@ export default async function AdminStartupScoresPage({ searchParams }: Props) {
                     <td className="px-5 py-3.5">
                       <span className="font-heading text-lg font-bold text-ink">{row.totalScore}</span>
                       <span className="font-sans text-[10px] text-ink/30">/100</span>
-                    </td>
-                    <td className="px-5 py-3.5">
-                      <span className={`text-[10px] font-sans font-semibold px-2 py-1 rounded-full ${bandColor(row.scoreBand)}`}>
-                        {row.scoreBand}
-                      </span>
                     </td>
                     <td className="px-5 py-3.5">
                       <div className="flex items-end gap-1">
@@ -113,13 +94,6 @@ export default async function AdminStartupScoresPage({ searchParams }: Props) {
                         })}
                       </div>
                     </td>
-                    <td className="px-5 py-3.5">
-                      {row.isPaid ? (
-                        <span className="text-[10px] font-sans font-semibold px-2 py-0.5 rounded-full bg-green-100 text-green-700">paid</span>
-                      ) : (
-                        <span className="text-[10px] font-sans font-semibold px-2 py-0.5 rounded-full bg-ink/10 text-ink/40">free</span>
-                      )}
-                    </td>
                     <td className="px-5 py-3.5 font-sans text-sm text-ink/50">
                       {row.createdAt ? new Date(row.createdAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" }) : "—"}
                     </td>
@@ -131,7 +105,6 @@ export default async function AdminStartupScoresPage({ searchParams }: Props) {
         )}
       </div>
 
-      {/* Pagination */}
       {totalPages > 1 && (
         <div className="flex items-center justify-between mt-4">
           <p className="font-sans text-sm text-ink/40">
@@ -139,18 +112,12 @@ export default async function AdminStartupScoresPage({ searchParams }: Props) {
           </p>
           <div className="flex gap-2">
             {page > 1 && (
-              <Link
-                href={`?page=${page - 1}`}
-                className="font-sans text-sm px-3 py-1.5 rounded-lg border border-border hover:bg-card transition-colors"
-              >
+              <Link href={`?page=${page - 1}`} className="font-sans text-sm px-3 py-1.5 rounded-lg border border-border hover:bg-card transition-colors">
                 prev
               </Link>
             )}
             {page < totalPages && (
-              <Link
-                href={`?page=${page + 1}`}
-                className="font-sans text-sm px-3 py-1.5 rounded-lg border border-border hover:bg-card transition-colors"
-              >
+              <Link href={`?page=${page + 1}`} className="font-sans text-sm px-3 py-1.5 rounded-lg border border-border hover:bg-card transition-colors">
                 next
               </Link>
             )}

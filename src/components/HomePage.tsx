@@ -29,8 +29,8 @@ export default function HomePage() {
           </div>
           <div>
             <p className="font-heading text-base font-700 text-ink">Priya Ahuja</p>
-            <p className="font-sans text-xs text-ink/40 mt-0.5">corp dev · groww</p>
-            <div className="flex gap-2.5 mt-2">
+            <p className="font-sans text-xs text-ink/40 mt-0.5 whitespace-nowrap">vc investor at Groww · startup consultant</p>
+            <div className="flex gap-2.5 mt-1.5">
               <a href="https://www.linkedin.com/in/ca-priya-harwani/" target="_blank" rel="noopener noreferrer" className="text-ink/35 hover:text-ink transition-colors" aria-label="LinkedIn">
                 <LinkedInIcon />
               </a>
@@ -43,10 +43,10 @@ export default function HomePage() {
 
         {/* CTA top-right */}
         <Link
-          href="/consult"
+          href="/connect"
           className="inline-flex items-center text-xs font-sans font-semibold bg-peach-dark text-ink px-3.5 py-2 rounded-lg hover:bg-peach-dark/80 transition-colors flex-shrink-0"
         >
-          consult
+          connect
         </Link>
       </div>
 
@@ -160,10 +160,10 @@ export default function HomePage() {
           <p className="font-sans text-xs text-cream/45 mt-1">one session can reframe months of confusion.</p>
         </div>
         <Link
-          href="/consult"
+          href="/connect"
           className="inline-flex items-center bg-peach-dark text-ink text-xs font-sans font-semibold px-4 py-2.5 rounded-lg hover:bg-peach-dark/80 transition-colors flex-shrink-0"
         >
-          consult
+          connect
         </Link>
       </div>
 

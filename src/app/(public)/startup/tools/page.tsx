@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { ArrowRight, TrendingUp, Lightbulb } from "lucide-react"
+import { ArrowRight, Lightbulb } from "lucide-react"
 
 const tools = [
   {
@@ -13,15 +13,6 @@ const tools = [
     icon: Lightbulb,
     available: true,
     href: "/tools/startup-score",
-  },
-  {
-    slug: "runway-calculator",
-    title: "Runway Calculator",
-    description: "Input your burn rate and cash on hand to see how much runway you have, and when to start your next raise.",
-    tag: "financial",
-    icon: TrendingUp,
-    available: false,
-    href: null,
   },
 ]
 

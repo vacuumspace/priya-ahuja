@@ -1,17 +1,30 @@
-"use client"
-
-import { useState } from "react"
-import { ArrowRight } from "lucide-react"
+import { auth } from "@/lib/auth"
+import { db } from "@/lib/db"
+import { purchases, digitalProducts } from "@/lib/db/schema"
+import { eq } from "drizzle-orm"
 import { getTemplatesByCategory } from "@/lib/templates-data"
-import TemplateCard from "@/components/templates/TemplateCard"
+import TemplatesGrid from "@/components/templates/TemplatesGrid"
 import Script from "next/script"
+import Link from "next/link"
+import { ArrowRight } from "lucide-react"
 
 const products = getTemplatesByCategory("startup")
-const allTags = ["all", ...Array.from(new Set(products.map((p) => p.tag)))]
 
-export default function StartupTemplatesPage() {
-  const [active, setActive] = useState("all")
-  const filtered = active === "all" ? products : products.filter((p) => p.tag === active)
+export default async function StartupTemplatesPage() {
+  const session = await auth()
+  const userEmail = session?.user?.email ?? null
+
+  const purchaseMap: Record<string, string> = {}
+  if (userEmail) {
+    const rows = await db
+      .select({ slug: digitalProducts.slug, token: purchases.downloadToken })
+      .from(purchases)
+      .innerJoin(digitalProducts, eq(purchases.productId, digitalProducts.id))
+      .where(eq(purchases.userEmail, userEmail))
+    for (const row of rows) {
+      if (row.slug && row.token) purchaseMap[row.slug] = row.token
+    }
+  }
 
   return (
     <>
@@ -35,35 +48,16 @@ export default function StartupTemplatesPage() {
           </p>
         </div>
 
-        <div className="px-4 md:px-10 pb-6">
-          <div className="flex items-center gap-2 flex-wrap">
-            {allTags.map((tag) => (
-              <button
-                key={tag}
-                onClick={() => setActive(tag)}
-                className={`text-[11px] font-sans px-3 py-1.5 rounded-full border transition-all ${
-                  active === tag
-                    ? "bg-ink text-cream border-ink"
-                    : "bg-transparent text-ink/50 border-border hover:border-ink/30 hover:text-ink/70"
-                }`}
-              >
-                {tag}
-              </button>
-            ))}
-          </div>
-        </div>
+        <TemplatesGrid
+          products={products}
+          purchaseMap={purchaseMap}
+          isAuthenticated={!!userEmail}
+          userEmail={userEmail ?? undefined}
+        />
 
         <div className="px-4 md:px-10 pb-16">
-          <div className="grid grid-cols-1 gap-4">
-            {filtered.map((product) => (
-              <TemplateCard key={product.slug} product={product} />
-            ))}
-          </div>
-
-          <div className="mt-10 text-center py-8 border-t border-border">
-            <p className="font-sans text-sm text-ink/40">
-              want something specific? i take requests.
-            </p>
+          <div className="mt-4 text-center py-8 border-t border-border">
+            <p className="font-sans text-sm text-ink/40">want something specific? i take requests.</p>
             <a
               href="mailto:hello@priyaahuja.com"
               className="inline-flex items-center gap-1.5 text-sm font-sans font-semibold text-peach-dark hover:underline mt-2"
