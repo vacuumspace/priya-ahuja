@@ -1,4 +1,4 @@
-import { pgTable, text, integer, boolean, timestamp, uuid, varchar } from "drizzle-orm/pg-core"
+import { pgTable, text, integer, boolean, timestamp, uuid, varchar, jsonb } from "drizzle-orm/pg-core"
 
 export const services = pgTable("services", {
   id: uuid("id").primaryKey().defaultRandom(),
@@ -97,6 +97,11 @@ export const availabilityConfig = pgTable("availability_config", {
   daysAhead: integer("days_ahead").notNull().default(14),
 })
 
+export const siteSettings = pgTable("site_settings", {
+  key: varchar("key", { length: 100 }).primaryKey(),
+  value: text("value").notNull(),
+})
+
 // Auth.js tables
 export const users = pgTable("users", {
   id: text("id").primaryKey(),
@@ -131,4 +136,50 @@ export const verificationTokens = pgTable("verification_tokens", {
   identifier: text("identifier").notNull(),
   token: text("token").notNull(),
   expires: timestamp("expires").notNull(),
+})
+
+export const userProfiles = pgTable("user_profiles", {
+  userId: text("user_id").primaryKey().references(() => users.id, { onDelete: "cascade" }),
+  // Basic details
+  phone: text("phone"),
+  bio: text("bio"),
+  location: text("location"),
+  website: text("website"),
+  // Business details
+  businessName: text("business_name"),
+  businessType: varchar("business_type", { length: 50 }), // founder | freelancer | agency | other
+  industry: text("industry"),
+  stage: varchar("stage", { length: 50 }), // idea | pre-revenue | revenue | scaling
+  businessDescription: text("business_description"),
+  businessWebsite: text("business_website"),
+  instagramHandle: text("instagram_handle"),
+  linkedinUrl: text("linkedin_url"),
+  twitterHandle: text("twitter_handle"),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+})
+
+export const startupScores = pgTable("startup_scores", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  answers: jsonb("answers").notNull(),
+  totalScore: integer("total_score").notNull(),
+  pillarScores: jsonb("pillar_scores").notNull(),
+  scoreBand: text("score_band").notNull(),
+  isPaid: boolean("is_paid").notNull().default(false),
+  razorpayOrderId: text("razorpay_order_id"),
+  razorpayPaymentId: text("razorpay_payment_id"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+})
+
+export const serviceInquiries = pgTable("service_inquiries", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  type: varchar("type", { length: 20 }).notNull(), // "tech" | "branding"
+  name: text("name").notNull(),
+  email: text("email").notNull(),
+  phone: text("phone"),
+  budget: varchar("budget", { length: 50 }),
+  projectDescription: text("project_description").notNull(),
+  status: varchar("status", { length: 20 }).notNull().default("new"), // new | reviewing | in-progress | closed
+  adminNotes: text("admin_notes"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
 })

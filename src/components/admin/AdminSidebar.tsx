@@ -7,25 +7,27 @@ import {
   ChevronLeft,
   ChevronRight,
   LayoutDashboard,
-  CalendarCheck,
-  Briefcase,
-  Package,
-  BookOpen,
+  Video,
+  FileStack,
   Users,
   LogOut,
   Home,
   Sun,
   Moon,
+  Wrench,
+  Inbox,
+  Lightbulb,
 } from "lucide-react"
 import { useAdminTheme } from "./AdminShell"
 
 const navItems = [
   { label: "Dashboard", href: "/admin", icon: LayoutDashboard },
   { label: "Users", href: "/admin/users", icon: Users },
-  { label: "Bookings", href: "/admin/bookings", icon: CalendarCheck },
-  { label: "Services", href: "/admin/services", icon: Briefcase },
-  { label: "Digital Products", href: "/admin/products", icon: Package },
-  { label: "Blog Posts", href: "/admin/blog", icon: BookOpen },
+  { label: "Connect Sessions", href: "/admin/services", icon: Video },
+  { label: "Templates", href: "/admin/products", icon: FileStack },
+  { label: "Service Inquiries", href: "/admin/service-inquiries", icon: Inbox },
+  { label: "Tools", href: "/admin/tools", icon: Wrench },
+  { label: "Startup Scores", href: "/admin/startup-scores", icon: Lightbulb },
 ]
 
 interface AdminSidebarProps {
