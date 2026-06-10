@@ -1,6 +1,7 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useSession } from "next-auth/react"
 import { FileText, Eye, Download, X, ChevronDown, ChevronUp, CheckCircle, Loader2 } from "lucide-react"
 import type { Template } from "@/lib/templates-data"
 
@@ -48,12 +49,23 @@ type Props = {
 }
 
 export default function TemplateCardAuth({ product, isAuthenticated, purchaseToken, userEmail }: Props) {
+  const { data: session } = useSession()
   const [modal, setModal] = useState<ModalState>({ type: "idle" })
-  const [buyName, setBuyName] = useState("")
-  const [buyEmail, setBuyEmail] = useState(userEmail ?? "")
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
   const [openSection, setOpenSection] = useState<number | null>(0)
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const params = new URLSearchParams(window.location.search)
+    const buyIntent = params.get("buyIntent")
+    if (buyIntent === product.slug && isAuthenticated) {
+      setModal({ type: "buy" })
+      const url = new URL(window.location.href)
+      url.searchParams.delete("buyIntent")
+      window.history.replaceState({}, "", url.toString())
+    }
+  }, [product.slug, isAuthenticated])
 
   function close() {
     setModal({ type: "idle" })
@@ -76,7 +88,9 @@ export default function TemplateCardAuth({ product, isAuthenticated, purchaseTok
 
   async function handleBuy(e: React.FormEvent) {
     e.preventDefault()
-    if (!buyName.trim() || !buyEmail.trim()) return
+    const buyName = session?.user?.name ?? ""
+    const buyEmail = session?.user?.email ?? userEmail ?? ""
+    if (!buyEmail.trim()) return
     setLoading(true)
     setError("")
     try {
@@ -87,6 +101,26 @@ export default function TemplateCardAuth({ product, isAuthenticated, purchaseTok
       })
       const data = await res.json()
       if (!res.ok) throw new Error(data.error || "Failed to create order")
+
+      if (data.orderId === "tester-order") {
+        const verifyRes = await fetch("/api/products/verify-payment", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            purchaseId: data.purchaseId,
+            razorpayOrderId: "tester-order",
+            razorpayPaymentId: "tester-payment",
+            razorpaySignature: "",
+          }),
+        })
+        const verifyData = await verifyRes.json()
+        if (!verifyRes.ok) {
+          setError(verifyData.error || "Something went wrong")
+          return
+        }
+        await loadContent(verifyData.accessToken)
+        return
+      }
 
       const rzp = new window.Razorpay({
         key: data.keyId,
@@ -196,7 +230,7 @@ export default function TemplateCardAuth({ product, isAuthenticated, purchaseTok
                   sign in to purchase and access this template from any device, anytime.
                 </p>
                 <form method="POST" action="/api/auth/signin/google">
-                  <input type="hidden" name="callbackUrl" value={typeof window !== "undefined" ? window.location.pathname : "/"} />
+                  <input type="hidden" name="callbackUrl" value={typeof window !== "undefined" ? `${window.location.pathname}?buyIntent=${product.slug}` : "/"} />
                   <button
                     type="submit"
                     className="w-full inline-flex items-center justify-center gap-2 bg-ink text-cream font-sans font-semibold text-sm py-3 rounded-lg hover:bg-ink/80 transition-colors"
@@ -228,28 +262,6 @@ export default function TemplateCardAuth({ product, isAuthenticated, purchaseTok
                   After payment, you&apos;ll get instant on-site access. The full content opens right here, and is also saved to your account under History → Templates.
                 </p>
                 <form onSubmit={handleBuy} className="space-y-4">
-                  <div>
-                    <label className="block font-sans text-xs text-ink/50 mb-1.5 uppercase tracking-wide">Your name</label>
-                    <input
-                      type="text"
-                      value={buyName}
-                      onChange={(e) => setBuyName(e.target.value)}
-                      required
-                      placeholder="First name"
-                      className="w-full border border-border rounded-lg px-3 py-2.5 font-sans text-sm text-ink bg-white focus:outline-none focus:border-ink/40 transition-colors"
-                    />
-                  </div>
-                  <div>
-                    <label className="block font-sans text-xs text-ink/50 mb-1.5 uppercase tracking-wide">Email address</label>
-                    <input
-                      type="email"
-                      value={buyEmail}
-                      onChange={(e) => setBuyEmail(e.target.value)}
-                      required
-                      placeholder="you@example.com"
-                      className="w-full border border-border rounded-lg px-3 py-2.5 font-sans text-sm text-ink bg-white focus:outline-none focus:border-ink/40 transition-colors"
-                    />
-                  </div>
                   {error && <p className="font-sans text-xs text-red-500">{error}</p>}
                   <button
                     type="submit"

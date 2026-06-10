@@ -52,7 +52,7 @@ export default async function ProfilePage() {
       <div className="px-4 md:px-10 pt-10 pb-16 max-w-2xl">
         <h1 className="font-heading text-3xl font-800 text-ink mb-2">your profile</h1>
         <p className="font-sans text-sm text-ink/60 mb-10">
-          all fields are optional. fill in what's relevant to you.
+          all fields are optional. details will be used to personalise your experience for future interactions.
         </p>
 
         <ProfileForm

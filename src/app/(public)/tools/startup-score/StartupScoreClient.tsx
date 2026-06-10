@@ -40,14 +40,18 @@ function IntroView({ userEmail, onStart }: { userEmail: string | null; onStart: 
     <div className="max-w-xl mx-auto space-y-5">
       <div className="bg-card border border-border rounded-2xl p-8">
         <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">
-          50 questions · 9 segments · ₹99
+          50 questions · 9 segments
         </p>
         <h1 className="font-heading text-3xl font-bold text-ink mb-3 lowercase">
           score your startup idea
         </h1>
-        <p className="font-sans text-sm text-ink/60 leading-relaxed mb-7">
+        <p className="font-sans text-sm text-ink/60 leading-relaxed mb-5">
           answer 50 questions across 9 segments and get a 0–100 score with a full breakdown — see exactly where your startup is strong and where it needs work.
         </p>
+        <div className="inline-flex items-center gap-1.5 bg-peach/40 border border-peach-dark/30 rounded-lg px-3 py-1.5 mb-7">
+          <span className="font-sans text-xs text-ink/50">full breakdown</span>
+          <span className="font-sans text-sm font-bold text-ink">₹99</span>
+        </div>
 
         {/* Segment table */}
         <div className="rounded-xl border border-border overflow-hidden mb-8">
@@ -75,7 +79,7 @@ function IntroView({ userEmail, onStart }: { userEmail: string | null; onStart: 
             onClick={onStart}
             className="inline-flex items-center gap-2 bg-ink text-cream font-sans text-sm font-semibold px-6 py-3 rounded-xl hover:bg-ink/80 transition-colors"
           >
-            start scoring <ArrowRight size={14} />
+            Start <ArrowRight size={14} />
           </button>
         ) : (
           <div className="space-y-3">
@@ -85,7 +89,7 @@ function IntroView({ userEmail, onStart }: { userEmail: string | null; onStart: 
                 type="submit"
                 className="inline-flex items-center gap-2 bg-ink text-cream font-sans text-sm font-semibold px-6 py-3 rounded-xl hover:bg-ink/80 transition-colors"
               >
-                sign in &amp; start scoring <ArrowRight size={14} />
+                sign in to start <ArrowRight size={14} />
               </button>
             </form>
             <p className="text-[11px] font-sans text-ink/35">
@@ -250,6 +254,32 @@ function PaywallView({
       })
       const orderData = await orderRes.json()
       if (!orderRes.ok) throw new Error(orderData.error || "Failed to create order")
+
+      // Bypass Razorpay checkout for tester order
+      if (orderData.orderId === "tester-order") {
+        const submitRes = await fetch("/api/tools/startup-score", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            answers,
+            razorpayOrderId: "tester-order",
+            razorpayPaymentId: "tester-payment",
+            razorpaySignature: "",
+          }),
+        })
+        const data = await submitRes.json()
+        if (!submitRes.ok) {
+          setError(data.error || "Something went wrong")
+          setLoading(false)
+          return
+        }
+        const pillarScores: Record<number, { earned: number; max: number }> = {}
+        for (const [k, v] of Object.entries(data.pillarScores as Record<string, { earned: number; max: number }>)) {
+          pillarScores[Number(k)] = v
+        }
+        onPaid({ id: data.id, totalScore: data.totalScore, pillarScores })
+        return
+      }
 
       const rzp = new window.Razorpay({
         key: orderData.keyId,

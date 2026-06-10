@@ -126,6 +126,21 @@ export function ProfileForm({ initialName, initialEmail, initialProfile }: Props
   const [saved, setSaved] = useState(false)
   const [error, setError] = useState("")
 
+  const isDirty =
+    phone !== (p?.phone ?? "") ||
+    bio !== (p?.bio ?? "") ||
+    location !== (p?.location ?? "") ||
+    website !== (p?.website ?? "") ||
+    businessName !== (p?.businessName ?? "") ||
+    businessType !== (p?.businessType ?? "") ||
+    industry !== (p?.industry ?? "") ||
+    stage !== (p?.stage ?? "") ||
+    businessDescription !== (p?.businessDescription ?? "") ||
+    businessWebsite !== (p?.businessWebsite ?? "") ||
+    instagramHandle !== (p?.instagramHandle ?? "") ||
+    linkedinUrl !== (p?.linkedinUrl ?? "") ||
+    twitterHandle !== (p?.twitterHandle ?? "")
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     setSaving(true)
@@ -236,7 +251,7 @@ export function ProfileForm({ initialName, initialEmail, initialProfile }: Props
       <div className="flex items-center gap-4">
         <button
           type="submit"
-          disabled={saving}
+          disabled={saving || !isDirty}
           className="inline-flex items-center gap-2 bg-ink text-cream font-sans font-semibold text-sm px-6 py-2.5 rounded-xl hover:bg-ink/80 transition-colors disabled:opacity-50"
         >
           {saving ? <Loader2 size={14} className="animate-spin" /> : saved ? <Check size={14} /> : null}

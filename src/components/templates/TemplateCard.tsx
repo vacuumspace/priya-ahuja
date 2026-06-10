@@ -77,6 +77,27 @@ export default function TemplateCard({ product }: Props) {
       const data = await res.json()
       if (!res.ok) throw new Error(data.error || "Failed to create order")
 
+      if (data.orderId === "tester-order") {
+        const verifyRes = await fetch("/api/products/verify-payment", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            purchaseId: data.purchaseId,
+            razorpayOrderId: "tester-order",
+            razorpayPaymentId: "tester-payment",
+            razorpaySignature: "",
+          }),
+        })
+        const verifyData = await verifyRes.json()
+        if (!verifyRes.ok) {
+          setError(verifyData.error || "Something went wrong")
+          return
+        }
+        localStorage.setItem(`access_${product.slug}`, verifyData.accessToken)
+        await loadContent(verifyData.accessToken)
+        return
+      }
+
       const rzp = new window.Razorpay({
         key: data.keyId,
         amount: data.amount,

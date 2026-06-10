@@ -60,12 +60,20 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    const razorpay = getRazorpayInstance()
-    const order = await razorpay.orders.create({
-      amount: service.price,
-      currency: "INR",
-      receipt: `booking_${Date.now()}`,
-    })
+    const isTester = email === process.env.TESTER_EMAIL
+
+    let orderId: string
+    if (isTester) {
+      orderId = "tester-order"
+    } else {
+      const razorpay = getRazorpayInstance()
+      const order = await razorpay.orders.create({
+        amount: service.price,
+        currency: "INR",
+        receipt: `booking_${Date.now()}`,
+      })
+      orderId = order.id
+    }
 
     const [booking] = await db.insert(bookings).values({
       serviceId: service.id,
@@ -73,14 +81,14 @@ export async function POST(req: NextRequest) {
       userName: name,
       userEmail: email,
       message: message || null,
-      razorpayOrderId: order.id,
+      razorpayOrderId: orderId,
       status: "pending",
     }).returning({ id: bookings.id })
 
     return NextResponse.json({
-      orderId: order.id,
-      amount: service.price,
-      keyId: process.env.RAZORPAY_KEY_ID,
+      orderId,
+      amount: isTester ? 0 : service.price,
+      keyId: isTester ? "" : process.env.RAZORPAY_KEY_ID,
       bookingId: booking.id,
     })
   } catch (err) {

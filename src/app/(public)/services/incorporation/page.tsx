@@ -32,7 +32,17 @@ export default function IncorporationPage() {
       if (session.user.email) setEmail((v) => v || session.user!.email!)
     }
   }, [session])
+
   const [phone, setPhone] = useState("")
+
+  useEffect(() => {
+    fetch("/api/profile")
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.profile?.phone) setPhone((v) => v || data.profile.phone)
+      })
+      .catch(() => {})
+  }, [])
   const [entityType, setEntityType] = useState("")
   const [projectDescription, setProjectDescription] = useState("")
   const [loading, setLoading] = useState(false)

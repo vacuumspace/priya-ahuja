@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { ArrowRight, Lightbulb } from "lucide-react"
+import { Lightbulb } from "lucide-react"
 
 const tools = [
   {
@@ -99,18 +99,6 @@ export default function StartupToolsPage() {
           })}
         </div>
 
-        <div className="mt-10 bg-peach/30 border border-peach-dark/20 rounded-2xl p-6">
-          <p className="font-heading text-lg font-700 text-ink mb-1">want to be notified?</p>
-          <p className="font-sans text-sm text-ink/60 mb-4">
-            i&apos;ll drop a note when more tools go live. no spam, just the tool launch.
-          </p>
-          <a
-            href="mailto:hello@priyaahuja.com?subject=Notify me when tools are live"
-            className="inline-flex items-center gap-2 bg-ink text-cream text-xs font-sans font-semibold px-4 py-2.5 rounded-lg hover:bg-ink/80 transition-colors"
-          >
-            notify me <ArrowRight size={12} />
-          </a>
-        </div>
       </div>
     </div>
   )
