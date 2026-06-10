@@ -34,19 +34,21 @@ function cn(...classes: (string | false | undefined | null)[]) {
 
 // ── Intro ────────────────────────────────────────────────────────────────────
 
-function IntroView({ userEmail, onStart }: { userEmail: string; onStart: () => void }) {
+function IntroView({ userEmail, onStart }: { userEmail: string | null; onStart: () => void }) {
+  const isSignedIn = !!userEmail
+
   return (
-    <div className="max-w-xl mx-auto">
+    <div className="max-w-xl mx-auto space-y-5">
       <div className="bg-card border border-border rounded-2xl p-8">
         <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">
-          free tool · signed in as {userEmail}
+          free tool · 11 questions · ~3 minutes
         </p>
         <h1 className="font-heading text-3xl font-bold text-ink mb-3 lowercase">
           score your startup idea
         </h1>
         <p className="font-sans text-sm text-ink/60 leading-relaxed mb-6">
-          answer 11 questions across 5 pillars and get a 0–100 fundability score. unlock the full
-          pillar breakdown and fix recommendations for ₹99.
+          answer 11 questions across 5 pillars and get a 0–100 fundability score — the same
+          framework investors use to evaluate early-stage startups.
         </p>
 
         <div className="flex flex-wrap gap-2 mb-8">
@@ -60,21 +62,53 @@ function IntroView({ userEmail, onStart }: { userEmail: string; onStart: () => v
           ))}
         </div>
 
-        <div className="flex items-center gap-4 text-[11px] font-sans text-ink/40 mb-8">
-          <span>11 questions</span>
-          <span>·</span>
-          <span>~3 minutes</span>
-          <span>·</span>
-          <span>score free · full analysis ₹99</span>
+        {/* What you get */}
+        <div className="space-y-3 mb-8">
+          <div className="flex items-start gap-3">
+            <span className="w-5 h-5 rounded-full bg-peach/60 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <span className="text-[9px] font-bold text-ink/60">✓</span>
+            </span>
+            <p className="font-sans text-sm text-ink/70">
+              <span className="font-semibold text-ink">free</span> — overall score out of 100 + band label
+            </p>
+          </div>
+          <div className="flex items-start gap-3">
+            <span className="w-5 h-5 rounded-full bg-peach-dark/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <Lock size={9} className="text-ink/50" />
+            </span>
+            <p className="font-sans text-sm text-ink/70">
+              <span className="font-semibold text-ink">₹99</span> — full pillar breakdown + top 3 fixes to improve before pitching
+            </p>
+          </div>
         </div>
 
-        <button
-          onClick={onStart}
-          className="inline-flex items-center gap-2 bg-ink text-cream font-sans text-sm font-semibold px-6 py-3 rounded-xl hover:bg-ink/80 transition-colors"
-        >
-          start scoring <ArrowRight size={14} />
-        </button>
+        {isSignedIn ? (
+          <button
+            onClick={onStart}
+            className="inline-flex items-center gap-2 bg-ink text-cream font-sans text-sm font-semibold px-6 py-3 rounded-xl hover:bg-ink/80 transition-colors"
+          >
+            start scoring <ArrowRight size={14} />
+          </button>
+        ) : (
+          <div className="space-y-3">
+            <a
+              href={`/api/auth/signin/google?callbackUrl=/tools/startup-score`}
+              className="inline-flex items-center gap-2 bg-ink text-cream font-sans text-sm font-semibold px-6 py-3 rounded-xl hover:bg-ink/80 transition-colors"
+            >
+              sign in &amp; start scoring <ArrowRight size={14} />
+            </a>
+            <p className="text-[11px] font-sans text-ink/35">
+              sign in with google · free to try · full analysis ₹99
+            </p>
+          </div>
+        )}
       </div>
+
+      {isSignedIn && (
+        <p className="text-[10px] font-sans text-ink/30 text-center">
+          signed in as {userEmail}
+        </p>
+      )}
     </div>
   )
 }
@@ -444,7 +478,7 @@ function ResultsView({
 
 // ── Main ──────────────────────────────────────────────────────────────────────
 
-export default function StartupScoreClient({ userEmail, userName }: { userEmail: string; userName: string }) {
+export default function StartupScoreClient({ userEmail, userName }: { userEmail: string | null; userName: string }) {
   const [view, setView] = useState<"intro" | "quiz" | "results">("intro")
   const [step, setStep] = useState(0)
   const [answers, setAnswers] = useState<Answers>({})

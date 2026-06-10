@@ -9,7 +9,7 @@ type SidebarProps = { isAdmin?: boolean; isSignedIn?: boolean; userName?: string
 
 const topItems = [
   { label: "home", href: "/", badge: null },
-  { label: "consult", href: "/consult", badge: null },
+  { label: "connect", href: "/connect", badge: null },
 ]
 
 const topicGroups = [
@@ -18,7 +18,7 @@ const topicGroups = [
     prefix: "/startup",
     children: [
       { label: "blog", href: "/startup/blog" },
-      { label: "tools", href: "/startup/tools" },
+      { label: "tools", href: "/tools" },
       { label: "templates", href: "/startup/templates" },
     ],
   },
@@ -31,6 +31,16 @@ const topicGroups = [
       { label: "templates", href: "/fundraise/templates" },
     ],
   },
+  {
+    label: "services",
+    prefix: "/services",
+    children: [
+      { label: "tech product development", href: "/services/tech" },
+      { label: "branding", href: "/services/branding" },
+      { label: "accounting", href: "/services/accounting" },
+      { label: "company incorporation", href: "/services/incorporation" },
+    ],
+  },
 ]
 
 const bottomItems: { label: string; href: string; badge: null }[] = []
@@ -41,8 +51,9 @@ export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEma
   const [mobileOpen, setMobileOpen] = useState(false)
 
   const [open, setOpen] = useState<string | null>(() => {
-    if (pathname.startsWith("/startup")) return "startup"
+    if (pathname.startsWith("/startup") || pathname.startsWith("/tools")) return "startup"
     if (pathname.startsWith("/fundraise")) return "fundraise"
+    if (pathname.startsWith("/services")) return "services"
     return null
   })
 
@@ -110,7 +121,8 @@ export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEma
         })}
 
         {topicGroups.map((group) => {
-          const isGroupActive = pathname.startsWith(group.prefix)
+          const isGroupActive = pathname.startsWith(group.prefix) ||
+            (group.label === "startup" && pathname.startsWith("/tools"))
           const isOpen = open === group.label
 
           return (
@@ -176,6 +188,31 @@ export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEma
       {!collapsed && (
         <div className="border-t border-peach-dark/20 px-4 pt-3 pb-4 flex flex-col gap-3">
 
+          {/* History link */}
+          <Link
+            href="/my-sessions"
+            className={`flex items-center px-3 py-2 rounded-lg text-sm font-sans font-medium transition-colors ${
+              pathname === "/my-sessions"
+                ? "bg-peach-dark/30 text-ink"
+                : "text-ink/70 hover:bg-peach-dark/20 hover:text-ink"
+            }`}
+          >
+            history
+          </Link>
+
+          {isSignedIn && (
+            <Link
+              href="/profile"
+              className={`flex items-center px-3 py-2 rounded-lg text-sm font-sans font-medium transition-colors ${
+                pathname === "/profile"
+                  ? "bg-peach-dark/30 text-ink"
+                  : "text-ink/70 hover:bg-peach-dark/20 hover:text-ink"
+              }`}
+            >
+              profile
+            </Link>
+          )}
+
           {/* Profile card */}
           <div className="bg-peach-dark/10 rounded-xl px-3 py-2.5 flex flex-col gap-0.5">
             {isSignedIn ? (
@@ -209,13 +246,9 @@ export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEma
             )}
           </div>
 
-          {/* Copyright */}
-          <div className="flex items-center">
+          {/* Footer */}
+          <div className="flex items-center gap-2 whitespace-nowrap overflow-hidden">
             <span className="text-[10px] text-ink/40 font-sans">©2026 Priya Ahuja</span>
-          </div>
-
-          {/* Legal footer */}
-          <div className="flex gap-3 whitespace-nowrap">
             <Link href="/contact" className="text-[10px] font-sans text-ink/40 hover:text-ink transition-colors">contact</Link>
             <Link href="/privacy-policy" className="text-[10px] font-sans text-ink/40 hover:text-ink transition-colors">privacy</Link>
             <Link href="/terms" className="text-[10px] font-sans text-ink/40 hover:text-ink transition-colors">terms</Link>
