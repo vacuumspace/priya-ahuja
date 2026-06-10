@@ -171,6 +171,18 @@ export const startupScores = pgTable("startup_scores", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
 })
 
+export const angelInvestors = pgTable("angel_investors", {
+  id:       uuid("id").primaryKey().defaultRandom(),
+  sno:      integer("sno").notNull(),
+  name:     text("name").notNull(),
+  city:     varchar("city", { length: 100 }).notNull().default(""),
+  state:    varchar("state", { length: 100 }).notNull().default(""),
+  country:  varchar("country", { length: 100 }).notNull().default(""),
+  linkedin: text("linkedin").notNull().default(""),
+  emails:   text("emails").array().notNull().default([]),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+})
+
 export const serviceInquiries = pgTable("service_inquiries", {
   id: uuid("id").primaryKey().defaultRandom(),
   type: varchar("type", { length: 20 }).notNull(), // "tech" | "branding"

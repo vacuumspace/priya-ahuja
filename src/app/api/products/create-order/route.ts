@@ -2,6 +2,16 @@ import { NextRequest, NextResponse } from "next/server"
 import { db } from "@/lib/db"
 import { purchases } from "@/lib/db/schema"
 import { getTemplate } from "@/lib/templates-data"
+
+const EXTRA_PRODUCTS: Record<string, { slug: string; title: string; description: string; price: number; comingSoon: boolean }> = {
+  "angel-investor-list": {
+    slug: "angel-investor-list",
+    title: "Angel Investor List",
+    description: "1400+ angel investors across India — name, city, LinkedIn, and emails.",
+    price: 99900,
+    comingSoon: false,
+  },
+}
 import { getRazorpayInstance } from "@/lib/razorpay"
 import { eq, and } from "drizzle-orm"
 import { digitalProducts } from "@/lib/db/schema"
@@ -14,7 +24,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
     }
 
-    const template = getTemplate(slug)
+    const template = getTemplate(slug) ?? EXTRA_PRODUCTS[slug] ?? null
     if (!template || template.comingSoon) {
       return NextResponse.json({ error: "Product not found" }, { status: 404 })
     }
