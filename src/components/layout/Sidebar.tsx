@@ -18,7 +18,7 @@ const topicGroups = [
     prefix: "/startup",
     children: [
       { label: "blog", href: "/startup/blog" },
-      { label: "tools", href: "/tools" },
+      { label: "tools", href: "/startup/tools" },
       { label: "templates", href: "/startup/templates" },
     ],
   },
@@ -51,7 +51,7 @@ export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEma
   const [mobileOpen, setMobileOpen] = useState(false)
 
   const [open, setOpen] = useState<string | null>(() => {
-    if (pathname.startsWith("/startup") || pathname.startsWith("/tools")) return "startup"
+    if (pathname.startsWith("/startup") || pathname.startsWith("/tools/startup-score")) return "startup"
     if (pathname.startsWith("/fundraise")) return "fundraise"
     if (pathname.startsWith("/services")) return "services"
     return null
@@ -122,7 +122,7 @@ export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEma
 
         {topicGroups.map((group) => {
           const isGroupActive = pathname.startsWith(group.prefix) ||
-            (group.label === "startup" && pathname.startsWith("/tools"))
+            (group.label === "startup" && pathname.startsWith("/tools/startup-score"))
           const isOpen = open === group.label
 
           return (
@@ -200,18 +200,16 @@ export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEma
             history
           </Link>
 
-          {isSignedIn && (
-            <Link
-              href="/profile"
-              className={`flex items-center px-3 py-2 rounded-lg text-sm font-sans font-medium transition-colors ${
-                pathname === "/profile"
-                  ? "bg-peach-dark/30 text-ink"
-                  : "text-ink/70 hover:bg-peach-dark/20 hover:text-ink"
-              }`}
-            >
-              profile
-            </Link>
-          )}
+          <Link
+            href="/profile"
+            className={`flex items-center px-3 py-2 rounded-lg text-sm font-sans font-medium transition-colors ${
+              pathname === "/profile"
+                ? "bg-peach-dark/30 text-ink"
+                : "text-ink/70 hover:bg-peach-dark/20 hover:text-ink"
+            }`}
+          >
+            profile
+          </Link>
 
           {/* Profile card */}
           <div className="bg-peach-dark/10 rounded-xl px-3 py-2.5 flex flex-col gap-0.5">
