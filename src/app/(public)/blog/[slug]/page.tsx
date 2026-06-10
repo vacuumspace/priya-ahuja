@@ -135,7 +135,7 @@ export default async function BlogPostPage({ params }: Props) {
     author: {
       "@type": "Person",
       name: "Priya Ahuja",
-      url: "https://priyaahuja.com",
+      url: "https://priyaahuja.in",
     },
     datePublished: post.date,
     keywords: post.keywords.join(", "),
