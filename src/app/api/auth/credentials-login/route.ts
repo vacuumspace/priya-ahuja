@@ -42,7 +42,7 @@ export async function POST(req: NextRequest) {
   })
 
   const isProduction = process.env.NODE_ENV === "production"
-  const cookieName = isProduction ? "__Secure-next-auth.session-token" : "next-auth.session-token"
+  const cookieName = isProduction ? "__Secure-authjs.session-token" : "authjs.session-token"
 
   const response = NextResponse.json({ ok: true })
   response.cookies.set(cookieName, sessionToken, {
