@@ -17,17 +17,21 @@ import {
   Wrench,
   Inbox,
   Lightbulb,
+  CalendarCheck,
+  TrendingUp,
 } from "lucide-react"
 import { useAdminTheme } from "./AdminShell"
 
 const navItems = [
   { label: "Dashboard", href: "/admin", icon: LayoutDashboard },
   { label: "Users", href: "/admin/users", icon: Users },
+  { label: "Bookings", href: "/admin/bookings", icon: CalendarCheck },
   { label: "Connect Sessions", href: "/admin/services", icon: Video },
   { label: "Templates", href: "/admin/products", icon: FileStack },
   { label: "Service Inquiries", href: "/admin/service-inquiries", icon: Inbox },
   { label: "Tools", href: "/admin/tools", icon: Wrench },
   { label: "Startup Scores", href: "/admin/startup-scores", icon: Lightbulb },
+  { label: "Angel Investors", href: "/admin/angel-investors", icon: TrendingUp },
 ]
 
 interface AdminSidebarProps {

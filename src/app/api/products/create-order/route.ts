@@ -50,20 +50,12 @@ export async function POST(req: NextRequest) {
       product = created
     }
 
-    const isTester = email === process.env.TESTER_EMAIL
-
-    let orderId: string
-    if (isTester) {
-      orderId = "tester-order"
-    } else {
-      const razorpay = getRazorpayInstance()
-      const order = await razorpay.orders.create({
-        amount: template.price,
-        currency: "INR",
-        receipt: `product_${Date.now()}`,
-      })
-      orderId = order.id
-    }
+    const razorpay = getRazorpayInstance()
+    const order = await razorpay.orders.create({
+      amount: template.price,
+      currency: "INR",
+      receipt: `product_${Date.now()}`,
+    })
 
     const [purchase] = await db
       .insert(purchases)
@@ -71,14 +63,14 @@ export async function POST(req: NextRequest) {
         productId: product.id,
         userEmail: email,
         userName: name,
-        razorpayOrderId: orderId,
+        razorpayOrderId: order.id,
       })
       .returning({ id: purchases.id })
 
     return NextResponse.json({
-      orderId,
-      amount: isTester ? 0 : template.price,
-      keyId: isTester ? "" : process.env.RAZORPAY_KEY_ID,
+      orderId: order.id,
+      amount: template.price,
+      keyId: process.env.RAZORPAY_KEY_ID,
       purchaseId: purchase.id,
       productTitle: template.title,
     })

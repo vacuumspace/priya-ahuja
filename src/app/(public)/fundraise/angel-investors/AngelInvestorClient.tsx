@@ -131,22 +131,6 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
       const data = await res.json()
       if (!res.ok) throw new Error(data.error || "Failed to create order")
 
-      if (data.orderId === "tester-order") {
-        const verifyRes = await fetch("/api/products/verify-payment", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            purchaseId: data.purchaseId,
-            razorpayOrderId: "tester-order",
-            razorpayPaymentId: "tester-payment",
-            razorpaySignature: "",
-          }),
-        })
-        if (!verifyRes.ok) throw new Error("Verification failed")
-        setPaid(true)
-        return
-      }
-
       const rzp = new window.Razorpay({
         key: data.keyId,
         amount: data.amount,
@@ -198,7 +182,7 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
         <span>{totalCount > 0 ? `${totalCount.toLocaleString()} investors` : "loading…"}</span>
       </div>
 
-      <div className="px-4 md:px-10 pt-12 pb-6 flex items-start justify-between gap-6">
+      <div className="px-4 md:px-10 pt-12 pb-6 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 sm:gap-6">
         <div>
           <p className="font-sans text-xs text-ink/40 uppercase tracking-wide mb-2">Fundraise</p>
           <h1 className="font-heading text-3xl md:text-5xl font-800 text-ink mb-4">
@@ -213,7 +197,7 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
 
         {/* Top-right CTA — only when not paid */}
         {!paid && (
-          <div className="flex-shrink-0 flex flex-col items-end gap-1.5 pt-1">
+          <div className="flex-shrink-0 flex flex-col items-start sm:items-end gap-1.5 sm:pt-1">
             <button
               onClick={() => isAuthenticated ? handleBuy() : setShowSignIn(true)}
               disabled={state === "buying"}
@@ -281,8 +265,8 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
               <th className="text-left py-2.5 pr-4 text-ink/40 font-semibold hidden sm:table-cell">City</th>
               <th className="text-left py-2.5 pr-4 text-ink/40 font-semibold hidden md:table-cell">State</th>
               <th className="text-left py-2.5 pr-4 text-ink/40 font-semibold hidden lg:table-cell">Country</th>
-              <th className="text-left py-2.5 pr-4 text-ink/40 font-semibold">LinkedIn</th>
-              <th className="text-left py-2.5 text-ink/40 font-semibold">Emails</th>
+              <th className="text-left py-2.5 pr-4 text-ink/40 font-semibold hidden sm:table-cell">LinkedIn</th>
+              <th className="text-left py-2.5 text-ink/40 font-semibold hidden sm:table-cell">Emails</th>
             </tr>
           </thead>
           <tbody>
@@ -295,7 +279,7 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
                 <td className="py-3 pr-4 text-ink/60 hidden lg:table-cell">{inv.country || "—"}</td>
 
                 {/* LinkedIn — blurred for non-paid */}
-                <td className="py-3 pr-4">
+                <td className="py-3 pr-4 hidden sm:table-cell">
                   {paid ? (
                     inv.linkedin ? (
                       <a href={inv.linkedin} target="_blank" rel="noopener noreferrer"
@@ -309,7 +293,7 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
                 </td>
 
                 {/* Emails — blurred for non-paid */}
-                <td className="py-3">
+                <td className="py-3 hidden sm:table-cell">
                   {paid ? (
                     inv.emails.length > 0 ? (
                       <div className="flex items-center gap-2 flex-wrap">

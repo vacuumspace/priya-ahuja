@@ -1,4 +1,4 @@
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { Inter } from "next/font/google"
 import { Syne } from "next/font/google"
 import { Analytics } from "@vercel/analytics/react"
@@ -46,6 +46,12 @@ export const metadata: Metadata = {
     images: [{ url: "/priyadp.jpeg", width: 1200, height: 630, alt: "Priya Ahuja" }],
   },
   robots: { index: true, follow: true },
+}
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
 }
 
 export default function RootLayout({

@@ -12,7 +12,7 @@ const InstagramIcon = () => (
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-cream max-w-2xl mx-auto px-6 md:px-10 py-14 md:py-20">
+    <div className="min-h-screen bg-cream max-w-2xl mx-auto px-5 md:px-10 py-8 md:py-20">
 
       {/* ── Top bar: profile left, CTA right ── */}
       <div className="flex items-start justify-between mb-12">
@@ -29,7 +29,7 @@ export default function HomePage() {
           </div>
           <div>
             <p className="font-heading text-base font-700 text-ink">Priya Ahuja</p>
-            <p className="font-sans text-xs text-ink/40 mt-0.5 whitespace-nowrap">vc · startup consultant · founder's advisor </p>
+            <p className="font-sans text-xs text-ink/40 mt-0.5">vc · startup consultant · founder's advisor</p>
             <div className="flex gap-2.5 mt-1.5">
               <a href="https://www.linkedin.com/in/ca-priya-harwani/" target="_blank" rel="noopener noreferrer" className="text-ink/35 hover:text-ink transition-colors" aria-label="LinkedIn">
                 <LinkedInIcon />
@@ -154,7 +154,7 @@ export default function HomePage() {
       </div>
 
       {/* ── CTA ── */}
-      <div className="bg-ink rounded-2xl px-7 py-7 flex items-center justify-between gap-4">
+      <div className="bg-ink rounded-2xl px-6 py-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
         <div>
           <p className="font-heading text-lg font-700 text-cream">ready to get unstuck?</p>
           <p className="font-sans text-xs text-cream/45 mt-1">one session can reframe months of confusion.</p>

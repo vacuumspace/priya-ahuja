@@ -251,10 +251,88 @@ function ListTab() {
   )
 }
 
+type Purchase = {
+  id: string
+  userName: string
+  userEmail: string
+  razorpayPaymentId: string | null
+  downloadToken: string | null
+  createdAt: string
+  price: number
+  productTitle: string
+  productSlug: string
+}
+
 function TemplateTransactionsTab() {
+  const [purchases, setPurchases] = useState<Purchase[]>([])
+  const [loading, setLoading] = useState(true)
+  const [revoking, setRevoking] = useState<string | null>(null)
+
+  useEffect(() => {
+    fetch("/api/admin/purchases")
+      .then((r) => r.json())
+      .then((data) => { setPurchases(data); setLoading(false) })
+  }, [])
+
+  const revoke = async (id: string, name: string) => {
+    if (!confirm(`Revoke download access for ${name}? They will no longer be able to download.`)) return
+    setRevoking(id)
+    await fetch(`/api/admin/purchases/${id}`, { method: "PATCH" })
+    setPurchases((prev) => prev.map((p) => p.id === id ? { ...p, downloadToken: null } : p))
+    setRevoking(null)
+  }
+
+  if (loading) return <p className="font-sans text-sm text-ink/40">Loading...</p>
+  if (purchases.length === 0) return <p className="font-sans text-sm text-ink/40">No template purchases yet.</p>
+
+  const revenue = purchases.reduce((sum, p) => sum + p.price, 0)
+
   return (
-    <div className="max-w-2xl">
-      <p className="font-sans text-sm text-ink/40">No template purchases yet.</p>
+    <div>
+      <p className="font-sans text-xs text-ink/40 mb-4">
+        {purchases.length} purchases · ₹{(revenue / 100).toLocaleString("en-IN")} revenue
+      </p>
+      <div className="overflow-x-auto rounded-2xl border border-border">
+        <table className="w-full min-w-[800px]">
+          <thead>
+            <tr className="border-b border-border bg-card">
+              {["#", "Name", "Email", "Product", "Amount", "Payment ID", "Date", "Access"].map((h) => (
+                <th key={h} className="py-3 px-4 text-left text-[10px] font-sans font-semibold text-ink/40 uppercase tracking-widest">
+                  {h}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {purchases.map((p, i) => (
+              <tr key={p.id} className={i !== purchases.length - 1 ? "border-b border-border" : ""}>
+                <td className="py-3 px-4 font-sans text-xs text-ink/30">{i + 1}</td>
+                <td className="py-3 px-4 font-sans text-sm font-medium text-ink">{p.userName}</td>
+                <td className="py-3 px-4 font-sans text-sm text-ink/70">{p.userEmail}</td>
+                <td className="py-3 px-4 font-sans text-xs text-ink/60">{p.productTitle}</td>
+                <td className="py-3 px-4 font-sans text-sm font-medium text-ink">₹{(p.price / 100).toLocaleString("en-IN")}</td>
+                <td className="py-3 px-4 font-sans text-xs text-ink/50">{p.razorpayPaymentId ?? "—"}</td>
+                <td className="py-3 px-4 font-sans text-xs text-ink/50">
+                  {new Intl.DateTimeFormat("en-IN", { dateStyle: "medium", timeStyle: "short" }).format(new Date(p.createdAt))}
+                </td>
+                <td className="py-3 px-4">
+                  {p.downloadToken ? (
+                    <button
+                      onClick={() => revoke(p.id, p.userName)}
+                      disabled={revoking === p.id}
+                      className="font-sans text-[11px] text-red-500 hover:underline disabled:opacity-40"
+                    >
+                      {revoking === p.id ? "Revoking…" : "Revoke"}
+                    </button>
+                  ) : (
+                    <span className="font-sans text-[11px] text-ink/30">Revoked</span>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   )
 }

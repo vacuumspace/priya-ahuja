@@ -39,7 +39,7 @@ function IntroView({ userEmail, onStart }: { userEmail: string | null; onStart: 
 
   return (
     <div className="max-w-xl mx-auto space-y-5">
-      <div className="bg-card border border-border rounded-2xl p-8">
+      <div className="bg-card border border-border rounded-2xl p-5 sm:p-8">
         <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">
           50 questions · 9 segments
         </p>
@@ -243,32 +243,6 @@ function PaywallView({
       const orderData = await orderRes.json()
       if (!orderRes.ok) throw new Error(orderData.error || "Failed to create order")
 
-      // Bypass Razorpay checkout for tester order
-      if (orderData.orderId === "tester-order") {
-        const submitRes = await fetch("/api/tools/startup-score", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            answers,
-            razorpayOrderId: "tester-order",
-            razorpayPaymentId: "tester-payment",
-            razorpaySignature: "",
-          }),
-        })
-        const data = await submitRes.json()
-        if (!submitRes.ok) {
-          setError(data.error || "Something went wrong")
-          setLoading(false)
-          return
-        }
-        const pillarScores: Record<number, { earned: number; max: number }> = {}
-        for (const [k, v] of Object.entries(data.pillarScores as Record<string, { earned: number; max: number }>)) {
-          pillarScores[Number(k)] = v
-        }
-        onPaid({ id: data.id, totalScore: data.totalScore, pillarScores })
-        return
-      }
-
       const rzp = new window.Razorpay({
         key: orderData.keyId,
         amount: orderData.amount,
@@ -321,7 +295,7 @@ function PaywallView({
 
   return (
     <div className="max-w-xl mx-auto space-y-5">
-      <div className="bg-card border border-border rounded-2xl p-8">
+      <div className="bg-card border border-border rounded-2xl p-5 sm:p-8">
         <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">
           quiz complete · 50 / 50 answered
         </p>
@@ -426,7 +400,7 @@ function ResultsView({
   return (
     <div className="max-w-xl mx-auto space-y-5">
       {/* Overall score */}
-      <div className="bg-card border border-border rounded-2xl p-8 text-center">
+      <div className="bg-card border border-border rounded-2xl p-5 sm:p-8 text-center">
         <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-6">
           your startup score
         </p>
@@ -446,7 +420,7 @@ function ResultsView({
       </div>
 
       {/* Segment breakdown */}
-      <div className="bg-card border border-border rounded-2xl p-6">
+      <div className="bg-card border border-border rounded-2xl p-4 sm:p-6">
         <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">
           segment breakdown
         </p>
@@ -474,7 +448,7 @@ function ResultsView({
 
       {/* Recommendations */}
       {recs.length > 0 ? (
-        <div className="bg-card border border-border rounded-2xl p-6">
+        <div className="bg-card border border-border rounded-2xl p-4 sm:p-6">
           <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">
             top areas to work on
           </p>
@@ -570,7 +544,7 @@ export default function StartupScoreClient({ userEmail, userName }: { userEmail:
   return (
     <>
       <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="lazyOnload" />
-      <div className="py-8 px-4 md:px-8">
+      <div className="py-6 px-4 md:py-8 md:px-8">
         {view === "intro" && (
           <IntroView userEmail={userEmail} onStart={() => setView("quiz")} />
         )}
