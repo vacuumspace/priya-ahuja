@@ -14,6 +14,9 @@ export async function POST(req: NextRequest) {
 
   const { email, password } = await req.json()
 
+  console.log("env email:", JSON.stringify(testerEmail), "req email:", JSON.stringify(email))
+  console.log("env pass:", JSON.stringify(testerPassword), "req pass:", JSON.stringify(password))
+
   if (email !== testerEmail || password !== testerPassword) {
     return NextResponse.json({ error: "Invalid credentials" }, { status: 401 })
   }
