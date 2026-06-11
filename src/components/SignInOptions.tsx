@@ -49,8 +49,7 @@ export default function SignInOptions({
         setError("Invalid credentials")
         return
       }
-      router.push(callbackUrl)
-      router.refresh()
+      window.location.href = callbackUrl
     } catch {
       setError("Something went wrong")
     } finally {
