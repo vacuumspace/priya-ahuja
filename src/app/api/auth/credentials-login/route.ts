@@ -41,9 +41,13 @@ export async function POST(req: NextRequest) {
     expires,
   })
 
+  const isProduction = process.env.NODE_ENV === "production"
+  const cookieName = isProduction ? "__Secure-next-auth.session-token" : "next-auth.session-token"
+
   const response = NextResponse.json({ ok: true })
-  response.cookies.set("next-auth.session-token", sessionToken, {
+  response.cookies.set(cookieName, sessionToken, {
     httpOnly: true,
+    secure: isProduction,
     path: "/",
     sameSite: "lax",
     expires,
