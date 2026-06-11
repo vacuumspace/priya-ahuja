@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback, useRef } from "react"
 import { useSession } from "next-auth/react"
 import { ExternalLink, Copy, Check, ChevronLeft, ChevronRight, Search, X, Loader2, Lock } from "lucide-react"
 import SignInOptions from "@/components/SignInOptions"
+import { trackCta } from "@/lib/analytics"
 
 declare global {
   interface Window {
@@ -120,6 +121,7 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
     const buyEmail = session?.user?.email ?? userEmail ?? ""
     const buyName  = session?.user?.name  ?? userName  ?? ""
     if (!buyEmail) return
+    trackCta("angel-investors-buy")
     setState("buying")
     setError("")
     try {
@@ -203,7 +205,7 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
               disabled={state === "buying"}
               className="inline-flex items-center gap-2 bg-ink text-cream font-sans font-semibold text-sm px-5 py-2.5 rounded-lg hover:bg-ink/80 transition-colors disabled:opacity-50 whitespace-nowrap"
             >
-              {state === "buying" ? <><Loader2 size={13} className="animate-spin" /> setting up…</> : "get full access"}
+              {state === "buying" ? <><Loader2 size={13} className="animate-spin" /> processing…</> : "get full access"}
             </button>
             <span className="text-[10px] font-sans text-ink/40">{PRICE} · lifetime access</span>
           </div>

@@ -41,9 +41,20 @@ export const bookings = pgTable("bookings", {
   message: text("message"), // for Priority DM
   razorpayOrderId: text("razorpay_order_id"),
   razorpayPaymentId: text("razorpay_payment_id"),
-  status: varchar("status", { length: 20 }).notNull().default("pending"), // pending | paid | completed | cancelled
+  status: varchar("status", { length: 20 }).notNull().default("pending"), // pending | paid | confirmed | completed | cancelled
   meetLink: text("meet_link"),
+  googleCalendarEventId: text("google_calendar_event_id"),
   adminNotes: text("admin_notes"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+})
+
+export const bookingMessages = pgTable("booking_messages", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  bookingId: uuid("booking_id").notNull().references(() => bookings.id, { onDelete: "cascade" }),
+  senderEmail: text("sender_email").notNull(),
+  senderName: text("sender_name").notNull(),
+  isAdmin: boolean("is_admin").notNull().default(false),
+  body: text("body").notNull(),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 })
 
@@ -180,6 +191,15 @@ export const angelInvestors = pgTable("angel_investors", {
   country:  varchar("country", { length: 100 }).notNull().default(""),
   linkedin: text("linkedin").notNull().default(""),
   emails:   text("emails").array().notNull().default([]),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+})
+
+export const analyticsEvents = pgTable("analytics_events", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  type: varchar("type", { length: 30 }).notNull(), // 'pageview' | 'cta_click'
+  page: varchar("page", { length: 200 }),
+  ctaId: varchar("cta_id", { length: 100 }),
+  sessionId: varchar("session_id", { length: 100 }),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 })
 

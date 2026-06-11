@@ -2,23 +2,76 @@
 
 import { useState, useEffect } from "react"
 import { useSession } from "next-auth/react"
-import { CheckCircle, Loader2, Building2, FileCheck, Globe, Shield } from "lucide-react"
+import { CheckCircle, Loader2, Building2, FileCheck, ClipboardList, ShieldCheck, Users, BookOpen } from "lucide-react"
+import { trackCta } from "@/lib/analytics"
 
-const ENTITY_TYPES = [
-  { value: "Proprietorship", label: "Sole Proprietorship", desc: "Simplest form — no separate legal entity, ideal for freelancers and micro-businesses" },
-  { value: "Partnership", label: "Partnership Firm", desc: "Two or more partners, governed by Partnership Act 1932" },
-  { value: "LLP", label: "LLP (Limited Liability Partnership)", desc: "Combines partnership flexibility with limited liability — popular for professional services" },
-  { value: "Pvt Ltd", label: "Private Limited Company", desc: "Separate legal entity, most investor-friendly structure for startups" },
-  { value: "LLC", label: "LLC / OPC (One Person Company)", desc: "Single-owner structure with limited liability" },
-  { value: "GST", label: "GST Registration", desc: "Required for businesses with turnover above ₹20L (₹10L in special states)" },
-  { value: "PF", label: "PF / ESI Registration", desc: "Mandatory for businesses with 20+ employees" },
-]
-
-const process = [
-  { icon: FileCheck, title: "Document Collection", desc: "We collect all required KYC and business documents from you" },
-  { icon: Globe, title: "Filing & Application", desc: "We handle all government filings, MCA/ROC submissions, and portal applications" },
-  { icon: Shield, title: "Approvals & Certificates", desc: "You receive incorporation certificate, PAN, TAN, and all required registrations" },
-  { icon: Building2, title: "Post-Incorporation", desc: "Bank account opening support, GST linkage, and compliance calendar setup" },
+const offerings = [
+  {
+    icon: Building2,
+    title: "Company Incorporation",
+    points: [
+      "Private Limited Company (Pvt Ltd)",
+      "LLP (Limited Liability Partnership)",
+      "One Person Company (OPC)",
+      "Partnership Firm & Proprietorship",
+      "GST, PF & ESI Registration",
+    ],
+  },
+  {
+    icon: ClipboardList,
+    title: "Annual Compliance (MCA Filings)",
+    points: [
+      "MGT-7 / MGT-7A — Annual Return",
+      "AOC-4 — Financial Statements filing",
+      "MGT-14 — Resolutions & agreements",
+      "DIR-3 KYC — Director KYC annual update",
+      "INC-20A — Business commencement declaration",
+    ],
+  },
+  {
+    icon: FileCheck,
+    title: "Event-Based MCA Filings",
+    points: [
+      "SH-7 — Change in authorised capital",
+      "PAS-3 — Allotment of shares",
+      "DIR-12 — Director appointments & resignations",
+      "INC-28 — Order filings",
+      "CHG-1 / CHG-4 — Charge creation & satisfaction",
+    ],
+  },
+  {
+    icon: ShieldCheck,
+    title: "Statutory Audit",
+    points: [
+      "Annual statutory audit under Companies Act",
+      "Audit report preparation (CARO)",
+      "Director's report & board resolutions",
+      "Secretarial audit (applicable companies)",
+      "Internal audit support",
+    ],
+  },
+  {
+    icon: Users,
+    title: "Company Secretary Services",
+    points: [
+      "Board & AGM meeting support",
+      "Maintenance of statutory registers",
+      "Share transfer & transmission",
+      "Drafting of resolutions & minutes",
+      "Registered office compliance",
+    ],
+  },
+  {
+    icon: BookOpen,
+    title: "Other Registrations & Filings",
+    points: [
+      "MSME / Udyam registration",
+      "FSSAI, IEC, NSIC registrations",
+      "Trademark & IP filing support",
+      "Labour law registrations",
+      "ROC search reports",
+    ],
+  },
 ]
 
 export default function IncorporationPage() {
@@ -43,7 +96,7 @@ export default function IncorporationPage() {
       })
       .catch(() => {})
   }, [])
-  const [entityType, setEntityType] = useState("")
+  const [serviceType, setServiceType] = useState("")
   const [projectDescription, setProjectDescription] = useState("")
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
@@ -51,10 +104,11 @@ export default function IncorporationPage() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
+    trackCta("inquiry-incorporation", "/services/incorporation")
     setError("")
     setLoading(true)
-    const fullDescription = entityType
-      ? `Entity Type: ${entityType}\n\n${projectDescription}`
+    const fullDescription = serviceType
+      ? `Service Required: ${serviceType}\n\n${projectDescription}`
       : projectDescription
     try {
       const res = await fetch("/api/service-inquiries", {
@@ -76,40 +130,37 @@ export default function IncorporationPage() {
 
       {/* Hero */}
       <div className="mb-14">
-        <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-4">services · company registration</p>
+        <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-4">services · legal compliance</p>
         <h1 className="font-heading text-[clamp(2rem,5vw,3rem)] font-800 text-ink leading-[0.95] tracking-tight mb-5">
-          register your<br />business right.
+          stay compliant,<br />stay protected.
         </h1>
         <p className="font-sans text-sm text-ink/55 leading-relaxed">
-          from sole proprietorship to private limited company, GST to PF — we handle end-to-end business registration and compliance so you can focus on building.
+          from company incorporation to annual MCA filings and statutory audits — end-to-end legal compliance handled so you never miss a deadline.
         </p>
-      </div>
-
-      {/* Entity types */}
-      <div className="mb-14">
-        <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">registration types we handle</p>
-        <div className="space-y-2">
-          {ENTITY_TYPES.map((et) => (
-            <div key={et.value} className="bg-peach/20 border border-peach-dark/15 rounded-xl px-4 py-3">
-              <p className="font-sans text-sm font-semibold text-ink">{et.label}</p>
-              <p className="font-sans text-xs text-ink/50 mt-0.5">{et.desc}</p>
-            </div>
-          ))}
+        <div className="inline-flex items-center gap-2 mt-4 bg-peach/40 border border-peach-dark/25 rounded-full px-4 py-1.5">
+          <span className="w-1.5 h-1.5 rounded-full bg-peach-dark/60 flex-shrink-0" />
+          <p className="font-sans text-xs text-ink/60">annual package starting from <span className="font-semibold text-ink">₹9,999/-</span></p>
         </div>
       </div>
 
-      {/* Process */}
+      {/* Offerings */}
       <div className="mb-14">
-        <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">how it works</p>
-        <div className="grid grid-cols-2 gap-3">
-          {process.map((p, i) => (
-            <div key={p.title} className="bg-peach/10 border border-peach-dark/10 rounded-xl px-4 py-4">
-              <div className="flex items-center gap-2 mb-1.5">
-                <span className="text-[10px] font-mono text-ink/30">0{i + 1}</span>
-                <p.icon size={14} className="text-peach-dark" />
-                <p className="font-sans text-xs font-semibold text-ink">{p.title}</p>
+        <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">what we cover</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {offerings.map((o) => (
+            <div key={o.title} className="bg-peach/20 border border-peach-dark/15 rounded-xl px-5 py-4">
+              <div className="flex items-center gap-2.5 mb-2">
+                <o.icon size={15} className="text-peach-dark flex-shrink-0" />
+                <p className="font-sans text-sm font-semibold text-ink">{o.title}</p>
               </div>
-              <p className="font-sans text-[11px] text-ink/50 leading-snug">{p.desc}</p>
+              <ul className="space-y-1">
+                {o.points.map((p) => (
+                  <li key={p} className="flex items-center gap-2 text-[11px] font-sans text-ink/50">
+                    <span className="w-1 h-1 rounded-full bg-peach-dark/50 flex-shrink-0" />
+                    {p}
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>
@@ -162,27 +213,29 @@ export default function IncorporationPage() {
             </div>
 
             <div>
-              <label className="text-[10px] font-sans text-ink/50 uppercase tracking-wide block mb-1.5">Registration Type</label>
+              <label className="text-[10px] font-sans text-ink/50 uppercase tracking-wide block mb-1.5">Service Required</label>
               <select
-                value={entityType}
-                onChange={(e) => setEntityType(e.target.value)}
+                value={serviceType}
+                onChange={(e) => setServiceType(e.target.value)}
                 className="w-full text-sm font-sans bg-peach/10 border border-peach-dark/20 rounded-xl px-3 py-2.5 text-ink focus:outline-none focus:border-peach-dark/50 transition-colors"
               >
-                <option value="">select type (optional)</option>
-                {ENTITY_TYPES.map((et) => (
-                  <option key={et.value} value={et.value}>{et.label}</option>
-                ))}
+                <option value="">select (optional)</option>
+                <option value="Company Incorporation">Company Incorporation</option>
+                <option value="Annual MCA Compliance">Annual MCA Compliance</option>
+                <option value="Statutory Audit">Statutory Audit</option>
+                <option value="CS Services">Company Secretary Services</option>
+                <option value="Other Registration">Other Registration / Filing</option>
               </select>
             </div>
 
             <div>
-              <label className="text-[10px] font-sans text-ink/50 uppercase tracking-wide block mb-1.5">Tell us about your business *</label>
+              <label className="text-[10px] font-sans text-ink/50 uppercase tracking-wide block mb-1.5">Tell us about your requirement *</label>
               <textarea
                 required
                 rows={4}
                 value={projectDescription}
                 onChange={(e) => setProjectDescription(e.target.value)}
-                placeholder="what does your business do, where are you located, are you a new business or looking to convert an existing one?"
+                placeholder="briefly describe what you need — company type, current compliance status, any upcoming deadlines, etc."
                 className="w-full text-sm font-sans bg-peach/10 border border-peach-dark/20 rounded-xl px-3 py-2.5 text-ink placeholder-ink/30 focus:outline-none focus:border-peach-dark/50 transition-colors resize-none"
               />
             </div>

@@ -19,6 +19,9 @@ import {
   Lightbulb,
   CalendarCheck,
   TrendingUp,
+  Mail,
+  ShoppingCart,
+  BarChart2,
 } from "lucide-react"
 import { useAdminTheme } from "./AdminShell"
 
@@ -32,6 +35,9 @@ const navItems = [
   { label: "Tools", href: "/admin/tools", icon: Wrench },
   { label: "Startup Scores", href: "/admin/startup-scores", icon: Lightbulb },
   { label: "Angel Investors", href: "/admin/angel-investors", icon: TrendingUp },
+  { label: "Email Templates", href: "/admin/email-templates", icon: Mail },
+  { label: "Sales", href: "/admin/sales", icon: ShoppingCart },
+  { label: "Stats", href: "/admin/stats", icon: BarChart2 },
 ]
 
 interface AdminSidebarProps {

@@ -59,19 +59,21 @@ export async function GET(
     const dayOfWeek = d.getDay()
     const dateStr = d.toISOString().slice(0, 10)
 
-    const daySchedule = scheduleRows.find((s) => s.dayOfWeek === dayOfWeek)
-    if (!daySchedule || !daySchedule.isActive) continue
+    const daySchedules = scheduleRows.filter((s) => s.dayOfWeek === dayOfWeek && s.isActive)
+    if (daySchedules.length === 0) continue
 
-    let current = daySchedule.startTime
-    const endMins = toMinutes(daySchedule.endTime)
+    for (const daySchedule of daySchedules) {
+      let current = daySchedule.startTime
+      const endMins = toMinutes(daySchedule.endTime)
 
-    while (toMinutes(current) + slotDuration <= endMins) {
-      const endTime = addMinutes(current, slotDuration)
-      const key = `${dateStr}T${current}`
-      if (!bookedSet.has(key)) {
-        result.push({ id: key, date: dateStr, startTime: current, endTime })
+      while (toMinutes(current) + slotDuration <= endMins) {
+        const endTime = addMinutes(current, slotDuration)
+        const key = `${dateStr}T${current}`
+        if (!bookedSet.has(key)) {
+          result.push({ id: key, date: dateStr, startTime: current, endTime })
+        }
+        current = endTime
       }
-      current = endTime
     }
   }
 

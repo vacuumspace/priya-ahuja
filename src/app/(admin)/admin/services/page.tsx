@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { ChevronUp, ChevronDown, Trash2, Plus, X, CalendarDays, Clock, CalendarCheck } from "lucide-react"
+import { ChevronUp, ChevronDown, Trash2, Plus, X, CalendarDays, Clock } from "lucide-react"
 
 type Service = {
   id: string
@@ -26,6 +26,7 @@ type Service = {
 
 type ScheduleDay = {
   id: string
+  isNew?: boolean
   dayOfWeek: number
   startTime: string
   endTime: string
@@ -36,9 +37,13 @@ type ScheduleDay = {
 
 const DAY_LABELS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
 
+let _tempId = 0
+function tempId() { return `new-${++_tempId}` }
+
 function AvailabilityTab() {
   const [daysAhead, setDaysAhead] = useState(14)
   const [schedule, setSchedule] = useState<ScheduleDay[]>([])
+  const [deletedIds, setDeletedIds] = useState<string[]>([])
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [saved, setSaved] = useState(false)
@@ -53,25 +58,41 @@ function AvailabilityTab() {
       })
   }, [])
 
-  const toggleDay = (id: string) =>
-    setSchedule((prev) => prev.map((d) => (d.id === id ? { ...d, isActive: !d.isActive } : d)))
-
-  const setDayField = (id: string, field: "startTime" | "endTime", value: string) =>
+  const setRowField = (id: string, field: "startTime" | "endTime" | "isActive", value: string | boolean) =>
     setSchedule((prev) => prev.map((d) => (d.id === id ? { ...d, [field]: value } : d)))
+
+  const addRange = (dayOfWeek: number) => {
+    setSchedule((prev) => [...prev, {
+      id: tempId(), isNew: true, dayOfWeek,
+      startTime: "08:00", endTime: "09:30", isActive: true,
+    }])
+  }
+
+  const removeRow = (id: string) => {
+    if (!id.startsWith("new-")) setDeletedIds((prev) => [...prev, id])
+    setSchedule((prev) => prev.filter((d) => d.id !== id))
+  }
 
   const save = async () => {
     setSaving(true)
     await fetch("/api/admin/availability-config", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ daysAhead, schedule }),
+      body: JSON.stringify({ daysAhead, schedule, deletedIds }),
     })
+    // Refresh to get real IDs for new rows
+    const data = await fetch("/api/admin/availability-config").then((r) => r.json())
+    setSchedule(data.schedule)
+    setDeletedIds([])
     setSaving(false)
     setSaved(true)
     setTimeout(() => setSaved(false), 2000)
   }
 
   if (loading) return <p className="font-sans text-sm text-ink/40">Loading…</p>
+
+  // Group by day
+  const days = [0, 1, 2, 3, 4, 5, 6]
 
   return (
     <div className="max-w-lg space-y-8">
@@ -95,49 +116,58 @@ function AvailabilityTab() {
       {/* Weekly schedule */}
       <div>
         <p className="text-[10px] font-sans text-ink/40 uppercase tracking-widest mb-3">Weekly Schedule</p>
-        <div className="space-y-2">
-          {schedule.map((day) => (
-            <div
-              key={day.id}
-              className={`flex items-center gap-4 rounded-xl border px-4 py-3 transition-colors ${
-                day.isActive ? "border-border bg-card" : "border-border/50 bg-cream opacity-60"
-              }`}
-            >
-              {/* Toggle */}
-              <button
-                type="button"
-                onClick={() => toggleDay(day.id)}
-                className={`flex-shrink-0 w-9 h-5 rounded-full transition-colors relative ${day.isActive ? "bg-ink" : "bg-border"}`}
-                aria-label={`Toggle ${DAY_LABELS[day.dayOfWeek]}`}
-              >
-                <span className={`absolute top-0.5 w-4 h-4 rounded-full bg-white shadow transition-all ${day.isActive ? "left-4" : "left-0.5"}`} />
-              </button>
-
-              {/* Day label */}
-              <span className="w-8 text-sm font-sans font-semibold text-ink/70">{DAY_LABELS[day.dayOfWeek]}</span>
-
-              {/* Time range */}
-              {day.isActive ? (
-                <div className="flex items-center gap-2">
-                  <input
-                    type="time"
-                    value={day.startTime}
-                    onChange={(e) => setDayField(day.id, "startTime", e.target.value)}
-                    className="text-xs font-sans bg-cream border border-border rounded-lg px-2 py-1 text-ink focus:outline-none focus:border-peach-dark/50"
-                  />
-                  <span className="text-ink/30 text-xs">to</span>
-                  <input
-                    type="time"
-                    value={day.endTime}
-                    onChange={(e) => setDayField(day.id, "endTime", e.target.value)}
-                    className="text-xs font-sans bg-cream border border-border rounded-lg px-2 py-1 text-ink focus:outline-none focus:border-peach-dark/50"
-                  />
+        <div className="space-y-3">
+          {days.map((dow) => {
+            const rows = schedule.filter((d) => d.dayOfWeek === dow)
+            return (
+              <div key={dow} className="border border-border rounded-xl px-4 py-3 bg-card space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-sans font-semibold text-ink/70">{DAY_LABELS[dow]}</span>
+                  <button
+                    type="button"
+                    onClick={() => addRange(dow)}
+                    className="text-[11px] font-sans text-ink/40 hover:text-peach-dark flex items-center gap-1 transition-colors"
+                  >
+                    <Plus size={11} /> add window
+                  </button>
                 </div>
-              ) : (
-                <span className="text-xs font-sans text-ink/30">unavailable</span>
-              )}
-            </div>
-          ))}
+                {rows.length === 0 && (
+                  <p className="text-xs font-sans text-ink/30">no time windows — unavailable</p>
+                )}
+                {rows.map((row) => (
+                  <div key={row.id} className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setRowField(row.id, "isActive", !row.isActive)}
+                      className={`flex-shrink-0 w-8 h-4 rounded-full transition-colors relative ${row.isActive ? "bg-ink" : "bg-border"}`}
+                    >
+                      <span className={`absolute top-0.5 w-3 h-3 rounded-full bg-white shadow transition-all ${row.isActive ? "left-4" : "left-0.5"}`} />
+                    </button>
+                    <input
+                      type="time"
+                      value={row.startTime}
+                      onChange={(e) => setRowField(row.id, "startTime", e.target.value)}
+                      className="text-xs font-sans bg-cream border border-border rounded-lg px-2 py-1 text-ink focus:outline-none focus:border-peach-dark/50"
+                    />
+                    <span className="text-ink/30 text-xs">to</span>
+                    <input
+                      type="time"
+                      value={row.endTime}
+                      onChange={(e) => setRowField(row.id, "endTime", e.target.value)}
+                      className="text-xs font-sans bg-cream border border-border rounded-lg px-2 py-1 text-ink focus:outline-none focus:border-peach-dark/50"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => removeRow(row.id)}
+                      className="text-ink/20 hover:text-red-400 transition-colors ml-1"
+                    >
+                      <X size={13} />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )
+          })}
         </div>
       </div>
 
@@ -282,6 +312,7 @@ function ServiceRow({
   isLast: boolean
 }) {
   const [price, setPrice] = useState(String(service.price / 100))
+  const [duration, setDuration] = useState(String(service.durationMin ?? ""))
   const [showSlots, setShowSlots] = useState(false)
 
   const patch = async (data: Partial<Service>) => {
@@ -325,17 +356,32 @@ function ServiceRow({
           )}
         </div>
 
-        <div className="flex items-center gap-1.5 mt-1">
-          <span className="text-sm font-sans text-ink/50">₹</span>
-          <input
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-            onBlur={() => {
-              const val = Math.round(parseFloat(price) * 100)
-              if (!isNaN(val)) patch({ price: val })
-            }}
-            className="w-24 text-sm font-sans bg-cream border border-border rounded-lg px-2 py-1 text-ink focus:outline-none focus:border-peach-dark/50"
-          />
+        <div className="flex flex-col gap-1.5 mt-1">
+          <div className="flex items-center gap-1.5">
+            <span className="text-sm font-sans text-ink/50">₹</span>
+            <input
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+              onBlur={() => {
+                const val = Math.round(parseFloat(price) * 100)
+                if (!isNaN(val)) patch({ price: val })
+              }}
+              className="w-24 text-sm font-sans bg-cream border border-border rounded-lg px-2 py-1 text-ink focus:outline-none focus:border-peach-dark/50"
+            />
+          </div>
+          <div className="flex items-center gap-1.5">
+            <span className="text-[10px] font-sans text-ink/40">min</span>
+            <input
+              type="number"
+              value={duration}
+              onChange={(e) => setDuration(e.target.value)}
+              onBlur={() => {
+                const val = parseInt(duration)
+                if (!isNaN(val)) patch({ durationMin: val })
+              }}
+              className="w-16 text-sm font-sans bg-cream border border-border rounded-lg px-2 py-1 text-ink focus:outline-none focus:border-peach-dark/50"
+            />
+          </div>
         </div>
 
         {service.type === "call" && (

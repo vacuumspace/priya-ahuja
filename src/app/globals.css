@@ -141,6 +141,11 @@
     width: 240px;
     min-width: 240px;
   }
+  .scrollbar-none {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar { display: none; }
+  }
 }
 
 /* When desktop sidebar is collapsed, shift main content */

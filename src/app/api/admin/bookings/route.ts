@@ -1,6 +1,6 @@
 import { auth, isAdmin } from "@/lib/auth"
 import { db } from "@/lib/db"
-import { bookings, services } from "@/lib/db/schema"
+import { bookings, services, availability } from "@/lib/db/schema"
 import { desc, eq } from "drizzle-orm"
 
 export async function GET() {
@@ -23,9 +23,12 @@ export async function GET() {
       createdAt: bookings.createdAt,
       serviceTitle: services.title,
       serviceId: bookings.serviceId,
+      slotDate: availability.date,
+      slotStartTime: availability.startTime,
     })
     .from(bookings)
     .leftJoin(services, eq(bookings.serviceId, services.id))
+    .leftJoin(availability, eq(bookings.slotId, availability.id))
     .orderBy(desc(bookings.createdAt))
 
   return Response.json(rows)

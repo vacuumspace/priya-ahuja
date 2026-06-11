@@ -5,6 +5,7 @@ import Script from "next/script"
 import Link from "next/link"
 import { ArrowRight, ArrowLeft, RotateCcw, CheckCircle } from "lucide-react"
 import SignInOptions from "@/components/SignInOptions"
+import { trackCta } from "@/lib/analytics"
 import {
   PILLARS,
   QUESTIONS,
@@ -232,6 +233,7 @@ function PaywallView({
   const [error, setError] = useState("")
 
   async function handlePay() {
+    trackCta("startup-score-unlock", "/tools/startup-score")
     setLoading(true)
     setError("")
     try {
@@ -361,7 +363,7 @@ function PaywallView({
           {loading ? (
             <>
               <span className="w-3.5 h-3.5 border-2 border-cream/40 border-t-cream rounded-full animate-spin" />
-              opening payment…
+              processing…
             </>
           ) : (
             <>unlock full score — ₹99 <ArrowRight size={14} /></>
@@ -505,7 +507,7 @@ function ResultsView({
 
 // ── Main ──────────────────────────────────────────────────────────────────────
 
-export default function StartupScoreClient({ userEmail, userName }: { userEmail: string | null; userName: string }) {
+export default function StartupScoreClient({ userEmail, userName, isAdmin = false }: { userEmail: string | null; userName: string; isAdmin?: boolean }) {
   const [view, setView] = useState<"intro" | "quiz" | "paywall" | "results">("intro")
   const [step, setStep] = useState(0)
   const [answers, setAnswers] = useState<Answers>({})
@@ -521,9 +523,14 @@ export default function StartupScoreClient({ userEmail, userName }: { userEmail:
     else setView("intro")
   }
 
-  function handleNext() {
+  async function handleNext() {
     if (step < PILLARS.length - 1) {
       setStep((s) => s + 1)
+    } else if (isAdmin) {
+      const totalScore = computeTotal(answers)
+      const pillarScores = computePillarScores(answers)
+      setResult({ id: "admin", totalScore, pillarScores })
+      setView("results")
     } else {
       setView("paywall")
     }

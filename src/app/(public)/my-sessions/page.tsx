@@ -1,11 +1,12 @@
 import { auth } from "@/lib/auth"
 import { db } from "@/lib/db"
-import { bookings, purchases, services as servicesTable, digitalProducts, startupScores } from "@/lib/db/schema"
+import { bookings, purchases, services as servicesTable, digitalProducts, startupScores, availability } from "@/lib/db/schema"
 import { eq, desc } from "drizzle-orm"
 import Link from "next/link"
 import { CalendarDays, FileText, ExternalLink, LogIn, Lightbulb } from "lucide-react"
 import ViewTemplateButton from "@/components/templates/ViewTemplateButton"
 import SignInOptions from "@/components/SignInOptions"
+import BookingActions from "./BookingActions"
 
 function statusBadge(status: string) {
   const map: Record<string, { label: string; cls: string }> = {
@@ -63,9 +64,12 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
         serviceTitle: servicesTable.title,
         serviceSlug: servicesTable.slug,
         serviceType: servicesTable.type,
+        slotDate: availability.date,
+        slotStartTime: availability.startTime,
       })
       .from(bookings)
       .leftJoin(servicesTable, eq(bookings.serviceId, servicesTable.id))
+      .leftJoin(availability, eq(bookings.slotId, availability.id))
       .where(eq(bookings.userEmail, email))
       .orderBy(desc(bookings.createdAt)),
 
@@ -163,7 +167,11 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1">
                           {statusBadge(b.status)}
-                          <span className="text-[10px] font-sans text-ink/30">{formatDate(b.createdAt)}</span>
+                          <span className="text-[10px] font-sans text-ink/30">
+                            {b.slotDate
+                              ? new Date(`${b.slotDate}T${b.slotStartTime}:00+05:30`).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" }) + " · " + b.slotStartTime + " IST"
+                              : formatDate(b.createdAt)}
+                          </span>
                         </div>
                         <p className="font-heading text-base font-700 text-ink normal-case">
                           {b.serviceTitle ?? "Session"}
@@ -180,6 +188,11 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
                         </a>
                       )}
                     </div>
+                    <BookingActions
+                      bookingId={b.id}
+                      status={b.status}
+                      serviceSlug={b.serviceSlug ?? null}
+                    />
                   </div>
                 ))}
               </div>
@@ -261,11 +274,21 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
                         </p>
                       </div>
                       {p.downloadToken && p.productSlug && (
-                        <ViewTemplateButton
-                          slug={p.productSlug}
-                          title={p.productTitle ?? "Template"}
-                          token={p.downloadToken}
-                        />
+                        p.productSlug === "angel-investor-list" ? (
+                          <Link
+                            href="/fundraise/angel-investors"
+                            className="inline-flex items-center gap-1.5 text-xs font-sans font-semibold text-peach-dark hover:underline flex-shrink-0 mt-1"
+                          >
+                            <ExternalLink size={11} />
+                            view
+                          </Link>
+                        ) : (
+                          <ViewTemplateButton
+                            slug={p.productSlug}
+                            title={p.productTitle ?? "Template"}
+                            token={p.downloadToken}
+                          />
+                        )
                       )}
                     </div>
                   </div>

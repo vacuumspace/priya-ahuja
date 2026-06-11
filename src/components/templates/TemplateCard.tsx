@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { FileText, Download, Lock, X, ChevronDown, ChevronUp, CheckCircle } from "lucide-react"
 import type { Template } from "@/lib/templates-data"
 
@@ -54,6 +54,11 @@ export default function TemplateCard({ product }: Props) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
   const [openSection, setOpenSection] = useState<number | null>(0)
+  const [hasAccess, setHasAccess] = useState(false)
+
+  useEffect(() => {
+    setHasAccess(!!localStorage.getItem(`access_${product.slug}`))
+  }, [product.slug])
 
   function close() {
     setModal({ type: "idle" })
@@ -102,6 +107,7 @@ export default function TemplateCard({ product }: Props) {
           }
           // Store token in localStorage for convenience
           localStorage.setItem(`access_${product.slug}`, verifyData.accessToken)
+          setHasAccess(true)
           await loadContent(verifyData.accessToken)
         },
         prefill: { name, email },
@@ -153,6 +159,7 @@ export default function TemplateCard({ product }: Props) {
         return
       }
       localStorage.setItem(`access_${product.slug}`, data.accessToken)
+      setHasAccess(true)
       await loadContent(data.accessToken)
     } catch {
       setError("Something went wrong. Try again.")
@@ -203,23 +210,32 @@ export default function TemplateCard({ product }: Props) {
             <p className="font-sans font-700 text-ink text-lg mb-3">{price}</p>
             {!product.comingSoon && (
               <div className="flex flex-col gap-2 items-end">
-                <button
-                  onClick={() => setModal({ type: "buy" })}
-                  className="inline-flex items-center gap-1.5 bg-ink text-cream text-xs font-sans font-semibold px-4 py-2 rounded-lg hover:bg-ink/80 transition-colors"
-                >
-                  <Download size={11} />
-                  buy now
-                </button>
-                <button
-                  onClick={() => {
-                    const cached = localStorage.getItem(`access_${product.slug}`)
-                    if (cached) { loadContent(cached) } else { setModal({ type: "check-access" }) }
-                  }}
-                  className="inline-flex items-center gap-1.5 text-xs font-sans text-ink/40 hover:text-ink/70 transition-colors"
-                >
-                  <Lock size={10} />
-                  already bought?
-                </button>
+                {hasAccess ? (
+                  <button
+                    onClick={() => { const t = localStorage.getItem(`access_${product.slug}`); if (t) loadContent(t) }}
+                    className="inline-flex items-center gap-1.5 bg-ink text-cream text-xs font-sans font-semibold px-4 py-2 rounded-lg hover:bg-ink/80 transition-colors"
+                  >
+                    <FileText size={11} />
+                    view
+                  </button>
+                ) : (
+                  <>
+                    <button
+                      onClick={() => setModal({ type: "buy" })}
+                      className="inline-flex items-center gap-1.5 bg-ink text-cream text-xs font-sans font-semibold px-4 py-2 rounded-lg hover:bg-ink/80 transition-colors"
+                    >
+                      <Download size={11} />
+                      buy now
+                    </button>
+                    <button
+                      onClick={() => setModal({ type: "check-access" })}
+                      className="inline-flex items-center gap-1.5 text-xs font-sans text-ink/40 hover:text-ink/70 transition-colors"
+                    >
+                      <Lock size={10} />
+                      already bought?
+                    </button>
+                  </>
+                )}
               </div>
             )}
           </div>
@@ -280,7 +296,7 @@ export default function TemplateCard({ product }: Props) {
                     disabled={loading}
                     className="w-full bg-ink text-cream font-sans font-semibold text-sm py-3 rounded-lg hover:bg-ink/80 transition-colors disabled:opacity-50"
                   >
-                    {loading ? "Setting up payment…" : `Pay ${price}`}
+                    {loading ? "processing…" : `Pay ${price}`}
                   </button>
                 </form>
               </div>

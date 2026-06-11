@@ -2,9 +2,17 @@
 
 import { useState, useEffect } from "react"
 import { useSession } from "next-auth/react"
-import { CheckCircle, Loader2, Smartphone, Globe, Code2, Layers, Zap, Shield } from "lucide-react"
+import { CheckCircle, Loader2, Smartphone, Globe, Code2, Layers, Zap, Shield, Sparkles } from "lucide-react"
+import { trackCta } from "@/lib/analytics"
 
 const offerings = [
+  {
+    icon: Sparkles,
+    title: "AI Native Products",
+    desc: "Products built with AI at the core — not bolted on. LLM-powered features, intelligent automation, and agent workflows that actually ship.",
+    points: ["LLM integration & prompt engineering", "AI agents & automation pipelines", "RAG systems & knowledge bases", "AI-first UX design"],
+    highlight: true,
+  },
   {
     icon: Smartphone,
     title: "Mobile Apps",
@@ -69,6 +77,7 @@ export default function TechPage() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
+    trackCta("inquiry-tech", "/services/tech")
     setError("")
     setLoading(true)
     try {
@@ -105,10 +114,11 @@ export default function TechPage() {
         <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">what we build</p>
         <div className="space-y-4">
           {offerings.map((o) => (
-            <div key={o.title} className="bg-peach/20 border border-peach-dark/15 rounded-xl px-5 py-5">
+            <div key={o.title} className={`border rounded-xl px-5 py-5 ${"highlight" in o && o.highlight ? "bg-peach/30 border-peach-dark/30" : "bg-peach/20 border-peach-dark/15"}`}>
               <div className="flex items-center gap-2.5 mb-2">
                 <o.icon size={16} className="text-peach-dark flex-shrink-0" />
                 <p className="font-sans text-sm font-semibold text-ink">{o.title}</p>
+
               </div>
               <p className="font-sans text-xs text-ink/55 leading-relaxed mb-3">{o.desc}</p>
               <ul className="space-y-1">

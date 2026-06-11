@@ -474,19 +474,6 @@ Do you have a clean, organised Google Drive / Notion data room?
       },
     ],
   },
-  {
-    slug: "pitch-deck-teardown",
-    title: "Pitch Deck Teardown: What Works",
-    description:
-      "A detailed guide with real before/after examples of pitch decks, annotated with what changed and why.",
-    price: 79900,
-    tag: "guide",
-    category: "fundraise",
-    comingSoon: true,
-    preview: "Coming soon — annotated before/after deck teardowns from real Indian fundraises.",
-    sections: [],
-  },
-
   // ─── STARTUP ─────────────────────────────────────────────────────────────────
   {
     slug: "first-10-customers-playbook",

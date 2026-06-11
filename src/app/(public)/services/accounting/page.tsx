@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { useSession } from "next-auth/react"
 import { CheckCircle, Loader2, BarChart2, FileSpreadsheet, Receipt, BookOpen, CreditCard, ShieldCheck } from "lucide-react"
+import { trackCta } from "@/lib/analytics"
 
 const offerings = [
   {
@@ -66,6 +67,7 @@ export default function AccountingPage() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
+    trackCta("inquiry-accounting", "/services/accounting")
     setError("")
     setLoading(true)
     try {
@@ -88,13 +90,17 @@ export default function AccountingPage() {
 
       {/* Hero */}
       <div className="mb-14">
-        <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-4">services · accounting</p>
+        <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-4">services · finance</p>
         <h1 className="font-heading text-[clamp(2rem,5vw,3rem)] font-800 text-ink leading-[0.95] tracking-tight mb-5">
           accounting that<br />works for startups.
         </h1>
         <p className="font-sans text-sm text-ink/55 leading-relaxed">
           end-to-end accounting, GST, TDS, payroll, and audit support — handled by a team that understands the compliance needs of early-stage Indian companies.
         </p>
+        <div className="inline-flex items-center gap-2 mt-4 bg-peach/40 border border-peach-dark/25 rounded-full px-4 py-1.5">
+          <span className="w-1.5 h-1.5 rounded-full bg-peach-dark/60 flex-shrink-0" />
+          <p className="font-sans text-xs text-ink/60">annual package starting from <span className="font-semibold text-ink">₹9,999/-</span></p>
+        </div>
       </div>
 
       {/* Offerings */}

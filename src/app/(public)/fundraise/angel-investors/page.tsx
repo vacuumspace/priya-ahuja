@@ -1,4 +1,4 @@
-import { auth } from "@/lib/auth"
+import { auth, isAdmin } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { purchases, digitalProducts, angelInvestors } from "@/lib/db/schema"
 import { eq, and, isNotNull, count } from "drizzle-orm"
@@ -12,9 +12,9 @@ export default async function AngelInvestorsPage() {
   const session = await auth()
   const userEmail = session?.user?.email ?? null
 
-  // Check if user has a completed purchase
-  let isPaid = false
-  if (userEmail) {
+  // Check if user has a completed purchase (admin always bypasses)
+  let isPaid = isAdmin(userEmail)
+  if (!isPaid && userEmail) {
     const [row] = await db
       .select({ id: purchases.id })
       .from(purchases)

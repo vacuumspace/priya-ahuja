@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import { db } from "@/lib/db"
 import { angelInvestors, purchases, digitalProducts } from "@/lib/db/schema"
-import { auth } from "@/lib/auth"
+import { auth, isAdmin } from "@/lib/auth"
 import { eq, and, ilike, isNotNull, count, sql } from "drizzle-orm"
 
 const SLUG = "angel-investor-list"
@@ -18,9 +18,9 @@ export async function GET(req: NextRequest) {
     const session = await auth()
     const userEmail = session?.user?.email ?? null
 
-    // Check if user has a completed purchase
-    let isPaid = false
-    if (userEmail) {
+    // Check if user has a completed purchase (admin always bypasses)
+    let isPaid = isAdmin(userEmail)
+    if (!isPaid && userEmail) {
       const [purchase] = await db
         .select({ id: purchases.id })
         .from(purchases)
