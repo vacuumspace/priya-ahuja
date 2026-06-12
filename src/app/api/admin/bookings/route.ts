@@ -25,6 +25,8 @@ export async function GET() {
       serviceId: bookings.serviceId,
       slotDate: availability.date,
       slotStartTime: availability.startTime,
+      feedbackRating: bookings.feedbackRating,
+      feedbackText: bookings.feedbackText,
     })
     .from(bookings)
     .leftJoin(services, eq(bookings.serviceId, services.id))

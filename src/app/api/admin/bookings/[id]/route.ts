@@ -1,7 +1,8 @@
 import { auth, isAdmin } from "@/lib/auth"
 import { db } from "@/lib/db"
-import { bookings } from "@/lib/db/schema"
+import { bookings, services as servicesTable } from "@/lib/db/schema"
 import { eq } from "drizzle-orm"
+import { sendFeedbackRequest } from "@/lib/resend"
 
 export async function PATCH(
   request: Request,
@@ -21,7 +22,23 @@ export async function PATCH(
   if (meetLink !== undefined) update.meetLink = meetLink
   if (adminNotes !== undefined) update.adminNotes = adminNotes
 
-  await db.update(bookings).set(update).where(eq(bookings.id, id))
+  const [updated] = await db.update(bookings).set(update).where(eq(bookings.id, id)).returning()
+
+  // Send feedback request email when admin marks session as completed
+  if (status === "completed" && updated) {
+    const [service] = await db
+      .select({ title: servicesTable.title })
+      .from(servicesTable)
+      .where(eq(servicesTable.id, updated.serviceId))
+      .limit(1)
+
+    sendFeedbackRequest({
+      to: updated.userEmail,
+      name: updated.userName,
+      serviceName: service?.title ?? "your session",
+      bookingId: updated.id,
+    }).catch(console.error)
+  }
 
   return Response.json({ ok: true })
 }

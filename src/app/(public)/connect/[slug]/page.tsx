@@ -7,6 +7,7 @@ import { BookingForm } from "./BookingForm"
 import { CheckCircle, Clock, MessageSquare, FileText, ArrowLeft, Zap } from "lucide-react"
 import Link from "next/link"
 import { Metadata } from "next"
+import Script from "next/script"
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -43,6 +44,8 @@ export default async function ServiceDetailPage({ params }: Props) {
   if (!service) notFound()
 
   return (
+    <>
+    <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="lazyOnload" />
     <div className="min-h-screen bg-cream">
       <div className="flex justify-between items-center px-4 md:px-10 py-4 text-[11px] text-ink/50 font-sans border-b border-border">
         <Link href="/connect" className="flex items-center gap-1.5 hover:text-ink transition-colors">
@@ -120,5 +123,6 @@ export default async function ServiceDetailPage({ params }: Props) {
         </div>
       </div>
     </div>
+    </>
   )
 }

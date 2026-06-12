@@ -8,7 +8,7 @@ const PAGE_SIZE = 10
 // Pages that have a paid CTA and which ctaId to look up
 const PAGE_CTA_MAP: Record<string, string> = {
   "/fundraise/angel-investors": "angel-investors-buy",
-  "/tools/startup-score": "startup-score-unlock",
+  "/fundraise/tools/fundability-score": "startup-score-unlock",
   "/services/accounting": "inquiry-accounting",
   "/services/incorporation": "inquiry-incorporation",
   "/services/tech": "inquiry-tech",

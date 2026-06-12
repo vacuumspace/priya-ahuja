@@ -7,6 +7,7 @@ import BookingConfirmationEmail from "@/emails/BookingConfirmationEmail"
 import AdminBookingNotificationEmail from "@/emails/AdminBookingNotificationEmail"
 import BookingCancellationEmail from "@/emails/BookingCancellationEmail"
 import DownloadLinkEmail from "@/emails/DownloadLinkEmail"
+import FeedbackRequestEmail from "@/emails/FeedbackRequestEmail"
 
 export const resend = new Resend(process.env.RESEND_API_KEY || "re_000000000000000000000000000000000000")
 
@@ -162,6 +163,28 @@ export async function sendDownloadLink({
     from: process.env.RESEND_FROM_EMAIL!,
     to,
     subject: s.email_download_subject || `Your Download: ${productName}`,
+    html,
+  })
+}
+
+export async function sendFeedbackRequest({
+  to,
+  name,
+  serviceName,
+  bookingId,
+}: {
+  to: string
+  name: string
+  serviceName: string
+  bookingId: string
+}) {
+  const feedbackUrl = `${process.env.NEXT_PUBLIC_APP_URL}/my-sessions/feedback/${bookingId}`
+  const html = await render(FeedbackRequestEmail({ name, serviceName, feedbackUrl }))
+
+  await resend.emails.send({
+    from: process.env.RESEND_FROM_EMAIL!,
+    to,
+    subject: `How was your ${serviceName}? Share your feedback`,
     html,
   })
 }

@@ -7,14 +7,14 @@ import { ArrowLeft, RotateCcw, CheckCircle } from "lucide-react"
 import SignInOptions from "@/components/SignInOptions"
 import { trackCta } from "@/lib/analytics"
 import {
-  PILLARS,
-  QUESTIONS,
-  computeTotal,
-  computePillarScores,
-  getTopRecommendations,
+  IDEA_PILLARS,
+  IDEA_QUESTIONS,
+  computeIdeaTotal,
+  computeIdeaPillarScores,
+  getIdeaTopRecommendations,
   type Answers,
   type OptionValue,
-} from "@/lib/startup-score-data"
+} from "@/lib/startup-idea-score-data"
 
 declare global {
   interface Window {
@@ -46,10 +46,13 @@ function IntroView({ userEmail, onStart }: { userEmail: string | null; onStart: 
           50 questions · 9 segments
         </p>
         <h1 className="font-heading text-3xl font-bold text-ink mb-3 lowercase">
-          startup fundability score
+          startup idea score
         </h1>
+        <p className="font-sans text-sm text-ink/60 leading-relaxed mb-3">
+          funding is a milestone, not the goal. this tool scores your idea on whether it's worth building — before you think about investors.
+        </p>
         <p className="font-sans text-sm text-ink/60 leading-relaxed mb-5">
-          this is not a "is my idea good?" test. it scores your startup on the exact criteria investors use when deciding whether to fund you — market size, traction signals, team strength, business model clarity, competitive defensibility, and more. answer 50 questions across 9 segments and get a 0–100 score with a full breakdown of where you stand and what to fix before you walk into a room.
+          50 questions across 9 segments: problem clarity, founder-market fit, demand signals, customer understanding, solution thinking, business basics, execution readiness, build mindset, and risk awareness. honest scoring. no fluff.
         </p>
         <div className="inline-flex items-center gap-1.5 bg-peach/40 border border-peach-dark/30 rounded-lg px-3 py-1.5 mb-7">
           <span className="font-sans text-xs text-ink/50">full breakdown</span>
@@ -62,7 +65,7 @@ function IntroView({ userEmail, onStart }: { userEmail: string | null; onStart: 
             <span>segment</span>
             <span className="text-right">questions</span>
           </div>
-          {PILLARS.map((p) => (
+          {IDEA_PILLARS.map((p) => (
             <div
               key={p.index}
               className="grid grid-cols-2 px-4 py-2.5 border-b border-border/50 last:border-0"
@@ -85,7 +88,7 @@ function IntroView({ userEmail, onStart }: { userEmail: string | null; onStart: 
             Start
           </button>
         ) : showSignIn ? (
-          <SignInOptions callbackUrl="/fundraise/tools/fundability-score" compact googleLabel="sign in to start" />
+          <SignInOptions callbackUrl="/startup/tools/idea-score" compact googleLabel="sign in to start" />
         ) : (
           <button
             onClick={() => setShowSignIn(true)}
@@ -151,10 +154,10 @@ function QuizView({
   onBack: () => void
   onNext: () => void
 }) {
-  const pillar = PILLARS[step]
-  const questions = pillar.questionIds.map((id) => QUESTIONS.find((q) => q.id === id)!)
+  const pillar = IDEA_PILLARS[step]
+  const questions = pillar.questionIds.map((id) => IDEA_QUESTIONS.find((q) => q.id === id)!)
   const allAnswered = pillar.questionIds.every((id) => answers[id] !== undefined)
-  const isLast = step === PILLARS.length - 1
+  const isLast = step === IDEA_PILLARS.length - 1
   const totalAnswered = Object.keys(answers).length
 
   return (
@@ -162,7 +165,7 @@ function QuizView({
       <div className="mb-6">
         <div className="flex justify-between items-center mb-2">
           <p key={step} className="text-[10px] font-sans text-ink/40 animate-in fade-in duration-300">
-            segment {step + 1} of {PILLARS.length} ·{" "}
+            segment {step + 1} of {IDEA_PILLARS.length} ·{" "}
             <span className="font-semibold text-ink/70 bg-peach/40 px-1 py-0.5 rounded animate-in fade-in duration-500">
               {pillar.title}
             </span>
@@ -174,7 +177,7 @@ function QuizView({
         <div className="w-full bg-border rounded-full h-1.5">
           <div
             className="bg-peach-dark rounded-full h-1.5 transition-all duration-500"
-            style={{ width: `${((step + 1) / PILLARS.length) * 100}%` }}
+            style={{ width: `${((step + 1) / IDEA_PILLARS.length) * 100}%` }}
           />
         </div>
       </div>
@@ -225,7 +228,7 @@ function QuizView({
   )
 }
 
-// ── Paywall View ──────────────────────────────────────────────────────────────
+// ── Paywall ───────────────────────────────────────────────────────────────────
 
 function PaywallView({
   answers,
@@ -244,11 +247,11 @@ function PaywallView({
   const [error, setError] = useState("")
 
   async function handlePay() {
-    trackCta("startup-score-unlock", "/fundraise/tools/fundability-score")
+    trackCta("startup-idea-score-unlock", "/startup/tools/idea-score")
     setLoading(true)
     setError("")
     try {
-      const orderRes = await fetch("/api/tools/startup-score/unlock-order", {
+      const orderRes = await fetch("/api/tools/startup-idea-score/unlock-order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({}),
@@ -261,14 +264,14 @@ function PaywallView({
         amount: orderData.amount,
         currency: "INR",
         name: "Priya Ahuja",
-        description: "Startup Fundability Score — Full Analysis",
+        description: "Startup Idea Score — Full Analysis",
         order_id: orderData.orderId,
         handler: async (response: {
           razorpay_order_id: string
           razorpay_payment_id: string
           razorpay_signature: string
         }) => {
-          const submitRes = await fetch("/api/tools/startup-score", {
+          const submitRes = await fetch("/api/tools/startup-idea-score", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -291,9 +294,7 @@ function PaywallView({
         },
         prefill: { name: userName, email: userEmail },
         theme: { color: "#2D2D2D" },
-        modal: {
-          ondismiss: () => setLoading(false),
-        },
+        modal: { ondismiss: () => setLoading(false) },
       })
       rzp.open()
     } catch (err) {
@@ -302,9 +303,8 @@ function PaywallView({
     }
   }
 
-  // Preview segment scores client-side (blurred) to give a sense of what's coming
-  const previewPillarScores = computePillarScores(answers)
-  const previewTotal = computeTotal(answers)
+  const previewPillarScores = computeIdeaPillarScores(answers)
+  const previewTotal = computeIdeaTotal(answers)
 
   return (
     <div className="max-w-xl mx-auto space-y-5">
@@ -313,13 +313,13 @@ function PaywallView({
           quiz complete · 50 / 50 answered
         </p>
         <h2 className="font-heading text-2xl font-bold text-ink lowercase mb-2">
-          your startup fundability score is ready
+          your startup idea score is ready
         </h2>
         <p className="font-sans text-sm text-ink/55 leading-relaxed mb-7">
-          unlock your full score — overall out of 100, all 9 segment breakdowns, and a prioritised list of exactly what to fix before you pitch to investors.
+          unlock your full score — overall out of 100, all 9 segment breakdowns, and a prioritised list of what to fix before you commit to building.
         </p>
 
-        {/* Blurred score preview */}
+        {/* Blurred preview */}
         <div className="relative mb-7 select-none">
           <div className="blur-sm pointer-events-none">
             <div className="flex items-center justify-center mb-4">
@@ -336,7 +336,7 @@ function PaywallView({
               </div>
             </div>
             <div className="space-y-2.5">
-              {PILLARS.slice(0, 3).map((pillar) => {
+              {IDEA_PILLARS.slice(0, 3).map((pillar) => {
                 const ps = previewPillarScores[pillar.index]
                 const pct = ps ? (ps.earned / ps.max) * 100 : 0
                 return (
@@ -407,23 +407,19 @@ function ResultsView({
   answers: Answers
   onReset: () => void
 }) {
-  const recs = getTopRecommendations(answers, 3)
+  const recs = getIdeaTopRecommendations(answers, 3)
   const deg = (result.totalScore / 100) * 360
 
   return (
     <div className="max-w-xl mx-auto space-y-5">
-      {/* Overall score */}
       <div className="bg-card border border-border rounded-2xl p-5 sm:p-8 text-center">
         <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-6">
-          startup fundability score
+          startup idea score
         </p>
-
         <div className="relative w-36 h-36 mx-auto mb-5">
           <div
             className="w-full h-full rounded-full"
-            style={{
-              background: `conic-gradient(#FFA07A ${deg}deg, #E8DFC8 ${deg}deg)`,
-            }}
+            style={{ background: `conic-gradient(#FFA07A ${deg}deg, #E8DFC8 ${deg}deg)` }}
           />
           <div className="absolute inset-3 rounded-full bg-card flex items-center justify-center flex-col gap-0.5">
             <span className="font-heading text-3xl font-bold text-ink leading-none">{result.totalScore}</span>
@@ -432,13 +428,12 @@ function ResultsView({
         </div>
       </div>
 
-      {/* Segment breakdown */}
       <div className="bg-card border border-border rounded-2xl p-4 sm:p-6">
         <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">
           segment breakdown
         </p>
         <div className="space-y-4">
-          {PILLARS.map((pillar, i) => {
+          {IDEA_PILLARS.map((pillar, i) => {
             const ps = result.pillarScores[pillar.index] ?? { earned: 0, max: pillar.maxPoints }
             const pct = (ps.earned / ps.max) * 100
             return (
@@ -459,18 +454,14 @@ function ResultsView({
         </div>
       </div>
 
-      {/* Recommendations */}
       {recs.length > 0 ? (
         <div className="bg-card border border-border rounded-2xl p-4 sm:p-6">
           <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">
-            top areas to work on
+            top things to work on before you build
           </p>
           <div className="space-y-3">
             {recs.map((rec, i) => (
-              <div
-                key={i}
-                className="flex gap-3 bg-peach/15 border border-peach-dark/15 rounded-xl p-4"
-              >
+              <div key={i} className="flex gap-3 bg-peach/15 border border-peach-dark/15 rounded-xl p-4">
                 <span className="font-heading text-lg font-bold text-peach-dark/60 w-5 flex-shrink-0 mt-0.5">
                   {i + 1}
                 </span>
@@ -483,18 +474,17 @@ function ResultsView({
         <div className="flex items-center gap-3 bg-peach/20 border border-peach-dark/20 rounded-xl px-5 py-4">
           <CheckCircle size={16} className="text-peach-dark flex-shrink-0" />
           <p className="font-sans text-sm text-ink/70">
-            exceptional score — you&apos;ve addressed every key area.
+            exceptional foundation — you&apos;ve done the groundwork most founders skip.
           </p>
         </div>
       )}
 
-      {/* Brainstorming session upsell */}
       <div className="bg-peach/30 border border-peach-dark/20 rounded-2xl p-6">
         <p className="font-heading text-lg font-bold text-ink lowercase mb-1">
           want to go deeper?
         </p>
         <p className="font-sans text-sm text-ink/60 leading-relaxed mb-5">
-          book a startup idea brainstorming session with priya — turn your score into a concrete action plan.
+          book a startup idea brainstorming session with priya — turn your score into a concrete 30-day plan.
         </p>
         <Link
           href="/connect"
@@ -515,7 +505,7 @@ function ResultsView({
 
       <div className="border-t border-border pt-5 pb-2">
         <p className="font-sans text-[10px] text-ink/30 leading-relaxed text-center max-w-md mx-auto">
-          disclaimer: this score is for informational and self-reflection purposes only. it is not a guarantee of business success or failure. startup outcomes depend on many factors beyond what any quiz can measure. use this as one data point, not a definitive verdict.
+          disclaimer: this score is for self-reflection and planning purposes only. it is not a guarantee that your idea will succeed or fail. startup outcomes depend on many factors beyond any quiz. use this as a thinking tool, not a verdict.
         </p>
       </div>
     </div>
@@ -524,7 +514,15 @@ function ResultsView({
 
 // ── Main ──────────────────────────────────────────────────────────────────────
 
-export default function StartupScoreClient({ userEmail, userName, isAdmin = false }: { userEmail: string | null; userName: string; isAdmin?: boolean }) {
+export default function StartupIdeaScoreClient({
+  userEmail,
+  userName,
+  isAdmin = false,
+}: {
+  userEmail: string | null
+  userName: string
+  isAdmin?: boolean
+}) {
   const [view, setView] = useState<"intro" | "quiz" | "paywall" | "results">("intro")
   const [step, setStep] = useState(0)
   const [answers, setAnswers] = useState<Answers>({})
@@ -535,18 +533,18 @@ export default function StartupScoreClient({ userEmail, userName, isAdmin = fals
   }
 
   function handleBack() {
-    if (view === "paywall") { setView("quiz"); setStep(PILLARS.length - 1); return }
+    if (view === "paywall") { setView("quiz"); setStep(IDEA_PILLARS.length - 1); return }
     if (step > 0) setStep((s) => s - 1)
     else setView("intro")
   }
 
   async function handleNext() {
     window.scrollTo({ top: 0, behavior: "smooth" })
-    if (step < PILLARS.length - 1) {
+    if (step < IDEA_PILLARS.length - 1) {
       setStep((s) => s + 1)
     } else if (isAdmin) {
-      const totalScore = computeTotal(answers)
-      const pillarScores = computePillarScores(answers)
+      const totalScore = computeIdeaTotal(answers)
+      const pillarScores = computeIdeaPillarScores(answers)
       setResult({ id: "admin", totalScore, pillarScores })
       setView("results")
     } else {
@@ -592,11 +590,7 @@ export default function StartupScoreClient({ userEmail, userName, isAdmin = fals
           />
         )}
         {view === "results" && result && (
-          <ResultsView
-            result={result}
-            answers={answers}
-            onReset={handleReset}
-          />
+          <ResultsView result={result} answers={answers} onReset={handleReset} />
         )}
       </div>
     </>

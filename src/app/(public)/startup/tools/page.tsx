@@ -2,17 +2,26 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { Lightbulb } from "lucide-react"
+import { Lightbulb, TrendingUp } from "lucide-react"
 
 const tools = [
   {
-    slug: "startup-score",
+    slug: "startup-idea-score",
     title: "Startup Idea Score",
-    description: "Answer 11 questions across 5 pillars and get a 0–100 fundability score. Full pillar breakdown and fix recommendations for ₹99.",
+    description: "Funding is a milestone, not the goal. This score tells you whether your idea is worth building in the first place — before you think about investors. It tests problem clarity (is the pain real and frequent?), founder-market fit (why are you the right person?), demand signals (are people already doing something to solve this?), unit economics (can the numbers ever work?), and execution path (do you know your first 90 days?). Brutally honest. No fluff.",
     tag: "ideation",
     icon: Lightbulb,
     available: true,
-    href: "/tools/startup-score",
+    href: "/startup/tools/idea-score",
+  },
+  {
+    slug: "runway-calculator",
+    title: "Runway Calculator",
+    description: "Input your burn rate and cash on hand to see how much runway you have, and when you need to hit your next milestone.",
+    tag: "financial",
+    icon: TrendingUp,
+    available: false,
+    href: null,
   },
 ]
 
@@ -25,7 +34,7 @@ export default function StartupToolsPage() {
   return (
     <div className="min-h-screen bg-cream">
       <div className="flex justify-between items-center px-4 md:px-10 py-4 text-[11px] text-ink/50 font-sans border-b border-border">
-        <span>startup · free to use</span>
+        <span>startup · tools</span>
         <span>{tools.filter((t) => t.available).length} live · {tools.filter((t) => !t.available).length} coming soon</span>
       </div>
 
@@ -37,7 +46,7 @@ export default function StartupToolsPage() {
           building smart
         </h1>
         <p className="font-sans text-sm text-ink/60 max-w-md leading-relaxed">
-          calculators for the operational numbers that founders need to make better decisions.
+          tools focused on building a real business — not pitching one.
         </p>
       </div>
 
@@ -98,7 +107,6 @@ export default function StartupToolsPage() {
             )
           })}
         </div>
-
       </div>
     </div>
   )

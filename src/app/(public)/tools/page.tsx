@@ -6,13 +6,14 @@ import { Calculator, FileSearch, TrendingUp, Lightbulb } from "lucide-react"
 
 const tools = [
   {
-    slug: "startup-score",
+    slug: "startup-idea-score",
     title: "Startup Idea Score",
-    description: "Answer 11 questions across 5 pillars and get a 0–100 fundability score. Full pillar breakdown and fix recommendations for ₹99.",
+    description: "Funding is a milestone, not the goal. This score tells you whether your idea is worth building — before you think about investors. Tests problem clarity, founder-market fit, demand signals, unit economics, and execution path. Brutally honest. No fluff.",
     tag: "ideation",
     topic: "startup",
     icon: Lightbulb,
     available: true,
+    href: "/startup/tools/idea-score",
   },
   {
     slug: "dilution-calculator",
@@ -117,8 +118,8 @@ export default function ToolsPage() {
               </div>
             )
 
-            return tool.available ? (
-              <Link key={tool.slug} href={`/tools/${tool.slug}`}>
+            return tool.available && "href" in tool && tool.href ? (
+              <Link key={tool.slug} href={tool.href as string}>
                 {cardContent}
               </Link>
             ) : (

@@ -16,7 +16,7 @@ export type PublicProduct = {
 const allTagsFrom = (products: PublicProduct[]) =>
   ["all", ...Array.from(new Set(products.map((p) => p.tag)))]
 
-export function ProductsClient({ products }: { products: PublicProduct[] }) {
+export function ProductsClient({ products, userEmail }: { products: PublicProduct[]; userEmail?: string }) {
   const [active, setActive] = useState("all")
   const allTags = allTagsFrom(products)
   const filtered = active === "all" ? products : products.filter((p) => p.tag === active)
@@ -83,10 +83,7 @@ export function ProductsClient({ products }: { products: PublicProduct[] }) {
         </div>
 
         <div className="mt-10 text-center py-8 border-t border-border">
-          <p className="font-sans text-sm text-ink/40">
-            want something specific? i take requests.
-          </p>
-          <CustomRequestForm source="products" />
+          <CustomRequestForm source="products" userEmail={userEmail} />
         </div>
       </div>
     </>

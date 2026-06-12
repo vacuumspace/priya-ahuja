@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState, useRef } from "react"
-import { MessageCircle, X } from "lucide-react"
+import { MessageCircle, Star, X } from "lucide-react"
 
 type Message = {
   id: string
@@ -25,6 +25,8 @@ type Booking = {
   serviceTitle: string | null
   slotDate: string | null
   slotStartTime: string | null
+  feedbackRating: number | null
+  feedbackText: string | null
 }
 
 const STATUS_OPTIONS = ["pending", "paid", "confirmed", "completed", "cancelled"]
@@ -186,6 +188,29 @@ function BookingRow({
         />
       </td>
       <td className="py-3 px-4">
+        {booking.feedbackRating ? (
+          <div className="space-y-1">
+            <div className="flex items-center gap-0.5">
+              {[1,2,3,4,5].map((n) => (
+                <Star
+                  key={n}
+                  size={12}
+                  className={n <= booking.feedbackRating! ? "fill-peach-dark text-peach-dark" : "text-border"}
+                />
+              ))}
+              <span className="text-[11px] font-sans text-ink/60 ml-1">{booking.feedbackRating}/5</span>
+            </div>
+            {booking.feedbackText && (
+              <p className="text-[11px] font-sans text-ink/60 max-w-[160px] leading-relaxed line-clamp-3">
+                {booking.feedbackText}
+              </p>
+            )}
+          </div>
+        ) : (
+          <span className="text-[11px] font-sans text-ink/30">—</span>
+        )}
+      </td>
+      <td className="py-3 px-4">
         <textarea
           value={adminNotes}
           onChange={(e) => setAdminNotes(e.target.value)}
@@ -254,7 +279,7 @@ export default function BookingsPage() {
           <table className="w-full min-w-[1000px]">
             <thead>
               <tr className="border-b border-border bg-card">
-                {["Date / Slot", "Client", "Service", "Status", "Meet Link", "Notes", "Actions"].map((h) => (
+                {["Date / Slot", "Client", "Service", "Status", "Meet Link", "Feedback", "Notes", "Actions"].map((h) => (
                   <th key={h} className="py-3 px-4 text-left text-[10px] font-sans font-semibold text-ink/40 uppercase tracking-widest">
                     {h}
                   </th>

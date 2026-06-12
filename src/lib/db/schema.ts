@@ -45,6 +45,8 @@ export const bookings = pgTable("bookings", {
   meetLink: text("meet_link"),
   googleCalendarEventId: text("google_calendar_event_id"),
   adminNotes: text("admin_notes"),
+  feedbackRating: integer("feedback_rating"), // 1–5
+  feedbackText: text("feedback_text"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 })
 
@@ -182,6 +184,18 @@ export const startupScores = pgTable("startup_scores", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
 })
 
+
+export const startupIdeaScores = pgTable("startup_idea_scores", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  answers: jsonb("answers").notNull(),
+  totalScore: integer("total_score").notNull(),
+  pillarScores: jsonb("pillar_scores").notNull(),
+  isPaid: boolean("is_paid").notNull().default(false),
+  razorpayOrderId: text("razorpay_order_id"),
+  razorpayPaymentId: text("razorpay_payment_id"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+})
 
 export const analyticsEvents = pgTable("analytics_events", {
   id: uuid("id").primaryKey().defaultRandom(),

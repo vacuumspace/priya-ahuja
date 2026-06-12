@@ -1,3 +1,4 @@
+import { auth } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { digitalProducts } from "@/lib/db/schema"
 import { asc } from "drizzle-orm"
@@ -8,6 +9,8 @@ function formatPrice(paise: number) {
 }
 
 export default async function ProductsPage() {
+  const session = await auth()
+  const userEmail = session?.user?.email ?? null
   const rows = await db.select().from(digitalProducts).orderBy(asc(digitalProducts.createdAt))
 
   const products: PublicProduct[] = rows.map((row) => ({
@@ -39,7 +42,7 @@ export default async function ProductsPage() {
         </p>
       </div>
 
-      <ProductsClient products={products} />
+      <ProductsClient products={products} userEmail={userEmail ?? undefined} />
     </div>
   )
 }

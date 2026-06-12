@@ -6,6 +6,7 @@ import { useState, useEffect } from "react"
 import { ChevronDown, PanelLeftClose, PanelLeftOpen, Menu, X, Sun, Moon } from "lucide-react"
 import { useTheme } from "@/components/ThemeProvider"
 import SignInOptions from "@/components/SignInOptions"
+import { signOut } from "next-auth/react"
 
 type SidebarProps = { isAdmin?: boolean; isSignedIn?: boolean; userName?: string; userEmail?: string }
 
@@ -55,8 +56,10 @@ export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEma
   const [mobileOpen, setMobileOpen] = useState(false)
   const { theme, toggle: toggleTheme } = useTheme()
 
+  const [signOutOpen, setSignOutOpen] = useState(false)
+
   const [open, setOpen] = useState<string | null>(() => {
-    if (pathname.startsWith("/startup") || pathname.startsWith("/tools/startup-score")) return "startup"
+    if (pathname.startsWith("/startup")) return "startup"
     if (pathname.startsWith("/fundraise")) return "fundraise"
     if (pathname.startsWith("/services")) return "services"
     return null
@@ -121,7 +124,7 @@ export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEma
               href={item.href}
               className={`flex items-center justify-between px-3 py-2 rounded-lg text-sm font-sans font-medium transition-colors ${
                 isActive
-                  ? "bg-peach-dark/30 text-ink"
+                  ? "bg-peach-dark/40 text-ink"
                   : "text-ink/70 hover:bg-peach-dark/20 hover:text-ink"
               }`}
             >
@@ -136,8 +139,7 @@ export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEma
         })}
 
         {topicGroups.map((group) => {
-          const isGroupActive = pathname.startsWith(group.prefix) ||
-            (group.label === "startup" && pathname.startsWith("/tools/startup-score"))
+          const isGroupActive = pathname.startsWith(group.prefix)
           const isOpen = open === group.label
 
           return (
@@ -146,7 +148,7 @@ export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEma
                 onClick={() => toggle(group.label)}
                 className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm font-sans font-medium transition-colors ${
                   isGroupActive
-                    ? "bg-peach-dark/30 text-ink"
+                    ? "bg-peach-dark/40 text-ink"
                     : "text-ink/70 hover:bg-peach-dark/20 hover:text-ink"
                 }`}
               >
@@ -167,7 +169,7 @@ export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEma
                         href={child.href}
                         className={`px-2 py-1.5 rounded-md text-xs font-sans font-medium transition-colors ${
                           isActive
-                            ? "bg-peach-dark/20 text-ink"
+                            ? "bg-peach-dark/40 text-ink"
                             : "text-ink/60 hover:bg-peach-dark/10 hover:text-ink"
                         }`}
                       >
@@ -189,7 +191,7 @@ export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEma
               href={item.href}
               className={`flex items-center justify-between px-3 py-2 rounded-lg text-sm font-sans font-medium transition-colors ${
                 isActive
-                  ? "bg-peach-dark/30 text-ink"
+                  ? "bg-peach-dark/40 text-ink"
                   : "text-ink/70 hover:bg-peach-dark/20 hover:text-ink"
               }`}
             >
@@ -208,18 +210,18 @@ export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEma
             href="/my-sessions"
             className={`flex items-center px-3 py-2 rounded-lg text-sm font-sans font-medium transition-colors ${
               pathname === "/my-sessions"
-                ? "bg-peach-dark/30 text-ink"
+                ? "bg-peach-dark/40 text-ink"
                 : "text-ink/70 hover:bg-peach-dark/20 hover:text-ink"
             }`}
           >
-            history
+            my activity
           </Link>
 
           <Link
             href="/profile"
             className={`flex items-center px-3 py-2 rounded-lg text-sm font-sans font-medium transition-colors ${
               pathname === "/profile"
-                ? "bg-peach-dark/30 text-ink"
+                ? "bg-peach-dark/40 text-ink"
                 : "text-ink/70 hover:bg-peach-dark/20 hover:text-ink"
             }`}
           >
@@ -239,9 +241,9 @@ export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEma
                   )}
                 </div>
                 <span className="text-[10px] font-sans text-ink/50 leading-tight truncate">{userEmail ?? ""}</span>
-                <a href="/api/auth/signout" className="mt-1.5 text-[10px] font-sans text-ink/40 hover:text-ink transition-colors">
+                <button onClick={() => setSignOutOpen(true)} className="mt-1.5 text-[10px] font-sans text-ink/40 hover:text-ink transition-colors text-left">
                   sign out
-                </a>
+                </button>
               </>
             ) : (
               <SignInOptions callbackUrl="/" compact googleLabel="sign in with Google" />
@@ -307,6 +309,40 @@ export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEma
       >
         {sidebarContent}
       </aside>
+
+      {/* Sign out modal */}
+      {signOutOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm" onClick={() => setSignOutOpen(false)}>
+          <div
+            className="flex flex-col items-center gap-8 px-10 py-12 border border-border rounded-2xl bg-card shadow-xl w-80 text-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex flex-col items-center gap-1">
+              <span className="font-heading text-4xl text-ink leading-none">pa</span>
+              <span className="font-sans text-xs text-ink-muted tracking-widest uppercase">priyaahuja.in</span>
+            </div>
+            <div className="w-full h-px bg-border" />
+            <div className="flex flex-col gap-1">
+              <h1 className="font-heading text-xl text-ink">see you soon</h1>
+              <p className="font-sans text-sm text-ink-muted">are you sure you want to sign out?</p>
+            </div>
+            <div className="flex flex-col gap-2.5 w-full">
+              <button
+                onClick={() => signOut({ callbackUrl: "/" })}
+                className="w-full inline-flex items-center justify-center font-sans font-semibold text-sm py-2.5 rounded-xl bg-ink text-cream hover:bg-ink/80 transition-colors"
+              >
+                yes, sign out
+              </button>
+              <button
+                onClick={() => setSignOutOpen(false)}
+                className="w-full inline-flex items-center justify-center font-sans font-semibold text-sm py-2.5 rounded-xl border border-border text-ink hover:bg-muted transition-colors"
+              >
+                go back
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   )
 }

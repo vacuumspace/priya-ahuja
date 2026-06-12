@@ -79,23 +79,27 @@ export default function TemplateCardAuth({ product, isAuthenticated, purchaseTok
         description: data.productTitle,
         order_id: data.orderId,
         handler: async (response: { razorpay_order_id: string; razorpay_payment_id: string; razorpay_signature: string }) => {
-          const verifyRes = await fetch("/api/products/verify-payment", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              purchaseId: data.purchaseId,
-              razorpayOrderId: response.razorpay_order_id,
-              razorpayPaymentId: response.razorpay_payment_id,
-              razorpaySignature: response.razorpay_signature,
-            }),
-          })
-          const verifyData = await verifyRes.json()
-          if (!verifyRes.ok) {
-            setError("Payment verified but access setup failed. Email hello@priyaahuja.com with your payment ID.")
-            return
+          try {
+            const verifyRes = await fetch("/api/products/verify-payment", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                purchaseId: data.purchaseId,
+                razorpayOrderId: response.razorpay_order_id,
+                razorpayPaymentId: response.razorpay_payment_id,
+                razorpaySignature: response.razorpay_signature,
+              }),
+            })
+            const verifyData = await verifyRes.json()
+            if (!verifyRes.ok) {
+              setError(`Payment captured but access setup failed (${verifyData?.error ?? verifyRes.status}). Email hello@priyaahuja.com with payment ID: ${response.razorpay_payment_id}`)
+              return
+            }
+            void verifyData
+            router.push(`/templates/${product.slug}`)
+          } catch (err) {
+            setError(`Something went wrong after payment. Email hello@priyaahuja.com with payment ID: ${response.razorpay_payment_id}. (${err instanceof Error ? err.message : "network error"})`)
           }
-          void verifyData
-          router.push(`/templates/${product.slug}`)
         },
         prefill: { name: buyName, email: buyEmail },
         theme: { color: "#1a1a1a" },

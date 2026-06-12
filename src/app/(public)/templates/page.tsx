@@ -45,7 +45,7 @@ export default async function TemplatesPage() {
             ready-to-use<br />documents.
           </h1>
           <p className="font-sans text-sm text-ink/55 leading-relaxed mb-2">
-            legal, financial, and business templates built for Indian startups. one-time purchase — view instantly, access forever from your history.
+            legal, financial, and business templates built for Indian startups. one-time purchase — view instantly, access forever from my activity.
           </p>
 
           {!userEmail && (

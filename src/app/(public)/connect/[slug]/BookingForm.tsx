@@ -1,6 +1,13 @@
 "use client"
 
 import { useState, useEffect } from "react"
+
+declare global {
+  interface Window {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    Razorpay: any
+  }
+}
 import { useSession, signIn } from "next-auth/react"
 import SignInOptions from "@/components/SignInOptions"
 import { Service } from "@/lib/services-data"
@@ -148,7 +155,7 @@ export function BookingForm({ service }: { service: Service }) {
           <LogIn size={32} className="text-peach-dark mx-auto mb-3" />
           <p className="font-heading text-base font-700 text-ink mb-1">sign in to book</p>
           <p className="font-sans text-sm text-ink/60 leading-relaxed mb-4">
-            a free account is required to complete your booking. no payment needed.
+            a free account is required to complete your booking.
           </p>
           <SignInOptions callbackUrl={typeof window !== "undefined" ? window.location.href : "/"} />
         </div>
@@ -170,22 +177,68 @@ export function BookingForm({ service }: { service: Service }) {
     setLoading(true)
 
     try {
-      const res = await fetch("/api/bookings/book", {
+      const fullMessage = [
+        deckLink ? `Deck/Doc Link: ${deckLink}` : null,
+        message || null,
+      ].filter(Boolean).join("\n\n")
+
+      const orderRes = await fetch("/api/bookings/create-order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           serviceSlug: service.slug,
           slotId: selectedSlot?.id ?? null,
           name,
-          message,
-          deckLink: deckLink || null,
+          email: session!.user!.email,
+          message: fullMessage || null,
         }),
       })
-      const data = await res.json()
-      if (!res.ok) throw new Error(data.error || "Failed to book")
+      const orderData = await orderRes.json()
+      if (!orderRes.ok) throw new Error(orderData.error || "Failed to create order")
+
+      await new Promise<void>((resolve, reject) => {
+        const rzp = new window.Razorpay({
+          key: orderData.keyId,
+          amount: orderData.amount,
+          currency: "INR",
+          name: "Priya Ahuja",
+          description: service.title,
+          order_id: orderData.orderId,
+          prefill: {
+            name,
+            email: session!.user!.email ?? "",
+          },
+          theme: { color: "#1a1a1a" },
+          handler: async (response: { razorpay_order_id: string; razorpay_payment_id: string; razorpay_signature: string }) => {
+            try {
+              const verifyRes = await fetch("/api/bookings/verify-payment", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  bookingId: orderData.bookingId,
+                  razorpayOrderId: response.razorpay_order_id,
+                  razorpayPaymentId: response.razorpay_payment_id,
+                  razorpaySignature: response.razorpay_signature,
+                }),
+              })
+              const verifyData = await verifyRes.json()
+              if (!verifyRes.ok) throw new Error(verifyData.error || "Payment verification failed")
+              resolve()
+            } catch (err) {
+              reject(err)
+            }
+          },
+          modal: {
+            ondismiss: () => reject(new Error("Payment cancelled")),
+          },
+        })
+        rzp.open()
+      })
+
       setSuccess(true)
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong")
+      const msg = err instanceof Error ? err.message : "Something went wrong"
+      if (msg !== "Payment cancelled") setError(msg)
     } finally {
       setLoading(false)
     }
@@ -286,7 +339,7 @@ export function BookingForm({ service }: { service: Service }) {
           "confirm booking"
         )}
       </Button>
-      <p className="text-[10px] text-ink/30 text-center font-sans">no payment required — just sign in</p>
+      <p className="text-[10px] text-ink/30 text-center font-sans">secure payment via razorpay</p>
     </form>
   )
 }

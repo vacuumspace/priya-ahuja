@@ -1,12 +1,12 @@
 import { auth } from "@/lib/auth"
 import { db } from "@/lib/db"
-import { bookings, purchases, services as servicesTable, digitalProducts, startupScores, availability } from "@/lib/db/schema"
+import { bookings, purchases, services as servicesTable, digitalProducts, startupScores, startupIdeaScores, availability } from "@/lib/db/schema"
 import { eq, desc } from "drizzle-orm"
 import Link from "next/link"
-import { CalendarDays, FileText, ExternalLink, LogIn, Lightbulb } from "lucide-react"
+import { CalendarDays, FileText, LogIn, Lightbulb } from "lucide-react"
 import ViewTemplateButton from "@/components/templates/ViewTemplateButton"
 import SignInOptions from "@/components/SignInOptions"
-import BookingActions from "./BookingActions"
+import BookingCard from "./BookingCard"
 
 function statusBadge(status: string) {
   const map: Record<string, { label: string; cls: string }> = {
@@ -35,14 +35,14 @@ type SearchParams = Promise<{ tab?: string }>
 export default async function MySessionsPage({ searchParams }: { searchParams: SearchParams }) {
   const session = await auth()
   const params = await searchParams
-  const activeTab = params.tab === "templates" ? "templates" : params.tab === "tools" ? "tools" : "sessions"
+  const activeTab = params.tab === "products" ? "products" : params.tab === "tools" ? "tools" : "sessions"
 
   if (!session?.user?.email) {
     return (
       <div className="min-h-screen bg-cream flex items-center justify-center px-4">
         <div className="text-center max-w-sm">
           <LogIn size={40} className="text-peach-dark mx-auto mb-4" />
-          <h1 className="font-heading text-2xl font-800 text-ink mb-2">sign in to view history</h1>
+          <h1 className="font-heading text-2xl font-800 text-ink mb-2">sign in to view my activity</h1>
           <p className="font-sans text-sm text-ink/60 leading-relaxed mb-6">
             your sessions and purchases are saved to your account. sign in to access them.
           </p>
@@ -54,7 +54,7 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
 
   const email = session.user.email
 
-  const [userBookings, userPurchases, userScores] = await Promise.all([
+  const [userBookings, userPurchases, userScores, userIdeaScores] = await Promise.all([
     db
       .select({
         id: bookings.id,
@@ -66,6 +66,8 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
         serviceType: servicesTable.type,
         slotDate: availability.date,
         slotStartTime: availability.startTime,
+        slotEndTime: availability.endTime,
+        feedbackRating: bookings.feedbackRating,
       })
       .from(bookings)
       .leftJoin(servicesTable, eq(bookings.serviceId, servicesTable.id))
@@ -79,6 +81,7 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
         createdAt: purchases.createdAt,
         productTitle: digitalProducts.title,
         productSlug: digitalProducts.slug,
+        productTag: digitalProducts.tag,
         downloadToken: purchases.downloadToken,
       })
       .from(purchases)
@@ -97,17 +100,28 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
       .from(startupScores)
       .where(eq(startupScores.userId, session.user.id!))
       .orderBy(desc(startupScores.createdAt)),
+
+    db
+      .select({
+        id: startupIdeaScores.id,
+        totalScore: startupIdeaScores.totalScore,
+        isPaid: startupIdeaScores.isPaid,
+        createdAt: startupIdeaScores.createdAt,
+      })
+      .from(startupIdeaScores)
+      .where(eq(startupIdeaScores.userId, session.user.id!))
+      .orderBy(desc(startupIdeaScores.createdAt)),
   ])
 
   return (
     <div className="min-h-screen bg-cream">
       <div className="flex justify-between items-center px-4 md:px-10 py-4 text-[11px] text-ink/50 font-sans border-b border-border">
         <span>my activity</span>
-        <span>{userBookings.length + userPurchases.length + userScores.length} total</span>
+        <span>{userBookings.length + userPurchases.length + userScores.length + userIdeaScores.length} total</span>
       </div>
 
       <div className="px-4 md:px-10 pt-10 pb-16 max-w-2xl">
-        <h1 className="font-heading text-3xl font-800 text-ink mb-6">history</h1>
+        <h1 className="font-heading text-3xl font-800 text-ink mb-6">my activity</h1>
 
         {/* Sub-tabs */}
         <div className="flex gap-1 mb-8 border-b border-border">
@@ -124,15 +138,15 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
             <span className="text-[10px] font-mono ml-0.5 opacity-60">{userBookings.length}</span>
           </Link>
           <Link
-            href="/my-sessions?tab=templates"
+            href="/my-sessions?tab=products"
             className={`flex items-center gap-1.5 px-4 py-2.5 text-xs font-sans font-semibold border-b-2 transition-colors -mb-px ${
-              activeTab === "templates"
+              activeTab === "products"
                 ? "border-ink text-ink"
                 : "border-transparent text-ink/40 hover:text-ink/70"
             }`}
           >
             <FileText size={12} />
-            templates
+            products
             <span className="text-[10px] font-mono ml-0.5 opacity-60">{userPurchases.length}</span>
           </Link>
           <Link
@@ -145,7 +159,7 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
           >
             <Lightbulb size={12} />
             tools
-            <span className="text-[10px] font-mono ml-0.5 opacity-60">{userScores.length}</span>
+            <span className="text-[10px] font-mono ml-0.5 opacity-60">{userScores.length + userIdeaScores.length}</span>
           </Link>
         </div>
 
@@ -162,38 +176,19 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
             ) : (
               <div className="flex flex-col gap-3">
                 {userBookings.map((b) => (
-                  <div key={b.id} className="bg-card border border-border rounded-2xl p-5">
-                    <div className="flex items-start justify-between gap-4">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-1">
-                          {statusBadge(b.status)}
-                          <span className="text-[10px] font-sans text-ink/30">
-                            {b.slotDate
-                              ? new Date(`${b.slotDate}T${b.slotStartTime}:00+05:30`).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" }) + " · " + b.slotStartTime + " IST"
-                              : formatDate(b.createdAt)}
-                          </span>
-                        </div>
-                        <p className="font-heading text-base font-700 text-ink normal-case">
-                          {b.serviceTitle ?? "Session"}
-                        </p>
-                      </div>
-                      {b.meetLink && (
-                        <a
-                          href={b.meetLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-1.5 text-xs font-sans font-semibold text-peach-dark hover:underline flex-shrink-0 mt-1"
-                        >
-                          join call <ExternalLink size={11} />
-                        </a>
-                      )}
-                    </div>
-                    <BookingActions
-                      bookingId={b.id}
-                      status={b.status}
-                      serviceSlug={b.serviceSlug ?? null}
-                    />
-                  </div>
+                  <BookingCard
+                    key={b.id}
+                    bookingId={b.id}
+                    status={b.status}
+                    serviceTitle={b.serviceTitle ?? "Session"}
+                    serviceSlug={b.serviceSlug ?? null}
+                    meetLink={b.meetLink}
+                    slotDate={b.slotDate}
+                    slotStartTime={b.slotStartTime}
+                    slotEndTime={b.slotEndTime}
+                    feedbackRating={b.feedbackRating}
+                    createdAt={b.createdAt.toISOString()}
+                  />
                 ))}
               </div>
             )}
@@ -203,12 +198,18 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
         {/* Tools tab */}
         {activeTab === "tools" && (
           <section>
-            {userScores.length === 0 ? (
+            {userScores.length === 0 && userIdeaScores.length === 0 ? (
               <div className="border border-dashed border-border rounded-2xl p-8 text-center">
                 <p className="font-sans text-sm text-ink/50 mb-3">no tool results yet</p>
-                <Link href="/tools/startup-score" className="text-xs font-sans font-semibold text-peach-dark hover:underline">
-                  score your startup idea
-                </Link>
+                <div className="flex items-center justify-center gap-4">
+                  <Link href="/fundraise/tools/fundability-score" className="text-xs font-sans font-semibold text-peach-dark hover:underline">
+                    startup fundability score
+                  </Link>
+                  <span className="text-ink/20">·</span>
+                  <Link href="/startup/tools/idea-score" className="text-xs font-sans font-semibold text-peach-dark hover:underline">
+                    startup idea score
+                  </Link>
+                </div>
               </div>
             ) : (
               <div className="flex flex-col gap-3">
@@ -229,15 +230,49 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
                           <span className="text-[10px] font-sans text-ink/30">{formatDate(s.createdAt)}</span>
                         </div>
                         <p className="font-heading text-base font-700 text-ink normal-case">
-                          startup idea score
+                          startup fundability score
                         </p>
-                        <p className="font-sans text-sm text-ink/50 mt-0.5">
+                      </div>
+                      <div className="flex-shrink-0 text-right flex flex-col items-end gap-2">
+                        <div>
+                          <span className="font-heading text-2xl font-bold text-ink">{s.totalScore}</span>
+                          <span className="font-sans text-[10px] text-ink/30">/100</span>
+                        </div>
+                        <Link href={`/my-sessions/score/${s.id}`} className="text-[11px] font-sans font-semibold text-peach-dark hover:underline">
+                          view report →
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+                {userIdeaScores.map((s) => (
+                  <div key={s.id} className="bg-card border border-border rounded-2xl p-5">
+                    <div className="flex items-center justify-between gap-4">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-1">
+                          {s.isPaid ? (
+                            <span className="text-[10px] font-sans font-semibold px-2 py-0.5 rounded-full bg-green-100 text-green-700">
+                              full analysis
+                            </span>
+                          ) : (
+                            <span className="text-[10px] font-sans font-semibold px-2 py-0.5 rounded-full bg-ink/10 text-ink/40">
+                              free score
+                            </span>
+                          )}
+                          <span className="text-[10px] font-sans text-ink/30">{formatDate(s.createdAt)}</span>
+                        </div>
+                        <p className="font-heading text-base font-700 text-ink normal-case">
                           startup idea score
                         </p>
                       </div>
-                      <div className="flex-shrink-0 text-right">
-                        <span className="font-heading text-2xl font-bold text-ink">{s.totalScore}</span>
-                        <span className="font-sans text-[10px] text-ink/30">/100</span>
+                      <div className="flex-shrink-0 text-right flex flex-col items-end gap-2">
+                        <div>
+                          <span className="font-heading text-2xl font-bold text-ink">{s.totalScore}</span>
+                          <span className="font-sans text-[10px] text-ink/30">/100</span>
+                        </div>
+                        <Link href={`/my-sessions/idea-score/${s.id}`} className="text-[11px] font-sans font-semibold text-peach-dark hover:underline">
+                          view report →
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -247,14 +282,14 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
           </section>
         )}
 
-        {/* Templates tab */}
-        {activeTab === "templates" && (
+        {/* Products tab */}
+        {activeTab === "products" && (
           <section>
             {userPurchases.length === 0 ? (
               <div className="border border-dashed border-border rounded-2xl p-8 text-center">
-                <p className="font-sans text-sm text-ink/50 mb-3">no templates purchased yet</p>
+                <p className="font-sans text-sm text-ink/50 mb-3">no products purchased yet</p>
                 <Link href="/templates" className="text-xs font-sans font-semibold text-peach-dark hover:underline">
-                  browse templates
+                  browse products
                 </Link>
               </div>
             ) : (
@@ -264,8 +299,8 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
                     <div className="flex items-start justify-between gap-4">
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1">
-                          <span className="text-[10px] font-sans font-semibold px-2 py-0.5 rounded-full bg-green-100 text-green-700">
-                            purchased
+                          <span className="text-[10px] font-sans font-semibold px-2 py-0.5 rounded-full bg-mint/20 text-green-700">
+                            {p.productTag ?? "template"}
                           </span>
                           <span className="text-[10px] font-sans text-ink/30">{formatDate(p.createdAt)}</span>
                         </div>

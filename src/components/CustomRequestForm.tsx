@@ -5,12 +5,12 @@ import { Loader2, CheckCircle } from "lucide-react"
 
 interface CustomRequestFormProps {
   source: string
+  userEmail?: string
 }
 
-export function CustomRequestForm({ source }: CustomRequestFormProps) {
-  const [open, setOpen] = useState(false)
+export function CustomRequestForm({ source, userEmail }: CustomRequestFormProps) {
   const [name, setName] = useState("")
-  const [email, setEmail] = useState("")
+  const [email, setEmail] = useState(userEmail ?? "")
   const [message, setMessage] = useState("")
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
@@ -44,47 +44,38 @@ export function CustomRequestForm({ source }: CustomRequestFormProps) {
     )
   }
 
-  if (!open) {
-    return (
-      <button
-        onClick={() => setOpen(true)}
-        className="text-sm font-sans font-semibold text-peach-dark hover:underline mt-2 text-left"
-      >
-        looking for something else? send me the details
-      </button>
-    )
-  }
-
   return (
-    <form onSubmit={handleSubmit} className="mt-3 flex flex-col gap-3 w-full max-w-md">
-      <p className="text-xs font-sans font-semibold text-ink/60 uppercase tracking-wide">send me the details</p>
-      <div className="grid grid-cols-2 gap-2">
-        <div>
-          <label className="block text-[10px] font-sans font-semibold text-ink/50 uppercase tracking-wide mb-1">
-            name <span className="text-peach-dark">*</span>
-          </label>
-          <input
-            required
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="your name"
-            className="w-full text-sm font-sans bg-peach/10 border border-peach-dark/20 rounded-xl px-3 py-2.5 text-ink placeholder-ink/30 focus:outline-none focus:border-peach-dark/50 transition-colors"
-          />
+    <form onSubmit={handleSubmit} className="mt-3 flex flex-col gap-3 w-full max-w-md text-left">
+      <p className="text-sm font-sans font-semibold text-peach-dark">looking for something else? send me the details</p>
+      {!userEmail && (
+        <div className="grid grid-cols-2 gap-2">
+          <div>
+            <label className="block text-[10px] font-sans font-semibold text-ink/50 uppercase tracking-wide mb-1">
+              name <span className="text-peach-dark">*</span>
+            </label>
+            <input
+              required
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="your name"
+              className="w-full text-sm font-sans bg-peach/10 border border-peach-dark/20 rounded-xl px-3 py-2.5 text-ink placeholder-ink/30 focus:outline-none focus:border-peach-dark/50 transition-colors"
+            />
+          </div>
+          <div>
+            <label className="block text-[10px] font-sans font-semibold text-ink/50 uppercase tracking-wide mb-1">
+              email <span className="text-peach-dark">*</span>
+            </label>
+            <input
+              required
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="you@example.com"
+              className="w-full text-sm font-sans bg-peach/10 border border-peach-dark/20 rounded-xl px-3 py-2.5 text-ink placeholder-ink/30 focus:outline-none focus:border-peach-dark/50 transition-colors"
+            />
+          </div>
         </div>
-        <div>
-          <label className="block text-[10px] font-sans font-semibold text-ink/50 uppercase tracking-wide mb-1">
-            email <span className="text-peach-dark">*</span>
-          </label>
-          <input
-            required
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="you@example.com"
-            className="w-full text-sm font-sans bg-peach/10 border border-peach-dark/20 rounded-xl px-3 py-2.5 text-ink placeholder-ink/30 focus:outline-none focus:border-peach-dark/50 transition-colors"
-          />
-        </div>
-      </div>
+      )}
       <div>
         <label className="block text-[10px] font-sans font-semibold text-ink/50 uppercase tracking-wide mb-1">
           what are you looking for? <span className="text-peach-dark">*</span>
@@ -106,13 +97,6 @@ export function CustomRequestForm({ source }: CustomRequestFormProps) {
           className="inline-flex items-center justify-center gap-2 bg-ink text-cream text-sm font-sans font-semibold px-5 py-2.5 rounded-xl hover:bg-ink/80 transition-colors disabled:opacity-50"
         >
           {loading ? <><Loader2 size={13} className="animate-spin" />sending…</> : "send"}
-        </button>
-        <button
-          type="button"
-          onClick={() => setOpen(false)}
-          className="text-xs font-sans text-ink/40 hover:text-ink/70 transition-colors"
-        >
-          cancel
         </button>
       </div>
     </form>

@@ -57,8 +57,7 @@ export default async function StartupTemplatesPage() {
 
         <div className="px-4 md:px-10 pb-16">
           <div className="mt-4 text-center py-8 border-t border-border">
-            <p className="font-sans text-sm text-ink/40">want something specific? i take requests.</p>
-            <CustomRequestForm source="startup-templates" />
+            <CustomRequestForm source="startup-templates" userEmail={userEmail ?? undefined} />
           </div>
         </div>
       </div>
