@@ -4,6 +4,7 @@ import { startupScores } from "@/lib/db/schema"
 import { and, eq } from "drizzle-orm"
 import { notFound, redirect } from "next/navigation"
 import ScoreResultClient from "./ScoreResultClient"
+import type { OptionValue } from "@/lib/startup-score-data"
 
 type Props = { params: Promise<{ id: string }> }
 
@@ -32,7 +33,7 @@ export default async function ScoreDetailPage({ params }: Props) {
         id={row.id}
         totalScore={row.totalScore}
         pillarScores={row.pillarScores as Record<number, { earned: number; max: number }>}
-        answers={row.answers as Record<number, number>}
+        answers={row.answers as Record<number, OptionValue>}
       />
     </div>
   )
