@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { useSession } from "next-auth/react"
 import { CheckCircle, Loader2, Building2, FileCheck, ClipboardList, ShieldCheck, Users, BookOpen } from "lucide-react"
 import { trackCta } from "@/lib/analytics"
+import { CustomSelect } from "@/components/CustomSelect"
 
 const offerings = [
   {
@@ -214,18 +215,18 @@ export default function IncorporationPage() {
 
             <div>
               <label className="text-[10px] font-sans text-ink/50 uppercase tracking-wide block mb-1.5">Service Required</label>
-              <select
+              <CustomSelect
                 value={serviceType}
-                onChange={(e) => setServiceType(e.target.value)}
-                className="w-full text-sm font-sans bg-peach/10 border border-peach-dark/20 rounded-xl px-3 py-2.5 text-ink focus:outline-none focus:border-peach-dark/50 transition-colors"
-              >
-                <option value="">select (optional)</option>
-                <option value="Company Incorporation">Company Incorporation</option>
-                <option value="Annual MCA Compliance">Annual MCA Compliance</option>
-                <option value="Statutory Audit">Statutory Audit</option>
-                <option value="CS Services">Company Secretary Services</option>
-                <option value="Other Registration">Other Registration / Filing</option>
-              </select>
+                onChange={setServiceType}
+                placeholder="select (optional)"
+                options={[
+                  { value: "Company Incorporation", label: "Company Incorporation" },
+                  { value: "Annual MCA Compliance", label: "Annual MCA Compliance" },
+                  { value: "Statutory Audit", label: "Statutory Audit" },
+                  { value: "CS Services", label: "Company Secretary Services" },
+                  { value: "Other Registration", label: "Other Registration / Filing" },
+                ]}
+              />
             </div>
 
             <div>

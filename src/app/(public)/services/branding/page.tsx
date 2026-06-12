@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { useSession } from "next-auth/react"
 import { CheckCircle, Loader2, Palette, MessageSquare, FileText, Eye, TrendingUp, Users } from "lucide-react"
+import { CustomSelect } from "@/components/CustomSelect"
 
 const offerings = [
   {
@@ -186,14 +187,12 @@ export default function BrandingPage() {
               </div>
               <div>
                 <label className="text-[10px] font-sans text-ink/50 uppercase tracking-wide block mb-1.5">Budget</label>
-                <select
+                <CustomSelect
                   value={budget}
-                  onChange={(e) => setBudget(e.target.value)}
-                  className="w-full text-sm font-sans bg-peach/10 border border-peach-dark/20 rounded-xl px-3 py-2.5 text-ink focus:outline-none focus:border-peach-dark/50 transition-colors"
-                >
-                  <option value="">select range</option>
-                  {BUDGET_OPTIONS.map((b) => <option key={b} value={b}>{b}</option>)}
-                </select>
+                  onChange={setBudget}
+                  placeholder="select range"
+                  options={BUDGET_OPTIONS.map((b) => ({ value: b, label: b }))}
+                />
               </div>
             </div>
 
