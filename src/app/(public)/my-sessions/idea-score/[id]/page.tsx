@@ -4,6 +4,7 @@ import { startupIdeaScores } from "@/lib/db/schema"
 import { and, eq } from "drizzle-orm"
 import { notFound, redirect } from "next/navigation"
 import IdeaScoreResultClient from "./IdeaScoreResultClient"
+import type { OptionValue } from "@/lib/startup-idea-score-data"
 
 type Props = { params: Promise<{ id: string }> }
 
@@ -32,7 +33,7 @@ export default async function IdeaScoreDetailPage({ params }: Props) {
         id={row.id}
         totalScore={row.totalScore}
         pillarScores={row.pillarScores as Record<number, { earned: number; max: number }>}
-        answers={row.answers as Record<number, number>}
+        answers={row.answers as Record<number, OptionValue>}
       />
     </div>
   )
