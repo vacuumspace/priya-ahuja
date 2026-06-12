@@ -1,8 +1,9 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { useRouter } from "next/navigation"
 import { useSession } from "next-auth/react"
-import { FileText, Eye, Download, X, ChevronDown, ChevronUp, CheckCircle, Loader2 } from "lucide-react"
+import { FileText, Eye, Download, X } from "lucide-react"
 import type { Template } from "@/lib/templates-data"
 import SignInOptions from "@/components/SignInOptions"
 
@@ -13,33 +14,10 @@ declare global {
   }
 }
 
-type Section = { heading: string; body: string }
-
 type ModalState =
   | { type: "idle" }
   | { type: "sign-in" }
   | { type: "buy" }
-  | { type: "content"; sections: Section[] }
-
-function renderBody(text: string) {
-  const html = text
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .split("\n")
-    .map((line) => {
-      if (line.startsWith("---")) return `<hr class="border-border my-4" />`
-      if (line.match(/^\*\*(.+)\*\*$/)) return `<p class="font-semibold text-ink mt-4 mb-1">${line.replace(/\*\*/g, "")}</p>`
-      const bold = line.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
-      if (line.startsWith("- ") || line.match(/^\d+\./)) {
-        return `<li class="ml-4 list-disc text-ink/80 leading-relaxed text-sm">${bold.replace(/^- /, "").replace(/^\d+\.\s*/, "")}</li>`
-      }
-      if (line.trim() === "") return `<div class="h-2"></div>`
-      return `<p class="text-ink/80 leading-relaxed text-sm">${bold}</p>`
-    })
-    .join("")
-  return html
-}
 
 type Props = {
   product: Template
@@ -51,10 +29,10 @@ type Props = {
 
 export default function TemplateCardAuth({ product, isAuthenticated, purchaseToken, userEmail }: Props) {
   const { data: session } = useSession()
+  const router = useRouter()
   const [modal, setModal] = useState<ModalState>({ type: "idle" })
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
-  const [openSection, setOpenSection] = useState<number | null>(0)
 
   useEffect(() => {
     if (typeof window === "undefined") return
@@ -73,18 +51,8 @@ export default function TemplateCardAuth({ product, isAuthenticated, purchaseTok
     setError("")
   }
 
-  async function loadContent(token: string) {
-    setLoading(true)
-    try {
-      const res = await fetch(`/api/products/access?token=${encodeURIComponent(token)}&slug=${product.slug}`)
-      const data = await res.json()
-      if (!res.ok) throw new Error(data.error || "Could not load content")
-      setModal({ type: "content", sections: data.sections })
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Could not load content")
-    } finally {
-      setLoading(false)
-    }
+  function openTemplate() {
+    router.push(`/templates/${product.slug}`)
   }
 
   async function handleBuy(e: React.FormEvent) {
@@ -126,7 +94,8 @@ export default function TemplateCardAuth({ product, isAuthenticated, purchaseTok
             setError("Payment verified but access setup failed. Email hello@priyaahuja.com with your payment ID.")
             return
           }
-          await loadContent(verifyData.accessToken)
+          void verifyData
+          router.push(`/templates/${product.slug}`)
         },
         prefill: { name: buyName, email: buyEmail },
         theme: { color: "#1a1a1a" },
@@ -165,13 +134,12 @@ export default function TemplateCardAuth({ product, isAuthenticated, purchaseTok
               <p className="font-sans font-700 text-ink text-sm">{price}</p>
 
               {purchaseToken ? (
-                // Already purchased — show View button directly
+                // Already purchased — navigate to full page
                 <button
-                  onClick={() => loadContent(purchaseToken)}
-                  disabled={loading}
-                  className="inline-flex items-center gap-1.5 bg-ink text-cream text-xs font-sans font-semibold px-4 py-2 rounded-lg hover:bg-ink/80 transition-colors disabled:opacity-50"
+                  onClick={openTemplate}
+                  className="inline-flex items-center gap-1.5 bg-ink text-cream text-xs font-sans font-semibold px-4 py-2 rounded-lg hover:bg-ink/80 transition-colors"
                 >
-                  {loading ? <Loader2 size={11} className="animate-spin" /> : <Eye size={11} />}
+                  <Eye size={11} />
                   view
                 </button>
               ) : (
@@ -229,7 +197,7 @@ export default function TemplateCardAuth({ product, isAuthenticated, purchaseTok
                   <button onClick={close} className="text-ink/40 hover:text-ink transition-colors"><X size={18} /></button>
                 </div>
                 <p className="font-sans text-sm text-ink/60 mb-6 leading-relaxed">
-                  After payment, you&apos;ll get instant on-site access. The full content opens right here, and is also saved to your account under History → Templates.
+                  After payment, you&apos;ll get instant access — the full content opens on its own page, and is also saved to your account under History → Templates.
                 </p>
                 <form onSubmit={handleBuy} className="space-y-4">
                   {error && <p className="font-sans text-xs text-red-500">{error}</p>}
@@ -244,40 +212,6 @@ export default function TemplateCardAuth({ product, isAuthenticated, purchaseTok
               </div>
             )}
 
-            {/* Content viewer */}
-            {modal.type === "content" && (
-              <div className="p-6">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle size={16} className="text-green-600" />
-                    <div>
-                      <h3 className="font-heading text-xl font-700 text-ink">{product.title}</h3>
-                      <p className="font-sans text-xs text-ink/40 mt-0.5">access confirmed · {modal.sections.length} sections</p>
-                    </div>
-                  </div>
-                  <button onClick={close} className="text-ink/40 hover:text-ink transition-colors"><X size={18} /></button>
-                </div>
-                <div className="border-t border-border mt-4 pt-4 space-y-2">
-                  {modal.sections.map((section, i) => (
-                    <div key={i} className="border border-border rounded-xl overflow-hidden">
-                      <button
-                        onClick={() => setOpenSection(openSection === i ? null : i)}
-                        className="w-full flex items-center justify-between px-4 py-3 text-left hover:bg-ink/5 transition-colors"
-                      >
-                        <span className="font-sans font-semibold text-sm text-ink">{section.heading}</span>
-                        {openSection === i ? <ChevronUp size={14} className="text-ink/40 flex-shrink-0" /> : <ChevronDown size={14} className="text-ink/40 flex-shrink-0" />}
-                      </button>
-                      {openSection === i && (
-                        <div className="px-4 pb-4 border-t border-border" dangerouslySetInnerHTML={{ __html: renderBody(section.body) }} />
-                      )}
-                    </div>
-                  ))}
-                </div>
-                <p className="font-sans text-[11px] text-ink/30 mt-4 text-center">
-                  Access this anytime from History → Templates in your account.
-                </p>
-              </div>
-            )}
           </div>
         </div>
       )}

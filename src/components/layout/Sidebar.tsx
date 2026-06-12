@@ -74,7 +74,7 @@ export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEma
 
   const toggle = (label: string) => setOpen((prev) => (prev === label ? null : label))
 
-  const SidebarContent = () => (
+  const sidebarContent = (
     <>
       {/* Logo / name */}
       <div className="px-5 pt-4 pb-6 flex items-center justify-between">
@@ -298,14 +298,14 @@ export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEma
           mobileOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <SidebarContent />
+        {sidebarContent}
       </aside>
 
       {/* Desktop sidebar */}
       <aside
         className={`hidden md:flex ${collapsed ? "w-12" : "sidebar-width"} fixed top-0 left-0 h-screen bg-peach flex-col z-40 border-r border-peach-dark/20 transition-all duration-200`}
       >
-        <SidebarContent />
+        {sidebarContent}
       </aside>
     </>
   )
