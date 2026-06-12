@@ -193,7 +193,7 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
             list
           </h1>
           <p className="font-sans text-sm text-ink/60 max-w-md leading-relaxed">
-            {totalCount > 0 ? `${totalCount.toLocaleString()}+` : "1,400+"} angel investors across India — name, city, LinkedIn, and direct email(s).
+            900+ angel investors across India — name, city, LinkedIn, and direct email(s).
           </p>
         </div>
 

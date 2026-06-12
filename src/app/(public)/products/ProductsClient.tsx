@@ -1,7 +1,8 @@
 "use client"
 
 import { useState } from "react"
-import { ArrowRight, FileText, Download } from "lucide-react"
+import { FileText, Download } from "lucide-react"
+import { CustomRequestForm } from "@/components/CustomRequestForm"
 
 export type PublicProduct = {
   slug: string
@@ -85,12 +86,7 @@ export function ProductsClient({ products }: { products: PublicProduct[] }) {
           <p className="font-sans text-sm text-ink/40">
             want something specific? i take requests.
           </p>
-          <a
-            href="mailto:hello@priyaahuja.com"
-            className="inline-flex items-center gap-1.5 text-sm font-sans font-semibold text-peach-dark hover:underline mt-2"
-          >
-            drop me a note <ArrowRight size={13} />
-          </a>
+          <CustomRequestForm source="products" />
         </div>
       </div>
     </>

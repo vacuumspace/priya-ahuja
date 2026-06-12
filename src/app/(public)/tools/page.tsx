@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { ArrowRight, Calculator, FileSearch, TrendingUp, Lightbulb } from "lucide-react"
+import { Calculator, FileSearch, TrendingUp, Lightbulb } from "lucide-react"
 
 const tools = [
   {
@@ -136,7 +136,7 @@ export default function ToolsPage() {
             href="mailto:hello@priyaahuja.com?subject=Notify me when tools are live"
             className="inline-flex items-center gap-2 bg-ink text-cream text-xs font-sans font-semibold px-4 py-2.5 rounded-lg hover:bg-ink/80 transition-colors"
           >
-            notify me <ArrowRight size={12} />
+            notify me
           </a>
         </div>
       </div>

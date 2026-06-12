@@ -182,17 +182,6 @@ export const startupScores = pgTable("startup_scores", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
 })
 
-export const angelInvestors = pgTable("angel_investors", {
-  id:       uuid("id").primaryKey().defaultRandom(),
-  sno:      integer("sno").notNull(),
-  name:     text("name").notNull(),
-  city:     varchar("city", { length: 100 }).notNull().default(""),
-  state:    varchar("state", { length: 100 }).notNull().default(""),
-  country:  varchar("country", { length: 100 }).notNull().default(""),
-  linkedin: text("linkedin").notNull().default(""),
-  emails:   text("emails").array().notNull().default([]),
-  createdAt: timestamp("created_at").notNull().defaultNow(),
-})
 
 export const analyticsEvents = pgTable("analytics_events", {
   id: uuid("id").primaryKey().defaultRandom(),
@@ -200,6 +189,17 @@ export const analyticsEvents = pgTable("analytics_events", {
   page: varchar("page", { length: 200 }),
   ctaId: varchar("cta_id", { length: 100 }),
   sessionId: varchar("session_id", { length: 100 }),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+})
+
+export const customRequests = pgTable("custom_requests", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  name: text("name").notNull(),
+  email: text("email").notNull(),
+  message: text("message").notNull(),
+  source: varchar("source", { length: 100 }), // which page they submitted from
+  status: varchar("status", { length: 20 }).notNull().default("new"), // new | reviewed | closed
+  adminNotes: text("admin_notes"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 })
 

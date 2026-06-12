@@ -156,7 +156,7 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
               <div className="border border-dashed border-border rounded-2xl p-8 text-center">
                 <p className="font-sans text-sm text-ink/50 mb-3">no sessions booked yet</p>
                 <Link href="/connect" className="text-xs font-sans font-semibold text-peach-dark hover:underline">
-                  browse sessions →
+                  browse sessions
                 </Link>
               </div>
             ) : (
@@ -207,7 +207,7 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
               <div className="border border-dashed border-border rounded-2xl p-8 text-center">
                 <p className="font-sans text-sm text-ink/50 mb-3">no tool results yet</p>
                 <Link href="/tools/startup-score" className="text-xs font-sans font-semibold text-peach-dark hover:underline">
-                  score your startup idea →
+                  score your startup idea
                 </Link>
               </div>
             ) : (
@@ -254,7 +254,7 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
               <div className="border border-dashed border-border rounded-2xl p-8 text-center">
                 <p className="font-sans text-sm text-ink/50 mb-3">no templates purchased yet</p>
                 <Link href="/templates" className="text-xs font-sans font-semibold text-peach-dark hover:underline">
-                  browse templates →
+                  browse templates
                 </Link>
               </div>
             ) : (

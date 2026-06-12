@@ -11,6 +11,13 @@ const EXTRA_PRODUCTS: Record<string, { slug: string; title: string; description:
     price: 99900,
     comingSoon: false,
   },
+  "startup-ideas-2026": {
+    slug: "startup-ideas-2026",
+    title: "100 Startup Ideas 2026",
+    description: "100 curated startup ideas for Indian founders — problem, opportunity, market size, and business model.",
+    price: 99900,
+    comingSoon: false,
+  },
 }
 import { getRazorpayInstance } from "@/lib/razorpay"
 import { eq, and } from "drizzle-orm"

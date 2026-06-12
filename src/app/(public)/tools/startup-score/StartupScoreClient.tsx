@@ -3,7 +3,7 @@
 import { useState } from "react"
 import Script from "next/script"
 import Link from "next/link"
-import { ArrowRight, ArrowLeft, RotateCcw, CheckCircle } from "lucide-react"
+import { ArrowLeft, RotateCcw, CheckCircle } from "lucide-react"
 import SignInOptions from "@/components/SignInOptions"
 import { trackCta } from "@/lib/analytics"
 import {
@@ -81,7 +81,7 @@ function IntroView({ userEmail, onStart }: { userEmail: string | null; onStart: 
             onClick={onStart}
             className="inline-flex items-center gap-2 bg-ink text-cream font-sans text-sm font-semibold px-6 py-3 rounded-xl hover:bg-ink/80 transition-colors"
           >
-            Start <ArrowRight size={14} />
+            Start
           </button>
         ) : (
           <SignInOptions callbackUrl="/tools/startup-score" compact googleLabel="sign in to start" />
@@ -207,7 +207,7 @@ function QuizView({
               : "bg-ink/20 text-ink/40 cursor-not-allowed"
           )}
         >
-          {isLast ? <>finish quiz <ArrowRight size={14} /></> : <>next <ArrowRight size={14} /></>}
+          {isLast ? "finish quiz" : "next"}
         </button>
       </div>
     </div>
@@ -366,7 +366,7 @@ function PaywallView({
               processing…
             </>
           ) : (
-            <>unlock full score — ₹99 <ArrowRight size={14} /></>
+            "unlock full score — ₹99"
           )}
         </button>
 
@@ -489,7 +489,7 @@ function ResultsView({
           href="/connect"
           className="inline-flex items-center gap-2 bg-ink text-cream text-xs font-sans font-semibold px-5 py-2.5 rounded-xl hover:bg-ink/80 transition-colors"
         >
-          book brainstorming session <ArrowRight size={12} />
+          book brainstorming session
         </Link>
       </div>
 

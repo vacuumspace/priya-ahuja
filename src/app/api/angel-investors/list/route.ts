@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from "next/server"
 import { db } from "@/lib/db"
-import { angelInvestors, purchases, digitalProducts } from "@/lib/db/schema"
+import { purchases, digitalProducts } from "@/lib/db/schema"
 import { auth, isAdmin } from "@/lib/auth"
-import { eq, and, ilike, isNotNull, count, sql } from "drizzle-orm"
+import { eq, and, isNotNull } from "drizzle-orm"
+import { angelInvestorsData } from "@/lib/angel-investors-data"
 
 const SLUG = "angel-investor-list"
 const PAGE_SIZE = 10
@@ -34,43 +35,32 @@ export async function GET(req: NextRequest) {
       isPaid = !!purchase
     }
 
-    const offset = (page - 1) * PAGE_SIZE
-
     if (!isPaid) {
-      // Non-paying users: page 1 only, real data but no linkedin/emails
-      const rows = await db
-        .select({
-          id:      angelInvestors.id,
-          sno:     angelInvestors.sno,
-          name:    angelInvestors.name,
-          city:    angelInvestors.city,
-          state:   angelInvestors.state,
-          country: angelInvestors.country,
-          linkedin: sql<string>`''`,
-          emails:   sql<string[]>`ARRAY[]::text[]`,
-        })
-        .from(angelInvestors)
-        .limit(PAGE_SIZE)
-        .offset(0)
-
-      const [{ value: total }] = await db
-        .select({ value: count() })
-        .from(angelInvestors)
-
-      return NextResponse.json({ investors: rows, total, page: 1, pageCount: Math.ceil(total / PAGE_SIZE), isPaid: false })
+      // Non-paying users: all rows visible but linkedin/emails hidden
+      const preview = angelInvestorsData.map(r => ({
+        id: r.id, sno: r.sno, name: r.name, city: r.city,
+        state: r.state, country: r.country, linkedin: "", emails: [],
+      }))
+      const total = preview.length
+      const offset = (page - 1) * PAGE_SIZE
+      return NextResponse.json({
+        investors: preview.slice(offset, offset + PAGE_SIZE),
+        total,
+        page,
+        pageCount: Math.ceil(total / PAGE_SIZE),
+        isPaid: false,
+      })
     }
 
-    // Paid users: full data with search + filters
-    const conditions = and(
-      search  ? ilike(angelInvestors.name, `%${search}%`) : undefined,
-      state   ? eq(angelInvestors.state, state)           : undefined,
-      country ? eq(angelInvestors.country, country)       : undefined,
-    )
+    // Paid users: filter + paginate in memory
+    let filtered = angelInvestorsData
+    if (search)  filtered = filtered.filter(r => r.name.toLowerCase().includes(search.toLowerCase()))
+    if (state)   filtered = filtered.filter(r => r.state === state)
+    if (country) filtered = filtered.filter(r => r.country === country)
 
-    const [rows, [{ value: total }]] = await Promise.all([
-      db.select().from(angelInvestors).where(conditions).limit(PAGE_SIZE).offset(offset),
-      db.select({ value: count() }).from(angelInvestors).where(conditions),
-    ])
+    const total = filtered.length
+    const offset = (page - 1) * PAGE_SIZE
+    const rows = filtered.slice(offset, offset + PAGE_SIZE)
 
     return NextResponse.json({
       investors: rows,

@@ -194,10 +194,10 @@ export default function AccountingPage() {
               {loading ? (
                 <span className="flex items-center justify-center gap-2"><Loader2 size={14} className="animate-spin" />submitting…</span>
               ) : (
-                "submit inquiry →"
+                "submit inquiry"
               )}
             </button>
-            <p className="text-[10px] text-ink/30 text-center font-sans">we respond within 1–2 business days</p>
+            <p className="text-[10px] text-ink/30 text-center font-sans">we respond within 2-3 business days</p>
           </form>
         )}
       </div>

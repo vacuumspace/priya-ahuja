@@ -283,7 +283,7 @@ export function BookingForm({ service }: { service: Service }) {
         ) : needsSlot && !selectedSlot ? (
           "select a slot to continue"
         ) : (
-          "confirm booking →"
+          "confirm booking"
         )}
       </Button>
       <p className="text-[10px] text-ink/30 text-center font-sans">no payment required — just sign in</p>

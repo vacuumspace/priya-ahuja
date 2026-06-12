@@ -6,7 +6,7 @@ import { getTemplatesByCategory } from "@/lib/templates-data"
 import TemplatesGrid from "@/components/templates/TemplatesGrid"
 import Script from "next/script"
 import Link from "next/link"
-import { ArrowRight } from "lucide-react"
+import { CustomRequestForm } from "@/components/CustomRequestForm"
 
 const products = getTemplatesByCategory("startup")
 
@@ -58,12 +58,7 @@ export default async function StartupTemplatesPage() {
         <div className="px-4 md:px-10 pb-16">
           <div className="mt-4 text-center py-8 border-t border-border">
             <p className="font-sans text-sm text-ink/40">want something specific? i take requests.</p>
-            <a
-              href="mailto:hello@priyaahuja.com"
-              className="inline-flex items-center gap-1.5 text-sm font-sans font-semibold text-peach-dark hover:underline mt-2"
-            >
-              drop me a note <ArrowRight size={13} />
-            </a>
+            <CustomRequestForm source="startup-templates" />
           </div>
         </div>
       </div>

@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { useState } from "react"
-import { ArrowRight, Clock, FileText, Zap } from "lucide-react"
+import { Clock, FileText, Zap } from "lucide-react"
 import { type Service, formatPrice, getDurationLabel } from "@/lib/services-data"
 
 const FUNDRAISE_TAGS = ["fundraising"]
@@ -86,7 +86,7 @@ export function ServicesClient({ services }: { services: Service[] }) {
                   </div>
                   <div className="mt-3 opacity-0 group-hover:opacity-100 transition-opacity">
                     <span className="inline-flex items-center gap-1 text-xs font-sans text-peach-dark font-semibold">
-                      book now <ArrowRight size={11} />
+                      book now
                     </span>
                   </div>
                 </div>

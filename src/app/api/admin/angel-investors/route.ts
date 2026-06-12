@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from "next/server"
 import { db } from "@/lib/db"
-import { angelInvestors, purchases, digitalProducts } from "@/lib/db/schema"
+import { purchases, digitalProducts } from "@/lib/db/schema"
 import { auth } from "@/lib/auth"
-import { eq, count, ilike, or, desc } from "drizzle-orm"
+import { eq, desc } from "drizzle-orm"
+import { angelInvestorsData } from "@/lib/angel-investors-data"
 
 const ANGEL_SLUG = "angel-investor-list"
 const PAGE_SIZE = 50
@@ -20,7 +21,7 @@ export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url)
   const tab = searchParams.get("tab") ?? "investors"
   const page = Math.max(1, parseInt(searchParams.get("page") ?? "1", 10))
-  const search = searchParams.get("search")?.trim() ?? ""
+  const search = searchParams.get("search")?.trim().toLowerCase() ?? ""
 
   if (tab === "transactions") {
     const rows = await db
@@ -44,26 +45,19 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ transactions: rows, total, revenue })
   }
 
-  // investors tab
-  const filter = search
-    ? or(
-        ilike(angelInvestors.name, `%${search}%`),
-        ilike(angelInvestors.city, `%${search}%`),
-        ilike(angelInvestors.state, `%${search}%`),
-      )
-    : undefined
+  // investors tab — in-memory filter + paginate
+  let filtered = angelInvestorsData
+  if (search) {
+    filtered = filtered.filter(r =>
+      r.name.toLowerCase().includes(search) ||
+      r.city.toLowerCase().includes(search) ||
+      r.state.toLowerCase().includes(search)
+    )
+  }
 
-  const [totalResult, rows] = await Promise.all([
-    db.select({ count: count() }).from(angelInvestors).where(filter),
-    db
-      .select()
-      .from(angelInvestors)
-      .where(filter)
-      .orderBy(angelInvestors.sno)
-      .limit(PAGE_SIZE)
-      .offset((page - 1) * PAGE_SIZE),
-  ])
+  const total = filtered.length
+  const offset = (page - 1) * PAGE_SIZE
+  const rows = filtered.slice(offset, offset + PAGE_SIZE)
 
-  const total = totalResult[0].count
   return NextResponse.json({ investors: rows, total, page, pageCount: Math.ceil(total / PAGE_SIZE) })
 }
