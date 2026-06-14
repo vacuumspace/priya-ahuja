@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from "next/server"
 import { db } from "@/lib/db"
-import { purchases } from "@/lib/db/schema"
+import { purchases, digitalProducts } from "@/lib/db/schema"
 import { verifyPaymentSignature } from "@/lib/razorpay"
 import { eq } from "drizzle-orm"
 import crypto from "crypto"
+import { sendPurchaseWelcome } from "@/lib/mailer"
 
 export async function POST(req: NextRequest) {
   try {
@@ -32,6 +33,22 @@ export async function POST(req: NextRequest) {
 
     if (!purchase) {
       return NextResponse.json({ error: "Purchase not found" }, { status: 404 })
+    }
+
+    // Send welcome/getting-started email (non-blocking)
+    const [product] = await db
+      .select({ slug: digitalProducts.slug, title: digitalProducts.title })
+      .from(digitalProducts)
+      .where(eq(digitalProducts.id, purchase.productId))
+      .limit(1)
+
+    if (product && purchase.userEmail) {
+      sendPurchaseWelcome({
+        to: purchase.userEmail,
+        name: purchase.userName || "there",
+        productSlug: product.slug,
+        productName: product.title,
+      }).catch(err => console.error("sendPurchaseWelcome error:", err))
     }
 
     return NextResponse.json({ success: true, accessToken })

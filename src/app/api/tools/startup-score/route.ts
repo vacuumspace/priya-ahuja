@@ -9,6 +9,7 @@ import {
   computePillarScores,
   type Answers,
 } from "@/lib/startup-score-data"
+import { sendPurchaseWelcome } from "@/lib/mailer"
 
 export async function POST(req: NextRequest) {
   const [session, liveSetting] = await Promise.all([
@@ -64,6 +65,16 @@ export async function POST(req: NextRequest) {
       razorpayPaymentId,
     })
     .returning({ id: startupScores.id })
+
+  // Send getting-started email non-blocking
+  if (session.user.email) {
+    sendPurchaseWelcome({
+      to: session.user.email,
+      name: session.user.name ?? "there",
+      productSlug: "startup-score",
+      productName: "Startup Fundability Score",
+    }).catch(err => console.error("sendPurchaseWelcome startup-score error:", err))
+  }
 
   return NextResponse.json({ id: row.id, totalScore, pillarScores })
 }

@@ -8,6 +8,7 @@ import AdminBookingNotificationEmail from "@/emails/AdminBookingNotificationEmai
 import BookingCancellationEmail from "@/emails/BookingCancellationEmail"
 import DownloadLinkEmail from "@/emails/DownloadLinkEmail"
 import FeedbackRequestEmail from "@/emails/FeedbackRequestEmail"
+import PurchaseWelcomeEmail from "@/emails/PurchaseWelcomeEmail"
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -175,6 +176,36 @@ export async function sendDownloadLink({
   await sendMail({
     to,
     subject: s.email_download_subject || `Your Download: ${productName}`,
+    html,
+  })
+}
+
+export async function sendPurchaseWelcome({
+  to,
+  name,
+  productSlug,
+  productName,
+}: {
+  to: string
+  name: string
+  productSlug: string
+  productName: string
+}) {
+  const html = await render(
+    PurchaseWelcomeEmail({
+      name,
+      productSlug,
+      productName,
+      appUrl: process.env.NEXT_PUBLIC_APP_URL,
+    })
+  )
+  const subjectMap: Record<string, string> = {
+    "angel-investor-list": "Your Angel Investor List — how to make the most of it",
+    "startup-ideas-2026": "Your 100 startup ideas — what to do next",
+  }
+  await sendMail({
+    to,
+    subject: subjectMap[productSlug] ?? `You're all set — ${productName}`,
     html,
   })
 }

@@ -36,13 +36,20 @@ function CopyButton({ text }: { text: string }) {
   async function copy() {
     await navigator.clipboard.writeText(text)
     setCopied(true)
-    setTimeout(() => setCopied(false), 1500)
+    setTimeout(() => setCopied(false), 2000)
   }
   return (
-    <button onClick={copy} className="inline-flex items-center gap-1 text-[10px] text-ink/40 hover:text-ink/70 transition-colors px-1.5 py-0.5 rounded border border-border hover:border-ink/30">
-      {copied ? <Check size={10} className="text-green-600" /> : <Copy size={10} />}
-      {copied ? "copied" : "copy"}
-    </button>
+    <div className="relative inline-flex">
+      <button onClick={copy} className="inline-flex items-center gap-1 text-[10px] text-ink/40 hover:text-ink/70 transition-colors px-1.5 py-0.5 rounded border border-border hover:border-ink/30">
+        {copied ? <Check size={10} className="text-green-600" /> : <Copy size={10} />}
+        {copied ? "copied" : "copy"}
+      </button>
+      {copied && (
+        <span className="absolute -top-7 left-1/2 -translate-x-1/2 bg-ink text-cream text-[10px] font-sans px-2 py-1 rounded whitespace-nowrap pointer-events-none animate-in fade-in duration-150">
+          copied to clipboard
+        </span>
+      )}
+    </div>
   )
 }
 
@@ -214,6 +221,38 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
         )}
       </div>
 
+      {/* Why this list? — shown only on preview */}
+      {!paid && (
+        <div className="px-4 md:px-10 pb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
+            {[
+              { stat: "900+", label: "verified angel investors" },
+              { stat: "28+", label: "states & cities covered" },
+              { stat: "direct", label: "emails, not contact forms" },
+            ].map((s) => (
+              <div key={s.stat} className="bg-peach/20 border border-peach-dark/15 rounded-xl px-4 py-3 text-center">
+                <p className="font-heading text-2xl font-800 text-ink">{s.stat}</p>
+                <p className="font-sans text-[11px] text-ink/50 mt-0.5">{s.label}</p>
+              </div>
+            ))}
+          </div>
+          <div className="bg-card border border-border rounded-xl px-5 py-4 space-y-2">
+            <p className="font-sans text-xs font-semibold text-ink/70">why this list is different</p>
+            {[
+              "These are verified active investors — not stale directories or cold LinkedIn scrapes.",
+              "Direct emails included, so you're not guessing or going through assistants.",
+              "Covers angels writing cheques in 2025–26 across fintech, SaaS, D2C, edtech, and healthtech.",
+              "One-time payment — no subscriptions, no expiry. Yours forever.",
+            ].map((point) => (
+              <p key={point} className="font-sans text-[12px] text-ink/55 leading-relaxed flex gap-2">
+                <span className="text-peach-dark flex-shrink-0">·</span>
+                {point}
+              </p>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Error */}
       {error && (
         <div className="mx-4 md:mx-10 mb-4 px-4 py-3 bg-red-50 border border-red-200 rounded-xl font-sans text-xs text-red-600">
@@ -274,7 +313,18 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
             </tr>
           </thead>
           <tbody>
-            {investors.map((inv) => (
+            {loading && Array.from({ length: 10 }).map((_, i) => (
+              <tr key={`skel-${i}`} className="border-b border-border/50">
+                <td className="py-3 pr-4"><div className="h-3 w-5 bg-peach-dark/10 rounded animate-pulse" /></td>
+                <td className="py-3 pr-4"><div className="h-3 w-28 bg-peach-dark/10 rounded animate-pulse" /></td>
+                <td className="py-3 pr-4 hidden sm:table-cell"><div className="h-3 w-16 bg-peach-dark/10 rounded animate-pulse" /></td>
+                <td className="py-3 pr-4 hidden md:table-cell"><div className="h-3 w-20 bg-peach-dark/10 rounded animate-pulse" /></td>
+                <td className="py-3 pr-4 hidden lg:table-cell"><div className="h-3 w-14 bg-peach-dark/10 rounded animate-pulse" /></td>
+                <td className="py-3 pr-4 hidden sm:table-cell"><div className="h-3 w-16 bg-peach-dark/10 rounded animate-pulse" /></td>
+                <td className="py-3 hidden sm:table-cell"><div className="h-3 w-32 bg-peach-dark/10 rounded animate-pulse" /></td>
+              </tr>
+            ))}
+            {!loading && investors.map((inv) => (
               <tr key={inv.id} className="border-b border-border/50 hover:bg-ink/[0.02] transition-colors">
                 <td className="py-3 pr-4 text-ink/30">{inv.sno}</td>
                 <td className="py-3 pr-4 text-ink font-medium">{inv.name}</td>

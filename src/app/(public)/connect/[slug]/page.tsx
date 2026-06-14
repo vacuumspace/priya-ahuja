@@ -68,31 +68,9 @@ export default async function ServiceDetailPage({ params }: Props) {
         </div>
 
         <div className="flex flex-col md:flex-row gap-8">
-          <div className="flex-1">
-            {service.highlights.length > 0 && (
-              <div className="bg-card border border-border rounded-2xl p-6 mb-4">
-                <h2 className="font-heading text-base font-700 text-ink mb-4">what we&apos;ll cover</h2>
-                <ul className="space-y-2.5">
-                  {service.highlights.map((h) => (
-                    <li key={h} className="flex items-start gap-2.5">
-                      <CheckCircle size={14} className="text-peach-dark mt-0.5 flex-shrink-0" />
-                      <span className="font-sans text-sm text-ink/70">{h}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {service.whoIsItFor && (
-              <div className="bg-card border border-border rounded-2xl p-6">
-                <h2 className="font-heading text-base font-700 text-ink mb-3">who is this for</h2>
-                <p className="font-sans text-sm text-ink/60 leading-relaxed">{service.whoIsItFor}</p>
-              </div>
-            )}
-          </div>
-
-          <div className="md:w-80 flex-shrink-0">
-            <div className="bg-card border border-border rounded-2xl p-6 sticky top-6">
+          {/* Booking card: appears first on mobile, right sidebar on md+ */}
+          <div className="md:w-80 flex-shrink-0 order-first md:order-last">
+            <div className="bg-card border border-border rounded-2xl p-6 md:sticky md:top-6">
               <div className="flex items-center justify-between mb-1">
                 <p className="font-heading text-3xl font-800 text-ink">{formatPrice(service.price)}</p>
                 {service.originalPrice && (
@@ -117,6 +95,30 @@ export default async function ServiceDetailPage({ params }: Props) {
               <BookingForm service={service} />
             </div>
           </div>
+
+          <div className="flex-1 order-last md:order-first">
+            {service.highlights.length > 0 && (
+              <div className="bg-card border border-border rounded-2xl p-6 mb-4">
+                <h2 className="font-heading text-base font-700 text-ink mb-4">what we&apos;ll cover</h2>
+                <ul className="space-y-2.5">
+                  {service.highlights.map((h) => (
+                    <li key={h} className="flex items-start gap-2.5">
+                      <CheckCircle size={14} className="text-peach-dark mt-0.5 flex-shrink-0" />
+                      <span className="font-sans text-sm text-ink/70">{h}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {service.whoIsItFor && (
+              <div className="bg-card border border-border rounded-2xl p-6">
+                <h2 className="font-heading text-base font-700 text-ink mb-3">who is this for</h2>
+                <p className="font-sans text-sm text-ink/60 leading-relaxed">{service.whoIsItFor}</p>
+              </div>
+            )}
+          </div>
+
         </div>
       </div>
     </div>

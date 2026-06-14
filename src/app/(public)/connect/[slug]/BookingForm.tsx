@@ -53,7 +53,14 @@ function SlotPicker({ slug, onSelect }: { slug: string; onSelect: (slot: Slot | 
   }
 
   if (loading) {
-    return <p className="text-xs font-sans text-ink/40 py-2">Checking availability…</p>
+    return (
+      <div className="space-y-3">
+        <div className="h-3 w-24 bg-peach-dark/10 rounded animate-pulse" />
+        <div className="flex flex-wrap gap-2">
+          {[1, 2, 3].map(i => <div key={i} className="h-8 w-16 bg-peach-dark/10 rounded-lg animate-pulse" />)}
+        </div>
+      </div>
+    )
   }
 
   if (slots.length === 0) {

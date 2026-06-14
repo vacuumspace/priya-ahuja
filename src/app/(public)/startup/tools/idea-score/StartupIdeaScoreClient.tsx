@@ -174,7 +174,14 @@ function QuizView({
             {totalAnswered} / 50 answered
           </p>
         </div>
-        <div className="w-full bg-border rounded-full h-1.5">
+        <div
+          role="progressbar"
+          aria-valuenow={Math.round(((step + 1) / IDEA_PILLARS.length) * 100)}
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-label={`Quiz progress: segment ${step + 1} of ${IDEA_PILLARS.length}`}
+          className="w-full bg-border rounded-full h-1.5"
+        >
           <div
             className="bg-peach-dark rounded-full h-1.5 transition-all duration-500"
             style={{ width: `${((step + 1) / IDEA_PILLARS.length) * 100}%` }}

@@ -123,6 +123,72 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
       <div className="px-4 md:px-10 pt-10 pb-16 max-w-2xl">
         <h1 className="font-heading text-3xl font-800 text-ink mb-6">my activity</h1>
 
+        {/* Overview cards */}
+        {(userScores.length > 0 || userIdeaScores.length > 0 || userBookings.length > 0) && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
+            {userScores.length > 0 && (
+              <div className="bg-card border border-border rounded-2xl px-5 py-4">
+                <p className="font-sans text-[10px] text-ink/40 uppercase tracking-wide mb-1">fundability score</p>
+                <div className="flex items-end gap-1.5">
+                  <span className="font-heading text-3xl font-800 text-ink">{userScores[0].totalScore}</span>
+                  <span className="font-sans text-xs text-ink/30 mb-1">/100</span>
+                </div>
+                <p className="font-sans text-[11px] text-ink/50 mt-1">{userScores[0].scoreBand ?? "see full breakdown"}</p>
+                <Link href={`/my-sessions/score/${userScores[0].id}`} className="text-[11px] font-sans font-semibold text-peach-dark hover:underline mt-2 inline-block">
+                  view report →
+                </Link>
+              </div>
+            )}
+            {userIdeaScores.length > 0 && (
+              <div className="bg-card border border-border rounded-2xl px-5 py-4">
+                <p className="font-sans text-[10px] text-ink/40 uppercase tracking-wide mb-1">idea score</p>
+                <div className="flex items-end gap-1.5">
+                  <span className="font-heading text-3xl font-800 text-ink">{userIdeaScores[0].totalScore}</span>
+                  <span className="font-sans text-xs text-ink/30 mb-1">/100</span>
+                </div>
+                <p className="font-sans text-[11px] text-ink/50 mt-1">{userIdeaScores[0].isPaid ? "full analysis unlocked" : "unlock full breakdown · ₹99"}</p>
+                <Link href={`/my-sessions/idea-score/${userIdeaScores[0].id}`} className="text-[11px] font-sans font-semibold text-peach-dark hover:underline mt-2 inline-block">
+                  view report →
+                </Link>
+              </div>
+            )}
+            {userBookings.filter(b => b.status === "confirmed" || b.status === "paid").length > 0 && (() => {
+              const next = userBookings.find(b => b.status === "confirmed" || b.status === "paid")!
+              return (
+                <div className="bg-card border border-border rounded-2xl px-5 py-4">
+                  <p className="font-sans text-[10px] text-ink/40 uppercase tracking-wide mb-1">upcoming session</p>
+                  <p className="font-heading text-base font-700 text-ink mt-1">{next.serviceTitle ?? "Session"}</p>
+                  <p className="font-sans text-[11px] text-ink/50 mt-1">
+                    {next.slotDate ? formatDate(next.slotDate) : "date TBD"}
+                  </p>
+                  <Link href="/my-sessions?tab=sessions" className="text-[11px] font-sans font-semibold text-peach-dark hover:underline mt-2 inline-block">
+                    view details →
+                  </Link>
+                </div>
+              )
+            })()}
+            {/* Suggested next step */}
+            {userScores.length > 0 && !userPurchases.some(p => p.productSlug === "angel-investor-list") && userScores[0].totalScore < 60 && (
+              <div className="bg-peach/20 border border-peach-dark/15 rounded-2xl px-5 py-4">
+                <p className="font-sans text-[10px] text-ink/40 uppercase tracking-wide mb-1">suggested next step</p>
+                <p className="font-sans text-sm text-ink/70 mt-1 leading-snug">Your fundability score is under 60 — book a 1-on-1 session to work through the gaps before you pitch.</p>
+                <Link href="/connect" className="text-[11px] font-sans font-semibold text-peach-dark hover:underline mt-2 inline-block">
+                  book a session →
+                </Link>
+              </div>
+            )}
+            {userIdeaScores.length > 0 && !userIdeaScores[0].isPaid && (
+              <div className="bg-peach/20 border border-peach-dark/15 rounded-2xl px-5 py-4">
+                <p className="font-sans text-[10px] text-ink/40 uppercase tracking-wide mb-1">suggested next step</p>
+                <p className="font-sans text-sm text-ink/70 mt-1 leading-snug">Unlock your full idea score breakdown — see which of the 9 segments need work before you build.</p>
+                <Link href="/startup/tools/idea-score" className="text-[11px] font-sans font-semibold text-peach-dark hover:underline mt-2 inline-block">
+                  unlock for ₹99 →
+                </Link>
+              </div>
+            )}
+          </div>
+        )}
+
         {/* Sub-tabs */}
         <div className="flex gap-1 mb-8 border-b border-border">
           <Link
