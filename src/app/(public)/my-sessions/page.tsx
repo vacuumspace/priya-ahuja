@@ -317,6 +317,14 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
                             <ExternalLink size={11} />
                             view
                           </Link>
+                        ) : p.productSlug === "startup-ideas-2026" ? (
+                          <Link
+                            href="/startup/ideas"
+                            className="inline-flex items-center gap-1.5 text-xs font-sans font-semibold text-peach-dark hover:underline flex-shrink-0 mt-1"
+                          >
+                            <ExternalLink size={11} />
+                            view
+                          </Link>
                         ) : (
                           <ViewTemplateButton
                             slug={p.productSlug}
