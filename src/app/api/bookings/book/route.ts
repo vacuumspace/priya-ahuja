@@ -3,7 +3,7 @@ import { auth } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { bookings, services as servicesTable, availability } from "@/lib/db/schema"
 import { eq, and } from "drizzle-orm"
-import { sendBookingConfirmation, sendAdminBookingNotification } from "@/lib/resend"
+import { sendBookingConfirmation, sendAdminBookingNotification } from "@/lib/mailer"
 import { createCalendarEvent } from "@/lib/google-calendar"
 
 export async function POST(req: NextRequest) {

@@ -4,7 +4,7 @@ import { db } from "@/lib/db"
 import { bookings, availability, services as servicesTable } from "@/lib/db/schema"
 import { eq, and } from "drizzle-orm"
 import { isAdmin } from "@/lib/auth"
-import { sendBookingConfirmation, sendAdminBookingNotification } from "@/lib/resend"
+import { sendBookingConfirmation, sendAdminBookingNotification } from "@/lib/mailer"
 import { updateCalendarEvent, createCalendarEvent } from "@/lib/google-calendar"
 
 export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {

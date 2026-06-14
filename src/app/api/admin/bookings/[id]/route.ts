@@ -2,7 +2,7 @@ import { auth, isAdmin } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { bookings, services as servicesTable } from "@/lib/db/schema"
 import { eq } from "drizzle-orm"
-import { sendFeedbackRequest } from "@/lib/resend"
+import { sendFeedbackRequest } from "@/lib/mailer"
 
 export async function PATCH(
   request: Request,

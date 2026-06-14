@@ -252,7 +252,7 @@ export function BookingForm({ service }: { service: Service }) {
         <p className="font-sans text-sm text-ink/60 leading-relaxed">
           {service.type === "report"
             ? "i'll send your written analysis within 3 business days."
-            : "your slot is confirmed — i'll reach out with details shortly."}
+            : "your slot is confirmed — check your email for details."}
         </p>
       </div>
     )
