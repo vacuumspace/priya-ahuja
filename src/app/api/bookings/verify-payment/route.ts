@@ -86,7 +86,7 @@ export async function POST(req: NextRequest) {
       date: dateLabel,
       time: timeLabel,
       meetLink,
-    }).catch(console.error)
+    }).catch((e) => console.error("[mailer] sendBookingConfirmation failed:", e))
 
     sendAdminBookingNotification({
       serviceName,
@@ -95,7 +95,7 @@ export async function POST(req: NextRequest) {
       date: dateLabel,
       time: timeLabel,
       message: booking.message ?? undefined,
-    }).catch(console.error)
+    }).catch((e) => console.error("[mailer] sendAdminBookingNotification failed:", e))
 
     return NextResponse.json({ success: true })
   } catch (err) {
