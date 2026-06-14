@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react"
 import { ExternalLink, Copy, Check, ChevronLeft, ChevronRight, Search, X, Loader2, Lock } from "lucide-react"
 import SignInOptions from "@/components/SignInOptions"
 import { trackCta } from "@/lib/analytics"
+import { loadRazorpay } from "@/lib/load-razorpay"
 
 declare global {
   interface Window {
@@ -133,6 +134,7 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
       const data = await res.json()
       if (!res.ok) throw new Error(data.error || "Failed to create order")
 
+      await loadRazorpay()
       const rzp = new window.Razorpay({
         key: data.keyId,
         amount: data.amount,

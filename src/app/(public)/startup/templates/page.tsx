@@ -4,7 +4,6 @@ import { purchases, digitalProducts } from "@/lib/db/schema"
 import { eq } from "drizzle-orm"
 import { getTemplatesByCategory } from "@/lib/templates-data"
 import TemplatesGrid from "@/components/templates/TemplatesGrid"
-import Script from "next/script"
 import Link from "next/link"
 import { CustomRequestForm } from "@/components/CustomRequestForm"
 
@@ -27,10 +26,7 @@ export default async function StartupTemplatesPage() {
   }
 
   return (
-    <>
-      <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="lazyOnload" />
-
-      <div className="min-h-screen bg-cream">
+    <div className="min-h-screen bg-cream">
         <div className="flex justify-between items-center px-4 md:px-10 py-4 text-[11px] text-ink/50 font-sans border-b border-border">
           <span>startup · digital downloads</span>
           <span>{products.filter((p) => !p.comingSoon).length} available</span>
@@ -61,6 +57,5 @@ export default async function StartupTemplatesPage() {
           </div>
         </div>
       </div>
-    </>
   )
 }

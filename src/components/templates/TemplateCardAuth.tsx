@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react"
 import { FileText, Eye, Download, X } from "lucide-react"
 import type { Template } from "@/lib/templates-data"
 import SignInOptions from "@/components/SignInOptions"
+import { loadRazorpay } from "@/lib/load-razorpay"
 
 declare global {
   interface Window {
@@ -71,6 +72,7 @@ export default function TemplateCardAuth({ product, isAuthenticated, purchaseTok
       const data = await res.json()
       if (!res.ok) throw new Error(data.error || "Failed to create order")
 
+      await loadRazorpay()
       const rzp = new window.Razorpay({
         key: data.keyId,
         amount: data.amount,

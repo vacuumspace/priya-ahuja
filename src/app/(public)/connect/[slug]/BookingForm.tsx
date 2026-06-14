@@ -9,6 +9,7 @@ declare global {
   }
 }
 import { useSession, signIn } from "next-auth/react"
+import { loadRazorpay } from "@/lib/load-razorpay"
 import SignInOptions from "@/components/SignInOptions"
 import { Service } from "@/lib/services-data"
 import { Input } from "@/components/ui/input"
@@ -197,6 +198,7 @@ export function BookingForm({ service }: { service: Service }) {
       const orderData = await orderRes.json()
       if (!orderRes.ok) throw new Error(orderData.error || "Failed to create order")
 
+      await loadRazorpay()
       await new Promise<void>((resolve, reject) => {
         const rzp = new window.Razorpay({
           key: orderData.keyId,

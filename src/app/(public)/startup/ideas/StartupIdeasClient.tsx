@@ -6,6 +6,7 @@ import Link from "next/link"
 import { Lock, Loader2, X, ChevronLeft, ChevronRight } from "lucide-react"
 import SignInOptions from "@/components/SignInOptions"
 import { FREE_IDEAS_COUNT, type StartupIdea } from "@/lib/startup-ideas-data"
+import { loadRazorpay } from "@/lib/load-razorpay"
 
 declare global {
   interface Window {
@@ -56,6 +57,7 @@ export default function StartupIdeasClient({ isPaid: initialPaid, isAuthenticate
       const data = await res.json()
       if (!res.ok) throw new Error(data.error || "Failed to create order")
 
+      await loadRazorpay()
       const rzp = new window.Razorpay({
         key: data.keyId,
         amount: data.amount,

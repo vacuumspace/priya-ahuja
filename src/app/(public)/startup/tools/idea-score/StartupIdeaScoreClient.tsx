@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import Script from "next/script"
+import { loadRazorpay } from "@/lib/load-razorpay"
 import Link from "next/link"
 import { ArrowLeft, RotateCcw, CheckCircle } from "lucide-react"
 import SignInOptions from "@/components/SignInOptions"
@@ -259,6 +259,7 @@ function PaywallView({
       const orderData = await orderRes.json()
       if (!orderRes.ok) throw new Error(orderData.error || "Failed to create order")
 
+      await loadRazorpay()
       const rzp = new window.Razorpay({
         key: orderData.keyId,
         amount: orderData.amount,
@@ -565,9 +566,7 @@ export default function StartupIdeaScoreClient({
   }
 
   return (
-    <>
-      <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="lazyOnload" />
-      <div className="py-6 px-4 md:py-8 md:px-8">
+    <div className="py-6 px-4 md:py-8 md:px-8">
         {view === "intro" && (
           <IntroView userEmail={userEmail} onStart={() => setView("quiz")} />
         )}
@@ -593,6 +592,5 @@ export default function StartupIdeaScoreClient({
           <ResultsView result={result} answers={answers} onReset={handleReset} />
         )}
       </div>
-    </>
   )
 }

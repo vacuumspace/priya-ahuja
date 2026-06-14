@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { FileText, Download, Lock, X, ChevronDown, ChevronUp, CheckCircle } from "lucide-react"
 import type { Template } from "@/lib/templates-data"
+import { loadRazorpay } from "@/lib/load-razorpay"
 
 declare global {
   interface Window {
@@ -82,6 +83,7 @@ export default function TemplateCard({ product }: Props) {
       const data = await res.json()
       if (!res.ok) throw new Error(data.error || "Failed to create order")
 
+      await loadRazorpay()
       const rzp = new window.Razorpay({
         key: data.keyId,
         amount: data.amount,

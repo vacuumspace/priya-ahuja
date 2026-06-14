@@ -2,7 +2,6 @@ import { auth, isAdmin } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { purchases, digitalProducts } from "@/lib/db/schema"
 import { eq, and, isNotNull } from "drizzle-orm"
-import Script from "next/script"
 import AngelInvestorClient from "./AngelInvestorClient"
 import { angelInvestorsData } from "@/lib/angel-investors-data"
 
@@ -36,9 +35,7 @@ export default async function AngelInvestorsPage() {
   }))
 
   return (
-    <>
-      <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="lazyOnload" />
-      <AngelInvestorClient
+    <AngelInvestorClient
         isPaid={isPaid}
         isAuthenticated={!!userEmail}
         firstPage={firstPage}
@@ -46,6 +43,5 @@ export default async function AngelInvestorsPage() {
         userEmail={userEmail}
         userName={session?.user?.name ?? null}
       />
-    </>
   )
 }

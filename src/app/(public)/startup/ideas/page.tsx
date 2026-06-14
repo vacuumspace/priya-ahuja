@@ -2,7 +2,6 @@ import { auth, isAdmin } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { purchases, digitalProducts } from "@/lib/db/schema"
 import { eq, and, isNotNull } from "drizzle-orm"
-import Script from "next/script"
 import { startupIdeas, STARTUP_IDEAS_SLUG } from "@/lib/startup-ideas-data"
 import StartupIdeasClient from "./StartupIdeasClient"
 
@@ -26,15 +25,12 @@ export default async function StartupIdeasPage() {
   }
 
   return (
-    <>
-      <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="lazyOnload" />
-      <StartupIdeasClient
+    <StartupIdeasClient
         isPaid={isPaid}
         isAuthenticated={!!userEmail}
         ideas={startupIdeas}
         userEmail={userEmail}
         userName={session?.user?.name ?? null}
       />
-    </>
   )
 }
