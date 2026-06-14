@@ -48,8 +48,11 @@ export default async function TemplateViewPage({ params }: { params: Promise<{ s
   return (
     <div className="min-h-screen bg-cream">
       <div className="px-4 md:px-10 pt-10 pb-16 max-w-3xl">
-        <a href="/templates" className="text-[10px] font-sans text-ink/40 uppercase tracking-[0.18em] hover:text-ink/70 transition-colors mb-6 inline-block">
-          ← templates
+        <a
+          href={template.category === "fundraise" ? "/fundraise/templates" : "/startup/templates"}
+          className="text-[10px] font-sans text-ink/40 uppercase tracking-[0.18em] hover:text-ink/70 transition-colors mb-6 inline-block"
+        >
+          ← {template.category} templates
         </a>
         <TemplateViewer template={template} />
       </div>

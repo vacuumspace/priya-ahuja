@@ -288,9 +288,14 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
             {userPurchases.length === 0 ? (
               <div className="border border-dashed border-border rounded-2xl p-8 text-center">
                 <p className="font-sans text-sm text-ink/50 mb-3">no products purchased yet</p>
-                <Link href="/templates" className="text-xs font-sans font-semibold text-peach-dark hover:underline">
-                  browse products
-                </Link>
+                <div className="flex gap-4 justify-center">
+                  <Link href="/startup/templates" className="text-xs font-sans font-semibold text-peach-dark hover:underline">
+                    startup templates
+                  </Link>
+                  <Link href="/fundraise/templates" className="text-xs font-sans font-semibold text-peach-dark hover:underline">
+                    fundraise templates
+                  </Link>
+                </div>
               </div>
             ) : (
               <div className="flex flex-col gap-3">
