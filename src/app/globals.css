@@ -146,6 +146,11 @@
     -ms-overflow-style: none;
     &::-webkit-scrollbar { display: none; }
   }
+  .scrollbar-hide {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar { display: none; }
+  }
 }
 
 /* When desktop sidebar is collapsed, shift main content */

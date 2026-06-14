@@ -96,13 +96,13 @@ function SlotPicker({ slug, onSelect }: { slug: string; onSelect: (slot: Slot | 
     <div className="space-y-3">
       <div>
         <p className="text-[10px] font-sans text-ink/40 uppercase tracking-wide mb-2">Pick a date</p>
-        <div className="flex flex-wrap gap-2">
+        <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
           {dates.map((d) => (
             <button
               key={d}
               type="button"
               onClick={() => setSelectedDate(d)}
-              className={`text-xs font-sans px-3 py-1.5 rounded-lg border transition-all ${
+              className={`flex-shrink-0 text-xs font-sans px-3 py-1.5 rounded-lg border transition-all ${
                 selectedDate === d
                   ? "bg-ink text-cream border-ink"
                   : "bg-transparent text-ink/60 border-border hover:border-ink/30 hover:text-ink"
@@ -117,13 +117,13 @@ function SlotPicker({ slug, onSelect }: { slug: string; onSelect: (slot: Slot | 
       {selectedDate && (
         <div>
           <p className="text-[10px] font-sans text-ink/40 uppercase tracking-wide mb-2">Pick a time</p>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
             {slotsForDate.map((slot) => (
               <button
                 key={slot.id}
                 type="button"
                 onClick={() => select(slot)}
-                className="flex items-center gap-1.5 text-xs font-sans px-3 py-1.5 rounded-lg border border-border bg-cream text-ink/70 hover:border-peach-dark/50 hover:text-ink transition-all"
+                className="flex-shrink-0 flex items-center gap-1.5 text-xs font-sans px-3 py-1.5 rounded-lg border border-border bg-cream text-ink/70 hover:border-peach-dark/50 hover:text-ink transition-all"
               >
                 <Clock size={11} className="text-peach-dark" />
                 {slot.startTime} – {slot.endTime}
