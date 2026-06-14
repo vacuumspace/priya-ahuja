@@ -5,6 +5,8 @@ function getCalendarClient() {
     email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
     key: process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY?.replace(/\\n/g, "\n"),
     scopes: ["https://www.googleapis.com/auth/calendar"],
+    // Impersonate the Workspace account so attendees + Meet links work
+    subject: process.env.GOOGLE_CALENDAR_ID,
   })
   return google.calendar({ version: "v3", auth })
 }
@@ -32,18 +34,24 @@ export async function createCalendarEvent({
   const startISO = `${date}T${startTime}:00+05:30`
   const endISO = `${date}T${endTime}:00+05:30`
 
-  const fullDescription = [
-    `Client: ${attendeeName} (${attendeeEmail})`,
-    description,
-  ].filter(Boolean).join("\n\n")
-
   const res = await calendar.events.insert({
     calendarId,
+    conferenceDataVersion: 1,
+    sendUpdates: "all",
     requestBody: {
       summary,
-      description: fullDescription,
+      description,
       start: { dateTime: startISO, timeZone: "Asia/Kolkata" },
       end:   { dateTime: endISO,   timeZone: "Asia/Kolkata" },
+      attendees: [
+        { email: attendeeEmail, displayName: attendeeName },
+      ],
+      conferenceData: {
+        createRequest: {
+          requestId: `booking-${Date.now()}`,
+          conferenceSolutionKey: { type: "hangoutsMeet" },
+        },
+      },
       reminders: {
         useDefault: false,
         overrides: [
@@ -54,7 +62,11 @@ export async function createCalendarEvent({
     },
   })
 
-  return { eventId: res.data.id!, meetLink: null }
+  const event = res.data
+  const meetLink =
+    event.conferenceData?.entryPoints?.find((e) => e.entryPointType === "video")?.uri ?? null
+
+  return { eventId: event.id!, meetLink }
 }
 
 export async function updateCalendarEvent({

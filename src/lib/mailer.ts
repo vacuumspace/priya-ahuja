@@ -18,56 +18,13 @@ const transporter = nodemailer.createTransport({
   },
 })
 
-type Attachment = { filename: string; content: string; contentType: string }
-
-async function sendMail({ to, subject, html, attachments }: { to: string | string[]; subject: string; html: string; attachments?: Attachment[] }) {
+async function sendMail({ to, subject, html }: { to: string | string[]; subject: string; html: string }) {
   await transporter.sendMail({
     from: `"${process.env.MAIL_FROM_NAME ?? "Priya Ahuja"}" <${process.env.GMAIL_USER}>`,
     to,
     subject,
     html,
-    attachments,
   })
-}
-
-function generateIcs({
-  summary,
-  date,
-  startTime,
-  endTime,
-  attendeeEmail,
-  attendeeName,
-}: {
-  summary: string
-  date: string       // YYYY-MM-DD
-  startTime: string  // HH:MM
-  endTime: string    // HH:MM
-  attendeeEmail: string
-  attendeeName: string
-}): string {
-  const dtStart = `${date.replace(/-/g, "")}T${startTime.replace(":", "")}00`
-  const dtEnd   = `${date.replace(/-/g, "")}T${endTime.replace(":", "")}00`
-  const uid = `booking-${Date.now()}@priyaahuja.in`
-  const organizer = process.env.GMAIL_USER ?? "priyaahujaoffice@gmail.com"
-
-  return [
-    "BEGIN:VCALENDAR",
-    "VERSION:2.0",
-    "PRODID:-//Priya Ahuja//EN",
-    "CALSCALE:GREGORIAN",
-    "METHOD:REQUEST",
-    "BEGIN:VEVENT",
-    `DTSTART;TZID=Asia/Kolkata:${dtStart}`,
-    `DTEND;TZID=Asia/Kolkata:${dtEnd}`,
-    `SUMMARY:${summary}`,
-    `ORGANIZER;CN=Priya Ahuja:mailto:${organizer}`,
-    `ATTENDEE;CN=${attendeeName};RSVP=TRUE:mailto:${attendeeEmail}`,
-    `UID:${uid}`,
-    "STATUS:CONFIRMED",
-    "SEQUENCE:0",
-    "END:VEVENT",
-    "END:VCALENDAR",
-  ].join("\r\n")
 }
 
 async function getEmailSettings(keys: string[]): Promise<Record<string, string>> {
@@ -82,7 +39,6 @@ export async function sendBookingConfirmation({
   date,
   time,
   meetLink,
-  slot,
 }: {
   to: string
   name: string
@@ -90,7 +46,6 @@ export async function sendBookingConfirmation({
   date: string
   time: string
   meetLink?: string
-  slot?: { date: string; startTime: string; endTime: string }
 }) {
   const s = await getEmailSettings([
     "email_confirmation_subject",
@@ -110,27 +65,10 @@ export async function sendBookingConfirmation({
     })
   )
 
-  const attachments: Attachment[] = []
-  if (slot) {
-    attachments.push({
-      filename: "invite.ics",
-      content: generateIcs({
-        summary: `${serviceName} with Priya Ahuja`,
-        date: slot.date,
-        startTime: slot.startTime,
-        endTime: slot.endTime,
-        attendeeEmail: to,
-        attendeeName: name,
-      }),
-      contentType: "text/calendar; method=REQUEST",
-    })
-  }
-
   await sendMail({
     to,
     subject: s.email_confirmation_subject || `Booking Confirmed: ${serviceName}`,
     html,
-    attachments: attachments.length ? attachments : undefined,
   })
 }
 

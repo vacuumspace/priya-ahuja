@@ -86,7 +86,6 @@ export async function POST(req: NextRequest) {
       date: dateLabel,
       time: timeLabel,
       meetLink,
-      slot: slot ? { date: slot.date, startTime: slot.startTime, endTime: slot.endTime } : undefined,
     }).catch((e) => console.error("[mailer] sendBookingConfirmation failed:", e))
 
     sendAdminBookingNotification({
