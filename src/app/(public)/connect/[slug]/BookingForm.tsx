@@ -15,7 +15,8 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
-import { CheckCircle, Loader2, Link2, CalendarDays, Clock, LogIn } from "lucide-react"
+import { CheckCircle, Loader2, Link2, CalendarDays, Clock, LogIn, ArrowRight } from "lucide-react"
+import Link from "next/link"
 
 type Slot = {
   id: string
@@ -249,11 +250,17 @@ export function BookingForm({ service }: { service: Service }) {
       <div className="text-center py-4">
         <CheckCircle size={40} className="text-peach-dark mx-auto mb-3" />
         <p className="font-heading text-lg font-700 text-ink mb-2">you&apos;re all set!</p>
-        <p className="font-sans text-sm text-ink/60 leading-relaxed">
+        <p className="font-sans text-sm text-ink/60 leading-relaxed mb-4">
           {service.type === "report"
             ? "i'll send your written analysis within 3 business days."
             : "your slot is confirmed — check your email for details."}
         </p>
+        <Link
+          href="/my-sessions"
+          className="inline-flex items-center gap-2 text-xs font-sans font-600 text-peach-dark border border-peach-dark/30 rounded-xl px-4 py-2 hover:bg-peach/20 transition-colors"
+        >
+          view my bookings <ArrowRight size={13} />
+        </Link>
       </div>
     )
   }

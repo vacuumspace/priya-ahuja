@@ -35,6 +35,7 @@ export async function createCalendarEvent({
   const res = await calendar.events.insert({
     calendarId,
     conferenceDataVersion: 1,
+    sendUpdates: "all",
     requestBody: {
       summary,
       description,
@@ -42,7 +43,7 @@ export async function createCalendarEvent({
       end:   { dateTime: endISO,   timeZone: "Asia/Kolkata" },
       attendees: [
         { email: attendeeEmail, displayName: attendeeName },
-        { email: calendarId },
+        { email: calendarId, displayName: "Priya Ahuja", organizer: true },
       ],
       conferenceData: {
         createRequest: {
