@@ -113,11 +113,12 @@ function formatCountdown(seconds: number): string {
 
 function statusBadge(status: string) {
   const map: Record<string, { label: string; cls: string }> = {
-    confirmed: { label: "confirmed", cls: "bg-green-100 text-green-700" },
-    paid:      { label: "paid",      cls: "bg-green-100 text-green-700" },
-    completed: { label: "completed", cls: "bg-ink/10 text-ink/60" },
-    pending:   { label: "pending",   cls: "bg-amber-100 text-amber-700" },
-    cancelled: { label: "cancelled", cls: "bg-red-100 text-red-500" },
+    confirmed:   { label: "confirmed & scheduled", cls: "bg-green-100 text-green-700" },
+    paid:        { label: "confirmed & scheduled", cls: "bg-green-100 text-green-700" },
+    completed:   { label: "completed",             cls: "bg-ink/10 text-ink/60" },
+    pending:     { label: "pending",               cls: "bg-amber-100 text-amber-700" },
+    cancelled:   { label: "cancelled",             cls: "bg-red-100 text-red-500" },
+    rescheduled: { label: "rescheduled",           cls: "bg-purple-100 text-purple-700" },
   }
   const s = map[status] ?? { label: status, cls: "bg-ink/10 text-ink/50" }
   return (
