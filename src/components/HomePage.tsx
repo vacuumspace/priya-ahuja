@@ -76,14 +76,15 @@ export default function HomePage() {
             <p className="font-heading text-base font-700 text-ink">Priya Ahuja</p>
             <p className="font-sans text-xs text-ink/40 mt-0.5">business educator</p>
             <p className="font-sans text-xs text-ink/40 mt-0.5">bangalore, india</p>
-            <div className="flex gap-2.5 mt-1.5">
+            {/* Social icons — TEMP hidden */}
+            {false && <div className="flex gap-2.5 mt-1.5">
               <a href="https://www.linkedin.com/in/ca-priya-harwani/" target="_blank" rel="noopener noreferrer" className="text-ink/35 hover:text-ink transition-colors" aria-label="LinkedIn">
                 <LinkedInIcon />
               </a>
               <a href="https://www.instagram.com/pitchtopriya" target="_blank" rel="noopener noreferrer" className="text-ink/35 hover:text-ink transition-colors" aria-label="Instagram">
                 <InstagramIcon />
               </a>
-            </div>
+            </div>}
           </div>
         </div>
 
