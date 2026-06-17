@@ -16,7 +16,7 @@ const topItems = [
   // { label: "connect", href: "/connect", badge: null },
 ]
 
-const topicGroups = [
+const topicGroups: { label: string; prefix: string; children: { label: string; href: string }[] }[] = [
   // {
   //   label: "startup",
   //   prefix: "/startup",
