@@ -325,7 +325,7 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
         )}
 
         {/* Tools tab — hidden temporarily */}
-        {false && activeTab === "tools" && (
+        {false && (
           <section>
             {userScores.length === 0 && userIdeaScores.length === 0 ? (
               <div className="border border-dashed border-border rounded-2xl p-8 text-center">
@@ -412,7 +412,7 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
         )}
 
         {/* Products tab — hidden temporarily */}
-        {false && activeTab === "products" && (
+        {false && (
           <section>
             {userPurchases.length === 0 ? (
               <div className="border border-dashed border-border rounded-2xl p-8 text-center">
