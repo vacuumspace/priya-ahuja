@@ -14,7 +14,7 @@ declare global {
   }
 }
 
-type ModalState = { type: "idle" } | { type: "sign-in" } | { type: "buy" }
+type ModalState = { type: "idle" } | { type: "sign-in" } | { type: "buy" } | { type: "access" }
 
 type Props = {
   course: Course
@@ -137,9 +137,12 @@ export default function CourseCard({ course, isAuthenticated, isPurchased, userE
               <p className="font-sans font-700 text-ink text-sm">{price}</p>
 
               {isPurchased ? (
-                <button className="inline-flex items-center gap-1.5 bg-ink text-cream text-xs font-sans font-semibold px-4 py-2 rounded-lg hover:bg-ink/80 transition-colors">
+                <button
+                  onClick={() => setModal({ type: "access" })}
+                  className="inline-flex items-center gap-1.5 bg-ink text-cream text-xs font-sans font-semibold px-4 py-2 rounded-lg hover:bg-ink/80 transition-colors"
+                >
                   <Play size={11} />
-                  start
+                  access
                 </button>
               ) : (
                 <button
@@ -177,6 +180,27 @@ export default function CourseCard({ course, isAuthenticated, isPurchased, userE
                   callbackUrl={typeof window !== "undefined" ? window.location.pathname : "/courses"}
                   compact
                 />
+              </div>
+            )}
+
+            {modal.type === "access" && (
+              <div className="p-6">
+                <div className="flex items-start justify-between mb-4">
+                  <h3 className="font-heading text-xl font-700 text-ink">accessing your course</h3>
+                  <button onClick={close} className="text-ink/40 hover:text-ink transition-colors"><X size={18} /></button>
+                </div>
+                <p className="font-sans text-sm text-ink/60 leading-relaxed">
+                  Please check your email for the course link, ID and password to access it.
+                </p>
+                <p className="font-sans text-xs text-ink/40 mt-3">
+                  Can&apos;t find it? Check your spam folder or email us at <a href="mailto:team@priyaahuja.in" className="underline text-ink/60">team@priyaahuja.in</a>
+                </p>
+                <button
+                  onClick={close}
+                  className="mt-6 w-full bg-ink text-cream font-sans font-semibold text-sm py-3 rounded-lg hover:bg-ink/80 transition-colors"
+                >
+                  got it
+                </button>
               </div>
             )}
 
