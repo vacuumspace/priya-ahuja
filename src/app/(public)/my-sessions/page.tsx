@@ -293,7 +293,7 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
         )}
 
         {/* Sessions tab — hidden temporarily */}
-        {false && activeTab === "sessions" && (
+        {false && (
           <section>
             {userBookings.length === 0 ? (
               <div className="border border-dashed border-border rounded-2xl p-8 text-center">
