@@ -74,7 +74,7 @@ export default function HomePage() {
           </div>
           <div>
             <p className="font-heading text-base font-700 text-ink">Priya Ahuja</p>
-            <p className="font-sans text-xs text-ink/40 mt-0.5">vc at Groww · business educator</p>
+            <p className="font-sans text-xs text-ink/40 mt-0.5">business educator</p>
             <p className="font-sans text-xs text-ink/40 mt-0.5">bangalore, india</p>
             <div className="flex gap-2.5 mt-1.5">
               <a href="https://www.linkedin.com/in/ca-priya-harwani/" target="_blank" rel="noopener noreferrer" className="text-ink/35 hover:text-ink transition-colors" aria-label="LinkedIn">
@@ -132,6 +132,31 @@ export default function HomePage() {
         {/* Original connect button — hidden temporarily
         <Link href="/connect" ...>connect</Link>
         */}
+      </div>
+
+      {/* ── Courses intro ── TEMP */}
+      <div className="mb-14">
+        <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">what we offer</p>
+        <div className="space-y-3 font-sans text-sm text-ink/60 leading-relaxed mb-6">
+          <p>
+            practical business courses designed for founders, operators, and anyone building something of their own. no fluff, no theory for its own sake — every lesson is something you can act on.
+          </p>
+          <p>
+            from business model design and go-to-market strategy to finance, sales, and team building — the full toolkit for running a real business.
+          </p>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          {[
+            { title: "self-paced", body: "learn on your schedule, at your own speed. lifetime access included." },
+            { title: "practical first", body: "every module is built around what you can apply immediately." },
+            { title: "founder-relevant", body: "topics chosen for the real challenges of building a business." },
+          ].map((m) => (
+            <div key={m.title} className="bg-peach/20 border border-peach-dark/15 rounded-xl px-4 py-4">
+              <p className="font-sans text-[11px] font-semibold text-ink/80 mb-1">{m.title}</p>
+              <p className="font-sans text-[11px] text-ink/45 leading-snug">{m.body}</p>
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* ── Achievements ── TEMP hidden */}
@@ -204,8 +229,8 @@ export default function HomePage() {
         </Link>
       </div>}
 
-      {/* ── About ── */}
-      <div className="mb-14">
+      {/* ── About ── TEMP hidden */}
+      {false && <div className="mb-14">
         <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">about</p>
         <div className="space-y-3 font-sans text-sm text-ink/60 leading-relaxed">
           <p>
@@ -231,10 +256,11 @@ export default function HomePage() {
             </span>
           ))}
         </div>
-      </div>
+      </div>}
 
-      {/* ── Mission ── */}
-      <div className="mb-14">
+      {/* ── Mission ── TEMP hidden */}
+      {/* ── Mission ── TEMP hidden */}
+      {false && <div className="mb-14">
         <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">mission</p>
         <div className="space-y-4">
           <p className="font-heading text-xl font-700 text-ink leading-snug">
@@ -262,10 +288,10 @@ export default function HomePage() {
             ))}
           </div>
         </div>
-      </div>
+      </div>}
 
-      {/* ── Dream: 10k founders ── */}
-      <div className="mb-14">
+      {/* ── Dream: 10k founders ── TEMP hidden */}
+      {false && <div className="mb-14">
         <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">north star</p>
         <p className="font-heading text-xl font-700 text-ink leading-snug mb-3">
           help 10,000 founders to win.
@@ -282,7 +308,7 @@ export default function HomePage() {
             <span className="font-sans text-[11px] text-ink/40">10,000</span>
           </div>
         </div>
-      </div>
+      </div>}
 
       {/* ── Footer nav ── TEMP hidden */}
       {false && <div className="border-t border-peach-dark/15 pt-6 pb-2">
