@@ -18,7 +18,7 @@ const syne = Syne({
 
 export const metadata: Metadata = {
   title: {
-    default: "Priya Ahuja - Fundraising & Startup Consultant",
+    default: "Priya Ahuja - Business Educator",
     template: "%s | Priya Ahuja",
   },
   description:
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   creator: "Priya Ahuja",
   twitter: {
     card: "summary_large_image",
-    title: "Priya Ahuja - Fundraising & Startup Consultant",
+    title: "Priya Ahuja - Business Educator",
     description:
       "Corporate Development at Groww. Helping founders with fundraising readiness, investor storytelling, and startup strategy.",
   },
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_IN",
     siteName: "Priya Ahuja",
-    title: "Priya Ahuja - Fundraising & Startup Consultant",
+    title: "Priya Ahuja - Business Educator",
     description:
       "Corporate Development at Groww. Helping founders with fundraising readiness, investor storytelling, and startup strategy.",
     images: [{ url: "/priyadp.jpeg", width: 1200, height: 630, alt: "Priya Ahuja" }],
