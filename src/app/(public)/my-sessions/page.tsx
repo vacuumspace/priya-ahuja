@@ -168,7 +168,7 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
                   <p className="font-sans text-[10px] text-ink/40 uppercase tracking-wide mb-1">upcoming session</p>
                   <p className="font-heading text-base font-700 text-ink mt-1">{next.serviceTitle ?? "Session"}</p>
                   <p className="font-sans text-[11px] text-ink/50 mt-1">
-                    {next.slotDate ? formatDate(next.slotDate) : "date TBD"}
+                    {next.slotDate ? formatDate(next.slotDate as string) : "date TBD"}
                   </p>
                   <Link href="/my-sessions?tab=sessions" className="text-[11px] font-sans font-semibold text-peach-dark hover:underline mt-2 inline-block">
                     view details →
