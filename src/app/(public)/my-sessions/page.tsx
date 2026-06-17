@@ -3,10 +3,11 @@ import { db } from "@/lib/db"
 import { bookings, purchases, services as servicesTable, digitalProducts, startupScores, startupIdeaScores, availability } from "@/lib/db/schema"
 import { eq, desc } from "drizzle-orm"
 import Link from "next/link"
-import { CalendarDays, FileText, LogIn, Lightbulb, ExternalLink } from "lucide-react"
+import { CalendarDays, FileText, LogIn, Lightbulb, ExternalLink, BookOpen } from "lucide-react"
 import ViewTemplateButton from "@/components/templates/ViewTemplateButton"
 import SignInOptions from "@/components/SignInOptions"
 import BookingCard from "./BookingCard"
+import { courses } from "@/lib/courses-data"
 
 function statusBadge(status: string) {
   const map: Record<string, { label: string; cls: string }> = {
@@ -35,7 +36,11 @@ type SearchParams = Promise<{ tab?: string }>
 export default async function MySessionsPage({ searchParams }: { searchParams: SearchParams }) {
   const session = await auth()
   const params = await searchParams
-  const activeTab = params.tab === "products" ? "products" : params.tab === "tools" ? "tools" : "sessions"
+  // TEMP: always show courses tab; restore original tab logic when reverting
+  const activeTab = "courses"
+  void params
+  // Original tab logic (restore when reverting):
+  // const activeTab = params.tab === "products" ? "products" : params.tab === "tools" ? "tools" : "sessions"
 
   if (!session?.user?.email) {
     return (
@@ -113,6 +118,10 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
       .orderBy(desc(startupIdeaScores.createdAt)),
   ])
 
+  // Courses enrolled by this user
+  const enrolledSlugs = new Set(userPurchases.map((p) => p.productSlug).filter(Boolean) as string[])
+  const enrolledCourses = courses.filter((c) => enrolledSlugs.has(c.slug))
+
   return (
     <div className="min-h-screen bg-cream">
       <div className="flex justify-between items-center px-4 md:px-10 py-4 text-[11px] text-ink/50 font-sans border-b border-border">
@@ -123,8 +132,8 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
       <div className="px-4 md:px-10 pt-10 pb-16 max-w-2xl">
         <h1 className="font-heading text-3xl font-800 text-ink mb-6">my activity</h1>
 
-        {/* Overview cards */}
-        {(userScores.length > 0 || userIdeaScores.length > 0 || userBookings.length > 0) && (
+        {/* Overview cards — hidden temporarily with courses mode */}
+        {false && (userScores.length > 0 || userIdeaScores.length > 0 || userBookings.length > 0) && (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
             {userScores.length > 0 && (
               <div className="bg-card border border-border rounded-2xl px-5 py-4">
@@ -191,6 +200,20 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
 
         {/* Sub-tabs */}
         <div className="flex gap-1 mb-8 border-b border-border">
+          {/* TEMP: courses tab shown; original tabs hidden below — restore when reverting */}
+          <Link
+            href="/my-sessions"
+            className={`flex items-center gap-1.5 px-4 py-2.5 text-xs font-sans font-semibold border-b-2 transition-colors -mb-px ${
+              activeTab === "courses"
+                ? "border-ink text-ink"
+                : "border-transparent text-ink/40 hover:text-ink/70"
+            }`}
+          >
+            <BookOpen size={12} />
+            courses
+            <span className="text-[10px] font-mono ml-0.5 opacity-60">{enrolledCourses.length}</span>
+          </Link>
+          {/* Original tabs — hidden temporarily
           <Link
             href="/my-sessions?tab=sessions"
             className={`flex items-center gap-1.5 px-4 py-2.5 text-xs font-sans font-semibold border-b-2 transition-colors -mb-px ${
@@ -227,10 +250,50 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
             tools
             <span className="text-[10px] font-mono ml-0.5 opacity-60">{userScores.length + userIdeaScores.length}</span>
           </Link>
+          */}
         </div>
 
-        {/* Sessions tab */}
-        {activeTab === "sessions" && (
+        {/* Courses tab */}
+        {activeTab === "courses" && (
+          <section>
+            {enrolledCourses.length === 0 ? (
+              <div className="border border-dashed border-border rounded-2xl p-8 text-center">
+                <p className="font-sans text-sm text-ink/50 mb-3">no courses enrolled yet</p>
+                <Link href="/courses" className="text-xs font-sans font-semibold text-peach-dark hover:underline">
+                  browse courses
+                </Link>
+              </div>
+            ) : (
+              <div className="flex flex-col gap-3">
+                {enrolledCourses.map((c) => (
+                  <div key={c.slug} className="bg-card border border-border rounded-2xl p-5">
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="text-[10px] font-sans font-semibold px-2 py-0.5 rounded-full bg-green-100 text-green-700">
+                            enrolled
+                          </span>
+                          <span className="text-[10px] font-sans text-ink/40">{c.tag}</span>
+                        </div>
+                        <p className="font-heading text-base font-700 text-ink">{c.title}</p>
+                        <p className="font-sans text-xs text-ink/50 mt-0.5">{c.duration} · {c.lessons} lessons</p>
+                      </div>
+                      <Link
+                        href="/courses"
+                        className="inline-flex items-center gap-1.5 text-xs font-sans font-semibold text-peach-dark hover:underline flex-shrink-0 mt-1"
+                      >
+                        go to course →
+                      </Link>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </section>
+        )}
+
+        {/* Sessions tab — hidden temporarily */}
+        {false && activeTab === "sessions" && (
           <section>
             {userBookings.length === 0 ? (
               <div className="border border-dashed border-border rounded-2xl p-8 text-center">
@@ -261,8 +324,8 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
           </section>
         )}
 
-        {/* Tools tab */}
-        {activeTab === "tools" && (
+        {/* Tools tab — hidden temporarily */}
+        {false && activeTab === "tools" && (
           <section>
             {userScores.length === 0 && userIdeaScores.length === 0 ? (
               <div className="border border-dashed border-border rounded-2xl p-8 text-center">
@@ -348,8 +411,8 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
           </section>
         )}
 
-        {/* Products tab */}
-        {activeTab === "products" && (
+        {/* Products tab — hidden temporarily */}
+        {false && activeTab === "products" && (
           <section>
             {userPurchases.length === 0 ? (
               <div className="border border-dashed border-border rounded-2xl p-8 text-center">

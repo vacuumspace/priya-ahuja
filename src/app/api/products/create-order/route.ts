@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server"
 import { db } from "@/lib/db"
 import { purchases } from "@/lib/db/schema"
 import { getTemplate } from "@/lib/templates-data"
+import { getCourse } from "@/lib/courses-data"
 
 const EXTRA_PRODUCTS: Record<string, { slug: string; title: string; description: string; price: number; comingSoon: boolean }> = {
   "angel-investor-list": {
@@ -31,7 +32,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
     }
 
-    const template = getTemplate(slug) ?? EXTRA_PRODUCTS[slug] ?? null
+    const template = getTemplate(slug) ?? EXTRA_PRODUCTS[slug] ?? getCourse(slug) ?? null
     if (!template || template.comingSoon) {
       return NextResponse.json({ error: "Product not found" }, { status: 404 })
     }

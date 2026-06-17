@@ -12,40 +12,41 @@ type SidebarProps = { isAdmin?: boolean; isSignedIn?: boolean; userName?: string
 
 const topItems = [
   { label: "home", href: "/", badge: null },
-  { label: "connect", href: "/connect", badge: null },
+  { label: "courses", href: "/courses", badge: null },
+  // { label: "connect", href: "/connect", badge: null },
 ]
 
 const topicGroups = [
-  {
-    label: "startup",
-    prefix: "/startup",
-    children: [
-      { label: "blog", href: "/startup/blog" },
-      { label: "tools", href: "/startup/tools" },
-      { label: "templates", href: "/startup/templates" },
-      { label: "100 startup ideas", href: "/startup/ideas" },
-    ],
-  },
-  {
-    label: "fundraise",
-    prefix: "/fundraise",
-    children: [
-      { label: "blog", href: "/fundraise/blog" },
-      { label: "tools", href: "/fundraise/tools" },
-      { label: "templates", href: "/fundraise/templates" },
-      { label: "angel investors", href: "/fundraise/angel-investors" },
-    ],
-  },
-  {
-    label: "services",
-    prefix: "/services",
-    children: [
-      { label: "tech product development", href: "/services/tech" },
-      { label: "branding", href: "/services/branding" },
-      { label: "finance", href: "/services/accounting" },
-      { label: "legal compliance", href: "/services/incorporation" },
-    ],
-  },
+  // {
+  //   label: "startup",
+  //   prefix: "/startup",
+  //   children: [
+  //     { label: "blog", href: "/startup/blog" },
+  //     { label: "tools", href: "/startup/tools" },
+  //     { label: "templates", href: "/startup/templates" },
+  //     { label: "100 startup ideas", href: "/startup/ideas" },
+  //   ],
+  // },
+  // {
+  //   label: "fundraise",
+  //   prefix: "/fundraise",
+  //   children: [
+  //     { label: "blog", href: "/fundraise/blog" },
+  //     { label: "tools", href: "/fundraise/tools" },
+  //     { label: "templates", href: "/fundraise/templates" },
+  //     { label: "angel investors", href: "/fundraise/angel-investors" },
+  //   ],
+  // },
+  // {
+  //   label: "services",
+  //   prefix: "/services",
+  //   children: [
+  //     { label: "tech product development", href: "/services/tech" },
+  //     { label: "branding", href: "/services/branding" },
+  //     { label: "finance", href: "/services/accounting" },
+  //     { label: "legal compliance", href: "/services/incorporation" },
+  //   ],
+  // },
 ]
 
 const bottomItems: { label: string; href: string; badge: null }[] = []
@@ -59,9 +60,6 @@ export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEma
   const [signOutOpen, setSignOutOpen] = useState(false)
 
   const [open, setOpen] = useState<string | null>(() => {
-    if (pathname.startsWith("/startup")) return "startup"
-    if (pathname.startsWith("/fundraise")) return "fundraise"
-    if (pathname.startsWith("/services")) return "services"
     return null
   })
 
@@ -253,9 +251,10 @@ export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEma
           {/* Footer */}
           <div className="flex items-center gap-2 whitespace-nowrap overflow-hidden">
             <span className="text-[10px] text-ink/40 font-sans">©2026 Priya Ahuja</span>
-            <Link href="/contact" className="text-[10px] font-sans text-ink/40 hover:text-ink transition-colors">contact</Link>
-            <Link href="/privacy-policy" className="text-[10px] font-sans text-ink/40 hover:text-ink transition-colors">privacy</Link>
-            <Link href="/terms" className="text-[10px] font-sans text-ink/40 hover:text-ink transition-colors">terms</Link>
+            {/* TEMP: using education pages; restore /contact /privacy-policy /terms when reverting */}
+            <Link href="/contacts" className="text-[10px] font-sans text-ink/40 hover:text-ink transition-colors">contact</Link>
+            <Link href="/policy" className="text-[10px] font-sans text-ink/40 hover:text-ink transition-colors">privacy</Link>
+            <Link href="/tc" className="text-[10px] font-sans text-ink/40 hover:text-ink transition-colors">t&c</Link>
           </div>
 
         </div>

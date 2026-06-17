@@ -119,13 +119,23 @@ export default function HomePage() {
         <h1 className="font-heading text-[clamp(2.4rem,6vw,3.6rem)] font-800 text-ink leading-[0.95] tracking-tight mb-6">
           for the founder&apos;s<br />dream.
         </h1>
-        <p className="font-sans text-sm text-ink/55 leading-relaxed">
+        <p className="font-sans text-sm text-ink/55 leading-relaxed mb-6">
           you're building something real. i help you to build to win with confidence - with actionable advice and resources.
         </p>
+        {/* TEMP: courses CTA replacing connect button */}
+        <Link
+          href="/courses"
+          className="inline-flex items-center bg-peach-dark text-ink text-xs font-sans font-semibold px-5 py-2.5 rounded-lg hover:bg-peach-dark/80 transition-colors"
+        >
+          explore courses →
+        </Link>
+        {/* Original connect button — hidden temporarily
+        <Link href="/connect" ...>connect</Link>
+        */}
       </div>
 
-      {/* ── Achievements ── */}
-      <div className="mb-14">
+      {/* ── Achievements ── TEMP hidden */}
+      {false && <div className="mb-14">
         <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">achievements</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {[
@@ -143,10 +153,10 @@ export default function HomePage() {
             </div>
           ))}
         </div>
-      </div>
+      </div>}
 
-      {/* ── Testimonials (slider) ── */}
-      <div className="mb-14">
+      {/* ── Testimonials (slider) ── TEMP hidden */}
+      {false && <div className="mb-14">
         <div className="flex items-center justify-between mb-5">
           <div className="flex items-center gap-2">
             <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em]">what founders say</p>
@@ -178,10 +188,10 @@ export default function HomePage() {
             />
           ))}
         </div>
-      </div>
+      </div>}
 
-      {/* ── CTA ── */}
-      <div className="bg-ink rounded-2xl px-6 py-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 mb-14">
+      {/* ── CTA ── TEMP hidden */}
+      {false && <div className="bg-ink rounded-2xl px-6 py-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 mb-14">
         <div>
           <p className="font-heading text-lg font-700 text-cream">want to get unstuck?</p>
           <p className="font-sans text-xs text-cream/45 mt-1">one session can reframe months of confusion.</p>
@@ -192,7 +202,7 @@ export default function HomePage() {
         >
           connect
         </Link>
-      </div>
+      </div>}
 
       {/* ── About ── */}
       <div className="mb-14">
@@ -274,8 +284,8 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* ── Footer nav ── */}
-      <div className="border-t border-peach-dark/15 pt-6 pb-2">
+      {/* ── Footer nav ── TEMP hidden */}
+      {false && <div className="border-t border-peach-dark/15 pt-6 pb-2">
         <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">explore more</p>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
           {[
@@ -340,7 +350,7 @@ export default function HomePage() {
             </div>
           ))}
         </div>
-      </div>
+      </div>}
 
     </div>
   )
