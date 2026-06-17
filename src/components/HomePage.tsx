@@ -120,7 +120,7 @@ export default function HomePage() {
           for the founder&apos;s<br />dream.
         </h1>
         <p className="font-sans text-sm text-ink/55 leading-relaxed mb-6">
-          you're building something real. i help you to build to win with confidence - with actionable advice and resources.
+          you're building something real. i help you to build to win with confidence - with actionable learnings and resources.
         </p>
         {/* TEMP: courses CTA replacing connect button */}
         <Link
