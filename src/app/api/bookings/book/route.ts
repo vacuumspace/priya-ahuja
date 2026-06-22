@@ -103,6 +103,8 @@ export async function POST(req: NextRequest) {
           .where(eq(bookings.id, booking.id))
       } catch (err) {
         console.error("Calendar event creation failed:", err)
+        const errMsg = `[calendar error] ${String(err)}`
+        await db.update(bookings).set({ adminNotes: errMsg }).where(eq(bookings.id, booking.id))
       }
     }
 
@@ -117,6 +119,7 @@ export async function POST(req: NextRequest) {
       to: session.user.email,
       name,
       serviceName: service.title,
+      serviceType: (service.type ?? "call") as "call" | "dm" | "report",
       date: dateLabel,
       time: timeLabel,
       meetLink,
@@ -124,6 +127,7 @@ export async function POST(req: NextRequest) {
 
     sendAdminBookingNotification({
       serviceName: service.title,
+      serviceType: (service.type ?? "call") as "call" | "dm" | "report",
       userName: name,
       userEmail: session.user.email,
       date: dateLabel,

@@ -121,6 +121,8 @@ export async function POST(req: NextRequest) {
           .where(eq(bookings.id, confirmedBooking.id))
       } catch (err) {
         console.error("Calendar event creation failed:", err)
+        const errMsg = `[calendar error] ${String(err)}`
+        await db.update(bookings).set({ adminNotes: errMsg }).where(eq(bookings.id, confirmedBooking.id))
       }
     }
 

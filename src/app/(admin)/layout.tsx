@@ -3,14 +3,19 @@ import { auth, isAdmin } from "@/lib/auth"
 import { AdminShell } from "@/components/admin/AdminShell"
 import { db } from "@/lib/db"
 import { bookings, purchases, startupScores, startupIdeaScores, customRequests } from "@/lib/db/schema"
-import { eq, count, gte } from "drizzle-orm"
+import { eq, count, gte, and, notInArray } from "drizzle-orm"
 
 async function getNotificationCounts() {
   const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
 
   const [pendingBookings, recentPurchases, recentFundability, recentIdea, newCustomRequests] =
     await Promise.all([
-      db.select({ count: count() }).from(bookings).where(eq(bookings.status, "pending")),
+      db.select({ count: count() }).from(bookings).where(
+        and(
+          gte(bookings.createdAt, sevenDaysAgo),
+          notInArray(bookings.status, ["cancelled", "pending"]),
+        )
+      ),
       db.select({ count: count() }).from(purchases).where(gte(purchases.createdAt, sevenDaysAgo)),
       db.select({ count: count() }).from(startupScores).where(gte(startupScores.createdAt, sevenDaysAgo)),
       db.select({ count: count() }).from(startupIdeaScores).where(gte(startupIdeaScores.createdAt, sevenDaysAgo)),
