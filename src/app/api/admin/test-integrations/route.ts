@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server"
 import { auth, isAdmin } from "@/lib/auth"
 import nodemailer from "nodemailer"
-import { google } from "googleapis"
+import { createCalendarEvent, deleteCalendarEvent } from "@/lib/google-calendar"
 
 export async function GET() {
   const session = await auth()
@@ -11,7 +11,7 @@ export async function GET() {
 
   const results: Record<string, { ok: boolean; detail: string }> = {}
 
-  // Test SMTP
+  // Test SMTP — actually send a mail to admin
   try {
     const transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
@@ -22,31 +22,38 @@ export async function GET() {
         pass: process.env.EMAIL_PASSWORD,
       },
     })
-    await transporter.verify()
-    results.smtp = { ok: true, detail: `Connected as ${process.env.EMAIL_USER}` }
+    await transporter.sendMail({
+      from: `"Priya Ahuja" <${process.env.EMAIL_USER}>`,
+      to: process.env.EMAIL_USER,
+      subject: "Integration test — SMTP working",
+      html: "<p>This is a test email sent from /api/admin/test-integrations.</p>",
+    })
+    results.smtp = { ok: true, detail: `Test email sent to ${process.env.EMAIL_USER}` }
   } catch (err: unknown) {
     results.smtp = { ok: false, detail: String(err) }
   }
 
-  // Test Google Calendar service account
+  // Test Google Calendar — actually create an event and check for Meet link, then delete it
   try {
-    const auth2 = new google.auth.JWT({
-      email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-      key: process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY?.replace(/\\n/g, "\n"),
-      scopes: ["https://www.googleapis.com/auth/calendar"],
-      subject: process.env.GOOGLE_CALENDAR_ID,
+    const tomorrow = new Date(Date.now() + 24 * 60 * 60 * 1000)
+    const date = tomorrow.toISOString().slice(0, 10)
+    const { eventId, meetLink } = await createCalendarEvent({
+      summary: "Integration Test — delete me",
+      date,
+      startTime: "10:00",
+      endTime: "10:30",
+      attendeeEmail: process.env.EMAIL_USER!,
+      attendeeName: "Integration Test",
     })
-    const calendar = google.calendar({ version: "v3", auth: auth2 })
-    const res = await calendar.calendarList.list({ maxResults: 1 })
+    await deleteCalendarEvent(eventId)
     results.googleCalendar = {
       ok: true,
-      detail: `Authenticated as ${process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL}, impersonating ${process.env.GOOGLE_CALENDAR_ID}. Calendars visible: ${res.data.items?.length ?? 0}`,
+      detail: meetLink
+        ? `Event created + deleted. Meet link generated: ${meetLink}`
+        : "Event created + deleted BUT no Meet link returned — Google Meet may not be enabled for this Workspace account",
     }
   } catch (err: unknown) {
-    results.googleCalendar = {
-      ok: false,
-      detail: String(err),
-    }
+    results.googleCalendar = { ok: false, detail: String(err) }
   }
 
   return NextResponse.json(results)
