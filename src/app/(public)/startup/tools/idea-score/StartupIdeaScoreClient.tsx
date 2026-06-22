@@ -54,9 +54,15 @@ function IntroView({ userEmail, onStart }: { userEmail: string | null; onStart: 
         <p className="font-sans text-sm text-ink/60 leading-relaxed mb-5">
           50 questions across 9 segments: problem clarity, founder-market fit, demand signals, customer understanding, solution thinking, business basics, execution readiness, build mindset, and risk awareness. honest scoring. no fluff.
         </p>
-        <div className="inline-flex items-center gap-1.5 bg-peach/40 border border-peach-dark/30 rounded-lg px-3 py-1.5 mb-7">
+        <div className="inline-flex items-center gap-1.5 bg-peach/40 border border-peach-dark/30 rounded-lg px-3 py-1.5 mb-3">
           <span className="font-sans text-xs text-ink/50">full breakdown</span>
           <span className="font-sans text-sm font-bold text-ink">₹99</span>
+        </div>
+        <div className="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 mb-7">
+          <p className="font-sans text-xs font-semibold text-amber-800 mb-0.5">one-time access</p>
+          <p className="font-sans text-[11px] text-amber-700 leading-relaxed">
+            this quiz can only be taken once. your answers and score are saved permanently to your account. take your time — once submitted, you cannot retake it.
+          </p>
         </div>
 
         {/* Segment table */}
@@ -291,7 +297,7 @@ function PaywallView({
           })
           const data = await submitRes.json()
           if (!submitRes.ok) {
-            setError("Payment received but verification failed. Email hello@priyaahuja.com with your payment ID.")
+            setError("Payment received but verification failed. Email hi@priyaahuja.in with your payment ID.")
             return
           }
           const pillarScores: Record<number, { earned: number; max: number }> = {}

@@ -9,7 +9,10 @@ import {
   computePillarScores,
   type Answers,
 } from "@/lib/startup-score-data"
+import { fetchRazorpayOrder } from "@/lib/razorpay"
 import { sendPurchaseWelcome } from "@/lib/mailer"
+
+const PRICE_PAISE = 9900 // ₹99
 
 export async function POST(req: NextRequest) {
   const [session, liveSetting] = await Promise.all([
@@ -34,19 +37,38 @@ export async function POST(req: NextRequest) {
     razorpaySignature: string
   }
 
-  if (!answers) {
+  if (!answers || !razorpayOrderId || !razorpayPaymentId || !razorpaySignature) {
     return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
   }
 
-  if (!razorpayOrderId || !razorpayPaymentId || !razorpaySignature) {
-    return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
+  // Idempotency: reject if this paymentId was already used
+  const [existing] = await db
+    .select({ id: startupScores.id })
+    .from(startupScores)
+    .where(eq(startupScores.razorpayPaymentId, razorpayPaymentId))
+    .limit(1)
+
+  if (existing) {
+    return NextResponse.json({ error: "Payment already used" }, { status: 409 })
   }
+
   const secret = process.env.RAZORPAY_KEY_SECRET!
   const expected = createHmac("sha256", secret)
     .update(`${razorpayOrderId}|${razorpayPaymentId}`)
     .digest("hex")
   if (expected !== razorpaySignature) {
     return NextResponse.json({ error: "Payment verification failed" }, { status: 400 })
+  }
+
+  // Verify amount matches the tool price
+  try {
+    const rzOrder = await fetchRazorpayOrder(razorpayOrderId)
+    if (rzOrder.amount !== PRICE_PAISE) {
+      console.error(`Startup score amount mismatch: expected ${PRICE_PAISE}, got ${rzOrder.amount}`)
+      return NextResponse.json({ error: "Payment amount mismatch" }, { status: 400 })
+    }
+  } catch (err) {
+    console.error("Razorpay order fetch failed (continuing):", err)
   }
 
   const totalScore = computeTotal(answers)
@@ -66,7 +88,6 @@ export async function POST(req: NextRequest) {
     })
     .returning({ id: startupScores.id })
 
-  // Send getting-started email non-blocking
   if (session.user.email) {
     sendPurchaseWelcome({
       to: session.user.email,

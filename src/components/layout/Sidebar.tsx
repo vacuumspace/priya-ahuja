@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState, useEffect } from "react"
-import { ChevronDown, PanelLeftClose, PanelLeftOpen, Menu, X, Sun, Moon } from "lucide-react"
+import { ChevronDown, PanelLeftClose, PanelLeftOpen, Menu, X, Sun, Moon, LogOut } from "lucide-react"
 import { useTheme } from "@/components/ThemeProvider"
 import SignInOptions from "@/components/SignInOptions"
 import { signOut } from "next-auth/react"
@@ -12,41 +12,40 @@ type SidebarProps = { isAdmin?: boolean; isSignedIn?: boolean; userName?: string
 
 const topItems = [
   { label: "home", href: "/", badge: null },
-  { label: "courses", href: "/courses", badge: null },
-  // { label: "connect", href: "/connect", badge: null },
+  { label: "connect", href: "/connect", badge: null },
 ]
 
-const topicGroups: { label: string; prefix: string; children: { label: string; href: string }[] }[] = [
-  // {
-  //   label: "startup",
-  //   prefix: "/startup",
-  //   children: [
-  //     { label: "blog", href: "/startup/blog" },
-  //     { label: "tools", href: "/startup/tools" },
-  //     { label: "templates", href: "/startup/templates" },
-  //     { label: "100 startup ideas", href: "/startup/ideas" },
-  //   ],
-  // },
-  // {
-  //   label: "fundraise",
-  //   prefix: "/fundraise",
-  //   children: [
-  //     { label: "blog", href: "/fundraise/blog" },
-  //     { label: "tools", href: "/fundraise/tools" },
-  //     { label: "templates", href: "/fundraise/templates" },
-  //     { label: "angel investors", href: "/fundraise/angel-investors" },
-  //   ],
-  // },
-  // {
-  //   label: "services",
-  //   prefix: "/services",
-  //   children: [
-  //     { label: "tech product development", href: "/services/tech" },
-  //     { label: "branding", href: "/services/branding" },
-  //     { label: "finance", href: "/services/accounting" },
-  //     { label: "legal compliance", href: "/services/incorporation" },
-  //   ],
-  // },
+const topicGroups = [
+  {
+    label: "startup",
+    prefix: "/startup",
+    children: [
+      { label: "blog", href: "/startup/blog" },
+      { label: "tools", href: "/startup/tools" },
+      { label: "templates", href: "/startup/templates" },
+      { label: "100 startup ideas", href: "/startup/ideas" },
+    ],
+  },
+  {
+    label: "fundraise",
+    prefix: "/fundraise",
+    children: [
+      { label: "blog", href: "/fundraise/blog" },
+      { label: "tools", href: "/fundraise/tools" },
+      { label: "templates", href: "/fundraise/templates" },
+      { label: "angel investors", href: "/fundraise/angel-investors" },
+    ],
+  },
+  {
+    label: "services",
+    prefix: "/services",
+    children: [
+      { label: "tech product development", href: "/services/tech" },
+      { label: "branding", href: "/services/branding" },
+      { label: "finance", href: "/services/accounting" },
+      { label: "legal compliance", href: "/services/incorporation" },
+    ],
+  },
 ]
 
 const bottomItems: { label: string; href: string; badge: null }[] = []
@@ -58,8 +57,12 @@ export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEma
   const { theme, toggle: toggleTheme } = useTheme()
 
   const [signOutOpen, setSignOutOpen] = useState(false)
+  const [profileOpen, setProfileOpen] = useState(false)
 
   const [open, setOpen] = useState<string | null>(() => {
+    if (pathname.startsWith("/startup")) return "startup"
+    if (pathname.startsWith("/fundraise")) return "fundraise"
+    if (pathname.startsWith("/services")) return "services"
     return null
   })
 
@@ -201,60 +204,94 @@ export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEma
 
       {/* Profile + Footer */}
       {!collapsed && (
-        <div className="border-t border-peach-dark/20 px-4 pt-3 pb-4 flex flex-col gap-3">
+        <div className="border-t border-peach-dark/20 px-3 pt-2 pb-3 flex flex-col gap-1">
 
-          {/* History link */}
-          <Link
-            href="/my-sessions"
-            className={`flex items-center px-3 py-2 rounded-lg text-sm font-sans font-medium transition-colors ${
-              pathname === "/my-sessions"
-                ? "bg-peach-dark/40 text-ink"
-                : "text-ink/70 hover:bg-peach-dark/20 hover:text-ink"
-            }`}
-          >
-            my activity
-          </Link>
+          {/* Nav links above profile */}
+          {isSignedIn && (
+            <>
+              <Link
+                href="/my-sessions"
+                className={`flex items-center px-3 py-2 rounded-lg text-sm font-sans font-medium transition-colors ${
+                  pathname === "/my-sessions" ? "bg-peach-dark/40 text-ink" : "text-ink/70 hover:bg-peach-dark/20 hover:text-ink"
+                }`}
+              >
+                my activity
+              </Link>
+              <Link
+                href="/profile"
+                className={`flex items-center px-3 py-2 rounded-lg text-sm font-sans font-medium transition-colors ${
+                  pathname === "/profile" ? "bg-peach-dark/40 text-ink" : "text-ink/70 hover:bg-peach-dark/20 hover:text-ink"
+                }`}
+              >
+                profile
+              </Link>
+              {isAdmin && (
+                <Link
+                  href="/admin"
+                  className={`flex items-center px-3 py-2 rounded-lg text-sm font-sans font-medium transition-colors ${
+                    pathname.startsWith("/admin") ? "bg-peach-dark/40 text-ink" : "text-ink/70 hover:bg-peach-dark/20 hover:text-ink"
+                  }`}
+                >
+                  admin panel
+                </Link>
+              )}
+            </>
+          )}
 
-          <Link
-            href="/profile"
-            className={`flex items-center px-3 py-2 rounded-lg text-sm font-sans font-medium transition-colors ${
-              pathname === "/profile"
-                ? "bg-peach-dark/40 text-ink"
-                : "text-ink/70 hover:bg-peach-dark/20 hover:text-ink"
-            }`}
-          >
-            profile
-          </Link>
-
-          {/* Profile card */}
-          <div className="bg-peach-dark/10 rounded-xl px-3 py-2.5 flex flex-col gap-0.5">
+          {/* Profile card — drop-up */}
+          <div className="rounded-xl bg-peach-dark/10 overflow-hidden flex flex-col-reverse mt-1">
+            {/* Trigger */}
             {isSignedIn ? (
-              <>
-                <div className="flex items-center justify-between">
-                  <span className="text-[12px] font-sans font-semibold text-ink leading-tight">{userName ?? "—"}</span>
-                  {isAdmin && (
-                    <Link href="/admin" className="text-[9px] font-sans font-semibold uppercase tracking-wide bg-ink text-cream rounded px-1.5 py-0.5 hover:bg-ink/80 transition-colors">
-                      admin
-                    </Link>
-                  )}
+              <button
+                onClick={() => setProfileOpen((p) => !p)}
+                className="w-full flex items-center justify-between px-3 py-2.5 hover:bg-peach-dark/10 transition-colors"
+              >
+                <div className="flex flex-col gap-0.5 min-w-0 text-left">
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-[11px] font-sans font-semibold text-ink leading-tight truncate">{userName ?? "—"}</span>
+                    {isAdmin && (
+                      <span className="text-[9px] font-sans font-semibold uppercase tracking-wide bg-ink text-cream rounded px-1.5 py-0.5">
+                        admin
+                      </span>
+                    )}
+                  </div>
+                  <span className="text-[10px] font-sans text-ink/50 leading-tight truncate">{userEmail ?? ""}</span>
                 </div>
-                <span className="text-[10px] font-sans text-ink/50 leading-tight truncate">{userEmail ?? ""}</span>
-                <button onClick={() => setSignOutOpen(true)} className="mt-1.5 text-[10px] font-sans text-ink/40 hover:text-ink transition-colors text-left">
-                  sign out
-                </button>
-              </>
+                <ChevronDown size={12} className={`text-ink/40 flex-shrink-0 transition-transform duration-200 ${profileOpen ? "" : "rotate-180"}`} />
+              </button>
             ) : (
-              <SignInOptions callbackUrl="/" compact googleLabel="sign in with Google" />
+              <div className="px-3 py-2.5">
+                <SignInOptions callbackUrl="/" compact googleLabel="sign in with Google" />
+              </div>
+            )}
+
+            {/* Drop-up items */}
+            {isSignedIn && profileOpen && (
+              <div className="border-b border-peach-dark/20 flex flex-col">
+                <button
+                  onClick={toggleTheme}
+                  className="flex items-center gap-2.5 px-3 py-2 text-xs font-sans font-medium text-ink/60 hover:bg-peach-dark/20 hover:text-ink transition-colors"
+                >
+                  {theme === "dark" ? <Sun size={13} className="flex-shrink-0" /> : <Moon size={13} className="flex-shrink-0" />}
+                  <span>{theme === "dark" ? "light mode" : "dark mode"}</span>
+                </button>
+                <button
+                  onClick={() => setSignOutOpen(true)}
+                  className="flex items-center gap-2.5 px-3 py-2 text-xs font-sans font-medium text-ink/60 hover:bg-peach-dark/20 hover:text-ink transition-colors"
+                >
+                  <LogOut size={13} className="flex-shrink-0" />
+                  <span>sign out</span>
+                </button>
+              </div>
             )}
           </div>
 
           {/* Footer */}
-          <div className="flex items-center gap-2 whitespace-nowrap overflow-hidden">
+          <div className="flex items-center gap-2 whitespace-nowrap overflow-hidden px-1 pt-1">
             <span className="text-[10px] text-ink/40 font-sans">©2026 Priya Ahuja</span>
-            {/* TEMP: using education pages; restore /contact /privacy-policy /terms when reverting */}
-            <Link href="/contacts" className="text-[10px] font-sans text-ink/40 hover:text-ink transition-colors">contact</Link>
-            <Link href="/policy" className="text-[10px] font-sans text-ink/40 hover:text-ink transition-colors">privacy</Link>
-            <Link href="/tc" className="text-[10px] font-sans text-ink/40 hover:text-ink transition-colors">t&c</Link>
+            <Link href="/contact" className="text-[10px] font-sans text-ink/40 hover:text-ink transition-colors">contact</Link>
+            <Link href="/privacy-policy" className="text-[10px] font-sans text-ink/40 hover:text-ink transition-colors">privacy</Link>
+            <Link href="/terms" className="text-[10px] font-sans text-ink/40 hover:text-ink transition-colors">terms</Link>
           </div>
 
         </div>
@@ -313,18 +350,10 @@ export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEma
       {signOutOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm" onClick={() => setSignOutOpen(false)}>
           <div
-            className="flex flex-col items-center gap-8 px-10 py-12 border border-border rounded-2xl bg-card shadow-xl w-80 text-center"
+            className="flex flex-col items-center gap-6 px-10 py-10 border border-border rounded-2xl bg-card shadow-xl w-80 text-center"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex flex-col items-center gap-1">
-              <span className="font-heading text-4xl text-ink leading-none">pa</span>
-              <span className="font-sans text-xs text-ink-muted tracking-widest uppercase">priyaahuja.in</span>
-            </div>
-            <div className="w-full h-px bg-border" />
-            <div className="flex flex-col gap-1">
-              <h1 className="font-heading text-xl text-ink">see you soon</h1>
-              <p className="font-sans text-sm text-ink-muted">are you sure you want to sign out?</p>
-            </div>
+            <p className="font-sans text-sm text-ink">are you sure you want to sign out?</p>
             <div className="flex flex-col gap-2.5 w-full">
               <button
                 onClick={() => signOut({ callbackUrl: "/" })}

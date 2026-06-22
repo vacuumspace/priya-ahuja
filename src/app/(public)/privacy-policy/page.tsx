@@ -31,7 +31,7 @@ export default function PrivacyPolicyPage() {
 
         <section>
           <h2 className="font-semibold text-ink mb-2">Contact</h2>
-          <p>For any privacy-related questions, email <a href="mailto:team@priyaahuja.in" className="text-ink underline">team@priyaahuja.in</a>.</p>
+          <p>For any privacy-related questions, email <a href="mailto:hi@priyaahuja.in" className="text-ink underline">hi@priyaahuja.in</a>.</p>
         </section>
       </div>
     </div>

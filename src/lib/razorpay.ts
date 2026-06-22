@@ -30,6 +30,15 @@ export function verifyPaymentSignature(
   return expectedSignature === signature
 }
 
+/** Fetch an order from Razorpay and return its amount (in paise) and status. */
+export async function fetchRazorpayOrder(
+  orderId: string
+): Promise<{ amount: number; status: string }> {
+  const razorpay = getRazorpayInstance()
+  const order = await razorpay.orders.fetch(orderId)
+  return { amount: Number(order.amount), status: order.status }
+}
+
 export function paiseToCurrency(paise: number): string {
   return `₹${(paise / 100).toLocaleString("en-IN")}`
 }

@@ -4,7 +4,7 @@ import { db } from "@/lib/db"
 import { bookings, availability, services as servicesTable } from "@/lib/db/schema"
 import { eq, and } from "drizzle-orm"
 import { isAdmin } from "@/lib/auth"
-import { sendBookingConfirmation, sendAdminBookingNotification } from "@/lib/mailer"
+import { sendRescheduleConfirmation, sendAdminBookingNotification } from "@/lib/mailer"
 import { updateCalendarEvent, createCalendarEvent } from "@/lib/google-calendar"
 
 export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
@@ -20,7 +20,11 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
     return NextResponse.json({ error: "New slot required" }, { status: 400 })
   }
 
-  const [booking] = await db.select().from(bookings).where(eq(bookings.id, id)).limit(1)
+  const [booking] = await db
+    .select()
+    .from(bookings)
+    .where(eq(bookings.id, id))
+    .limit(1)
   if (!booking) return NextResponse.json({ error: "Booking not found" }, { status: 404 })
 
   const admin = isAdmin(session.user.email)
@@ -30,6 +34,11 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
 
   if (booking.status === "cancelled" || booking.status === "completed") {
     return NextResponse.json({ error: "Cannot reschedule a completed or cancelled booking" }, { status: 400 })
+  }
+
+  // Non-admins are limited to 1 reschedule
+  if (!admin && (booking.rescheduleCount ?? 0) >= 1) {
+    return NextResponse.json({ error: "You can only reschedule once. Please contact us for further changes." }, { status: 403 })
   }
 
   const [service] = await db
@@ -72,8 +81,17 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
     newSlotId = s.id
   }
 
-  // Free old slot
+  // Capture old slot details for admin email before freeing it
+  let previousDate: string | undefined
+  let previousTime: string | undefined
   if (booking.slotId) {
+    const [oldSlot] = await db.select().from(availability).where(eq(availability.id, booking.slotId)).limit(1)
+    if (oldSlot) {
+      previousDate = new Date(`${oldSlot.date}T${oldSlot.startTime}:00+05:30`).toLocaleDateString("en-IN", {
+        day: "numeric", month: "long", year: "numeric",
+      })
+      previousTime = `${oldSlot.startTime} IST`
+    }
     await db.update(availability).set({ isBooked: false }).where(eq(availability.id, booking.slotId))
   }
 
@@ -108,7 +126,11 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
     console.error("Calendar update failed:", err)
   }
 
-  await db.update(bookings).set({ slotId: newSlotId, meetLink }).where(eq(bookings.id, id))
+  await db.update(bookings).set({
+    slotId: newSlotId,
+    meetLink,
+    rescheduleCount: (booking.rescheduleCount ?? 0) + 1,
+  }).where(eq(bookings.id, id))
 
   const dateLabel = new Date(`${newSlot.date}T${newSlot.startTime}:00+05:30`).toLocaleDateString("en-IN", {
     day: "numeric", month: "long", year: "numeric",
@@ -116,7 +138,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
   const timeLabel = `${newSlot.startTime} IST`
   const serviceName = service?.title ?? "Session"
 
-  sendBookingConfirmation({
+  sendRescheduleConfirmation({
     to: booking.userEmail,
     name: booking.userName,
     serviceName,
@@ -131,6 +153,9 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
     userEmail: booking.userEmail,
     date: dateLabel,
     time: timeLabel,
+    type: "reschedule",
+    previousDate,
+    previousTime,
   }).catch(console.error)
 
   return NextResponse.json({ success: true })

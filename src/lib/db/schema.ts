@@ -47,6 +47,8 @@ export const bookings = pgTable("bookings", {
   adminNotes: text("admin_notes"),
   feedbackRating: integer("feedback_rating"), // 1–5
   feedbackText: text("feedback_text"),
+  msgEmailEnabled: boolean("msg_email_enabled").notNull().default(true),
+  rescheduleCount: integer("reschedule_count").notNull().default(0),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 })
 
@@ -108,6 +110,14 @@ export const availabilitySchedule = pgTable("availability_schedule", {
 export const availabilityConfig = pgTable("availability_config", {
   id: uuid("id").primaryKey().defaultRandom(),
   daysAhead: integer("days_ahead").notNull().default(14),
+})
+
+export const blockedPeriods = pgTable("blocked_periods", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  startDate: varchar("start_date", { length: 10 }).notNull(), // YYYY-MM-DD
+  endDate: varchar("end_date", { length: 10 }).notNull(),     // YYYY-MM-DD inclusive
+  reason: text("reason"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
 })
 
 export const siteSettings = pgTable("site_settings", {

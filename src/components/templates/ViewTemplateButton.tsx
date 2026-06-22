@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Eye, X, ChevronDown, ChevronUp, CheckCircle, Loader2 } from "lucide-react"
+import { Eye, X, ChevronDown, ChevronUp, CheckCircle, Loader2, Download } from "lucide-react"
 
 type Section = { heading: string; body: string }
 
@@ -56,14 +56,24 @@ export default function ViewTemplateButton({ slug, title, token }: Props) {
 
   return (
     <>
-      <button
-        onClick={handleView}
-        disabled={loading}
-        className="inline-flex items-center gap-1.5 text-xs font-sans font-semibold text-peach-dark hover:underline flex-shrink-0 mt-1 disabled:opacity-50"
-      >
-        {loading ? <Loader2 size={11} className="animate-spin" /> : <Eye size={11} />}
-        view
-      </button>
+      <div className="flex items-center gap-3 mt-1 flex-shrink-0">
+        <button
+          onClick={handleView}
+          disabled={loading}
+          className="inline-flex items-center gap-1.5 text-xs font-sans font-semibold text-peach-dark hover:underline disabled:opacity-50"
+        >
+          {loading ? <Loader2 size={11} className="animate-spin" /> : <Eye size={11} />}
+          view
+        </button>
+        <a
+          href={`/api/products/download?token=${encodeURIComponent(token)}&slug=${slug}`}
+          download
+          className="inline-flex items-center gap-1.5 text-xs font-sans font-semibold text-ink/50 hover:text-ink transition-colors"
+        >
+          <Download size={11} />
+          .doc
+        </a>
+      </div>
 
       {error && <p className="text-[10px] font-sans text-red-500 mt-1">{error}</p>}
 

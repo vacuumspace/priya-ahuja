@@ -31,9 +31,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const service = await getService(slug)
   if (!service) return {}
+  const url = `${process.env.NEXT_PUBLIC_APP_URL || "https://priyaahuja.in"}/connect/${slug}`
+  const desc = service.shortDescription ?? service.description ?? `Book a ${service.title} session with Priya Ahuja`
   return {
     title: service.title,
-    description: service.shortDescription ?? service.description,
+    description: desc,
+    alternates: { canonical: url },
+    openGraph: {
+      type: "website",
+      url,
+      title: `${service.title} — Priya Ahuja`,
+      description: desc,
+      images: [{ url: "/priyadp.jpeg", width: 1200, height: 630, alt: `${service.title} — Priya Ahuja` }],
+    },
   }
 }
 

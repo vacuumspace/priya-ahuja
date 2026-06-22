@@ -43,7 +43,7 @@ export default function ContactPage() {
             <p className="text-[10px] font-sans text-ink/40 uppercase tracking-widest mb-4">contact info</p>
             <div className="flex flex-col gap-4">
               <a
-                href="mailto:team@priyaahuja.in"
+                href="mailto:hi@priyaahuja.in"
                 className="flex items-center gap-3 group"
               >
                 <div className="w-8 h-8 rounded-lg bg-peach flex items-center justify-center shrink-0">
@@ -52,7 +52,7 @@ export default function ContactPage() {
                 <div>
                   <p className="text-[10px] text-ink/40 font-sans mb-0.5">email</p>
                   <p className="text-sm font-sans text-ink group-hover:text-peach-dark transition-colors">
-                    team@priyaahuja.in
+                    hi@priyaahuja.in
                   </p>
                 </div>
               </a>

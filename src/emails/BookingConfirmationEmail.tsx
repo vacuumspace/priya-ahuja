@@ -5,9 +5,11 @@ import {
 export type BookingConfirmationEmailProps = {
   name: string
   serviceName: string
-  date: string
-  time: string
+  date?: string
+  time?: string
   meetLink?: string
+  heading?: string
+  serviceType?: "call" | "dm" | "report"
   // editable fields from site_settings
   subject?: string
   intro?: string
@@ -17,20 +19,23 @@ export type BookingConfirmationEmailProps = {
 export default function BookingConfirmationEmail({
   name = "there",
   serviceName = "Strategy Call",
-  date = "12 June 2026",
-  time = "10:00 IST",
+  date,
+  time,
   meetLink,
+  heading = "Booking Confirmed 🎉",
+  serviceType = "call",
   intro = "Your session is booked and confirmed!",
   footer = "Questions? Reply to this email or reach out on LinkedIn.\n\n— Priya Ahuja",
 }: BookingConfirmationEmailProps) {
+  const isAsync = serviceType === "report" || serviceType === "dm"
   return (
     <Html>
       <Head />
-      <Preview>Booking Confirmed: {serviceName}</Preview>
+      <Preview>{heading.replace(/\s*[🎉📅]\s*/g, "")}: {serviceName}</Preview>
       <Body style={{ backgroundColor: "#FEF9E7", fontFamily: "Inter, sans-serif", margin: 0, padding: "40px 0" }}>
         <Container style={{ maxWidth: 560, margin: "0 auto", backgroundColor: "#FEF9E7", borderRadius: 16, padding: "32px 40px" }}>
           <Heading style={{ fontSize: 26, fontWeight: 800, color: "#2D2D2D", margin: "0 0 8px" }}>
-            Booking Confirmed 🎉
+            {heading}
           </Heading>
           <Text style={{ color: "#555", fontSize: 15, margin: "0 0 28px", lineHeight: "1.6" }}>
             Hi {name}, {intro}
@@ -40,17 +45,29 @@ export default function BookingConfirmationEmail({
             <Text style={{ margin: "0 0 10px", color: "#2D2D2D", fontSize: 14 }}>
               <strong>Service:</strong> {serviceName}
             </Text>
-            <Text style={{ margin: "0 0 10px", color: "#2D2D2D", fontSize: 14 }}>
-              <strong>Date:</strong> {date}
-            </Text>
-            <Text style={{ margin: meetLink ? "0 0 10px" : "0", color: "#2D2D2D", fontSize: 14 }}>
-              <strong>Time:</strong> {time}
-            </Text>
-            {meetLink && (
+            {isAsync ? (
               <Text style={{ margin: 0, color: "#2D2D2D", fontSize: 14 }}>
-                <strong>Meet Link:</strong>{" "}
-                <Link href={meetLink} style={{ color: "#FFA07A" }}>{meetLink}</Link>
+                <strong>Delivery:</strong> Since I review your documents personally without any AI, it takes me some time to review in detail. I'll surely respond within 5–7 days. Thanks :)
               </Text>
+            ) : (
+              <>
+                {date && (
+                  <Text style={{ margin: "0 0 10px", color: "#2D2D2D", fontSize: 14 }}>
+                    <strong>Date:</strong> {date}
+                  </Text>
+                )}
+                {time && (
+                  <Text style={{ margin: meetLink ? "0 0 10px" : "0", color: "#2D2D2D", fontSize: 14 }}>
+                    <strong>Time:</strong> {time}
+                  </Text>
+                )}
+                {meetLink && (
+                  <Text style={{ margin: 0, color: "#2D2D2D", fontSize: 14 }}>
+                    <strong>Meet Link:</strong>{" "}
+                    <Link href={meetLink} style={{ color: "#FFA07A" }}>{meetLink}</Link>
+                  </Text>
+                )}
+              </>
             )}
           </Section>
 

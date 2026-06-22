@@ -20,13 +20,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: post.metaDescription,
     keywords: post.keywords,
     authors: [{ name: "Priya Ahuja" }],
+    alternates: {
+      canonical: `${process.env.NEXT_PUBLIC_APP_URL || "https://priyaahuja.in"}/blog/${slug}`,
+    },
     openGraph: {
       type: "article",
+      url: `${process.env.NEXT_PUBLIC_APP_URL || "https://priyaahuja.in"}/blog/${slug}`,
       title: post.title,
       description: post.metaDescription,
       publishedTime: post.date,
       authors: ["Priya Ahuja"],
       tags: post.keywords,
+      images: [{ url: "/priyadp.jpeg", width: 1200, height: 630, alt: post.title }],
     },
     twitter: {
       card: "summary_large_image",

@@ -161,7 +161,7 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
             }),
           })
           if (!verifyRes.ok) {
-            setError("Payment received but access setup failed. Email hello@priyaahuja.com with your payment ID.")
+            setError("Payment received but access setup failed. Email hi@priyaahuja.in with your payment ID.")
             setState("preview")
             return
           }
@@ -203,6 +203,9 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
           </h1>
           <p className="font-sans text-sm text-ink/60 max-w-md leading-relaxed">
             900+ angel investors across India — name, city, LinkedIn, and direct email(s).
+          </p>
+          <p className="font-sans text-xs text-ink/40 mt-2">
+            updated {new Date().toLocaleString("en-IN", { month: "long", year: "numeric" })}
           </p>
         </div>
 

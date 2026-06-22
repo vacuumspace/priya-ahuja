@@ -14,7 +14,7 @@ export async function PATCH(
 
   const { id } = await params
   const body = await request.json()
-  const { isActive, title, price, description, shortDescription, tag, fileUrl } = body
+  const { isActive, title, price, description, shortDescription, tag, fileUrl, previewImageUrl } = body
 
   const update: Record<string, unknown> = {}
   if (isActive !== undefined) update.isActive = isActive
@@ -24,6 +24,7 @@ export async function PATCH(
   if (shortDescription !== undefined) update.shortDescription = shortDescription
   if (tag !== undefined) update.tag = tag
   if (fileUrl !== undefined) update.fileUrl = fileUrl
+  if (previewImageUrl !== undefined) update.previewImageUrl = previewImageUrl
 
   await db.update(digitalProducts).set(update).where(eq(digitalProducts.id, id))
 

@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server"
 import { db } from "@/lib/db"
 import { purchases } from "@/lib/db/schema"
 import { getTemplate } from "@/lib/templates-data"
-import { getCourse } from "@/lib/courses-data"
 
 const EXTRA_PRODUCTS: Record<string, { slug: string; title: string; description: string; price: number; comingSoon: boolean }> = {
   "angel-investor-list": {
@@ -32,7 +31,12 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
     }
 
-    const template = getTemplate(slug) ?? EXTRA_PRODUCTS[slug] ?? getCourse(slug) ?? null
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(email)) {
+      return NextResponse.json({ error: "Invalid email address" }, { status: 400 })
+    }
+
+    const template = getTemplate(slug) ?? EXTRA_PRODUCTS[slug] ?? null
     if (!template || template.comingSoon) {
       return NextResponse.json({ error: "Product not found" }, { status: 404 })
     }
@@ -60,7 +64,7 @@ export async function POST(req: NextRequest) {
 
     const razorpay = getRazorpayInstance()
     const order = await razorpay.orders.create({
-      amount: template.price,
+      amount: 100, // TEMP: ₹1 for testing (original: product.price)
       currency: "INR",
       receipt: `product_${Date.now()}`,
     })
@@ -77,7 +81,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({
       orderId: order.id,
-      amount: template.price,
+      amount: 100, // TEMP: ₹1 for testing (original: product.price)
       keyId: process.env.RAZORPAY_KEY_ID,
       purchaseId: purchase.id,
       productTitle: template.title,

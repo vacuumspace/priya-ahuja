@@ -55,8 +55,10 @@ export async function createCalendarEvent({
       reminders: {
         useDefault: false,
         overrides: [
-          { method: "email", minutes: 60 },
-          { method: "popup", minutes: 15 },
+          { method: "email", minutes: 1440 }, // 24h
+          { method: "email", minutes: 60 },   // 1h
+          { method: "email", minutes: 10 },   // 10min
+          { method: "popup", minutes: 10 },
         ],
       },
     },
@@ -90,6 +92,7 @@ export async function updateCalendarEvent({
     calendarId,
     eventId,
     conferenceDataVersion: 1,
+    sendUpdates: "all",
     requestBody: {
       start: { dateTime: startISO, timeZone: "Asia/Kolkata" },
       end:   { dateTime: endISO,   timeZone: "Asia/Kolkata" },
@@ -108,4 +111,49 @@ export async function deleteCalendarEvent(eventId: string): Promise<void> {
     calendarId: process.env.GOOGLE_CALENDAR_ID!,
     eventId,
   })
+}
+
+// Returns busy windows from Google Calendar for the given date range (IST)
+export async function getCalendarBusySlots(
+  startDate: string, // YYYY-MM-DD
+  endDate: string,   // YYYY-MM-DD (exclusive)
+): Promise<{ startMin: number; endMin: number; date: string }[]> {
+  const calendar = getCalendarClient()
+  const calendarId = process.env.GOOGLE_CALENDAR_ID!
+
+  const res = await calendar.freebusy.query({
+    requestBody: {
+      timeMin: `${startDate}T00:00:00+05:30`,
+      timeMax: `${endDate}T00:00:00+05:30`,
+      timeZone: "Asia/Kolkata",
+      items: [{ id: calendarId }],
+    },
+  })
+
+  const busy = res.data.calendars?.[calendarId]?.busy ?? []
+  const result: { startMin: number; endMin: number; date: string }[] = []
+
+  for (const period of busy) {
+    if (!period.start || !period.end) continue
+
+    // Convert UTC ISO strings to IST HH:MM
+    const startIST = new Date(new Date(period.start).getTime() + 5.5 * 60 * 60 * 1000)
+    const endIST   = new Date(new Date(period.end).getTime()   + 5.5 * 60 * 60 * 1000)
+
+    const date = startIST.toISOString().slice(0, 10)
+    const startMin = startIST.getUTCHours() * 60 + startIST.getUTCMinutes()
+    const endMin   = endIST.getUTCHours()   * 60 + endIST.getUTCMinutes()
+
+    // A single busy period may span midnight — split across dates if needed
+    if (startIST.toISOString().slice(0, 10) === endIST.toISOString().slice(0, 10)) {
+      result.push({ date, startMin, endMin })
+    } else {
+      // spans midnight: cap at end of first day and start of second
+      result.push({ date, startMin, endMin: 24 * 60 })
+      const nextDate = endIST.toISOString().slice(0, 10)
+      result.push({ date: nextDate, startMin: 0, endMin: endIST.getUTCHours() * 60 + endIST.getUTCMinutes() })
+    }
+  }
+
+  return result
 }

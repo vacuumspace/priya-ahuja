@@ -2,7 +2,7 @@ import { NextResponse } from "next/server"
 import { auth } from "@/lib/auth"
 import { getRazorpayInstance } from "@/lib/razorpay"
 
-const PRICE_PAISE = 9900 // ₹99
+const PRICE_PAISE = 100 // TEMP: ₹1 for testing (original: 9900)
 
 export async function POST() {
   try {

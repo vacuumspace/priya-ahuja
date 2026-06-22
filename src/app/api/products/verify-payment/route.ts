@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import { db } from "@/lib/db"
 import { purchases, digitalProducts } from "@/lib/db/schema"
-import { verifyPaymentSignature } from "@/lib/razorpay"
+import { verifyPaymentSignature, fetchRazorpayOrder } from "@/lib/razorpay"
 import { eq } from "drizzle-orm"
 import crypto from "crypto"
 import { sendPurchaseWelcome } from "@/lib/mailer"
@@ -14,33 +14,70 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Missing fields" }, { status: 400 })
     }
 
-    const isValid = verifyPaymentSignature(razorpayOrderId, razorpayPaymentId, razorpaySignature)
-    if (!isValid) {
-      return NextResponse.json({ error: "Invalid payment signature" }, { status: 400 })
-    }
-
-    // Generate a long-lived access token (no expiry — access is permanent once purchased)
-    const accessToken = crypto.randomBytes(32).toString("hex")
-
+    // Fetch purchase to verify ownership: the submitted orderId must match what we created
     const [purchase] = await db
-      .update(purchases)
-      .set({
-        razorpayPaymentId,
-        downloadToken: accessToken,
-      })
+      .select()
+      .from(purchases)
       .where(eq(purchases.id, purchaseId))
-      .returning()
+      .limit(1)
 
     if (!purchase) {
       return NextResponse.json({ error: "Purchase not found" }, { status: 404 })
     }
 
-    // Send welcome/getting-started email (non-blocking)
+    // Ownership: submitted orderId must match the one we stored at order-creation time
+    if (purchase.razorpayOrderId !== razorpayOrderId) {
+      return NextResponse.json({ error: "Order mismatch" }, { status: 400 })
+    }
+
+    // Idempotency: already confirmed — return the existing token
+    if (purchase.downloadToken && purchase.razorpayPaymentId) {
+      return NextResponse.json({ success: true, accessToken: purchase.downloadToken })
+    }
+
+    // Verify HMAC signature
+    const isValid = verifyPaymentSignature(razorpayOrderId, razorpayPaymentId, razorpaySignature)
+    if (!isValid) {
+      return NextResponse.json({ error: "Invalid payment signature" }, { status: 400 })
+    }
+
+    // Verify amount matches product price (prevents under-payment)
     const [product] = await db
-      .select({ slug: digitalProducts.slug, title: digitalProducts.title })
+      .select({ slug: digitalProducts.slug, title: digitalProducts.title, price: digitalProducts.price })
       .from(digitalProducts)
       .where(eq(digitalProducts.id, purchase.productId))
       .limit(1)
+
+    // TEMP: amount check disabled for ₹1 testing (re-enable by uncommenting below)
+    // if (product) {
+    //   try {
+    //     const rzOrder = await fetchRazorpayOrder(razorpayOrderId)
+    //     if (rzOrder.amount !== product.price) {
+    //       console.error(`Amount mismatch: expected ${product.price}, got ${rzOrder.amount} for order ${razorpayOrderId}`)
+    //       return NextResponse.json({ error: "Payment amount mismatch" }, { status: 400 })
+    //     }
+    //   } catch (err) {
+    //     console.error("Razorpay order fetch failed (continuing):", err)
+    //   }
+    // }
+
+    const accessToken = crypto.randomBytes(32).toString("hex")
+    const tokenExpiresAt = new Date()
+    tokenExpiresAt.setFullYear(tokenExpiresAt.getFullYear() + 1)
+
+    const [updated] = await db
+      .update(purchases)
+      .set({
+        razorpayPaymentId,
+        downloadToken: accessToken,
+        tokenExpiresAt,
+      })
+      .where(eq(purchases.id, purchaseId))
+      .returning()
+
+    if (!updated) {
+      return NextResponse.json({ error: "Purchase not found" }, { status: 404 })
+    }
 
     if (product && purchase.userEmail) {
       sendPurchaseWelcome({

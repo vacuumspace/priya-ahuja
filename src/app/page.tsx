@@ -3,7 +3,7 @@ import { SidebarWithAuth } from "@/components/layout/SidebarWithAuth"
 import HomePage from "@/components/HomePage"
 
 export const metadata: Metadata = {
-  title: "Priya Ahuja - Business Educator",
+  title: "Priya Ahuja - Startup & Fundraise Consultant",
 }
 
 export default function RootPage() {

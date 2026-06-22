@@ -134,7 +134,7 @@ export default function ToolsPage() {
             i&apos;ll drop a note when more tools go live. no spam, just the tool launch.
           </p>
           <a
-            href="mailto:hello@priyaahuja.com?subject=Notify me when tools are live"
+            href="mailto:hi@priyaahuja.in?subject=Notify me when tools are live"
             className="inline-flex items-center gap-2 bg-ink text-cream text-xs font-sans font-semibold px-4 py-2.5 rounded-lg hover:bg-ink/80 transition-colors"
           >
             notify me

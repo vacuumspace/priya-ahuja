@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { useSearchParams } from "next/navigation"
 
 type Investor = {
   id: string
@@ -32,7 +33,8 @@ function fmtAmount(paise: number) {
 }
 
 export default function AngelInvestorsAdminPage() {
-  const [tab, setTab] = useState<"investors" | "transactions">("investors")
+  const searchParams = useSearchParams()
+  const tab = (searchParams.get("tab") as "investors" | "transactions") || "investors"
 
   // investors state
   const [investors, setInvestors] = useState<Investor[]>([])
@@ -99,23 +101,6 @@ export default function AngelInvestorsAdminPage() {
         <p className="font-sans text-sm text-ink/50 mt-1">
           {tab === "investors" ? `${invTotal} investors` : `${txTotal} purchases · ${fmtAmount(txRevenue)} revenue`}
         </p>
-      </div>
-
-      {/* Tabs */}
-      <div className="flex gap-1 mb-6 border-b border-border">
-        {(["investors", "transactions"] as const).map((t) => (
-          <button
-            key={t}
-            onClick={() => setTab(t)}
-            className={`px-4 py-2 font-sans text-sm font-medium capitalize transition-colors border-b-2 -mb-px ${
-              tab === t
-                ? "border-peach-dark text-ink"
-                : "border-transparent text-ink/50 hover:text-ink"
-            }`}
-          >
-            {t}
-          </button>
-        ))}
       </div>
 
       {/* Investors tab */}

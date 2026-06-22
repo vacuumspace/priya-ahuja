@@ -1,0 +1,192 @@
+"use client"
+
+import { useState } from "react"
+
+type Booking = { id: string; status: string; createdAt: Date; serviceTitle: string | null }
+type Purchase = { id: string; createdAt: Date; productTitle: string | null }
+
+type Profile = {
+  phone: string | null
+  location: string | null
+  website: string | null
+  bio: string | null
+  businessName: string | null
+  businessType: string | null
+  industry: string | null
+  stage: string | null
+  businessDescription: string | null
+  businessWebsite: string | null
+  instagramHandle: string | null
+  linkedinUrl: string | null
+  twitterHandle: string | null
+}
+
+type User = {
+  id: string
+  email: string
+  name: string | null
+  createdAt: Date | null
+}
+
+function Row({ label, value }: { label: string; value?: string | null }) {
+  if (!value) return null
+  return (
+    <div className="flex gap-4 py-2.5 border-b border-border last:border-0">
+      <span className="font-sans text-xs text-ink/40 w-40 shrink-0 pt-0.5">{label}</span>
+      <span className="font-sans text-sm text-ink break-all">{value}</span>
+    </div>
+  )
+}
+
+function Section({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div className="border border-border rounded-2xl overflow-hidden">
+      <div className="px-5 py-3 border-b border-border bg-card">
+        <h2 className="font-heading text-base font-700 text-ink">{title}</h2>
+      </div>
+      <div className="px-5 py-1">{children}</div>
+    </div>
+  )
+}
+
+const STATUS_CLS: Record<string, string> = {
+  confirmed: "bg-green-100 text-green-700",
+  paid:      "bg-green-100 text-green-700",
+  completed: "bg-ink/10 text-ink/60",
+  pending:   "bg-amber-100 text-amber-700",
+  cancelled: "bg-red-100 text-red-500",
+}
+
+export default function UserDetailClient({
+  user,
+  profile,
+  bookings,
+  purchases,
+}: {
+  user: User
+  profile: Profile | null
+  bookings: Booking[]
+  purchases: Purchase[]
+}) {
+  const tabs = ["profile", "sessions", "purchases"] as const
+  type Tab = typeof tabs[number]
+  const [tab, setTab] = useState<Tab>("profile")
+
+  const fmt = (d: Date) => new Intl.DateTimeFormat("en-IN", { dateStyle: "medium" }).format(new Date(d))
+
+  return (
+    <>
+      {/* Sub-tabs */}
+      <div className="flex gap-1 mb-6 border-b border-border">
+        {tabs.map((t) => (
+          <button
+            key={t}
+            onClick={() => setTab(t)}
+            className={`px-4 py-2.5 text-xs font-sans font-semibold border-b-2 transition-colors -mb-px capitalize ${
+              tab === t
+                ? "border-ink text-ink"
+                : "border-transparent text-ink/40 hover:text-ink/70"
+            }`}
+          >
+            {t}
+            {t === "sessions" && bookings.length > 0 && (
+              <span className="ml-1.5 font-mono text-[10px] opacity-60">{bookings.length}</span>
+            )}
+            {t === "purchases" && purchases.length > 0 && (
+              <span className="ml-1.5 font-mono text-[10px] opacity-60">{purchases.length}</span>
+            )}
+          </button>
+        ))}
+      </div>
+
+      {/* Profile tab */}
+      {tab === "profile" && (
+        <div className="flex flex-col gap-5">
+          <Section title="account">
+            <Row label="user id" value={user.id} />
+            <Row label="email" value={user.email} />
+            <Row label="name" value={user.name} />
+            <Row
+              label="joined"
+              value={user.createdAt
+                ? new Intl.DateTimeFormat("en-IN", { dateStyle: "long", timeStyle: "short" }).format(new Date(user.createdAt))
+                : undefined}
+            />
+          </Section>
+
+          {profile ? (
+            <>
+              <Section title="basic info">
+                <Row label="phone" value={profile.phone} />
+                <Row label="location" value={profile.location} />
+                <Row label="website" value={profile.website} />
+                <Row label="bio" value={profile.bio} />
+              </Section>
+
+              <Section title="business details">
+                <Row label="business name" value={profile.businessName} />
+                <Row label="type" value={profile.businessType} />
+                <Row label="industry" value={profile.industry} />
+                <Row label="stage" value={profile.stage} />
+                <Row label="description" value={profile.businessDescription} />
+                <Row label="business website" value={profile.businessWebsite} />
+                <Row label="instagram" value={profile.instagramHandle} />
+                <Row label="linkedin" value={profile.linkedinUrl} />
+                <Row label="twitter / x" value={profile.twitterHandle} />
+              </Section>
+            </>
+          ) : (
+            <p className="text-sm font-sans text-ink/40 border border-dashed border-border rounded-2xl p-6 text-center">
+              no profile set up yet
+            </p>
+          )}
+        </div>
+      )}
+
+      {/* Sessions tab */}
+      {tab === "sessions" && (
+        <div>
+          {bookings.length === 0 ? (
+            <p className="text-sm font-sans text-ink/40 border border-dashed border-border rounded-2xl p-6 text-center">
+              no sessions yet
+            </p>
+          ) : (
+            <div className="border border-border rounded-2xl overflow-hidden">
+              {bookings.map((b) => (
+                <div key={b.id} className="flex items-center justify-between px-5 py-3 border-b border-border last:border-0 hover:bg-card transition-colors">
+                  <span className="font-sans text-sm text-ink">{b.serviceTitle ?? "Session"}</span>
+                  <div className="flex items-center gap-3">
+                    <span className={`text-[10px] font-sans font-semibold px-2 py-0.5 rounded-full ${STATUS_CLS[b.status] ?? "bg-ink/10 text-ink/60"}`}>
+                      {b.status}
+                    </span>
+                    <span className="font-sans text-xs text-ink/40">{fmt(b.createdAt)}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Purchases tab */}
+      {tab === "purchases" && (
+        <div>
+          {purchases.length === 0 ? (
+            <p className="text-sm font-sans text-ink/40 border border-dashed border-border rounded-2xl p-6 text-center">
+              no purchases yet
+            </p>
+          ) : (
+            <div className="border border-border rounded-2xl overflow-hidden">
+              {purchases.map((p) => (
+                <div key={p.id} className="flex items-center justify-between px-5 py-3 border-b border-border last:border-0 hover:bg-card transition-colors">
+                  <span className="font-sans text-sm text-ink">{p.productTitle ?? "Product"}</span>
+                  <span className="font-sans text-xs text-ink/40">{fmt(p.createdAt)}</span>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+    </>
+  )
+}

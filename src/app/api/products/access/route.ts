@@ -32,9 +32,9 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: "Not found" }, { status: 404 })
     }
 
-    // Validate the access token
+    // Validate the access token and check expiry
     const [purchase] = await db
-      .select({ id: purchases.id })
+      .select({ id: purchases.id, tokenExpiresAt: purchases.tokenExpiresAt })
       .from(purchases)
       .where(
         and(
@@ -46,6 +46,10 @@ export async function GET(req: NextRequest) {
 
     if (!purchase) {
       return NextResponse.json({ error: "Invalid or expired access token" }, { status: 403 })
+    }
+
+    if (purchase.tokenExpiresAt && purchase.tokenExpiresAt < new Date()) {
+      return NextResponse.json({ error: "Access token has expired" }, { status: 403 })
     }
 
     return NextResponse.json({ sections: template.sections })

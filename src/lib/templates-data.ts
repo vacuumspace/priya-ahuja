@@ -4099,6 +4099,289 @@ Same structure, but one-way: Company's obligations are limited to reasonable car
       },
     ],
   },
+
+  {
+    slug: "investor-update-email",
+    title: "Investor Update Email Templates",
+    description: "Monthly and quarterly investor update templates that keep your investors informed, engaged, and ready to help — without taking hours to write.",
+    price: 49900,
+    tag: "templates",
+    category: "fundraise",
+    comingSoon: false,
+    preview: "4 investor update templates (monthly, quarterly, tough-month, and milestone) with fill-in-the-blank structure and notes on what investors actually want to see.",
+    sections: [
+      {
+        heading: "Why investor updates matter",
+        body: `Most founders send investor updates only when things are going well. This is backwards.
+
+Investors who receive regular, honest updates are more likely to:
+- Introduce you to other investors when you need them
+- Help you solve problems before they become crises
+- Give you the benefit of the doubt when you miss a target
+
+The founders who are hardest to back in a future round are the ones who went silent for 8 months and only surfaced when they needed money.
+
+These templates are designed to take you 30 minutes or less per update. The structure is fixed — you fill in the numbers and the narrative.`,
+      },
+      {
+        heading: "Template 1 — Monthly Update (Standard)",
+        body: `**Subject:** [Company] — [Month] update
+
+Hi [investor first names],
+
+Here's our [Month] update.
+
+**The number that matters most this month:** [MRR / ARR / active users / whichever metric you're optimising for]
+
+**Month summary in one sentence:** [e.g. "Crossed ₹10L MRR for the first time, but churn picked up in the SMB segment — investigating why."]
+
+---
+
+**Metrics**
+- MRR: ₹[X] ([+/–X%] vs last month)
+- Active customers: [X]
+- New customers this month: [X]
+- Churned customers: [X]
+- Runway at current burn: [X months]
+
+**What went well**
+- [1–3 bullet points — be specific]
+
+**What didn't go well / what we're working on**
+- [1–3 bullet points — be honest, include what you're doing about it]
+
+**Focus for next month**
+- [1–3 items you're prioritising]
+
+**Where you can help**
+- [Specific ask — intro to X, advice on Y, connection to Z]
+
+[Your name]
+
+---
+**Notes on tone:** Direct, honest, short. Investors read dozens of updates. The ones that stand out are specific about what's working AND what isn't. Generic positivity is the fastest way to get your updates skipped.`,
+      },
+      {
+        heading: "Template 2 — Quarterly Update (More detailed)",
+        body: `**Subject:** [Company] Q[X] [Year] — investor update
+
+Hi [investor first names],
+
+Q[X] update below. Happy to jump on a call if anything here warrants discussion.
+
+**Quarter in one paragraph:**
+[3–5 sentences on the shape of the quarter — what you set out to do, what you achieved, and where you're heading next quarter.]
+
+---
+
+**Key metrics — Q[X] vs Q[X-1]**
+
+| Metric | Q[X-1] | Q[X] | Change |
+|---|---|---|---|
+| MRR / ARR | ₹X | ₹X | +X% |
+| Active customers | X | X | +X% |
+| Gross margin | X% | X% | — |
+| Burn rate (monthly) | ₹X | ₹X | — |
+| Runway | X months | X months | — |
+
+**Milestones reached this quarter**
+- [List 2–4 specific milestones]
+
+**Milestones missed — and why**
+- [Be honest. Include what you learned and what you're changing.]
+
+**Key hires / team changes**
+- [Any hires, departures, or org changes]
+
+**Product highlights**
+- [2–3 key things shipped or in progress]
+
+**Next quarter priorities (top 3)**
+1. [Priority 1]
+2. [Priority 2]
+3. [Priority 3]
+
+**Asks**
+- [Specific introductions or help needed]
+
+[Your name]`,
+      },
+      {
+        heading: "Template 3 — Tough Month Update",
+        body: `**Subject:** [Company] — [Month] update (honest version)
+
+Hi [investor first names],
+
+This month was harder than expected. I want to be straight with you about what happened.
+
+**What happened:**
+[2–3 sentences. Be specific. Don't hedge with "macro headwinds" unless that's genuinely the cause.]
+
+**The numbers:**
+- MRR: ₹[X] (was ₹[X] last month — [–X%])
+- Key metric: [X]
+- Runway: [X months at current burn]
+
+**What we're doing about it:**
+[Specific actions — not "we're working hard on it." What specifically changed? What's the hypothesis? What are you testing?]
+
+**What I need from you:**
+[Be direct. An intro? A sounding board call? A specific connection? Investors respect directness far more than silence.]
+
+I'll send another update in [2 weeks / next month] with a status on the above.
+
+[Your name]
+
+---
+**Why this template works:** Investors have seen companies fail. What they can't forgive is being surprised at the end. A transparent tough-month update builds more trust than six months of rosy updates followed by a crisis call.`,
+      },
+      {
+        heading: "Template 4 — Milestone / Announcement Update",
+        body: `**Subject:** [Company] — [milestone achieved]
+
+Hi [investor first names],
+
+Quick update — wanted to share this directly.
+
+**The news:**
+[One sentence. Be direct: "We closed ₹X crore from [investor]", "We crossed ₹1Cr ARR today", "We signed [company] as our first enterprise customer."]
+
+**What this means for us:**
+[2–3 sentences on why this milestone matters for the company's trajectory.]
+
+**What's next:**
+[1–2 sentences on what you're focused on now that this is done.]
+
+**Where you can still help:**
+[Optional, but appreciated — keeps the relationship active even when things are going well.]
+
+Thanks for being on this journey.
+
+[Your name]`,
+      },
+    ],
+  },
+
+  {
+    slug: "cap-table-template",
+    title: "Cap Table Template & Guide",
+    description: "A plain-language cap table template with worked examples — pre-seed through Series A — plus a guide to understanding dilution, option pools, and pro-rata rights.",
+    price: 49900,
+    tag: "templates",
+    category: "fundraise",
+    comingSoon: false,
+    preview: "Downloadable cap table structure with pre-seed, seed, and Series A scenarios — plus a founder's guide to reading and managing your cap table.",
+    sections: [
+      {
+        heading: "What a cap table is and why it matters",
+        body: `A cap table (capitalisation table) is a record of who owns what in your company — every shareholder, the number and type of shares they hold, and the percentage of the company each holding represents.
+
+It matters because:
+- Every funding round changes it, usually by diluting existing shareholders
+- Investors will scrutinise it before investing — a messy cap table is a red flag
+- Your future payout in any exit scenario is determined by your cap table and the rights attached to each share class
+- The option pool you create for employees comes out of the cap table (usually from the founder's share before a round — understand this before you agree to it)
+
+**The earlier you manage your cap table carefully, the better your options later.**`,
+      },
+      {
+        heading: "Pre-seed cap table — worked example",
+        body: `**Scenario:** Two co-founders, incorporating before the first raise.
+
+**Shares issued at incorporation:**
+
+| Shareholder | Shares | % Ownership | Share class |
+|---|---|---|---|
+| Founder 1 | 5,000,000 | 50% | Equity |
+| Founder 2 | 5,000,000 | 50% | Equity |
+| **Total** | **10,000,000** | **100%** | |
+
+**Key decisions at incorporation:**
+- Issue enough shares to allow for future splitting without fractions (10M is standard)
+- Both founders should be on a vesting schedule — even if you trust each other, this protects both parties if one leaves
+- Standard vesting: 4-year vesting with a 1-year cliff (nothing vests in year 1, then 25% on the cliff date, then monthly over years 2–4)
+
+**After a pre-seed round (₹1Cr at ₹4Cr post-money valuation = 25% dilution):**
+
+| Shareholder | Shares | % Ownership |
+|---|---|---|
+| Founder 1 | 5,000,000 | 37.5% |
+| Founder 2 | 5,000,000 | 37.5% |
+| Angel investors (CCPS) | 3,333,333 | 25% |
+| **Total (fully diluted)** | **13,333,333** | **100%** |
+
+Note: the new shares are calculated as: (25% × total post-round shares) = 3,333,333. The founders' absolute share count doesn't change — their percentage drops because more shares are in circulation.`,
+      },
+      {
+        heading: "Seed round — option pool and dilution",
+        body: `**Scenario:** Pre-seed closed. Now raising a ₹3Cr seed at ₹12Cr post-money (25% dilution again). Investor requires a 10% ESOP pool to be created before the round.
+
+**Why the option pool matters:**
+The "option pool shuffle" is one of the most misunderstood parts of early fundraising. When an investor asks for a 10% option pool "pre-money," they mean 10% of the post-round fully diluted shares — created by diluting the existing shareholders before the new money comes in.
+
+This means the effective pre-money valuation is lower than it appears.
+
+**Before seed round (post ESOP creation):**
+
+| Shareholder | Shares | % |
+|---|---|---|
+| Founder 1 | 5,000,000 | 33.75% |
+| Founder 2 | 5,000,000 | 33.75% |
+| Pre-seed angels | 3,333,333 | 22.5% |
+| ESOP pool (unissued) | 1,481,481 | 10% |
+| **Total** | **14,814,814** | **100%** |
+
+**After seed round:**
+
+| Shareholder | Shares | % |
+|---|---|---|
+| Founder 1 | 5,000,000 | 25.3% |
+| Founder 2 | 5,000,000 | 25.3% |
+| Pre-seed angels | 3,333,333 | 16.9% |
+| ESOP pool | 1,481,481 | 7.5% |
+| Seed investors (CCPS) | 4,938,271 | 25% |
+| **Total** | **19,752,085** | **100%** |
+
+**Key point:** after two 25% dilution rounds plus a 10% option pool, the founders each own ~25% of their company. This is normal and healthy for this stage — but many founders are surprised by how quickly dilution compounds.`,
+      },
+      {
+        heading: "Reading your cap table: key terms",
+        body: `**Fully diluted shares:** The total share count including all issued shares, all unissued ESOP options, and all convertible instruments (SAFE, CCPS) as if fully converted. This is the number that matters for ownership percentage calculations.
+
+**Authorised vs issued shares:** Authorised shares are the maximum you can issue (defined in your Articles of Association). Issued shares are what's actually been given to shareholders. Always authorise more than you've issued — you need headroom for future rounds.
+
+**Liquidation preference:** Most preferred shares (CCPS) carry a liquidation preference — in an exit, investors get paid back their investment (1x non-participating) before founders get anything. In a low-exit scenario, this can mean founders receive nothing. Understand what preference stack you're agreeing to.
+
+**Pro-rata rights:** The right for existing investors to invest in future rounds to maintain their ownership percentage. Standard at seed. Know who has these rights and for how long.
+
+**Anti-dilution:** Protects investors if you raise at a lower valuation in future. Broad-based weighted average (standard) is much better for founders than full ratchet (avoid).
+
+**Drag-along rights:** Allows majority shareholders to force minority shareholders to agree to a sale. Common in investor agreements — make sure the threshold is set appropriately (typically 75%+ approval required).`,
+      },
+      {
+        heading: "Cap table hygiene — what to do",
+        body: `**Before you incorporate:**
+- Decide the founder split carefully — changing it later is possible but creates friction
+- Agree on vesting schedules in writing, even between co-founders
+- Issue enough shares to allow for future rounds without inconvenient fractions
+
+**After each funding round:**
+- Update the cap table immediately — don't let it go stale
+- Confirm the fully diluted share count with your lawyer
+- Update your ESOP register alongside the cap table
+
+**Before the next raise:**
+- Have a lawyer review the cap table for any issues before you start investor conversations
+- Know your fully diluted post-money ownership at different dilution scenarios — don't be surprised in negotiations
+- Understand every preference, right, and restriction attached to every share class
+
+**Tools to manage your cap table:**
+- Carta (if you have US investors)
+- Razorpay Rize or Leegality for Indian documentation
+- A well-structured Excel/Google Sheet is fine at pre-seed and seed stage — the important thing is keeping it accurate and updated`,
+      },
+    ],
+  },
 ]
 
 export function getTemplatesByCategory(category: "fundraise" | "startup") {

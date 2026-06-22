@@ -56,7 +56,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
   const adminEmails = (process.env.ADMIN_EMAILS ?? "").split(",").map((e) => e.trim())
 
   sendBookingCancellation({ to: booking.userEmail, name: booking.userName, serviceName, isAdmin: false }).catch(console.error)
-  sendBookingCancellation({ to: adminEmails, name: "Priya", serviceName, isAdmin: true }).catch(console.error)
+  sendBookingCancellation({ to: adminEmails, name: process.env.MAIL_FROM_NAME ?? "Priya Ahuja", serviceName, isAdmin: true }).catch(console.error)
 
   return NextResponse.json({ success: true })
 }

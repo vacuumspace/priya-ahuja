@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, createContext, useContext } from "react"
+import { useState, useEffect, createContext, useContext, Suspense } from "react"
 import { AdminSidebar } from "./AdminSidebar"
 
 const CollapseCtx = createContext({ collapsed: false })
@@ -12,9 +12,10 @@ export const useAdminTheme = () => useContext(ThemeCtx)
 interface AdminShellProps {
   userEmail: string
   children: React.ReactNode
+  notificationCounts?: Record<string, number>
 }
 
-export function AdminShell({ userEmail, children }: AdminShellProps) {
+export function AdminShell({ userEmail, children, notificationCounts = {} }: AdminShellProps) {
   const [collapsed, setCollapsed] = useState(false)
   const [theme, setTheme] = useState<"light" | "dark">("light")
 
@@ -39,15 +40,18 @@ export function AdminShell({ userEmail, children }: AdminShellProps) {
     <ThemeCtx.Provider value={{ theme, toggleTheme }}>
       <CollapseCtx.Provider value={{ collapsed }}>
         <div className="flex min-h-screen bg-cream">
-          <AdminSidebar
-            userEmail={userEmail}
-            collapsed={collapsed}
-            onToggle={() => {
-              const next = !collapsed
-              setCollapsed(next)
-              localStorage.setItem("admin-sidebar-collapsed", String(next))
-            }}
-          />
+          <Suspense fallback={null}>
+            <AdminSidebar
+              userEmail={userEmail}
+              collapsed={collapsed}
+              notificationCounts={notificationCounts}
+              onToggle={() => {
+                const next = !collapsed
+                setCollapsed(next)
+                localStorage.setItem("admin-sidebar-collapsed", String(next))
+              }}
+            />
+          </Suspense>
           <main
             className="flex-1 min-h-screen transition-all duration-200"
             style={{ marginLeft: collapsed ? 56 : 240 }}

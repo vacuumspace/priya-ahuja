@@ -30,13 +30,32 @@ export async function POST(req: NextRequest) {
 
   let html = ""
   if (template === "confirmation") {
-    html = await render(BookingConfirmationEmail({ ...SAMPLE, ...fields }))
+    html = await render(BookingConfirmationEmail({
+      ...SAMPLE,
+      subject: fields.email_confirmation_subject,
+      intro: fields.email_confirmation_intro,
+      footer: fields.email_confirmation_footer,
+    }))
   } else if (template === "admin") {
-    html = await render(AdminBookingNotificationEmail({ ...SAMPLE, ...fields }))
+    html = await render(AdminBookingNotificationEmail({
+      ...SAMPLE,
+      subject: fields.email_admin_subject,
+      intro: fields.email_admin_intro,
+    }))
   } else if (template === "cancellation") {
-    html = await render(BookingCancellationEmail({ ...SAMPLE, ...fields }))
+    html = await render(BookingCancellationEmail({
+      ...SAMPLE,
+      subject: fields.email_cancellation_subject,
+      body: fields.email_cancellation_body,
+      footer: fields.email_cancellation_footer,
+    }))
   } else if (template === "download") {
-    html = await render(DownloadLinkEmail({ ...SAMPLE, ...fields }))
+    html = await render(DownloadLinkEmail({
+      ...SAMPLE,
+      subject: fields.email_download_subject,
+      intro: fields.email_download_intro,
+      footer: fields.email_download_footer,
+    }))
   } else {
     return NextResponse.json({ error: "Unknown template" }, { status: 400 })
   }

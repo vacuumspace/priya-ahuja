@@ -6,35 +6,49 @@ export type AdminBookingNotificationEmailProps = {
   serviceName: string
   userName: string
   userEmail: string
-  date: string
-  time: string
+  date?: string
+  time?: string
+  serviceType?: "call" | "dm" | "report"
   message?: string
   appUrl?: string
-  // editable
-  subject?: string
   intro?: string
+  type?: "new" | "reschedule"
+  previousDate?: string
+  previousTime?: string
 }
 
 export default function AdminBookingNotificationEmail({
   serviceName = "Strategy Call",
   userName = "Rahul Kumar",
   userEmail = "rahul@example.com",
-  date = "12 June 2026",
-  time = "10:00 IST",
+  date,
+  time,
+  serviceType = "call",
   message,
   appUrl = "https://priyaahuja.com",
-  intro = "A new booking has been received.",
+  intro,
+  type = "new",
+  previousDate,
+  previousTime,
 }: AdminBookingNotificationEmailProps) {
+  const isReschedule = type === "reschedule"
+  const isAsync = serviceType === "report" || serviceType === "dm"
+  const defaultIntro = isReschedule
+    ? "A client has rescheduled an existing booking."
+    : isAsync
+    ? "A new async review request has been received. Check My Activity to message the client."
+    : "A new booking has been received."
+
   return (
     <Html>
       <Head />
-      <Preview>New Booking: {serviceName} from {userName}</Preview>
+      <Preview>{isReschedule ? `Rescheduled: ${serviceName} — ${userName}` : `New Booking: ${serviceName} from ${userName}`}</Preview>
       <Body style={{ backgroundColor: "#f8f8f8", fontFamily: "Inter, sans-serif", margin: 0, padding: "40px 0" }}>
         <Container style={{ maxWidth: 560, margin: "0 auto", backgroundColor: "#ffffff", borderRadius: 12, padding: "32px 40px", border: "1px solid #e8e8e8" }}>
           <Heading style={{ fontSize: 22, fontWeight: 800, color: "#2D2D2D", margin: "0 0 6px" }}>
-            New Booking Received
+            {isReschedule ? "Booking Rescheduled" : "New Booking Received"}
           </Heading>
-          <Text style={{ color: "#777", fontSize: 14, margin: "0 0 28px" }}>{intro}</Text>
+          <Text style={{ color: "#777", fontSize: 14, margin: "0 0 28px" }}>{intro ?? defaultIntro}</Text>
 
           <Section style={{ backgroundColor: "#fafafa", borderRadius: 8, padding: "16px 20px", marginBottom: 24, border: "1px solid #efefef" }}>
             <Text style={{ margin: "0 0 8px", color: "#2D2D2D", fontSize: 14 }}>
@@ -43,9 +57,20 @@ export default function AdminBookingNotificationEmail({
             <Text style={{ margin: "0 0 8px", color: "#2D2D2D", fontSize: 14 }}>
               <strong>Client:</strong> {userName} ({userEmail})
             </Text>
-            <Text style={{ margin: message ? "0 0 8px" : "0", color: "#2D2D2D", fontSize: 14 }}>
-              <strong>Date:</strong> {date} at {time}
-            </Text>
+            {isReschedule && previousDate && previousTime && (
+              <Text style={{ margin: "0 0 8px", color: "#999", fontSize: 14 }}>
+                <strong>Was:</strong> {previousDate} at {previousTime}
+              </Text>
+            )}
+            {isAsync ? (
+              <Text style={{ margin: message ? "0 0 8px" : "0", color: "#2D2D2D", fontSize: 14 }}>
+                <strong>Delivery:</strong> Personal review (no AI) — respond within 5–7 days via email
+              </Text>
+            ) : date && time ? (
+              <Text style={{ margin: message ? "0 0 8px" : "0", color: isReschedule ? "#FFA07A" : "#2D2D2D", fontSize: 14, fontWeight: isReschedule ? 700 : 400 }}>
+                <strong>{isReschedule ? "Now:" : "Date:"}</strong> {date} at {time}
+              </Text>
+            ) : null}
             {message && (
               <Text style={{ margin: 0, color: "#2D2D2D", fontSize: 14 }}>
                 <strong>Message:</strong> {message}

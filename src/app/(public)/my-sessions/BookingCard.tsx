@@ -12,8 +12,9 @@ type Message = {
   createdAt: string
 }
 
-function MessagesDrawer({ bookingId, onClose }: { bookingId: string; onClose: () => void }) {
+function MessagesDrawer({ bookingId, isAdmin, onClose }: { bookingId: string; isAdmin: boolean; onClose: () => void }) {
   const [messages, setMessages] = useState<Message[]>([])
+  const [msgEmailEnabled, setMsgEmailEnabled] = useState(true)
   const [draft, setDraft] = useState("")
   const [sending, setSending] = useState(false)
   const bottomRef = useRef<HTMLDivElement>(null)
@@ -21,10 +22,23 @@ function MessagesDrawer({ bookingId, onClose }: { bookingId: string; onClose: ()
   useEffect(() => {
     fetch(`/api/bookings/${bookingId}/messages`)
       .then((r) => r.json())
-      .then(setMessages)
+      .then((data) => {
+        setMessages(data.messages ?? [])
+        setMsgEmailEnabled(data.msgEmailEnabled ?? true)
+      })
   }, [bookingId])
 
   useEffect(() => { bottomRef.current?.scrollIntoView({ behavior: "smooth" }) }, [messages])
+
+  const toggleEmailNotify = async () => {
+    const next = !msgEmailEnabled
+    setMsgEmailEnabled(next)
+    await fetch(`/api/bookings/${bookingId}/messages`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ msgEmailEnabled: next }),
+    })
+  }
 
   const send = async () => {
     if (!draft.trim()) return
@@ -44,7 +58,23 @@ function MessagesDrawer({ bookingId, onClose }: { bookingId: string; onClose: ()
     <div className="mt-4 border border-border rounded-xl overflow-hidden">
       <div className="flex items-center justify-between px-4 py-2 bg-cream border-b border-border">
         <span className="font-sans text-xs font-semibold text-ink">Messages</span>
-        <button onClick={onClose} className="text-ink/40 hover:text-ink"><X size={14} /></button>
+        <div className="flex items-center gap-3">
+          {isAdmin && (
+            <button
+              onClick={toggleEmailNotify}
+              title={msgEmailEnabled ? "Email notifications on" : "Email notifications off"}
+              className={`flex items-center gap-1 text-[10px] font-sans rounded-full px-2 py-0.5 border transition-colors ${
+                msgEmailEnabled
+                  ? "bg-green-50 border-green-200 text-green-700"
+                  : "bg-ink/5 border-border text-ink/40"
+              }`}
+            >
+              <span className={`w-1.5 h-1.5 rounded-full ${msgEmailEnabled ? "bg-green-500" : "bg-ink/20"}`} />
+              email {msgEmailEnabled ? "on" : "off"}
+            </button>
+          )}
+          <button onClick={onClose} className="text-ink/40 hover:text-ink"><X size={14} /></button>
+        </div>
       </div>
       <div className="px-4 py-3 flex flex-col gap-2 max-h-52 overflow-y-auto bg-white">
         {messages.length === 0 && (
@@ -133,37 +163,48 @@ export default function BookingCard({
   status,
   serviceTitle,
   serviceSlug,
+  serviceType = "call",
   meetLink,
   slotDate,
   slotStartTime,
   slotEndTime,
   feedbackRating,
   createdAt,
+  isAdmin = false,
+  rescheduleCount = 0,
 }: {
   bookingId: string
   status: string
   serviceTitle: string
   serviceSlug: string | null
+  serviceType?: string
   meetLink: string | null | undefined
   slotDate: string | null | undefined
   slotStartTime: string | null | undefined
   slotEndTime: string | null | undefined
   feedbackRating: number | null | undefined
   createdAt: string
+  isAdmin?: boolean
+  rescheduleCount?: number
 }) {
   const [currentStatus, setCurrentStatus] = useState(status)
   const [showMessages, setShowMessages] = useState(false)
   const [cancelling, setCancelling] = useState(false)
   const secondsLeft = useCountdown(slotDate ?? null, slotStartTime ?? null)
 
+  const isAsync = serviceType === "report" || serviceType === "dm"
   const isActive = currentStatus === "paid" || currentStatus === "confirmed"
   const isCompleted = currentStatus === "completed"
   const isCancelled = currentStatus === "cancelled"
 
-  // Join is enabled 10 min before (600s) until session end
+  // Session date has passed but status hasn't been marked completed yet
   const sessionEndMs = slotDate && slotEndTime
     ? new Date(`${slotDate}T${slotEndTime}:00+05:30`).getTime()
     : null
+  const isPastSession = sessionEndMs !== null && Date.now() > sessionEndMs
+  const showReviewPrompt = isActive && isPastSession && !feedbackRating
+
+  // Join is enabled 10 min before (600s) until session end
   const joinActive = meetLink && secondsLeft !== null && secondsLeft <= 600 && (sessionEndMs ? Date.now() <= sessionEndMs : true)
 
   const cancel = async () => {
@@ -219,8 +260,16 @@ export default function BookingCard({
         </div>
       )}
 
+      {/* Async review notice */}
+      {isAsync && isActive && (
+        <div className="bg-peach/20 border border-peach-dark/20 rounded-xl px-4 py-3 mb-3">
+          <p className="font-sans text-xs font-semibold text-ink mb-0.5">written review in progress</p>
+          <p className="font-sans text-[11px] text-ink/50">since priya reviews your documents personally without any ai, it takes some time to review in detail. she'll surely respond within 5–7 days. thanks :)</p>
+        </div>
+      )}
+
       {/* Join CTA */}
-      {meetLink && isActive && (
+      {meetLink && isActive && !isAsync && (
         <a
           href={joinActive ? meetLink : undefined}
           target="_blank"
@@ -238,6 +287,20 @@ export default function BookingCard({
             <span className="text-[11px] font-normal opacity-60 ml-1">(opens 10 min before)</span>
           )}
         </a>
+      )}
+
+      {/* Past session review prompt (session date passed, still active status) */}
+      {showReviewPrompt && (
+        <div className="bg-peach/20 border border-peach-dark/20 rounded-xl px-4 py-3 mb-3">
+          <p className="font-sans text-xs font-semibold text-ink mb-0.5">how was your session?</p>
+          <p className="font-sans text-[11px] text-ink/50 mb-2">your feedback helps other founders find the right session.</p>
+          <Link
+            href={`/my-sessions/feedback/${bookingId}`}
+            className="inline-flex items-center gap-1.5 text-[11px] font-sans font-semibold text-cream bg-ink px-3 py-1.5 rounded-lg hover:bg-ink/80 transition-colors"
+          >
+            <Star size={11} /> leave a review
+          </Link>
+        </div>
       )}
 
       {/* Completed: feedback CTA */}
@@ -264,7 +327,7 @@ export default function BookingCard({
           >
             <MessageCircle size={13} /> messages
           </button>
-          {serviceSlug && (
+          {serviceSlug && !isAsync && (isAdmin || rescheduleCount < 1) && (
             <a
               href={`/connect/${serviceSlug}?reschedule=${bookingId}`}
               className="flex items-center gap-1.5 text-xs font-sans text-ink/50 hover:text-peach-dark transition-colors"
@@ -292,7 +355,7 @@ export default function BookingCard({
         </div>
       )}
 
-      {showMessages && <MessagesDrawer bookingId={bookingId} onClose={() => setShowMessages(false)} />}
+      {showMessages && <MessagesDrawer bookingId={bookingId} isAdmin={isAdmin} onClose={() => setShowMessages(false)} />}
     </div>
   )
 }

@@ -104,7 +104,7 @@ export default function TemplateCard({ product }: Props) {
           })
           const verifyData = await verifyRes.json()
           if (!verifyRes.ok) {
-            setError("Payment verified but access setup failed. Email hello@priyaahuja.com with your payment ID.")
+            setError("Payment verified but access setup failed. Email hi@priyaahuja.in with your payment ID.")
             return
           }
           // Store token in localStorage for convenience

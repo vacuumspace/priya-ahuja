@@ -74,27 +74,26 @@ export default function HomePage() {
           </div>
           <div>
             <p className="font-heading text-base font-700 text-ink">Priya Ahuja</p>
-            <p className="font-sans text-xs text-ink/40 mt-0.5">business educator</p>
+            <p className="font-sans text-xs text-ink/40 mt-0.5">vc at Groww · startup consultant & advisor</p>
             <p className="font-sans text-xs text-ink/40 mt-0.5">bangalore, india</p>
-            {/* Social icons — TEMP hidden */}
-            {false && <div className="flex gap-2.5 mt-1.5">
+            <div className="flex gap-2.5 mt-1.5">
               <a href="https://www.linkedin.com/in/ca-priya-harwani/" target="_blank" rel="noopener noreferrer" className="text-ink/35 hover:text-ink transition-colors" aria-label="LinkedIn">
                 <LinkedInIcon />
               </a>
               <a href="https://www.instagram.com/pitchtopriya" target="_blank" rel="noopener noreferrer" className="text-ink/35 hover:text-ink transition-colors" aria-label="Instagram">
                 <InstagramIcon />
               </a>
-            </div>}
+            </div>
           </div>
         </div>
 
-        {/* CTA top-right — TEMP hidden */}
-        {false && <Link
+        {/* CTA top-right */}
+        <Link
           href="/connect"
           className="inline-flex items-center text-xs font-sans font-semibold bg-peach-dark text-ink px-3.5 py-2 rounded-lg hover:bg-peach-dark/80 transition-colors flex-shrink-0"
         >
           connect
-        </Link>}
+        </Link>
       </div>
 
       {/* ── Continue where you left off (signed-in only) ── */}
@@ -120,48 +119,13 @@ export default function HomePage() {
         <h1 className="font-heading text-[clamp(2.4rem,6vw,3.6rem)] font-800 text-ink leading-[0.95] tracking-tight mb-6">
           for the founder&apos;s<br />dream.
         </h1>
-        <p className="font-sans text-sm text-ink/55 leading-relaxed mb-6">
-          you're building something real. i help you to build to win with confidence - with actionable learnings and resources.
+        <p className="font-sans text-sm text-ink/55 leading-relaxed">
+          you're building something real. i help you to build to win with confidence - with actionable advice and resources.
         </p>
-        {/* TEMP: courses CTA replacing connect button */}
-        <Link
-          href="/courses"
-          className="inline-flex items-center bg-peach-dark text-ink text-xs font-sans font-semibold px-5 py-2.5 rounded-lg hover:bg-peach-dark/80 transition-colors"
-        >
-          explore courses →
-        </Link>
-        {/* Original connect button — hidden temporarily
-        <Link href="/connect" ...>connect</Link>
-        */}
       </div>
 
-      {/* ── Courses intro ── TEMP */}
+      {/* ── Achievements ── */}
       <div className="mb-14">
-        <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">what we offer</p>
-        <div className="space-y-3 font-sans text-sm text-ink/60 leading-relaxed mb-6">
-          <p>
-            practical business courses designed for founders, operators, and anyone building something of their own. no fluff, no theory for its own sake — every lesson is something you can act on.
-          </p>
-          <p>
-            from business model design and go-to-market strategy to finance, sales, and team building — the full toolkit for running a real business.
-          </p>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          {[
-            { title: "self-paced", body: "learn on your schedule, at your own speed. lifetime access included." },
-            { title: "practical first", body: "every module is built around what you can apply immediately." },
-            { title: "founder-relevant", body: "topics chosen for the real challenges of building a business." },
-          ].map((m) => (
-            <div key={m.title} className="bg-peach/20 border border-peach-dark/15 rounded-xl px-4 py-4">
-              <p className="font-sans text-[11px] font-semibold text-ink/80 mb-1">{m.title}</p>
-              <p className="font-sans text-[11px] text-ink/45 leading-snug">{m.body}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* ── Achievements ── TEMP hidden */}
-      {false && <div className="mb-14">
         <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">achievements</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {[
@@ -170,7 +134,7 @@ export default function HomePage() {
             { value: "5.0★", label: "avg. session rating", sub: "from 50+ independent reviews" },
             { value: "3 yrs", label: "inside startup investment", sub: "investment, strategy, m&a at groww, india's #1 retail investment app" },
             { value: "12+", label: "sectors covered", sub: "fintech, edtech, healthtech, b2b, d2c, social platforms & more" },
-            { value: "0%", label: "confusion", sub: "with all actionable insights and advice" },
+            { value: "100%", label: "actionable advice", sub: "every session ends with clear next steps you can act on today" },
           ].map((s) => (
             <div key={s.label} className="bg-peach/20 border border-peach-dark/15 rounded-xl px-4 py-4">
               <p className="font-heading text-2xl font-800 text-ink leading-none">{s.value}</p>
@@ -179,10 +143,10 @@ export default function HomePage() {
             </div>
           ))}
         </div>
-      </div>}
+      </div>
 
-      {/* ── Testimonials (slider) ── TEMP hidden */}
-      {false && <div className="mb-14">
+      {/* ── Testimonials (slider) ── */}
+      <div className="mb-14">
         <div className="flex items-center justify-between mb-5">
           <div className="flex items-center gap-2">
             <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em]">what founders say</p>
@@ -214,10 +178,10 @@ export default function HomePage() {
             />
           ))}
         </div>
-      </div>}
+      </div>
 
-      {/* ── CTA ── TEMP hidden */}
-      {false && <div className="bg-ink rounded-2xl px-6 py-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 mb-14">
+      {/* ── CTA ── */}
+      <div className="bg-ink rounded-2xl px-6 py-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 mb-14">
         <div>
           <p className="font-heading text-lg font-700 text-cream">want to get unstuck?</p>
           <p className="font-sans text-xs text-cream/45 mt-1">one session can reframe months of confusion.</p>
@@ -228,10 +192,10 @@ export default function HomePage() {
         >
           connect
         </Link>
-      </div>}
+      </div>
 
-      {/* ── About ── TEMP hidden */}
-      {false && <div className="mb-14">
+      {/* ── About ── */}
+      <div className="mb-14">
         <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">about</p>
         <div className="space-y-3 font-sans text-sm text-ink/60 leading-relaxed">
           <p>
@@ -257,11 +221,10 @@ export default function HomePage() {
             </span>
           ))}
         </div>
-      </div>}
+      </div>
 
-      {/* ── Mission ── TEMP hidden */}
-      {/* ── Mission ── TEMP hidden */}
-      {false && <div className="mb-14">
+      {/* ── Mission ── */}
+      <div className="mb-14">
         <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">mission</p>
         <div className="space-y-4">
           <p className="font-heading text-xl font-700 text-ink leading-snug">
@@ -289,10 +252,10 @@ export default function HomePage() {
             ))}
           </div>
         </div>
-      </div>}
+      </div>
 
-      {/* ── Dream: 10k founders ── TEMP hidden */}
-      {false && <div className="mb-14">
+      {/* ── Dream: 10k founders ── */}
+      <div className="mb-14">
         <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">north star</p>
         <p className="font-heading text-xl font-700 text-ink leading-snug mb-3">
           help 10,000 founders to win.
@@ -309,10 +272,10 @@ export default function HomePage() {
             <span className="font-sans text-[11px] text-ink/40">10,000</span>
           </div>
         </div>
-      </div>}
+      </div>
 
-      {/* ── Footer nav ── TEMP hidden */}
-      {false && <div className="border-t border-peach-dark/15 pt-6 pb-2">
+      {/* ── Footer nav ── */}
+      <div className="border-t border-peach-dark/15 pt-6 pb-2">
         <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">explore more</p>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
           {[
@@ -377,7 +340,7 @@ export default function HomePage() {
             </div>
           ))}
         </div>
-      </div>}
+      </div>
 
     </div>
   )

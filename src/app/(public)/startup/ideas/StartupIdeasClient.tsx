@@ -77,7 +77,7 @@ export default function StartupIdeasClient({ isPaid: initialPaid, isAuthenticate
             }),
           })
           if (!verifyRes.ok) {
-            setError("Payment received but access setup failed. Email hello@priyaahuja.com with your payment ID.")
+            setError("Payment received but access setup failed. Email hi@priyaahuja.in with your payment ID.")
             return
           }
           setPaid(true)
