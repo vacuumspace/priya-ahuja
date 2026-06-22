@@ -3,6 +3,7 @@ import { Inter } from "next/font/google"
 import { Syne } from "next/font/google"
 import { Analytics } from "@vercel/analytics/react"
 import { Providers } from "@/components/Providers"
+import Script from "next/script"
 import "./globals.css"
 
 const inter = Inter({
@@ -66,48 +67,50 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} ${syne.variable} h-full antialiased`}>
-      <head>
-        {/* Prevent flash of wrong theme */}
-        <script dangerouslySetInnerHTML={{ __html: `(function(){var t=localStorage.getItem('theme');if(t==='dark'||(t==null&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark')}})()` }} />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Person",
-              name: "Priya Ahuja",
-              url: "https://www.priyaahuja.in",
-              image: "https://www.priyaahuja.in/priyadp.jpeg",
-              jobTitle: "Startup & Fundraise Consultant",
-              worksFor: {
-                "@type": "Organization",
-                name: "Groww Ventures",
-                url: "https://groww.in",
-              },
-              description:
-                "Startup and fundraise consultant at Groww Ventures. Helping early-stage founders with fundraising readiness, investor pitch review, and startup strategy. 200+ founders advised across India.",
-              sameAs: [
-                "https://www.linkedin.com/in/ca-priya-harwani/",
-                "https://www.instagram.com/pitchtopriya",
-              ],
-              knowsAbout: [
-                "Startup fundraising",
-                "Investor pitch decks",
-                "Pre-seed and seed stage startups",
-                "Venture capital",
-                "Business model strategy",
-                "Go-to-market strategy",
-              ],
-              address: {
-                "@type": "PostalAddress",
-                addressLocality: "Bangalore",
-                addressCountry: "IN",
-              },
-            }),
-          }}
-        />
-      </head>
       <body className="min-h-full flex flex-col"><Providers>{children}</Providers><Analytics /></body>
+      <Script
+        id="theme-init"
+        strategy="beforeInteractive"
+        dangerouslySetInnerHTML={{ __html: `(function(){var t=localStorage.getItem('theme');if(t==='dark'||(t==null&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark')}})()` }}
+      />
+      <Script
+        id="json-ld"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Person",
+            name: "Priya Ahuja",
+            url: "https://www.priyaahuja.in",
+            image: "https://www.priyaahuja.in/priyadp.jpeg",
+            jobTitle: "Startup & Fundraise Consultant",
+            worksFor: {
+              "@type": "Organization",
+              name: "Groww Ventures",
+              url: "https://groww.in",
+            },
+            description:
+              "Startup and fundraise consultant at Groww Ventures. Helping early-stage founders with fundraising readiness, investor pitch review, and startup strategy. 200+ founders advised across India.",
+            sameAs: [
+              "https://www.linkedin.com/in/ca-priya-harwani/",
+              "https://www.instagram.com/pitchtopriya",
+            ],
+            knowsAbout: [
+              "Startup fundraising",
+              "Investor pitch decks",
+              "Pre-seed and seed stage startups",
+              "Venture capital",
+              "Business model strategy",
+              "Go-to-market strategy",
+            ],
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: "Bangalore",
+              addressCountry: "IN",
+            },
+          }),
+        }}
+      />
     </html>
   )
 }

@@ -87,16 +87,6 @@ export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEma
             <span className="font-heading text-xl font-800 text-ink leading-tight">Priya Ahuja</span>
           </Link>
         )}
-        {/* Theme toggle */}
-        {!collapsed && (
-          <button
-            onClick={toggleTheme}
-            className="text-ink/40 hover:text-ink transition-colors"
-            aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-          >
-            {theme === "dark" ? <Sun size={15} /> : <Moon size={15} />}
-          </button>
-        )}
         {/* Desktop collapse button */}
         <button
           onClick={() => setCollapsed((prev) => !prev)}

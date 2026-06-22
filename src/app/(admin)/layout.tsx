@@ -12,8 +12,8 @@ async function getNotificationCounts() {
     await Promise.all([
       db.select({ count: count() }).from(bookings).where(
         and(
-          gte(bookings.createdAt, sevenDaysAgo),
           notInArray(bookings.status, ["cancelled", "pending"]),
+          eq(bookings.adminSeen, false),
         )
       ),
       db.select({ count: count() }).from(purchases).where(gte(purchases.createdAt, sevenDaysAgo)),

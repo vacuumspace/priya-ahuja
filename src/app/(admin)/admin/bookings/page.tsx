@@ -1,9 +1,15 @@
 import { db } from "@/lib/db"
 import { bookings, services, availability, users } from "@/lib/db/schema"
-import { eq, desc } from "drizzle-orm"
+import { eq, desc, and, notInArray } from "drizzle-orm"
 import BookingsClient from "./BookingsClient"
 
 export default async function BookingsPage() {
+  // Mark all unseen confirmed/completed/paid bookings as seen
+  await db
+    .update(bookings)
+    .set({ adminSeen: true })
+    .where(and(eq(bookings.adminSeen, false), notInArray(bookings.status, ["cancelled", "pending"])))
+
   const rows = await db
     .select({
       id: bookings.id,
