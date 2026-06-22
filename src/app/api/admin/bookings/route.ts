@@ -9,6 +9,9 @@ export async function GET() {
     return new Response("Forbidden", { status: 403 })
   }
 
+  // Mark all unseen bookings as seen now that admin is viewing the list
+  await db.update(bookings).set({ adminSeen: true }).where(eq(bookings.adminSeen, false))
+
   const rows = await db
     .select({
       id: bookings.id,
