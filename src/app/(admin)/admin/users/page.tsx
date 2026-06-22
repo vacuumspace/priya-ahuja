@@ -2,6 +2,7 @@ import { db } from "@/lib/db"
 import { users, userProfiles } from "@/lib/db/schema"
 import { desc, ilike, or, count, eq } from "drizzle-orm"
 import { UsersControls } from "./UsersControls"
+import { UserRowActions } from "./UserRowActions"
 import Link from "next/link"
 
 const PAGE_SIZE = 10
@@ -31,6 +32,7 @@ export default async function AdminUsersPage({ searchParams }: Props) {
         businessName: userProfiles.businessName,
         businessType: userProfiles.businessType,
         stage: userProfiles.stage,
+        location: userProfiles.location,
       })
       .from(users)
       .leftJoin(userProfiles, eq(users.id, userProfiles.userId))
@@ -67,22 +69,28 @@ export default async function AdminUsersPage({ searchParams }: Props) {
                   <th className="text-left font-sans text-[11px] text-ink/40 uppercase tracking-widest px-5 py-3">Name</th>
                   <th className="text-left font-sans text-[11px] text-ink/40 uppercase tracking-widest px-5 py-3">Email</th>
                   <th className="text-left font-sans text-[11px] text-ink/40 uppercase tracking-widest px-5 py-3">Business</th>
+                  <th className="text-left font-sans text-[11px] text-ink/40 uppercase tracking-widest px-5 py-3">Location</th>
                   <th className="text-left font-sans text-[11px] text-ink/40 uppercase tracking-widest px-5 py-3">Phone</th>
                   <th className="text-left font-sans text-[11px] text-ink/40 uppercase tracking-widest px-5 py-3">Signed Up</th>
-                  <th className="px-5 py-3 w-8" />
+                  <th className="px-5 py-3 w-20" />
                 </tr>
               </thead>
               <tbody>
                 {rows.map((user, i) => (
                   <tr key={user.id} className={i !== rows.length - 1 ? "border-b border-border" : ""}>
                     <td className="px-5 py-3.5 font-sans text-sm text-ink/30">{offset + i + 1}</td>
-                    <td className="px-5 py-3.5 font-sans text-sm text-ink font-medium">{user.name ?? "—"}</td>
+                    <td className="px-5 py-3.5 font-sans text-sm font-medium">
+                      <Link href={`/admin/users/${user.id}`} className="text-ink hover:text-peach-dark transition-colors">
+                        {user.name ?? "—"}
+                      </Link>
+                    </td>
                     <td className="px-5 py-3.5 font-sans text-sm text-ink/70">{user.email}</td>
                     <td className="px-5 py-3.5 font-sans text-sm text-ink/70">
                       {user.businessName ? (
                         <span>{user.businessName}{user.stage ? <span className="ml-1.5 text-[10px] text-ink/40">· {user.stage}</span> : null}</span>
                       ) : "—"}
                     </td>
+                    <td className="px-5 py-3.5 font-sans text-sm text-ink/60">{user.location ?? "—"}</td>
                     <td className="px-5 py-3.5 font-sans text-sm text-ink/60">{user.phone ?? "—"}</td>
                     <td className="px-5 py-3.5 font-sans text-sm text-ink/50">
                       {user.createdAt
@@ -93,12 +101,7 @@ export default async function AdminUsersPage({ searchParams }: Props) {
                         : "—"}
                     </td>
                     <td className="px-5 py-3.5">
-                      <Link
-                        href={`/admin/users/${user.id}`}
-                        className="font-sans text-[11px] text-peach-dark hover:underline"
-                      >
-                        view
-                      </Link>
+                      <UserRowActions id={user.id} name={user.name} email={user.email} />
                     </td>
                   </tr>
                 ))}
