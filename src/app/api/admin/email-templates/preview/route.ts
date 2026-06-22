@@ -39,7 +39,6 @@ export async function POST(req: NextRequest) {
   } else if (template === "admin") {
     html = await render(AdminBookingNotificationEmail({
       ...SAMPLE,
-      subject: fields.email_admin_subject,
       intro: fields.email_admin_intro,
     }))
   } else if (template === "cancellation") {
