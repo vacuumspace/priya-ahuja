@@ -3,6 +3,7 @@ import { Inter } from "next/font/google"
 import { Syne } from "next/font/google"
 import { Analytics } from "@vercel/analytics/react"
 import { Providers } from "@/components/Providers"
+import { OpenInBrowserBanner } from "@/components/OpenInBrowserBanner"
 import Script from "next/script"
 import "./globals.css"
 
@@ -69,6 +70,7 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${syne.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
         <Providers>{children}</Providers>
+        <OpenInBrowserBanner />
         <Analytics />
         <Script
           id="theme-init"
