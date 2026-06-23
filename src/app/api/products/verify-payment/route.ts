@@ -48,18 +48,17 @@ export async function POST(req: NextRequest) {
       .where(eq(digitalProducts.id, purchase.productId))
       .limit(1)
 
-    // TEMP: amount check disabled for ₹1 testing (re-enable by uncommenting below)
-    // if (product) {
-    //   try {
-    //     const rzOrder = await fetchRazorpayOrder(razorpayOrderId)
-    //     if (rzOrder.amount !== product.price) {
-    //       console.error(`Amount mismatch: expected ${product.price}, got ${rzOrder.amount} for order ${razorpayOrderId}`)
-    //       return NextResponse.json({ error: "Payment amount mismatch" }, { status: 400 })
-    //     }
-    //   } catch (err) {
-    //     console.error("Razorpay order fetch failed (continuing):", err)
-    //   }
-    // }
+    if (product) {
+      try {
+        const rzOrder = await fetchRazorpayOrder(razorpayOrderId)
+        if (rzOrder.amount !== product.price) {
+          console.error(`Amount mismatch: expected ${product.price}, got ${rzOrder.amount} for order ${razorpayOrderId}`)
+          return NextResponse.json({ error: "Payment amount mismatch" }, { status: 400 })
+        }
+      } catch (err) {
+        console.error("Razorpay order fetch failed (continuing):", err)
+      }
+    }
 
     const accessToken = crypto.randomBytes(32).toString("hex")
     const tokenExpiresAt = new Date()

@@ -180,6 +180,41 @@ function TransactionsTab() {
 
 // ─── Summary Tab ──────────────────────────────────────────────────────────────
 
+function BarChart({ months, valueKey, label, fmt: fmtVal }: {
+  months: { key: string; label: string; revenue: number; count: number }[]
+  valueKey: "revenue" | "count"
+  label: string
+  fmt: (v: number) => string
+}) {
+  const max = Math.max(...months.map((m) => m[valueKey]), 1)
+  return (
+    <div>
+      <h3 className="text-xs font-medium text-ink/50 uppercase tracking-wider mb-3">{label}</h3>
+      <div className="flex items-end gap-1.5 h-32">
+        {months.map((m) => {
+          const val = m[valueKey]
+          return (
+            <div key={m.key} className="flex-1 flex flex-col items-center gap-1 min-w-0">
+              <div className="w-full relative flex justify-center">
+                {val > 0 && (
+                  <span className="text-[9px] text-ink/40 absolute -top-4 whitespace-nowrap">
+                    {fmtVal(val)}
+                  </span>
+                )}
+                <div
+                  className="w-full bg-peach-dark/40 rounded-t-sm"
+                  style={{ height: `${Math.max(3, (val / max) * 104)}px` }}
+                />
+              </div>
+              <span className="text-[9px] text-ink/40 truncate w-full text-center">{m.label}</span>
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
 function SummaryTab() {
   const [data, setData] = useState<SummaryData | null>(null)
 
@@ -193,12 +228,12 @@ function SummaryTab() {
     return <div className="text-center py-12 text-ink/40">Loading…</div>
   }
 
-  const maxRevenue = Math.max(...data.monthly.map((m) => m.revenue), 1)
+  const visibleMonths = data.monthly.filter((m) => m.key >= "2026-06")
 
   return (
     <div className="space-y-8">
       {/* Top-line stats */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="flex flex-wrap gap-3">
         <StatCard label="Total Revenue" value={fmtAmount(data.totalRevenue)} />
         <StatCard label="Total Transactions" value={String(data.totalTransactions)} />
         {data.byType.map((t) => (
@@ -211,65 +246,18 @@ function SummaryTab() {
         ))}
       </div>
 
-      {/* Monthly revenue bar chart */}
-      <div>
-        <h3 className="text-sm font-medium text-ink/60 mb-4">Monthly Revenue (last 12 months)</h3>
-        <div className="flex items-end gap-2 h-40">
-          {data.monthly.map((m) => (
-            <div key={m.key} className="flex-1 flex flex-col items-center gap-1 min-w-0">
-              <div className="w-full relative flex justify-center">
-                {m.revenue > 0 && (
-                  <span className="text-[10px] text-ink/50 absolute -top-5 whitespace-nowrap">
-                    {fmtAmount(m.revenue)}
-                  </span>
-                )}
-                <div
-                  className="w-full bg-peach-dark/40 rounded-t-sm"
-                  style={{ height: `${Math.max(4, (m.revenue / maxRevenue) * 128)}px` }}
-                />
-              </div>
-              <span className="text-[10px] text-ink/40 truncate w-full text-center">{m.label}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Monthly count table */}
-      <div>
-        <h3 className="text-sm font-medium text-ink/60 mb-3">Monthly Breakdown</h3>
-        <div className="rounded-xl border border-peach-dark/20 overflow-hidden">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="bg-peach-dark/10 text-left">
-                <th className="px-4 py-2.5 font-medium text-ink/60">Month</th>
-                <th className="px-4 py-2.5 font-medium text-ink/60">Transactions</th>
-                <th className="px-4 py-2.5 font-medium text-ink/60">Revenue</th>
-              </tr>
-            </thead>
-            <tbody>
-              {[...data.monthly].reverse().map((m) => (
-                <tr key={m.key} className="border-t border-peach-dark/10">
-                  <td className="px-4 py-2.5 text-ink/80">{m.label}</td>
-                  <td className="px-4 py-2.5 text-ink/70">{m.count}</td>
-                  <td className="px-4 py-2.5 font-medium text-ink">
-                    {m.revenue > 0 ? fmtAmount(m.revenue) : "—"}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
+      <BarChart months={visibleMonths} valueKey="revenue" label="Revenue per month" fmt={fmtAmount} />
+      <BarChart months={visibleMonths} valueKey="count" label="Transactions per month" fmt={(v) => String(v)} />
     </div>
   )
 }
 
 function StatCard({ label, value, sub }: { label: string; value: string; sub?: string }) {
   return (
-    <div className="bg-peach-dark/10 rounded-xl px-4 py-4">
-      <p className="text-xs text-ink/50 mb-1">{label}</p>
-      <p className="text-xl font-heading font-bold text-ink">{value}</p>
-      {sub && <p className="text-xs text-ink/40 mt-0.5">{sub}</p>}
+    <div className="bg-peach-dark/10 rounded-xl px-3 py-2.5 min-w-[120px]">
+      <p className="text-[11px] text-ink/50 mb-0.5">{label}</p>
+      <p className="text-base font-heading font-bold text-ink">{value}</p>
+      {sub && <p className="text-[10px] text-ink/40">{sub}</p>}
     </div>
   )
 }

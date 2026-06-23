@@ -41,26 +41,21 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Product not found" }, { status: 404 })
     }
 
-    // Find or create digital product record
-    let [product] = await db
-      .select()
-      .from(digitalProducts)
-      .where(eq(digitalProducts.slug, slug))
-      .limit(1)
-
-    if (!product) {
-      const [created] = await db
-        .insert(digitalProducts)
-        .values({
-          slug: template.slug,
-          title: template.title,
-          description: template.description,
-          price: template.price,
-          isActive: true,
-        })
-        .returning()
-      product = created
-    }
+    // Upsert digital product — always sync price from canonical template data
+    const [product] = await db
+      .insert(digitalProducts)
+      .values({
+        slug: template.slug,
+        title: template.title,
+        description: template.description,
+        price: template.price,
+        isActive: true,
+      })
+      .onConflictDoUpdate({
+        target: digitalProducts.slug,
+        set: { price: template.price },
+      })
+      .returning()
 
     const razorpay = getRazorpayInstance()
     const order = await razorpay.orders.create({

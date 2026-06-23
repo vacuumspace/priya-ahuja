@@ -10,14 +10,17 @@ import {
   type Answers,
 } from "@/lib/startup-score-data"
 import { sendPurchaseWelcome } from "@/lib/mailer"
+import { fetchRazorpayOrder } from "@/lib/razorpay"
 
-const PRICE_PAISE = 19900 // ₹199
+const DEFAULT_PRICE_PAISE = 49900
 
 export async function POST(req: NextRequest) {
-  const [session, liveSetting] = await Promise.all([
+  const [session, liveSetting, priceSetting] = await Promise.all([
     auth(),
     db.select({ value: siteSettings.value }).from(siteSettings).where(eq(siteSettings.key, "tool_startup_score_live")).limit(1),
+    db.select({ value: siteSettings.value }).from(siteSettings).where(eq(siteSettings.key, "price_startup_score")).limit(1),
   ])
+  const PRICE_PAISE = priceSetting[0] ? parseInt(priceSetting[0].value, 10) : DEFAULT_PRICE_PAISE
 
   const isLive = liveSetting.length === 0 || liveSetting[0].value !== "false"
   if (!isLive) {
@@ -59,16 +62,15 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Payment verification failed" }, { status: 400 })
   }
 
-  // TEMP: amount check disabled for ₹1 testing (re-enable by uncommenting below)
-  // try {
-  //   const rzOrder = await fetchRazorpayOrder(razorpayOrderId)
-  //   if (rzOrder.amount !== PRICE_PAISE) {
-  //     console.error(`Startup score amount mismatch: expected ${PRICE_PAISE}, got ${rzOrder.amount}`)
-  //     return NextResponse.json({ error: "Payment amount mismatch" }, { status: 400 })
-  //   }
-  // } catch (err) {
-  //   console.error("Razorpay order fetch failed (continuing):", err)
-  // }
+  try {
+    const rzOrder = await fetchRazorpayOrder(razorpayOrderId)
+    if (rzOrder.amount !== PRICE_PAISE) {
+      console.error(`Startup score amount mismatch: expected ${PRICE_PAISE}, got ${rzOrder.amount}`)
+      return NextResponse.json({ error: "Payment amount mismatch" }, { status: 400 })
+    }
+  } catch (err) {
+    console.error("Razorpay order fetch failed (continuing):", err)
+  }
 
   const totalScore = computeTotal(answers)
   const pillarScores = computePillarScores(answers)

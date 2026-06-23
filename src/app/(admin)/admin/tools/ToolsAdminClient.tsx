@@ -34,6 +34,7 @@ export default function ToolsAdminClient({
   const [settings, setSettings] = useState(initialSettings)
   const [saving, setSaving] = useState(false)
   const [savedKey, setSavedKey] = useState<string | null>(null)
+  const [priceInputs, setPriceInputs] = useState<Record<string, string>>({})
 
   const getSetting = (key: string, fallback = "true") =>
     (settings[key] ?? fallback) !== "false"
@@ -51,6 +52,23 @@ export default function ToolsAdminClient({
     setTimeout(() => setSavedKey(null), 2000)
   }
 
+  const savePrice = async (priceKey: string) => {
+    const rupees = parseFloat(priceInputs[priceKey] ?? "")
+    if (isNaN(rupees) || rupees <= 0) return
+    const paise = Math.round(rupees * 100)
+    setSettings((prev) => ({ ...prev, [priceKey]: String(paise) }))
+    setPriceInputs((prev) => ({ ...prev, [priceKey]: "" }))
+    setSaving(true)
+    await fetch("/api/admin/settings", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ [priceKey]: String(paise) }),
+    })
+    setSaving(false)
+    setSavedKey(priceKey)
+    setTimeout(() => setSavedKey(null), 2000)
+  }
+
   const conversionRate = analytics.total > 0
     ? Math.round((analytics.paid / analytics.total) * 100)
     : 0
@@ -58,9 +76,17 @@ export default function ToolsAdminClient({
   const toolsList = [
     {
       key: "tool_startup_score_live",
-      label: "Startup Idea Score",
-      description: "11-question quiz scoring startup ideas 0–100. Free score, ₹99 for full analysis.",
+      priceKey: "price_startup_score",
+      label: "Startup Fundability Score",
+      description: "50-question quiz scoring startups on investor criteria. Free score, paid full analysis.",
       href: "/admin/startup-scores",
+    },
+    {
+      key: "tool_startup_idea_score_live",
+      priceKey: "price_idea_score",
+      label: "Startup Idea Score",
+      description: "Startup idea evaluation tool. Free score, paid full analysis.",
+      href: "/admin/idea-scores",
     },
   ]
 
@@ -80,7 +106,7 @@ export default function ToolsAdminClient({
             return (
               <div
                 key={tool.key}
-                className="bg-card border border-border rounded-2xl px-6 py-5 flex items-center justify-between gap-6"
+                className="bg-card border border-border rounded-2xl px-6 py-5 flex items-start justify-between gap-6"
               >
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
@@ -90,14 +116,34 @@ export default function ToolsAdminClient({
                     }`}>
                       {isOn ? "live" : "off"}
                     </span>
-                    {savedKey === tool.key && (
+                    {(savedKey === tool.key || savedKey === tool.priceKey) && (
                       <span className="text-[10px] font-sans text-ink/40">saved ✓</span>
                     )}
                   </div>
-                  <p className="font-sans text-xs text-ink/50 leading-relaxed">{tool.description}</p>
+                  <p className="font-sans text-xs text-ink/50 leading-relaxed mb-2">{tool.description}</p>
+                  <div className="flex items-center gap-2 mt-1">
+                    <span className="text-[11px] font-sans text-ink/50">price:</span>
+                    <span className="text-[11px] font-sans font-semibold text-ink">
+                      ₹{((parseInt(settings[tool.priceKey] ?? "49900", 10)) / 100).toLocaleString("en-IN")}
+                    </span>
+                    <input
+                      type="number"
+                      placeholder="new price ₹"
+                      value={priceInputs[tool.priceKey] ?? ""}
+                      onChange={(e) => setPriceInputs((p) => ({ ...p, [tool.priceKey]: e.target.value }))}
+                      className="w-24 text-xs font-sans bg-peach-dark/10 border border-peach-dark/20 rounded-lg px-2 py-1 text-ink focus:outline-none"
+                    />
+                    <button
+                      onClick={() => savePrice(tool.priceKey)}
+                      disabled={saving || !priceInputs[tool.priceKey]}
+                      className="text-[11px] font-sans px-2 py-1 rounded-lg bg-ink text-cream disabled:opacity-30"
+                    >
+                      save
+                    </button>
+                  </div>
                   <Link
                     href={tool.href}
-                    className="text-[11px] font-sans text-peach-dark hover:underline mt-1 inline-block"
+                    className="text-[11px] font-sans text-peach-dark hover:underline mt-2 inline-block"
                   >
                     view submissions →
                   </Link>

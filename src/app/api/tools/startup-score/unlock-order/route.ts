@@ -1,8 +1,16 @@
 import { NextResponse } from "next/server"
 import { auth } from "@/lib/auth"
+import { db } from "@/lib/db"
+import { siteSettings } from "@/lib/db/schema"
+import { eq } from "drizzle-orm"
 import { getRazorpayInstance } from "@/lib/razorpay"
 
-const PRICE_PAISE = 100 // TEMP: ₹1 for testing (restore to 19900 for ₹199)
+const DEFAULT_PRICE_PAISE = 49900
+
+async function getPrice(): Promise<number> {
+  const [row] = await db.select({ value: siteSettings.value }).from(siteSettings).where(eq(siteSettings.key, "price_startup_score")).limit(1)
+  return row ? parseInt(row.value, 10) : DEFAULT_PRICE_PAISE
+}
 
 export async function POST() {
   try {
@@ -11,16 +19,17 @@ export async function POST() {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
     }
 
+    const price = await getPrice()
     const razorpay = getRazorpayInstance()
     const order = await razorpay.orders.create({
-      amount: PRICE_PAISE,
+      amount: price,
       currency: "INR",
       receipt: `startup_score_${Date.now()}`,
     })
 
     return NextResponse.json({
       orderId: order.id,
-      amount: PRICE_PAISE,
+      amount: price,
       keyId: process.env.RAZORPAY_KEY_ID,
     })
   } catch (err) {

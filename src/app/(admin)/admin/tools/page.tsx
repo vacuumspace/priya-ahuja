@@ -30,7 +30,8 @@ export default async function AdminToolsPage() {
 
   const total = Number(totalRows[0].count)
   const paid = Number(paidRows[0].count)
-  const revenue = paid * 99
+  const priceStartupScore = parseInt(settings["price_startup_score"] ?? "49900", 10)
+  const revenue = Math.round((paid * priceStartupScore) / 100)
 
   return (
     <ToolsAdminClient

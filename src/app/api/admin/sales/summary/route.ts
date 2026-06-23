@@ -1,7 +1,7 @@
 import { auth, isAdmin } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { bookings, purchases, startupScores, services, digitalProducts, users } from "@/lib/db/schema"
-import { eq, not, inArray } from "drizzle-orm"
+import { eq, not } from "drizzle-orm"
 
 export async function GET() {
   const session = await auth()
@@ -18,7 +18,7 @@ export async function GET() {
       })
       .from(bookings)
       .leftJoin(services, eq(bookings.serviceId, services.id))
-      .where(not(inArray(bookings.status, ["pending", "cancelled"]))),
+      .where(not(eq(bookings.status, "pending"))),
 
     db
       .select({

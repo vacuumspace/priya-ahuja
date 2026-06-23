@@ -36,7 +36,7 @@ function cn(...classes: (string | false | undefined | null)[]) {
 
 // ── Intro ─────────────────────────────────────────────────────────────────────
 
-function IntroView({ userEmail, onStart }: { userEmail: string | null; onStart: () => void }) {
+function IntroView({ userEmail, onStart, price = 49900 }: { userEmail: string | null; onStart: () => void; price?: number }) {
   const isSignedIn = !!userEmail
 
   return (
@@ -53,7 +53,7 @@ function IntroView({ userEmail, onStart }: { userEmail: string | null; onStart: 
         </p>
         <div className="inline-flex items-center gap-1.5 bg-peach/40 border border-peach-dark/30 rounded-lg px-3 py-1.5 mb-3">
           <span className="font-sans text-xs text-ink/50">full breakdown</span>
-          <span className="font-sans text-sm font-bold text-ink">₹499</span>
+          <span className="font-sans text-sm font-bold text-ink">₹{(price / 100).toLocaleString("en-IN")}</span>
         </div>
         <div className="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 mb-7">
           <p className="font-sans text-xs font-semibold text-amber-800 mb-0.5">one-time access</p>
@@ -470,12 +470,14 @@ function PaywallView({
   userName,
   onPaid,
   onBack,
+  price = 49900,
 }: {
   answers: Answers
   userEmail: string
   userName: string
   onPaid: (result: ResultData) => void
   onBack: () => void
+  price?: number
 }) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
@@ -615,7 +617,7 @@ function PaywallView({
               processing…
             </>
           ) : (
-            "unlock full score — ₹499"
+            `unlock full score — ₹${(price / 100).toLocaleString("en-IN")}`
           )}
         </button>
 
@@ -762,7 +764,7 @@ function ResultsView({
 
 // ── Main ──────────────────────────────────────────────────────────────────────
 
-export default function StartupScoreClient({ userEmail, userName, isAdmin = false }: { userEmail: string | null; userName: string; isAdmin?: boolean }) {
+export default function StartupScoreClient({ userEmail, userName, isAdmin = false, price = 49900 }: { userEmail: string | null; userName: string; isAdmin?: boolean; price?: number }) {
   const [view, setView] = useState<"intro" | "quiz" | "paywall" | "results">("intro")
   const [step, setStep] = useState(0)
   const [answers, setAnswers] = useState<Answers>({})
@@ -807,7 +809,7 @@ export default function StartupScoreClient({ userEmail, userName, isAdmin = fals
   return (
     <div className="py-6 px-4 md:py-8 md:px-8">
         {view === "intro" && (
-          <IntroView userEmail={userEmail} onStart={() => setView("quiz")} />
+          <IntroView userEmail={userEmail} onStart={() => setView("quiz")} price={price} />
         )}
         {view === "quiz" && (
           <QuizView
@@ -825,6 +827,7 @@ export default function StartupScoreClient({ userEmail, userName, isAdmin = fals
             userName={userName}
             onPaid={handlePaid}
             onBack={handleBack}
+            price={price}
           />
         )}
         {view === "results" && result && (

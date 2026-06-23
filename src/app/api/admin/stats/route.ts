@@ -4,7 +4,7 @@ import {
   bookings, purchases, startupScores, serviceInquiries,
   users, services, analyticsEvents,
 } from "@/lib/db/schema"
-import { eq, not, inArray, count } from "drizzle-orm"
+import { eq, not, count } from "drizzle-orm"
 
 export async function GET() {
   const session = await auth()
@@ -26,7 +26,7 @@ export async function GET() {
   ] = await Promise.all([
     db.select({ createdAt: bookings.createdAt, status: bookings.status })
       .from(bookings)
-      .where(not(inArray(bookings.status, ["pending", "cancelled"]))),
+      .where(not(eq(bookings.status, "pending"))),
 
     db.select({ createdAt: purchases.createdAt }).from(purchases),
 
@@ -41,7 +41,7 @@ export async function GET() {
     db.select({ serviceTitle: services.title, cnt: count(bookings.id) })
       .from(bookings)
       .leftJoin(services, eq(bookings.serviceId, services.id))
-      .where(not(inArray(bookings.status, ["pending", "cancelled"])))
+      .where(not(eq(bookings.status, "pending")))
       .groupBy(services.title),
 
     db.select({ type: serviceInquiries.type, cnt: count(serviceInquiries.id) })

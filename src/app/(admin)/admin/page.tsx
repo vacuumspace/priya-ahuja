@@ -25,7 +25,7 @@ export default async function AdminDashboard() {
     })
     .from(bookings)
     .leftJoin(services, eq(bookings.serviceId, services.id))
-    .where(and(isNotNull(bookings.razorpayPaymentId), not(eq(bookings.status, "cancelled"))))
+    .where(isNotNull(bookings.razorpayPaymentId))
     .orderBy(desc(bookings.createdAt))
     .limit(10)
 

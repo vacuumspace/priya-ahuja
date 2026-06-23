@@ -58,8 +58,8 @@ export default function TemplateCardAuth({ product, isAuthenticated, purchaseTok
 
   async function handleBuy(e: React.FormEvent) {
     e.preventDefault()
-    const buyName = session?.user?.name ?? ""
     const buyEmail = session?.user?.email ?? userEmail ?? ""
+    const buyName = session?.user?.name || buyEmail || ""
     if (!buyEmail.trim()) return
     setLoading(true)
     setError("")

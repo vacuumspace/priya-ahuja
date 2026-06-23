@@ -54,22 +54,23 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Invalid payment signature" }, { status: 400 })
     }
 
-    // TEMP: amount check disabled for ₹1 testing (re-enable by uncommenting below)
-    // const [service] = await db
-    //   .select({ price: servicesTable.price })
-    //   .from(servicesTable)
-    //   .where(eq(servicesTable.id, booking.serviceId))
-    //   .limit(1)
-    // if (service) {
-    //   try {
-    //     const rzOrder = await fetchRazorpayOrder(razorpayOrderId)
-    //     if (rzOrder.amount !== service.price) {
-    //       console.error(`Amount mismatch: expected ${service.price}, got ${rzOrder.amount} for order ${razorpayOrderId}`)
-    //       return NextResponse.json({ error: "Payment amount mismatch" }, { status: 400 })
-    //     }
-    //   } catch (err) {
-    //     console.error("Razorpay order fetch failed (continuing):", err)
-    //   }
+    const [service] = await db
+      .select({ price: servicesTable.price })
+      .from(servicesTable)
+      .where(eq(servicesTable.id, booking.serviceId))
+      .limit(1)
+    if (service) {
+      try {
+        const rzOrder = await fetchRazorpayOrder(razorpayOrderId)
+        if (rzOrder.amount !== service.price) {
+          console.error(`Amount mismatch: expected ${service.price}, got ${rzOrder.amount} for order ${razorpayOrderId}`)
+          return NextResponse.json({ error: "Payment amount mismatch" }, { status: 400 })
+        }
+      } catch (err) {
+        console.error("Razorpay order fetch failed (continuing):", err)
+      }
+    }
+
     const [confirmedBooking] = await db
       .update(bookings)
       .set({ status: "confirmed", razorpayPaymentId })

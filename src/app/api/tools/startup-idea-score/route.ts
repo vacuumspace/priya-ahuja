@@ -12,13 +12,15 @@ import {
 import { fetchRazorpayOrder } from "@/lib/razorpay"
 import { sendPurchaseWelcome } from "@/lib/mailer"
 
-const PRICE_PAISE = 9900 // ₹99
+const DEFAULT_PRICE_PAISE = 49900
 
 export async function POST(req: NextRequest) {
-  const [session, liveSetting] = await Promise.all([
+  const [session, liveSetting, priceSetting] = await Promise.all([
     auth(),
     db.select({ value: siteSettings.value }).from(siteSettings).where(eq(siteSettings.key, "tool_startup_idea_score_live")).limit(1),
+    db.select({ value: siteSettings.value }).from(siteSettings).where(eq(siteSettings.key, "price_idea_score")).limit(1),
   ])
+  const PRICE_PAISE = priceSetting[0] ? parseInt(priceSetting[0].value, 10) : DEFAULT_PRICE_PAISE
 
   const isLive = liveSetting.length === 0 || liveSetting[0].value !== "false"
   if (!isLive) {

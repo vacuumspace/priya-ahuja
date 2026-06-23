@@ -58,13 +58,19 @@ const navGroups: NavGroup[] = [
   },
   {
     label: "Transactions",
-    prefixes: ["/admin/bookings", "/admin/startup-scores", "/admin/idea-scores", "/admin/custom-requests", "/admin/service-inquiries"],
+    prefixes: ["/admin/bookings", "/admin/startup-scores", "/admin/idea-scores"],
     items: [
       { label: "Bookings", href: "/admin/bookings", icon: CalendarCheck },
       { label: "Templates", href: "/admin/products?tab=transactions", icon: FileStack },
       { label: "Angel Investors", href: "/admin/angel-investors?tab=transactions", icon: TrendingUp },
       { label: "Fundability Scores", href: "/admin/startup-scores", icon: Lightbulb },
       { label: "Idea Scores", href: "/admin/idea-scores", icon: Lightbulb },
+    ],
+  },
+  {
+    label: "Enquiry",
+    prefixes: ["/admin/custom-requests", "/admin/service-inquiries"],
+    items: [
       { label: "Custom Requests", href: "/admin/custom-requests", icon: MessageSquare },
       { label: "Service Enquiries", href: "/admin/service-inquiries", icon: Inbox },
     ],
