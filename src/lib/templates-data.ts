@@ -22,7 +22,7 @@ export const templates: Template[] = [
     title: "Investor Outreach Templates",
     description:
       "Cold email templates, follow-up sequences, and LinkedIn messages that have actually gotten replies from Indian VCs.",
-    price: 49900,
+    price: 19900,
     tag: "templates",
     category: "fundraise",
     comingSoon: false,
@@ -298,7 +298,7 @@ This is why warm intros are non-negotiable. Your first job is to get warm — no
     title: "Pre-Fundraise Readiness Checklist",
     description:
       "A 40-point checklist covering everything from financial model hygiene to cap table structure, before you talk to a single investor.",
-    price: 29900,
+    price: 19900,
     tag: "checklist",
     category: "fundraise",
     comingSoon: false,
@@ -595,7 +595,7 @@ You don't have to reveal names. "We're in conversations with [X] other funds. We
     title: "First 10 Customers Playbook",
     description:
       "The exact outreach scripts, pricing conversations, and close tactics used to land the first 10 paying customers — without a brand, a case study, or an ad budget.",
-    price: 59900,
+    price: 19900,
     tag: "playbook",
     category: "startup",
     comingSoon: false,
@@ -842,7 +842,7 @@ For local markets, in-person meetings convert 3x better than video calls. Offer 
     title: "Hiring Your First 5: The Startup Hiring Playbook",
     description:
       "Job descriptions, interview scorecards, offer letter templates, and the questions that actually predict performance for early-stage hires.",
-    price: 49900,
+    price: 19900,
     tag: "playbook",
     category: "startup",
     comingSoon: false,
@@ -1126,7 +1126,7 @@ Giving new hires too little to do in week 1. They feel useless. They doubt the c
     title: "Product Spec Templates",
     description:
       "PRD templates, user story frameworks, and feature prioritisation scorecards for early-stage product teams that don't have the luxury of a dedicated PM.",
-    price: 39900,
+    price: 19900,
     tag: "templates",
     category: "startup",
     comingSoon: false,
@@ -1318,7 +1318,7 @@ The retro is not a post-mortem. It's a calibration. Keep it short; act on one th
     title: "Growth Experiment Tracker & Playbook",
     description:
       "A structured system for running, tracking, and learning from growth experiments — with 30 pre-built experiment ideas across SEO, paid, content, and referral.",
-    price: 44900,
+    price: 19900,
     tag: "playbook",
     category: "startup",
     comingSoon: false,
@@ -1581,7 +1581,7 @@ Test showing the upgrade prompt at 3 different moments in the user journey. Meas
     title: "Founder Weekly Operating System",
     description:
       "A planning and review system for solo founders and small teams — weekly review template, OKR framework, decision log, and a meeting structure that doesn't waste everyone's time.",
-    price: 34900,
+    price: 19900,
     tag: "templates",
     category: "startup",
     comingSoon: false,
@@ -1872,7 +1872,7 @@ When someone raises a debate you've had before, link them to the entry instead o
     title: "Term Sheet (CCD, CCPS, Equity, SAFE)",
     description:
       "Ready-to-use term sheet templates for the four most common Indian fundraising instruments — Compulsorily Convertible Debentures, Preference Shares, Equity, and SAFE notes.",
-    price: 299900,
+    price: 19900,
     tag: "legal",
     category: "fundraise",
     comingSoon: false,
@@ -2092,7 +2092,7 @@ If Company issues another SAFE with more favourable terms, this SAFE shall autom
     title: "Valuation Methodologies",
     description:
       "A practical guide to the valuation methods used in Indian startup funding rounds — DCF, comparables, scorecard, and VC method — with worked examples.",
-    price: 149900,
+    price: 19900,
     tag: "guide",
     category: "fundraise",
     comingSoon: false,
@@ -2307,7 +2307,7 @@ The founder who goes in asking for ₹36 Cr pre-money will be laughed out. The o
     title: "Transaction Documents (SHA & SSA)",
     description:
       "Annotated templates for Shareholders' Agreement (SHA) and Share Subscription Agreement (SSA) — the two core legal documents in every Indian VC funding transaction.",
-    price: 349900,
+    price: 19900,
     tag: "legal",
     category: "fundraise",
     comingSoon: false,
@@ -2441,7 +2441,7 @@ This Share Subscription Agreement ("Agreement") is entered into on [DATE] betwee
     title: "Data Bible (Data Room)",
     description:
       "A complete data room checklist and template structure for Series A and beyond — covering legal, financial, commercial, and technical due diligence documents.",
-    price: 199900,
+    price: 19900,
     tag: "checklist",
     category: "fundraise",
     comingSoon: false,
@@ -2585,7 +2585,7 @@ This Share Subscription Agreement ("Agreement") is entered into on [DATE] betwee
     title: "Financial Model (General)",
     description:
       "A clean, investor-ready 3-year financial model template for SaaS, D2C, and services businesses — with built-in scenario analysis and a cap table model.",
-    price: 249900,
+    price: 19900,
     tag: "template",
     category: "fundraise",
     comingSoon: false,
@@ -2699,7 +2699,7 @@ Example: 120% growth + (−80)% margin = 40 ✅`,
     title: "Pitch Deck Template",
     description:
       "A 12-slide pitch deck template with slide-by-slide guidance on what to include, what to avoid, and how Indian VCs read decks differently from Silicon Valley investors.",
-    price: 99900,
+    price: 19900,
     tag: "template",
     category: "fundraise",
     comingSoon: false,
@@ -2872,7 +2872,7 @@ Make this slide impossible to misread.
     title: "Non-Disclosure Agreement (Fundraise)",
     description:
       "A mutual NDA template designed for sharing confidential information with potential investors during fundraising — clean, enforceable, and founder-balanced.",
-    price: 49900,
+    price: 19900,
     tag: "legal",
     category: "fundraise",
     comingSoon: false,
@@ -2959,7 +2959,7 @@ Instead of a paper NDA for data room access, use Google Drive / Notion access co
     title: "KMP Agreement",
     description:
       "A Key Managerial Personnel agreement template covering appointment terms, responsibilities, remuneration, confidentiality, and IP assignment for CXO-level hires.",
-    price: 199900,
+    price: 19900,
     tag: "legal",
     category: "startup",
     comingSoon: false,
@@ -3048,7 +3048,7 @@ The Company may terminate this Agreement immediately without notice or compensat
     title: "Employee Agreement",
     description:
       "A comprehensive employment agreement template for full-time hires — covering appointment, compensation, IP assignment, confidentiality, and exit provisions.",
-    price: 149900,
+    price: 19900,
     tag: "legal",
     category: "startup",
     comingSoon: false,
@@ -3138,7 +3138,7 @@ This Agreement shall be governed by Indian law and all disputes shall be subject
     title: "GTM Plan",
     description:
       "A go-to-market plan template for B2B and B2C startups — covering ICP definition, channel strategy, launch sequencing, and a 90-day execution calendar.",
-    price: 99900,
+    price: 19900,
     tag: "playbook",
     category: "startup",
     comingSoon: false,
@@ -3343,7 +3343,7 @@ Indian founder audiences respond to personal, honest, behind-the-scenes content.
     title: "Startup Idea Analysis",
     description:
       "A structured framework for analysing a startup idea before committing to it — covering problem validation, market sizing, competitive moat, and founder-market fit.",
-    price: 79900,
+    price: 19900,
     tag: "framework",
     category: "startup",
     comingSoon: false,
@@ -3486,7 +3486,7 @@ Fintech, healthtech, and edtech in India are heavily regulated. If your business
     title: "Market Positioning",
     description:
       "A positioning framework for early-stage startups — covering category creation, competitive positioning, and how to write a positioning statement that sticks.",
-    price: 99900,
+    price: 19900,
     tag: "framework",
     category: "startup",
     comingSoon: false,
@@ -3617,7 +3617,7 @@ Why it worked: Most Indian SMBs weren't using any software — they were using s
     title: "Value Proposition",
     description:
       "A value proposition design workbook — from customer jobs-to-be-done to a crisp one-liner that converts, with templates for B2B and B2C contexts.",
-    price: 79900,
+    price: 19900,
     tag: "framework",
     category: "startup",
     comingSoon: false,
@@ -3792,7 +3792,7 @@ This works best once you have 500+ target customers identifiable by job title an
     title: "Employee Offer Letter Template",
     description:
       "A clean, professional offer letter template for full-time hires — with ESOP clause variant, joining bonus variant, and guidance on offer letter best practices.",
-    price: 49900,
+    price: 19900,
     tag: "legal",
     category: "startup",
     comingSoon: false,
@@ -3954,7 +3954,7 @@ Send the offer letter, then follow up with a call 48 hours later. "I wanted to m
     title: "Founders Agreement",
     description:
       "A comprehensive founders' agreement template covering equity split, vesting, roles, decision-making, IP assignment, and exit provisions — the most important document you'll sign before your first investor.",
-    price: 249900,
+    price: 19900,
     tag: "legal",
     category: "startup",
     comingSoon: false,
@@ -4053,7 +4053,7 @@ Before signing, every founding team should explicitly discuss and agree on:
     title: "Non-Disclosure Agreement (Startup Operations)",
     description:
       "NDA templates for startup operations — covering employee NDA, vendor/contractor NDA, and customer NDA, with guidance on when to use each.",
-    price: 49900,
+    price: 19900,
     tag: "legal",
     category: "startup",
     comingSoon: false,
@@ -4104,7 +4104,7 @@ Same structure, but one-way: Company's obligations are limited to reasonable car
     slug: "investor-update-email",
     title: "Investor Update Email Templates",
     description: "Monthly and quarterly investor update templates that keep your investors informed, engaged, and ready to help — without taking hours to write.",
-    price: 49900,
+    price: 19900,
     tag: "templates",
     category: "fundraise",
     comingSoon: false,
@@ -4266,7 +4266,7 @@ Thanks for being on this journey.
     slug: "cap-table-template",
     title: "Cap Table Template & Guide",
     description: "A plain-language cap table template with worked examples — pre-seed through Series A — plus a guide to understanding dilution, option pools, and pro-rata rights.",
-    price: 49900,
+    price: 19900,
     tag: "templates",
     category: "fundraise",
     comingSoon: false,
