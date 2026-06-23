@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "migrate": "drizzle-kit migrate",
+    "build": "drizzle-kit migrate && next build",
     "start": "next start",
     "lint": "eslint",
     "check-routes": "tsx scripts/check-routes.ts"

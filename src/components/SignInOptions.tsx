@@ -1,8 +1,6 @@
 "use client"
 
 import { signIn } from "next-auth/react"
-import { useState } from "react"
-import { useRouter } from "next/navigation"
 
 const GoogleIcon = () => (
   <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24" aria-hidden="true">
@@ -29,38 +27,6 @@ export default function SignInOptions({
   googleLabel = "continue with google",
   className = "",
 }: Props) {
-  const router = useRouter()
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [error, setError] = useState("")
-  const [loading, setLoading] = useState(false)
-
-  async function handleCredentials(e: React.FormEvent) {
-    e.preventDefault()
-    setError("")
-    setLoading(true)
-    try {
-      const res = await fetch("/api/auth/credentials-login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      })
-      if (!res.ok) {
-        setError("Invalid credentials")
-        return
-      }
-      window.location.href = callbackUrl
-    } catch {
-      setError("Something went wrong")
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  const inputCls = compact
-    ? "w-full px-2.5 py-1.5 border border-ink/20 rounded-lg text-xs font-sans text-ink bg-paper placeholder:text-ink/30 focus:outline-none focus:border-ink/40"
-    : "w-full px-3 py-2 border border-ink/20 rounded-lg text-sm font-sans text-ink bg-paper placeholder:text-ink/30 focus:outline-none focus:border-ink/40"
-
   const btnBaseCls = compact
     ? "inline-flex items-center justify-center gap-1.5 font-sans font-semibold text-xs px-4 py-2 rounded-lg transition-colors"
     : "w-full inline-flex items-center justify-center gap-2 font-sans font-semibold text-sm py-2.5 rounded-xl transition-colors"
@@ -76,38 +42,6 @@ export default function SignInOptions({
         {googleLabel}
       </button>
 
-      <div className="flex items-center gap-2">
-        <div className="flex-1 h-px bg-ink/10" />
-        <span className={`font-sans text-ink/30 ${compact ? "text-[10px]" : "text-xs"}`}>or</span>
-        <div className="flex-1 h-px bg-ink/10" />
-      </div>
-
-      <form onSubmit={handleCredentials} className="flex flex-col gap-2">
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          className={inputCls}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          className={inputCls}
-        />
-        {error && <p className={`font-sans text-red-500 ${compact ? "text-[10px]" : "text-xs"}`}>{error}</p>}
-        <button
-          type="submit"
-          disabled={loading}
-          className={`${btnBaseCls} border border-ink/20 text-ink hover:bg-ink/5 disabled:opacity-50`}
-        >
-          {loading ? "Signing in…" : "Continue"}
-        </button>
-      </form>
     </div>
   )
 }

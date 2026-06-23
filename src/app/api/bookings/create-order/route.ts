@@ -84,7 +84,7 @@ export async function POST(req: NextRequest) {
 
     const razorpay = getRazorpayInstance()
     const order = await razorpay.orders.create({
-      amount: 100, // TEMP: ₹1 for testing (original: service.price)
+      amount: service.price,
       currency: "INR",
       receipt: `booking_${Date.now()}`,
     })
@@ -101,7 +101,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({
       orderId: order.id,
-      amount: 100, // TEMP: ₹1 for testing (original: service.price)
+      amount: service.price,
       keyId: process.env.RAZORPAY_KEY_ID,
       bookingId: booking.id,
     })
