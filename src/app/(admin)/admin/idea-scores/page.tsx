@@ -14,6 +14,8 @@ export default async function AdminIdeaScoresPage({ searchParams }: Props) {
   const { page: pageParam } = await searchParams
   const page = Math.max(1, parseInt(pageParam ?? "1", 10))
 
+  await db.update(startupIdeaScores).set({ adminSeen: true }).where(eq(startupIdeaScores.adminSeen, false))
+
   const [totalResult, rows] = await Promise.all([
     db.select({ count: count() }).from(startupIdeaScores),
     db

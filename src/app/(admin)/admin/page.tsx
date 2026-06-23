@@ -1,6 +1,6 @@
 import { db } from "@/lib/db"
 import { bookings, services, availability, purchases, digitalProducts } from "@/lib/db/schema"
-import { eq, and, gte, not, desc, isNotNull, inArray } from "drizzle-orm"
+import { eq, and, gte, desc, isNotNull } from "drizzle-orm"
 import Link from "next/link"
 
 const STATUS_COLORS: Record<string, string> = {
@@ -25,7 +25,7 @@ export default async function AdminDashboard() {
     })
     .from(bookings)
     .leftJoin(services, eq(bookings.serviceId, services.id))
-    .where(inArray(bookings.status, ["paid", "confirmed", "completed", "rescheduled"]))
+    .where(isNotNull(bookings.amountPaid))
     .orderBy(desc(bookings.createdAt))
     .limit(10)
 
@@ -77,9 +77,14 @@ export default async function AdminDashboard() {
       <div className="max-w-2xl flex flex-col gap-10">
 
         <div>
-          <h2 className="font-sans text-xs font-semibold text-ink/40 uppercase tracking-widest mb-3">
-            Recent Transactions
-          </h2>
+          <div className="flex items-center justify-between mb-3">
+            <h2 className="font-sans text-xs font-semibold text-ink/40 uppercase tracking-widest">
+              Payment Transactions
+            </h2>
+            <Link href="/admin/sales" className="text-[11px] font-sans text-ink/40 hover:text-ink transition-colors">
+              see full list →
+            </Link>
+          </div>
           {recentTransactions.length === 0 ? (
             <p className="font-sans text-sm text-ink/30">No transactions yet.</p>
           ) : (

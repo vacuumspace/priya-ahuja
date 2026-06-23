@@ -266,8 +266,11 @@ export default function SalesPage() {
   const [tab, setTab] = useState<"transactions" | "summary">("transactions")
 
   return (
-    <div>
-      <h1 className="text-2xl font-heading font-800 text-ink mb-6">Sales</h1>
+    <div className="px-10 py-10">
+      <div className="mb-8">
+        <h1 className="font-heading text-3xl font-800 text-ink">Sales</h1>
+        <p className="font-sans text-sm text-ink/50 mt-1">Revenue, transactions, and summaries.</p>
+      </div>
 
       <div className="flex gap-1 mb-6 bg-peach-dark/10 rounded-xl p-1 w-fit">
         {(["transactions", "summary"] as const).map((t) => (

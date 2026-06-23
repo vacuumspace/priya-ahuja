@@ -464,18 +464,22 @@ function QuizView({
 
 // ── Paywall View ──────────────────────────────────────────────────────────────
 
+type PaymentInfo = {
+  razorpayOrderId: string
+  razorpayPaymentId: string
+  razorpaySignature: string
+}
+
 function PaywallView({
-  answers,
   userEmail,
   userName,
   onPaid,
   onBack,
   price = 49900,
 }: {
-  answers: Answers
   userEmail: string
   userName: string
-  onPaid: (result: ResultData) => void
+  onPaid: (info: PaymentInfo) => void
   onBack: () => void
   price?: number
 }) {
@@ -503,31 +507,16 @@ function PaywallView({
         name: "Priya Ahuja",
         description: "Startup Fundability Score — Full Analysis",
         order_id: orderData.orderId,
-        handler: async (response: {
+        handler: (response: {
           razorpay_order_id: string
           razorpay_payment_id: string
           razorpay_signature: string
         }) => {
-          const submitRes = await fetch("/api/tools/startup-score", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              answers,
-              razorpayOrderId: response.razorpay_order_id,
-              razorpayPaymentId: response.razorpay_payment_id,
-              razorpaySignature: response.razorpay_signature,
-            }),
+          onPaid({
+            razorpayOrderId: response.razorpay_order_id,
+            razorpayPaymentId: response.razorpay_payment_id,
+            razorpaySignature: response.razorpay_signature,
           })
-          const data = await submitRes.json()
-          if (!submitRes.ok) {
-            setError("Payment received but verification failed. Email hi@priyaahuja.in with your payment ID.")
-            return
-          }
-          const pillarScores: Record<number, { earned: number; max: number }> = {}
-          for (const [k, v] of Object.entries(data.pillarScores as Record<string, { earned: number; max: number }>)) {
-            pillarScores[Number(k)] = v
-          }
-          onPaid({ id: data.id, totalScore: data.totalScore, pillarScores })
         },
         prefill: { name: userName, email: userEmail },
         theme: { color: "#2D2D2D" },
@@ -542,63 +531,22 @@ function PaywallView({
     }
   }
 
-  // Preview segment scores client-side (blurred) to give a sense of what's coming
-  const previewPillarScores = computePillarScores(answers)
-  const previewTotal = computeTotal(answers)
-
   return (
     <div className="max-w-xl mx-auto space-y-5">
       <div className="bg-card border border-border rounded-2xl p-5 sm:p-8">
         <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">
-          quiz complete · 50 / 50 answered
+          one-time access
         </p>
         <h2 className="font-heading text-2xl font-bold text-ink lowercase mb-2">
-          your startup fundability score is ready
+          unlock your startup fundability score
         </h2>
         <p className="font-sans text-sm text-ink/55 leading-relaxed mb-7">
-          unlock your full score — overall out of 100, all 9 segment breakdowns, and a prioritised list of exactly what to fix before you pitch to investors.
+          pay once to take the 50-question quiz and get your full score — overall out of 100, all 9 segment breakdowns, and a prioritised list of exactly what to fix before you pitch to investors.
         </p>
 
-        {/* Blurred score preview */}
-        <div className="relative mb-7 select-none">
-          <div className="blur-sm pointer-events-none">
-            <div className="flex items-center justify-center mb-4">
-              <div className="relative w-28 h-28">
-                <div
-                  className="w-full h-full rounded-full"
-                  style={{
-                    background: `conic-gradient(#FFA07A ${(previewTotal / 100) * 360}deg, #E8DFC8 ${(previewTotal / 100) * 360}deg)`,
-                  }}
-                />
-                <div className="absolute inset-3 rounded-full bg-card flex items-center justify-center">
-                  <span className="font-heading text-2xl font-bold text-ink">{previewTotal}</span>
-                </div>
-              </div>
-            </div>
-            <div className="space-y-2.5">
-              {PILLARS.slice(0, 3).map((pillar) => {
-                const ps = previewPillarScores[pillar.index]
-                const pct = ps ? (ps.earned / ps.max) * 100 : 0
-                return (
-                  <div key={pillar.index}>
-                    <div className="flex justify-between text-[11px] font-sans text-ink/60 mb-1">
-                      <span>{pillar.title}</span>
-                      <span>{ps?.earned ?? 0}/{pillar.maxPoints}</span>
-                    </div>
-                    <div className="h-1.5 bg-border rounded-full">
-                      <div className="h-1.5 bg-peach-dark rounded-full" style={{ width: `${pct}%` }} />
-                    </div>
-                  </div>
-                )
-              })}
-              <p className="text-[10px] font-sans text-ink/30 text-center pt-1">+ 6 more segments…</p>
-            </div>
-          </div>
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="bg-cream/90 border border-border rounded-xl px-5 py-3 text-center shadow-sm">
-              <p className="font-sans text-xs font-semibold text-ink">unlock to see your full score</p>
-            </div>
-          </div>
+        <div className="inline-flex items-center gap-1.5 bg-peach/40 border border-peach-dark/30 rounded-lg px-3 py-1.5 mb-7">
+          <span className="font-sans text-xs text-ink/50">full breakdown</span>
+          <span className="font-sans text-sm font-bold text-ink">₹{(price / 100).toLocaleString("en-IN")}</span>
         </div>
 
         {error && <p className="font-sans text-xs text-red-500 mb-4">{error}</p>}
@@ -617,12 +565,12 @@ function PaywallView({
               processing…
             </>
           ) : (
-            `unlock full score — ₹${(price / 100).toLocaleString("en-IN")}`
+            `pay ₹${(price / 100).toLocaleString("en-IN")} & start quiz`
           )}
         </button>
 
         <p className="text-[10px] font-sans text-ink/30 text-center mt-3">
-          one-time payment · instant results
+          one-time payment · instant access
         </p>
       </div>
 
@@ -630,7 +578,7 @@ function PaywallView({
         onClick={onBack}
         className="flex items-center gap-1.5 text-[11px] font-sans text-ink/35 hover:text-ink/60 transition-colors mx-auto"
       >
-        <ArrowLeft size={11} /> go back and review answers
+        <ArrowLeft size={11} /> back
       </button>
     </div>
   )
@@ -765,53 +713,95 @@ function ResultsView({
 // ── Main ──────────────────────────────────────────────────────────────────────
 
 export default function StartupScoreClient({ userEmail, userName, isAdmin = false, price = 49900 }: { userEmail: string | null; userName: string; isAdmin?: boolean; price?: number }) {
-  const [view, setView] = useState<"intro" | "quiz" | "paywall" | "results">("intro")
+  const [view, setView] = useState<"intro" | "paywall" | "quiz" | "results">("intro")
   const [step, setStep] = useState(0)
   const [answers, setAnswers] = useState<Answers>({})
   const [result, setResult] = useState<ResultData | null>(null)
+  const [paymentInfo, setPaymentInfo] = useState<PaymentInfo | null>(null)
+  const [submitError, setSubmitError] = useState("")
 
   function handleAnswer(qId: number, val: OptionValue) {
     setAnswers((prev) => ({ ...prev, [qId]: val }))
   }
 
   function handleBack() {
-    if (view === "paywall") { setView("quiz"); setStep(PILLARS.length - 1); return }
-    if (step > 0) setStep((s) => s - 1)
-    else setView("intro")
+    if (view === "quiz" && step === 0) { setView(isAdmin ? "intro" : "paywall"); return }
+    if (view === "quiz" && step > 0) { setStep((s) => s - 1); return }
+    if (view === "paywall") { setView("intro"); return }
   }
 
   async function handleNext() {
     window.scrollTo({ top: 0, behavior: "smooth" })
     if (step < PILLARS.length - 1) {
       setStep((s) => s + 1)
-    } else if (isAdmin) {
+      return
+    }
+    // Last segment — submit
+    if (isAdmin) {
       const totalScore = computeTotal(answers)
       const pillarScores = computePillarScores(answers)
       setResult({ id: "admin", totalScore, pillarScores })
       setView("results")
-    } else {
-      setView("paywall")
+      return
+    }
+    if (!paymentInfo) return
+    setSubmitError("")
+    try {
+      const submitRes = await fetch("/api/tools/startup-score", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ answers, ...paymentInfo }),
+      })
+      const data = await submitRes.json()
+      if (!submitRes.ok) {
+        setSubmitError(data.error || "Submission failed. Email hi@priyaahuja.in with your payment ID.")
+        return
+      }
+      const pillarScores: Record<number, { earned: number; max: number }> = {}
+      for (const [k, v] of Object.entries(data.pillarScores as Record<string, { earned: number; max: number }>)) {
+        pillarScores[Number(k)] = v
+      }
+      setResult({ id: data.id, totalScore: data.totalScore, pillarScores })
+      setView("results")
+    } catch {
+      setSubmitError("Something went wrong. Email hi@priyaahuja.in with your payment ID.")
     }
   }
 
-  function handlePaid(r: ResultData) {
-    setResult(r)
-    setView("results")
+  function handlePaid(info: PaymentInfo) {
+    setPaymentInfo(info)
+    setStep(0)
+    setView("quiz")
   }
 
   function handleReset() {
     setAnswers({})
     setStep(0)
     setResult(null)
+    setPaymentInfo(null)
+    setSubmitError("")
     setView("intro")
   }
 
   return (
     <div className="py-6 px-4 md:py-8 md:px-8">
-        {view === "intro" && (
-          <IntroView userEmail={userEmail} onStart={() => setView("quiz")} price={price} />
-        )}
-        {view === "quiz" && (
+      {view === "intro" && (
+        <IntroView userEmail={userEmail} onStart={() => isAdmin ? setView("quiz") : setView("paywall")} price={price} />
+      )}
+      {view === "paywall" && userEmail && (
+        <PaywallView
+          userEmail={userEmail}
+          userName={userName}
+          onPaid={handlePaid}
+          onBack={handleBack}
+          price={price}
+        />
+      )}
+      {view === "quiz" && (
+        <>
+          {submitError && (
+            <p className="max-w-xl mx-auto font-sans text-xs text-red-500 mb-4">{submitError}</p>
+          )}
           <QuizView
             step={step}
             answers={answers}
@@ -819,24 +809,15 @@ export default function StartupScoreClient({ userEmail, userName, isAdmin = fals
             onBack={handleBack}
             onNext={handleNext}
           />
-        )}
-        {view === "paywall" && userEmail && (
-          <PaywallView
-            answers={answers}
-            userEmail={userEmail}
-            userName={userName}
-            onPaid={handlePaid}
-            onBack={handleBack}
-            price={price}
-          />
-        )}
-        {view === "results" && result && (
-          <ResultsView
-            result={result}
-            answers={answers}
-            onReset={handleReset}
-          />
-        )}
-      </div>
+        </>
+      )}
+      {view === "results" && result && (
+        <ResultsView
+          result={result}
+          answers={answers}
+          onReset={handleReset}
+        />
+      )}
+    </div>
   )
 }

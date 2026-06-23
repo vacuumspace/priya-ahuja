@@ -169,6 +169,7 @@ export function AdminSidebar({ userEmail, collapsed, onToggle, notificationCount
             if (group.directHref && group.directIcon) {
               const isActive = pathname.startsWith(group.directHref)
               const Icon = group.directIcon
+              const count = isActive ? 0 : (notificationCounts[group.directHref] ?? 0)
               if (collapsed) {
                 return (
                   <div key={group.label}>
@@ -194,7 +195,12 @@ export function AdminSidebar({ userEmail, collapsed, onToggle, notificationCount
                   }`}
                 >
                   <Icon size={16} className="flex-shrink-0" />
-                  <span className="truncate">{group.label}</span>
+                  <span className="truncate flex-1">{group.label}</span>
+                  {count > 0 && (
+                    <span className="flex-shrink-0 min-w-[18px] h-[18px] flex items-center justify-center rounded-full bg-peach-dark text-cream text-[10px] font-sans font-semibold px-1">
+                      {count > 99 ? "99+" : count}
+                    </span>
+                  )}
                 </Link>
               )
             }

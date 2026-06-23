@@ -7,6 +7,12 @@ const ANGEL_SLUG = "angel-investor-list"
 
 export default async function ProductsPage({ searchParams }: { searchParams: Promise<{ tab?: string }> }) {
   const { tab: defaultTab } = await searchParams
+
+  // Mark all unseen purchases as seen now that admin is viewing the transactions tab
+  if (!defaultTab || defaultTab === "transactions") {
+    await db.update(purchases).set({ adminSeen: true }).where(eq(purchases.adminSeen, false))
+  }
+
   const [productsData, purchasesData] = await Promise.all([
     db.select().from(digitalProducts).orderBy(desc(digitalProducts.createdAt)),
     db

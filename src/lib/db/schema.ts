@@ -89,6 +89,7 @@ export const purchases = pgTable("purchases", {
   amountPaid: integer("amount_paid"), // actual captured amount in paise
   downloadToken: text("download_token").unique(),
   tokenExpiresAt: timestamp("token_expires_at"),
+  adminSeen: boolean("admin_seen").notNull().default(false),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 })
 
@@ -137,6 +138,7 @@ export const users = pgTable("users", {
   email: text("email").notNull(),
   emailVerified: timestamp("email_verified"),
   image: text("image"),
+  adminSeen: boolean("admin_seen").notNull().default(false),
   createdAt: timestamp("created_at").defaultNow(),
 })
 
@@ -196,6 +198,7 @@ export const startupScores = pgTable("startup_scores", {
   isPaid: boolean("is_paid").notNull().default(false),
   razorpayOrderId: text("razorpay_order_id"),
   razorpayPaymentId: text("razorpay_payment_id"),
+  adminSeen: boolean("admin_seen").notNull().default(false),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 })
 
@@ -209,6 +212,7 @@ export const startupIdeaScores = pgTable("startup_idea_scores", {
   isPaid: boolean("is_paid").notNull().default(false),
   razorpayOrderId: text("razorpay_order_id"),
   razorpayPaymentId: text("razorpay_payment_id"),
+  adminSeen: boolean("admin_seen").notNull().default(false),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 })
 

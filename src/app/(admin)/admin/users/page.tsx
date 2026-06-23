@@ -16,6 +16,8 @@ export default async function AdminUsersPage({ searchParams }: Props) {
   const page = Math.max(1, parseInt(pageParam ?? "1", 10))
   const search = searchParam?.trim() ?? ""
 
+  await db.update(users).set({ adminSeen: true }).where(eq(users.adminSeen, false))
+
   const filter = search
     ? or(ilike(users.name, `%${search}%`), ilike(users.email, `%${search}%`))
     : undefined

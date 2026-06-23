@@ -2,15 +2,13 @@ import { redirect } from "next/navigation"
 import { auth, isAdmin } from "@/lib/auth"
 import { AdminShell } from "@/components/admin/AdminShell"
 import { db } from "@/lib/db"
-import { bookings, purchases, startupScores, startupIdeaScores, customRequests, bookingMessages } from "@/lib/db/schema"
-import { eq, count, gte, and, notInArray } from "drizzle-orm"
+import { bookings, purchases, startupScores, startupIdeaScores, customRequests, bookingMessages, users } from "@/lib/db/schema"
+import { eq, count, and, notInArray } from "drizzle-orm"
 
 export const dynamic = "force-dynamic"
 
 async function getNotificationCounts() {
-  const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
-
-  const [pendingBookings, recentPurchases, recentFundability, recentIdea, newCustomRequests, unreadMessages] =
+  const [unseenBookings, unseenPurchases, unseenFundability, unseenIdea, newCustomRequests, unreadMessages, unseenUsers] =
     await Promise.all([
       db.select({ count: count() }).from(bookings).where(
         and(
@@ -18,21 +16,23 @@ async function getNotificationCounts() {
           eq(bookings.adminSeen, false),
         )
       ),
-      db.select({ count: count() }).from(purchases).where(gte(purchases.createdAt, sevenDaysAgo)),
-      db.select({ count: count() }).from(startupScores).where(gte(startupScores.createdAt, sevenDaysAgo)),
-      db.select({ count: count() }).from(startupIdeaScores).where(gte(startupIdeaScores.createdAt, sevenDaysAgo)),
+      db.select({ count: count() }).from(purchases).where(eq(purchases.adminSeen, false)),
+      db.select({ count: count() }).from(startupScores).where(eq(startupScores.adminSeen, false)),
+      db.select({ count: count() }).from(startupIdeaScores).where(eq(startupIdeaScores.adminSeen, false)),
       db.select({ count: count() }).from(customRequests).where(eq(customRequests.status, "new")),
       db.select({ count: count() }).from(bookingMessages).where(
         and(eq(bookingMessages.isAdmin, false), eq(bookingMessages.adminRead, false))
       ),
+      db.select({ count: count() }).from(users).where(eq(users.adminSeen, false)),
     ])
 
   return {
-    "/admin/bookings": pendingBookings[0].count + unreadMessages[0].count,
-    "/admin/products?tab=transactions": recentPurchases[0].count,
-    "/admin/startup-scores": recentFundability[0].count,
-    "/admin/idea-scores": recentIdea[0].count,
+    "/admin/bookings": unseenBookings[0].count + unreadMessages[0].count,
+    "/admin/products?tab=transactions": unseenPurchases[0].count,
+    "/admin/startup-scores": unseenFundability[0].count,
+    "/admin/idea-scores": unseenIdea[0].count,
     "/admin/custom-requests": newCustomRequests[0].count,
+    "/admin/users": unseenUsers[0].count,
   }
 }
 

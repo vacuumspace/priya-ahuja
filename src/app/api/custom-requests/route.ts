@@ -1,5 +1,13 @@
 import { db } from "@/lib/db"
 import { customRequests } from "@/lib/db/schema"
+import nodemailer from "nodemailer"
+
+const transporter = nodemailer.createTransport({
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
+  auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASSWORD },
+})
 
 export async function POST(req: Request) {
   const body = await req.json()
@@ -13,6 +21,29 @@ export async function POST(req: Request) {
     .insert(customRequests)
     .values({ name, email, message, source: source || null })
     .returning()
+
+  const adminEmails = (process.env.ADMIN_EMAILS ?? "").split(",").map((e) => e.trim())
+  const adminUrl = `${process.env.NEXT_PUBLIC_APP_URL}/admin/custom-requests`
+  const html = `
+    <div style="font-family:Inter,sans-serif;max-width:560px;margin:0 auto;padding:32px 24px;background:#fff;border:1px solid #e8e8e8;border-radius:12px">
+      <p style="font-size:16px;font-weight:700;color:#2D2D2D;margin:0 0 16px">New Custom Request</p>
+      <table style="width:100%;border-collapse:collapse;font-size:13px;color:#555;margin-bottom:20px">
+        <tr><td style="padding:6px 0;color:#999;width:100px">Name</td><td style="padding:6px 0;color:#2D2D2D;font-weight:600">${name}</td></tr>
+        <tr><td style="padding:6px 0;color:#999">Email</td><td style="padding:6px 0"><a href="mailto:${email}" style="color:#FFA07A">${email}</a></td></tr>
+        ${source ? `<tr><td style="padding:6px 0;color:#999">Source</td><td style="padding:6px 0;color:#2D2D2D">${source}</td></tr>` : ""}
+      </table>
+      <p style="font-size:12px;font-weight:700;color:#2D2D2D;text-transform:uppercase;letter-spacing:0.08em;margin:0 0 8px">Message</p>
+      <div style="background:#fafafa;border:1px solid #efefef;border-radius:8px;padding:16px 20px;margin-bottom:24px;font-size:13px;color:#555;line-height:1.7;white-space:pre-line">${message}</div>
+      <a href="${adminUrl}" style="display:inline-block;background:#1a1a1a;color:#fff;padding:10px 22px;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600">View in Admin →</a>
+    </div>
+  `
+
+  transporter.sendMail({
+    from: `"${process.env.MAIL_FROM_NAME ?? "Priya Ahuja"}" <${process.env.EMAIL_USER}>`,
+    to: adminEmails,
+    subject: `New Custom Request from ${name}`,
+    html,
+  }).catch(console.error)
 
   return Response.json(row, { status: 201 })
 }
