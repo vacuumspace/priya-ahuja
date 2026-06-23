@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "migrate": "drizzle-kit migrate",
-    "build": "drizzle-kit migrate && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "eslint",
     "check-routes": "tsx scripts/check-routes.ts"
