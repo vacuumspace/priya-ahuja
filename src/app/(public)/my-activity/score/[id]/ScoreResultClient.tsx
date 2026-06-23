@@ -62,7 +62,7 @@ export default function ScoreResultClient({ totalScore, pillarScores, answers }:
     <div className="max-w-xl mx-auto space-y-5">
       <div className="flex items-center justify-between mb-2 print:hidden">
         <Link
-          href="/my-sessions?tab=tools"
+          href="/my-activity?tab=tools"
           className="inline-flex items-center gap-1.5 text-[11px] font-sans text-ink/40 hover:text-ink/70 transition-colors"
         >
           <ArrowLeft size={12} /> back to my activity

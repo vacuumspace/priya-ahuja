@@ -1,4 +1,4 @@
-import { auth } from "@/lib/auth"
+﻿import { auth } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { bookings, purchases, services as servicesTable, digitalProducts, startupScores, startupIdeaScores, availability } from "@/lib/db/schema"
 import { eq, desc } from "drizzle-orm"
@@ -46,7 +46,7 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
           <p className="font-sans text-sm text-ink/60 leading-relaxed mb-6">
             your sessions and purchases are saved to your account. sign in to access them.
           </p>
-          <SignInOptions callbackUrl="/my-sessions" />
+          <SignInOptions callbackUrl="/my-activity" />
         </div>
       </div>
     )
@@ -143,7 +143,7 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
         {/* Sub-tabs */}
         <div className="flex gap-1 mb-8 border-b border-border">
           <Link
-            href="/my-sessions?tab=sessions"
+            href="/my-activity?tab=sessions"
             className={`flex items-center gap-1.5 px-4 py-2.5 text-xs font-sans font-semibold border-b-2 transition-colors -mb-px ${
               activeTab === "sessions"
                 ? "border-ink text-ink"
@@ -155,7 +155,7 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
             <span className="text-[10px] font-mono ml-0.5 opacity-60">{userBookings.length}</span>
           </Link>
           <Link
-            href="/my-sessions?tab=products"
+            href="/my-activity?tab=products"
             className={`flex items-center gap-1.5 px-4 py-2.5 text-xs font-sans font-semibold border-b-2 transition-colors -mb-px ${
               activeTab === "products"
                 ? "border-ink text-ink"
@@ -167,7 +167,7 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
             <span className="text-[10px] font-mono ml-0.5 opacity-60">{userPurchases.length}</span>
           </Link>
           <Link
-            href="/my-sessions?tab=tools"
+            href="/my-activity?tab=tools"
             className={`flex items-center gap-1.5 px-4 py-2.5 text-xs font-sans font-semibold border-b-2 transition-colors -mb-px ${
               activeTab === "tools"
                 ? "border-ink text-ink"
@@ -263,7 +263,7 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
                           <span className="font-heading text-2xl font-bold text-ink">{s.totalScore}</span>
                           <span className="font-sans text-[10px] text-ink/30">/100</span>
                         </div>
-                        <Link href={`/my-sessions/score/${s.id}`} className="text-[11px] font-sans font-semibold text-peach-dark hover:underline">
+                        <Link href={`/my-activity/score/${s.id}`} className="text-[11px] font-sans font-semibold text-peach-dark hover:underline">
                           view report →
                         </Link>
                       </div>
@@ -295,7 +295,7 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
                           <span className="font-heading text-2xl font-bold text-ink">{s.totalScore}</span>
                           <span className="font-sans text-[10px] text-ink/30">/100</span>
                         </div>
-                        <Link href={`/my-sessions/idea-score/${s.id}`} className="text-[11px] font-sans font-semibold text-peach-dark hover:underline">
+                        <Link href={`/my-activity/idea-score/${s.id}`} className="text-[11px] font-sans font-semibold text-peach-dark hover:underline">
                           view report →
                         </Link>
                       </div>

@@ -197,6 +197,7 @@ function BookingFormInner({ service }: { service: Service }) {
   const [success, setSuccess] = useState(false)
   const [error, setError] = useState("")
   const [showSummary, setShowSummary] = useState(false)
+  const [rescheduleCount, setRescheduleCount] = useState<number | null>(null)
 
   useEffect(() => {
     if (session?.user?.name && !name) {
@@ -205,6 +206,14 @@ function BookingFormInner({ service }: { service: Service }) {
   }, [session])
 
   const isRescheduleMode = !!rescheduleId
+
+  useEffect(() => {
+    if (!rescheduleId || !session) return
+    fetch(`/api/bookings/${rescheduleId}`)
+      .then((r) => r.json())
+      .then((data) => setRescheduleCount(data.rescheduleCount ?? 0))
+      .catch(() => setRescheduleCount(0))
+  }, [rescheduleId, session])
   const needsSlot = service.type === "call"
   const canSubmit = needsSlot ? selectedSlot !== null : true
 
@@ -354,7 +363,7 @@ function BookingFormInner({ service }: { service: Service }) {
           </p>
         )}
         <Link
-          href="/my-sessions"
+          href="/my-activity"
           className="inline-flex items-center gap-2 text-xs font-sans font-600 text-cream bg-ink rounded-xl px-5 py-2.5 hover:bg-ink/80 transition-colors"
         >
           view my activity <ArrowRight size={13} />
@@ -446,11 +455,18 @@ function BookingFormInner({ service }: { service: Service }) {
     )
   }
 
+  const alreadyRescheduled = rescheduleCount !== null && rescheduleCount >= 1
+
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       {isRescheduleMode && (
         <div className="bg-amber-50 border border-amber-200 rounded-xl px-3 py-2 text-xs font-sans text-amber-700">
           Pick a new time below. No payment needed — your original booking will be updated.
+        </div>
+      )}
+      {isRescheduleMode && (
+        <div className="bg-red-50 border border-red-200 rounded-xl px-3 py-2 text-xs font-sans text-red-500">
+          You can only reschedule once. Please contact us for further changes.
         </div>
       )}
       {(needsSlot || isRescheduleMode) && (
@@ -523,7 +539,7 @@ function BookingFormInner({ service }: { service: Service }) {
 
       <Button
         type="submit"
-        disabled={loading || !canSubmit}
+        disabled={loading || !canSubmit || alreadyRescheduled}
         className="w-full bg-ink text-cream hover:bg-ink/80 font-sans font-semibold text-sm py-3 rounded-xl disabled:opacity-40"
       >
         {loading ? (

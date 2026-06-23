@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { signIn } from "next-auth/react"
 import { loadRazorpay } from "@/lib/load-razorpay"
 import Link from "next/link"
 import { ArrowLeft, RotateCcw, CheckCircle } from "lucide-react"
@@ -33,11 +34,236 @@ function cn(...classes: (string | false | undefined | null)[]) {
   return classes.filter(Boolean).join(" ")
 }
 
+// ── Sample Scorecard ──────────────────────────────────────────────────────────
+
+const SAMPLE_IDEA_SCORE = 68
+const SAMPLE_IDEA_PILLARS = [
+  {
+    title: "problem clarity", earned: 9, max: 12,
+    comments: [
+      { q: "can you describe the problem in one sentence?", answer: "yes, crisp and clear", level: "good", note: "strong start — problem articulation is a core founder skill." },
+      { q: "how often does your target customer face this problem?", answer: "occasionally · a few times a week", level: "mid", note: "weekly friction is real but not urgent. understand what triggers the pain." },
+      { q: "what do people currently do about this problem?", answer: "manual workarounds · spreadsheets, WhatsApp, jugaad", level: "mid", note: "workarounds validate the problem exists. can you quantify what they cost?" },
+    ],
+  },
+  {
+    title: "founder-market fit", earned: 8, max: 12,
+    comments: [
+      { q: "have you personally experienced this problem?", answer: "adjacent experience · worked in the space", level: "mid", note: "proximity helps but lived experience is stronger. document your specific edge clearly." },
+      { q: "why are you the right person to build this?", answer: "general relevance · skills useful but not specific", level: "low", note: "this is the question investors will ask first. you need a sharper answer than 'my skills apply'." },
+    ],
+  },
+  {
+    title: "demand signals", earned: 7, max: 10,
+    comments: [
+      { q: "have you talked to at least 10 potential customers?", answer: "somewhat · 3–5 conversations", level: "mid", note: "keep going. 10 conversations is a floor, not a ceiling. look for patterns, not consensus." },
+    ],
+  },
+  {
+    title: "customer understanding", earned: 7, max: 12,
+    comments: [
+      { q: "can you name your first 10 target customers?", answer: "not yet · still defining the persona", level: "low", note: "if you can't name them, you don't know them yet. this is the most important thing to fix." },
+    ],
+  },
+  {
+    title: "solution clarity", earned: 8, max: 10,
+    comments: [
+      { q: "can you describe what you're building in 2 sentences?", answer: "yes, clearly", level: "good", note: "good. keep that clarity as the product evolves." },
+    ],
+  },
+  {
+    title: "business basics", earned: 6, max: 10,
+    comments: [
+      { q: "do you have a rough sense of what you'd charge?", answer: "somewhat · thinking about it", level: "mid", note: "pricing uncertainty at this stage is fine, but you should have a hypothesis. what would make someone pay?" },
+      { q: "can the unit economics ever work?", answer: "unclear · haven't modelled it", level: "low", note: "do a back-of-napkin: what's your CAC estimate and how many times can a customer pay you?" },
+    ],
+  },
+  {
+    title: "execution readiness", earned: 8, max: 12,
+    comments: [
+      { q: "do you know your first 90 days?", answer: "yes, have a rough plan", level: "good", note: "good. write it down and pressure-test each milestone." },
+    ],
+  },
+  {
+    title: "build mindset", earned: 8, max: 10,
+    comments: [
+      { q: "are you willing to kill the idea if the data says no?", answer: "yes, data over ego", level: "good", note: "this is the right mindset. most founders don't actually act on it — keep checking yourself." },
+    ],
+  },
+  {
+    title: "risk awareness", earned: 7, max: 12,
+    comments: [
+      { q: "what's the biggest risk to this idea?", answer: "identified it but no mitigation plan", level: "mid", note: "naming the risk is the first step. now build a plan to reduce or route around it." },
+    ],
+  },
+]
+const SAMPLE_IDEA_RECS = [
+  "your customer definition is vague — you need a named persona with a specific trigger moment, not a demographic bracket.",
+  "you haven't validated demand beyond personal belief. find 3 people already paying for a workaround and talk to them.",
+  "unit economics are hand-wavy. even a rough back-of-napkin CAC vs LTV estimate would sharpen your thinking.",
+]
+
+function ideaPillarColor(pct: number) {
+  if (pct >= 75) return "bg-green-400"
+  if (pct >= 50) return "bg-peach-dark"
+  if (pct >= 25) return "bg-amber-400"
+  return "bg-red-400"
+}
+
+function getIdeaScoreBand(score: number): { label: string; color: string; directional: string } {
+  if (score >= 80) return {
+    label: "strong foundation",
+    color: "text-green-700",
+    directional: "your idea has real legs. the fundamentals are solid — now focus on sharp customer definition and early validation. most ideas at this level succeed or stall on execution, not concept.",
+  }
+  if (score >= 65) return {
+    label: "almost there",
+    color: "text-blue-700",
+    directional: "good signal, a few gaps. a couple of weak areas will hold you back if not addressed before you start building. fix your customer definition and unit economics hypothesis first.",
+  }
+  if (score >= 50) return {
+    label: "building blocks in place",
+    color: "text-amber-700",
+    directional: "there's something here, but the gaps are meaningful. don't start building yet — spend 4–6 weeks on customer discovery and problem validation before writing a line of code.",
+  }
+  return {
+    label: "needs more groundwork",
+    color: "text-orange-700",
+    directional: "the idea needs more grounding. focus on understanding the problem deeply before thinking about a solution. talk to 20 potential customers and listen more than you pitch.",
+  }
+}
+
+function SampleIdeaScorecard({ userEmail }: { userEmail: string | null }) {
+  const isSignedIn = !!userEmail
+  const [showSignIn, setShowSignIn] = useState(false)
+  const [expandedIdx, setExpandedIdx] = useState<number | null>(null)
+  const deg = (SAMPLE_IDEA_SCORE / 100) * 360
+  const band = getIdeaScoreBand(SAMPLE_IDEA_SCORE)
+
+  return (
+    <div className="space-y-4">
+      <div className="flex items-center justify-between px-1">
+        <p className="text-[10px] font-sans text-ink/40 uppercase tracking-[0.15em]">sample report</p>
+        <span className="text-[10px] font-sans text-ink/30 bg-ink/5 px-2 py-0.5 rounded-full">example only</span>
+      </div>
+
+      <div className={cn("relative", !isSignedIn && "select-none")}>
+        <div className={cn(!isSignedIn && "blur-sm pointer-events-none")}>
+          {/* Score + band */}
+          <div className="bg-card border border-border rounded-2xl overflow-hidden mb-4">
+            <div className="bg-ink px-6 py-4">
+              <p className="text-[10px] font-sans text-cream/40 uppercase tracking-[0.18em]">startup idea score</p>
+            </div>
+            <div className="px-6 py-6 flex items-center gap-6">
+              <div className="relative w-28 h-28 flex-shrink-0">
+                <div className="w-full h-full rounded-full" style={{ background: `conic-gradient(#FFA07A ${deg}deg, #E8DFC8 ${deg}deg)` }} />
+                <div className="absolute inset-2.5 rounded-full bg-card flex items-center justify-center flex-col">
+                  <span className="font-heading text-2xl font-bold text-ink leading-none">{SAMPLE_IDEA_SCORE}</span>
+                  <span className="font-sans text-[9px] text-ink/35">/ 100</span>
+                </div>
+              </div>
+              <div className="flex-1">
+                <span className={`font-sans text-xs font-semibold uppercase tracking-wide ${band.color}`}>{band.label}</span>
+                <p className="font-sans text-[11px] text-ink/60 mt-2 leading-relaxed">{band.directional}</p>
+              </div>
+            </div>
+            <div className="px-6 pb-5">
+              <div className="relative w-full h-2 bg-border rounded-full">
+                <div className="h-2 bg-peach-dark rounded-full" style={{ width: `${SAMPLE_IDEA_SCORE}%` }} />
+                <div className="absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-ink border-2 border-cream shadow" style={{ left: `calc(${SAMPLE_IDEA_SCORE}% - 6px)` }} />
+              </div>
+              <div className="flex justify-between mt-1.5">
+                <span className="text-[9px] font-sans text-ink/30">0 · needs work</span>
+                <span className="text-[9px] font-sans text-ink/30">100 · strong foundation</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Segment breakdown with expandable comments */}
+          <div className="bg-card border border-border rounded-2xl p-4 sm:p-6 mb-4">
+            <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-4">segment breakdown · tap to see comments</p>
+            <div className="space-y-2">
+              {SAMPLE_IDEA_PILLARS.map((p, i) => {
+                const pct = Math.round((p.earned / p.max) * 100)
+                const isOpen = expandedIdx === i
+                return (
+                  <div key={i} className="border border-border rounded-xl overflow-hidden">
+                    <button
+                      type="button"
+                      onClick={() => setExpandedIdx(isOpen ? null : i)}
+                      className="w-full px-4 py-3 flex items-center gap-3 hover:bg-peach/10 transition-colors text-left"
+                    >
+                      <span className={`flex-shrink-0 text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full text-white ${ideaPillarColor(pct)}`}>
+                        {p.earned}/{p.max}
+                      </span>
+                      <div className="flex-1 h-1.5 bg-border rounded-full">
+                        <div className={`h-1.5 rounded-full ${ideaPillarColor(pct)}`} style={{ width: `${pct}%` }} />
+                      </div>
+                      <span className="text-xs font-sans font-semibold text-ink/70 w-36 text-left">{p.title}</span>
+                      {isOpen ? <span className="text-ink/30 text-xs flex-shrink-0">▲</span> : <span className="text-ink/30 text-xs flex-shrink-0">▼</span>}
+                    </button>
+                    {isOpen && (
+                      <div className="border-t border-border divide-y divide-border/60 bg-cream/50">
+                        {p.comments.map((c, j) => (
+                          <div key={j} className="px-4 py-3">
+                            <p className="font-sans text-[11px] text-ink/60 leading-snug mb-1.5">{c.q}</p>
+                            <div className={`inline-flex items-center gap-1.5 text-[11px] font-sans font-semibold px-2.5 py-1 rounded-lg mb-1.5 ${
+                              c.level === "good" ? "bg-green-100 text-green-700" : c.level === "low" ? "bg-red-50 text-red-600" : "bg-amber-50 text-amber-700"
+                            }`}>
+                              {c.answer}
+                            </div>
+                            <p className="font-sans text-[10px] text-ink/45 leading-relaxed border-l-2 border-peach-dark/30 pl-2">{c.note}</p>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+
+          {/* Recommendations */}
+          <div className="bg-card border border-border rounded-2xl p-4 sm:p-6">
+            <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-4">top things to fix before you build</p>
+            <div className="space-y-3">
+              {SAMPLE_IDEA_RECS.map((rec, i) => (
+                <div key={i} className="flex gap-3 bg-peach/15 border border-peach-dark/15 rounded-xl p-4">
+                  <span className="font-heading text-lg font-bold text-peach-dark/60 w-5 flex-shrink-0 mt-0.5">{i + 1}</span>
+                  <p className="font-sans text-sm text-ink/70 leading-relaxed">{rec}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {!isSignedIn && (
+          <div className="absolute inset-0 flex items-start justify-center pt-6">
+            <div className="bg-cream/95 border border-border rounded-2xl px-6 py-5 text-center shadow-sm max-w-xs mx-4">
+              <p className="font-heading text-base font-bold text-ink lowercase mb-1">see a sample report</p>
+              <p className="font-sans text-xs text-ink/55 leading-relaxed mb-4">sign in to preview what your scorecard will look like.</p>
+              {showSignIn ? (
+                <SignInOptions callbackUrl="/startup/tools/idea-score" compact googleLabel="sign in to preview" />
+              ) : (
+                <button
+                  onClick={() => setShowSignIn(true)}
+                  className="inline-flex items-center gap-2 bg-ink text-cream font-sans text-xs font-semibold px-5 py-2.5 rounded-xl hover:bg-ink/80 transition-colors"
+                >
+                  sample report
+                </button>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
 // ── Intro ─────────────────────────────────────────────────────────────────────
 
 function IntroView({ userEmail, onStart }: { userEmail: string | null; onStart: () => void }) {
   const isSignedIn = !!userEmail
-  const [showSignIn, setShowSignIn] = useState(false)
 
   return (
     <div className="max-w-xl mx-auto space-y-5">
@@ -56,7 +282,7 @@ function IntroView({ userEmail, onStart }: { userEmail: string | null; onStart: 
         </p>
         <div className="inline-flex items-center gap-1.5 bg-peach/40 border border-peach-dark/30 rounded-lg px-3 py-1.5 mb-3">
           <span className="font-sans text-xs text-ink/50">full breakdown</span>
-          <span className="font-sans text-sm font-bold text-ink">₹99</span>
+          <span className="font-sans text-sm font-bold text-ink">₹499</span>
         </div>
         <div className="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 mb-7">
           <p className="font-sans text-xs font-semibold text-amber-800 mb-0.5">one-time access</p>
@@ -86,23 +312,12 @@ function IntroView({ userEmail, onStart }: { userEmail: string | null; onStart: 
           </div>
         </div>
 
-        {isSignedIn ? (
-          <button
-            onClick={onStart}
-            className="inline-flex items-center gap-2 bg-ink text-cream font-sans text-sm font-semibold px-6 py-3 rounded-xl hover:bg-ink/80 transition-colors"
-          >
-            Start
-          </button>
-        ) : showSignIn ? (
-          <SignInOptions callbackUrl="/startup/tools/idea-score" compact googleLabel="sign in to start" />
-        ) : (
-          <button
-            onClick={() => setShowSignIn(true)}
-            className="inline-flex items-center gap-2 bg-ink text-cream font-sans text-sm font-semibold px-6 py-3 rounded-xl hover:bg-ink/80 transition-colors"
-          >
-            Start
-          </button>
-        )}
+        <button
+          onClick={isSignedIn ? onStart : () => signIn("google", { callbackUrl: "/startup/tools/idea-score" })}
+          className="inline-flex items-center gap-2 bg-ink text-cream font-sans text-sm font-semibold px-6 py-3 rounded-xl hover:bg-ink/80 transition-colors"
+        >
+          Start
+        </button>
       </div>
 
       {isSignedIn && (
@@ -110,6 +325,8 @@ function IntroView({ userEmail, onStart }: { userEmail: string | null; onStart: 
           signed in as {userEmail}
         </p>
       )}
+
+      <SampleIdeaScorecard userEmail={userEmail} />
     </div>
   )
 }
@@ -391,7 +608,7 @@ function PaywallView({
               processing…
             </>
           ) : (
-            "unlock full score — ₹99"
+            "unlock full score — ₹499"
           )}
         </button>
 

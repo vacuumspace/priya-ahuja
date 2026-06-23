@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useEffect, useRef } from "react"
 import { Video, MessageCircle, RefreshCw, Star, X } from "lucide-react"
@@ -295,7 +295,7 @@ export default function BookingCard({
           <p className="font-sans text-xs font-semibold text-ink mb-0.5">how was your session?</p>
           <p className="font-sans text-[11px] text-ink/50 mb-2">your feedback helps other founders find the right session.</p>
           <Link
-            href={`/my-sessions/feedback/${bookingId}`}
+            href={`/my-activity/feedback/${bookingId}`}
             className="inline-flex items-center gap-1.5 text-[11px] font-sans font-semibold text-cream bg-ink px-3 py-1.5 rounded-lg hover:bg-ink/80 transition-colors"
           >
             <Star size={11} /> leave a review
@@ -306,7 +306,7 @@ export default function BookingCard({
       {/* Completed: feedback CTA */}
       {isCompleted && (
         <Link
-          href={`/my-sessions/feedback/${bookingId}`}
+          href={`/my-activity/feedback/${bookingId}`}
           className={`flex items-center justify-center gap-2 w-full py-2.5 rounded-xl font-sans font-semibold text-sm mb-3 transition-all ${
             feedbackRating
               ? "bg-border/30 text-ink/40 pointer-events-none"

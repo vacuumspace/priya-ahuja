@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -200,9 +200,9 @@ export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEma
           {isSignedIn && (
             <>
               <Link
-                href="/my-sessions"
+                href="/my-activity"
                 className={`flex items-center px-3 py-2 rounded-lg text-sm font-sans font-medium transition-colors ${
-                  pathname === "/my-sessions" ? "bg-peach-dark/40 text-ink" : "text-ink/70 hover:bg-peach-dark/20 hover:text-ink"
+                  pathname === "/my-activity" ? "bg-peach-dark/40 text-ink" : "text-ink/70 hover:bg-peach-dark/20 hover:text-ink"
                 }`}
               >
                 my activity
@@ -251,7 +251,7 @@ export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEma
               </button>
             ) : (
               <div className="px-3 py-2.5">
-                <SignInOptions callbackUrl="/" compact googleLabel="sign in with Google" />
+                <SignInOptions callbackUrl={typeof window !== "undefined" ? window.location.pathname + window.location.search : "/my-activity"} compact googleLabel="sign in with Google" />
               </div>
             )}
 
@@ -346,7 +346,7 @@ export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEma
             <p className="font-sans text-sm text-ink">are you sure you want to sign out?</p>
             <div className="flex flex-col gap-2.5 w-full">
               <button
-                onClick={() => signOut({ callbackUrl: "/" })}
+                onClick={() => signOut({ callbackUrl: window.location.pathname + window.location.search })}
                 className="w-full inline-flex items-center justify-center font-sans font-semibold text-sm py-2.5 rounded-xl bg-ink text-cream hover:bg-ink/80 transition-colors"
               >
                 yes, sign out

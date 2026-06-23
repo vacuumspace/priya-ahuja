@@ -1,10 +1,9 @@
-"use client"
+﻿"use client"
 
 import Image from "next/image"
 import Link from "next/link"
 import { Star, ChevronLeft, ChevronRight } from "lucide-react"
 import { useState } from "react"
-import { useSession } from "next-auth/react"
 
 const LinkedInIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
@@ -49,7 +48,6 @@ const testimonials = [
 
 export default function HomePage() {
   const [idx, setIdx] = useState(0)
-  const { data: session } = useSession()
 
   const prev = () => setIdx((i) => (i - 1 + testimonials.length) % testimonials.length)
   const next = () => setIdx((i) => (i + 1) % testimonials.length)
@@ -95,24 +93,6 @@ export default function HomePage() {
           connect
         </Link>
       </div>
-
-      {/* ── Continue where you left off (signed-in only) ── */}
-      {session?.user && (
-        <div className="mb-10 bg-peach/20 border border-peach-dark/15 rounded-xl px-4 py-3 flex items-center justify-between gap-3">
-          <div>
-            <p className="font-sans text-xs font-semibold text-ink/70">
-              welcome back{session.user.name ? `, ${session.user.name.split(" ")[0]}` : ""}
-            </p>
-            <p className="font-sans text-[11px] text-ink/40 mt-0.5">pick up where you left off</p>
-          </div>
-          <Link
-            href="/my-sessions"
-            className="text-[11px] font-sans font-semibold text-peach-dark hover:underline whitespace-nowrap flex-shrink-0"
-          >
-            my activity →
-          </Link>
-        </div>
-      )}
 
       {/* ── Hero ── */}
       <div className="mb-14">
@@ -304,7 +284,7 @@ export default function HomePage() {
               href: "/connect",
               links: [
                 { label: "book a session", href: "/connect" },
-                { label: "my activity", href: "/my-sessions" },
+                { label: "my activity", href: "/my-activity" },
               ],
             },
             {

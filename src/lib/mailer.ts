@@ -1,4 +1,4 @@
-import nodemailer from "nodemailer"
+﻿import nodemailer from "nodemailer"
 import { render } from "@react-email/components"
 import { db } from "@/lib/db"
 import { siteSettings } from "@/lib/db/schema"
@@ -296,7 +296,7 @@ export async function sendMessageNotification({
 }) {
   const dashboardUrl = recipientIsAdmin
     ? `${process.env.NEXT_PUBLIC_APP_URL}/admin/bookings`
-    : `${process.env.NEXT_PUBLIC_APP_URL}/my-sessions`
+    : `${process.env.NEXT_PUBLIC_APP_URL}/my-activity`
 
   const html = `
     <div style="font-family:Inter,sans-serif;max-width:560px;margin:0 auto;padding:32px 24px;background:#fff;border:1px solid #e8e8e8;border-radius:12px">
@@ -337,7 +337,7 @@ export async function sendSessionNotes({
   bookingId: string
 }) {
   const firstName = name.split(" ")[0]
-  const activityUrl = `${process.env.NEXT_PUBLIC_APP_URL}/my-sessions`
+  const activityUrl = `${process.env.NEXT_PUBLIC_APP_URL}/my-activity`
   const html = `
     <div style="font-family:Inter,sans-serif;max-width:560px;margin:0 auto;padding:32px 24px;background:#fff;border:1px solid #e8e8e8;border-radius:12px">
       <p style="font-size:14px;color:#777;margin:0 0 20px">Hi ${firstName},</p>
@@ -378,7 +378,7 @@ export async function sendFeedbackRequest({
   serviceName: string
   bookingId: string
 }) {
-  const feedbackUrl = `${process.env.NEXT_PUBLIC_APP_URL}/my-sessions/feedback/${bookingId}`
+  const feedbackUrl = `${process.env.NEXT_PUBLIC_APP_URL}/my-activity/feedback/${bookingId}`
   const html = await render(FeedbackRequestEmail({ name, serviceName, feedbackUrl }))
 
   await sendMail({

@@ -1,6 +1,6 @@
 import { db } from "@/lib/db"
-import { bookings, services, availability } from "@/lib/db/schema"
-import { eq, and, gte, not } from "drizzle-orm"
+import { bookings, services, availability, purchases, digitalProducts } from "@/lib/db/schema"
+import { eq, and, gte, not, desc, isNotNull } from "drizzle-orm"
 import Link from "next/link"
 
 const STATUS_COLORS: Record<string, string> = {
@@ -13,6 +13,42 @@ const STATUS_COLORS: Record<string, string> = {
 
 export default async function AdminDashboard() {
   const today = new Date().toISOString().slice(0, 10)
+
+  const recentBookingTxns = await db
+    .select({
+      id: bookings.id,
+      userName: bookings.userName,
+      amount: services.price,
+      label: services.title,
+      createdAt: bookings.createdAt,
+      type: bookings.razorpayPaymentId,
+    })
+    .from(bookings)
+    .leftJoin(services, eq(bookings.serviceId, services.id))
+    .where(and(isNotNull(bookings.razorpayPaymentId), not(eq(bookings.status, "cancelled"))))
+    .orderBy(desc(bookings.createdAt))
+    .limit(10)
+
+  const recentPurchaseTxns = await db
+    .select({
+      id: purchases.id,
+      userName: purchases.userName,
+      amount: digitalProducts.price,
+      label: digitalProducts.title,
+      createdAt: purchases.createdAt,
+    })
+    .from(purchases)
+    .leftJoin(digitalProducts, eq(purchases.productId, digitalProducts.id))
+    .where(isNotNull(purchases.razorpayPaymentId))
+    .orderBy(desc(purchases.createdAt))
+    .limit(10)
+
+  const recentTransactions = [
+    ...recentBookingTxns.map((t) => ({ ...t, kind: "booking" as const })),
+    ...recentPurchaseTxns.map((t) => ({ ...t, kind: "purchase" as const, type: null })),
+  ]
+    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+    .slice(0, 10)
 
   const upcomingBookings = await db
     .select({
@@ -38,7 +74,42 @@ export default async function AdminDashboard() {
         <p className="font-sans text-sm text-ink/50 mt-1">Welcome back, Priya.</p>
       </div>
 
-      <div className="max-w-2xl">
+      <div className="max-w-2xl flex flex-col gap-10">
+
+        <div>
+          <h2 className="font-sans text-xs font-semibold text-ink/40 uppercase tracking-widest mb-3">
+            Recent Transactions
+          </h2>
+          {recentTransactions.length === 0 ? (
+            <p className="font-sans text-sm text-ink/30">No transactions yet.</p>
+          ) : (
+            <div className="flex flex-col gap-2">
+              {recentTransactions.map((t) => {
+                const dateLabel = new Date(t.createdAt).toLocaleDateString("en-IN", {
+                  day: "numeric", month: "short", year: "numeric",
+                })
+                const amountRs = t.amount != null ? `₹${(t.amount / 100).toLocaleString("en-IN")}` : "—"
+                return (
+                  <div key={`${t.kind}-${t.id}`} className="bg-card border border-border rounded-xl px-4 py-3 flex items-center gap-4">
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-sans font-medium text-ink truncate">{t.userName}</p>
+                      <p className="text-[11px] font-sans text-ink/40 truncate">{t.label ?? "—"}</p>
+                    </div>
+                    <div className="text-right flex-shrink-0">
+                      <p className="text-sm font-sans font-semibold text-ink">{amountRs}</p>
+                      <p className="text-[10px] font-sans text-ink/30">{dateLabel}</p>
+                    </div>
+                    <span className={`text-[10px] font-sans font-semibold px-2 py-0.5 rounded-full capitalize flex-shrink-0 ${t.kind === "purchase" ? "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400" : "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"}`}>
+                      {t.kind === "purchase" ? "template" : "session"}
+                    </span>
+                  </div>
+                )
+              })}
+            </div>
+          )}
+        </div>
+
+        <div>
         <div className="flex items-center justify-between mb-3">
           <h2 className="font-sans text-xs font-semibold text-ink/40 uppercase tracking-widest">
             Upcoming Bookings
@@ -86,6 +157,8 @@ export default async function AdminDashboard() {
             })}
           </div>
         )}
+        </div>
+
       </div>
     </div>
   )

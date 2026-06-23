@@ -17,7 +17,7 @@ export default function SignInPage() {
           <p className="font-sans text-sm text-ink-muted">sign in to continue</p>
         </div>
 
-        <SignInOptions callbackUrl="/" className="w-full" />
+        <SignInOptions callbackUrl="/my-activity" className="w-full" />
       </div>
     </div>
   )

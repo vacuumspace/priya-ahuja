@@ -8,7 +8,7 @@ const sections = [
     description: "50 questions across 9 investor criteria — market size, traction signals, team strength, business model, defensibility, and more. Get a 0–100 score with a full breakdown and a prioritised fix list before you walk into any room.",
     tag: "tool",
     icon: Wrench,
-    badge: "free quiz · ₹99 unlock",
+    badge: "free quiz · ₹499 unlock",
     href: "/fundraise/tools/fundability-score",
   },
   {

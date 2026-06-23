@@ -58,7 +58,7 @@ export default function FeedbackForm({
             ? "you've already shared your feedback for this session."
             : "your feedback means a lot and helps me keep improving."}
         </p>
-        <Link href="/my-sessions" className="inline-block mt-4 text-xs font-sans font-semibold text-peach-dark hover:underline">
+        <Link href="/my-activity" className="inline-block mt-4 text-xs font-sans font-semibold text-peach-dark hover:underline">
           ← back to my activity
         </Link>
       </div>

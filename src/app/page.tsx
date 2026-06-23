@@ -1,4 +1,4 @@
-import { Metadata } from "next"
+﻿import { Metadata } from "next"
 import { SidebarWithAuth } from "@/components/layout/SidebarWithAuth"
 import HomePage from "@/components/HomePage"
 

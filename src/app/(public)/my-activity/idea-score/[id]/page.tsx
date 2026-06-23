@@ -10,7 +10,7 @@ type Props = { params: Promise<{ id: string }> }
 
 export default async function IdeaScoreDetailPage({ params }: Props) {
   const session = await auth()
-  if (!session?.user?.id) redirect("/my-sessions")
+  if (!session?.user?.id) redirect("/my-activity")
 
   const { id } = await params
 

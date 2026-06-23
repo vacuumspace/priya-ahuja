@@ -1,4 +1,4 @@
-import {
+﻿import {
   Html, Head, Body, Container, Text, Heading, Link, Hr, Preview, Section,
 } from "@react-email/components"
 
@@ -54,7 +54,7 @@ const content: Record<string, {
       "Retake the score after 4 weeks to track how your thinking has evolved.",
     ],
     ctaLabel: "View your full score",
-    ctaPath: "/my-sessions?tab=tools",
+    ctaPath: "/my-activity?tab=tools",
   },
   "startup-score": {
     subject: "Your fundability score is ready — here's what to do with it",
@@ -67,7 +67,7 @@ const content: Record<string, {
       "Retake after 6–8 weeks once you've worked on your weak areas.",
     ],
     ctaLabel: "View your full score",
-    ctaPath: "/my-sessions?tab=tools",
+    ctaPath: "/my-activity?tab=tools",
   },
   default: {
     subject: "You're all set — here's how to get the most out of your purchase",
@@ -78,7 +78,7 @@ const content: Record<string, {
       "If you get stuck or want a second opinion, book a 1-on-1 session — that's what they're for.",
     ],
     ctaLabel: "View your activity",
-    ctaPath: "/my-sessions",
+    ctaPath: "/my-activity",
   },
 }
 

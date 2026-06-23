@@ -17,7 +17,7 @@ const sections = [
     description: "50 questions across 9 segments — problem clarity, founder-market fit, demand signals, customer understanding, and more. Find out if your idea is worth building before you commit.",
     tag: "tool",
     icon: Wrench,
-    badge: "free quiz · ₹99 unlock",
+    badge: "free quiz · ₹499 unlock",
     href: "/startup/tools/idea-score",
   },
   {

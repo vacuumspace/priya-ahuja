@@ -10,7 +10,7 @@ type Props = { params: Promise<{ bookingId: string }> }
 export default async function FeedbackPage({ params }: Props) {
   const { bookingId } = await params
   const session = await auth()
-  if (!session?.user?.email) redirect("/my-sessions")
+  if (!session?.user?.email) redirect("/my-activity")
 
   const [row] = await db
     .select({
@@ -27,7 +27,7 @@ export default async function FeedbackPage({ params }: Props) {
     .limit(1)
 
   if (!row || row.userEmail !== session.user.email) notFound()
-  if (row.status !== "completed") redirect("/my-sessions")
+  if (row.status !== "completed") redirect("/my-activity")
 
   return (
     <div className="min-h-screen bg-cream flex items-center justify-center px-4 py-16">
