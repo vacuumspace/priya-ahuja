@@ -86,7 +86,7 @@ export default function AccountingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-cream max-w-2xl mx-auto px-6 md:px-10 py-14 md:py-20">
+    <div className="min-h-screen bg-cream max-w-2xl mx-auto px-4 md:px-10 py-10 md:py-20">
 
       {/* Hero */}
       <div className="mb-14">
@@ -137,7 +137,7 @@ export default function AccountingPage() {
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="text-[10px] font-sans text-ink/50 uppercase tracking-wide block mb-1.5">Name *</label>
                 <input

@@ -97,7 +97,7 @@ export default function TechPage() {
   }
 
   return (
-    <div className="min-h-screen bg-cream max-w-2xl mx-auto px-6 md:px-10 py-14 md:py-20">
+    <div className="min-h-screen bg-cream max-w-2xl mx-auto px-4 md:px-10 py-10 md:py-20">
 
       {/* Hero */}
       <div className="mb-14">
@@ -138,7 +138,7 @@ export default function TechPage() {
       {/* Why us */}
       <div className="mb-14">
         <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">why work with us</p>
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           {whyUs.map((w) => (
             <div key={w.label} className="bg-peach/10 border border-peach-dark/10 rounded-xl px-4 py-4 text-center">
               <w.icon size={18} className="text-peach-dark mx-auto mb-2" />
@@ -160,7 +160,7 @@ export default function TechPage() {
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="text-[10px] font-sans text-ink/50 uppercase tracking-wide block mb-1.5">Name *</label>
                 <input
@@ -184,7 +184,7 @@ export default function TechPage() {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="text-[10px] font-sans text-ink/50 uppercase tracking-wide block mb-1.5">Phone</label>
                 <input

@@ -58,10 +58,10 @@ export default function HomePage() {
     <div className="min-h-screen bg-cream max-w-2xl mx-auto px-5 md:px-10 py-8 md:py-20">
 
       {/* ── Top bar: profile left, CTA right ── */}
-      <div className="flex items-start justify-between mb-12">
+      <div className="flex items-start justify-between mb-12 gap-3">
         {/* Profile */}
-        <div className="flex items-center gap-4">
-          <div className="relative w-[84px] h-[84px] rounded-full overflow-hidden border-2 border-peach-dark/30 flex-shrink-0">
+        <div className="flex items-center gap-3 sm:gap-4">
+          <div className="relative w-16 h-16 sm:w-[84px] sm:h-[84px] rounded-full overflow-hidden border-2 border-peach-dark/30 flex-shrink-0">
             <Image
               src="/priyadp.jpeg"
               alt="Priya Ahuja"
@@ -161,7 +161,7 @@ export default function HomePage() {
       </div>
 
       {/* ── CTA ── */}
-      <div className="bg-ink rounded-2xl px-6 py-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 mb-14">
+      <div className="bg-ink rounded-2xl px-4 sm:px-6 py-5 sm:py-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 mb-14">
         <div>
           <p className="font-heading text-lg font-700 text-cream">want to get unstuck?</p>
           <p className="font-sans text-xs text-cream/45 mt-1">one session can reframe months of confusion.</p>

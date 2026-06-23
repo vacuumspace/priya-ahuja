@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, createContext, useContext, Suspense } from "react"
+import { usePathname } from "next/navigation"
 import { AdminSidebar } from "./AdminSidebar"
 
 const CollapseCtx = createContext({ collapsed: false })
@@ -15,9 +16,11 @@ interface AdminShellProps {
   notificationCounts?: Record<string, number>
 }
 
-export function AdminShell({ userEmail, children, notificationCounts = {} }: AdminShellProps) {
+export function AdminShell({ userEmail, children }: AdminShellProps) {
   const [collapsed, setCollapsed] = useState(false)
   const [theme, setTheme] = useState<"light" | "dark">("light")
+  const [notificationCounts, setNotificationCounts] = useState<Record<string, number>>({})
+  const pathname = usePathname()
 
   useEffect(() => {
     const storedCollapse = localStorage.getItem("admin-sidebar-collapsed")
@@ -28,6 +31,13 @@ export function AdminShell({ userEmail, children, notificationCounts = {} }: Adm
     setTheme(initial)
     if (initial === "dark") document.documentElement.classList.add("dark")
   }, [])
+
+  useEffect(() => {
+    fetch("/api/admin/notification-counts")
+      .then((r) => r.json())
+      .then(setNotificationCounts)
+      .catch(() => {})
+  }, [pathname])
 
   const toggleTheme = () => {
     const next = theme === "light" ? "dark" : "light"

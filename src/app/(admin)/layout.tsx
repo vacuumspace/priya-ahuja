@@ -1,40 +1,8 @@
 import { redirect } from "next/navigation"
 import { auth, isAdmin } from "@/lib/auth"
 import { AdminShell } from "@/components/admin/AdminShell"
-import { db } from "@/lib/db"
-import { bookings, purchases, startupScores, startupIdeaScores, customRequests, bookingMessages, users } from "@/lib/db/schema"
-import { eq, count, and, notInArray } from "drizzle-orm"
 
 export const dynamic = "force-dynamic"
-
-async function getNotificationCounts() {
-  const [unseenBookings, unseenPurchases, unseenFundability, unseenIdea, newCustomRequests, unreadMessages, unseenUsers] =
-    await Promise.all([
-      db.select({ count: count() }).from(bookings).where(
-        and(
-          notInArray(bookings.status, ["cancelled", "pending"]),
-          eq(bookings.adminSeen, false),
-        )
-      ),
-      db.select({ count: count() }).from(purchases).where(eq(purchases.adminSeen, false)),
-      db.select({ count: count() }).from(startupScores).where(eq(startupScores.adminSeen, false)),
-      db.select({ count: count() }).from(startupIdeaScores).where(eq(startupIdeaScores.adminSeen, false)),
-      db.select({ count: count() }).from(customRequests).where(eq(customRequests.status, "new")),
-      db.select({ count: count() }).from(bookingMessages).where(
-        and(eq(bookingMessages.isAdmin, false), eq(bookingMessages.adminRead, false))
-      ),
-      db.select({ count: count() }).from(users).where(eq(users.adminSeen, false)),
-    ])
-
-  return {
-    "/admin/bookings": unseenBookings[0].count + unreadMessages[0].count,
-    "/admin/products?tab=transactions": unseenPurchases[0].count,
-    "/admin/startup-scores": unseenFundability[0].count,
-    "/admin/idea-scores": unseenIdea[0].count,
-    "/admin/custom-requests": newCustomRequests[0].count,
-    "/admin/users": unseenUsers[0].count,
-  }
-}
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   const session = await auth()
@@ -42,10 +10,8 @@ export default async function AdminLayout({ children }: { children: React.ReactN
     redirect("/")
   }
 
-  const notificationCounts = await getNotificationCounts()
-
   return (
-    <AdminShell userEmail={session.user?.email ?? ""} notificationCounts={notificationCounts}>
+    <AdminShell userEmail={session.user?.email ?? ""}>
       {children}
     </AdminShell>
   )

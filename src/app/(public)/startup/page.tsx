@@ -79,7 +79,7 @@ export default function StartupHubPage() {
         <div className="grid grid-cols-1 gap-4">
           {sections.map((section) => (
             <Link key={section.slug} href={section.href}>
-              <div className="bg-card border border-border rounded-2xl p-6 hover:border-peach-dark/40 hover:shadow-sm transition-all">
+              <div className="bg-card border border-border rounded-2xl p-4 sm:p-6 hover:border-peach-dark/40 hover:shadow-sm transition-all">
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-xl bg-peach/50 flex items-center justify-center flex-shrink-0">
                     <section.icon size={18} className="text-peach-dark" />

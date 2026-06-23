@@ -36,7 +36,7 @@ export default async function BlogPage({ searchParams }: Props) {
       {/* Series section */}
       <div className="px-4 md:px-10 pb-8">
         <div className="border border-peach-dark/30 rounded-2xl overflow-hidden">
-          <div className="bg-peach/40 px-6 py-4 flex items-center justify-between">
+          <div className="bg-peach/40 px-4 sm:px-6 py-4 flex items-center justify-between">
             <div>
               <p className="font-sans text-[10px] text-ink/40 uppercase tracking-wide mb-0.5">Featured Series</p>
               <p className="font-heading text-lg font-700 text-ink">{STARTUP_SERIES_NAME}</p>
@@ -51,7 +51,7 @@ export default async function BlogPage({ searchParams }: Props) {
               <Link
                 key={post.slug}
                 href={`/blog/${post.slug}`}
-                className="group flex items-center gap-4 px-6 py-3.5 hover:bg-peach/10 transition-colors"
+                className="group flex items-center gap-3 sm:gap-4 px-4 sm:px-6 py-3.5 hover:bg-peach/10 transition-colors"
               >
                 <span className="font-heading text-xs font-700 text-ink/25 w-4 flex-shrink-0">
                   {post.series!.part}
@@ -83,7 +83,7 @@ export default async function BlogPage({ searchParams }: Props) {
             <Link
               key={post.slug}
               href={`/blog/${post.slug}`}
-              className="group block bg-card border border-border rounded-2xl p-6 hover:border-peach-dark/40 hover:shadow-sm transition-all"
+              className="group block bg-card border border-border rounded-2xl p-4 sm:p-6 hover:border-peach-dark/40 hover:shadow-sm transition-all"
             >
               <div className="flex items-start justify-between gap-6">
                 <div className="flex-1">
@@ -105,7 +105,7 @@ export default async function BlogPage({ searchParams }: Props) {
           ))}
         </div>
 
-        <div className="mt-12 bg-peach/30 border border-peach-dark/20 rounded-2xl p-6">
+        <div className="mt-12 bg-peach/30 border border-peach-dark/20 rounded-2xl p-4 sm:p-6">
           <p className="font-heading text-lg font-700 text-ink mb-1">stay in the loop</p>
           <p className="font-sans text-sm text-ink/60 mb-4">new posts drop whenever i have something worth saying.</p>
           <a
