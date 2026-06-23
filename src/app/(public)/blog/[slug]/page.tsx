@@ -202,7 +202,7 @@ export default async function BlogPostPage({ params }: Props) {
           {!post.series && <div className="mt-16 bg-peach/30 border border-peach-dark/20 rounded-2xl p-6">
             <p className="font-heading text-base font-700 text-ink mb-1">Priya Ahuja</p>
             <p className="font-sans text-xs text-ink/60 mb-4 leading-relaxed">
-              Corporate Development at Groww. Writing about fundraising, VC careers, and startup strategy from the inside.
+              vc at Groww · startup consultant & advisor. Writing about fundraising, VC careers, and startup strategy from the inside.
             </p>
             <a
               href="https://www.instagram.com/pitchtopriya"

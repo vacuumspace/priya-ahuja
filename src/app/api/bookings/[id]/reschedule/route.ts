@@ -142,6 +142,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
     to: booking.userEmail,
     name: booking.userName,
     serviceName,
+    serviceType: (service?.type ?? "call") as "call" | "dm" | "report",
     date: dateLabel,
     time: timeLabel,
     meetLink: meetLink ?? undefined,

@@ -2,7 +2,7 @@ import { redirect } from "next/navigation"
 import { auth, isAdmin } from "@/lib/auth"
 import { AdminShell } from "@/components/admin/AdminShell"
 import { db } from "@/lib/db"
-import { bookings, purchases, startupScores, startupIdeaScores, customRequests } from "@/lib/db/schema"
+import { bookings, purchases, startupScores, startupIdeaScores, customRequests, bookingMessages } from "@/lib/db/schema"
 import { eq, count, gte, and, notInArray } from "drizzle-orm"
 
 export const dynamic = "force-dynamic"
@@ -10,7 +10,7 @@ export const dynamic = "force-dynamic"
 async function getNotificationCounts() {
   const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
 
-  const [pendingBookings, recentPurchases, recentFundability, recentIdea, newCustomRequests] =
+  const [pendingBookings, recentPurchases, recentFundability, recentIdea, newCustomRequests, unreadMessages] =
     await Promise.all([
       db.select({ count: count() }).from(bookings).where(
         and(
@@ -22,10 +22,13 @@ async function getNotificationCounts() {
       db.select({ count: count() }).from(startupScores).where(gte(startupScores.createdAt, sevenDaysAgo)),
       db.select({ count: count() }).from(startupIdeaScores).where(gte(startupIdeaScores.createdAt, sevenDaysAgo)),
       db.select({ count: count() }).from(customRequests).where(eq(customRequests.status, "new")),
+      db.select({ count: count() }).from(bookingMessages).where(
+        and(eq(bookingMessages.isAdmin, false), eq(bookingMessages.adminRead, false))
+      ),
     ])
 
   return {
-    "/admin/bookings": pendingBookings[0].count,
+    "/admin/bookings": pendingBookings[0].count + unreadMessages[0].count,
     "/admin/products?tab=transactions": recentPurchases[0].count,
     "/admin/startup-scores": recentFundability[0].count,
     "/admin/idea-scores": recentIdea[0].count,

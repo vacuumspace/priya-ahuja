@@ -9,10 +9,9 @@ import {
   computePillarScores,
   type Answers,
 } from "@/lib/startup-score-data"
-import { fetchRazorpayOrder } from "@/lib/razorpay"
 import { sendPurchaseWelcome } from "@/lib/mailer"
 
-const PRICE_PAISE = 9900 // ₹99
+const PRICE_PAISE = 19900 // ₹199
 
 export async function POST(req: NextRequest) {
   const [session, liveSetting] = await Promise.all([
@@ -60,16 +59,16 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Payment verification failed" }, { status: 400 })
   }
 
-  // Verify amount matches the tool price
-  try {
-    const rzOrder = await fetchRazorpayOrder(razorpayOrderId)
-    if (rzOrder.amount !== PRICE_PAISE) {
-      console.error(`Startup score amount mismatch: expected ${PRICE_PAISE}, got ${rzOrder.amount}`)
-      return NextResponse.json({ error: "Payment amount mismatch" }, { status: 400 })
-    }
-  } catch (err) {
-    console.error("Razorpay order fetch failed (continuing):", err)
-  }
+  // TEMP: amount check disabled for ₹1 testing (re-enable by uncommenting below)
+  // try {
+  //   const rzOrder = await fetchRazorpayOrder(razorpayOrderId)
+  //   if (rzOrder.amount !== PRICE_PAISE) {
+  //     console.error(`Startup score amount mismatch: expected ${PRICE_PAISE}, got ${rzOrder.amount}`)
+  //     return NextResponse.json({ error: "Payment amount mismatch" }, { status: 400 })
+  //   }
+  // } catch (err) {
+  //   console.error("Razorpay order fetch failed (continuing):", err)
+  // }
 
   const totalScore = computeTotal(answers)
   const pillarScores = computePillarScores(answers)

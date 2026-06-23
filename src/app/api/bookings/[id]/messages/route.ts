@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server"
 import { auth } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { bookings, bookingMessages, services as servicesTable } from "@/lib/db/schema"
-import { eq, asc } from "drizzle-orm"
+import { eq, asc, and } from "drizzle-orm"
 import { isAdmin } from "@/lib/auth"
 import { sendMessageNotification } from "@/lib/mailer"
 
@@ -66,6 +66,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
     senderName: session.user.name ?? session.user.email,
     isAdmin: admin,
     body: body.trim(),
+    adminRead: admin, // admin's own messages are pre-read; user messages start unread
   }).returning()
 
   if (booking.msgEmailEnabled) {
@@ -102,6 +103,22 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
   }
 
   return NextResponse.json(msg)
+}
+
+// Admin only: mark all user messages in this booking as read
+export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  const session = await auth()
+  if (!session?.user?.email || !isAdmin(session.user.email)) {
+    return NextResponse.json({ error: "Forbidden" }, { status: 403 })
+  }
+
+  const { id } = await params
+  await db
+    .update(bookingMessages)
+    .set({ adminRead: true })
+    .where(and(eq(bookingMessages.bookingId, id), eq(bookingMessages.adminRead, false)))
+
+  return NextResponse.json({ ok: true })
 }
 
 // Admin only: toggle email notifications for this booking's messages

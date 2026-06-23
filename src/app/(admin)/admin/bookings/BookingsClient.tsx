@@ -42,7 +42,9 @@ function MessagesPanel({ bookingId, onClose }: { bookingId: string; onClose: () 
   useEffect(() => {
     fetch(`/api/bookings/${bookingId}/messages`)
       .then((r) => r.json())
-      .then(setMessages)
+      .then(({ messages }) => setMessages(messages ?? []))
+    // Mark all user messages in this booking as read
+    fetch(`/api/bookings/${bookingId}/messages`, { method: "PUT" }).catch(() => {})
   }, [bookingId])
 
   useEffect(() => {

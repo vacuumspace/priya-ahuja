@@ -147,6 +147,7 @@ export async function sendRescheduleConfirmation({
   to,
   name,
   serviceName,
+  serviceType = "call",
   date,
   time,
   meetLink,
@@ -154,6 +155,7 @@ export async function sendRescheduleConfirmation({
   to: string
   name: string
   serviceName: string
+  serviceType?: "call" | "dm" | "report"
   date: string
   time: string
   meetLink?: string
@@ -164,6 +166,7 @@ export async function sendRescheduleConfirmation({
     BookingConfirmationEmail({
       name,
       serviceName,
+      serviceType,
       date,
       time,
       meetLink,

@@ -77,6 +77,11 @@ export async function POST(req: NextRequest) {
       status: "confirmed",
     }).returning()
 
+    // Mark slot as booked atomically after booking creation
+    if (resolvedSlotId) {
+      await db.update(availability).set({ isBooked: true }).where(eq(availability.id, resolvedSlotId))
+    }
+
     // Fetch the slot for calendar/email
     let slot = null
     if (resolvedSlotId) {

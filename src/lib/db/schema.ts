@@ -60,6 +60,7 @@ export const bookingMessages = pgTable("booking_messages", {
   senderName: text("sender_name").notNull(),
   isAdmin: boolean("is_admin").notNull().default(false),
   body: text("body").notNull(),
+  adminRead: boolean("admin_read").notNull().default(false),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 })
 
