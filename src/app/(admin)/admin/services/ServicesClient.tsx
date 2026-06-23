@@ -144,6 +144,7 @@ function BlockedPeriodsSection() {
 
 function AvailabilityTab() {
   const [daysAhead, setDaysAhead] = useState(14)
+  const [minDaysOffset, setMinDaysOffset] = useState(0)
   const [schedule, setSchedule] = useState<ScheduleDay[]>([])
   const [deletedIds, setDeletedIds] = useState<string[]>([])
   const [loading, setLoading] = useState(true)
@@ -155,6 +156,7 @@ function AvailabilityTab() {
       .then((r) => r.json())
       .then((data) => {
         setDaysAhead(data.daysAhead)
+        setMinDaysOffset(data.minDaysOffset ?? 0)
         setSchedule(data.schedule)
         setLoading(false)
       })
@@ -180,7 +182,7 @@ function AvailabilityTab() {
     await fetch("/api/admin/availability-config", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ daysAhead, schedule, deletedIds }),
+      body: JSON.stringify({ daysAhead, minDaysOffset, schedule, deletedIds }),
     })
     const data = await fetch("/api/admin/availability-config").then((r) => r.json())
     setSchedule(data.schedule)
@@ -210,6 +212,27 @@ function AvailabilityTab() {
           />
           <span className="text-sm font-sans text-ink/60">days</span>
         </div>
+        <div className="flex items-center gap-3 mt-3">
+          <label className="text-sm font-sans text-ink/60">Hide slots within the next</label>
+          <input
+            type="number"
+            min={0}
+            max={30}
+            value={minDaysOffset}
+            onChange={(e) => setMinDaysOffset(Number(e.target.value))}
+            className="w-16 text-sm font-sans bg-cream border border-border rounded-lg px-2 py-1 text-ink text-center focus:outline-none focus:border-peach-dark/50"
+          />
+          <span className="text-sm font-sans text-ink/60">days</span>
+        </div>
+        {minDaysOffset > 0 && (
+          <p className="text-[11px] font-sans text-ink/40 mt-1.5">
+            Users booking today will only see slots from{" "}
+            <span className="font-semibold text-ink/60">
+              {new Date(Date.now() + (minDaysOffset + 1) * 86400000).toLocaleDateString("en-IN", { day: "numeric", month: "short" })}
+            </span>{" "}
+            onwards.
+          </p>
+        )}
       </div>
 
       <div>
@@ -477,6 +500,9 @@ function ServiceRow({
 }) {
   const [price, setPrice] = useState(String(service.price / 100))
   const [duration, setDuration] = useState(String(service.durationMin ?? ""))
+  const [isDirty, setIsDirty] = useState(false)
+  const [saving, setSaving] = useState(false)
+  const [saved, setSaved] = useState(false)
   const [showSlots, setShowSlots] = useState(false)
   const [showHighlights, setShowHighlights] = useState(false)
 
@@ -487,6 +513,20 @@ function ServiceRow({
       body: JSON.stringify(data),
     })
     onUpdate(service.id, data)
+  }
+
+  const saveFields = async () => {
+    setSaving(true)
+    const priceVal = Math.round(parseFloat(price) * 100)
+    const durVal = parseInt(duration)
+    const data: Partial<Service> = {}
+    if (!isNaN(priceVal)) data.price = priceVal
+    if (!isNaN(durVal)) data.durationMin = durVal
+    await patch(data)
+    setIsDirty(false)
+    setSaving(false)
+    setSaved(true)
+    setTimeout(() => setSaved(false), 1500)
   }
 
   const handleDelete = async () => {
@@ -526,11 +566,7 @@ function ServiceRow({
             <span className="text-sm font-sans text-ink/50">₹</span>
             <input
               value={price}
-              onChange={(e) => setPrice(e.target.value)}
-              onBlur={() => {
-                const val = Math.round(parseFloat(price) * 100)
-                if (!isNaN(val)) patch({ price: val })
-              }}
+              onChange={(e) => { setPrice(e.target.value); setIsDirty(true) }}
               className="w-24 text-sm font-sans bg-cream border border-border rounded-lg px-2 py-1 text-ink focus:outline-none focus:border-peach-dark/50"
             />
           </div>
@@ -539,14 +575,20 @@ function ServiceRow({
             <input
               type="number"
               value={duration}
-              onChange={(e) => setDuration(e.target.value)}
-              onBlur={() => {
-                const val = parseInt(duration)
-                if (!isNaN(val)) patch({ durationMin: val })
-              }}
+              onChange={(e) => { setDuration(e.target.value); setIsDirty(true) }}
               className="w-16 text-sm font-sans bg-cream border border-border rounded-lg px-2 py-1 text-ink focus:outline-none focus:border-peach-dark/50"
             />
           </div>
+          {isDirty && (
+            <button
+              onClick={saveFields}
+              disabled={saving}
+              className="text-[11px] font-sans font-semibold bg-ink text-cream px-2.5 py-1 rounded-lg hover:bg-ink/80 disabled:opacity-50 transition-colors"
+            >
+              {saving ? "…" : "Save"}
+            </button>
+          )}
+          {saved && !isDirty && <span className="text-[11px] font-sans text-ink/40">✓</span>}
         </div>
 
         <button

@@ -1,6 +1,6 @@
 import { db } from "@/lib/db"
 import { digitalProducts, purchases } from "@/lib/db/schema"
-import { eq, desc, ne } from "drizzle-orm"
+import { eq, desc, ne, isNotNull, and } from "drizzle-orm"
 import ProductsClient from "./ProductsClient"
 
 const ANGEL_SLUG = "angel-investor-list"
@@ -17,13 +17,13 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
         razorpayPaymentId: purchases.razorpayPaymentId,
         downloadToken: purchases.downloadToken,
         createdAt: purchases.createdAt,
-        price: digitalProducts.price,
+        amountPaid: purchases.amountPaid,
         productTitle: digitalProducts.title,
         productSlug: digitalProducts.slug,
       })
       .from(purchases)
       .innerJoin(digitalProducts, eq(purchases.productId, digitalProducts.id))
-      .where(ne(digitalProducts.slug, ANGEL_SLUG))
+      .where(and(ne(digitalProducts.slug, ANGEL_SLUG), isNotNull(purchases.razorpayPaymentId)))
       .orderBy(desc(purchases.createdAt)),
   ])
 

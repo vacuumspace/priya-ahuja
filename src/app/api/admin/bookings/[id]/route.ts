@@ -42,3 +42,18 @@ export async function PATCH(
 
   return Response.json({ ok: true })
 }
+
+export async function DELETE(
+  _request: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const session = await auth()
+  if (!session || !isAdmin(session.user?.email)) {
+    return new Response("Forbidden", { status: 403 })
+  }
+
+  const { id } = await params
+  await db.delete(bookings).where(eq(bookings.id, id))
+
+  return Response.json({ ok: true })
+}

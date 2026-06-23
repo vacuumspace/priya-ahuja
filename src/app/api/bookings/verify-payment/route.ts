@@ -59,6 +59,8 @@ export async function POST(req: NextRequest) {
       .from(servicesTable)
       .where(eq(servicesTable.id, booking.serviceId))
       .limit(1)
+
+    let amountPaid: number | undefined
     if (service) {
       try {
         const rzOrder = await fetchRazorpayOrder(razorpayOrderId)
@@ -66,14 +68,16 @@ export async function POST(req: NextRequest) {
           console.error(`Amount mismatch: expected ${service.price}, got ${rzOrder.amount} for order ${razorpayOrderId}`)
           return NextResponse.json({ error: "Payment amount mismatch" }, { status: 400 })
         }
+        amountPaid = rzOrder.amount
       } catch (err) {
         console.error("Razorpay order fetch failed (continuing):", err)
+        amountPaid = service.price
       }
     }
 
     const [confirmedBooking] = await db
       .update(bookings)
-      .set({ status: "confirmed", razorpayPaymentId })
+      .set({ status: "confirmed", razorpayPaymentId, amountPaid })
       .where(eq(bookings.id, bookingId))
       .returning()
 

@@ -48,6 +48,7 @@ export async function POST(req: NextRequest) {
       .where(eq(digitalProducts.id, purchase.productId))
       .limit(1)
 
+    let amountPaid: number | undefined
     if (product) {
       try {
         const rzOrder = await fetchRazorpayOrder(razorpayOrderId)
@@ -55,8 +56,10 @@ export async function POST(req: NextRequest) {
           console.error(`Amount mismatch: expected ${product.price}, got ${rzOrder.amount} for order ${razorpayOrderId}`)
           return NextResponse.json({ error: "Payment amount mismatch" }, { status: 400 })
         }
+        amountPaid = rzOrder.amount
       } catch (err) {
         console.error("Razorpay order fetch failed (continuing):", err)
+        amountPaid = product.price
       }
     }
 
@@ -68,6 +71,7 @@ export async function POST(req: NextRequest) {
       .update(purchases)
       .set({
         razorpayPaymentId,
+        amountPaid,
         downloadToken: accessToken,
         tokenExpiresAt,
       })

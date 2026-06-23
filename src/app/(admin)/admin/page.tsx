@@ -1,6 +1,6 @@
 import { db } from "@/lib/db"
 import { bookings, services, availability, purchases, digitalProducts } from "@/lib/db/schema"
-import { eq, and, gte, not, desc, isNotNull } from "drizzle-orm"
+import { eq, and, gte, not, desc, isNotNull, inArray } from "drizzle-orm"
 import Link from "next/link"
 
 const STATUS_COLORS: Record<string, string> = {
@@ -18,14 +18,14 @@ export default async function AdminDashboard() {
     .select({
       id: bookings.id,
       userName: bookings.userName,
-      amount: services.price,
+      amount: bookings.amountPaid,
       label: services.title,
       createdAt: bookings.createdAt,
       type: bookings.razorpayPaymentId,
     })
     .from(bookings)
     .leftJoin(services, eq(bookings.serviceId, services.id))
-    .where(isNotNull(bookings.razorpayPaymentId))
+    .where(inArray(bookings.status, ["paid", "confirmed", "completed", "rescheduled"]))
     .orderBy(desc(bookings.createdAt))
     .limit(10)
 
@@ -33,7 +33,7 @@ export default async function AdminDashboard() {
     .select({
       id: purchases.id,
       userName: purchases.userName,
-      amount: digitalProducts.price,
+      amount: purchases.amountPaid,
       label: digitalProducts.title,
       createdAt: purchases.createdAt,
     })
@@ -64,7 +64,7 @@ export default async function AdminDashboard() {
     .from(bookings)
     .innerJoin(availability, eq(bookings.slotId, availability.id))
     .leftJoin(services, eq(bookings.serviceId, services.id))
-    .where(and(gte(availability.date, today), not(eq(bookings.status, "cancelled"))))
+    .where(and(gte(availability.date, today), eq(bookings.status, "confirmed")))
     .orderBy(availability.date, availability.startTime)
 
   return (

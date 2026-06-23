@@ -228,8 +228,6 @@ function SummaryTab() {
     return <div className="text-center py-12 text-ink/40">Loading…</div>
   }
 
-  const visibleMonths = data.monthly.filter((m) => m.key >= "2026-06")
-
   return (
     <div className="space-y-8">
       {/* Top-line stats */}
@@ -246,8 +244,8 @@ function SummaryTab() {
         ))}
       </div>
 
-      <BarChart months={visibleMonths} valueKey="revenue" label="Revenue per month" fmt={fmtAmount} />
-      <BarChart months={visibleMonths} valueKey="count" label="Transactions per month" fmt={(v) => String(v)} />
+      <BarChart months={data.monthly} valueKey="revenue" label="Revenue per month" fmt={fmtAmount} />
+      <BarChart months={data.monthly} valueKey="count" label="Transactions per month" fmt={(v) => String(v)} />
     </div>
   )
 }

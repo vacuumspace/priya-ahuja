@@ -41,6 +41,7 @@ export const bookings = pgTable("bookings", {
   message: text("message"), // for Priority DM
   razorpayOrderId: text("razorpay_order_id"),
   razorpayPaymentId: text("razorpay_payment_id"),
+  amountPaid: integer("amount_paid"), // actual captured amount in paise
   status: varchar("status", { length: 20 }).notNull().default("pending"), // pending | paid | confirmed | completed | cancelled
   meetLink: text("meet_link"),
   googleCalendarEventId: text("google_calendar_event_id"),
@@ -85,6 +86,7 @@ export const purchases = pgTable("purchases", {
   userName: text("user_name").notNull(),
   razorpayOrderId: text("razorpay_order_id"),
   razorpayPaymentId: text("razorpay_payment_id"),
+  amountPaid: integer("amount_paid"), // actual captured amount in paise
   downloadToken: text("download_token").unique(),
   tokenExpiresAt: timestamp("token_expires_at"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
@@ -112,6 +114,7 @@ export const availabilitySchedule = pgTable("availability_schedule", {
 export const availabilityConfig = pgTable("availability_config", {
   id: uuid("id").primaryKey().defaultRandom(),
   daysAhead: integer("days_ahead").notNull().default(14),
+  minDaysOffset: integer("min_days_offset").notNull().default(0),
 })
 
 export const blockedPeriods = pgTable("blocked_periods", {

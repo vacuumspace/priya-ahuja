@@ -227,18 +227,7 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
       {/* Why this list? — shown only on preview */}
       {!paid && (
         <div className="px-4 md:px-10 pb-8">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
-            {[
-              { stat: "900+", label: "verified angel investors" },
-              { stat: "28+", label: "states & cities covered" },
-              { stat: "direct", label: "emails, not contact forms" },
-            ].map((s) => (
-              <div key={s.stat} className="bg-peach/20 border border-peach-dark/15 rounded-xl px-4 py-3 text-center">
-                <p className="font-heading text-2xl font-800 text-ink">{s.stat}</p>
-                <p className="font-sans text-[11px] text-ink/50 mt-0.5">{s.label}</p>
-              </div>
-            ))}
-          </div>
+
           <div className="bg-card border border-border rounded-xl px-5 py-4 space-y-2">
             <p className="font-sans text-xs font-semibold text-ink/70">why this list is different</p>
             {[

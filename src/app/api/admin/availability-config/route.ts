@@ -12,7 +12,7 @@ export async function GET() {
   const [config] = await db.select().from(availabilityConfig).limit(1)
   const schedule = await db.select().from(availabilitySchedule).orderBy(availabilitySchedule.dayOfWeek)
 
-  return Response.json({ daysAhead: config?.daysAhead ?? 14, schedule })
+  return Response.json({ daysAhead: config?.daysAhead ?? 14, minDaysOffset: config?.minDaysOffset ?? 0, schedule })
 }
 
 export async function PUT(request: Request) {
@@ -21,14 +21,14 @@ export async function PUT(request: Request) {
     return new Response("Forbidden", { status: 403 })
   }
 
-  const { daysAhead, schedule, deletedIds } = await request.json()
+  const { daysAhead, minDaysOffset, schedule, deletedIds } = await request.json()
 
   // Update config
   const [existing] = await db.select({ id: availabilityConfig.id }).from(availabilityConfig).limit(1)
   if (existing) {
-    await db.update(availabilityConfig).set({ daysAhead }).where(eq(availabilityConfig.id, existing.id))
+    await db.update(availabilityConfig).set({ daysAhead, minDaysOffset: minDaysOffset ?? 0 }).where(eq(availabilityConfig.id, existing.id))
   } else {
-    await db.insert(availabilityConfig).values({ daysAhead })
+    await db.insert(availabilityConfig).values({ daysAhead, minDaysOffset: minDaysOffset ?? 0 })
   }
 
   // Delete removed rows

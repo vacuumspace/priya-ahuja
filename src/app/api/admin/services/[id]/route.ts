@@ -1,6 +1,6 @@
 import { auth, isAdmin } from "@/lib/auth"
 import { db } from "@/lib/db"
-import { services } from "@/lib/db/schema"
+import { services, availability, bookings } from "@/lib/db/schema"
 import { eq } from "drizzle-orm"
 
 export async function PATCH(
@@ -50,6 +50,9 @@ export async function DELETE(
   }
 
   const { id } = await params
+  // Delete child rows first to avoid foreign key violations
+  await db.delete(bookings).where(eq(bookings.serviceId, id))
+  await db.delete(availability).where(eq(availability.serviceId, id))
   await db.delete(services).where(eq(services.id, id))
 
   return Response.json({ ok: true })

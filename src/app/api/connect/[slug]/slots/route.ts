@@ -37,6 +37,7 @@ export async function GET(
   ])
 
   const daysAhead = config[0]?.daysAhead ?? 14
+  const minDaysOffset = config[0]?.minDaysOffset ?? 0
 
   const today = new Date()
   today.setHours(0, 0, 0, 0)
@@ -79,7 +80,7 @@ export async function GET(
 
   const result: { id: string; date: string; startTime: string; endTime: string }[] = []
 
-  for (let i = 1; i <= daysAhead; i++) {
+  for (let i = minDaysOffset + 1; i <= minDaysOffset + daysAhead; i++) {
     const d = new Date(today)
     d.setDate(d.getDate() + i)
     const dayOfWeek = d.getDay()

@@ -1,7 +1,7 @@
 import { auth, isAdmin } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { bookings, purchases, startupScores, services, digitalProducts, users } from "@/lib/db/schema"
-import { desc, eq, not } from "drizzle-orm"
+import { desc, eq, isNotNull } from "drizzle-orm"
 
 const PAGE_SIZE = 10
 
@@ -26,11 +26,11 @@ export async function GET(req: Request) {
         status: bookings.status,
         createdAt: bookings.createdAt,
         itemName: services.title,
-        amount: services.price,
+        amount: bookings.amountPaid,
       })
       .from(bookings)
       .leftJoin(services, eq(bookings.serviceId, services.id))
-      .where(not(eq(bookings.status, "pending"))),
+      .where(isNotNull(bookings.razorpayPaymentId)),
 
     db
       .select({
@@ -40,10 +40,11 @@ export async function GET(req: Request) {
         razorpayPaymentId: purchases.razorpayPaymentId,
         createdAt: purchases.createdAt,
         itemName: digitalProducts.title,
-        amount: digitalProducts.price,
+        amount: purchases.amountPaid,
       })
       .from(purchases)
-      .leftJoin(digitalProducts, eq(purchases.productId, digitalProducts.id)),
+      .leftJoin(digitalProducts, eq(purchases.productId, digitalProducts.id))
+      .where(isNotNull(purchases.razorpayPaymentId)),
 
     db
       .select({

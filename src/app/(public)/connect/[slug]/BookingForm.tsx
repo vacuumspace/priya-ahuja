@@ -17,7 +17,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
-import { CheckCircle, Loader2, Link2, CalendarDays, Clock, LogIn, ArrowRight, User, Mail } from "lucide-react"
+import { CheckCircle, Loader2, Link2, CalendarDays, Clock, LogIn, ArrowRight } from "lucide-react"
 import Link from "next/link"
 
 type Slot = {
@@ -196,7 +196,6 @@ function BookingFormInner({ service }: { service: Service }) {
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
   const [error, setError] = useState("")
-  const [showSummary, setShowSummary] = useState(false)
   const [rescheduleCount, setRescheduleCount] = useState<number | null>(null)
 
   useEffect(() => {
@@ -339,8 +338,7 @@ function BookingFormInner({ service }: { service: Service }) {
       return
     }
     setError("")
-    // Show booking summary before opening payment
-    setShowSummary(true)
+    await handlePayment()
   }
 
   if (success) {
@@ -368,89 +366,6 @@ function BookingFormInner({ service }: { service: Service }) {
         >
           view my activity <ArrowRight size={13} />
         </Link>
-      </div>
-    )
-  }
-
-  // Booking summary screen shown before payment
-  if (showSummary && (selectedSlot || !needsSlot)) {
-    const priceInRupees = Math.round((service.price ?? 0) / 100)
-    const slotDisplay = selectedSlot ? formatSlotTime(selectedSlot.date, selectedSlot.startTime, selectedSlot.endTime) : null
-    return (
-      <div className="space-y-4">
-        <div>
-          <p className="font-heading text-base font-700 text-ink mb-1">confirm your booking</p>
-          <p className="text-[11px] font-sans text-ink/40">review your details before payment</p>
-        </div>
-        <div className="bg-peach/20 border border-peach-dark/20 rounded-xl divide-y divide-peach-dark/10">
-          <div className="px-4 py-3 flex items-start gap-3">
-            <CalendarDays size={14} className="text-peach-dark mt-0.5 flex-shrink-0" />
-            <div>
-              <p className="text-[10px] font-sans text-ink/40 uppercase tracking-wide">session</p>
-              <p className="text-sm font-sans font-semibold text-ink mt-0.5">{service.title}</p>
-            </div>
-          </div>
-          {selectedSlot && slotDisplay ? (
-            <div className="px-4 py-3 flex items-start gap-3">
-              <Clock size={14} className="text-peach-dark mt-0.5 flex-shrink-0" />
-              <div>
-                <p className="text-[10px] font-sans text-ink/40 uppercase tracking-wide">date & time</p>
-                <p className="text-sm font-sans font-semibold text-ink mt-0.5">{formatDate(selectedSlot.date)}</p>
-                <p className="text-xs font-sans text-ink/60">{slotDisplay.display}</p>
-                {slotDisplay.localNote && <p className="text-[11px] font-sans text-peach-dark/70">{slotDisplay.localNote} (your time)</p>}
-              </div>
-            </div>
-          ) : (
-            <div className="px-4 py-3 flex items-start gap-3">
-              <Clock size={14} className="text-peach-dark mt-0.5 flex-shrink-0" />
-              <div>
-                <p className="text-[10px] font-sans text-ink/40 uppercase tracking-wide">delivery</p>
-                <p className="text-sm font-sans font-semibold text-ink mt-0.5">Personal review within 5–7 days</p>
-                <p className="text-[11px] font-sans text-ink/50 mt-0.5">Reviewed personally, no AI — Priya will follow up via email</p>
-              </div>
-            </div>
-          )}
-          <div className="px-4 py-3 flex items-start gap-3">
-            <User size={14} className="text-peach-dark mt-0.5 flex-shrink-0" />
-            <div>
-              <p className="text-[10px] font-sans text-ink/40 uppercase tracking-wide">name</p>
-              <p className="text-sm font-sans font-semibold text-ink mt-0.5">{name || session?.user?.name}</p>
-            </div>
-          </div>
-          <div className="px-4 py-3 flex items-start gap-3">
-            <Mail size={14} className="text-peach-dark mt-0.5 flex-shrink-0" />
-            <div>
-              <p className="text-[10px] font-sans text-ink/40 uppercase tracking-wide">email</p>
-              <p className="text-sm font-sans font-semibold text-ink mt-0.5">{session?.user?.email}</p>
-            </div>
-          </div>
-          <div className="px-4 py-3 flex items-center justify-between">
-            <p className="text-[10px] font-sans text-ink/40 uppercase tracking-wide">amount</p>
-            <p className="font-heading text-xl font-700 text-ink">₹{priceInRupees.toLocaleString("en-IN")}</p>
-          </div>
-        </div>
-
-        {error && <p className="text-xs font-sans text-red-500 bg-red-50 px-3 py-2 rounded-lg">{error}</p>}
-
-        <Button
-          onClick={handlePayment}
-          disabled={loading}
-          className="w-full bg-ink text-cream hover:bg-ink/80 font-sans font-semibold text-sm py-3 rounded-xl disabled:opacity-40"
-        >
-          {loading ? (
-            <span className="flex items-center gap-2"><Loader2 size={14} className="animate-spin" />processing…</span>
-          ) : (
-            `pay ₹${priceInRupees.toLocaleString("en-IN")}`
-          )}
-        </Button>
-        <button
-          type="button"
-          onClick={() => setShowSummary(false)}
-          className="w-full text-xs font-sans text-ink/40 hover:text-ink transition-colors"
-        >
-          ← go back and edit
-        </button>
-        <p className="text-[10px] text-ink/30 text-center font-sans">secure payment via razorpay · no refunds</p>
       </div>
     )
   }
@@ -549,7 +464,7 @@ function BookingFormInner({ service }: { service: Service }) {
         ) : isRescheduleMode ? (
           "confirm reschedule"
         ) : (
-          "review & pay"
+          "pay & book"
         )}
       </Button>
       {!isRescheduleMode && (
