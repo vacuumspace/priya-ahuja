@@ -251,7 +251,6 @@ function BookingFormInner({ service }: { service: Service }) {
   async function handlePayment() {
     setLoading(true)
     setError("")
-    setShowSummary(false)
     try {
       const fullMessage = [
         deckLink ? `Deck/Doc Link: ${deckLink}` : null,
