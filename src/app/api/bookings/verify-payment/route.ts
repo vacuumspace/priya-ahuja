@@ -35,8 +35,8 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Order mismatch" }, { status: 400 })
     }
 
-    // Idempotency: if already confirmed, return success without side-effects
-    if (booking.status === "confirmed" && booking.razorpayPaymentId) {
+    // Idempotency: if already confirmed AND post-payment side-effects completed, short-circuit
+    if (booking.status === "confirmed" && booking.razorpayPaymentId && booking.googleCalendarEventId) {
       return NextResponse.json({ success: true })
     }
 

@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import { MessageCircle, Star, X, CalendarClock, ExternalLink, FileEdit } from "lucide-react"
+import { MessageCircle, Star, X, CalendarClock, ExternalLink, FileEdit, Mail } from "lucide-react"
 import Link from "next/link"
 
 type Message = {
@@ -127,6 +127,8 @@ function BookingRow({
   const [rescheduleTime, setRescheduleTime] = useState("")
   const [rescheduleSaving, setRescheduleSaving] = useState(false)
   const [rescheduleError, setRescheduleError] = useState("")
+  const [resending, setResending] = useState(false)
+  const [resendStatus, setResendStatus] = useState<"idle" | "sent" | "error">("idle")
   const [showNotesPanel, setShowNotesPanel] = useState(false)
   const [notesText, setNotesText] = useState("")
   const [nextStepsText, setNextStepsText] = useState("")
@@ -276,6 +278,22 @@ function BookingRow({
               title="Send session notes"
             >
               <FileEdit size={15} />
+            </button>
+            <button
+              onClick={async () => {
+                if (resending) return
+                setResending(true)
+                setResendStatus("idle")
+                const res = await fetch(`/api/admin/bookings/${booking.id}/resend-confirmation`, { method: "POST" })
+                setResending(false)
+                setResendStatus(res.ok ? "sent" : "error")
+                setTimeout(() => setResendStatus("idle"), 3000)
+              }}
+              disabled={resending}
+              className={`transition-colors disabled:opacity-40 ${resendStatus === "sent" ? "text-green-600" : resendStatus === "error" ? "text-red-500" : "text-ink/40 hover:text-peach-dark"}`}
+              title={resendStatus === "sent" ? "Sent!" : resendStatus === "error" ? "Failed" : "Resend confirmation"}
+            >
+              <Mail size={15} />
             </button>
             {status !== "cancelled" && (
               <button
