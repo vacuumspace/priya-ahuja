@@ -236,6 +236,7 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
               "Covers angels writing cheques in 2025–26 across fintech, SaaS, D2C, edtech, healthtech, deeptech, consumer brands, climate tech, and many more.",
               "One-time payment: no subscriptions, no expiry. Yours forever.",
               "Future updates included, when the list grows or gets refreshed, you have the access to updated list automatically always.",
+              "There are 1000+ investors on the list, but a few email IDs may not be active — for those, LinkedIn is the best way to reach out.",
             ].map((point) => (
               <p key={point} className="font-sans text-[12px] text-ink/55 leading-relaxed flex gap-2">
                 <span className="text-peach-dark flex-shrink-0">·</span>
