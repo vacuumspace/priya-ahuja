@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { AnchorNav } from "./AnchorNav"
 
 export const metadata: Metadata = {
   title: "work | priya ahuja",
@@ -77,30 +78,8 @@ const approach = [
 export default function WorkPage() {
   return (
     <div className="min-h-screen bg-cream">
-      {/* Breadcrumb bar */}
-      <div className="flex justify-between items-center px-4 md:px-10 py-4 text-[11px] text-ink/50 font-sans border-b border-border">
-        <span>work & advisory</span>
-      </div>
-
       {/* Anchor nav */}
-      <div className="sticky top-0 z-10 bg-cream/95 backdrop-blur-sm border-b border-border px-4 md:px-10 py-3 flex gap-5 overflow-x-auto scrollbar-none">
-        {[
-          { label: "experience", href: "#experience" },
-          { label: "startup", href: "#strategy" },
-          { label: "fundraising", href: "#fundraising" },
-          { label: "how i work", href: "#how-i-work" },
-          { label: "principles", href: "#principles" },
-          { label: "get started", href: "#onboarding" },
-        ].map((link) => (
-          <a
-            key={link.href}
-            href={link.href}
-            className="font-sans text-[11px] text-ink/50 hover:text-ink whitespace-nowrap transition-colors"
-          >
-            {link.label}
-          </a>
-        ))}
-      </div>
+      <AnchorNav />
 
       {/* Hero */}
       <div className="px-4 md:px-10 pt-12 pb-10 border-b border-border">
