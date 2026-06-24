@@ -199,9 +199,9 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
           <h1 className="font-heading text-3xl md:text-5xl font-800 text-ink mb-4">
             angel investor
             <br />
-            list
+            contact details
           </h1>
-          <p className="font-sans text-sm text-ink/60 max-w-md leading-relaxed">
+          <p className="font-sans text-sm font-semibold text-ink max-w-md leading-relaxed">
             900+ angel investors across India. Name, city, LinkedIn, and direct email(s).
           </p>
           <p className="font-sans text-xs text-ink/40 mt-2">
@@ -219,7 +219,7 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
             >
               {state === "buying" ? <><Loader2 size={13} className="animate-spin" /> processing…</> : "get full access"}
             </button>
-            <span className="text-[10px] font-sans text-ink/40">{PRICE} · lifetime access</span>
+            <span className="text-xs font-sans font-semibold text-ink bg-peach/30 border border-peach-dark/20 px-2.5 py-1 rounded-md">{PRICE} · lifetime access</span>
           </div>
         )}
       </div>
@@ -229,12 +229,13 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
         <div className="px-4 md:px-10 pb-8">
 
           <div className="bg-card border border-border rounded-xl px-5 py-4 space-y-2">
-            <p className="font-sans text-xs font-semibold text-ink/70">why this list is different</p>
+            <p className="font-sans text-xs font-semibold text-ink/70">all about these contact details</p>
             {[
               "These are curated and updated active investors not stale directories or cold LinkedIn scrapes.",
               "Direct emails included, so you're not guessing or going through assistants.",
               "Covers angels writing cheques in 2025–26 across fintech, SaaS, D2C, edtech, healthtech, deeptech, consumer brands, climate tech, and many more.",
               "One-time payment: no subscriptions, no expiry. Yours forever.",
+              "Future updates included, when the list grows or gets refreshed, you have the access to updated list automatically always.",
             ].map((point) => (
               <p key={point} className="font-sans text-[12px] text-ink/55 leading-relaxed flex gap-2">
                 <span className="text-peach-dark flex-shrink-0">·</span>

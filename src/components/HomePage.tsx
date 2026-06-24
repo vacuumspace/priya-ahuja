@@ -106,13 +106,13 @@ export default function HomePage() {
 
       {/* ── Achievements ── */}
       <div className="mb-14">
-        <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">achievements</p>
+        <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">traction</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {[
-            { value: "200+", label: "founders advised", sub: "across fintech, saas, consumer-tech & d2c" },
+            { value: "250+", label: "founders advised", sub: "across fintech, saas, consumer-tech & d2c" },
             { value: "₹200cr+", label: "fundraise guided", sub: "across pre-seed to pre-series A & series A rounds" },
             { value: "5.0★", label: "avg. session rating", sub: "from 50+ independent reviews" },
-            { value: "3 yrs", label: "inside startup investment", sub: "investment, strategy, m&a at groww, india's #1 retail investment app" },
+            { value: "4 yrs", label: "inside startup investment", sub: "investment, strategy, m&a at groww, india's #1 retail investment app" },
             { value: "12+", label: "sectors covered", sub: "fintech, edtech, healthtech, b2b, d2c, social platforms & more" },
             { value: "100%", label: "actionable advice", sub: "every session ends with clear next steps you can act on today" },
           ].map((s) => (
