@@ -9,7 +9,16 @@ export function isAndroid(): boolean {
   return /Android/.test(navigator.userAgent)
 }
 
+export function getInAppSource(): 'instagram' | 'linkedin' | 'other' {
+  if (typeof navigator === 'undefined') return 'other'
+  const ua = navigator.userAgent
+  if (/Instagram/.test(ua)) return 'instagram'
+  if (/LinkedIn/.test(ua)) return 'linkedin'
+  return 'other'
+}
+
 export function getAndroidIntentUrl(url: string): string {
   const stripped = url.replace(/^https?:\/\//, '')
-  return `intent://${stripped}#Intent;scheme=https;package=com.android.chrome;end`
+  const fallback = encodeURIComponent(url)
+  return `intent://${stripped}#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=${fallback};end`
 }
