@@ -21,6 +21,7 @@ type Transaction = {
   razorpayPaymentId: string | null
   downloadToken: string | null
   createdAt: string
+  amountPaid: number | null
   price: number
 }
 
