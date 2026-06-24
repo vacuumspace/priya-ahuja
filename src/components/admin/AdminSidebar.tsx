@@ -25,6 +25,7 @@ import {
   ShoppingCart,
   BarChart2,
   CalendarDays,
+  Briefcase,
   type LucideIcon,
 } from "lucide-react"
 import { useState } from "react"
@@ -96,6 +97,11 @@ const navGroups: NavGroup[] = [
     label: "Email Templates",
     directHref: "/admin/email-templates",
     directIcon: Mail,
+  },
+  {
+    label: "Work",
+    directHref: "/work",
+    directIcon: Briefcase,
   },
 ]
 
