@@ -86,10 +86,11 @@ export default function WorkPage() {
       <div className="sticky top-0 z-10 bg-cream/95 backdrop-blur-sm border-b border-border px-4 md:px-10 py-3 flex gap-5 overflow-x-auto scrollbar-none">
         {[
           { label: "experience", href: "#experience" },
-          { label: "startup strategy", href: "#strategy" },
+          { label: "startup", href: "#strategy" },
           { label: "fundraising", href: "#fundraising" },
           { label: "how i work", href: "#how-i-work" },
-          { label: "principles", href: "#highlights" },
+          { label: "principles", href: "#principles" },
+          { label: "get started", href: "#onboarding" },
         ].map((link) => (
           <a
             key={link.href}
@@ -168,7 +169,7 @@ export default function WorkPage() {
       {/* Startup Strategy */}
       <div id="strategy" className="px-4 md:px-10 pt-8 md:pt-10 pb-10 md:pb-12 border-b border-border">
         <div className="flex flex-col gap-1 mb-5">
-          <p className="font-sans text-[10px] text-ink/40 uppercase tracking-widest">startup strategy</p>
+          <p className="font-sans text-[10px] text-ink/40 uppercase tracking-widest">startup</p>
           <p className="font-sans text-sm text-ink/60 max-w-lg mt-1 leading-relaxed">
             early-stage companies are figuring out too many things at once. i work across all the functions that matter
             at this stage, wherever the founder is most stuck.
@@ -246,13 +247,31 @@ export default function WorkPage() {
       </div>
 
       {/* Highlights */}
-      <div id="highlights" className="px-4 md:px-10 pt-8 md:pt-10 pb-10 md:pb-12 border-b border-border">
+      <div id="principles" className="px-4 md:px-10 pt-8 md:pt-10 pb-10 md:pb-12 border-b border-border">
         <p className="font-sans text-[10px] text-ink/40 uppercase tracking-widest mb-6">principles</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5">
           {highlights.map((h) => (
             <div key={h.title} className="rounded-2xl bg-peach/30 px-5 py-4 flex flex-col gap-1.5">
               <p className="font-heading text-sm font-700 text-ink">{h.title}</p>
               <p className="font-sans text-xs text-ink/55 leading-relaxed">{h.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Onboarding */}
+      <div id="onboarding" className="px-4 md:px-10 pt-8 md:pt-10 pb-10 md:pb-12 border-b border-border">
+        <p className="font-sans text-[10px] text-ink/40 uppercase tracking-widest mb-8">get started</p>
+        <div className="flex flex-col sm:flex-row gap-0 max-w-2xl">
+          {[
+            { step: "01", label: "intro calls", desc: "one or two calls to understand where you are and whether it makes sense to work together." },
+            { step: "02", label: "engagement letter", desc: "a simple document covering scope, terms, and what we're both committing to." },
+            { step: "03", label: "work begins", desc: "fix a date and we'll start." },
+          ].map((item) => (
+            <div key={item.step} className="flex-1 sm:pr-6 pb-8 sm:pb-0">
+              <p className="font-sans text-[10px] text-ink/40 uppercase tracking-wider mb-1">{item.step}</p>
+              <p className="font-heading text-sm font-700 text-ink mb-1">{item.label}</p>
+              <p className="font-sans text-xs text-ink/55 leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </div>
