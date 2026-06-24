@@ -241,6 +241,9 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
                 {point}
               </p>
             ))}
+            <p className="font-sans text-[12px] text-ink/50 leading-relaxed pt-1 border-t border-border mt-2">
+              Please note that this is a paid access list. I put in a lot of efforts to curate this list, so this is just to make sure that list access goes to those who actually value it.
+            </p>
           </div>
         </div>
       )}
@@ -291,70 +294,72 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
       )}
 
       {/* Table */}
-      <div className="px-4 md:px-10 pb-4 overflow-x-auto">
-        <table className="w-full text-xs font-sans border-collapse">
-          <thead>
-            <tr className="border-b border-border">
-              <th className="text-left py-2.5 pr-4 text-ink/40 font-semibold w-8">#</th>
-              <th className="text-left py-2.5 pr-4 text-ink/40 font-semibold">Name</th>
-              <th className="text-left py-2.5 pr-4 text-ink/40 font-semibold hidden sm:table-cell">City</th>
-              <th className="text-left py-2.5 pr-4 text-ink/40 font-semibold hidden md:table-cell">State</th>
-              <th className="text-left py-2.5 pr-4 text-ink/40 font-semibold hidden lg:table-cell">Country</th>
-              <th className="text-left py-2.5 pr-4 text-ink/40 font-semibold hidden sm:table-cell">LinkedIn</th>
-              <th className="text-left py-2.5 text-ink/40 font-semibold hidden sm:table-cell">Emails</th>
-            </tr>
-          </thead>
-          <tbody>
-            {loading && Array.from({ length: 10 }).map((_, i) => (
-              <tr key={`skel-${i}`} className="border-b border-border/50">
-                <td className="py-3 pr-4"><div className="h-3 w-5 bg-peach-dark/10 rounded animate-pulse" /></td>
-                <td className="py-3 pr-4"><div className="h-3 w-28 bg-peach-dark/10 rounded animate-pulse" /></td>
-                <td className="py-3 pr-4 hidden sm:table-cell"><div className="h-3 w-16 bg-peach-dark/10 rounded animate-pulse" /></td>
-                <td className="py-3 pr-4 hidden md:table-cell"><div className="h-3 w-20 bg-peach-dark/10 rounded animate-pulse" /></td>
-                <td className="py-3 pr-4 hidden lg:table-cell"><div className="h-3 w-14 bg-peach-dark/10 rounded animate-pulse" /></td>
-                <td className="py-3 pr-4 hidden sm:table-cell"><div className="h-3 w-16 bg-peach-dark/10 rounded animate-pulse" /></td>
-                <td className="py-3 hidden sm:table-cell"><div className="h-3 w-32 bg-peach-dark/10 rounded animate-pulse" /></td>
+      <div className="pb-4">
+        <div className="overflow-x-auto px-4 md:px-10 -webkit-overflow-scrolling-touch">
+          <table className="min-w-[600px] w-full text-xs font-sans border-collapse">
+            <thead>
+              <tr className="border-b border-border">
+                <th className="text-left py-2.5 pr-4 text-ink/40 font-semibold w-8">#</th>
+                <th className="text-left py-2.5 pr-4 text-ink/40 font-semibold">Name</th>
+                <th className="text-left py-2.5 pr-4 text-ink/40 font-semibold">City</th>
+                <th className="text-left py-2.5 pr-4 text-ink/40 font-semibold hidden md:table-cell">State</th>
+                <th className="text-left py-2.5 pr-4 text-ink/40 font-semibold hidden lg:table-cell">Country</th>
+                <th className="text-left py-2.5 pr-4 text-ink/40 font-semibold">LinkedIn</th>
+                <th className="text-left py-2.5 text-ink/40 font-semibold">Emails</th>
               </tr>
-            ))}
-            {!loading && investors.map((inv) => (
-              <tr key={inv.id} className="border-b border-border/50 hover:bg-ink/[0.02] transition-colors">
-                <td className="py-3 pr-4 text-ink/30">{inv.sno}</td>
-                <td className="py-3 pr-4 text-ink font-medium">{inv.name}</td>
-                <td className="py-3 pr-4 text-ink/60 hidden sm:table-cell">{inv.city || "—"}</td>
-                <td className="py-3 pr-4 text-ink/60 hidden md:table-cell">{inv.state || "—"}</td>
-                <td className="py-3 pr-4 text-ink/60 hidden lg:table-cell">{inv.country || "—"}</td>
+            </thead>
+            <tbody>
+              {loading && Array.from({ length: 10 }).map((_, i) => (
+                <tr key={`skel-${i}`} className="border-b border-border/50">
+                  <td className="py-3 pr-4"><div className="h-3 w-5 bg-peach-dark/10 rounded animate-pulse" /></td>
+                  <td className="py-3 pr-4"><div className="h-3 w-28 bg-peach-dark/10 rounded animate-pulse" /></td>
+                  <td className="py-3 pr-4"><div className="h-3 w-16 bg-peach-dark/10 rounded animate-pulse" /></td>
+                  <td className="py-3 pr-4 hidden md:table-cell"><div className="h-3 w-20 bg-peach-dark/10 rounded animate-pulse" /></td>
+                  <td className="py-3 pr-4 hidden lg:table-cell"><div className="h-3 w-14 bg-peach-dark/10 rounded animate-pulse" /></td>
+                  <td className="py-3 pr-4"><div className="h-3 w-16 bg-peach-dark/10 rounded animate-pulse" /></td>
+                  <td className="py-3"><div className="h-3 w-32 bg-peach-dark/10 rounded animate-pulse" /></td>
+                </tr>
+              ))}
+              {!loading && investors.map((inv) => (
+                <tr key={inv.id} className="border-b border-border/50 hover:bg-ink/[0.02] transition-colors">
+                  <td className="py-3 pr-4 text-ink/30">{inv.sno}</td>
+                  <td className="py-3 pr-4 text-ink font-medium whitespace-nowrap">{inv.name}</td>
+                  <td className="py-3 pr-4 text-ink/60 whitespace-nowrap">{inv.city || "—"}</td>
+                  <td className="py-3 pr-4 text-ink/60 hidden md:table-cell whitespace-nowrap">{inv.state || "—"}</td>
+                  <td className="py-3 pr-4 text-ink/60 hidden lg:table-cell whitespace-nowrap">{inv.country || "—"}</td>
 
-                {/* LinkedIn — blurred for non-paid */}
-                <td className="py-3 pr-4 hidden sm:table-cell">
-                  {paid ? (
-                    inv.linkedin ? (
-                      <a href={inv.linkedin} target="_blank" rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-peach-dark hover:underline">
-                        view <ExternalLink size={10} />
-                      </a>
-                    ) : <span className="text-ink/20">—</span>
-                  ) : (
-                    <span className="select-none blur-sm text-ink/60 pointer-events-none">linkedin.com/in/xxxxx</span>
-                  )}
-                </td>
+                  {/* LinkedIn — blurred for non-paid */}
+                  <td className="py-3 pr-4">
+                    {paid ? (
+                      inv.linkedin ? (
+                        <a href={inv.linkedin} target="_blank" rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-peach-dark hover:underline whitespace-nowrap">
+                          view <ExternalLink size={10} />
+                        </a>
+                      ) : <span className="text-ink/20">—</span>
+                    ) : (
+                      <span className="select-none blur-sm text-ink/60 pointer-events-none">linkedin.com/in/xxxxx</span>
+                    )}
+                  </td>
 
-                {/* Emails — blurred for non-paid */}
-                <td className="py-3 hidden sm:table-cell">
-                  {paid ? (
-                    inv.emails.length > 0 ? (
-                      <div className="flex items-center gap-2 flex-wrap">
-                        <span className="text-ink/70">{inv.emails.join(", ")}</span>
-                        <CopyButton text={inv.emails.join(", ")} />
-                      </div>
-                    ) : <span className="text-ink/20">—</span>
-                  ) : (
-                    <span className="select-none blur-sm text-ink/60 pointer-events-none">email@example.com</span>
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                  {/* Emails — blurred for non-paid */}
+                  <td className="py-3">
+                    {paid ? (
+                      inv.emails.length > 0 ? (
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <span className="text-ink/70">{inv.emails.join(", ")}</span>
+                          <CopyButton text={inv.emails.join(", ")} />
+                        </div>
+                      ) : <span className="text-ink/20">—</span>
+                    ) : (
+                      <span className="select-none blur-sm text-ink/60 pointer-events-none">email@example.com</span>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       {/* Sign-in modal */}
