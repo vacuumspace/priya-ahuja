@@ -66,7 +66,7 @@ const approach = [
   },
   {
     phase: "08 / terms",
-    body: "i work on a retainer basis as an advisor or consultant, starting from Rs. 1 lakh per month. the structure depends on the scope and how involved the engagement needs to be.",
+    body: "i work on a retainer basis as an advisor or consultant, starting from Rs. 1 lakh per month. the structure depends on the scope and how involved the engagement needs to be. no variable fees, no success fees on fundraising. i work like an insider, not a hired gun.",
   },
   {
     phase: "09 / on equity",
