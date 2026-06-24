@@ -202,7 +202,7 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
             list
           </h1>
           <p className="font-sans text-sm text-ink/60 max-w-md leading-relaxed">
-            900+ angel investors across India — name, city, LinkedIn, and direct email(s).
+            900+ angel investors across India. Name, city, LinkedIn, and direct email(s).
           </p>
           <p className="font-sans text-xs text-ink/40 mt-2">
             updated {new Date().toLocaleString("en-IN", { month: "long", year: "numeric" })}
@@ -231,10 +231,10 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
           <div className="bg-card border border-border rounded-xl px-5 py-4 space-y-2">
             <p className="font-sans text-xs font-semibold text-ink/70">why this list is different</p>
             {[
-              "These are verified active investors — not stale directories or cold LinkedIn scrapes.",
+              "These are curated and updated active investors not stale directories or cold LinkedIn scrapes.",
               "Direct emails included, so you're not guessing or going through assistants.",
               "Covers angels writing cheques in 2025–26 across fintech, SaaS, D2C, edtech, healthtech, deeptech, consumer brands, climate tech, and many more.",
-              "One-time payment — no subscriptions, no expiry. Yours forever.",
+              "One-time payment: no subscriptions, no expiry. Yours forever.",
             ].map((point) => (
               <p key={point} className="font-sans text-[12px] text-ink/55 leading-relaxed flex gap-2">
                 <span className="text-peach-dark flex-shrink-0">·</span>
