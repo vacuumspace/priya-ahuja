@@ -50,6 +50,8 @@ export default function AngelInvestorsAdminPage() {
   const [txTotal, setTxTotal] = useState(0)
   const [txRevenue, setTxRevenue] = useState(0)
   const [txLoading, setTxLoading] = useState(false)
+  const [txPage, setTxPage] = useState(1)
+  const [txPageCount, setTxPageCount] = useState(1)
   const [revoking, setRevoking] = useState<string | null>(null)
 
   useEffect(() => {
@@ -70,15 +72,16 @@ export default function AngelInvestorsAdminPage() {
   useEffect(() => {
     if (tab !== "transactions") return
     setTxLoading(true)
-    fetch("/api/admin/angel-investors?tab=transactions")
+    fetch(`/api/admin/angel-investors?tab=transactions&page=${txPage}`)
       .then((r) => r.json())
       .then((d) => {
         setTransactions(d.transactions ?? [])
         setTxTotal(d.total ?? 0)
         setTxRevenue(d.revenue ?? 0)
+        setTxPageCount(d.pageCount ?? 1)
         setTxLoading(false)
       })
-  }, [tab])
+  }, [tab, txPage])
 
   const revokeAccess = async (id: string, name: string) => {
     if (!confirm(`Revoke angel investor list access for ${name}? They will no longer be able to view the list.`)) return
@@ -217,10 +220,10 @@ export default function AngelInvestorsAdminPage() {
                 <tbody>
                   {transactions.map((tx, i) => (
                     <tr key={tx.id} className={i !== transactions.length - 1 ? "border-b border-border" : ""}>
-                      <td className="py-3 px-4 font-sans text-xs text-ink/30">{i + 1}</td>
+                      <td className="py-3 px-4 font-sans text-xs text-ink/30">{(txPage - 1) * 10 + i + 1}</td>
                       <td className="py-3 px-4 font-sans text-sm font-medium text-ink">{tx.userName}</td>
                       <td className="py-3 px-4 font-sans text-sm text-ink/70">{tx.userEmail}</td>
-                      <td className="py-3 px-4 font-sans text-sm font-medium text-ink">{fmtAmount(tx.price)}</td>
+                      <td className="py-3 px-4 font-sans text-sm font-medium text-ink">{fmtAmount(tx.amountPaid ?? tx.price)}</td>
                       <td className="py-3 px-4 font-sans text-xs text-ink/50">{tx.razorpayPaymentId ?? "—"}</td>
                       <td className="py-3 px-4 font-sans text-xs text-ink/50">{fmt(tx.createdAt)}</td>
                       <td className="py-3 px-4">
@@ -240,6 +243,28 @@ export default function AngelInvestorsAdminPage() {
                   ))}
                 </tbody>
               </table>
+            </div>
+          )}
+
+          {txPageCount > 1 && (
+            <div className="flex items-center gap-3 mt-4 justify-end">
+              <button
+                disabled={txPage <= 1}
+                onClick={() => setTxPage((p) => p - 1)}
+                className="font-sans text-xs px-3 py-1.5 rounded-lg border border-border text-ink/60 disabled:opacity-30 hover:bg-card transition-colors"
+              >
+                Prev
+              </button>
+              <span className="font-sans text-xs text-ink/40">
+                {txPage} / {txPageCount}
+              </span>
+              <button
+                disabled={txPage >= txPageCount}
+                onClick={() => setTxPage((p) => p + 1)}
+                className="font-sans text-xs px-3 py-1.5 rounded-lg border border-border text-ink/60 disabled:opacity-30 hover:bg-card transition-colors"
+              >
+                Next
+              </button>
             </div>
           )}
         </>

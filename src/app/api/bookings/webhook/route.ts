@@ -16,6 +16,7 @@ export async function POST(req: NextRequest) {
   const event = JSON.parse(rawBody)
   const orderId = event.payload?.payment?.entity?.order_id as string | undefined
   const paymentId = event.payload?.payment?.entity?.id as string | undefined
+  const amountCaptured = event.payload?.payment?.entity?.amount as number | undefined
 
   if (!orderId) return NextResponse.json({ ok: true })
 
@@ -30,7 +31,7 @@ export async function POST(req: NextRequest) {
     if (booking && booking.status === "pending") {
       await db
         .update(bookings)
-        .set({ status: "confirmed", razorpayPaymentId: paymentId ?? booking.razorpayPaymentId })
+        .set({ status: "confirmed", razorpayPaymentId: paymentId ?? booking.razorpayPaymentId, amountPaid: amountCaptured ?? booking.amountPaid })
         .where(and(eq(bookings.id, booking.id), eq(bookings.status, "pending")))
       // Note: calendar event and confirmation email are handled by client-side verify-payment.
       // This webhook acts as a safety net if the client call never completes.
@@ -52,6 +53,7 @@ export async function POST(req: NextRequest) {
         .update(purchases)
         .set({
           razorpayPaymentId: paymentId,
+          amountPaid: amountCaptured,
           downloadToken: accessToken,
           tokenExpiresAt,
         })

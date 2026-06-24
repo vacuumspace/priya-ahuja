@@ -35,17 +35,18 @@ export default async function AdminDashboard() {
       userName: purchases.userName,
       amount: purchases.amountPaid,
       label: digitalProducts.title,
+      slug: digitalProducts.slug,
       createdAt: purchases.createdAt,
     })
     .from(purchases)
     .leftJoin(digitalProducts, eq(purchases.productId, digitalProducts.id))
-    .where(isNotNull(purchases.razorpayPaymentId))
+    .where(isNotNull(purchases.amountPaid))
     .orderBy(desc(purchases.createdAt))
     .limit(10)
 
   const recentTransactions = [
     ...recentBookingTxns.map((t) => ({ ...t, kind: "booking" as const })),
-    ...recentPurchaseTxns.map((t) => ({ ...t, kind: "purchase" as const, type: null })),
+    ...recentPurchaseTxns.map((t) => ({ ...t, kind: "purchase" as const, type: null, slug: t.slug })),
   ]
     .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
     .slice(0, 10)
@@ -105,7 +106,7 @@ export default async function AdminDashboard() {
                       <p className="text-[10px] font-sans text-ink/30">{dateLabel}</p>
                     </div>
                     <span className={`text-[10px] font-sans font-semibold px-2 py-0.5 rounded-full capitalize flex-shrink-0 ${t.kind === "purchase" ? "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400" : "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"}`}>
-                      {t.kind === "purchase" ? "template" : "session"}
+                      {t.kind === "purchase" ? (t.slug === "angel-investor-list" ? "Investor List" : "template") : "session"}
                     </span>
                   </div>
                 )

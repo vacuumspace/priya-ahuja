@@ -246,5 +246,6 @@ export const serviceInquiries = pgTable("service_inquiries", {
   projectDescription: text("project_description").notNull(),
   status: varchar("status", { length: 20 }).notNull().default("new"), // new | reviewing | in-progress | closed
   adminNotes: text("admin_notes"),
+  adminSeen: boolean("admin_seen").notNull().default(false),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 })

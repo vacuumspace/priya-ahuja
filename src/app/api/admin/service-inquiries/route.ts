@@ -1,7 +1,7 @@
 import { auth, isAdmin } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { serviceInquiries } from "@/lib/db/schema"
-import { desc } from "drizzle-orm"
+import { desc, eq } from "drizzle-orm"
 
 export async function GET() {
   const session = await auth()
@@ -9,10 +9,10 @@ export async function GET() {
     return new Response("Forbidden", { status: 403 })
   }
 
-  const rows = await db
-    .select()
-    .from(serviceInquiries)
-    .orderBy(desc(serviceInquiries.createdAt))
+  const [rows] = await Promise.all([
+    db.select().from(serviceInquiries).orderBy(desc(serviceInquiries.createdAt)),
+    db.update(serviceInquiries).set({ adminSeen: true }).where(eq(serviceInquiries.adminSeen, false)),
+  ])
 
   return Response.json(rows)
 }

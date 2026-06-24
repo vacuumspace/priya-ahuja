@@ -2,11 +2,12 @@ import { NextRequest, NextResponse } from "next/server"
 import { db } from "@/lib/db"
 import { purchases, digitalProducts } from "@/lib/db/schema"
 import { auth } from "@/lib/auth"
-import { eq, desc } from "drizzle-orm"
+import { eq, desc, and, like } from "drizzle-orm"
 import { angelInvestorsData } from "@/lib/angel-investors-data"
 
 const ANGEL_SLUG = "angel-investor-list"
 const PAGE_SIZE = 50
+const TX_PAGE_SIZE = 10
 
 async function isAdmin(req: NextRequest) {
   const session = await auth()
@@ -24,7 +25,7 @@ export async function GET(req: NextRequest) {
   const search = searchParams.get("search")?.trim().toLowerCase() ?? ""
 
   if (tab === "transactions") {
-    const rows = await db
+    const allRows = await db
       .select({
         id: purchases.id,
         userName: purchases.userName,
@@ -32,17 +33,21 @@ export async function GET(req: NextRequest) {
         razorpayPaymentId: purchases.razorpayPaymentId,
         downloadToken: purchases.downloadToken,
         createdAt: purchases.createdAt,
+        amountPaid: purchases.amountPaid,
         price: digitalProducts.price,
       })
       .from(purchases)
       .innerJoin(digitalProducts, eq(purchases.productId, digitalProducts.id))
-      .where(eq(digitalProducts.slug, ANGEL_SLUG))
+      .where(and(eq(digitalProducts.slug, ANGEL_SLUG), like(purchases.razorpayPaymentId, "pay_%")))
       .orderBy(desc(purchases.createdAt))
 
-    const total = rows.length
-    const revenue = rows.reduce((sum, r) => sum + (r.price ?? 0), 0)
+    const total = allRows.length
+    const revenue = allRows.reduce((sum, r) => sum + (r.amountPaid ?? r.price ?? 0), 0)
+    const pageCount = Math.ceil(total / TX_PAGE_SIZE)
+    const offset = (page - 1) * TX_PAGE_SIZE
+    const transactions = allRows.slice(offset, offset + TX_PAGE_SIZE)
 
-    return NextResponse.json({ transactions: rows, total, revenue })
+    return NextResponse.json({ transactions, total, revenue, page, pageCount })
   }
 
   // investors tab — in-memory filter + paginate

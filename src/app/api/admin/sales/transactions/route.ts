@@ -1,7 +1,7 @@
 import { auth, isAdmin } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { bookings, purchases, startupScores, services, digitalProducts, users } from "@/lib/db/schema"
-import { desc, eq, isNotNull } from "drizzle-orm"
+import { and, desc, eq, inArray, isNotNull, like } from "drizzle-orm"
 
 const PAGE_SIZE = 10
 
@@ -30,7 +30,7 @@ export async function GET(req: Request) {
       })
       .from(bookings)
       .leftJoin(services, eq(bookings.serviceId, services.id))
-      .where(isNotNull(bookings.razorpayPaymentId)),
+      .where(inArray(bookings.status, ["confirmed", "completed", "paid"])),
 
     db
       .select({
@@ -40,11 +40,13 @@ export async function GET(req: Request) {
         razorpayPaymentId: purchases.razorpayPaymentId,
         createdAt: purchases.createdAt,
         itemName: digitalProducts.title,
+        slug: digitalProducts.slug,
         amount: purchases.amountPaid,
+        price: digitalProducts.price,
       })
       .from(purchases)
       .leftJoin(digitalProducts, eq(purchases.productId, digitalProducts.id))
-      .where(isNotNull(purchases.razorpayPaymentId)),
+      .where(and(like(purchases.razorpayPaymentId, "pay_%"), isNotNull(purchases.amountPaid))),
 
     db
       .select({
@@ -81,16 +83,16 @@ export async function GET(req: Request) {
       itemName: r.itemName ?? "Session",
       amount: r.amount ?? null,
       razorpayPaymentId: r.razorpayPaymentId,
-      status: r.status,
+      status: "paid",
       createdAt: r.createdAt,
     })),
     ...allPurchases.map((r) => ({
       id: r.id,
-      type: "template",
+      type: r.slug === "angel-investor-list" ? "angel" : "template",
       userName: r.userName,
       userEmail: r.userEmail ?? "",
       itemName: r.itemName ?? "Template",
-      amount: r.amount ?? null,
+      amount: r.amount ?? r.price ?? null,
       razorpayPaymentId: r.razorpayPaymentId,
       status: "paid",
       createdAt: r.createdAt,

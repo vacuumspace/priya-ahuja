@@ -1,7 +1,7 @@
 import { auth, isAdmin } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { bookings, purchases, startupScores, services, digitalProducts, users } from "@/lib/db/schema"
-import { eq, isNotNull } from "drizzle-orm"
+import { and, eq, inArray, isNotNull, like } from "drizzle-orm"
 
 export async function GET() {
   const session = await auth()
@@ -17,17 +17,18 @@ export async function GET() {
         amount: bookings.amountPaid,
       })
       .from(bookings)
-      .where(isNotNull(bookings.razorpayPaymentId)),
+      .where(inArray(bookings.status, ["confirmed", "completed", "paid"])),
 
     db
       .select({
         createdAt: purchases.createdAt,
         amount: purchases.amountPaid,
         productTitle: digitalProducts.title,
+        price: digitalProducts.price,
       })
       .from(purchases)
       .leftJoin(digitalProducts, eq(purchases.productId, digitalProducts.id))
-      .where(isNotNull(purchases.razorpayPaymentId)),
+      .where(and(like(purchases.razorpayPaymentId, "pay_%"), isNotNull(purchases.amountPaid))),
 
     db
       .select({ createdAt: startupScores.createdAt })
@@ -63,7 +64,7 @@ export async function GET() {
     if (monthly[k]) { monthly[k].revenue += amt; monthly[k].count++ }
   }
   for (const r of allPurchases) {
-    const amt = r.amount ?? 0
+    const amt = r.amount ?? r.price ?? 0
     purchaseRevenue += amt
     purchaseCount++
     const k = monthKey(r.createdAt)
