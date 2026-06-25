@@ -89,13 +89,15 @@ export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEma
         )}
         {/* Desktop collapse + theme buttons */}
         <div className="hidden md:flex items-center gap-2">
-          <button
-            onClick={toggleTheme}
-            className="text-ink/40 hover:text-ink transition-colors"
-            aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-          >
-            {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
-          </button>
+          {!collapsed && (
+            <button
+              onClick={toggleTheme}
+              className="text-ink/40 hover:text-ink transition-colors"
+              aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            >
+              {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
+            </button>
+          )}
           <button
             onClick={() => setCollapsed((prev) => !prev)}
             className="text-ink/40 hover:text-ink transition-colors"
