@@ -2,7 +2,6 @@ import type { Metadata } from "next"
 import { AnchorNav } from "./AnchorNav"
 
 export const metadata: Metadata = {
-  title: "work | priya ahuja",
   robots: { index: false, follow: false },
 }
 
@@ -105,11 +104,11 @@ export default function WorkPage() {
               <p className="font-sans text-[10px] text-ink/40 uppercase tracking-wider">at scale, inside a platform</p>
             </div>
             <p className="font-sans text-sm text-ink/70 leading-relaxed">
-              i'm part of the investment and strategy function at one of india's largest consumer fintech platforms, working across
-              more than $120 million deployed into fintech startups. the portfolio spans both B2B and B2C: a wealth management platform,
-              a financial data analytics company, and account aggregator infrastructure. beyond the deals themselves, i'm embedded
-              in internal business strategy, product direction, and investor relations for the platform. i'm currently supporting
-              the platform's own $55 million raise from global investors for a strategic business partnership.
+              i'm part of the investment and strategy function at Groww, one of india's largest fintech unicorns, working
+              across more than $120 million deployed into fintech startups. the portfolio spans both B2B and B2C: a wealth management
+              platform, a financial data analytics company, and account aggregator infrastructure. beyond the deals themselves, i'm
+              embedded in internal business strategy, product direction, and investor relations. i'm currently supporting Groww's
+              own $55 million raise from global investors for a strategic business partnership.
             </p>
           </div>
 
@@ -134,11 +133,13 @@ export default function WorkPage() {
               <p className="font-sans text-[10px] text-ink/40 uppercase tracking-wider">on the ground with founders</p>
             </div>
             <p className="font-sans text-sm text-ink/70 leading-relaxed">
-              outside of the platform, i actively advise founders building across very different spaces: a social gaming platform
-              built for women, a startup solving export financing, and a company working in women's healthcare. all three are funded
-              and currently at the pre-seed to seed stage. i also work with student founders from IIT Bombay across domains, helping
-              them sharpen their ideas and navigate grants and early institutional support. the contexts are different.
-              the fundamentals are always the same.
+              outside of the platform, i have worked with a number of founders across very different spaces. a few examples: a social
+              gaming platform built for women, a startup solving export financing, a company in women's healthcare, a D2C ethnic wear
+              brand, a proptech startup, among others. some of these are past engagements; a few are ongoing. i also work with student founders from
+              IIT Bombay across domains, helping them sharpen their ideas and navigate grants and early institutional support.
+              every startup comes with its own set of problems, and depending on what's needed, i have stepped in as a business
+              strategist, fundraising consultant, product advisor, or simply a thinking partner who helps the founder see things
+              more clearly.
             </p>
           </div>
 

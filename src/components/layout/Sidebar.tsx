@@ -87,14 +87,23 @@ export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEma
             <span className="font-heading text-xl font-800 text-ink leading-tight">Priya Ahuja</span>
           </Link>
         )}
-        {/* Desktop collapse button */}
-        <button
-          onClick={() => setCollapsed((prev) => !prev)}
-          className="hidden md:flex text-ink/40 hover:text-ink transition-colors"
-          aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
-        >
-          {collapsed ? <PanelLeftOpen size={16} /> : <PanelLeftClose size={16} />}
-        </button>
+        {/* Desktop collapse + theme buttons */}
+        <div className="hidden md:flex items-center gap-2">
+          <button
+            onClick={toggleTheme}
+            className="text-ink/40 hover:text-ink transition-colors"
+            aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+          >
+            {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
+          </button>
+          <button
+            onClick={() => setCollapsed((prev) => !prev)}
+            className="text-ink/40 hover:text-ink transition-colors"
+            aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+          >
+            {collapsed ? <PanelLeftOpen size={16} /> : <PanelLeftClose size={16} />}
+          </button>
+        </div>
         {/* Mobile close button */}
         <button
           onClick={() => setMobileOpen(false)}
@@ -258,13 +267,6 @@ export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEma
             {/* Drop-up items */}
             {isSignedIn && profileOpen && (
               <div className="border-b border-peach-dark/20 flex flex-col">
-                <button
-                  onClick={toggleTheme}
-                  className="flex items-center gap-2.5 px-3 py-2 text-xs font-sans font-medium text-ink/60 hover:bg-peach-dark/20 hover:text-ink transition-colors"
-                >
-                  {theme === "dark" ? <Sun size={13} className="flex-shrink-0" /> : <Moon size={13} className="flex-shrink-0" />}
-                  <span>{theme === "dark" ? "light mode" : "dark mode"}</span>
-                </button>
                 <button
                   onClick={() => setSignOutOpen(true)}
                   className="flex items-center gap-2.5 px-3 py-2 text-xs font-sans font-medium text-ink/60 hover:bg-peach-dark/20 hover:text-ink transition-colors"

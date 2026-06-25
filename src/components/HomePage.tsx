@@ -236,19 +236,19 @@ export default function HomePage() {
 
       {/* ── Dream: 10k founders ── */}
       <div className="mb-14">
-        <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">north star</p>
+        <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">dream</p>
         <p className="font-heading text-xl font-700 text-ink leading-snug mb-3">
           help 10,000 founders to win.
         </p>
         <div className="bg-peach/20 border border-peach-dark/15 rounded-xl px-5 py-5">
           <p className="font-sans text-[10px] text-ink/30 mb-1">progress</p>
           <div className="relative w-full bg-peach-dark/15 rounded-full h-2.5 overflow-visible mb-2 mt-6">
-            <div className="h-full bg-peach-dark rounded-full relative" style={{ width: "2.5%" }}>
-              <span className="absolute -top-5 left-0 font-sans text-[10px] font-semibold text-peach-dark whitespace-nowrap">2.5%</span>
+            <div className="h-full bg-peach-dark rounded-full relative" style={{ width: "2.6%" }}>
+              <span className="absolute -top-5 left-0 font-sans text-[10px] font-semibold text-peach-dark whitespace-nowrap">2.6%</span>
             </div>
           </div>
           <div className="flex justify-between">
-            <span className="font-sans text-[11px] text-ink/40">0</span>
+            <span className="font-sans text-[11px] text-ink/40">260</span>
             <span className="font-sans text-[11px] text-ink/40">10,000</span>
           </div>
         </div>

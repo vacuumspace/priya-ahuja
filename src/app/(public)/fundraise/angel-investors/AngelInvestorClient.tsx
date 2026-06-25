@@ -236,7 +236,7 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
               "Covers angels writing cheques in 2025–26 across fintech, SaaS, D2C, edtech, healthtech, deeptech, consumer brands, climate tech, and many more.",
               "One-time payment: no subscriptions, no expiry. Yours forever.",
               "Future updates included, when the list grows or gets refreshed, you have the access to updated list automatically always.",
-              "There are 1000+ investors on the list, but a few email IDs may not be active — for those, LinkedIn is the best way to reach out.",
+              "There are 1000+ investors on the list, but a few email IDs may not be active. For those, LinkedIn is the best way to reach out.",
             ].map((point) => (
               <p key={point} className="font-sans text-[12px] text-ink/55 leading-relaxed flex gap-2">
                 <span className="text-peach-dark flex-shrink-0">·</span>
@@ -295,9 +295,66 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
         </div>
       )}
 
-      {/* Table */}
-      <div className="pb-4">
-        <div className="overflow-x-auto px-4 md:px-10 -webkit-overflow-scrolling-touch">
+      {/* Mobile cards — shown only on small screens */}
+      <div className="sm:hidden pb-4 px-4 space-y-3">
+        {loading && Array.from({ length: 10 }).map((_, i) => (
+          <div key={`skel-${i}`} className="bg-card border border-border rounded-xl p-4 space-y-2 animate-pulse">
+            <div className="h-4 w-36 bg-peach-dark/10 rounded" />
+            <div className="h-3 w-24 bg-peach-dark/10 rounded" />
+            <div className="h-3 w-48 bg-peach-dark/10 rounded" />
+          </div>
+        ))}
+        {!loading && investors.map((inv) => (
+          <div key={inv.id} className="bg-card border border-border rounded-xl p-4 space-y-2.5">
+            <div className="flex items-start justify-between gap-2">
+              <div>
+                <span className="font-sans text-[11px] text-ink/30 mr-1.5">{inv.sno}.</span>
+                <span className="font-sans text-sm font-semibold text-ink">{inv.name}</span>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-x-4">
+              <div>
+                <p className="font-sans text-[10px] text-ink/30 uppercase tracking-wide mb-0.5">City</p>
+                <p className="font-sans text-xs text-ink/60">{[inv.city, inv.state].filter(Boolean).join(", ") || "—"}</p>
+              </div>
+              <div>
+                <p className="font-sans text-[10px] text-ink/30 uppercase tracking-wide mb-0.5">LinkedIn</p>
+                {paid ? (
+                  inv.linkedin ? (
+                    <a href={inv.linkedin} target="_blank" rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-xs font-sans text-peach-dark hover:underline">
+                      view <ExternalLink size={10} />
+                    </a>
+                  ) : <span className="text-ink/20">—</span>
+                ) : (
+                  <span className="select-none blur-sm text-xs font-sans text-ink/60 pointer-events-none">view</span>
+                )}
+              </div>
+            </div>
+
+            <div>
+              <p className="font-sans text-[10px] text-ink/30 uppercase tracking-wide mb-0.5">Email</p>
+              <div className="font-sans text-xs text-ink/70">
+                {paid ? (
+                  inv.emails.length > 0 ? (
+                    <div className="flex items-start gap-2 flex-wrap">
+                      <span className="break-all">{inv.emails.join(", ")}</span>
+                      <CopyButton text={inv.emails.join(", ")} />
+                    </div>
+                  ) : <span className="text-ink/20">—</span>
+                ) : (
+                  <span className="select-none blur-sm text-ink/60 pointer-events-none">email@example.com</span>
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Desktop table — hidden on small screens */}
+      <div className="hidden sm:block pb-4">
+        <div className="overflow-x-auto px-4 md:px-10">
           <table className="min-w-[600px] w-full text-xs font-sans border-collapse">
             <thead>
               <tr className="border-b border-border">

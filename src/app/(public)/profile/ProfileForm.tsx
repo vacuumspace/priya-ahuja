@@ -252,7 +252,7 @@ export function ProfileForm({ initialName, initialEmail, initialProfile }: Props
         <button
           type="submit"
           disabled={saving || !isDirty}
-          className="inline-flex items-center gap-2 bg-ink text-cream font-sans font-semibold text-sm px-6 py-2.5 rounded-xl hover:bg-ink/80 transition-colors disabled:opacity-50"
+          className="inline-flex items-center gap-2 font-sans font-semibold text-sm px-6 py-2.5 rounded-xl transition-colors disabled:bg-ink/20 disabled:text-ink/40 disabled:cursor-not-allowed bg-ink text-cream hover:bg-ink/80"
         >
           {saving ? <Loader2 size={14} className="animate-spin" /> : saved ? <Check size={14} /> : null}
           {saving ? "saving..." : saved ? "saved!" : "save profile"}
