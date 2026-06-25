@@ -244,7 +244,7 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
               </p>
             ))}
             <p className="font-sans text-[12px] text-ink/50 leading-relaxed pt-1 border-t border-border mt-2">
-              Please note that this is a paid access list. I put in a lot of efforts to curate this list, so this is just to make sure that list access goes to those who actually value it.
+              <span className="font-semibold text-ink/70">Why paid?</span> I put in a lot of efforts to curate this list, so this is just to make sure that list access goes to those who actually value it.
             </p>
           </div>
         </div>
