@@ -82,7 +82,7 @@ export default function StartupIdeasClient({ isPaid, isAuthenticated, ideas }: P
             <tr className="border-b border-border">
               <th className="text-left py-2.5 pr-4 text-ink/40 font-semibold w-8">#</th>
               <th className="text-left py-2.5 pr-4 text-ink/40 font-semibold">
-                Idea <span className="font-normal text-ink/25 text-[10px] hidden sm:inline">· click for details</span>
+                Idea <span className="font-normal text-ink/25 text-[10px]">· click for details</span>
               </th>
               <th className="text-left py-2.5 pr-4 text-ink/40 font-semibold hidden sm:table-cell">Category</th>
               <th className="text-left py-2.5 text-ink/40 font-semibold hidden md:table-cell">Tagline</th>
