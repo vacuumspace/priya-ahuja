@@ -81,7 +81,9 @@ export default function StartupIdeasClient({ isPaid, isAuthenticated, ideas }: P
           <thead>
             <tr className="border-b border-border">
               <th className="text-left py-2.5 pr-4 text-ink/40 font-semibold w-8">#</th>
-              <th className="text-left py-2.5 pr-4 text-ink/40 font-semibold">Idea</th>
+              <th className="text-left py-2.5 pr-4 text-ink/40 font-semibold">
+                Idea <span className="font-normal text-ink/25 text-[10px] hidden sm:inline">· click for details</span>
+              </th>
               <th className="text-left py-2.5 pr-4 text-ink/40 font-semibold hidden sm:table-cell">Category</th>
               <th className="text-left py-2.5 text-ink/40 font-semibold hidden md:table-cell">Tagline</th>
             </tr>
@@ -100,7 +102,7 @@ export default function StartupIdeasClient({ isPaid, isAuthenticated, ideas }: P
                     <div className="flex items-center gap-2">
                       {!isClickable && <Lock size={11} className="text-ink/25 flex-shrink-0" />}
                       <div className="flex flex-col gap-0.5">
-                        <span className={`font-medium ${isClickable ? "text-ink" : "text-ink/40"}`}>
+                        <span className={`font-semibold ${isClickable ? "text-ink" : "text-ink/40"}`}>
                           {idea.title}
                         </span>
                         <span className={`sm:hidden text-[10px] ${isClickable ? "text-ink/40" : "text-ink/25"}`}>
