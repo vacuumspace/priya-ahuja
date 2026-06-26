@@ -218,16 +218,16 @@ export async function sendBookingCancellation({
   })
 }
 
-export async function sendDownloadLink({
+export async function sendAccessLink({
   to,
   name,
   productName,
-  downloadUrl,
+  accessUrl,
 }: {
   to: string
   name: string
   productName: string
-  downloadUrl: string
+  accessUrl: string
 }) {
   const s = await getEmailSettings([
     "email_download_subject",
@@ -239,7 +239,7 @@ export async function sendDownloadLink({
     DownloadLinkEmail({
       name,
       productName,
-      downloadUrl,
+      accessUrl,
       intro: s.email_download_intro,
       footer: s.email_download_footer,
     })
@@ -247,7 +247,7 @@ export async function sendDownloadLink({
 
   await sendMail({
     to,
-    subject: s.email_download_subject || `Your Download: ${productName}`,
+    subject: s.email_download_subject || `Your Access: ${productName}`,
     html,
   })
 }

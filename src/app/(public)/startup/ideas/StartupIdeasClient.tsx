@@ -3,17 +3,9 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
-import { Lock, Loader2, X, ChevronLeft, ChevronRight } from "lucide-react"
+import { Lock, X, ChevronLeft, ChevronRight } from "lucide-react"
 import SignInOptions from "@/components/SignInOptions"
 import { FREE_IDEAS_COUNT, type StartupIdea } from "@/lib/startup-ideas-data"
-import { loadRazorpay } from "@/lib/load-razorpay"
-
-declare global {
-  interface Window {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    Razorpay: any
-  }
-}
 
 type Props = {
   isPaid: boolean
@@ -23,83 +15,31 @@ type Props = {
   userName: string | null
 }
 
-const PRICE = "₹999"
 const PAGE_SIZE = 10
 const TOTAL_IDEAS = 100
 
-export default function StartupIdeasClient({ isPaid: initialPaid, isAuthenticated, ideas, userEmail, userName }: Props) {
+export default function StartupIdeasClient({ isPaid, isAuthenticated, ideas }: Props) {
   const router = useRouter()
-  const [paid, setPaid] = useState(initialPaid)
-  const [buying, setBuying] = useState(false)
-  const [error, setError] = useState("")
   const [showSignIn, setShowSignIn] = useState(false)
   const [page, setPage] = useState(1)
 
+  const hasAccess = isAuthenticated || isPaid
   const total = TOTAL_IDEAS
   const pageCount = Math.ceil(total / PAGE_SIZE)
-  const visibleIdeas = paid
+  const visibleIdeas = hasAccess
     ? ideas.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
-    : ideas.slice(0, PAGE_SIZE) // always first 10 for non-paid
+    : ideas.slice(0, PAGE_SIZE)
 
   const start = (page - 1) * PAGE_SIZE + 1
   const end = Math.min(page * PAGE_SIZE, total)
 
-  async function handleBuy() {
-    if (!isAuthenticated) { setShowSignIn(true); return }
-    setBuying(true)
-    setError("")
-    try {
-      const res = await fetch("/api/products/create-order", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ slug: "startup-ideas-2026", name: userName ?? "", email: userEmail ?? "" }),
-      })
-      const data = await res.json()
-      if (!res.ok) throw new Error(data.error || "Failed to create order")
-
-      await loadRazorpay()
-      const rzp = new window.Razorpay({
-        key: data.keyId,
-        amount: data.amount,
-        currency: "INR",
-        name: "Priya Ahuja",
-        description: "100 Startup Ideas 2026",
-        order_id: data.orderId,
-        handler: async (response: { razorpay_order_id: string; razorpay_payment_id: string; razorpay_signature: string }) => {
-          const verifyRes = await fetch("/api/products/verify-payment", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              purchaseId: data.purchaseId,
-              razorpayOrderId: response.razorpay_order_id,
-              razorpayPaymentId: response.razorpay_payment_id,
-              razorpaySignature: response.razorpay_signature,
-            }),
-          })
-          if (!verifyRes.ok) {
-            setError("Payment received but access setup failed. Email hi@priyaahuja.in with your payment ID.")
-            return
-          }
-          setPaid(true)
-        },
-        prefill: { name: userName ?? "", email: userEmail ?? "" },
-        theme: { color: "#1a1a1a" },
-        modal: { ondismiss: () => setBuying(false) },
-      })
-      rzp.open()
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong")
-      setBuying(false)
-    }
-  }
-
   function handleRowClick(slug: string, isClickable: boolean) {
     if (isClickable) router.push(`/startup/ideas/${slug}`)
-    else handleBuy()
+    else setShowSignIn(true)
   }
 
   return (
-    <div className="min-h-screen bg-cream">
+    <div className="min-h-screen bg-cream w-full max-w-full overflow-x-hidden">
       {/* Header bar */}
       <div className="flex justify-between items-center px-4 md:px-10 py-4 text-[11px] text-ink/50 font-sans border-b border-border">
         <span>startup · ideas 2026</span>
@@ -116,35 +56,28 @@ export default function StartupIdeasClient({ isPaid: initialPaid, isAuthenticate
             for 2026
           </h1>
           <p className="font-sans text-sm text-ink/60 max-w-md leading-relaxed">
-            Curated unique and out of the box ideas for Indian founders — each with the real problem, market opportunity, and why now.
+            Curated unique and out of the box ideas for Indian founders, each with the real problem, market opportunity, and why now.
             Ideas are evergreen, not only tech or trend-specific, and covers across the industry categories.
             Under tapped, non-obvious, and high potential ideas that you won't find elsewhere.
           </p>
         </div>
 
-        {!paid && (
+        {!hasAccess && (
           <div className="flex-shrink-0 flex flex-col items-start sm:items-end gap-1.5 sm:pt-1">
             <button
-              onClick={handleBuy}
-              disabled={buying}
-              className="inline-flex items-center gap-2 bg-ink text-cream font-sans font-semibold text-sm px-5 py-2.5 rounded-lg hover:bg-ink/80 transition-colors disabled:opacity-50 whitespace-nowrap"
+              onClick={() => setShowSignIn(true)}
+              className="inline-flex items-center gap-2 bg-ink text-cream font-sans font-semibold text-sm px-5 py-2.5 rounded-lg hover:bg-ink/80 transition-colors whitespace-nowrap"
             >
-              {buying ? <><Loader2 size={13} className="animate-spin" /> processing…</> : "get full access"}
+              sign in to read
             </button>
-            <span className="text-[10px] font-sans text-ink/40">{PRICE} · all 100 ideas unlocked</span>
+            <span className="text-[10px] font-sans text-ink/40">free · all 100 ideas unlocked</span>
           </div>
         )}
       </div>
 
-      {error && (
-        <div className="mx-4 md:mx-10 mb-4 px-4 py-3 bg-red-50 border border-red-200 rounded-xl font-sans text-xs text-red-600">
-          {error}
-        </div>
-      )}
-
       {/* Table */}
-      <div className="px-4 md:px-10 pb-4 overflow-x-auto">
-        <table className="w-full text-xs font-sans border-collapse">
+      <div className="px-4 md:px-10 pb-4 md:overflow-x-auto">
+        <table className="w-full text-xs font-sans border-collapse table-fixed md:table-auto">
           <thead>
             <tr className="border-b border-border">
               <th className="text-left py-2.5 pr-4 text-ink/40 font-semibold w-8">#</th>
@@ -155,7 +88,7 @@ export default function StartupIdeasClient({ isPaid: initialPaid, isAuthenticate
           </thead>
           <tbody>
             {visibleIdeas.map((idea) => {
-              const isClickable = idea.sno <= FREE_IDEAS_COUNT || paid
+              const isClickable = idea.sno <= FREE_IDEAS_COUNT || hasAccess
               return (
                 <tr
                   key={idea.slug}
@@ -163,12 +96,17 @@ export default function StartupIdeasClient({ isPaid: initialPaid, isAuthenticate
                   className={`border-b border-border/50 transition-colors ${isClickable ? "hover:bg-ink/[0.02] cursor-pointer" : "cursor-pointer"}`}
                 >
                   <td className="py-3 pr-4 text-ink/30">{idea.sno}</td>
-                  <td className="py-3 pr-4">
-                    <div className="flex items-center gap-2">
+                  <td className="py-3 pr-4 w-full min-w-0">
+                    <div className="flex items-center gap-2 min-w-0">
                       {!isClickable && <Lock size={11} className="text-ink/25 flex-shrink-0" />}
-                      <span className={`font-medium ${isClickable ? "text-ink" : "text-ink/40"}`}>
-                        {idea.title}
-                      </span>
+                      <div className="flex flex-col gap-0.5 min-w-0">
+                        <span className={`font-medium break-words ${isClickable ? "text-ink" : "text-ink/40"}`}>
+                          {idea.title}
+                        </span>
+                        <span className={`sm:hidden text-[10px] ${isClickable ? "text-ink/40" : "text-ink/25"}`}>
+                          {idea.category}
+                        </span>
+                      </div>
                     </div>
                   </td>
                   <td className="py-3 pr-4 hidden sm:table-cell">
@@ -191,14 +129,14 @@ export default function StartupIdeasClient({ isPaid: initialPaid, isAuthenticate
       {/* Pagination */}
       <div className="px-4 md:px-10 pb-10 flex items-center justify-between">
         <p className="font-sans text-xs text-ink/40">
-          {paid
+          {hasAccess
             ? `showing ${start}–${end} of ${total} ideas`
             : `showing 1–10 of ${total} ideas`}
         </p>
         <div className="flex items-center gap-2">
           <button
-            onClick={() => paid ? setPage(p => p - 1) : undefined}
-            disabled={!paid || page <= 1}
+            onClick={() => hasAccess ? setPage(p => p - 1) : undefined}
+            disabled={!hasAccess || page <= 1}
             className="inline-flex items-center gap-1 text-xs font-sans font-semibold text-ink/60 hover:text-ink disabled:opacity-30 disabled:cursor-not-allowed transition-colors px-3 py-1.5 border border-border rounded-lg"
           >
             <ChevronLeft size={13} /> prev
@@ -206,13 +144,13 @@ export default function StartupIdeasClient({ isPaid: initialPaid, isAuthenticate
 
           <div className="flex items-center gap-1">
             {Array.from({ length: Math.min(5, pageCount) }, (_, i) => {
-              const p = paid ? Math.max(1, Math.min(page - 2, pageCount - 4)) + i : i + 1
-              const isLocked = !paid && p > 1
-              const isCurrent = paid && p === page
+              const p = hasAccess ? Math.max(1, Math.min(page - 2, pageCount - 4)) + i : i + 1
+              const isLocked = !hasAccess && p > 1
+              const isCurrent = hasAccess && p === page
               return (
                 <button
                   key={p}
-                  onClick={() => paid ? setPage(p) : handleBuy()}
+                  onClick={() => hasAccess ? setPage(p) : setShowSignIn(true)}
                   className={`inline-flex items-center justify-center w-7 h-7 rounded text-xs font-sans font-semibold transition-colors
                     ${isCurrent ? "bg-ink text-cream" : "border border-border text-ink/50 hover:text-ink hover:border-ink/40"}`}
                 >
@@ -226,8 +164,8 @@ export default function StartupIdeasClient({ isPaid: initialPaid, isAuthenticate
           </div>
 
           <button
-            onClick={() => paid ? setPage(p => p + 1) : undefined}
-            disabled={!paid || page >= pageCount}
+            onClick={() => hasAccess ? setPage(p => p + 1) : undefined}
+            disabled={!hasAccess || page >= pageCount}
             className="inline-flex items-center gap-1 text-xs font-sans font-semibold text-ink/60 hover:text-ink disabled:opacity-30 disabled:cursor-not-allowed transition-colors px-3 py-1.5 border border-border rounded-lg"
           >
             next <ChevronRight size={13} />
@@ -255,17 +193,17 @@ export default function StartupIdeasClient({ isPaid: initialPaid, isAuthenticate
             <div className="flex items-start justify-between mb-4">
               <div>
                 <h3 className="font-heading text-xl font-700 text-ink">sign in to continue</h3>
-                <p className="font-sans text-xs text-ink/40 mt-0.5">100 startup ideas · {PRICE} one-time</p>
+                <p className="font-sans text-xs text-ink/40 mt-0.5">100 startup ideas · free access</p>
               </div>
               <button onClick={() => setShowSignIn(false)} className="text-ink/40 hover:text-ink transition-colors">
                 <X size={18} />
               </button>
             </div>
             <p className="font-sans text-sm text-ink/60 mb-5 leading-relaxed">
-              sign in, then complete payment for lifetime access to all 100 ideas.
+              sign in for free access to all 100 ideas.
             </p>
             <SignInOptions
-              callbackUrl={typeof window !== "undefined" ? `${window.location.href}?pay=1` : "/startup/ideas?pay=1"}
+              callbackUrl={typeof window !== "undefined" ? window.location.href : "/startup/ideas"}
               compact
             />
           </div>

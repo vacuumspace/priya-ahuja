@@ -4,7 +4,7 @@ import { purchases, digitalProducts } from "@/lib/db/schema"
 import { verifyPaymentSignature, fetchRazorpayOrder } from "@/lib/razorpay"
 import { eq } from "drizzle-orm"
 import crypto from "crypto"
-import { sendPurchaseWelcome, sendDownloadLink } from "@/lib/mailer"
+import { sendPurchaseWelcome, sendAccessLink } from "@/lib/mailer"
 
 export async function POST(req: NextRequest) {
   try {
@@ -83,19 +83,18 @@ export async function POST(req: NextRequest) {
     }
 
     if (product && purchase.userEmail) {
-      const downloadUrl = `${process.env.NEXT_PUBLIC_APP_URL}/api/products/download?token=${accessToken}&slug=${product.slug}`
       sendPurchaseWelcome({
         to: purchase.userEmail,
         name: purchase.userName || "there",
         productSlug: product.slug,
         productName: product.title,
       }).catch(err => console.error("sendPurchaseWelcome error:", err))
-      sendDownloadLink({
+      sendAccessLink({
         to: purchase.userEmail,
         name: purchase.userName || "there",
         productName: product.title,
-        downloadUrl,
-      }).catch(err => console.error("sendDownloadLink error:", err))
+        accessUrl: `${process.env.NEXT_PUBLIC_APP_URL}/fundraise/angel-investors`,
+      }).catch(err => console.error("sendAccessLink error:", err))
     }
 
     return NextResponse.json({ success: true, accessToken })
