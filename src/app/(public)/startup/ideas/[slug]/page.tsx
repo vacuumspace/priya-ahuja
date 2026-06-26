@@ -1,12 +1,8 @@
 import { notFound, redirect } from "next/navigation"
 import Link from "next/link"
-import { ArrowLeft, Lock } from "lucide-react"
-import { auth, isAdmin } from "@/lib/auth"
-import { db } from "@/lib/db"
-import { purchases, digitalProducts } from "@/lib/db/schema"
-import { eq, and, isNotNull } from "drizzle-orm"
-import { getIdeaBySlug, FREE_IDEAS_COUNT, STARTUP_IDEAS_SLUG } from "@/lib/startup-ideas-data"
-import SignInOptions from "@/components/SignInOptions"
+import { ArrowLeft } from "lucide-react"
+import { auth } from "@/lib/auth"
+import { getIdeaBySlug, FREE_IDEAS_COUNT } from "@/lib/startup-ideas-data"
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -58,65 +54,8 @@ export default async function IdeaDetailPage({ params }: Props) {
 
   const isFree = idea.sno <= FREE_IDEAS_COUNT
 
-  // Free ideas: no sign-in needed
-  if (!isFree) {
-    // Require sign-in
-    if (!userEmail) {
-      redirect(`/signin?callbackUrl=/startup/ideas/${slug}`)
-    }
-
-    // Require payment (admins bypass)
-    let isPaid = isAdmin(userEmail)
-    if (!isPaid) {
-      const [row] = await db
-        .select({ id: purchases.id })
-        .from(purchases)
-        .innerJoin(digitalProducts, eq(purchases.productId, digitalProducts.id))
-        .where(and(
-          eq(purchases.userEmail, userEmail),
-          eq(digitalProducts.slug, STARTUP_IDEAS_SLUG),
-          isNotNull(purchases.downloadToken),
-        ))
-        .limit(1)
-      isPaid = !!row
-    }
-
-    if (!isPaid) {
-      return (
-        <div className="min-h-screen bg-cream">
-          <div className="flex justify-between items-center px-4 md:px-10 py-4 text-[11px] text-ink/50 font-sans border-b border-border">
-            <span>startup · ideas 2026</span>
-          </div>
-          <div className="px-4 md:px-10 pt-10 pb-4">
-            <Link href="/startup/ideas" className="inline-flex items-center gap-1.5 text-xs font-sans text-ink/40 hover:text-ink transition-colors mb-8">
-              <ArrowLeft size={13} /> back to ideas
-            </Link>
-          </div>
-          <div className="px-4 md:px-10 pb-16 max-w-lg">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-peach/40 flex items-center justify-center">
-                <Lock size={18} className="text-peach-dark" />
-              </div>
-              <div>
-                <p className="font-sans text-xs text-ink/40 uppercase tracking-wide">{idea.category}</p>
-                <h1 className="font-heading text-2xl font-700 text-ink">{idea.title}</h1>
-              </div>
-            </div>
-            <p className="font-sans text-sm text-ink/60 leading-relaxed mb-8">{idea.tagline}</p>
-            <div className="bg-peach/20 border border-peach-dark/20 rounded-2xl p-6">
-              <p className="font-sans text-sm font-semibold text-ink mb-1">unlock all 100 ideas</p>
-              <p className="font-sans text-xs text-ink/50 mb-4">₹999 one-time · full problem, opportunity, market size, and business model breakdown.</p>
-              <Link
-                href="/startup/ideas?pay=1"
-                className="inline-flex items-center gap-2 bg-ink text-cream font-sans font-semibold text-sm px-5 py-2.5 rounded-lg hover:bg-ink/80 transition-colors"
-              >
-                get full access · ₹999
-              </Link>
-            </div>
-          </div>
-        </div>
-      )
-    }
+  if (!isFree && !userEmail) {
+    redirect(`/signin?callbackUrl=/startup/ideas/${slug}`)
   }
 
   return (
