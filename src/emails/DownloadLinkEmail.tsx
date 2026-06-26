@@ -5,7 +5,7 @@ import {
 export type DownloadLinkEmailProps = {
   name: string
   productName: string
-  accessUrl: string
+  accessUrl?: string
   // editable
   subject?: string
   intro?: string
