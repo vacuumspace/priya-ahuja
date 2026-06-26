@@ -76,8 +76,8 @@ export default function StartupIdeasClient({ isPaid, isAuthenticated, ideas }: P
       </div>
 
       {/* Table */}
-      <div className="px-4 md:px-10 pb-4 md:overflow-x-auto">
-        <table className="w-full text-xs font-sans border-collapse table-fixed md:table-auto">
+      <div className="px-4 md:px-10 pb-4">
+        <table className="w-full text-xs font-sans border-collapse">
           <thead>
             <tr className="border-b border-border">
               <th className="text-left py-2.5 pr-4 text-ink/40 font-semibold w-8">#</th>
@@ -96,11 +96,11 @@ export default function StartupIdeasClient({ isPaid, isAuthenticated, ideas }: P
                   className={`border-b border-border/50 transition-colors ${isClickable ? "hover:bg-ink/[0.02] cursor-pointer" : "cursor-pointer"}`}
                 >
                   <td className="py-3 pr-4 text-ink/30">{idea.sno}</td>
-                  <td className="py-3 pr-4 w-full min-w-0">
-                    <div className="flex items-center gap-2 min-w-0">
+                  <td className="py-3 pr-4">
+                    <div className="flex items-center gap-2">
                       {!isClickable && <Lock size={11} className="text-ink/25 flex-shrink-0" />}
-                      <div className="flex flex-col gap-0.5 min-w-0">
-                        <span className={`font-medium break-words ${isClickable ? "text-ink" : "text-ink/40"}`}>
+                      <div className="flex flex-col gap-0.5">
+                        <span className={`font-medium ${isClickable ? "text-ink" : "text-ink/40"}`}>
                           {idea.title}
                         </span>
                         <span className={`sm:hidden text-[10px] ${isClickable ? "text-ink/40" : "text-ink/25"}`}>
