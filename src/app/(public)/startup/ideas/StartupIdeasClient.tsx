@@ -60,6 +60,7 @@ export default function StartupIdeasClient({ isPaid, isAuthenticated, ideas }: P
             Ideas are evergreen, not only tech or trend-specific, and covers across the industry categories.
             Under tapped, non-obvious, and high potential ideas that you won't find elsewhere.
           </p>
+          <p className="font-sans text-sm text-ink/70 max-w-md mt-3 font-semibold">Click on the idea to see the details.</p>
         </div>
 
         {!hasAccess && (
@@ -81,9 +82,7 @@ export default function StartupIdeasClient({ isPaid, isAuthenticated, ideas }: P
           <thead>
             <tr className="border-b border-border">
               <th className="text-left py-2.5 pr-4 text-ink/40 font-semibold w-8">#</th>
-              <th className="text-left py-2.5 pr-4 text-ink/40 font-semibold">
-                Idea <span className="font-normal text-ink/25 text-[10px]">· click for details</span>
-              </th>
+              <th className="text-left py-2.5 pr-4 text-ink/40 font-semibold">Idea</th>
               <th className="text-left py-2.5 pr-4 text-ink/40 font-semibold hidden sm:table-cell">Category</th>
               <th className="text-left py-2.5 text-ink/40 font-semibold hidden md:table-cell">Tagline</th>
             </tr>
