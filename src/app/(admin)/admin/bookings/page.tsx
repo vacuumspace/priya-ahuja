@@ -1,6 +1,6 @@
 import { db } from "@/lib/db"
 import { bookings, services, availability, users } from "@/lib/db/schema"
-import { eq, desc, and, notInArray } from "drizzle-orm"
+import { eq, desc, asc, and, notInArray, like } from "drizzle-orm"
 import BookingsClient from "./BookingsClient"
 
 export default async function BookingsPage() {
@@ -33,7 +33,8 @@ export default async function BookingsPage() {
     .leftJoin(services, eq(bookings.serviceId, services.id))
     .leftJoin(availability, eq(bookings.slotId, availability.id))
     .leftJoin(users, eq(bookings.userEmail, users.email))
-    .orderBy(desc(bookings.createdAt))
+    .where(like(bookings.razorpayPaymentId, "pay_%"))
+    .orderBy(desc(availability.date), asc(availability.startTime))
 
   const serialized = rows.map((r) => ({
     ...r,

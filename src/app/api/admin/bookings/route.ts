@@ -1,7 +1,7 @@
 import { auth, isAdmin } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { bookings, services, availability } from "@/lib/db/schema"
-import { desc, eq } from "drizzle-orm"
+import { desc, eq, isNotNull, like } from "drizzle-orm"
 
 export async function GET() {
   const session = await auth()
@@ -34,6 +34,7 @@ export async function GET() {
     .from(bookings)
     .leftJoin(services, eq(bookings.serviceId, services.id))
     .leftJoin(availability, eq(bookings.slotId, availability.id))
+    .where(like(bookings.razorpayPaymentId, "pay_%"))
     .orderBy(desc(bookings.createdAt))
 
   return Response.json(rows)

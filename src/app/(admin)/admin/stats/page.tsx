@@ -157,8 +157,8 @@ export default function StatsPage() {
 
   if (!data) {
     return (
-      <div>
-        <h1 className="text-2xl font-heading font-800 text-ink mb-6">Stats</h1>
+      <div className="px-10 py-10">
+        <h1 className="font-heading text-3xl font-800 text-ink mb-6">Stats</h1>
         <div className="text-center py-12 text-ink/40">Loading…</div>
       </div>
     )
@@ -171,31 +171,29 @@ export default function StatsPage() {
   const maxInqCount = Math.max(...data.inquiriesByType.map((t) => t.count), 1)
 
   return (
-    <div>
-      <h1 className="text-2xl font-heading font-800 text-ink mb-6">Stats</h1>
+    <div className="px-10 py-10 max-w-6xl">
+      <div className="mb-6">
+        <h1 className="font-heading text-3xl font-800 text-ink">Stats</h1>
+      </div>
 
       {/* Totals */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 mb-8">
         <StatCard label="Total Users" value={data.totals.users} />
         <StatCard label="Paid Transactions" value={data.totals.transactions} />
-        <StatCard
-          label="Startup Scores"
-          value={data.totals.scores}
-          sub={`${data.totals.paidScores} paid`}
-        />
+        <StatCard label="Startup Scores" value={data.totals.scores} sub={`${data.totals.paidScores} paid`} />
         <StatCard label="Service Inquiries" value={data.totals.inquiries} />
         <StatCard label="Page Views" value={data.totals.pageViews.toLocaleString("en-IN")} sub="all time" />
       </div>
 
       {/* Page visits */}
       <div className="mb-8">
-        <h2 className="text-base font-heading font-semibold text-ink mb-4">Page Visits (all time, high → low)</h2>
+        <h2 className="font-sans text-xs font-semibold text-ink/40 uppercase tracking-widest mb-3">Page Visits (all time, high → low)</h2>
         <PageViewsTable />
       </div>
 
       {/* CTA conversion rates */}
       <div className="mb-8">
-        <h2 className="text-base font-heading font-semibold text-ink mb-4">CTA Conversion Rates</h2>
+        <h2 className="font-sans text-xs font-semibold text-ink/40 uppercase tracking-widest mb-3">CTA Conversion Rates</h2>
         {data.conversions.every((c) => c.clicks === 0) ? (
           <p className="text-sm text-ink/40">No CTA click data yet — rates will populate once users interact with the site.</p>
         ) : (
@@ -235,9 +233,7 @@ export default function StatsPage() {
 
       {/* Monthly activity */}
       <div className="mb-8">
-        <h2 className="text-base font-heading font-semibold text-ink mb-4">
-          Monthly Activity (last 12 months)
-        </h2>
+        <h2 className="font-sans text-xs font-semibold text-ink/40 uppercase tracking-widest mb-3">Monthly Activity (last 12 months)</h2>
         <div className="rounded-xl border border-peach-dark/20 overflow-hidden">
           <table className="w-full text-sm">
             <thead>
@@ -288,7 +284,7 @@ export default function StatsPage() {
       {/* Breakdowns */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <h2 className="text-base font-heading font-semibold text-ink mb-4">Bookings by Service</h2>
+          <h2 className="font-sans text-xs font-semibold text-ink/40 uppercase tracking-widest mb-3">Bookings by Service</h2>
           {data.bookingsByService.length === 0 ? (
             <p className="text-sm text-ink/40">No data yet</p>
           ) : (
@@ -303,7 +299,7 @@ export default function StatsPage() {
         </div>
 
         <div>
-          <h2 className="text-base font-heading font-semibold text-ink mb-4">Service Inquiries by Type</h2>
+          <h2 className="font-sans text-xs font-semibold text-ink/40 uppercase tracking-widest mb-3">Service Inquiries by Type</h2>
           {data.inquiriesByType.length === 0 ? (
             <p className="text-sm text-ink/40">No data yet</p>
           ) : (

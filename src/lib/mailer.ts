@@ -272,8 +272,11 @@ export async function sendPurchaseWelcome({
     })
   )
   const subjectMap: Record<string, string> = {
-    "angel-investor-list": "Your Angel Investor List — how to make the most of it",
-    "startup-ideas-2026": "Your 100 startup ideas — what to do next",
+    "angel-investor-list":  "Your Angel Investor List — how to make the most of it",
+    "early-stage-vc-list":  "Your Early Stage VC List — how to use it well",
+    "family-offices-list":  "Your Family Office List — how to approach them",
+    "incubators-list":      "Your Incubator and Accelerator List — how to apply well",
+    "startup-ideas-2026":   "Your 100 startup ideas — what to do next",
   }
   await sendMail({
     to,

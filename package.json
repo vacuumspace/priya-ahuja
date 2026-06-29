@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "migrate": "drizzle-kit migrate",
+    "prebuild": "node scripts/build-investor-data.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",

@@ -26,10 +26,12 @@ type Props = {
   total: number
   userEmail: string | null
   userName: string | null
+  displayPrice?: string
 }
 
 const PAGE_SIZE = 10
-const PRICE = "₹999"
+const FREE_PAGES = 3
+const PRICE = "₹999" // fallback; actual price passed as prop
 
 function CopyButton({ text }: { text: string }) {
   const [copied, setCopied] = useState(false)
@@ -53,7 +55,8 @@ function CopyButton({ text }: { text: string }) {
   )
 }
 
-export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticated, firstPage, total, userEmail, userName }: Props) {
+export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticated, firstPage, total, userEmail, userName, displayPrice }: Props) {
+  const price = displayPrice ?? PRICE
   const { data: session } = useSession()
   const [paid, setPaid]   = useState(initialPaid)
   const [state, setState] = useState<"preview" | "buying" | "list">(initialPaid ? "list" : "preview")
@@ -219,24 +222,23 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
             >
               {state === "buying" ? <><Loader2 size={13} className="animate-spin" /> processing…</> : "get full access"}
             </button>
-            <span className="text-xs font-sans font-semibold text-ink bg-peach/30 border border-peach-dark/20 px-2.5 py-1 rounded-md">{PRICE} · lifetime access</span>
+            <span className="text-xs font-sans font-semibold text-ink bg-peach/30 border border-peach-dark/20 px-2.5 py-1 rounded-md">{price} · lifetime access</span>
           </div>
         )}
       </div>
 
-      {/* Why this list? — shown only on preview */}
+      {/* Description block — shown only when not paid */}
       {!paid && (
         <div className="px-4 md:px-10 pb-8">
-
           <div className="bg-card border border-border rounded-xl px-5 py-4 space-y-2">
-            <p className="font-sans text-xs font-semibold text-ink/70">all about these contact details</p>
+            <p className="font-sans text-xs font-semibold text-ink/70">all about this list</p>
             {[
-              "These are curated and updated active investors not stale directories or cold LinkedIn scrapes.",
-              "Direct emails included, so you're not guessing or going through assistants.",
-              "Covers angels writing cheques in 2025–26 across fintech, SaaS, D2C, edtech, healthtech, deeptech, consumer brands, climate tech, and many more.",
-              "One-time payment: no subscriptions, no expiry. Yours forever.",
-              "Future updates included, when the list grows or gets refreshed, you have the access to updated list automatically always.",
-              "There are 1000+ investors on the list, but a few email IDs may not be active. For those, LinkedIn is the best way to reach out.",
+              "900+ angel investors actively writing cheques across India, curated and kept updated.",
+              "Each entry includes direct email and LinkedIn so you can reach them without going through assistants or guessing addresses.",
+              "Covers angels investing in 2024-26 across fintech, SaaS, D2C, edtech, healthtech, deeptech, consumer brands, climate tech, and more.",
+              "One-time payment. No subscriptions, no expiry. Yours forever including future refreshes.",
+              "A few email IDs may not be active. LinkedIn is always the most reliable fallback for outreach.",
+              "We verify details to the best of our ability and keep improving this list over time. That is why access is given here directly and not as a download, so we can keep updating what you see. Our intention is to genuinely help founders.",
             ].map((point) => (
               <p key={point} className="font-sans text-[12px] text-ink/55 leading-relaxed flex gap-2">
                 <span className="text-peach-dark flex-shrink-0">·</span>
@@ -244,7 +246,7 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
               </p>
             ))}
             <p className="font-sans text-[12px] text-ink/50 leading-relaxed pt-1 border-t border-border mt-2">
-              <span className="font-semibold text-ink/70">Why paid?</span> I put in a lot of efforts to curate this list, so this is just to make sure that list access goes to those who actually value it.
+              <span className="font-semibold text-ink/70">Why paid?</span> Curating and maintaining this list takes real effort. Keeping it paid ensures it stays high quality and goes to founders who genuinely need it.
             </p>
           </div>
         </div>
@@ -257,10 +259,11 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
         </div>
       )}
 
-      {/* Paid: search + filters */}
+      {/* Search + filters + count */}
       {paid && state === "list" && (
-        <div className="px-4 md:px-10 mb-4 flex flex-wrap gap-3 items-center">
-          <div className="relative flex-1 min-w-[180px] max-w-xs">
+        <div className="px-4 md:px-10 mb-4 flex flex-wrap gap-3 items-center justify-between">
+          <div className="flex flex-wrap items-center gap-3">
+          <div className="relative min-w-[180px] max-w-xs">
             <Search size={13} className="absolute left-3 top-1/2 -translate-y-1/2 text-ink/30 pointer-events-none" />
             <input
               type="text"
@@ -292,6 +295,10 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
             {uniqueCountries.map(c => <option key={c} value={c}>{c}</option>)}
           </select>
           {loading && <Loader2 size={14} className="animate-spin text-ink/30" />}
+          </div>
+          <p className="font-sans text-xs text-ink/40">
+            {totalCount.toLocaleString()} investors total
+          </p>
         </div>
       )}
 
@@ -431,7 +438,7 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
             <div className="flex items-start justify-between mb-4">
               <div>
                 <h3 className="font-heading text-xl font-700 text-ink">sign in to continue</h3>
-                <p className="font-sans text-xs text-ink/40 mt-0.5">angel investor list · {PRICE} lifetime access</p>
+                <p className="font-sans text-xs text-ink/40 mt-0.5">angel investor list · {price} lifetime access</p>
               </div>
               <button onClick={() => setShowSignIn(false)} className="text-ink/40 hover:text-ink transition-colors">
                 <X size={18} />
@@ -454,30 +461,30 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
           <p className="font-sans text-xs text-ink/40">
             {paid
               ? `showing ${start}–${end} of ${totalCount.toLocaleString()} investors`
-              : `showing 1–${Math.min(PAGE_SIZE, totalCount)} of ${totalCount.toLocaleString()} investors`}
+              : `showing 1–${Math.min(FREE_PAGES * PAGE_SIZE, totalCount)} of ${totalCount.toLocaleString()} investors`}
           </p>
           <div className="flex items-center gap-2">
             <button
-              onClick={() => paid ? fetchPage(page - 1, search, stateFilter, countryFilter) : undefined}
-              disabled={!paid || page <= 1 || loading}
+              onClick={() => page > 1 ? fetchPage(page - 1, search, stateFilter, countryFilter) : undefined}
+              disabled={page <= 1 || loading}
               className="inline-flex items-center gap-1 text-xs font-sans font-semibold text-ink/60 hover:text-ink disabled:opacity-30 disabled:cursor-not-allowed transition-colors px-3 py-1.5 border border-border rounded-lg"
             >
               <ChevronLeft size={13} /> prev
             </button>
 
-            {/* Page numbers — show a few around current page */}
             <div className="flex items-center gap-1">
               {Array.from({ length: Math.min(5, pageCount) }, (_, i) => {
-                const p = paid ? Math.max(1, Math.min(page - 2, pageCount - 4)) + i : i + 1
-                const isLocked = !paid && p > 1
-                const isCurrent = paid && p === page
+                const p = (paid || page > FREE_PAGES - 2)
+                  ? Math.max(1, Math.min(page - 2, pageCount - 4)) + i
+                  : i + 1
+                const isLocked = !paid && p > FREE_PAGES
+                const isCurrent = p === page
                 return (
                   <button
                     key={p}
-                    onClick={() => paid ? fetchPage(p, search, stateFilter, countryFilter) : setShowSignIn(true)}
+                    onClick={() => isLocked ? setShowSignIn(true) : fetchPage(p, search, stateFilter, countryFilter)}
                     className={`inline-flex items-center justify-center w-7 h-7 rounded text-xs font-sans font-semibold transition-colors
-                      ${isCurrent ? "bg-ink text-cream" : "border border-border text-ink/50 hover:text-ink hover:border-ink/40"}
-                      ${isLocked ? "cursor-pointer" : ""}`}
+                      ${isCurrent ? "bg-ink text-cream" : "border border-border text-ink/50 hover:text-ink hover:border-ink/40"}`}
                   >
                     {isLocked ? <Lock size={9} className="text-ink/30" /> : p}
                   </button>
@@ -489,8 +496,8 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
             </div>
 
             <button
-              onClick={() => paid ? fetchPage(page + 1, search, stateFilter, countryFilter) : undefined}
-              disabled={!paid || page >= pageCount || loading}
+              onClick={() => !paid && page >= FREE_PAGES ? setShowSignIn(true) : fetchPage(page + 1, search, stateFilter, countryFilter)}
+              disabled={page >= pageCount || loading}
               className="inline-flex items-center gap-1 text-xs font-sans font-semibold text-ink/60 hover:text-ink disabled:opacity-30 disabled:cursor-not-allowed transition-colors px-3 py-1.5 border border-border rounded-lg"
             >
               next <ChevronRight size={13} />

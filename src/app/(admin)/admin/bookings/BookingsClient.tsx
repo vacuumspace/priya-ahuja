@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import { MessageCircle, Star, X, CalendarClock, ExternalLink, FileEdit, Mail } from "lucide-react"
+import { MessageCircle, Star, X, CalendarClock, ExternalLink, FileEdit, Mail, ChevronLeft, ChevronRight } from "lucide-react"
 import Link from "next/link"
 
 type Message = {
@@ -213,13 +213,27 @@ function BookingRow({
           </select>
         </td>
         <td className="py-3 px-4">
-          <input
-            value={meetLink}
-            onChange={(e) => setMeetLink(e.target.value)}
-            onBlur={() => save({ meetLink })}
-            placeholder="Meet link"
-            className="w-full text-xs font-sans bg-card border border-border rounded-lg px-2 py-1 text-ink placeholder-ink/30 focus:outline-none focus:border-peach-dark/50"
-          />
+          {meetLink ? (
+            <a
+              href={meetLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-sans text-xs font-semibold px-3 py-1.5 rounded-lg bg-emerald-500/20 text-emerald-400 hover:bg-emerald-500/30 transition-colors whitespace-nowrap"
+            >
+              Join
+            </a>
+          ) : (
+            <input
+              value={meetLink}
+              onChange={(e) => setMeetLink(e.target.value)}
+              onBlur={() => save({ meetLink })}
+              placeholder="Add link"
+              className="w-full text-xs font-sans bg-card border border-border rounded-lg px-2 py-1 text-ink placeholder-ink/30 focus:outline-none focus:border-peach-dark/50"
+            />
+          )}
+        </td>
+        <td className="py-3 px-4 text-xs font-sans text-ink/50 whitespace-nowrap">
+          {new Intl.DateTimeFormat("en-IN", { dateStyle: "medium", timeStyle: "short" }).format(new Date(booking.createdAt))}
         </td>
         <td className="py-3 px-4">
           {booking.feedbackRating ? (
@@ -408,6 +422,16 @@ function BookingRow({
   )
 }
 
+function getMonthKey(dateStr: string | null) {
+  if (!dateStr) return "0000-00"
+  const d = new Date(dateStr)
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`
+}
+function fmtMonthLabel(ym: string) {
+  const [y, m] = ym.split("-")
+  return new Date(Number(y), Number(m) - 1, 1).toLocaleString("en-IN", { month: "long", year: "numeric" })
+}
+
 export default function BookingsClient({ initialBookings }: { initialBookings: Booking[] }) {
   const [bookings, setBookings] = useState<Booking[]>(initialBookings)
   const [messagingId, setMessagingId] = useState<string | null>(null)
@@ -415,26 +439,55 @@ export default function BookingsClient({ initialBookings }: { initialBookings: B
   const handleUpdate = (id: string, patch: Partial<Booking>) => {
     setBookings((prev) => prev.map((b) => (b.id === id ? { ...b, ...patch } : b)))
   }
-
   const handleCancel = (id: string) => {
     setBookings((prev) => prev.map((b) => (b.id === id ? { ...b, status: "cancelled" } : b)))
   }
 
+  // Sorted months newest first — by slot date
+  const months = Array.from(new Set(bookings.map(b => getMonthKey(b.slotDate)))).sort((a, b) => b.localeCompare(a))
+  const [monthIdx, setMonthIdx] = useState(0)
+
+  const selectedMonth = months[monthIdx] ?? ""
+  const filtered = bookings.filter(b => getMonthKey(b.slotDate) === selectedMonth)
+
   return (
     <div className="px-10 py-10">
-      <div className="mb-6">
-        <h1 className="font-heading text-3xl font-800 text-ink">Bookings</h1>
-        <p className="font-sans text-sm text-ink/50 mt-1">{bookings.length} total</p>
+      <div className="flex items-start justify-between mb-6">
+        <div>
+          <h1 className="font-heading text-3xl font-800 text-ink">Bookings</h1>
+          <p className="font-sans text-sm text-ink/50 mt-1">{filtered.length} bookings · {bookings.length} total</p>
+        </div>
+        {months.length > 0 && (
+          <div className="flex items-center gap-1 mt-1">
+            <button
+              onClick={() => setMonthIdx(i => Math.min(months.length - 1, i + 1))}
+              disabled={monthIdx >= months.length - 1}
+              className="p-1.5 rounded hover:bg-card disabled:opacity-20 transition-colors"
+            >
+              <ChevronLeft size={15} />
+            </button>
+            <span className="font-sans text-sm font-medium text-ink min-w-[130px] text-center">
+              {fmtMonthLabel(selectedMonth)}
+            </span>
+            <button
+              onClick={() => setMonthIdx(i => Math.max(0, i - 1))}
+              disabled={monthIdx <= 0}
+              className="p-1.5 rounded hover:bg-card disabled:opacity-20 transition-colors"
+            >
+              <ChevronRight size={15} />
+            </button>
+          </div>
+        )}
       </div>
 
-      {bookings.length === 0 ? (
-        <p className="font-sans text-sm text-ink/40">No bookings yet.</p>
+      {filtered.length === 0 ? (
+        <p className="font-sans text-sm text-ink/40">No bookings for {fmtMonthLabel(selectedMonth)}.</p>
       ) : (
         <div className="overflow-x-auto rounded-2xl border border-border">
           <table className="w-full min-w-[1000px]">
             <thead>
               <tr className="border-b border-border bg-card">
-                {["Date / Slot", "Client", "Service", "Status", "Meet Link", "Feedback", "Notes", "Actions"].map((h) => (
+                {["Date / Slot", "Client", "Service", "Status", "Meet Link", "Paid On", "Feedback", "Notes", "Actions"].map((h) => (
                   <th key={h} className="py-3 px-4 text-left text-[10px] font-sans font-semibold text-ink/40 uppercase tracking-widest">
                     {h}
                   </th>
@@ -442,7 +495,7 @@ export default function BookingsClient({ initialBookings }: { initialBookings: B
               </tr>
             </thead>
             <tbody>
-              {bookings.map((b) => (
+              {filtered.map((b) => (
                 <BookingRow
                   key={b.id}
                   booking={b}

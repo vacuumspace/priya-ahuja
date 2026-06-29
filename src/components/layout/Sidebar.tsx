@@ -15,6 +15,13 @@ const topItems = [
   { label: "connect", href: "/connect", badge: null },
 ]
 
+const INVESTOR_LIST_ITEMS = [
+  { label: "angel investors", href: "/fundraise/investor-list/angel-investors" },
+  { label: "early stage vc", href: "/fundraise/investor-list/early-stage-vc" },
+  { label: "family offices", href: "/fundraise/investor-list/family-offices" },
+  { label: "incubator & accelerator", href: "/fundraise/investor-list/incubators" },
+]
+
 const topicGroups = [
   {
     label: "startup",
@@ -34,7 +41,7 @@ const topicGroups = [
       { label: "blog", href: "/fundraise/blog" },
       { label: "tools", href: "/fundraise/tools" },
       { label: "templates", href: "/fundraise/templates" },
-      { label: "angel investors", href: "/fundraise/angel-investors" },
+      { label: "investor list", href: "/fundraise/investor-list", subItems: INVESTOR_LIST_ITEMS },
       { label: "grants", href: "/fundraise/grants" },
     ],
   },
@@ -166,6 +173,42 @@ export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEma
               {isOpen && (
                 <div className="ml-3 mt-0.5 flex flex-col gap-0.5 border-l border-peach-dark/20 pl-3">
                   {group.children.map((child) => {
+                    const hasSubItems = "subItems" in child && Array.isArray(child.subItems)
+                    const isGroupActive = pathname === child.href || pathname.startsWith(child.href + "/")
+
+                    if (hasSubItems) {
+                      return (
+                        <div key={child.href}>
+                          <Link
+                            href={child.href}
+                            className={`block px-2 py-1.5 rounded-md text-xs font-sans font-medium transition-colors ${
+                              isGroupActive ? "text-ink bg-peach-dark/20" : "text-ink/60 hover:text-ink hover:bg-peach-dark/10"
+                            }`}
+                          >
+                            {child.label}
+                          </Link>
+                          <div className="ml-2 flex flex-col gap-0.5 border-l border-peach-dark/15 pl-2.5">
+                            {(child.subItems as { label: string; href: string }[]).map((sub) => {
+                              const isActive = pathname === sub.href || pathname.startsWith(sub.href + "/")
+                              return (
+                                <Link
+                                  key={sub.href}
+                                  href={sub.href}
+                                  className={`px-2 py-1 rounded-md text-[11px] font-sans font-medium transition-colors ${
+                                    isActive
+                                      ? "bg-peach-dark/40 text-ink"
+                                      : "text-ink/50 hover:bg-peach-dark/10 hover:text-ink"
+                                  }`}
+                                >
+                                  {sub.label}
+                                </Link>
+                              )
+                            })}
+                          </div>
+                        </div>
+                      )
+                    }
+
                     const isActive = pathname === child.href || pathname.startsWith(child.href + "/")
                     return (
                       <Link

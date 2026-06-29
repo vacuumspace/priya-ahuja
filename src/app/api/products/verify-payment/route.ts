@@ -83,6 +83,13 @@ export async function POST(req: NextRequest) {
     }
 
     if (product && purchase.userEmail) {
+      const ACCESS_URLS: Record<string, string> = {
+        "angel-investor-list":  "/fundraise/investor-list/angel-investors",
+        "early-stage-vc-list":  "/fundraise/investor-list/early-stage-vc",
+        "family-offices-list":  "/fundraise/investor-list/family-offices",
+        "incubators-list":      "/fundraise/investor-list/incubators",
+      }
+      const accessPath = ACCESS_URLS[product.slug] ?? "/my-activity"
       sendPurchaseWelcome({
         to: purchase.userEmail,
         name: purchase.userName || "there",
@@ -93,7 +100,7 @@ export async function POST(req: NextRequest) {
         to: purchase.userEmail,
         name: purchase.userName || "there",
         productName: product.title,
-        accessUrl: `${process.env.NEXT_PUBLIC_APP_URL}/fundraise/angel-investors`,
+        accessUrl: `${process.env.NEXT_PUBLIC_APP_URL}${accessPath}`,
       }).catch(err => console.error("sendAccessLink error:", err))
     }
 

@@ -68,6 +68,13 @@ export default async function AdminDashboard() {
     .where(and(gte(availability.date, today), eq(bookings.status, "confirmed")))
     .orderBy(availability.date, availability.startTime)
 
+  // Tag label for purchase kind
+  function purchaseTag(slug: string | null | undefined) {
+    if (!slug) return "template"
+    if (slug.endsWith("-list")) return "Investor List"
+    return "template"
+  }
+
   return (
     <div className="px-10 py-10">
       <div className="mb-8">
@@ -75,12 +82,13 @@ export default async function AdminDashboard() {
         <p className="font-sans text-sm text-ink/50 mt-1">Welcome back, Priya.</p>
       </div>
 
-      <div className="max-w-2xl flex flex-col gap-10">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
 
+        {/* Left — Transactions */}
         <div>
           <div className="flex items-center justify-between mb-3">
             <h2 className="font-sans text-xs font-semibold text-ink/40 uppercase tracking-widest">
-              Payment Transactions
+              Latest Transactions
             </h2>
             <Link href="/admin/sales" className="text-[11px] font-sans text-ink/40 hover:text-ink transition-colors">
               see full list →
@@ -105,8 +113,14 @@ export default async function AdminDashboard() {
                       <p className="text-sm font-sans font-semibold text-ink">{amountRs}</p>
                       <p className="text-[10px] font-sans text-ink/30">{dateLabel}</p>
                     </div>
-                    <span className={`text-[10px] font-sans font-semibold px-2 py-0.5 rounded-full capitalize flex-shrink-0 ${t.kind === "purchase" ? "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400" : "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"}`}>
-                      {t.kind === "purchase" ? (t.slug === "angel-investor-list" ? "Investor List" : "template") : "session"}
+                    <span className={`text-[10px] font-sans font-semibold px-2 py-0.5 rounded-full capitalize flex-shrink-0 ${
+                      t.kind !== "purchase"
+                        ? "bg-emerald-900/30 text-emerald-400"
+                        : purchaseTag(t.slug) === "Investor List"
+                        ? "bg-pink-900/30 text-pink-400"
+                        : "bg-violet-900/30 text-violet-400"
+                    }`}>
+                      {t.kind === "purchase" ? purchaseTag(t.slug) : "session"}
                     </span>
                   </div>
                 )
@@ -115,54 +129,55 @@ export default async function AdminDashboard() {
           )}
         </div>
 
+        {/* Right — Upcoming Bookings */}
         <div>
-        <div className="flex items-center justify-between mb-3">
-          <h2 className="font-sans text-xs font-semibold text-ink/40 uppercase tracking-widest">
-            Upcoming Bookings
-          </h2>
-          <Link href="/admin/bookings" className="text-[11px] font-sans text-ink/40 hover:text-ink transition-colors">
-            view all →
-          </Link>
-        </div>
-
-        {upcomingBookings.length === 0 ? (
-          <p className="font-sans text-sm text-ink/30">No upcoming bookings.</p>
-        ) : (
-          <div className="flex flex-col gap-2">
-            {upcomingBookings.map((b) => {
-              const dateLabel = new Date(`${b.slotDate}T00:00:00`).toLocaleDateString("en-IN", {
-                weekday: "short", day: "numeric", month: "short",
-              })
-              return (
-                <div key={b.id} className="bg-card border border-border rounded-xl px-4 py-3 flex items-center gap-4">
-                  <div className="text-center min-w-[48px]">
-                    <p className="text-xs font-sans font-semibold text-ink">{b.slotStartTime}</p>
-                    <p className="text-[10px] font-sans text-ink/40">{dateLabel}</p>
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-sans font-medium text-ink truncate">{b.userName}</p>
-                    <p className="text-[11px] font-sans text-ink/40 truncate">{b.serviceTitle ?? "—"}</p>
-                  </div>
-                  <span className={`text-[10px] font-sans font-semibold px-2 py-0.5 rounded-full capitalize flex-shrink-0 ${STATUS_COLORS[b.status] ?? "bg-ink/10 text-ink/40"}`}>
-                    {b.status}
-                  </span>
-                  {b.meetLink ? (
-                    <a
-                      href={b.meetLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-[10px] font-sans text-peach-dark underline underline-offset-2 hover:opacity-70 flex-shrink-0"
-                    >
-                      meet
-                    </a>
-                  ) : (
-                    <span className="text-[10px] font-sans text-ink/20 flex-shrink-0">no link</span>
-                  )}
-                </div>
-              )
-            })}
+          <div className="flex items-center justify-between mb-3">
+            <h2 className="font-sans text-xs font-semibold text-ink/40 uppercase tracking-widest">
+              Upcoming Bookings
+            </h2>
+            <Link href="/admin/bookings" className="text-[11px] font-sans text-ink/40 hover:text-ink transition-colors">
+              view all →
+            </Link>
           </div>
-        )}
+
+          {upcomingBookings.length === 0 ? (
+            <p className="font-sans text-sm text-ink/30">No upcoming bookings.</p>
+          ) : (
+            <div className="flex flex-col gap-2">
+              {upcomingBookings.map((b) => {
+                const dateLabel = new Date(`${b.slotDate}T00:00:00`).toLocaleDateString("en-IN", {
+                  weekday: "short", day: "numeric", month: "short",
+                })
+                return (
+                  <div key={b.id} className="bg-card border border-border rounded-xl px-4 py-3 flex items-center gap-4">
+                    <div className="text-center min-w-[48px]">
+                      <p className="text-xs font-sans font-semibold text-ink">{b.slotStartTime}</p>
+                      <p className="text-[10px] font-sans text-ink/40">{dateLabel}</p>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-sans font-medium text-ink truncate">{b.userName}</p>
+                      <p className="text-[11px] font-sans text-ink/40 truncate">{b.serviceTitle ?? "—"}</p>
+                    </div>
+                    <span className={`text-[10px] font-sans font-semibold px-2 py-0.5 rounded-full capitalize flex-shrink-0 ${STATUS_COLORS[b.status] ?? "bg-ink/10 text-ink/40"}`}>
+                      {b.status}
+                    </span>
+                    {b.meetLink ? (
+                      <a
+                        href={b.meetLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[10px] font-sans text-peach-dark underline underline-offset-2 hover:opacity-70 flex-shrink-0"
+                      >
+                        meet
+                      </a>
+                    ) : (
+                      <span className="text-[10px] font-sans text-ink/20 flex-shrink-0">no link</span>
+                    )}
+                  </div>
+                )
+              })}
+            </div>
+          )}
         </div>
 
       </div>

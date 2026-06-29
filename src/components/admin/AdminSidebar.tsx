@@ -59,11 +59,11 @@ const navGroups: NavGroup[] = [
   },
   {
     label: "Transactions",
-    prefixes: ["/admin/bookings", "/admin/startup-scores", "/admin/idea-scores"],
+    prefixes: ["/admin/bookings", "/admin/startup-scores", "/admin/idea-scores", "/admin/investor-list"],
     items: [
       { label: "Bookings", href: "/admin/bookings", icon: CalendarCheck },
       { label: "Templates", href: "/admin/products?tab=transactions", icon: FileStack },
-      { label: "Angel Investors", href: "/admin/angel-investors?tab=transactions", icon: TrendingUp },
+      { label: "Investor List", href: "/admin/investor-list", icon: TrendingUp },
       { label: "Fundability Scores", href: "/admin/startup-scores", icon: Lightbulb },
       { label: "Idea Scores", href: "/admin/idea-scores", icon: Lightbulb },
     ],
@@ -78,11 +78,10 @@ const navGroups: NavGroup[] = [
   },
   {
     label: "Products",
-    prefixes: ["/admin/angel-investors", "/admin/vc-investors", "/admin/products", "/admin/services", "/admin/tools"],
+    prefixes: ["/admin/products", "/admin/services", "/admin/tools", "/admin/investor-list-products"],
     items: [
-      { label: "Angel Investors", href: "/admin/angel-investors", icon: TrendingUp },
-      { label: "VC", href: "/admin/vc-investors", icon: TrendingUp },
       { label: "Templates", href: "/admin/products?tab=list", icon: FileStack },
+      { label: "Investor Lists", href: "/admin/investor-list-products", icon: TrendingUp },
       { label: "Sessions", href: "/admin/services?tab=list", icon: Video },
       { label: "Slots", href: "/admin/services?tab=slots", icon: CalendarDays },
       { label: "Tools", href: "/admin/tools", icon: Wrench },
@@ -235,9 +234,9 @@ export function AdminSidebar({ userEmail, collapsed, onToggle, notificationCount
                   key={item.href}
                   href={item.href}
                   title={collapsed ? item.label : undefined}
-                  className={`flex items-center gap-3 pl-6 pr-2.5 py-2 rounded-lg text-sm font-sans font-medium transition-colors ${
-                    active ? "bg-peach-dark/30 text-ink" : "text-ink/70 hover:bg-peach-dark/20 hover:text-ink"
-                  }`}
+                  className={`flex items-center gap-3 py-2 rounded-lg text-sm font-sans font-medium transition-colors ${
+                    collapsed ? "justify-center" : "pl-6 pr-2.5"
+                  } ${active ? "bg-peach-dark/30 text-ink" : "text-ink/70 hover:bg-peach-dark/20 hover:text-ink"}`}
                 >
                   <Icon size={16} className="flex-shrink-0" />
                   {!collapsed && <span className="truncate flex-1">{item.label}</span>}
