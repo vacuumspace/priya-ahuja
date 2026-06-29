@@ -68,7 +68,7 @@ export default function FeedbackForm({
   return (
     <div className="space-y-8">
       <div>
-        <p className="text-[11px] font-sans text-ink/40 uppercase tracking-widest mb-2">feedback</p>
+        <p className="text-[13px] font-sans text-ink/40 uppercase tracking-widest mb-2">feedback</p>
         <h1 className="font-heading text-3xl font-800 text-ink leading-tight mb-2">
           how was the session?
         </h1>
@@ -99,7 +99,7 @@ export default function FeedbackForm({
             </button>
           ))}
         </div>
-        <p className="text-[11px] font-sans text-ink/40 h-4">
+        <p className="text-[13px] font-sans text-ink/40 h-4">
           {(hovered || rating) === 1 && "needs improvement"}
           {(hovered || rating) === 2 && "it was okay"}
           {(hovered || rating) === 3 && "pretty good"}

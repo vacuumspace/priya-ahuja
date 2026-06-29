@@ -111,15 +111,15 @@ function SlotPicker({ slug, onSelect }: { slug: string; onSelect: (slot: Slot | 
           <CalendarDays size={13} className="text-peach-dark flex-shrink-0" />
           <div>
             <p className="text-xs font-sans font-semibold text-ink">{formatDate(selectedSlot.date)}</p>
-            <p className="text-[11px] font-sans text-ink/60">{display}</p>
+            <p className="text-[13px] font-sans text-ink/60">{display}</p>
             {localNote && (
-              <p className="text-[10px] font-sans text-peach-dark/80 mt-0.5">{localNote} (your time)</p>
+              <p className="text-[12px] font-sans text-peach-dark/80 mt-0.5">{localNote} (your time)</p>
             )}
           </div>
         </div>
         <button
           onClick={() => { setSelectedSlot(null); setSelectedDate(selectedSlot.date); onSelect(null) }}
-          className="text-[11px] font-sans text-ink/40 hover:text-ink underline flex-shrink-0"
+          className="text-[13px] font-sans text-ink/40 hover:text-ink underline flex-shrink-0"
         >
           change
         </button>
@@ -128,9 +128,9 @@ function SlotPicker({ slug, onSelect }: { slug: string; onSelect: (slot: Slot | 
   }
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-3 w-full min-w-0">
       <div>
-        <p className="text-[10px] font-sans text-ink/40 uppercase tracking-wide mb-2">Pick a date</p>
+        <p className="text-[12px] font-sans text-ink/40 uppercase tracking-wide mb-2">Pick a date</p>
         <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
           {dates.map((d) => (
             <button
@@ -152,9 +152,9 @@ function SlotPicker({ slug, onSelect }: { slug: string; onSelect: (slot: Slot | 
       {selectedDate && (
         <div>
           <div className="flex items-center justify-between mb-2">
-            <p className="text-[10px] font-sans text-ink/40 uppercase tracking-wide">Pick a time</p>
+            <p className="text-[12px] font-sans text-ink/40 uppercase tracking-wide">Pick a time</p>
             {isNonIST() && (
-              <p className="text-[10px] font-sans text-peach-dark/70">shown in IST · your local time shown below</p>
+              <p className="text-[12px] font-sans text-peach-dark/70">shown in IST · your local time shown below</p>
             )}
           </div>
           <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
@@ -172,7 +172,7 @@ function SlotPicker({ slug, onSelect }: { slug: string; onSelect: (slot: Slot | 
                     {display}
                   </span>
                   {localNote && (
-                    <span className="text-[10px] text-peach-dark/70 mt-0.5 ml-[18px]">{localNote}</span>
+                    <span className="text-[12px] text-peach-dark/70 mt-0.5 ml-[18px]">{localNote}</span>
                   )}
                 </button>
               )
@@ -399,13 +399,13 @@ function BookingFormInner({ service }: { service: Service }) {
       )}
 
       <div className="bg-peach/10 border border-peach-dark/20 rounded-xl px-3 py-2 flex items-center justify-between">
-        <p className="text-[11px] font-sans text-ink/60">
+        <p className="text-[13px] font-sans text-ink/60">
           booking as <span className="font-semibold text-ink">{session?.user?.email}</span>
         </p>
         <button
           type="button"
           onClick={() => signIn("google", { callbackUrl: window.location.href })}
-          className="text-[10px] font-sans text-ink/40 hover:text-ink underline"
+          className="text-[12px] font-sans text-ink/40 hover:text-ink underline"
         >
           switch
         </button>
@@ -429,7 +429,7 @@ function BookingFormInner({ service }: { service: Service }) {
             required={(service as any).deckLinkRequired || service.type === "report"}
             className="bg-cream border-border text-sm"
           />
-          <p className="text-[10px] text-ink/40 mt-1 font-sans">ensure view access is enabled before submitting</p>
+          <p className="text-[12px] text-ink/40 mt-1 font-sans">ensure view access is enabled before submitting</p>
         </div>
       )}
 
@@ -468,7 +468,7 @@ function BookingFormInner({ service }: { service: Service }) {
         )}
       </Button>
       {!isRescheduleMode && (
-        <p className="text-[10px] text-ink/30 text-center font-sans">secure payment via razorpay</p>
+        <p className="text-[12px] text-ink/30 text-center font-sans">secure payment via razorpay</p>
       )}
     </form>
   )

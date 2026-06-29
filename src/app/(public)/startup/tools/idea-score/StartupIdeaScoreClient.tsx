@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState } from "react"
 import { signIn } from "next-auth/react"
@@ -143,8 +143,8 @@ function SampleIdeaScorecard({ userEmail }: { userEmail: string | null }) {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between px-1">
-        <p className="text-[10px] font-sans text-ink/40 uppercase tracking-[0.15em]">sample report</p>
-        <span className="text-[10px] font-sans text-ink/30 bg-ink/5 px-2 py-0.5 rounded-full">example only</span>
+        <p className="text-[12px] font-sans text-ink/40 uppercase tracking-[0.15em]">sample report</p>
+        <span className="text-[12px] font-sans text-ink/30 bg-ink/5 px-2 py-0.5 rounded-full">example only</span>
       </div>
 
       <div className={cn("relative", !isSignedIn && "select-none")}>
@@ -152,7 +152,7 @@ function SampleIdeaScorecard({ userEmail }: { userEmail: string | null }) {
           {/* Score + band */}
           <div className="bg-card border border-border rounded-2xl overflow-hidden mb-4">
             <div className="bg-ink px-6 py-4">
-              <p className="text-[10px] font-sans text-cream/40 uppercase tracking-[0.18em]">startup idea score</p>
+              <p className="text-[12px] font-sans text-cream/40 uppercase tracking-[0.18em]">startup idea score</p>
             </div>
             <div className="px-6 py-6 flex items-center gap-6">
               <div className="relative w-28 h-28 flex-shrink-0">
@@ -164,7 +164,7 @@ function SampleIdeaScorecard({ userEmail }: { userEmail: string | null }) {
               </div>
               <div className="flex-1">
                 <span className={`font-sans text-xs font-semibold uppercase tracking-wide ${band.color}`}>{band.label}</span>
-                <p className="font-sans text-[11px] text-ink/60 mt-2 leading-relaxed">{band.directional}</p>
+                <p className="font-sans text-[13px] text-ink/60 mt-2 leading-relaxed">{band.directional}</p>
               </div>
             </div>
             <div className="px-6 pb-5">
@@ -181,7 +181,7 @@ function SampleIdeaScorecard({ userEmail }: { userEmail: string | null }) {
 
           {/* Segment breakdown with expandable comments */}
           <div className="bg-card border border-border rounded-2xl p-4 sm:p-6 mb-4">
-            <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-4">segment breakdown · tap to see comments</p>
+            <p className="text-[12px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-4">segment breakdown · tap to see comments</p>
             <div className="space-y-2">
               {SAMPLE_IDEA_PILLARS.map((p, i) => {
                 const pct = Math.round((p.earned / p.max) * 100)
@@ -193,7 +193,7 @@ function SampleIdeaScorecard({ userEmail }: { userEmail: string | null }) {
                       onClick={() => setExpandedIdx(isOpen ? null : i)}
                       className="w-full px-4 py-3 flex items-center gap-3 hover:bg-peach/10 transition-colors text-left"
                     >
-                      <span className={`flex-shrink-0 text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full text-white ${ideaPillarColor(pct)}`}>
+                      <span className={`flex-shrink-0 text-[12px] font-mono font-semibold px-2 py-0.5 rounded-full text-white ${ideaPillarColor(pct)}`}>
                         {p.earned}/{p.max}
                       </span>
                       <div className="flex-1 h-1.5 bg-border rounded-full">
@@ -206,13 +206,13 @@ function SampleIdeaScorecard({ userEmail }: { userEmail: string | null }) {
                       <div className="border-t border-border divide-y divide-border/60 bg-cream/50">
                         {p.comments.map((c, j) => (
                           <div key={j} className="px-4 py-3">
-                            <p className="font-sans text-[11px] text-ink/60 leading-snug mb-1.5">{c.q}</p>
-                            <div className={`inline-flex items-center gap-1.5 text-[11px] font-sans font-semibold px-2.5 py-1 rounded-lg mb-1.5 ${
+                            <p className="font-sans text-[13px] text-ink/60 leading-snug mb-1.5">{c.q}</p>
+                            <div className={`inline-flex items-center gap-1.5 text-[13px] font-sans font-semibold px-2.5 py-1 rounded-lg mb-1.5 ${
                               c.level === "good" ? "bg-green-100 text-green-700" : c.level === "low" ? "bg-red-50 text-red-600" : "bg-amber-50 text-amber-700"
                             }`}>
                               {c.answer}
                             </div>
-                            <p className="font-sans text-[10px] text-ink/45 leading-relaxed border-l-2 border-peach-dark/30 pl-2">{c.note}</p>
+                            <p className="font-sans text-[12px] text-ink/45 leading-relaxed border-l-2 border-peach-dark/30 pl-2">{c.note}</p>
                           </div>
                         ))}
                       </div>
@@ -225,12 +225,12 @@ function SampleIdeaScorecard({ userEmail }: { userEmail: string | null }) {
 
           {/* Recommendations */}
           <div className="bg-card border border-border rounded-2xl p-4 sm:p-6">
-            <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-4">top things to fix before you build</p>
+            <p className="text-[12px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-4">top things to fix before you build</p>
             <div className="space-y-3">
               {SAMPLE_IDEA_RECS.map((rec, i) => (
                 <div key={i} className="flex gap-3 bg-peach/15 border border-peach-dark/15 rounded-xl p-4">
                   <span className="font-heading text-lg font-bold text-peach-dark/60 w-5 flex-shrink-0 mt-0.5">{i + 1}</span>
-                  <p className="font-sans text-sm text-ink/70 leading-relaxed">{rec}</p>
+                  <p className="font-sans text-base text-ink/70 leading-relaxed">{rec}</p>
                 </div>
               ))}
             </div>
@@ -268,7 +268,7 @@ function IntroView({ userEmail, onStart, price = 49900 }: { userEmail: string | 
   return (
     <div className="max-w-xl mx-auto space-y-5">
       <div className="bg-card border border-border rounded-2xl p-5 sm:p-8">
-        <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">
+        <p className="text-[12px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">
           50 questions · 9 segments
         </p>
         <h1 className="font-heading text-3xl font-bold text-ink mb-3 lowercase">
@@ -286,14 +286,14 @@ function IntroView({ userEmail, onStart, price = 49900 }: { userEmail: string | 
         </div>
         <div className="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 mb-7">
           <p className="font-sans text-xs font-semibold text-amber-800 mb-0.5">one-time access</p>
-          <p className="font-sans text-[11px] text-amber-700 leading-relaxed">
+          <p className="font-sans text-[13px] text-amber-700 leading-relaxed">
             this quiz can only be taken once. your answers and score are saved permanently to your account. take your time — once submitted, you cannot retake it.
           </p>
         </div>
 
         {/* Segment table */}
         <div className="rounded-xl border border-border overflow-hidden mb-8">
-          <div className="grid grid-cols-2 text-[10px] font-sans text-ink/35 uppercase tracking-widest px-4 py-2 bg-peach/20 border-b border-border">
+          <div className="grid grid-cols-2 text-[12px] font-sans text-ink/35 uppercase tracking-widest px-4 py-2 bg-peach/20 border-b border-border">
             <span>segment</span>
             <span className="text-right">questions</span>
           </div>
@@ -321,7 +321,7 @@ function IntroView({ userEmail, onStart, price = 49900 }: { userEmail: string | 
       </div>
 
       {isSignedIn && (
-        <p className="text-[10px] font-sans text-ink/30 text-center">
+        <p className="text-[12px] font-sans text-ink/30 text-center">
           signed in as {userEmail}
         </p>
       )}
@@ -356,7 +356,7 @@ function OptionCard({
     >
       <p className="font-sans font-semibold text-[13px] text-ink">{label}</p>
       {sublabel && (
-        <p className="font-sans text-[11px] text-ink/50 mt-0.5 leading-relaxed">{sublabel}</p>
+        <p className="font-sans text-[13px] text-ink/50 mt-0.5 leading-relaxed">{sublabel}</p>
       )}
     </div>
   )
@@ -387,13 +387,13 @@ function QuizView({
     <div className="max-w-xl mx-auto">
       <div className="mb-6">
         <div className="flex justify-between items-center mb-2">
-          <p key={step} className="text-[10px] font-sans text-ink/40 animate-in fade-in duration-300">
+          <p key={step} className="text-[12px] font-sans text-ink/40 animate-in fade-in duration-300">
             segment {step + 1} of {IDEA_PILLARS.length} ·{" "}
             <span className="font-semibold text-ink/70 bg-peach/40 px-1 py-0.5 rounded animate-in fade-in duration-500">
               {pillar.title}
             </span>
           </p>
-          <p className="text-[10px] font-sans text-ink/30">
+          <p className="text-[12px] font-sans text-ink/30">
             {totalAnswered} / 50 answered
           </p>
         </div>
@@ -528,7 +528,7 @@ function PaywallView({
   return (
     <div className="max-w-xl mx-auto space-y-5">
       <div className="bg-card border border-border rounded-2xl p-5 sm:p-8">
-        <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">
+        <p className="text-[12px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">
           one-time access
         </p>
         <h2 className="font-heading text-2xl font-bold text-ink lowercase mb-2">
@@ -563,14 +563,14 @@ function PaywallView({
           )}
         </button>
 
-        <p className="text-[10px] font-sans text-ink/30 text-center mt-3">
+        <p className="text-[12px] font-sans text-ink/30 text-center mt-3">
           one-time payment · instant access
         </p>
       </div>
 
       <button
         onClick={onBack}
-        className="flex items-center gap-1.5 text-[11px] font-sans text-ink/35 hover:text-ink/60 transition-colors mx-auto"
+        className="flex items-center gap-1.5 text-[13px] font-sans text-ink/35 hover:text-ink/60 transition-colors mx-auto"
       >
         <ArrowLeft size={11} /> back
       </button>
@@ -595,7 +595,7 @@ function ResultsView({
   return (
     <div className="max-w-xl mx-auto space-y-5">
       <div className="bg-card border border-border rounded-2xl p-5 sm:p-8 text-center">
-        <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-6">
+        <p className="text-[12px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-6">
           startup idea score
         </p>
         <div className="relative w-36 h-36 mx-auto mb-5">
@@ -605,13 +605,13 @@ function ResultsView({
           />
           <div className="absolute inset-3 rounded-full bg-card flex items-center justify-center flex-col gap-0.5">
             <span className="font-heading text-3xl font-bold text-ink leading-none">{result.totalScore}</span>
-            <span className="font-sans text-[10px] text-ink/35">out of 100</span>
+            <span className="font-sans text-[12px] text-ink/35">out of 100</span>
           </div>
         </div>
       </div>
 
       <div className="bg-card border border-border rounded-2xl p-4 sm:p-6">
-        <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">
+        <p className="text-[12px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">
           segment breakdown
         </p>
         <div className="space-y-4">
@@ -620,7 +620,7 @@ function ResultsView({
             const pct = (ps.earned / ps.max) * 100
             return (
               <div key={pillar.index}>
-                <div className="flex justify-between text-[11px] font-sans text-ink/60 mb-1.5">
+                <div className="flex justify-between text-[13px] font-sans text-ink/60 mb-1.5">
                   <span>{pillar.title}</span>
                   <span>{ps.earned} / {ps.max}</span>
                 </div>
@@ -638,7 +638,7 @@ function ResultsView({
 
       {recs.length > 0 ? (
         <div className="bg-card border border-border rounded-2xl p-4 sm:p-6">
-          <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">
+          <p className="text-[12px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">
             top things to work on before you build
           </p>
           <div className="space-y-3">
@@ -647,7 +647,7 @@ function ResultsView({
                 <span className="font-heading text-lg font-bold text-peach-dark/60 w-5 flex-shrink-0 mt-0.5">
                   {i + 1}
                 </span>
-                <p className="font-sans text-sm text-ink/70 leading-relaxed">{rec}</p>
+                <p className="font-sans text-base text-ink/70 leading-relaxed">{rec}</p>
               </div>
             ))}
           </div>
@@ -679,14 +679,14 @@ function ResultsView({
       <div className="text-center pb-4">
         <button
           onClick={onReset}
-          className="inline-flex items-center gap-1.5 text-[11px] font-sans text-ink/35 hover:text-ink/60 transition-colors"
+          className="inline-flex items-center gap-1.5 text-[13px] font-sans text-ink/35 hover:text-ink/60 transition-colors"
         >
           <RotateCcw size={11} /> take it again
         </button>
       </div>
 
       <div className="border-t border-border pt-5 pb-2">
-        <p className="font-sans text-[10px] text-ink/30 leading-relaxed text-center max-w-md mx-auto">
+        <p className="font-sans text-[12px] text-ink/30 leading-relaxed text-center max-w-md mx-auto">
           disclaimer: this score is for self-reflection and planning purposes only. it is not a guarantee that your idea will succeed or fail. startup outcomes depend on many factors beyond any quiz. use this as a thinking tool, not a verdict.
         </p>
       </div>

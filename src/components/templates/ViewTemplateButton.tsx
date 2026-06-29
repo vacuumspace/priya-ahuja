@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState } from "react"
 import { Eye, X, ChevronDown, ChevronUp, CheckCircle, Loader2, Download } from "lucide-react"
@@ -75,7 +75,7 @@ export default function ViewTemplateButton({ slug, title, token }: Props) {
         </a>
       </div>
 
-      {error && <p className="text-[10px] font-sans text-red-500 mt-1">{error}</p>}
+      {error && <p className="text-[12px] font-sans text-red-500 mt-1">{error}</p>}
 
       {open && sections.length > 0 && (
         <div

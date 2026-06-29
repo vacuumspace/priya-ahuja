@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useEffect, useCallback, useRef } from "react"
 import { useSession } from "next-auth/react"
@@ -40,12 +40,12 @@ function CopyButton({ text }: { text: string }) {
   }
   return (
     <div className="relative inline-flex">
-      <button onClick={copy} className="inline-flex items-center gap-1 text-[10px] text-ink/40 hover:text-ink/70 transition-colors px-1.5 py-0.5 rounded border border-border hover:border-ink/30">
+      <button onClick={copy} className="inline-flex items-center gap-1 text-[12px] text-ink/40 hover:text-ink/70 transition-colors px-1.5 py-0.5 rounded border border-border hover:border-ink/30">
         {copied ? <Check size={10} className="text-green-600" /> : <Copy size={10} />}
         {copied ? "copied" : "copy"}
       </button>
       {copied && (
-        <span className="absolute -top-7 left-1/2 -translate-x-1/2 bg-ink text-cream text-[10px] font-sans px-2 py-1 rounded whitespace-nowrap pointer-events-none animate-in fade-in duration-150">
+        <span className="absolute -top-7 left-1/2 -translate-x-1/2 bg-ink text-cream text-[12px] font-sans px-2 py-1 rounded whitespace-nowrap pointer-events-none animate-in fade-in duration-150">
           copied to clipboard
         </span>
       )}
@@ -188,7 +188,7 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
   return (
     <div className="min-h-screen bg-cream">
       {/* Header bar */}
-      <div className="flex justify-between items-center px-4 md:px-10 py-4 text-[11px] text-ink/50 font-sans border-b border-border">
+      <div className="flex justify-between items-center px-4 md:px-10 py-4 text-[13px] text-ink/50 font-sans border-b border-border">
         <span>fundraise · angel investor list</span>
         <span>{totalCount > 0 ? `${totalCount.toLocaleString()} investors` : "loading…"}</span>
       </div>
@@ -308,18 +308,18 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
           <div key={inv.id} className="bg-card border border-border rounded-xl p-4 space-y-2.5">
             <div className="flex items-start justify-between gap-2">
               <div>
-                <span className="font-sans text-[11px] text-ink/30 mr-1.5">{inv.sno}.</span>
+                <span className="font-sans text-[13px] text-ink/30 mr-1.5">{inv.sno}.</span>
                 <span className="font-sans text-sm font-semibold text-ink">{inv.name}</span>
               </div>
             </div>
 
             <div className="grid grid-cols-2 gap-x-4">
               <div>
-                <p className="font-sans text-[10px] text-ink/30 uppercase tracking-wide mb-0.5">City</p>
+                <p className="font-sans text-[12px] text-ink/30 uppercase tracking-wide mb-0.5">City</p>
                 <p className="font-sans text-xs text-ink/60">{[inv.city, inv.state].filter(Boolean).join(", ") || "—"}</p>
               </div>
               <div>
-                <p className="font-sans text-[10px] text-ink/30 uppercase tracking-wide mb-0.5">LinkedIn</p>
+                <p className="font-sans text-[12px] text-ink/30 uppercase tracking-wide mb-0.5">LinkedIn</p>
                 {paid ? (
                   inv.linkedin ? (
                     <a href={inv.linkedin} target="_blank" rel="noopener noreferrer"
@@ -334,7 +334,7 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
             </div>
 
             <div>
-              <p className="font-sans text-[10px] text-ink/30 uppercase tracking-wide mb-0.5">Email</p>
+              <p className="font-sans text-[12px] text-ink/30 uppercase tracking-wide mb-0.5">Email</p>
               <div className="font-sans text-xs text-ink/70">
                 {paid ? (
                   inv.emails.length > 0 ? (

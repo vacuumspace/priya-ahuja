@@ -48,6 +48,7 @@
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) * 1.4);
+
 }
 
 :root {
@@ -118,6 +119,9 @@
 }
 
 @layer base {
+  html {
+    font-size: 106.25%; /* 17px base — lifts all rem-based text sizes */
+  }
   * {
     @apply border-border outline-ring/50;
   }
@@ -133,7 +137,15 @@
   }
 }
 
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
 @layer utilities {
+  .animate-marquee {
+    animation: marquee 28s linear infinite;
+  }
   .font-heading {
     font-family: var(--font-syne), sans-serif;
   }

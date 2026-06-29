@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState } from "react"
 import { Send } from "lucide-react"
@@ -34,7 +34,7 @@ export default function ContactForm({ defaultName, defaultEmail }: { defaultName
 
   return (
     <div className="min-h-screen bg-cream">
-      <div className="flex justify-between items-center px-4 md:px-10 py-4 text-[11px] text-ink/50 font-sans border-b border-border">
+      <div className="flex justify-between items-center px-4 md:px-10 py-4 text-[13px] text-ink/50 font-sans border-b border-border">
         <span>reach out</span>
         <span>get in touch</span>
       </div>
@@ -53,7 +53,7 @@ export default function ContactForm({ defaultName, defaultEmail }: { defaultName
         {/* Contact info */}
         <div className="flex flex-col gap-6">
           <div>
-            <p className="text-[10px] font-sans text-ink/40 uppercase tracking-widest mb-4">contact info</p>
+            <p className="text-[12px] font-sans text-ink/40 uppercase tracking-widest mb-4">contact info</p>
             <div className="flex flex-col gap-4">
               <a
                 href="mailto:hi@priyaahuja.in"
@@ -63,7 +63,7 @@ export default function ContactForm({ defaultName, defaultEmail }: { defaultName
                   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-ink/60"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
                 </div>
                 <div>
-                  <p className="text-[10px] text-ink/40 font-sans mb-0.5">email</p>
+                  <p className="text-[12px] text-ink/40 font-sans mb-0.5">email</p>
                   <p className="text-sm font-sans text-ink group-hover:text-peach-dark transition-colors">
                     hi@priyaahuja.in
                   </p>
@@ -80,7 +80,7 @@ export default function ContactForm({ defaultName, defaultEmail }: { defaultName
                   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" className="text-ink/60"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
                 </div>
                 <div>
-                  <p className="text-[10px] text-ink/40 font-sans mb-0.5">instagram</p>
+                  <p className="text-[12px] text-ink/40 font-sans mb-0.5">instagram</p>
                   <p className="text-sm font-sans text-ink group-hover:text-peach-dark transition-colors">
                     @pitchtopriya
                   </p>
@@ -99,7 +99,7 @@ export default function ContactForm({ defaultName, defaultEmail }: { defaultName
 
         {/* Enquiry form */}
         <div className="bg-card border border-border rounded-2xl p-6">
-          <p className="text-[10px] font-sans text-ink/40 uppercase tracking-widest mb-5">send an enquiry</p>
+          <p className="text-[12px] font-sans text-ink/40 uppercase tracking-widest mb-5">send an enquiry</p>
 
           {status === "sent" ? (
             <div className="flex flex-col items-center justify-center py-12 text-center">
@@ -119,7 +119,7 @@ export default function ContactForm({ defaultName, defaultEmail }: { defaultName
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-[10px] font-sans text-ink/50 uppercase tracking-wider">name</label>
+                  <label className="text-[12px] font-sans text-ink/50 uppercase tracking-wider">name</label>
                   <input
                     name="name"
                     required
@@ -130,7 +130,7 @@ export default function ContactForm({ defaultName, defaultEmail }: { defaultName
                   />
                 </div>
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-[10px] font-sans text-ink/50 uppercase tracking-wider">email</label>
+                  <label className="text-[12px] font-sans text-ink/50 uppercase tracking-wider">email</label>
                   <input
                     name="email"
                     type="email"
@@ -144,7 +144,7 @@ export default function ContactForm({ defaultName, defaultEmail }: { defaultName
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <label className="text-[10px] font-sans text-ink/50 uppercase tracking-wider">subject</label>
+                <label className="text-[12px] font-sans text-ink/50 uppercase tracking-wider">subject</label>
                 <select
                   name="subject"
                   required
@@ -162,7 +162,7 @@ export default function ContactForm({ defaultName, defaultEmail }: { defaultName
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <label className="text-[10px] font-sans text-ink/50 uppercase tracking-wider">message</label>
+                <label className="text-[12px] font-sans text-ink/50 uppercase tracking-wider">message</label>
                 <textarea
                   name="message"
                   required

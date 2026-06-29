@@ -63,13 +63,13 @@ export default function ScoreResultClient({ totalScore, pillarScores, answers }:
       <div className="flex items-center justify-between mb-2 print:hidden">
         <Link
           href="/my-activity?tab=tools"
-          className="inline-flex items-center gap-1.5 text-[11px] font-sans text-ink/40 hover:text-ink/70 transition-colors"
+          className="inline-flex items-center gap-1.5 text-[13px] font-sans text-ink/40 hover:text-ink/70 transition-colors"
         >
           <ArrowLeft size={12} /> back to my activity
         </Link>
         <button
           onClick={() => window.print()}
-          className="inline-flex items-center gap-1.5 text-[11px] font-sans text-ink/40 hover:text-ink/70 transition-colors border border-border rounded-lg px-3 py-1.5"
+          className="inline-flex items-center gap-1.5 text-[13px] font-sans text-ink/40 hover:text-ink/70 transition-colors border border-border rounded-lg px-3 py-1.5"
         >
           <Download size={11} /> save as PDF
         </button>
@@ -78,7 +78,7 @@ export default function ScoreResultClient({ totalScore, pillarScores, answers }:
       {/* ── Overall scorecard ── */}
       <div className="bg-card border border-border rounded-2xl overflow-hidden">
         <div className="bg-ink px-6 py-4">
-          <p className="text-[10px] font-sans text-cream/40 uppercase tracking-[0.18em]">startup fundability score</p>
+          <p className="text-[12px] font-sans text-cream/40 uppercase tracking-[0.18em]">startup fundability score</p>
         </div>
         <div className="px-6 py-6 flex items-center gap-6">
           {/* Donut */}
@@ -95,7 +95,7 @@ export default function ScoreResultClient({ totalScore, pillarScores, answers }:
           {/* Band + directional */}
           <div className="flex-1">
             <span className={`font-sans text-xs font-semibold uppercase tracking-wide ${band.color}`}>{band.label}</span>
-            <p className="font-sans text-[11px] text-ink/60 mt-2 leading-relaxed">{band.directional}</p>
+            <p className="font-sans text-[13px] text-ink/60 mt-2 leading-relaxed">{band.directional}</p>
           </div>
         </div>
         {/* Score scale bar */}
@@ -116,7 +116,7 @@ export default function ScoreResultClient({ totalScore, pillarScores, answers }:
 
       {/* ── Segment breakdown (clickable to expand Q&A) ── */}
       <div className="bg-card border border-border rounded-2xl p-4 sm:p-6">
-        <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">
+        <p className="text-[12px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">
           segment breakdown · tap to see your answers
         </p>
         <div className="space-y-3">
@@ -134,7 +134,7 @@ export default function ScoreResultClient({ totalScore, pillarScores, answers }:
                   className="w-full px-4 py-3 flex items-center gap-3 hover:bg-peach/10 transition-colors text-left"
                 >
                   {/* Pill score */}
-                  <span className={`flex-shrink-0 text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full text-white ${pillarColor(pct)}`}>
+                  <span className={`flex-shrink-0 text-[12px] font-mono font-semibold px-2 py-0.5 rounded-full text-white ${pillarColor(pct)}`}>
                     {ps.earned}/{ps.max}
                   </span>
                   {/* Bar */}
@@ -158,9 +158,9 @@ export default function ScoreResultClient({ totalScore, pillarScores, answers }:
                       const isMax = chosen?.points === maxPoints
                       return (
                         <div key={q.id} className="px-4 py-3">
-                          <p className="font-sans text-[11px] text-ink/60 leading-snug mb-1.5">{q.text}</p>
+                          <p className="font-sans text-[13px] text-ink/60 leading-snug mb-1.5">{q.text}</p>
                           {chosen ? (
-                            <div className={`inline-flex items-center gap-1.5 text-[11px] font-sans font-semibold px-2.5 py-1 rounded-lg ${
+                            <div className={`inline-flex items-center gap-1.5 text-[13px] font-sans font-semibold px-2.5 py-1 rounded-lg ${
                               isMax ? "bg-green-100 text-green-700" : chosen.points === 0 ? "bg-red-50 text-red-600" : "bg-amber-50 text-amber-700"
                             }`}>
                               {isMax ? <CheckCircle size={11} /> : null}
@@ -168,11 +168,11 @@ export default function ScoreResultClient({ totalScore, pillarScores, answers }:
                               {chosen.sublabel && <span className="font-normal text-inherit/70">· {chosen.sublabel}</span>}
                             </div>
                           ) : (
-                            <span className="text-[11px] font-sans text-ink/30">not answered</span>
+                            <span className="text-[13px] font-sans text-ink/30">not answered</span>
                           )}
                           {/* Recommendation if any */}
                           {optIdx !== undefined && q.recommendationByOption[optIdx] && (
-                            <p className="font-sans text-[10px] text-ink/45 mt-1.5 leading-relaxed border-l-2 border-peach-dark/30 pl-2">
+                            <p className="font-sans text-[12px] text-ink/45 mt-1.5 leading-relaxed border-l-2 border-peach-dark/30 pl-2">
                               {q.recommendationByOption[optIdx]}
                             </p>
                           )}
@@ -190,7 +190,7 @@ export default function ScoreResultClient({ totalScore, pillarScores, answers }:
       {/* ── Top recommendations ── */}
       {recs.length > 0 ? (
         <div className="bg-card border border-border rounded-2xl p-4 sm:p-6">
-          <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">
+          <p className="text-[12px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">
             top areas to strengthen
           </p>
           <div className="space-y-3">
@@ -199,7 +199,7 @@ export default function ScoreResultClient({ totalScore, pillarScores, answers }:
                 <span className="font-heading text-lg font-bold text-peach-dark/60 w-5 flex-shrink-0 mt-0.5">
                   {i + 1}
                 </span>
-                <p className="font-sans text-sm text-ink/70 leading-relaxed">{rec}</p>
+                <p className="font-sans text-base text-ink/70 leading-relaxed">{rec}</p>
               </div>
             ))}
           </div>
@@ -231,7 +231,7 @@ export default function ScoreResultClient({ totalScore, pillarScores, answers }:
 
       {/* ── Disclaimer ── */}
       <div className="border-t border-border pt-5 pb-2">
-        <p className="font-sans text-[10px] text-ink/30 leading-relaxed text-center max-w-md mx-auto">
+        <p className="font-sans text-[12px] text-ink/30 leading-relaxed text-center max-w-md mx-auto">
           disclaimer: this score is for self-reflection only. it is not a guarantee of business success or failure. startup outcomes depend on many factors beyond what any quiz can measure. use this as one directional data point.
         </p>
       </div>

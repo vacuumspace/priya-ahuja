@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState } from "react"
 import type { Template } from "@/lib/templates-data"
@@ -24,7 +24,7 @@ export default function TemplatesGrid({ products, purchaseMap, isAuthenticated, 
             <button
               key={tag}
               onClick={() => setActive(tag)}
-              className={`text-[11px] font-sans px-3 py-1.5 rounded-full border transition-all ${
+              className={`text-[13px] font-sans px-3 py-1.5 rounded-full border transition-all ${
                 active === tag
                   ? "bg-ink text-cream border-ink"
                   : "bg-transparent text-ink/50 border-border hover:border-ink/30 hover:text-ink/70"

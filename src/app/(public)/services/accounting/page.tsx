@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useEffect } from "react"
 import { useSession } from "next-auth/react"
@@ -90,7 +90,7 @@ export default function AccountingPage() {
 
       {/* Hero */}
       <div className="mb-14">
-        <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-4">services · finance</p>
+        <p className="text-[12px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-4">services · finance</p>
         <h1 className="font-heading text-[clamp(2rem,5vw,3rem)] font-800 text-ink leading-[0.95] tracking-tight mb-5">
           accounting that<br />works for startups.
         </h1>
@@ -105,7 +105,7 @@ export default function AccountingPage() {
 
       {/* Offerings */}
       <div className="mb-14">
-        <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">what we handle</p>
+        <p className="text-[12px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">what we handle</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {offerings.map((o) => (
             <div key={o.title} className="bg-peach/20 border border-peach-dark/15 rounded-xl px-5 py-4">
@@ -115,7 +115,7 @@ export default function AccountingPage() {
               </div>
               <ul className="space-y-1">
                 {o.points.map((p) => (
-                  <li key={p} className="flex items-center gap-2 text-[11px] font-sans text-ink/50">
+                  <li key={p} className="flex items-center gap-2 text-[13px] font-sans text-ink/50">
                     <span className="w-1 h-1 rounded-full bg-peach-dark/50 flex-shrink-0" />
                     {p}
                   </li>
@@ -128,7 +128,7 @@ export default function AccountingPage() {
 
       {/* Inquiry form */}
       <div>
-        <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">get in touch</p>
+        <p className="text-[12px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">get in touch</p>
         {success ? (
           <div className="bg-peach/20 border border-peach-dark/20 rounded-2xl p-8 text-center">
             <CheckCircle size={36} className="text-peach-dark mx-auto mb-3" />
@@ -139,7 +139,7 @@ export default function AccountingPage() {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="text-[10px] font-sans text-ink/50 uppercase tracking-wide block mb-1.5">Name *</label>
+                <label className="text-[12px] font-sans text-ink/50 uppercase tracking-wide block mb-1.5">Name *</label>
                 <input
                   required
                   value={name}
@@ -149,7 +149,7 @@ export default function AccountingPage() {
                 />
               </div>
               <div>
-                <label className="text-[10px] font-sans text-ink/50 uppercase tracking-wide block mb-1.5">Email *</label>
+                <label className="text-[12px] font-sans text-ink/50 uppercase tracking-wide block mb-1.5">Email *</label>
                 <input
                   required
                   type="email"
@@ -162,7 +162,7 @@ export default function AccountingPage() {
             </div>
 
             <div>
-              <label className="text-[10px] font-sans text-ink/50 uppercase tracking-wide block mb-1.5">Phone</label>
+              <label className="text-[12px] font-sans text-ink/50 uppercase tracking-wide block mb-1.5">Phone</label>
               <input
                 type="tel"
                 value={phone}
@@ -173,7 +173,7 @@ export default function AccountingPage() {
             </div>
 
             <div>
-              <label className="text-[10px] font-sans text-ink/50 uppercase tracking-wide block mb-1.5">Tell us about your business *</label>
+              <label className="text-[12px] font-sans text-ink/50 uppercase tracking-wide block mb-1.5">Tell us about your business *</label>
               <textarea
                 required
                 rows={4}
@@ -197,7 +197,7 @@ export default function AccountingPage() {
                 "submit inquiry"
               )}
             </button>
-            <p className="text-[10px] text-ink/30 text-center font-sans">we respond within 2-3 business days</p>
+            <p className="text-[12px] text-ink/30 text-center font-sans">we respond within 2-3 business days</p>
           </form>
         )}
       </div>

@@ -63,7 +63,7 @@ function MessagesDrawer({ bookingId, isAdmin, onClose }: { bookingId: string; is
             <button
               onClick={toggleEmailNotify}
               title={msgEmailEnabled ? "Email notifications on" : "Email notifications off"}
-              className={`flex items-center gap-1 text-[10px] font-sans rounded-full px-2 py-0.5 border transition-colors ${
+              className={`flex items-center gap-1 text-[12px] font-sans rounded-full px-2 py-0.5 border transition-colors ${
                 msgEmailEnabled
                   ? "bg-green-50 border-green-200 text-green-700"
                   : "bg-ink/5 border-border text-ink/40"
@@ -82,7 +82,7 @@ function MessagesDrawer({ bookingId, isAdmin, onClose }: { bookingId: string; is
         )}
         {messages.map((m) => (
           <div key={m.id} className={`flex flex-col gap-0.5 ${!m.isAdmin ? "items-end" : "items-start"}`}>
-            <span className="text-[10px] font-sans text-ink/40">{m.isAdmin ? "Priya" : "You"}</span>
+            <span className="text-[12px] font-sans text-ink/40">{m.isAdmin ? "Priya" : "You"}</span>
             <div className={`px-3 py-2 rounded-xl text-xs font-sans max-w-[85%] ${!m.isAdmin ? "bg-peach text-ink" : "bg-border/40 text-ink"}`}>
               {m.body}
             </div>
@@ -152,7 +152,7 @@ function statusBadge(status: string) {
   }
   const s = map[status] ?? { label: status, cls: "bg-ink/10 text-ink/50" }
   return (
-    <span className={`text-[10px] font-sans font-semibold px-2 py-0.5 rounded-full ${s.cls}`}>
+    <span className={`text-[12px] font-sans font-semibold px-2 py-0.5 rounded-full ${s.cls}`}>
       {s.label}
     </span>
   )
@@ -251,7 +251,7 @@ export default function BookingCard({
           {/* Countdown — only for upcoming */}
           {isActive && secondsLeft !== null && secondsLeft > 0 && (
             <div className="text-right flex-shrink-0">
-              <p className="text-[10px] font-sans text-ink/40 uppercase tracking-wide">starts in</p>
+              <p className="text-[12px] font-sans text-ink/40 uppercase tracking-wide">starts in</p>
               <p className={`font-mono text-sm font-semibold ${secondsLeft <= 600 ? "text-peach-dark" : "text-ink"}`}>
                 {formatCountdown(secondsLeft)}
               </p>
@@ -264,7 +264,7 @@ export default function BookingCard({
       {isAsync && isActive && (
         <div className="bg-peach/20 border border-peach-dark/20 rounded-xl px-4 py-3 mb-3">
           <p className="font-sans text-xs font-semibold text-ink mb-0.5">written review in progress</p>
-          <p className="font-sans text-[11px] text-ink/50">since priya reviews your documents personally without any ai, it takes some time to review in detail. she'll surely respond within 5–7 days. thanks :)</p>
+          <p className="font-sans text-[13px] text-ink/50">since priya reviews your documents personally without any ai, it takes some time to review in detail. she'll surely respond within 5–7 days. thanks :)</p>
         </div>
       )}
 
@@ -284,7 +284,7 @@ export default function BookingCard({
           <Video size={15} />
           {joinActive ? "join call now" : "join call"}
           {!joinActive && secondsLeft !== null && secondsLeft > 0 && (
-            <span className="text-[11px] font-normal opacity-60 ml-1">(opens 10 min before)</span>
+            <span className="text-[13px] font-normal opacity-60 ml-1">(opens 10 min before)</span>
           )}
         </a>
       )}
@@ -293,10 +293,10 @@ export default function BookingCard({
       {showReviewPrompt && (
         <div className="bg-peach/20 border border-peach-dark/20 rounded-xl px-4 py-3 mb-3">
           <p className="font-sans text-xs font-semibold text-ink mb-0.5">how was your session?</p>
-          <p className="font-sans text-[11px] text-ink/50 mb-2">your feedback helps other founders find the right session.</p>
+          <p className="font-sans text-[13px] text-ink/50 mb-2">your feedback helps other founders find the right session.</p>
           <Link
             href={`/my-activity/feedback/${bookingId}`}
-            className="inline-flex items-center gap-1.5 text-[11px] font-sans font-semibold text-cream bg-ink px-3 py-1.5 rounded-lg hover:bg-ink/80 transition-colors"
+            className="inline-flex items-center gap-1.5 text-[13px] font-sans font-semibold text-cream bg-ink px-3 py-1.5 rounded-lg hover:bg-ink/80 transition-colors"
           >
             <Star size={11} /> leave a review
           </Link>

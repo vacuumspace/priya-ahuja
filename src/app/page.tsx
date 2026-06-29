@@ -10,7 +10,7 @@ export default function RootPage() {
   return (
     <div className="flex min-h-screen bg-cream">
       <SidebarWithAuth />
-      <main className="flex-1 md:ml-[240px] min-h-screen pt-[52px] md:pt-0">
+      <main className="flex-1 md:ml-[240px] min-h-screen pt-[52px] md:pt-0 overflow-x-hidden">
         <HomePage />
       </main>
     </div>

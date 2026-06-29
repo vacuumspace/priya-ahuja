@@ -20,7 +20,7 @@ export function SeriesDropdown({ seriesName, currentPart, total, seriesPosts }: 
 
   return (
     <div className="mb-8 bg-amber-tag/40 border border-peach-dark/20 rounded-xl px-4 py-3 relative">
-      <p className="font-sans text-[10px] text-ink/50 mb-0.5 uppercase tracking-wide">Series · Part {currentPart} of {total}</p>
+      <p className="font-sans text-[12px] text-ink/50 mb-0.5 uppercase tracking-wide">Series · Part {currentPart} of {total}</p>
       <p className="font-heading text-sm font-700 text-ink mb-2">{seriesName}</p>
 
       {/* Dropdown trigger */}
@@ -53,7 +53,7 @@ export function SeriesDropdown({ seriesName, currentPart, total, seriesPosts }: 
                   p.part === currentPart ? "bg-peach/10" : ""
                 }`}
               >
-                <span className="font-sans text-[10px] text-ink/30 w-4 flex-shrink-0 mt-0.5">{p.part}</span>
+                <span className="font-sans text-[12px] text-ink/30 w-4 flex-shrink-0 mt-0.5">{p.part}</span>
                 <span className="font-sans text-xs text-ink/70 leading-snug flex-1">{p.title}</span>
                 {p.part === currentPart && (
                   <Check size={11} className="text-peach-dark flex-shrink-0 mt-0.5" />

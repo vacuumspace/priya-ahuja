@@ -30,14 +30,14 @@ function renderContent(content: string) {
       while (i < lines.length && lines[i].startsWith("- ")) { items.push(lines[i].slice(2)); i++ }
       elements.push(
         <ul key={`ul-${i}`} className="list-disc list-inside space-y-2 my-4 pl-2">
-          {items.map((item, idx) => <li key={idx} className="font-sans text-sm text-ink/70 leading-relaxed">{renderInline(item)}</li>)}
+          {items.map((item, idx) => <li key={idx} className="font-sans text-base text-ink/70 leading-relaxed">{renderInline(item)}</li>)}
         </ul>
       )
       continue
     } else if (line.trim() === "") {
       // skip
     } else {
-      elements.push(<p key={i} className="font-sans text-sm text-ink/75 leading-relaxed my-3">{renderInline(line)}</p>)
+      elements.push(<p key={i} className="font-sans text-base text-ink/75 leading-relaxed my-3">{renderInline(line)}</p>)
     }
     i++
   }
@@ -60,7 +60,7 @@ export default async function IdeaDetailPage({ params }: Props) {
 
   return (
     <div className="min-h-screen bg-cream">
-      <div className="flex justify-between items-center px-4 md:px-10 py-4 text-[11px] text-ink/50 font-sans border-b border-border">
+      <div className="flex justify-between items-center px-4 md:px-10 py-4 text-[13px] text-ink/50 font-sans border-b border-border">
         <span>startup · ideas 2026</span>
         <span>{idea.category}</span>
       </div>
@@ -77,7 +77,7 @@ export default async function IdeaDetailPage({ params }: Props) {
         </p>
 
         {idea.content ? renderContent(idea.content) : (
-          <p className="font-sans text-sm text-ink/40">Full breakdown coming soon.</p>
+          <p className="font-sans text-base text-ink/40">Full breakdown coming soon.</p>
         )}
 
         <div className="mt-16 pt-6 border-t border-border flex flex-col sm:flex-row sm:items-center justify-between gap-3">

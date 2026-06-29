@@ -32,7 +32,7 @@ const testimonials = [
   {
     name: "divya nair",
     role: "co-founder, healthtech",
-    text: "she helped us see our unit economics from an investor's lens — not just as a model on a spreadsheet. we fixed the story before it became a red flag.",
+    text: "she helped us see our unit economics from an investor's lens, not just as a model on a spreadsheet. we fixed the story before it became a red flag.",
   },
   {
     name: "karan bhatia",
@@ -42,7 +42,7 @@ const testimonials = [
   {
     name: "simran oberoi",
     role: "founder, consumer brand",
-    text: "i'd been stalling on the fundraise for weeks. after talking to Priya i had a plan i actually believed in. the follow-through from there was mine — but the clarity was hers.",
+    text: "i'd been stalling on the fundraise for weeks. after talking to Priya i had a plan i actually believed in. the follow-through from there was mine, but the clarity was hers.",
   },
 ]
 
@@ -99,29 +99,37 @@ export default function HomePage() {
         <h1 className="font-heading text-[clamp(2.4rem,6vw,3.6rem)] font-800 text-ink leading-[0.95] tracking-tight mb-6">
           for the founder&apos;s<br />dream.
         </h1>
-        <p className="font-sans text-sm text-ink/55 leading-relaxed">
+        <p className="font-sans text-base text-ink/55 leading-relaxed">
           you're building something real. i help you to build to win with confidence - with actionable advice and resources.
         </p>
       </div>
 
       {/* ── Achievements ── */}
       <div className="mb-14">
-        <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">traction</p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {[
-            { value: "250+", label: "founders advised", sub: "across fintech, saas, consumer-tech & d2c" },
-            { value: "₹200cr+", label: "fundraise guided", sub: "across pre-seed to pre-series A & series A rounds" },
-            { value: "5.0★", label: "avg. session rating", sub: "from 50+ independent reviews" },
-            { value: "4 yrs", label: "inside startup investment", sub: "investment, strategy, m&a at groww, india's #1 retail investment app" },
-            { value: "12+", label: "sectors covered", sub: "fintech, edtech, healthtech, b2b, d2c, social platforms & more" },
-            { value: "100%", label: "actionable advice", sub: "every session ends with clear next steps you can act on today" },
-          ].map((s) => (
-            <div key={s.label} className="bg-peach/20 border border-peach-dark/15 rounded-xl px-4 py-4">
-              <p className="font-heading text-2xl font-800 text-ink leading-none">{s.value}</p>
-              <p className="font-sans text-[11px] font-semibold text-ink/70 mt-1.5">{s.label}</p>
-              <p className="font-sans text-[10px] text-ink/35 mt-0.5 leading-snug">{s.sub}</p>
-            </div>
-          ))}
+        <p className="text-[12px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">traction</p>
+        <div style={{ overflow: "hidden", width: "100%", position: "relative" }}>
+          <div className="flex animate-marquee gap-6 w-max">
+            {[
+              { value: "250+", label: "founders advised", sub: "across fintech, saas, consumer-tech & d2c" },
+              { value: "₹200cr+", label: "fundraise guided", sub: "across pre-seed to pre-series A & series A rounds" },
+              { value: "5.0★", label: "avg. session rating", sub: "from 50+ independent reviews" },
+              { value: "4 yrs", label: "inside startup investment", sub: "investment, strategy, m&a at groww, india's #1 retail investment app" },
+              { value: "12+", label: "sectors covered", sub: "fintech, edtech, healthtech, b2b, d2c, social platforms & more" },
+              { value: "100%", label: "actionable advice", sub: "every session ends with clear next steps you can act on today" },
+              { value: "250+", label: "founders advised", sub: "across fintech, saas, consumer-tech & d2c" },
+              { value: "₹200cr+", label: "fundraise guided", sub: "across pre-seed to pre-series A & series A rounds" },
+              { value: "5.0★", label: "avg. session rating", sub: "from 50+ independent reviews" },
+              { value: "4 yrs", label: "inside startup investment", sub: "investment, strategy, m&a at groww, india's #1 retail investment app" },
+              { value: "12+", label: "sectors covered", sub: "fintech, edtech, healthtech, b2b, d2c, social platforms & more" },
+              { value: "100%", label: "actionable advice", sub: "every session ends with clear next steps you can act on today" },
+            ].map((s, i) => (
+              <div key={i} className="bg-peach/20 border border-peach-dark/15 rounded-xl px-4 py-4 w-52 shrink-0">
+                <p className="font-heading text-2xl font-800 text-ink leading-none">{s.value}</p>
+                <p className="font-sans text-[13px] font-semibold text-ink/70 mt-1.5">{s.label}</p>
+                <p className="font-sans text-[12px] text-ink/35 mt-0.5 leading-snug">{s.sub}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -129,7 +137,7 @@ export default function HomePage() {
       <div className="mb-14">
         <div className="flex items-center justify-between mb-5">
           <div className="flex items-center gap-2">
-            <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em]">what founders say</p>
+            <p className="text-[12px] font-sans text-ink/30 uppercase tracking-[0.18em]">what founders say</p>
             <div className="flex gap-0.5">
               {[...Array(5)].map((_, i) => <Star key={i} size={9} fill="#FFA07A" className="text-peach-dark" />)}
             </div>
@@ -138,15 +146,15 @@ export default function HomePage() {
             <button onClick={prev} aria-label="Previous" className="p-1 rounded-md text-ink/30 hover:text-ink hover:bg-peach/40 transition-colors">
               <ChevronLeft size={16} />
             </button>
-            <span className="font-sans text-[10px] text-ink/30 tabular-nums w-8 text-center">{idx + 1}/{testimonials.length}</span>
+            <span className="font-sans text-[12px] text-ink/30 tabular-nums w-8 text-center">{idx + 1}/{testimonials.length}</span>
             <button onClick={next} aria-label="Next" className="p-1 rounded-md text-ink/30 hover:text-ink hover:bg-peach/40 transition-colors">
               <ChevronRight size={16} />
             </button>
           </div>
         </div>
         <div className="pl-4 border-l-2 border-peach-dark/30 min-h-[80px]">
-          <p className="font-sans text-sm text-ink/60 leading-relaxed">&ldquo;{t.text}&rdquo;</p>
-          <p className="font-sans text-[10px] text-ink/35 mt-2">{t.name} · {t.role}</p>
+          <p className="font-sans text-base text-ink/60 leading-relaxed">&ldquo;{t.text}&rdquo;</p>
+          <p className="font-sans text-[12px] text-ink/35 mt-2">{t.name} · {t.role}</p>
         </div>
         <div className="flex gap-1 mt-4">
           {testimonials.map((_, i) => (
@@ -176,27 +184,27 @@ export default function HomePage() {
 
       {/* ── About ── */}
       <div className="mb-14">
-        <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">about</p>
-        <div className="space-y-3 font-sans text-sm text-ink/60 leading-relaxed">
+        <p className="text-[12px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">about</p>
+        <div className="space-y-3 font-sans text-base text-ink/60 leading-relaxed">
           <p>
-            i work at groww ventures, the vc and strategic investment arm of groww — india&apos;s #1
+            i work at groww ventures, the vc and strategic investment arm of groww, india&apos;s #1
             retail investment platform. day to day, that means fintech investments, m&amp;a, and
             working closely with startups at the intersection of capital and strategy.
           </p>
           <p>
             after years of evaluating hundreds of companies, i&apos;ve learned what the best founders
-            have in common — and more importantly, what holds the rest back. it&apos;s rarely the
+            have in common, and more importantly, what holds the rest back. it&apos;s rarely the
             idea. it&apos;s the story, the model, or the moment.
           </p>
           <p>
-            that&apos;s what pitch to priya is about. working with early-stage founders one-on-one —
+            that&apos;s what pitch to priya is about. working with early-stage founders one-on-one,
             on fundraising, startup strategy, business model, product direction, positioning. the full
             picture, not just the pitch.
           </p>
         </div>
         <div className="mt-6 flex flex-wrap gap-2">
           {["startup strategy", "fundraising", "business model", "go-to-market", "idea brainstorming"].map((tag) => (
-            <span key={tag} className="text-[11px] font-sans bg-peach/50 text-ink/50 px-3 py-1 rounded-full border border-peach-dark/15">
+            <span key={tag} className="text-[13px] font-sans bg-peach/50 text-ink/50 px-3 py-1 rounded-full border border-peach-dark/15">
               {tag}
             </span>
           ))}
@@ -205,18 +213,18 @@ export default function HomePage() {
 
       {/* ── Mission ── */}
       <div className="mb-14">
-        <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">mission</p>
+        <p className="text-[12px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">mission</p>
         <div className="space-y-4">
           <p className="font-heading text-xl font-700 text-ink leading-snug">
             more than 95% startup fail. i am here to reverse it.
           </p>
-          <p className="font-sans text-sm text-ink/55 leading-relaxed">
+          <p className="font-sans text-base text-ink/55 leading-relaxed">
             unfortunately i've also seen more than 95% of startups failed. no founder starts out thinking they'll be in that 95%. but the numbers are real, and the path is hard. and trust me shutting down a startup, which was founder's dream, is the worst thing. beyond that - loss of confidence, money and time.
           </p>
-          <p className="font-sans text-sm text-ink/55 leading-relaxed">
+          <p className="font-sans text-base text-ink/55 leading-relaxed">
             biggest reason behind a startup failure is all the small small mistakes that founders make in the early days, when they are still figuring things out. and most of these mistakes were avoidable if founders had the right resources with them.
           </p>
-          <p className="font-sans text-sm text-ink/55 leading-relaxed">
+          <p className="font-sans text-base text-ink/55 leading-relaxed">
             the mission is simple: i want to see more than 95% of founders to win and make their dream come true, with whatever best advice or resources i can provide.
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
@@ -226,8 +234,8 @@ export default function HomePage() {
               { title: "founder-first", body: "the goal is your growth, not dependency on advice." },
             ].map((m) => (
               <div key={m.title} className="bg-peach/20 border border-peach-dark/15 rounded-xl px-4 py-4">
-                <p className="font-sans text-[11px] font-semibold text-ink/80 mb-1">{m.title}</p>
-                <p className="font-sans text-[11px] text-ink/45 leading-snug">{m.body}</p>
+                <p className="font-sans text-[13px] font-semibold text-ink/80 mb-1">{m.title}</p>
+                <p className="font-sans text-[13px] text-ink/45 leading-snug">{m.body}</p>
               </div>
             ))}
           </div>
@@ -236,27 +244,27 @@ export default function HomePage() {
 
       {/* ── Dream: 10k founders ── */}
       <div className="mb-14">
-        <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">dream</p>
+        <p className="text-[12px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">dream</p>
         <p className="font-heading text-xl font-700 text-ink leading-snug mb-3">
           help 10,000 founders to win.
         </p>
         <div className="bg-peach/20 border border-peach-dark/15 rounded-xl px-5 py-5">
-          <p className="font-sans text-[10px] text-ink/30 mb-1">progress</p>
+          <p className="font-sans text-[12px] text-ink/30 mb-1">progress</p>
           <div className="relative w-full bg-peach-dark/15 rounded-full h-2.5 overflow-visible mb-2 mt-6">
             <div className="h-full bg-peach-dark rounded-full relative" style={{ width: "2.6%" }}>
-              <span className="absolute -top-5 left-0 font-sans text-[10px] font-semibold text-peach-dark whitespace-nowrap">2.6%</span>
+              <span className="absolute -top-5 left-0 font-sans text-[12px] font-semibold text-peach-dark whitespace-nowrap">2.6%</span>
             </div>
           </div>
           <div className="flex justify-between">
-            <span className="font-sans text-[11px] text-ink/40">260</span>
-            <span className="font-sans text-[11px] text-ink/40">10,000</span>
+            <span className="font-sans text-[13px] text-ink/40">260</span>
+            <span className="font-sans text-[13px] text-ink/40">10,000</span>
           </div>
         </div>
       </div>
 
       {/* ── Footer nav ── */}
       <div className="border-t border-peach-dark/15 pt-6 pb-2">
-        <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">explore more</p>
+        <p className="text-[12px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">explore more</p>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
           {[
             {
@@ -300,18 +308,18 @@ export default function HomePage() {
           ].map((col) => (
             <div key={col.heading}>
               {col.href ? (
-                <Link href={col.href} className="font-sans text-[11px] font-semibold text-ink/50 hover:text-ink/80 transition-colors uppercase tracking-wide mb-2.5 block">
+                <Link href={col.href} className="font-sans text-[13px] font-semibold text-ink/50 hover:text-ink/80 transition-colors uppercase tracking-wide mb-2.5 block">
                   {col.heading}
                 </Link>
               ) : (
-                <p className="font-sans text-[11px] font-semibold text-ink/50 uppercase tracking-wide mb-2.5">{col.heading}</p>
+                <p className="font-sans text-[13px] font-semibold text-ink/50 uppercase tracking-wide mb-2.5">{col.heading}</p>
               )}
               <div className="flex flex-col gap-1.5">
                 {col.links.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="font-sans text-[11px] text-ink/30 hover:text-ink/60 transition-colors"
+                    className="font-sans text-[13px] text-ink/30 hover:text-ink/60 transition-colors"
                   >
                     {link.label}
                   </Link>

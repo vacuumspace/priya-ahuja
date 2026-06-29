@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useEffect } from "react"
 import { FileText, Download, Lock, X, ChevronDown, ChevronUp, CheckCircle } from "lucide-react"
@@ -193,11 +193,11 @@ export default function TemplateCard({ product }: Props) {
           <div className="flex-1">
             <div className="flex items-center gap-2 mb-3">
               <FileText size={14} className="text-peach-dark" />
-              <span className="text-[10px] bg-amber-tag text-ink/60 px-2 py-0.5 rounded font-sans">
+              <span className="text-[12px] bg-amber-tag text-ink/60 px-2 py-0.5 rounded font-sans">
                 {product.tag}
               </span>
               {product.comingSoon && (
-                <span className="text-[10px] bg-ink/10 text-ink/50 px-2 py-0.5 rounded font-sans">
+                <span className="text-[12px] bg-ink/10 text-ink/50 px-2 py-0.5 rounded font-sans">
                   coming soon
                 </span>
               )}
@@ -290,7 +290,7 @@ export default function TemplateCard({ product }: Props) {
                       placeholder="you@example.com"
                       className="w-full border border-border rounded-lg px-3 py-2.5 font-sans text-sm text-ink bg-white focus:outline-none focus:border-ink/40 transition-colors"
                     />
-                    <p className="font-sans text-[11px] text-ink/40 mt-1.5">Save this email — you&apos;ll use it to access the content later.</p>
+                    <p className="font-sans text-[13px] text-ink/40 mt-1.5">Save this email — you&apos;ll use it to access the content later.</p>
                   </div>
                   {error && <p className="font-sans text-xs text-red-500">{error}</p>}
                   <button
@@ -380,7 +380,7 @@ export default function TemplateCard({ product }: Props) {
                   ))}
                 </div>
 
-                <p className="font-sans text-[11px] text-ink/30 mt-4 text-center">
+                <p className="font-sans text-[13px] text-ink/30 mt-4 text-center">
                   Your access is saved in this browser. To access on another device, use &quot;already bought?&quot; with your email.
                 </p>
               </div>

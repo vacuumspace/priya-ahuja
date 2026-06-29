@@ -70,7 +70,7 @@ function renderContent(content: string) {
       )
     } else if (line.startsWith("**") && line.endsWith("**") && line.length > 4) {
       elements.push(
-        <p key={i} className="font-sans text-sm font-semibold text-ink mt-6 mb-2">
+        <p key={i} className="font-sans text-base font-semibold text-ink mt-6 mb-2">
           {line.slice(2, -2)}
         </p>
       )
@@ -83,7 +83,7 @@ function renderContent(content: string) {
       elements.push(
         <ul key={`ul-${i}`} className="list-disc list-inside space-y-2 my-4 pl-2">
           {items.map((item, idx) => (
-            <li key={idx} className="font-sans text-sm text-ink/70 leading-relaxed">
+            <li key={idx} className="font-sans text-base text-ink/70 leading-relaxed">
               {renderInline(item)}
             </li>
           ))}
@@ -99,7 +99,7 @@ function renderContent(content: string) {
       elements.push(
         <ol key={`ol-${i}`} className="list-decimal list-inside space-y-2 my-4 pl-2">
           {items.map((item, idx) => (
-            <li key={idx} className="font-sans text-sm text-ink/70 leading-relaxed">
+            <li key={idx} className="font-sans text-base text-ink/70 leading-relaxed">
               {renderInline(item)}
             </li>
           ))}
@@ -112,7 +112,7 @@ function renderContent(content: string) {
       // skip blank lines
     } else {
       elements.push(
-        <p key={i} className="font-sans text-sm text-ink/75 leading-relaxed my-3">
+        <p key={i} className="font-sans text-base text-ink/75 leading-relaxed my-3">
           {renderInline(line)}
         </p>
       )
@@ -158,7 +158,7 @@ export default async function BlogPostPage({ params }: Props) {
       />
       <div className="min-h-screen bg-cream">
         {/* Top bar */}
-        <div className="flex justify-between items-center px-4 md:px-10 py-4 text-[11px] text-ink/50 font-sans border-b border-border">
+        <div className="flex justify-between items-center px-4 md:px-10 py-4 text-[13px] text-ink/50 font-sans border-b border-border">
           <Link href="/blog" className="flex items-center gap-1.5 hover:text-ink transition-colors">
             <ArrowLeft size={11} />
             all posts
@@ -181,11 +181,11 @@ export default async function BlogPostPage({ params }: Props) {
 
           {/* Meta */}
           <div className="flex items-center gap-2 mb-6">
-            <span className="text-[10px] bg-amber-tag text-ink/60 px-2 py-0.5 rounded font-sans">
+            <span className="text-[12px] bg-amber-tag text-ink/60 px-2 py-0.5 rounded font-sans">
               {post.tag}
             </span>
-            <span className="text-[10px] text-ink/30 font-sans">{post.date}</span>
-            <span className="text-[10px] text-ink/30 font-sans">· {post.readTime} read</span>
+            <span className="text-[12px] text-ink/30 font-sans">{post.date}</span>
+            <span className="text-[12px] text-ink/30 font-sans">· {post.readTime} read</span>
           </div>
 
           <h1 className="font-heading text-3xl md:text-4xl font-800 text-ink leading-tight mb-6">
@@ -222,7 +222,7 @@ export default async function BlogPostPage({ params }: Props) {
                   href={`/blog/${prev.slug}`}
                   className="group border border-border rounded-xl p-4 hover:border-peach-dark/40 transition-all"
                 >
-                  <p className="text-[10px] text-ink/30 font-sans mb-1">← previous</p>
+                  <p className="text-[12px] text-ink/30 font-sans mb-1">← previous</p>
                   <p className="font-sans text-xs text-ink/70 group-hover:text-ink transition-colors line-clamp-2">
                     {prev.title}
                   </p>
@@ -235,7 +235,7 @@ export default async function BlogPostPage({ params }: Props) {
                   href={`/blog/${next.slug}`}
                   className="group border border-border rounded-xl p-4 hover:border-peach-dark/40 transition-all text-right"
                 >
-                  <p className="text-[10px] text-ink/30 font-sans mb-1">next →</p>
+                  <p className="text-[12px] text-ink/30 font-sans mb-1">next →</p>
                   <p className="font-sans text-xs text-ink/70 group-hover:text-ink transition-colors line-clamp-2">
                     {next.title}
                   </p>

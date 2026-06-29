@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
@@ -41,7 +41,7 @@ export default function StartupIdeasClient({ isPaid, isAuthenticated, ideas }: P
   return (
     <div className="min-h-screen bg-cream w-full max-w-full overflow-x-hidden">
       {/* Header bar */}
-      <div className="flex justify-between items-center px-4 md:px-10 py-4 text-[11px] text-ink/50 font-sans border-b border-border">
+      <div className="flex justify-between items-center px-4 md:px-10 py-4 text-[13px] text-ink/50 font-sans border-b border-border">
         <span>startup · ideas 2026</span>
         <span>100 ideas for Indian founders</span>
       </div>
@@ -71,7 +71,7 @@ export default function StartupIdeasClient({ isPaid, isAuthenticated, ideas }: P
             >
               sign in to read
             </button>
-            <span className="text-[10px] font-sans text-ink/40">free · all 100 ideas unlocked</span>
+            <span className="text-[12px] font-sans text-ink/40">free · all 100 ideas unlocked</span>
           </div>
         )}
       </div>
@@ -104,7 +104,7 @@ export default function StartupIdeasClient({ isPaid, isAuthenticated, ideas }: P
                         <span className={`font-semibold ${isClickable ? "text-ink" : "text-ink/40"}`}>
                           {idea.title}
                         </span>
-                        <span className={`sm:hidden text-[10px] ${isClickable ? "text-ink/40" : "text-ink/25"}`}>
+                        <span className={`sm:hidden text-[12px] ${isClickable ? "text-ink/40" : "text-ink/25"}`}>
                           {idea.category}
                         </span>
                       </div>

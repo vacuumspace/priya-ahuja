@@ -1,4 +1,4 @@
-import type { Metadata } from "next"
+﻿import type { Metadata } from "next"
 import { AnchorNav } from "./AnchorNav"
 
 export const metadata: Metadata = {
@@ -87,7 +87,7 @@ export default function WorkPage() {
           <br />
           and how i do it
         </h1>
-        <p className="font-sans text-sm text-ink/60 max-w-lg leading-relaxed">
+        <p className="font-sans text-base text-ink/60 max-w-lg leading-relaxed">
           i work with early-stage founders across two things: building the right business, and getting it funded.
           sometimes both at once. here is what that actually looks like.
         </p>
@@ -95,15 +95,15 @@ export default function WorkPage() {
 
       {/* Experience */}
       <div id="experience" className="px-4 md:px-10 pt-10 pb-12 border-b border-border">
-        <p className="font-sans text-[10px] text-ink/40 uppercase tracking-widest mb-6">experience</p>
+        <p className="font-sans text-[12px] text-ink/40 uppercase tracking-widest mb-6">experience</p>
         <div className="flex flex-col gap-8 max-w-2xl">
 
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-3 mb-1">
               <div className="w-6 h-0.5 bg-peach-dark" />
-              <p className="font-sans text-[10px] text-ink/40 uppercase tracking-wider">at scale, inside a platform</p>
+              <p className="font-sans text-[12px] text-ink/40 uppercase tracking-wider">at scale, inside a platform</p>
             </div>
-            <p className="font-sans text-sm text-ink/70 leading-relaxed">
+            <p className="font-sans text-base text-ink/70 leading-relaxed">
               i'm part of the investment and strategy function at Groww, one of india's largest fintech unicorns, working
               across more than $120 million deployed into fintech startups. the portfolio spans both B2B and B2C: a wealth management
               platform, a financial data analytics company, and account aggregator infrastructure. beyond the deals themselves, i'm
@@ -115,9 +115,9 @@ export default function WorkPage() {
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-3 mb-1">
               <div className="w-6 h-0.5 bg-peach-dark" />
-              <p className="font-sans text-[10px] text-ink/40 uppercase tracking-wider">portfolio company depth</p>
+              <p className="font-sans text-[12px] text-ink/40 uppercase tracking-wider">portfolio company depth</p>
             </div>
-            <p className="font-sans text-sm text-ink/70 leading-relaxed">
+            <p className="font-sans text-base text-ink/70 leading-relaxed">
               for companies within that portfolio, the work doesn't stop at the check. i sit closely with founding teams across
               the hard stuff: figuring out what the business actually is and who it's really for, finding the right go-to-market
               angle when the obvious one isn't working, making product decisions when resources are tight, and navigating the
@@ -130,9 +130,9 @@ export default function WorkPage() {
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-3 mb-1">
               <div className="w-6 h-0.5 bg-peach-dark" />
-              <p className="font-sans text-[10px] text-ink/40 uppercase tracking-wider">on the ground with founders</p>
+              <p className="font-sans text-[12px] text-ink/40 uppercase tracking-wider">on the ground with founders</p>
             </div>
-            <p className="font-sans text-sm text-ink/70 leading-relaxed">
+            <p className="font-sans text-base text-ink/70 leading-relaxed">
               outside of the platform, i have worked with a number of founders across very different spaces. a few examples: a social
               gaming platform built for women, a startup solving export financing, a company in women's healthcare, a D2C ethnic wear
               brand, a proptech startup, among others. some of these are past engagements; a few are ongoing. i also work with student founders from
@@ -149,8 +149,8 @@ export default function WorkPage() {
       {/* Startup Strategy */}
       <div id="strategy" className="px-4 md:px-10 pt-8 md:pt-10 pb-10 md:pb-12 border-b border-border">
         <div className="flex flex-col gap-1 mb-5">
-          <p className="font-sans text-[10px] text-ink/40 uppercase tracking-widest">startup</p>
-          <p className="font-sans text-sm text-ink/60 max-w-lg mt-1 leading-relaxed">
+          <p className="font-sans text-[12px] text-ink/40 uppercase tracking-widest">startup</p>
+          <p className="font-sans text-base text-ink/60 max-w-lg mt-1 leading-relaxed">
             early-stage companies are figuring out too many things at once. i work across all the functions that matter
             at this stage, wherever the founder is most stuck.
           </p>
@@ -168,8 +168,8 @@ export default function WorkPage() {
       {/* Fundraising */}
       <div id="fundraising" className="px-4 md:px-10 pt-8 md:pt-10 pb-10 md:pb-12 border-b border-border">
         <div className="flex flex-col gap-1 mb-5">
-          <p className="font-sans text-[10px] text-ink/40 uppercase tracking-widest">fundraising</p>
-          <p className="font-sans text-sm text-ink/60 max-w-lg mt-1 leading-relaxed">
+          <p className="font-sans text-[12px] text-ink/40 uppercase tracking-widest">fundraising</p>
+          <p className="font-sans text-base text-ink/60 max-w-lg mt-1 leading-relaxed">
             focused on early-stage rounds, from the first angel check to seed. the work starts with getting ready
             to raise, not just the raise itself. a lot of founders show up underprepared and lose momentum early.
           </p>
@@ -183,13 +183,13 @@ export default function WorkPage() {
           ))}
         </div>
         <div className="mt-6">
-          <p className="font-sans text-sm text-ink/60 max-w-lg mb-4 leading-relaxed">
+          <p className="font-sans text-base text-ink/60 max-w-lg mb-4 leading-relaxed">
             this is what a realistic fundraising timeline looks like. most founders underestimate how long it takes. 9 to 12 months is the safer assumption.
           </p>
           <div className="flex flex-col sm:flex-row sm:gap-0 rounded-2xl bg-peach/20 border border-peach-dark/20 overflow-hidden">
             <div className="flex-1 sm:pr-6 px-5 py-5 sm:px-6 sm:py-6">
               <div className="w-8 h-0.5 bg-peach-dark mb-3" />
-              <p className="font-sans text-[10px] text-ink/40 uppercase tracking-wider mb-1.5">months 0 to 3</p>
+              <p className="font-sans text-[12px] text-ink/40 uppercase tracking-wider mb-1.5">months 0 to 3</p>
               <p className="font-heading text-base font-700 text-ink mb-1.5">get fundable</p>
               <p className="font-sans text-xs text-ink/60 leading-relaxed">cleaning the mess, getting clarity on what you're building, growth strategy, GTM, positioning, business model, unit economics</p>
             </div>
@@ -197,7 +197,7 @@ export default function WorkPage() {
             <div className="h-px bg-peach-dark/20 sm:hidden mx-5" />
             <div className="flex-1 sm:px-6 px-5 py-5 sm:py-6">
               <div className="w-8 h-0.5 bg-peach-dark mb-3" />
-              <p className="font-sans text-[10px] text-ink/40 uppercase tracking-wider mb-1.5">months 3 to 6</p>
+              <p className="font-sans text-[12px] text-ink/40 uppercase tracking-wider mb-1.5">months 3 to 6</p>
               <p className="font-heading text-base font-700 text-ink mb-1.5">build the groundwork</p>
               <p className="font-sans text-xs text-ink/60 leading-relaxed">narrative, deck, data room, warm investor relationships before you need them</p>
             </div>
@@ -205,7 +205,7 @@ export default function WorkPage() {
             <div className="h-px bg-peach-dark/20 sm:hidden mx-5" />
             <div className="flex-1 sm:pl-6 px-5 py-5 sm:py-6">
               <div className="w-8 h-0.5 bg-peach-dark mb-3" />
-              <p className="font-sans text-[10px] text-ink/40 uppercase tracking-wider mb-1.5">months 6 to 9</p>
+              <p className="font-sans text-[12px] text-ink/40 uppercase tracking-wider mb-1.5">months 6 to 9</p>
               <p className="font-heading text-base font-700 text-ink mb-1.5">raise</p>
               <p className="font-sans text-xs text-ink/60 leading-relaxed">outreach, pitch, diligence, term sheet, close</p>
             </div>
@@ -215,12 +215,12 @@ export default function WorkPage() {
 
       {/* How I work */}
       <div id="how-i-work" className="px-4 md:px-10 pt-8 md:pt-10 pb-10 md:pb-12 border-b border-border">
-        <p className="font-sans text-[10px] text-ink/40 uppercase tracking-widest mb-6">how i work</p>
+        <p className="font-sans text-[12px] text-ink/40 uppercase tracking-widest mb-6">how i work</p>
         <div className="flex flex-col gap-5 max-w-2xl">
           {approach.map((a) => (
             <div key={a.phase} className="flex flex-col gap-1.5">
-              <p className="font-sans text-[11px] text-ink/40 uppercase tracking-wider">{a.phase}</p>
-              <p className="font-sans text-sm text-ink/75 leading-relaxed">{a.body}</p>
+              <p className="font-sans text-[13px] text-ink/40 uppercase tracking-wider">{a.phase}</p>
+              <p className="font-sans text-base text-ink/75 leading-relaxed">{a.body}</p>
             </div>
           ))}
         </div>
@@ -228,7 +228,7 @@ export default function WorkPage() {
 
       {/* Highlights */}
       <div id="principles" className="px-4 md:px-10 pt-8 md:pt-10 pb-10 md:pb-12 border-b border-border">
-        <p className="font-sans text-[10px] text-ink/40 uppercase tracking-widest mb-6">principles</p>
+        <p className="font-sans text-[12px] text-ink/40 uppercase tracking-widest mb-6">principles</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5">
           {highlights.map((h) => (
             <div key={h.title} className="rounded-2xl bg-peach/30 px-5 py-4 flex flex-col gap-1.5">
@@ -241,7 +241,7 @@ export default function WorkPage() {
 
       {/* Onboarding */}
       <div id="onboarding" className="px-4 md:px-10 pt-8 md:pt-10 pb-10 md:pb-12 border-b border-border">
-        <p className="font-sans text-[10px] text-ink/40 uppercase tracking-widest mb-8">get started</p>
+        <p className="font-sans text-[12px] text-ink/40 uppercase tracking-widest mb-8">get started</p>
         <div className="flex flex-col sm:flex-row gap-0 max-w-2xl">
           {[
             { step: "01", label: "intro calls", desc: "one or two calls to understand where you are and whether it makes sense to work together." },
@@ -249,7 +249,7 @@ export default function WorkPage() {
             { step: "03", label: "work begins", desc: "fix a date and we'll start." },
           ].map((item) => (
             <div key={item.step} className="flex-1 sm:pr-6 pb-8 sm:pb-0">
-              <p className="font-sans text-[10px] text-ink/40 uppercase tracking-wider mb-1">{item.step}</p>
+              <p className="font-sans text-[12px] text-ink/40 uppercase tracking-wider mb-1">{item.step}</p>
               <p className="font-heading text-sm font-700 text-ink mb-1">{item.label}</p>
               <p className="font-sans text-xs text-ink/55 leading-relaxed">{item.desc}</p>
             </div>

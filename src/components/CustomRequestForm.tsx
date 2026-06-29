@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState } from "react"
 import { Loader2, CheckCircle } from "lucide-react"
@@ -60,7 +60,7 @@ export function CustomRequestForm({ source, userEmail }: CustomRequestFormProps)
       ) : (
         <form onSubmit={handleSubmit} className="flex flex-col gap-3">
           <div>
-            <label className="block text-[10px] font-sans font-semibold text-ink/50 uppercase tracking-wide mb-1">
+            <label className="block text-[12px] font-sans font-semibold text-ink/50 uppercase tracking-wide mb-1">
               what are you looking for? <span className="text-peach-dark">*</span>
             </label>
             <textarea

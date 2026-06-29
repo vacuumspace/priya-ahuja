@@ -1,4 +1,4 @@
-import Link from "next/link"
+﻿import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { Suspense } from "react"
 import { posts, STARTUP_SERIES_NAME } from "@/lib/blog-data"
@@ -18,7 +18,7 @@ export default async function StartupBlogPage({ searchParams }: Props) {
 
   return (
     <div className="min-h-screen bg-cream">
-      <div className="flex justify-between items-center px-4 md:px-10 py-4 text-[11px] text-ink/50 font-sans border-b border-border">
+      <div className="flex justify-between items-center px-4 md:px-10 py-4 text-[13px] text-ink/50 font-sans border-b border-border">
         <span>startup · field notes</span>
         <span>{topicPosts.length} posts</span>
       </div>
@@ -41,11 +41,11 @@ export default async function StartupBlogPage({ searchParams }: Props) {
           <div className="border border-peach-dark/30 rounded-2xl overflow-hidden">
             <div className="bg-peach/40 px-6 py-4 flex items-center justify-between">
               <div>
-                <p className="font-sans text-[10px] text-ink/40 uppercase tracking-wide mb-0.5">Featured Series</p>
+                <p className="font-sans text-[12px] text-ink/40 uppercase tracking-wide mb-0.5">Featured Series</p>
                 <p className="font-heading text-lg font-700 text-ink">{STARTUP_SERIES_NAME}</p>
                 <p className="font-sans text-xs text-ink/60 mt-0.5">11-part guide from idea to funding — read in order or jump in anywhere.</p>
               </div>
-              <span className="font-sans text-[10px] text-ink/40 bg-cream/60 px-2 py-1 rounded">
+              <span className="font-sans text-[12px] text-ink/40 bg-cream/60 px-2 py-1 rounded">
                 {seriesPosts.length} parts
               </span>
             </div>
@@ -64,7 +64,7 @@ export default async function StartupBlogPage({ searchParams }: Props) {
                       {post.title}
                     </p>
                   </div>
-                  <span className="font-sans text-[10px] text-ink/30 flex-shrink-0">{post.readTime}</span>
+                  <span className="font-sans text-[12px] text-ink/30 flex-shrink-0">{post.readTime}</span>
                   <ArrowRight size={12} className="text-peach-dark opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />
                 </Link>
               ))}
@@ -83,7 +83,7 @@ export default async function StartupBlogPage({ searchParams }: Props) {
       <div className="px-4 md:px-10 pb-16">
         {nonSeriesPosts.length > 0 && (
           <>
-            <p className="font-sans text-[11px] text-ink/40 uppercase tracking-wide mb-4">Field Notes</p>
+            <p className="font-sans text-[13px] text-ink/40 uppercase tracking-wide mb-4">Field Notes</p>
             <div className="grid grid-cols-1 gap-4">
               {filtered.map((post) => (
                 <Link
@@ -94,11 +94,11 @@ export default async function StartupBlogPage({ searchParams }: Props) {
                   <div className="flex items-start justify-between gap-6">
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-3">
-                        <span className="text-[10px] bg-amber-tag text-ink/60 px-2 py-0.5 rounded font-sans">
+                        <span className="text-[12px] bg-amber-tag text-ink/60 px-2 py-0.5 rounded font-sans">
                           {post.tag}
                         </span>
-                        <span className="text-[10px] text-ink/30 font-sans">{post.date}</span>
-                        <span className="text-[10px] text-ink/30 font-sans">· {post.readTime} read</span>
+                        <span className="text-[12px] text-ink/30 font-sans">{post.date}</span>
+                        <span className="text-[12px] text-ink/30 font-sans">· {post.readTime} read</span>
                       </div>
                       <h2 className="font-heading text-xl font-700 text-ink mb-2">{post.title}</h2>
                       <p className="font-sans text-sm text-ink/60 leading-relaxed max-w-lg">{post.excerpt}</p>

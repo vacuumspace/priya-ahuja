@@ -1,4 +1,4 @@
-import { db } from "@/lib/db"
+﻿import { db } from "@/lib/db"
 import { services as servicesTable } from "@/lib/db/schema"
 import { eq, asc } from "drizzle-orm"
 import { type Service } from "@/lib/services-data"
@@ -23,7 +23,7 @@ export default async function ServicesPage() {
 
   return (
     <div className="min-h-screen bg-cream">
-      <div className="flex justify-between items-center px-4 md:px-10 py-4 text-[11px] text-ink/50 font-sans border-b border-border">
+      <div className="flex justify-between items-center px-4 md:px-10 py-4 text-[13px] text-ink/50 font-sans border-b border-border">
         <span>connect with me</span>
         <span>{activeServices.length} offerings</span>
       </div>
@@ -34,7 +34,7 @@ export default async function ServicesPage() {
           <br />
           help you?
         </h1>
-        <p className="font-sans text-sm text-ink/60 max-w-md leading-relaxed">
+        <p className="font-sans text-base text-ink/60 max-w-md leading-relaxed">
           each session is focused, practical, and tailored to where you are right now.
           no generic advice, just clear thinking based on real deal experience.
         </p>

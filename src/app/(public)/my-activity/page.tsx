@@ -18,7 +18,7 @@ function statusBadge(status: string) {
   }
   const s = map[status] ?? { label: status, cls: "bg-ink/10 text-ink/50" }
   return (
-    <span className={`text-[10px] font-sans font-semibold px-2 py-0.5 rounded-full ${s.cls}`}>
+    <span className={`text-[12px] font-sans font-semibold px-2 py-0.5 rounded-full ${s.cls}`}>
       {s.label}
     </span>
   )
@@ -132,7 +132,7 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
 
   return (
     <div className="min-h-screen bg-cream">
-      <div className="flex justify-between items-center px-4 md:px-10 py-4 text-[11px] text-ink/50 font-sans border-b border-border">
+      <div className="flex justify-between items-center px-4 md:px-10 py-4 text-[13px] text-ink/50 font-sans border-b border-border">
         <span>my activity</span>
         <span>{userBookings.length + userPurchases.length + userScores.length + userIdeaScores.length} total</span>
       </div>
@@ -152,7 +152,7 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
           >
             <CalendarDays size={12} />
             sessions
-            <span className="text-[10px] font-mono ml-0.5 opacity-60">{userBookings.length}</span>
+            <span className="text-[12px] font-mono ml-0.5 opacity-60">{userBookings.length}</span>
           </Link>
           <Link
             href="/my-activity?tab=products"
@@ -164,7 +164,7 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
           >
             <FileText size={12} />
             products
-            <span className="text-[10px] font-mono ml-0.5 opacity-60">{userPurchases.length}</span>
+            <span className="text-[12px] font-mono ml-0.5 opacity-60">{userPurchases.length}</span>
           </Link>
           <Link
             href="/my-activity?tab=tools"
@@ -176,7 +176,7 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
           >
             <Lightbulb size={12} />
             tools
-            <span className="text-[10px] font-mono ml-0.5 opacity-60">{userScores.length + userIdeaScores.length}</span>
+            <span className="text-[12px] font-mono ml-0.5 opacity-60">{userScores.length + userIdeaScores.length}</span>
           </Link>
         </div>
 
@@ -244,15 +244,15 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1">
                           {s.isPaid ? (
-                            <span className="text-[10px] font-sans font-semibold px-2 py-0.5 rounded-full bg-green-100 text-green-700">
+                            <span className="text-[12px] font-sans font-semibold px-2 py-0.5 rounded-full bg-green-100 text-green-700">
                               full analysis
                             </span>
                           ) : (
-                            <span className="text-[10px] font-sans font-semibold px-2 py-0.5 rounded-full bg-ink/10 text-ink/40">
+                            <span className="text-[12px] font-sans font-semibold px-2 py-0.5 rounded-full bg-ink/10 text-ink/40">
                               free score
                             </span>
                           )}
-                          <span className="text-[10px] font-sans text-ink/30">{formatDate(s.createdAt)}</span>
+                          <span className="text-[12px] font-sans text-ink/30">{formatDate(s.createdAt)}</span>
                         </div>
                         <p className="font-heading text-base font-700 text-ink normal-case">
                           startup fundability score
@@ -261,9 +261,9 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
                       <div className="flex-shrink-0 text-right flex flex-col items-end gap-2">
                         <div>
                           <span className="font-heading text-2xl font-bold text-ink">{s.totalScore}</span>
-                          <span className="font-sans text-[10px] text-ink/30">/100</span>
+                          <span className="font-sans text-[12px] text-ink/30">/100</span>
                         </div>
-                        <Link href={`/my-activity/score/${s.id}`} className="text-[11px] font-sans font-semibold text-peach-dark hover:underline">
+                        <Link href={`/my-activity/score/${s.id}`} className="text-[13px] font-sans font-semibold text-peach-dark hover:underline">
                           view report →
                         </Link>
                       </div>
@@ -276,15 +276,15 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1">
                           {s.isPaid ? (
-                            <span className="text-[10px] font-sans font-semibold px-2 py-0.5 rounded-full bg-green-100 text-green-700">
+                            <span className="text-[12px] font-sans font-semibold px-2 py-0.5 rounded-full bg-green-100 text-green-700">
                               full analysis
                             </span>
                           ) : (
-                            <span className="text-[10px] font-sans font-semibold px-2 py-0.5 rounded-full bg-ink/10 text-ink/40">
+                            <span className="text-[12px] font-sans font-semibold px-2 py-0.5 rounded-full bg-ink/10 text-ink/40">
                               free score
                             </span>
                           )}
-                          <span className="text-[10px] font-sans text-ink/30">{formatDate(s.createdAt)}</span>
+                          <span className="text-[12px] font-sans text-ink/30">{formatDate(s.createdAt)}</span>
                         </div>
                         <p className="font-heading text-base font-700 text-ink normal-case">
                           startup idea score
@@ -293,9 +293,9 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
                       <div className="flex-shrink-0 text-right flex flex-col items-end gap-2">
                         <div>
                           <span className="font-heading text-2xl font-bold text-ink">{s.totalScore}</span>
-                          <span className="font-sans text-[10px] text-ink/30">/100</span>
+                          <span className="font-sans text-[12px] text-ink/30">/100</span>
                         </div>
-                        <Link href={`/my-activity/idea-score/${s.id}`} className="text-[11px] font-sans font-semibold text-peach-dark hover:underline">
+                        <Link href={`/my-activity/idea-score/${s.id}`} className="text-[13px] font-sans font-semibold text-peach-dark hover:underline">
                           view report →
                         </Link>
                       </div>
@@ -329,10 +329,10 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
                     <div className="flex items-start justify-between gap-4">
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1">
-                          <span className="text-[10px] font-sans font-semibold px-2 py-0.5 rounded-full bg-mint/20 text-green-700">
+                          <span className="text-[12px] font-sans font-semibold px-2 py-0.5 rounded-full bg-mint/20 text-green-700">
                             {p.productTag ?? "template"}
                           </span>
-                          <span className="text-[10px] font-sans text-ink/30">{formatDate(p.createdAt)}</span>
+                          <span className="text-[12px] font-sans text-ink/30">{formatDate(p.createdAt)}</span>
                         </div>
                         <p className="font-heading text-base font-700 text-ink normal-case">
                           {p.productTitle ?? "Template"}

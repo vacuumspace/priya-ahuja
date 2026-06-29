@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState } from "react"
 import { Check, Loader2 } from "lucide-react"
@@ -58,7 +58,7 @@ function Field({
           className="w-full border border-border rounded-xl px-3.5 py-2.5 font-sans text-sm text-ink bg-cream placeholder:text-ink/30 focus:outline-none focus:ring-2 focus:ring-peach-dark/40"
         />
       )}
-      {hint && <p className="font-sans text-[11px] text-ink/40 mt-1">{hint}</p>}
+      {hint && <p className="font-sans text-[13px] text-ink/40 mt-1">{hint}</p>}
     </div>
   )
 }

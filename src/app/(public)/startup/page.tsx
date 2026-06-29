@@ -1,5 +1,5 @@
-import Link from "next/link"
-import { Lightbulb, FileText, Wrench, BookOpen, Users } from "lucide-react"
+﻿import Link from "next/link"
+import { Lightbulb, FileText, Wrench, BookOpen, Users, Gift } from "lucide-react"
 
 const sections = [
   {
@@ -39,6 +39,15 @@ const sections = [
     href: "/startup/blog",
   },
   {
+    slug: "resources",
+    title: "Resources & Credits",
+    description: "Tools, credits, and deals curated for founders — from cloud infrastructure to AI models. 40+ programs including AWS ($200k), Google Cloud ($350k), OpenAI, Anthropic, HubSpot, and more.",
+    tag: "free",
+    icon: Gift,
+    badge: "40+ tools",
+    href: "/startup/resources",
+  },
+  {
     slug: "connect",
     title: "1-on-1 Startup Sessions",
     description: "Book a direct session with Priya — idea brainstorming, go-to-market, first principles review of your business model, or a no-filter sanity check before your next big move.",
@@ -55,12 +64,13 @@ const tagColors: Record<string, string> = {
   downloads: "bg-mint/20 text-green-700",
   reading: "bg-blue-50 text-blue-600",
   session: "bg-ink/10 text-ink/60",
+  free: "bg-mint/20 text-green-700",
 }
 
 export default function StartupHubPage() {
   return (
     <div className="min-h-screen bg-cream">
-      <div className="flex justify-between items-center px-4 md:px-10 py-4 text-[11px] text-ink/50 font-sans border-b border-border">
+      <div className="flex justify-between items-center px-4 md:px-10 py-4 text-[13px] text-ink/50 font-sans border-b border-border">
         <span>startup</span>
         <span>{sections.length} resources</span>
       </div>
@@ -70,7 +80,7 @@ export default function StartupHubPage() {
         <h1 className="font-heading text-3xl md:text-5xl font-800 text-ink mb-4">
           build to win.
         </h1>
-        <p className="font-sans text-sm text-ink/60 max-w-md leading-relaxed">
+        <p className="font-sans text-base text-ink/60 max-w-md leading-relaxed">
           everything you need to go from idea to traction — tools, templates, curated content, and direct access to Priya.
         </p>
       </div>
@@ -88,12 +98,12 @@ export default function StartupHubPage() {
                     <div className="flex items-center gap-2 flex-wrap mb-2">
                       <h2 className="font-heading text-lg font-700 text-ink">{section.title}</h2>
                     </div>
-                    <p className="font-sans text-sm text-ink/60 leading-relaxed mb-3">{section.description}</p>
+                    <p className="font-sans text-base text-ink/60 leading-relaxed mb-3">{section.description}</p>
                     <div className="flex items-center gap-2">
-                      <span className={`inline-block text-[10px] px-2 py-0.5 rounded font-sans font-medium ${tagColors[section.tag] ?? "bg-ink/10 text-ink/50"}`}>
+                      <span className={`inline-block text-[12px] px-2 py-0.5 rounded font-sans font-medium ${tagColors[section.tag] ?? "bg-ink/10 text-ink/50"}`}>
                         {section.tag}
                       </span>
-                      <span className="text-[10px] font-sans text-ink/40">{section.badge}</span>
+                      <span className="text-[12px] font-sans text-ink/40">{section.badge}</span>
                     </div>
                   </div>
                   <span className="font-sans text-ink/30 text-lg flex-shrink-0 mt-1">→</span>

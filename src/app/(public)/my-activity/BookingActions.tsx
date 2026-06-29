@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useRef, useEffect } from "react"
 import { MessageCircle, X, RefreshCw } from "lucide-react"
@@ -55,7 +55,7 @@ function MessagesDrawer({ bookingId, onClose }: { bookingId: string; onClose: ()
         )}
         {messages.map((m) => (
           <div key={m.id} className={`flex flex-col gap-0.5 ${!m.isAdmin ? "items-end" : "items-start"}`}>
-            <span className="text-[10px] font-sans text-ink/40">{m.isAdmin ? "Priya" : "You"}</span>
+            <span className="text-[12px] font-sans text-ink/40">{m.isAdmin ? "Priya" : "You"}</span>
             <div className={`px-3 py-2 rounded-xl text-xs font-sans max-w-[85%] ${!m.isAdmin ? "bg-peach text-ink" : "bg-border/40 text-ink"}`}>
               {m.body}
             </div>

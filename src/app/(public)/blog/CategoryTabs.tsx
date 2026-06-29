@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useRouter, usePathname, useSearchParams } from "next/navigation"
 
@@ -23,7 +23,7 @@ export function CategoryTabs({ categories, active }: { categories: string[]; act
         <button
           key={cat}
           onClick={() => setActive(cat)}
-          className={`text-[11px] font-sans px-3 py-1.5 rounded-full border transition-all ${
+          className={`text-[13px] font-sans px-3 py-1.5 rounded-full border transition-all ${
             active === cat
               ? "bg-ink text-cream border-ink"
               : "bg-transparent text-ink/50 border-border hover:border-ink/30 hover:text-ink/70"

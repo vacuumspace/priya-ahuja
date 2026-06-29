@@ -1,4 +1,4 @@
-import { auth } from "@/lib/auth"
+﻿import { auth } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { userProfiles } from "@/lib/db/schema"
 import { eq } from "drizzle-orm"
@@ -31,7 +31,7 @@ export default async function ProfilePage() {
 
   return (
     <div className="min-h-screen bg-cream">
-      <div className="flex justify-between items-center px-4 md:px-10 py-4 text-[11px] text-ink/50 font-sans border-b border-border">
+      <div className="flex justify-between items-center px-4 md:px-10 py-4 text-[13px] text-ink/50 font-sans border-b border-border">
         <span>profile</span>
         <span>{session.user.email}</span>
       </div>

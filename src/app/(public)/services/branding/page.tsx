@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useEffect } from "react"
 import { useSession } from "next-auth/react"
@@ -92,7 +92,7 @@ export default function BrandingPage() {
 
       {/* Hero */}
       <div className="mb-14">
-        <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-4">services · branding</p>
+        <p className="text-[12px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-4">services · branding</p>
         <h1 className="font-heading text-[clamp(2rem,5vw,3rem)] font-800 text-ink leading-[0.95] tracking-tight mb-5">
           look like you<br />mean it.
         </h1>
@@ -103,7 +103,7 @@ export default function BrandingPage() {
 
       {/* Offerings */}
       <div className="mb-14">
-        <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">what we offer</p>
+        <p className="text-[12px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">what we offer</p>
         <div className="space-y-4">
           {offerings.map((o) => (
             <div key={o.title} className="bg-peach/20 border border-peach-dark/15 rounded-xl px-5 py-5">
@@ -114,7 +114,7 @@ export default function BrandingPage() {
               <p className="font-sans text-xs text-ink/55 leading-relaxed mb-3">{o.desc}</p>
               <ul className="space-y-1">
                 {o.points.map((p) => (
-                  <li key={p} className="flex items-center gap-2 text-[11px] font-sans text-ink/50">
+                  <li key={p} className="flex items-center gap-2 text-[13px] font-sans text-ink/50">
                     <span className="w-1 h-1 rounded-full bg-peach-dark/50 flex-shrink-0" />
                     {p}
                   </li>
@@ -127,13 +127,13 @@ export default function BrandingPage() {
 
       {/* Why us */}
       <div className="mb-14">
-        <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">our approach</p>
+        <p className="text-[12px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">our approach</p>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           {whyUs.map((w) => (
             <div key={w.label} className="bg-peach/10 border border-peach-dark/10 rounded-xl px-4 py-4 text-center">
               <w.icon size={18} className="text-peach-dark mx-auto mb-2" />
               <p className="font-sans text-xs font-semibold text-ink mb-1">{w.label}</p>
-              <p className="font-sans text-[10px] text-ink/40 leading-snug">{w.desc}</p>
+              <p className="font-sans text-[12px] text-ink/40 leading-snug">{w.desc}</p>
             </div>
           ))}
         </div>
@@ -141,7 +141,7 @@ export default function BrandingPage() {
 
       {/* Inquiry form */}
       <div>
-        <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">get in touch</p>
+        <p className="text-[12px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">get in touch</p>
         {success ? (
           <div className="bg-peach/20 border border-peach-dark/20 rounded-2xl p-8 text-center">
             <CheckCircle size={36} className="text-peach-dark mx-auto mb-3" />
@@ -152,7 +152,7 @@ export default function BrandingPage() {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="text-[10px] font-sans text-ink/50 uppercase tracking-wide block mb-1.5">Name *</label>
+                <label className="text-[12px] font-sans text-ink/50 uppercase tracking-wide block mb-1.5">Name *</label>
                 <input
                   required
                   value={name}
@@ -162,7 +162,7 @@ export default function BrandingPage() {
                 />
               </div>
               <div>
-                <label className="text-[10px] font-sans text-ink/50 uppercase tracking-wide block mb-1.5">Email *</label>
+                <label className="text-[12px] font-sans text-ink/50 uppercase tracking-wide block mb-1.5">Email *</label>
                 <input
                   required
                   type="email"
@@ -176,7 +176,7 @@ export default function BrandingPage() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="text-[10px] font-sans text-ink/50 uppercase tracking-wide block mb-1.5">Phone</label>
+                <label className="text-[12px] font-sans text-ink/50 uppercase tracking-wide block mb-1.5">Phone</label>
                 <input
                   type="tel"
                   value={phone}
@@ -186,7 +186,7 @@ export default function BrandingPage() {
                 />
               </div>
               <div>
-                <label className="text-[10px] font-sans text-ink/50 uppercase tracking-wide block mb-1.5">Budget</label>
+                <label className="text-[12px] font-sans text-ink/50 uppercase tracking-wide block mb-1.5">Budget</label>
                 <CustomSelect
                   value={budget}
                   onChange={setBudget}
@@ -197,7 +197,7 @@ export default function BrandingPage() {
             </div>
 
             <div>
-              <label className="text-[10px] font-sans text-ink/50 uppercase tracking-wide block mb-1.5">Project Description *</label>
+              <label className="text-[12px] font-sans text-ink/50 uppercase tracking-wide block mb-1.5">Project Description *</label>
               <textarea
                 required
                 rows={4}
@@ -221,7 +221,7 @@ export default function BrandingPage() {
                 "submit inquiry"
               )}
             </button>
-            <p className="text-[10px] text-ink/30 text-center font-sans">we respond within 2-3 business days</p>
+            <p className="text-[12px] text-ink/30 text-center font-sans">we respond within 2-3 business days</p>
           </form>
         )}
       </div>

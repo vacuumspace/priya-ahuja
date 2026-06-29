@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useEffect, useState } from "react"
 
@@ -53,7 +53,7 @@ export function AnchorNav() {
           <a
             key={link.href}
             href={link.href}
-            className={`font-sans text-[11px] whitespace-nowrap transition-colors ${
+            className={`font-sans text-[13px] whitespace-nowrap transition-colors ${
               isActive ? "text-ink font-600" : "text-ink/50 hover:text-ink"
             }`}
           >

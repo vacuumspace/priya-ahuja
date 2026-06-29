@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
@@ -123,12 +123,12 @@ export default function TemplateCardAuth({ product, isAuthenticated, purchaseTok
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 mb-2">
               <FileText size={13} className="text-peach-dark flex-shrink-0" />
-              <span className="text-[10px] bg-amber-tag text-ink/60 px-2 py-0.5 rounded font-sans">{product.tag}</span>
+              <span className="text-[12px] bg-amber-tag text-ink/60 px-2 py-0.5 rounded font-sans">{product.tag}</span>
               {product.comingSoon && (
-                <span className="text-[10px] bg-ink/10 text-ink/50 px-2 py-0.5 rounded font-sans">coming soon</span>
+                <span className="text-[12px] bg-ink/10 text-ink/50 px-2 py-0.5 rounded font-sans">coming soon</span>
               )}
               {purchaseToken && (
-                <span className="text-[10px] bg-green-100 text-green-700 px-2 py-0.5 rounded font-sans font-semibold">purchased</span>
+                <span className="text-[12px] bg-green-100 text-green-700 px-2 py-0.5 rounded font-sans font-semibold">purchased</span>
               )}
             </div>
             <h3 className="font-heading text-base font-700 text-ink mb-1">{product.title}</h3>
@@ -225,7 +225,7 @@ export default function TemplateCardAuth({ product, isAuthenticated, purchaseTok
                   >
                     {loading ? "Setting up payment…" : `Pay ${price}`}
                   </button>
-                  <p className="font-sans text-[10px] text-ink/30 text-center leading-relaxed">
+                  <p className="font-sans text-[12px] text-ink/30 text-center leading-relaxed">
                     digital products are non-refundable once access is granted. for issues contact hi@priyaahuja.in
                   </p>
                 </form>

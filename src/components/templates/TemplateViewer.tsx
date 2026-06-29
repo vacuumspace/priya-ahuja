@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState } from "react"
 import { CheckCircle, ChevronDown, ChevronUp } from "lucide-react"
@@ -31,7 +31,7 @@ export default function TemplateViewer({ template }: { template: Template }) {
     <div>
       <div className="flex items-center gap-2 mb-2">
         <CheckCircle size={16} className="text-green-600" />
-        <span className="text-[10px] font-sans text-ink/40 uppercase tracking-[0.18em]">access confirmed</span>
+        <span className="text-[12px] font-sans text-ink/40 uppercase tracking-[0.18em]">access confirmed</span>
       </div>
       <h1 className="font-heading text-[clamp(1.6rem,4vw,2.4rem)] font-800 text-ink leading-tight tracking-tight mb-1">
         {template.title}
@@ -60,7 +60,7 @@ export default function TemplateViewer({ template }: { template: Template }) {
         ))}
       </div>
 
-      <p className="font-sans text-[11px] text-ink/30 mt-6 text-center">
+      <p className="font-sans text-[13px] text-ink/30 mt-6 text-center">
         Access this anytime from History → Templates in your account.
       </p>
     </div>

@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import Link from "next/link"
 import { useState } from "react"
@@ -30,7 +30,7 @@ export function ServicesClient({ services }: { services: Service[] }) {
             <button
               key={tab}
               onClick={() => setActive(tab)}
-              className={`text-[11px] font-sans px-3 py-1.5 rounded-full border transition-all ${
+              className={`text-[13px] font-sans px-3 py-1.5 rounded-full border transition-all ${
                 active === tab
                   ? "bg-ink text-cream border-ink"
                   : "bg-transparent text-ink/50 border-border hover:border-ink/30 hover:text-ink/70"
@@ -53,17 +53,17 @@ export function ServicesClient({ services }: { services: Service[] }) {
               <div className="flex items-start justify-between gap-6">
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-3">
-                    <span className="text-[10px] font-mono text-ink/30">
+                    <span className="text-[12px] font-mono text-ink/30">
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <span className="text-[10px] bg-amber-tag text-ink/60 px-2 py-0.5 rounded font-sans">
+                    <span className="text-[12px] bg-amber-tag text-ink/60 px-2 py-0.5 rounded font-sans">
                       {service.tag}
                     </span>
                   </div>
                   <h2 className="font-heading text-xl font-700 text-ink mb-2 normal-case">
                     {service.title}
                   </h2>
-                  <p className="font-sans text-sm text-ink/60 leading-relaxed max-w-lg">
+                  <p className="font-sans text-base text-ink/60 leading-relaxed max-w-lg">
                     {service.shortDescription}
                   </p>
                 </div>
@@ -82,7 +82,7 @@ export function ServicesClient({ services }: { services: Service[] }) {
                     ) : (
                       <Clock size={12} />
                     )}
-                    <span className="text-[11px] font-sans">{getDurationLabel(service)}</span>
+                    <span className="text-[13px] font-sans">{getDurationLabel(service)}</span>
                   </div>
                   <div className="mt-3 opacity-0 group-hover:opacity-100 transition-opacity">
                     <span className="inline-flex items-center gap-1 text-xs font-sans text-peach-dark font-semibold">

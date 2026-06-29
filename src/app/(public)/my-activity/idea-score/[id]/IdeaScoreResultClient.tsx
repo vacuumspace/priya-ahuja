@@ -24,14 +24,14 @@ export default function IdeaScoreResultClient({ totalScore, pillarScores, answer
       <div className="flex items-center gap-2 mb-2">
         <Link
           href="/my-activity?tab=tools"
-          className="inline-flex items-center gap-1.5 text-[11px] font-sans text-ink/40 hover:text-ink/70 transition-colors"
+          className="inline-flex items-center gap-1.5 text-[13px] font-sans text-ink/40 hover:text-ink/70 transition-colors"
         >
           <ArrowLeft size={12} /> back to my activity
         </Link>
       </div>
 
       <div className="bg-card border border-border rounded-2xl p-5 sm:p-8 text-center">
-        <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-6">
+        <p className="text-[12px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-6">
           startup idea score
         </p>
         <div className="relative w-36 h-36 mx-auto mb-5">
@@ -41,13 +41,13 @@ export default function IdeaScoreResultClient({ totalScore, pillarScores, answer
           />
           <div className="absolute inset-3 rounded-full bg-card flex items-center justify-center flex-col gap-0.5">
             <span className="font-heading text-3xl font-bold text-ink leading-none">{totalScore}</span>
-            <span className="font-sans text-[10px] text-ink/35">out of 100</span>
+            <span className="font-sans text-[12px] text-ink/35">out of 100</span>
           </div>
         </div>
       </div>
 
       <div className="bg-card border border-border rounded-2xl p-4 sm:p-6">
-        <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">
+        <p className="text-[12px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">
           segment breakdown
         </p>
         <div className="space-y-4">
@@ -56,7 +56,7 @@ export default function IdeaScoreResultClient({ totalScore, pillarScores, answer
             const pct = (ps.earned / ps.max) * 100
             return (
               <div key={pillar.index}>
-                <div className="flex justify-between text-[11px] font-sans text-ink/60 mb-1.5">
+                <div className="flex justify-between text-[13px] font-sans text-ink/60 mb-1.5">
                   <span>{pillar.title}</span>
                   <span>{ps.earned} / {ps.max}</span>
                 </div>
@@ -74,7 +74,7 @@ export default function IdeaScoreResultClient({ totalScore, pillarScores, answer
 
       {recs.length > 0 ? (
         <div className="bg-card border border-border rounded-2xl p-4 sm:p-6">
-          <p className="text-[10px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">
+          <p className="text-[12px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">
             top things to work on before you build
           </p>
           <div className="space-y-3">
@@ -83,7 +83,7 @@ export default function IdeaScoreResultClient({ totalScore, pillarScores, answer
                 <span className="font-heading text-lg font-bold text-peach-dark/60 w-5 flex-shrink-0 mt-0.5">
                   {i + 1}
                 </span>
-                <p className="font-sans text-sm text-ink/70 leading-relaxed">{rec}</p>
+                <p className="font-sans text-base text-ink/70 leading-relaxed">{rec}</p>
               </div>
             ))}
           </div>
@@ -113,7 +113,7 @@ export default function IdeaScoreResultClient({ totalScore, pillarScores, answer
       </div>
 
       <div className="border-t border-border pt-5 pb-2">
-        <p className="font-sans text-[10px] text-ink/30 leading-relaxed text-center max-w-md mx-auto">
+        <p className="font-sans text-[12px] text-ink/30 leading-relaxed text-center max-w-md mx-auto">
           disclaimer: this score is for self-reflection and planning purposes only. it is not a guarantee that your idea will succeed or fail. use this as a thinking tool, not a verdict.
         </p>
       </div>

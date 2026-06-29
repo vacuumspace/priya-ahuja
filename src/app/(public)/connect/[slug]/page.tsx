@@ -54,32 +54,32 @@ export default async function ServiceDetailPage({ params }: Props) {
 
   return (
     <div className="min-h-screen bg-cream">
-      <div className="flex justify-between items-center px-4 md:px-10 py-4 text-[11px] text-ink/50 font-sans border-b border-border">
+      <div className="flex justify-between items-center px-4 md:px-10 py-4 text-[13px] text-ink/50 font-sans border-b border-border">
         <Link href="/connect" className="flex items-center gap-1.5 hover:text-ink transition-colors">
           <ArrowLeft size={11} />
           all connects
         </Link>
-        <span className="text-[10px] bg-amber-tag text-ink/60 px-2 py-0.5 rounded font-sans">
+        <span className="text-[12px] bg-amber-tag text-ink/60 px-2 py-0.5 rounded font-sans">
           {service.tag}
         </span>
       </div>
 
       <div className="px-4 md:px-10 pt-10 pb-16 max-w-3xl">
         <div className="mb-8">
-          <p className="text-[11px] font-sans text-ink/40 uppercase tracking-widest mb-3">
+          <p className="text-[13px] font-sans text-ink/40 uppercase tracking-widest mb-3">
             {getDurationLabel(service)}
           </p>
           <h1 className="font-heading text-3xl md:text-4xl font-800 text-ink leading-tight mb-4">
             {service.title}
           </h1>
-          <p className="font-sans text-sm text-ink/60 leading-relaxed max-w-xl">
+          <p className="font-sans text-base text-ink/60 leading-relaxed max-w-xl">
             {service.description}
           </p>
         </div>
 
         <div className="flex flex-col md:flex-row gap-8">
           {/* Booking card: appears first on mobile, right sidebar on md+ */}
-          <div className="md:w-80 flex-shrink-0 order-first md:order-last">
+          <div className="w-full md:w-80 flex-shrink-0 min-w-0 order-first md:order-last">
             <div className="bg-card border border-border rounded-2xl p-6 md:sticky md:top-6">
               <div className="flex items-center justify-between mb-1">
                 <p className="font-heading text-3xl font-800 text-ink">{formatPrice(service.price)}</p>
@@ -114,7 +114,7 @@ export default async function ServiceDetailPage({ params }: Props) {
                   {service.highlights.map((h) => (
                     <li key={h} className="flex items-start gap-2.5">
                       <CheckCircle size={14} className="text-peach-dark mt-0.5 flex-shrink-0" />
-                      <span className="font-sans text-sm text-ink/70">{h}</span>
+                      <span className="font-sans text-base text-ink/70">{h}</span>
                     </li>
                   ))}
                 </ul>
@@ -124,7 +124,7 @@ export default async function ServiceDetailPage({ params }: Props) {
             {service.whoIsItFor && (
               <div className="bg-card border border-border rounded-2xl p-6">
                 <h2 className="font-heading text-base font-700 text-ink mb-3">who is this for</h2>
-                <p className="font-sans text-sm text-ink/60 leading-relaxed">{service.whoIsItFor}</p>
+                <p className="font-sans text-base text-ink/60 leading-relaxed">{service.whoIsItFor}</p>
               </div>
             )}
           </div>

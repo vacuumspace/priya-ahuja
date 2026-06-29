@@ -1,4 +1,4 @@
-import Link from "next/link"
+﻿import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { Suspense } from "react"
 import { posts } from "@/lib/blog-data"
@@ -16,7 +16,7 @@ export default async function FundraiseBlogPage({ searchParams }: Props) {
 
   return (
     <div className="min-h-screen bg-cream">
-      <div className="flex justify-between items-center px-4 md:px-10 py-4 text-[11px] text-ink/50 font-sans border-b border-border">
+      <div className="flex justify-between items-center px-4 md:px-10 py-4 text-[13px] text-ink/50 font-sans border-b border-border">
         <span>fundraise · field notes</span>
         <span>{topicPosts.length} posts</span>
       </div>
@@ -41,7 +41,7 @@ export default async function FundraiseBlogPage({ searchParams }: Props) {
       </div>
 
       <div className="px-4 md:px-10 pb-16">
-        <p className="font-sans text-[11px] text-ink/40 uppercase tracking-wide mb-4">Field Notes</p>
+        <p className="font-sans text-[13px] text-ink/40 uppercase tracking-wide mb-4">Field Notes</p>
         <div className="grid grid-cols-1 gap-4">
           {filtered.map((post) => (
             <Link
@@ -52,11 +52,11 @@ export default async function FundraiseBlogPage({ searchParams }: Props) {
               <div className="flex items-start justify-between gap-6">
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-3">
-                    <span className="text-[10px] bg-amber-tag text-ink/60 px-2 py-0.5 rounded font-sans">
+                    <span className="text-[12px] bg-amber-tag text-ink/60 px-2 py-0.5 rounded font-sans">
                       {post.tag}
                     </span>
-                    <span className="text-[10px] text-ink/30 font-sans">{post.date}</span>
-                    <span className="text-[10px] text-ink/30 font-sans">· {post.readTime} read</span>
+                    <span className="text-[12px] text-ink/30 font-sans">{post.date}</span>
+                    <span className="text-[12px] text-ink/30 font-sans">· {post.readTime} read</span>
                   </div>
                   <h2 className="font-heading text-xl font-700 text-ink mb-2">{post.title}</h2>
                   <p className="font-sans text-sm text-ink/60 leading-relaxed max-w-lg">{post.excerpt}</p>
