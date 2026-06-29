@@ -1,8 +1,21 @@
-﻿import Link from "next/link"
+﻿import type { Metadata } from "next"
+import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { Suspense } from "react"
 import { posts, STARTUP_SERIES_NAME } from "@/lib/blog-data"
 import { CategoryTabs } from "./CategoryTabs"
+
+export const metadata: Metadata = {
+  title: "Startup & Fundraise Blog",
+  description: "Honest takes on startup building and fundraising — idea validation, investor evaluation criteria, pitch mistakes, pre-seed vs Series A signals, and what to do when fundraising stalls.",
+  keywords: ["startup blog India", "fundraising blog India", "investor pitch tips", "startup advice India", "pre-seed fundraising advice"],
+  alternates: { canonical: "https://priyaahuja.in/blog" },
+  openGraph: {
+    title: "Startup & Fundraise Blog | Priya Ahuja",
+    description: "Honest takes on startup building and fundraising for Indian founders.",
+    url: "https://priyaahuja.in/blog",
+  },
+}
 
 const seriesPosts = posts.filter((p) => p.series?.name === STARTUP_SERIES_NAME)
 const nonSeriesPosts = posts.filter((p) => !p.series)

@@ -1,6 +1,19 @@
+import type { Metadata } from "next"
 import { Suspense } from "react"
 import { resources } from "@/lib/resources-data"
 import { ResourcesClient } from "./ResourcesClient"
+
+export const metadata: Metadata = {
+  title: "Startup Credits & Resources for Founders",
+  description: "40+ free tools, credits, and deals curated for Indian founders — AWS ($200k), Google Cloud ($350k), OpenAI, Anthropic, HubSpot, Notion, and more. One place, no hunting.",
+  keywords: ["startup credits India", "AWS startup credits", "Google Cloud startup program", "free tools for startups", "startup deals India", "founder resources India"],
+  alternates: { canonical: "https://priyaahuja.in/startup/resources" },
+  openGraph: {
+    title: "Startup Credits & Resources for Founders | Priya Ahuja",
+    description: "40+ free tools, credits, and deals for Indian founders — AWS, Google Cloud, OpenAI, HubSpot, and more.",
+    url: "https://priyaahuja.in/startup/resources",
+  },
+}
 
 type Props = { searchParams: Promise<{ category?: string }> }
 

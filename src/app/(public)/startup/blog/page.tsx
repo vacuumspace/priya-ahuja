@@ -1,8 +1,21 @@
-﻿import Link from "next/link"
+﻿import type { Metadata } from "next"
+import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { Suspense } from "react"
 import { posts, STARTUP_SERIES_NAME } from "@/lib/blog-data"
 import { CategoryTabs } from "./CategoryTabs"
+
+export const metadata: Metadata = {
+  title: "Startup Blog — Building Smart in India",
+  description: "Startup building advice for Indian founders — from idea validation to hiring, unit economics, go-to-market, and what investors actually look for in early-stage decks.",
+  keywords: ["startup blog India", "startup building advice", "idea validation India", "founder advice India", "early stage startup India"],
+  alternates: { canonical: "https://priyaahuja.in/startup/blog" },
+  openGraph: {
+    title: "Startup Blog — Building Smart in India | Priya Ahuja",
+    description: "Startup building advice for Indian founders — from idea validation to hiring, unit economics, and go-to-market.",
+    url: "https://priyaahuja.in/startup/blog",
+  },
+}
 
 const topicPosts = posts.filter((p) => p.topic === "startup")
 const seriesPosts = topicPosts.filter((p) => p.series?.name === STARTUP_SERIES_NAME)

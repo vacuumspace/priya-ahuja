@@ -1,6 +1,19 @@
+import type { Metadata } from "next"
 import { Suspense } from "react"
 import { grants, lastRefreshed } from "@/lib/grants-data"
 import { GrantsClient } from "./GrantsClient"
+
+export const metadata: Metadata = {
+  title: "Startup Grants & Government Schemes India",
+  description: "DPIIT, Startup India, AIM, BIRAC, state schemes, accelerators, and international programs — curated and filtered by sector. Find grants your startup is eligible for.",
+  keywords: ["startup grants India", "DPIIT grant", "Startup India scheme", "AIM grant India", "BIRAC funding", "government grants startups India", "startup funding schemes"],
+  alternates: { canonical: "https://priyaahuja.in/fundraise/grants" },
+  openGraph: {
+    title: "Startup Grants & Government Schemes India | Priya Ahuja",
+    description: "DPIIT, Startup India, AIM, BIRAC, state schemes, and international programs — curated for Indian founders by sector.",
+    url: "https://priyaahuja.in/fundraise/grants",
+  },
+}
 
 type Props = { searchParams: Promise<{ sector?: string }> }
 

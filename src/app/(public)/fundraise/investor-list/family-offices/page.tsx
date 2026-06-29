@@ -21,9 +21,9 @@ const CONFIG: ListConfig = {
   freePages: 2,
   teamLabel: "team contacts",
   description: [
-    "160+ family offices that are actively investing in Indian startups.",
+    "160 family offices that are actively investing in Indian startups.",
     "Each entry includes country, website, LinkedIn, domain focus, and direct email IDs where available.",
-    "The team contacts sheet has 700+ individual contacts including family principals, CIOs, and investment managers.",
+    "The team contacts sheet has 700 individual contacts including family principals, CIOs, and investment managers.",
     "Family offices are often underutilised by founders. They move faster than VCs, write flexible cheques, and many have deep domain networks.",
     "One-time payment. No subscriptions, no expiry. Yours forever including future refreshes.",
     "A few email IDs may not be active. LinkedIn is always the most reliable fallback for outreach.",

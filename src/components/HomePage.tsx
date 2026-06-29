@@ -264,56 +264,32 @@ export default function HomePage() {
 
       {/* ── Footer nav ── */}
       <div className="border-t border-peach-dark/15 pt-6 pb-2">
-        <p className="text-[12px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">explore more</p>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
+        <p className="text-[12px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">Featured Resources</p>
+        <div className="grid grid-cols-2 gap-6">
           {[
+            {
+              heading: "fundraise",
+              href: "/fundraise",
+              links: [
+                { label: "investor lists", href: "/fundraise/investor-list", star: true },
+                { label: "grants", href: "/fundraise/grants" },
+                { label: "fundability score", href: "/fundraise/tools/fundability-score" },
+              ],
+            },
             {
               heading: "startup",
               href: "/startup",
               links: [
                 { label: "100 startup ideas", href: "/startup/ideas" },
                 { label: "idea score", href: "/startup/tools/idea-score" },
-                { label: "templates", href: "/startup/templates" },
-                { label: "blog", href: "/startup/blog" },
-              ],
-            },
-            {
-              heading: "fundraise",
-              href: "/fundraise",
-              links: [
-                { label: "fundability score", href: "/fundraise/tools/fundability-score" },
-                { label: "angel investors", href: "/fundraise/angel-investors" },
-                { label: "templates", href: "/fundraise/templates" },
-                { label: "blog", href: "/fundraise/blog" },
-              ],
-            },
-            {
-              heading: "connect",
-              href: "/connect",
-              links: [
-                { label: "book a session", href: "/connect" },
-                { label: "my activity", href: "/my-activity" },
-              ],
-            },
-            {
-              heading: "services",
-              href: null,
-              links: [
-                { label: "tech product dev", href: "/services/tech" },
-                { label: "branding", href: "/services/branding" },
-                { label: "finance", href: "/services/accounting" },
-                { label: "legal compliance", href: "/services/incorporation" },
+                { label: "resources & credits", href: "/startup/resources" },
               ],
             },
           ].map((col) => (
             <div key={col.heading}>
-              {col.href ? (
-                <Link href={col.href} className="font-sans text-[13px] font-semibold text-ink/50 hover:text-ink/80 transition-colors uppercase tracking-wide mb-2.5 block">
-                  {col.heading}
-                </Link>
-              ) : (
-                <p className="font-sans text-[13px] font-semibold text-ink/50 uppercase tracking-wide mb-2.5">{col.heading}</p>
-              )}
+              <Link href={col.href} className="font-sans text-[13px] font-semibold text-ink/50 hover:text-ink/80 transition-colors uppercase tracking-wide mb-2.5 block">
+                {col.heading}
+              </Link>
               <div className="flex flex-col gap-1.5">
                 {col.links.map((link) => (
                   <Link
@@ -322,6 +298,9 @@ export default function HomePage() {
                     className="font-sans text-[13px] text-ink/30 hover:text-ink/60 transition-colors"
                   >
                     {link.label}
+                    {"star" in link && link.star && (
+                      <span className="ml-1 text-[10px] text-peach-dark dark:text-[#FEF9E7]">★</span>
+                    )}
                   </Link>
                 ))}
               </div>

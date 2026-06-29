@@ -27,6 +27,8 @@ export type ListConfig = {
   freePages: number
   description?: string[]
   whyPaid?: string
+  indianCount?: number
+  globalCount?: number
 }
 
 type Props = {
@@ -217,6 +219,21 @@ export default function InvestorListClient({
           <p className="font-sans text-xs text-ink/40 uppercase tracking-wide mb-2">Fundraise · Investor List</p>
           <h1 className="font-heading text-3xl md:text-5xl font-800 text-ink mb-4" dangerouslySetInnerHTML={{ __html: config.title }} />
           <p className="font-sans text-sm font-semibold text-ink max-w-md leading-relaxed">{config.subtitle}</p>
+          {(config.indianCount !== undefined || config.globalCount !== undefined) && (
+            <div className="flex items-center gap-3 mt-3">
+              {config.indianCount !== undefined && (
+                <span className="inline-flex items-center gap-1.5 text-[12px] font-sans bg-peach/50 text-ink/70 px-2.5 py-1 rounded-full">
+                  <img src="https://flagcdn.com/w20/in.png" alt="India" width={16} height={12} className="rounded-sm" />
+                  {config.indianCount.toLocaleString()} Indian VCs
+                </span>
+              )}
+              {config.globalCount !== undefined && (
+                <span className="inline-flex items-center gap-1.5 text-[12px] font-sans bg-ink/5 text-ink/60 px-2.5 py-1 rounded-full">
+                  🌍 {config.globalCount.toLocaleString()} global VCs
+                </span>
+              )}
+            </div>
+          )}
           <p className="font-sans text-xs text-ink/40 mt-2">
             updated {new Date().toLocaleString("en-IN", { month: "long", year: "numeric" })}
           </p>

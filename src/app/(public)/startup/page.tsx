@@ -1,5 +1,18 @@
-﻿import Link from "next/link"
+﻿import type { Metadata } from "next"
+import Link from "next/link"
 import { Lightbulb, FileText, Wrench, BookOpen, Users, Gift } from "lucide-react"
+
+export const metadata: Metadata = {
+  title: "Startup Resources for Indian Founders",
+  description: "100 startup ideas, idea validation score, templates, resources & credits, and 1-on-1 sessions — everything you need to go from idea to traction as an Indian founder.",
+  keywords: ["startup resources India", "startup ideas India", "idea validation tool", "startup templates", "founder tools India", "startup credits India"],
+  alternates: { canonical: "https://priyaahuja.in/startup" },
+  openGraph: {
+    title: "Startup Resources for Indian Founders | Priya Ahuja",
+    description: "100 startup ideas, idea validation score, templates, resources & credits, and 1-on-1 sessions for Indian founders.",
+    url: "https://priyaahuja.in/startup",
+  },
+}
 
 const sections = [
   {

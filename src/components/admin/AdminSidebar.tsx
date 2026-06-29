@@ -158,13 +158,24 @@ export function AdminSidebar({ userEmail, collapsed, onToggle, notificationCount
           {!collapsed && (
             <span className="font-heading text-base font-800 text-ink truncate">Admin</span>
           )}
-          <button
-            onClick={onToggle}
-            className={`flex-shrink-0 p-1.5 rounded-lg text-ink/50 hover:bg-peach-dark/20 hover:text-ink transition-colors ${collapsed ? "mx-auto" : ""}`}
-            aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
-          >
-            {collapsed ? <ChevronRight size={15} /> : <ChevronLeft size={15} />}
-          </button>
+          <div className={`flex items-center gap-2 ${collapsed ? "mx-auto" : ""}`}>
+            {!collapsed && (
+              <button
+                onClick={toggleTheme}
+                className="text-ink/40 hover:text-ink transition-colors"
+                aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+              >
+                {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
+              </button>
+            )}
+            <button
+              onClick={onToggle}
+              className="p-1.5 rounded-lg text-ink/50 hover:bg-peach-dark/20 hover:text-ink transition-colors"
+              aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+            >
+              {collapsed ? <ChevronRight size={15} /> : <ChevronLeft size={15} />}
+            </button>
+          </div>
         </div>
 
         {/* Nav */}
@@ -311,13 +322,6 @@ export function AdminSidebar({ userEmail, collapsed, onToggle, notificationCount
               {profileOpen && (
                 <div className="border-b border-peach-dark/20 flex flex-col">
                   <button
-                    onClick={toggleTheme}
-                    className="flex items-center gap-2.5 px-3 py-2 text-xs font-sans font-medium text-ink/60 hover:bg-peach-dark/20 hover:text-ink transition-colors"
-                  >
-                    {theme === "dark" ? <Sun size={13} className="flex-shrink-0" /> : <Moon size={13} className="flex-shrink-0" />}
-                    <span>{theme === "dark" ? "Light mode" : "Dark mode"}</span>
-                  </button>
-                  <button
                     onClick={() => setSignOutOpen(true)}
                     className="flex items-center gap-2.5 px-3 py-2 text-xs font-sans font-medium text-ink/60 hover:bg-peach-dark/20 hover:text-ink transition-colors"
                   >
@@ -328,22 +332,13 @@ export function AdminSidebar({ userEmail, collapsed, onToggle, notificationCount
               )}
             </div>
           ) : (
-            <>
-              <button
-                onClick={toggleTheme}
-                title={theme === "dark" ? "Light mode" : "Dark mode"}
-                className="flex items-center justify-center w-full py-2 rounded-lg text-ink/60 hover:bg-peach-dark/20 hover:text-ink transition-colors"
-              >
-                {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
-              </button>
-              <button
-                onClick={() => setSignOutOpen(true)}
-                title="Sign out"
-                className="flex items-center justify-center w-full py-2 rounded-lg text-ink/60 hover:bg-peach-dark/20 hover:text-ink transition-colors"
-              >
-                <LogOut size={16} />
-              </button>
-            </>
+            <button
+              onClick={() => setSignOutOpen(true)}
+              title="Sign out"
+              className="flex items-center justify-center w-full py-2 rounded-lg text-ink/60 hover:bg-peach-dark/20 hover:text-ink transition-colors"
+            >
+              <LogOut size={16} />
+            </button>
           )}
         </div>
       </aside>

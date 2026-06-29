@@ -41,7 +41,7 @@ const topicGroups = [
       { label: "blog", href: "/fundraise/blog" },
       { label: "tools", href: "/fundraise/tools" },
       { label: "templates", href: "/fundraise/templates" },
-      { label: "investor list", href: "/fundraise/investor-list", subItems: INVESTOR_LIST_ITEMS },
+      { label: "investor list", href: "/fundraise/investor-list", subItems: INVESTOR_LIST_ITEMS, star: true },
       { label: "grants", href: "/fundraise/grants" },
     ],
   },
@@ -176,6 +176,9 @@ export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEma
                     const hasSubItems = "subItems" in child && Array.isArray(child.subItems)
                     const isGroupActive = pathname === child.href || pathname.startsWith(child.href + "/")
 
+                    const hasStar = "star" in child && child.star
+                    const StarMark = () => hasStar ? <span className="ml-1 text-[#FEF9E7] text-[10px]">★</span> : null
+
                     if (hasSubItems) {
                       return (
                         <div key={child.href}>
@@ -185,7 +188,7 @@ export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEma
                               isGroupActive ? "text-ink bg-peach-dark/20" : "text-ink/60 hover:text-ink hover:bg-peach-dark/10"
                             }`}
                           >
-                            {child.label}
+                            {child.label}<StarMark />
                           </Link>
                           <div className="ml-2 flex flex-col gap-0.5 border-l border-peach-dark/15 pl-2.5">
                             {(child.subItems as { label: string; href: string }[]).map((sub) => {
@@ -220,7 +223,7 @@ export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEma
                             : "text-ink/60 hover:bg-peach-dark/10 hover:text-ink"
                         }`}
                       >
-                        {child.label}
+                        {child.label}<StarMark />
                       </Link>
                     )
                   })}

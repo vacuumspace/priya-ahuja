@@ -205,7 +205,7 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
             contact details
           </h1>
           <p className="font-sans text-sm font-semibold text-ink max-w-md leading-relaxed">
-            900+ angel investors across India. Name, city, LinkedIn, and direct email(s).
+            900 angel investors across India. Name, city, LinkedIn, and direct email(s).
           </p>
           <p className="font-sans text-xs text-ink/40 mt-2">
             updated {new Date().toLocaleString("en-IN", { month: "long", year: "numeric" })}
@@ -233,7 +233,7 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
           <div className="bg-card border border-border rounded-xl px-5 py-4 space-y-2">
             <p className="font-sans text-xs font-semibold text-ink/70">all about this list</p>
             {[
-              "900+ angel investors actively writing cheques across India, curated and kept updated.",
+              "900 angel investors actively writing cheques across India, curated and kept updated.",
               "Each entry includes direct email and LinkedIn so you can reach them without going through assistants or guessing addresses.",
               "Covers angels investing in 2024-26 across fintech, SaaS, D2C, edtech, healthtech, deeptech, consumer brands, climate tech, and more.",
               "One-time payment. No subscriptions, no expiry. Yours forever including future refreshes.",

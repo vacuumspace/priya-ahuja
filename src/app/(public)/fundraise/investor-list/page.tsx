@@ -1,18 +1,30 @@
 export const dynamic = "force-dynamic"
 
+import type { Metadata } from "next"
 import Link from "next/link"
 import { auth, isAdmin } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { purchases, digitalProducts } from "@/lib/db/schema"
 import { eq, and, isNotNull, inArray } from "drizzle-orm"
 
+export const metadata: Metadata = {
+  title: "Investor Lists for Indian Startups",
+  description: "Curated investor contact lists for founders actively fundraising. Angel investors, early stage VCs, family offices, and incubators. Buy once, access forever.",
+  keywords: ["angel investor list India", "VC list India", "family office India startups", "incubator list India", "investor contacts India", "fundraising data India"],
+  alternates: { canonical: "https://priyaahuja.in/fundraise/investor-list" },
+  openGraph: {
+    title: "Investor Lists for Indian Startups | Priya Ahuja",
+    description: "Angel investors, early stage VCs, family offices, and incubators. Curated contact lists for Indian founders. Buy once, access forever.",
+    url: "https://priyaahuja.in/fundraise/investor-list",
+  },
+}
+
 const LISTS = [
   {
     href: "/fundraise/investor-list/angel-investors",
     slug: "angel-investor-list",
     title: "angel investors",
-    price: "₹999",
-    count: "900+",
+    count: "900",
     unit: "investors",
     description: "Active angel investors across India with direct email and LinkedIn. Ideal for pre-seed and seed stage founders.",
     tags: ["fintech", "SaaS", "D2C", "edtech", "healthtech", "deeptech"],
@@ -21,18 +33,16 @@ const LISTS = [
     href: "/fundraise/investor-list/early-stage-vc",
     slug: "early-stage-vc-list",
     title: "early stage vc",
-    price: "₹4,999",
-    count: "1,000+",
+    count: "1,000",
     unit: "VC firms",
-    description: "Early stage VC firms actively writing cheques in Indian startups. Includes firm profiles and 26,000+ team contacts.",
+    description: "Early stage VC firms actively writing cheques in Indian startups. Includes firm profiles and 26,000 team contacts.",
     tags: ["pre-seed", "seed", "Series A", "all sectors"],
   },
   {
     href: "/fundraise/investor-list/family-offices",
     slug: "family-offices-list",
     title: "family offices",
-    price: "₹2,999",
-    count: "160+",
+    count: "160",
     unit: "family offices",
     description: "Family offices deploying capital into Indian startups. Faster than VCs, flexible cheques, and strong domain networks.",
     tags: ["flexible cheques", "growth stage", "sector agnostic"],
@@ -41,8 +51,7 @@ const LISTS = [
     href: "/fundraise/investor-list/incubators",
     slug: "incubators-list",
     title: "incubator & accelerator",
-    price: "₹1,999",
-    count: "230+",
+    count: "230",
     unit: "programs",
     description: "Incubators and accelerators in India across government, university, corporate, and independent cohort programs.",
     tags: ["early stage", "mentorship", "cohort programs"],
@@ -58,6 +67,21 @@ const DEFAULT_PRICES: Record<string, number> = {
 
 function fmtPrice(paise: number) {
   return "₹" + (paise / 100).toLocaleString("en-IN")
+}
+
+const itemListJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Investor Lists for Indian Startups",
+  "description": "Curated investor contact lists for founders actively fundraising in India.",
+  "url": "https://priyaahuja.in/fundraise/investor-list",
+  "itemListElement": LISTS.map((list, i) => ({
+    "@type": "ListItem",
+    "position": i + 1,
+    "name": list.title,
+    "description": list.description,
+    "url": `https://priyaahuja.in${list.href}`,
+  })),
 }
 
 export default async function InvestorListPage() {
@@ -85,6 +109,7 @@ export default async function InvestorListPage() {
 
   return (
     <div className="min-h-screen bg-cream overflow-x-hidden">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }} />
       {/* Header bar */}
       <div className="flex justify-between items-center px-4 md:px-10 py-4 text-[13px] text-ink/50 font-sans border-b border-border">
         <span>fundraise · investor list</span>

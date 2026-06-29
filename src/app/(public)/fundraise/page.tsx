@@ -1,5 +1,18 @@
-﻿import Link from "next/link"
+﻿import type { Metadata } from "next"
+import Link from "next/link"
 import { Users, FileText, Wrench, BookOpen, Database, Award } from "lucide-react"
+
+export const metadata: Metadata = {
+  title: "Fundraise Resources for Indian Startups",
+  description: "Tools, data, and direct access to help Indian founders raise — fundability score, investor lists, grant programs, templates, and 1-on-1 fundraise sessions with Priya Ahuja.",
+  keywords: ["fundraising resources India", "investor list India", "startup fundability score", "fundraise grants India", "pitch prep India", "pre-seed fundraising"],
+  alternates: { canonical: "https://priyaahuja.in/fundraise" },
+  openGraph: {
+    title: "Fundraise Resources for Indian Startups | Priya Ahuja",
+    description: "Tools, data, and direct access to help Indian founders raise — fundability score, investor lists, grant programs, templates, and 1-on-1 sessions.",
+    url: "https://priyaahuja.in/fundraise",
+  },
+}
 
 const sections = [
   {
@@ -13,12 +26,13 @@ const sections = [
   },
   {
     slug: "angel-investors",
-    title: "Angel Investor List",
-    description: "900+ angel investors across India — verified active investors, not cold LinkedIn profiles. Name, city, LinkedIn, and direct email(s). Filter by state and country. One-time lifetime access.",
+    title: "Investor List",
+    star: true,
+    description: "Curated investor contact lists for founders actively fundraising — angel investors, early stage VCs, family offices, and incubators. Buy once, access forever.",
     tag: "data",
     icon: Database,
-    badge: "900+ investors · ₹999",
-    href: "/fundraise/angel-investors",
+    badge: "4 lists · from ₹999",
+    href: "/fundraise/investor-list",
   },
   {
     slug: "grants",
@@ -96,7 +110,12 @@ export default function FundraiseHubPage() {
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center gap-2 flex-wrap mb-2">
-                      <h2 className="font-heading text-lg font-700 text-ink">{section.title}</h2>
+                      <h2 className="font-heading text-lg font-700 text-ink">
+                        {section.title}
+                        {"star" in section && section.star && (
+                          <span className="ml-1.5 text-sm text-peach-dark dark:text-[#FEF9E7]">★</span>
+                        )}
+                      </h2>
                     </div>
                     <p className="font-sans text-base text-ink/60 leading-relaxed mb-3">{section.description}</p>
                     <div className="flex items-center gap-2">

@@ -10,20 +10,20 @@ import { getEarlyStageVCFirms, getEarlyStageVCTeam } from "@/lib/read-investor-x
 const SLUG = "early-stage-vc-list"
 const PAGE_SIZE = 10
 
-const CONFIG: ListConfig = {
+const BASE_CONFIG: Omit<ListConfig, "indianCount" | "globalCount"> = {
   listType: "early-stage-vc",
   slug: SLUG,
   title: "early stage vc<br/>contact details",
-  subtitle: "Early stage VC firms actively investing in Indian startups. Firm details and team contacts, all in one place.",
+  subtitle: "Global and Indian VC firms actively investing in startups. Firm details and team contacts, all in one place.",
   price: "₹4,999",
   breadcrumb: "fundraise · investor list · early stage vc",
   firmsLabel: "VC firms",
   freePages: 4,
   teamLabel: "team contacts",
   description: [
-    "1000+ early stage VC firms that are actively writing cheques in Indian startups across sectors.",
+    "1,000 early stage VC firms globally, including Indian VCs and international funds actively writing cheques in Indian startups.",
     "Each firm entry includes website, LinkedIn, domain focus, country, and direct email IDs where available.",
-    "The team contacts sheet has 26,000+ individual partners, associates, and analysts with their direct LinkedIn and emails.",
+    "The team contacts sheet has 26,000 individual partners, associates, and analysts with their direct LinkedIn and emails.",
     "Covers investors writing pre-seed, seed, and Series A cheques in 2024-26 across fintech, SaaS, D2C, deeptech, healthtech, edtech, climate, and more.",
     "One-time payment. No subscriptions, no expiry. Yours forever including future refreshes.",
     "A few email IDs may not be active. LinkedIn is always the most reliable fallback for outreach.",
@@ -52,6 +52,11 @@ export default async function EarlyStageVCPage() {
 
   const allFirms = getEarlyStageVCFirms()
   const allTeam  = getEarlyStageVCTeam()
+
+  const indianCount = allFirms.filter(f => f.country?.toLowerCase().includes("india")).length
+  const globalCount = allFirms.length - indianCount
+
+  const CONFIG: ListConfig = { ...BASE_CONFIG, indianCount, globalCount }
 
   const firmsFirstPage = allFirms.slice(0, PAGE_SIZE).map(r => ({
     ...r,
