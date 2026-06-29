@@ -1,5 +1,5 @@
-import Link from "next/link"
-import { Users, FileText, Wrench, BookOpen, Database } from "lucide-react"
+﻿import Link from "next/link"
+import { Users, FileText, Wrench, BookOpen, Database, Award } from "lucide-react"
 
 const sections = [
   {
@@ -19,6 +19,15 @@ const sections = [
     icon: Database,
     badge: "900+ investors · ₹999",
     href: "/fundraise/angel-investors",
+  },
+  {
+    slug: "grants",
+    title: "Grant Resources",
+    description: "DPIIT, Startup India, AIM, BIRAC, state schemes, accelerators, and international programs — curated and filtered by sector. Sign in to see eligibility and apply links.",
+    tag: "grants",
+    icon: Award,
+    badge: "free · sign in for details",
+    href: "/fundraise/grants",
   },
   {
     slug: "templates",
@@ -55,12 +64,13 @@ const tagColors: Record<string, string> = {
   downloads: "bg-mint/20 text-green-700",
   reading: "bg-blue-50 text-blue-600",
   session: "bg-ink/10 text-ink/60",
+  grants: "bg-green-50 text-green-700",
 }
 
 export default function FundraiseHubPage() {
   return (
     <div className="min-h-screen bg-cream">
-      <div className="flex justify-between items-center px-4 md:px-10 py-4 text-[11px] text-ink/50 font-sans border-b border-border">
+      <div className="flex justify-between items-center px-4 md:px-10 py-4 text-[13px] text-ink/50 font-sans border-b border-border">
         <span>fundraise</span>
         <span>{sections.length} resources</span>
       </div>
@@ -70,7 +80,7 @@ export default function FundraiseHubPage() {
         <h1 className="font-heading text-3xl md:text-5xl font-800 text-ink mb-4">
           raise with clarity.
         </h1>
-        <p className="font-sans text-sm text-ink/60 max-w-md leading-relaxed">
+        <p className="font-sans text-base text-ink/60 max-w-md leading-relaxed">
           tools, data, and direct access to help you understand what investors want — and walk in prepared.
         </p>
       </div>
@@ -88,12 +98,12 @@ export default function FundraiseHubPage() {
                     <div className="flex items-center gap-2 flex-wrap mb-2">
                       <h2 className="font-heading text-lg font-700 text-ink">{section.title}</h2>
                     </div>
-                    <p className="font-sans text-sm text-ink/60 leading-relaxed mb-3">{section.description}</p>
+                    <p className="font-sans text-base text-ink/60 leading-relaxed mb-3">{section.description}</p>
                     <div className="flex items-center gap-2">
-                      <span className={`inline-block text-[10px] px-2 py-0.5 rounded font-sans font-medium ${tagColors[section.tag] ?? "bg-ink/10 text-ink/50"}`}>
+                      <span className={`inline-block text-[12px] px-2 py-0.5 rounded font-sans font-medium ${tagColors[section.tag] ?? "bg-ink/10 text-ink/50"}`}>
                         {section.tag}
                       </span>
-                      <span className="text-[10px] font-sans text-ink/40">{section.badge}</span>
+                      <span className="text-[12px] font-sans text-ink/40">{section.badge}</span>
                     </div>
                   </div>
                   <span className="font-sans text-ink/30 text-lg flex-shrink-0 mt-1">→</span>

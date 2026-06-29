@@ -24,6 +24,7 @@ const topicGroups = [
       { label: "tools", href: "/startup/tools" },
       { label: "templates", href: "/startup/templates" },
       { label: "100 startup ideas", href: "/startup/ideas" },
+      { label: "resources & credits", href: "/startup/resources" },
     ],
   },
   {
@@ -34,6 +35,7 @@ const topicGroups = [
       { label: "tools", href: "/fundraise/tools" },
       { label: "templates", href: "/fundraise/templates" },
       { label: "angel investors", href: "/fundraise/angel-investors" },
+      { label: "grants", href: "/fundraise/grants" },
     ],
   },
   {
