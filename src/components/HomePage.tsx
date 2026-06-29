@@ -281,8 +281,8 @@ export default function HomePage() {
               href: "/startup",
               links: [
                 { label: "100 startup ideas", href: "/startup/ideas" },
-                { label: "idea score", href: "/startup/tools/idea-score" },
                 { label: "resources & credits", href: "/startup/resources" },
+                { label: "idea score", href: "/startup/tools/idea-score" },
               ],
             },
           ].map((col) => (
