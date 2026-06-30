@@ -105,10 +105,10 @@ const TOTAL = {
   transactions: Object.values(SEGMENTS).reduce((s, v) => s + v.transactions, 0),
   area_sqft: Object.values(SEGMENTS).reduce((s, v) => s + v.area_sqft, 0),
   value_cr: Object.values(SEGMENTS).reduce((s, v) => s + v.value_cr, 0),
-  districts: new Set([
-    ...individualBuyers.map((r) => r.state + r.district),
-    ...developers.map((r) => r.state + r.district),
-    ...brokers.map((r) => r.state + r.district),
+  states: new Set([
+    ...individualBuyers.map((r) => r.state),
+    ...developers.map((r) => r.state),
+    ...brokers.map((r) => r.state),
     ...banksInsurers.map((r) => r.state),
   ]).size,
 }
@@ -892,9 +892,9 @@ export default function KYLPage() {
               <p className="text-xs text-ink/40 font-sans mt-0.5">Crore (excl. brokers)</p>
             </div>
             <div className="bg-peach-dark/10 rounded-xl px-4 py-4">
-              <p className="text-xs text-ink/50 font-sans mb-1">Markets Tracked</p>
-              <p className="text-2xl font-heading font-bold text-ink">{TOTAL.districts}</p>
-              <p className="text-xs text-ink/40 font-sans mt-0.5">cities / states</p>
+              <p className="text-xs text-ink/50 font-sans mb-1">States Covered</p>
+              <p className="text-2xl font-heading font-bold text-ink">{TOTAL.states}</p>
+              <p className="text-xs text-ink/40 font-sans mt-0.5">with data across segments</p>
             </div>
           </div>
 
