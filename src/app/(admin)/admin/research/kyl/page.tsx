@@ -5,6 +5,7 @@ import { ChevronRight } from "lucide-react"
 import advisoryCompanies from "../../../../../../data/json/kyl/advisory-companies.json"
 import competitorsResearchRaw from "../../../../../../data/json/kyl/competitors-research.json"
 import competitorsVastuRaw from "../../../../../../data/json/kyl/competitors-vastu.json"
+import contentCreatorsRaw from "../../../../../../data/json/kyl/content-creators.json"
 import individualBuyers from "../../../../../../data/json/kyl/individual-buyers.json"
 import developers from "../../../../../../data/json/kyl/developers.json"
 import brokers from "../../../../../../data/json/kyl/brokers.json"
@@ -1042,6 +1043,202 @@ function VastuCards({ items }: { items: VastuCompetitor[] }) {
   )
 }
 
+// ── Content Creators Tab ──────────────────────────────────────────────────────
+
+type ContentCreator = {
+  name: string
+  handle: string
+  platforms: string[]
+  profile_url: string
+  bio: string
+  followers: Record<string, number>
+  language: string[]
+  content_focus: string[]
+  geography_focus: string[]
+  posting_frequency: string
+  monetisation: string[]
+  relevance_to_kyl: string
+  confidence: string
+  notes: string
+}
+
+function fmtFollowers(n: number): string {
+  if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}M`
+  if (n >= 1_000) return `${(n / 1_000).toFixed(0)}K`
+  return String(n)
+}
+
+const PLATFORM_COLORS: Record<string, string> = {
+  YouTube: "bg-red-50 text-red-600",
+  Instagram: "bg-pink-50 text-pink-600",
+  Facebook: "bg-blue-50 text-blue-600",
+  LinkedIn: "bg-sky-50 text-sky-700",
+  "Twitter/X": "bg-ink/8 text-ink/60",
+}
+
+function ContentCreatorsTab() {
+  const creators = contentCreatorsRaw as unknown as ContentCreator[]
+  const [open, setOpen] = useState<string | null>(null)
+  const [langFilter, setLangFilter] = useState("All")
+  const [platformFilter, setPlatformFilter] = useState("All")
+
+  const allLangs = ["All", "English", "Hindi", "Hinglish", "Marathi", "Gujarati", "Kannada", "Telugu", "Tamil", "Bengali"]
+  const allPlatforms = ["All", "YouTube", "Instagram", "Facebook", "LinkedIn"]
+
+  const filtered = creators.filter(c => {
+    const langOk = langFilter === "All" || c.language.some(l => l === langFilter)
+    const platOk = platformFilter === "All" || c.platforms.includes(platformFilter)
+    return langOk && platOk
+  })
+
+  const totalFollowers = creators.reduce((s, c) => s + Object.values(c.followers).reduce((a, b) => a + b, 0), 0)
+
+  return (
+    <div>
+      {/* Summary cards */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+        <div className="bg-peach-dark/10 rounded-xl px-4 py-4">
+          <p className="text-xs text-ink/50 font-sans mb-1">Creators Tracked</p>
+          <p className="text-2xl font-heading font-bold text-ink">{creators.length}</p>
+          <p className="text-xs text-ink/40 font-sans mt-0.5">India-focused</p>
+        </div>
+        <div className="bg-peach-dark/10 rounded-xl px-4 py-4">
+          <p className="text-xs text-ink/50 font-sans mb-1">Total Reach</p>
+          <p className="text-2xl font-heading font-bold text-ink">{fmtFollowers(totalFollowers)}</p>
+          <p className="text-xs text-ink/40 font-sans mt-0.5">combined followers</p>
+        </div>
+        <div className="bg-peach-dark/10 rounded-xl px-4 py-4">
+          <p className="text-xs text-ink/50 font-sans mb-1">Languages</p>
+          <p className="text-2xl font-heading font-bold text-ink">9</p>
+          <p className="text-xs text-ink/40 font-sans mt-0.5">regional + English</p>
+        </div>
+        <div className="bg-peach-dark/10 rounded-xl px-4 py-4">
+          <p className="text-xs text-ink/50 font-sans mb-1">Plot/Land Focus</p>
+          <p className="text-2xl font-heading font-bold text-ink">{creators.filter(c => c.content_focus.some(f => f.toLowerCase().includes("plot") || f.toLowerCase().includes("land"))).length}</p>
+          <p className="text-xs text-ink/40 font-sans mt-0.5">direct KYL audience</p>
+        </div>
+      </div>
+
+      {/* Filters */}
+      <div className="flex flex-wrap gap-2 mb-3">
+        {allPlatforms.map(p => (
+          <button key={p} onClick={() => setPlatformFilter(p)}
+            className={`px-3 py-1.5 rounded-full text-xs font-sans font-medium transition-colors ${platformFilter === p ? "bg-ink text-white" : "bg-ink/8 text-ink/50 hover:bg-ink/15"}`}>
+            {p}
+          </button>
+        ))}
+      </div>
+      <div className="flex flex-wrap gap-2 mb-6">
+        {allLangs.map(l => (
+          <button key={l} onClick={() => setLangFilter(l)}
+            className={`px-3 py-1.5 rounded-full text-xs font-sans font-medium transition-colors ${langFilter === l ? "bg-peach-dark text-white" : "bg-ink/5 text-ink/50 hover:bg-ink/10"}`}>
+            {l}
+          </button>
+        ))}
+      </div>
+
+      {/* Creator cards */}
+      <div className="grid sm:grid-cols-2 gap-4">
+        {filtered.map(c => {
+          const isOpen = open === c.name
+          const totalReach = Object.values(c.followers).reduce((a, b) => a + b, 0)
+          return (
+            <div key={c.name} className={`border rounded-xl overflow-hidden ${isOpen ? "border-border" : "border-border/40"}`}>
+              <button onClick={() => setOpen(isOpen ? null : c.name)} className="w-full text-left px-4 py-4 hover:bg-peach-dark/5 transition-colors">
+                <div className="flex items-start justify-between gap-2 mb-2">
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-semibold text-ink font-sans">{c.name}</p>
+                    <p className="text-[11px] text-ink/40 font-sans mt-0.5">{c.handle}</p>
+                  </div>
+                  <div className="flex-shrink-0 text-right">
+                    <p className="text-base font-heading font-bold text-ink">{fmtFollowers(totalReach)}</p>
+                    <p className="text-[10px] text-ink/35 font-sans">total reach</p>
+                  </div>
+                </div>
+
+                {/* Platform badges */}
+                <div className="flex flex-wrap gap-1 mb-2">
+                  {c.platforms.map(p => (
+                    <span key={p} className={`text-[10px] font-sans font-medium px-2 py-0.5 rounded-full ${PLATFORM_COLORS[p] ?? "bg-ink/8 text-ink/50"}`}>{p}</span>
+                  ))}
+                </div>
+
+                {/* Language badges */}
+                <div className="flex flex-wrap gap-1 mb-2">
+                  {c.language.map(l => (
+                    <span key={l} className="text-[10px] font-sans bg-amber-50 text-amber-700 px-2 py-0.5 rounded-full">{l}</span>
+                  ))}
+                </div>
+
+                <p className="text-xs text-ink/55 font-sans leading-relaxed line-clamp-2">{c.bio}</p>
+
+                <div className="flex flex-wrap gap-1 mt-2">
+                  {c.content_focus.slice(0, 3).map(f => (
+                    <span key={f} className="text-[10px] bg-ink/5 text-ink/50 px-1.5 py-0.5 rounded font-sans">{f}</span>
+                  ))}
+                  {c.content_focus.length > 3 && <span className="text-[10px] text-ink/35 font-sans px-1">+{c.content_focus.length - 3}</span>}
+                </div>
+              </button>
+
+              {isOpen && (
+                <div className="border-t border-border/30 px-4 py-4 bg-peach-dark/4 space-y-3 text-xs font-sans">
+                  <div>
+                    <p className="text-ink/40 uppercase tracking-wide text-[10px] mb-1">About</p>
+                    <p className="text-ink/70 leading-relaxed">{c.bio}</p>
+                  </div>
+
+                  {/* Per-platform followers */}
+                  <div>
+                    <p className="text-ink/40 uppercase tracking-wide text-[10px] mb-1.5">Followers by platform</p>
+                    <div className="flex flex-wrap gap-3">
+                      {Object.entries(c.followers).map(([plat, count]) => (
+                        <div key={plat} className="flex items-center gap-1">
+                          <span className={`text-[10px] font-medium px-1.5 py-0.5 rounded-full ${PLATFORM_COLORS[plat.charAt(0).toUpperCase() + plat.slice(1)] ?? "bg-ink/8 text-ink/50"}`}>{plat.charAt(0).toUpperCase() + plat.slice(1)}</span>
+                          <span className="text-ink/60 font-semibold">{fmtFollowers(count)}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="grid sm:grid-cols-2 gap-3">
+                    <div>
+                      <p className="text-ink/40 uppercase tracking-wide text-[10px] mb-1">Geography</p>
+                      <p className="text-ink/65">{c.geography_focus.join(", ")}</p>
+                    </div>
+                    <div>
+                      <p className="text-ink/40 uppercase tracking-wide text-[10px] mb-1">Posts</p>
+                      <p className="text-ink/65">{c.posting_frequency}</p>
+                    </div>
+                  </div>
+
+                  <div>
+                    <p className="text-ink/40 uppercase tracking-wide text-[10px] mb-1">How they earn</p>
+                    <p className="text-ink/65">{c.monetisation.join(", ")}</p>
+                  </div>
+
+                  <div>
+                    <p className="text-ink/40 uppercase tracking-wide text-[10px] mb-1">KYL partnership angle</p>
+                    <p className="text-ink/70 leading-relaxed">{c.relevance_to_kyl}</p>
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <a href={c.profile_url} target="_blank" rel="noopener noreferrer" className="text-ink/40 hover:text-ink underline underline-offset-2">{c.handle} ↗</a>
+                    <ConfidenceBadge c={c.confidence} />
+                  </div>
+                </div>
+              )}
+            </div>
+          )
+        })}
+      </div>
+
+      <p className="mt-5 text-[11px] text-ink/35 font-sans leading-relaxed">
+        Follower counts are approximate and sourced from public profiles. Confidence badge reflects data reliability. Platform reach is additive across platforms for each creator (some audience overlap expected).
+      </p>
+    </div>
+  )
+}
+
 const COMP_TABS = ["Research", "Vastu"] as const
 type CompTab = (typeof COMP_TABS)[number]
 
@@ -1070,7 +1267,7 @@ function CompetitionTab() {
 
 // ── Page ─────────────────────────────────────────────────────────────────────
 
-const MAIN_TABS = ["Bottom-up Market", "Advisory Market", "Competition"] as const
+const MAIN_TABS = ["Bottom-up Market", "Advisory Market", "Competition", "Content Creators"] as const
 type MainTab = (typeof MAIN_TABS)[number]
 
 export default function KYLPage() {
@@ -1184,6 +1381,9 @@ export default function KYLPage() {
 
       {/* ── Competition ── */}
       {mainTab === "Competition" && <CompetitionTab />}
+
+      {/* ── Content Creators ── */}
+      {mainTab === "Content Creators" && <ContentCreatorsTab />}
     </div>
   )
 }
