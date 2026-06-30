@@ -71,7 +71,7 @@ const foTeam = readSheet("famil-office.xlsx", "team", (row, i) => ({
   designation:  str(row["Designation"]),
   location:     str(row["Location"]),
   emails:       parseEmails(row["Emails"]),
-  linkedin:     str(row["Link to profiles"]),
+  linkedin:     str(row["Linkedin"]) || str(row["LinkedIn"]),
   summary:      str(row["Summary"]),
 }))
 
