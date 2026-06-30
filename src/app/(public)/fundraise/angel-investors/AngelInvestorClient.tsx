@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react"
 import { useSession } from "next-auth/react"
+import Link from "next/link"
 import { ExternalLink, Copy, Check, ChevronLeft, ChevronRight, Search, X, Loader2, Lock } from "lucide-react"
 import SignInOptions from "@/components/SignInOptions"
 import { trackCta } from "@/lib/analytics"
@@ -505,6 +506,22 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
           </div>
         </div>
       )}
+
+      {/* Other investor lists */}
+      <div className="px-4 md:px-10 pb-10 pt-4 border-t border-border/40 mt-2 flex flex-wrap sm:flex-nowrap items-center gap-3">
+        <p className="font-sans text-[11px] text-ink/30 uppercase tracking-wide whitespace-nowrap">other investor lists might be useful for you</p>
+        <div className="flex flex-wrap sm:flex-nowrap gap-2">
+          {[
+            { title: "early stage vc", href: "/fundraise/investor-list/early-stage-vc" },
+            { title: "family offices", href: "/fundraise/investor-list/family-offices" },
+            { title: "incubator & accelerator", href: "/fundraise/investor-list/incubators" },
+          ].map(list => (
+            <Link key={list.href} href={list.href} className="font-sans text-xs text-ink/70 bg-ink/[0.06] hover:bg-ink/[0.11] border border-ink/15 hover:border-ink/30 px-3 py-1 rounded-full transition-colors">
+              {list.title}
+            </Link>
+          ))}
+        </div>
+      </div>
     </div>
   )
 }
