@@ -516,7 +516,7 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
             { title: "family offices", href: "/fundraise/investor-list/family-offices" },
             { title: "incubator & accelerator", href: "/fundraise/investor-list/incubators" },
           ].map(list => (
-            <Link key={list.href} href={list.href} className="font-sans text-xs text-ink/70 bg-ink/[0.06] hover:bg-ink/[0.11] border border-ink/15 hover:border-ink/30 px-3 py-1 rounded-full transition-colors">
+            <Link key={list.href} href={list.href} className="font-sans text-xs text-ink/70 bg-peach/40 hover:bg-peach/60 border border-peach-dark/20 hover:border-peach-dark/40 px-3 py-1 rounded-full transition-colors">
               {list.title}
             </Link>
           ))}

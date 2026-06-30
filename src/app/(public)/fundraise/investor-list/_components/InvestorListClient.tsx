@@ -521,7 +521,7 @@ export default function InvestorListClient({
             <p className="font-sans text-[11px] text-ink/30 uppercase tracking-wide whitespace-nowrap">other investor lists might be useful for you</p>
             <div className="flex flex-wrap sm:flex-nowrap gap-2">
               {others.map(list => (
-                <Link key={list.href} href={list.href} className="font-sans text-xs text-ink/70 bg-ink/[0.06] hover:bg-ink/[0.11] border border-ink/15 hover:border-ink/30 px-3 py-1 rounded-full transition-colors">
+                <Link key={list.href} href={list.href} className="font-sans text-xs text-ink/70 bg-peach/40 hover:bg-peach/60 border border-peach-dark/20 hover:border-peach-dark/40 px-3 py-1 rounded-full transition-colors">
                   {list.title}
                 </Link>
               ))}
