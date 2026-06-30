@@ -3,6 +3,7 @@
 import { Fragment, useState } from "react"
 import { ChevronRight } from "lucide-react"
 import advisoryCompanies from "../../../../../../data/json/kyl/advisory-companies.json"
+import competitorsRaw from "../../../../../../data/json/kyl/competitors.json"
 import individualBuyers from "../../../../../../data/json/kyl/individual-buyers.json"
 import developers from "../../../../../../data/json/kyl/developers.json"
 import brokers from "../../../../../../data/json/kyl/brokers.json"
@@ -831,9 +832,194 @@ function AdvisoryTable() {
   )
 }
 
+// ── Competition Tab ───────────────────────────────────────────────────────────
+
+type Competitor = {
+  company: string
+  category: string
+  hq: string
+  founded: number
+  positioning: string
+  description: string
+  key_problem: string
+  revenue_model: string
+  funding_usd: number
+  funding_stage: string
+  investors: string[]
+  employees: number
+  website: string
+  market_focus: string[]
+  geography: string[]
+  differentiator: string
+  weakness: string
+  status: string
+  notes: string
+}
+
+const COMP_CATEGORY_ORDER = [
+  "Land Intelligence",
+  "Real Estate Data Analytics",
+  "Real Estate Research",
+  "Property Analytics",
+  "Legal Services / PropTech",
+  "PropTech — Verification",
+  "Land Intelligence (Global)",
+  "Property Data (Global)",
+  "Commercial RE Data (Global)",
+  "Land Records Tech (Emerging)",
+  "Government — Lien Registry",
+  "Geospatial Intelligence (Global)",
+]
+
+function fmtFunding(usd: number): string {
+  if (usd === 0) return "—"
+  if (usd >= 1_000_000) return `$${(usd / 1_000_000).toFixed(1)}M`
+  return `$${(usd / 1_000).toFixed(0)}K`
+}
+
+function CompetitionTab() {
+  const competitors = competitorsRaw as Competitor[]
+  const [open, setOpen] = useState<string | null>(null)
+  const [filter, setFilter] = useState<string>("All")
+
+  const categories = ["All", "India", "Global"]
+  const globalKeywords = ["Global", "USA", "US"]
+
+  const filtered = filter === "All"
+    ? competitors
+    : filter === "Global"
+      ? competitors.filter(c => globalKeywords.some(k => c.category.includes(k) || c.geography[0]?.includes("USA")))
+      : competitors.filter(c => !globalKeywords.some(k => c.category.includes(k)) && !c.geography[0]?.includes("USA"))
+
+  return (
+    <div>
+      {/* Summary */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
+        <div className="bg-peach-dark/10 rounded-xl px-4 py-4">
+          <p className="text-xs text-ink/50 font-sans mb-1">Companies Tracked</p>
+          <p className="text-2xl font-heading font-bold text-ink">{competitors.length}</p>
+          <p className="text-xs text-ink/40 font-sans mt-0.5">across India + global</p>
+        </div>
+        <div className="bg-peach-dark/10 rounded-xl px-4 py-4">
+          <p className="text-xs text-ink/50 font-sans mb-1">India Players</p>
+          <p className="text-2xl font-heading font-bold text-ink">
+            {competitors.filter(c => !globalKeywords.some(k => c.category.includes(k))).length}
+          </p>
+          <p className="text-xs text-ink/40 font-sans mt-0.5">direct + adjacent</p>
+        </div>
+        <div className="bg-peach-dark/10 rounded-xl px-4 py-4">
+          <p className="text-xs text-ink/50 font-sans mb-1">Funded (Startup)</p>
+          <p className="text-2xl font-heading font-bold text-ink">
+            {competitors.filter(c => c.funding_usd > 0 && !c.funding_stage.includes("Public") && !c.funding_stage.includes("Government")).length}
+          </p>
+          <p className="text-xs text-ink/40 font-sans mt-0.5">raised external capital</p>
+        </div>
+        <div className="bg-peach-dark/10 rounded-xl px-4 py-4">
+          <p className="text-xs text-ink/50 font-sans mb-1">Direct Competitors</p>
+          <p className="text-2xl font-heading font-bold text-ink">2</p>
+          <p className="text-xs text-ink/40 font-sans mt-0.5">Landeed, PropEquity</p>
+        </div>
+      </div>
+
+      {/* Filter */}
+      <div className="flex gap-2 mb-6">
+        {categories.map(c => (
+          <button
+            key={c}
+            onClick={() => setFilter(c)}
+            className={`px-3 py-1.5 rounded-full text-xs font-sans font-medium transition-colors ${
+              filter === c ? "bg-ink text-white" : "bg-ink/8 text-ink/50 hover:bg-ink/15"
+            }`}
+          >
+            {c}
+          </button>
+        ))}
+      </div>
+
+      {/* Cards */}
+      <div className="grid sm:grid-cols-2 gap-4">
+        {filtered.map(c => {
+          const isOpen = open === c.company
+          return (
+            <div key={c.company} className={`border rounded-xl overflow-hidden transition-colors ${isOpen ? "border-border" : "border-border/40"}`}>
+              <button
+                onClick={() => setOpen(isOpen ? null : c.company)}
+                className="w-full text-left px-4 py-4 hover:bg-peach-dark/5 transition-colors"
+              >
+                <div className="flex items-start justify-between gap-2 mb-2">
+                  <div>
+                    <p className="text-sm font-semibold text-ink font-sans">{c.company}</p>
+                    <p className="text-[11px] text-ink/40 font-sans mt-0.5">{c.hq} · est. {c.founded}</p>
+                  </div>
+                  <div className="flex flex-col items-end gap-1 flex-shrink-0">
+                    <span className="text-[10px] font-sans font-medium bg-ink/6 text-ink/50 px-2 py-0.5 rounded-full whitespace-nowrap">{c.category}</span>
+                    <span className={`text-[10px] font-sans font-medium px-2 py-0.5 rounded-full ${c.status === "Active" ? "bg-green-100 text-green-700" : "bg-amber-100 text-amber-700"}`}>{c.status}</span>
+                  </div>
+                </div>
+                <p className="text-xs text-ink/65 font-sans leading-relaxed">{c.positioning}</p>
+                <div className="flex flex-wrap gap-3 mt-3 text-[11px] font-sans text-ink/40">
+                  <span>💰 {fmtFunding(c.funding_usd)} {c.funding_stage !== "Bootstrapped" && c.funding_stage !== "Government / Statutory body" ? `· ${c.funding_stage}` : `· ${c.funding_stage}`}</span>
+                  <span>👥 {c.employees.toLocaleString("en-IN")} people</span>
+                </div>
+              </button>
+
+              {isOpen && (
+                <div className="border-t border-border/30 px-4 py-4 bg-peach-dark/4 space-y-4 text-xs font-sans">
+                  <div>
+                    <p className="text-ink/40 uppercase tracking-wide text-[10px] mb-1">Problem they solve</p>
+                    <p className="text-ink/70 leading-relaxed">{c.key_problem}</p>
+                  </div>
+                  <div>
+                    <p className="text-ink/40 uppercase tracking-wide text-[10px] mb-1">Revenue model</p>
+                    <p className="text-ink/70 leading-relaxed">{c.revenue_model}</p>
+                  </div>
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div>
+                      <p className="text-ink/40 uppercase tracking-wide text-[10px] mb-1">Differentiator</p>
+                      <p className="text-ink/70 leading-relaxed">{c.differentiator}</p>
+                    </div>
+                    <div>
+                      <p className="text-ink/40 uppercase tracking-wide text-[10px] mb-1">Weakness</p>
+                      <p className="text-ink/70 leading-relaxed">{c.weakness}</p>
+                    </div>
+                  </div>
+                  {c.market_focus.length > 0 && (
+                    <div>
+                      <p className="text-ink/40 uppercase tracking-wide text-[10px] mb-1.5">Focus areas</p>
+                      <div className="flex flex-wrap gap-1">
+                        {c.market_focus.map(f => (
+                          <span key={f} className="bg-ink/8 px-1.5 py-0.5 rounded text-ink/60">{f}</span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  {c.investors.length > 0 && (
+                    <div>
+                      <p className="text-ink/40 uppercase tracking-wide text-[10px] mb-1">Investors</p>
+                      <p className="text-ink/60">{c.investors.join(", ")}</p>
+                    </div>
+                  )}
+                  <div>
+                    <p className="text-ink/40 uppercase tracking-wide text-[10px] mb-1">KYL relevance</p>
+                    <p className="text-ink/60 leading-relaxed">{c.notes}</p>
+                  </div>
+                  <a href={c.website} target="_blank" rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-ink/40 hover:text-ink underline underline-offset-2">
+                    {c.website.replace("https://", "")} ↗
+                  </a>
+                </div>
+              )}
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
 // ── Page ─────────────────────────────────────────────────────────────────────
 
-const MAIN_TABS = ["Bottom-up Market", "Advisory Market"] as const
+const MAIN_TABS = ["Bottom-up Market", "Advisory Market", "Competition"] as const
 type MainTab = (typeof MAIN_TABS)[number]
 
 export default function KYLPage() {
@@ -845,9 +1031,6 @@ export default function KYLPage() {
       {/* Header */}
       <div className="mb-6">
         <h1 className="font-heading text-2xl font-bold text-ink">KYL — Know Your Land</h1>
-        <p className="text-sm text-ink/50 font-sans mt-1">
-          Market research · {meta.period} · Last updated {meta.last_updated}
-        </p>
       </div>
 
       {/* Main tabs */}
@@ -924,29 +1107,32 @@ export default function KYLPage() {
             {activeTab === "Brokers" && <BrokersTable />}
             {activeTab === "Banks / Insurers" && <BanksTable />}
           </div>
+
+          {/* Sources footer — only in Bottom-up Market */}
+          <div className="mt-10 pt-6 border-t border-border">
+            <p className="text-xs text-ink/40 font-sans font-medium mb-2">Data Sources</p>
+            <div className="flex flex-wrap gap-x-4 gap-y-1">
+              {meta.sources.map((s) => (
+                <a
+                  key={s.name}
+                  href={s.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[11px] text-ink/40 hover:text-ink underline underline-offset-2 font-sans"
+                >
+                  {s.name}
+                </a>
+              ))}
+            </div>
+          </div>
         </>
       )}
 
       {/* ── Advisory Market ── */}
       {mainTab === "Advisory Market" && <AdvisoryTable />}
 
-      {/* Sources footer */}
-      <div className="mt-10 pt-6 border-t border-border">
-        <p className="text-xs text-ink/40 font-sans font-medium mb-2">Data Sources</p>
-        <div className="flex flex-wrap gap-x-4 gap-y-1">
-          {meta.sources.map((s) => (
-            <a
-              key={s.name}
-              href={s.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[11px] text-ink/40 hover:text-ink underline underline-offset-2 font-sans"
-            >
-              {s.name}
-            </a>
-          ))}
-        </div>
-      </div>
+      {/* ── Competition ── */}
+      {mainTab === "Competition" && <CompetitionTab />}
     </div>
   )
 }
