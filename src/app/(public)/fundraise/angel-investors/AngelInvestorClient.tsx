@@ -236,8 +236,8 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
           <div className="bg-card border border-border rounded-xl px-5 py-4 space-y-2">
             <p className="font-sans text-xs font-semibold text-ink/70">all about this list</p>
             {[
-              "900 angel investors actively writing cheques across India, curated and kept updated.",
-              "Each entry includes direct email and LinkedIn so you can reach them without going through assistants or guessing addresses.",
+              "1,000 angel investors actively writing cheques across India, curated and kept updated.",
+              "823 have LinkedIn profiles and 526 have direct email IDs so you can reach them without going through assistants or guessing addresses.",
               "Covers angels investing in 2024-26 across fintech, SaaS, D2C, edtech, healthtech, deeptech, consumer brands, climate tech, and more.",
               "One-time payment. No subscriptions, no expiry. Yours forever including future refreshes.",
               "Most contacts have both LinkedIn and email. Some have only one linkedin or email id.",
