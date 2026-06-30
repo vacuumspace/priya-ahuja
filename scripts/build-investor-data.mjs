@@ -123,7 +123,7 @@ const incTeam = readSheet("incubator-accelrator.xlsx", "team", (row, i) => ({
   designation:  str(row["Designation"]),
   location:     str(row["Location"]),
   emails:       parseEmails(row["Emails"]),
-  linkedin: "", summary: "",
+  linkedin: str(row["Link to profiles"]), summary: "",
 }))
 
 // ── Write JSON ────────────────────────────────────────────────────
