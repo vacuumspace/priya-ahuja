@@ -1049,6 +1049,7 @@ type ContentCreator = {
   name: string
   handle: string
   platforms: string[]
+  platform_urls: Record<string, string>
   profile_url: string
   bio: string
   followers: Record<string, number>
@@ -1156,10 +1157,15 @@ function ContentCreatorsTab() {
                   </div>
                 </div>
 
-                {/* Platform badges */}
+                {/* Platform badges — linked */}
                 <div className="flex flex-wrap gap-1 mb-2">
                   {c.platforms.map(p => (
-                    <span key={p} className={`text-[10px] font-sans font-medium px-2 py-0.5 rounded-full ${PLATFORM_COLORS[p] ?? "bg-ink/8 text-ink/50"}`}>{p}</span>
+                    c.platform_urls[p] ? (
+                      <a key={p} href={c.platform_urls[p]} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}
+                        className={`text-[10px] font-sans font-medium px-2 py-0.5 rounded-full hover:opacity-75 transition-opacity ${PLATFORM_COLORS[p] ?? "bg-ink/8 text-ink/50"}`}>{p} ↗</a>
+                    ) : (
+                      <span key={p} className={`text-[10px] font-sans font-medium px-2 py-0.5 rounded-full ${PLATFORM_COLORS[p] ?? "bg-ink/8 text-ink/50"}`}>{p}</span>
+                    )
                   ))}
                 </div>
 
@@ -1191,12 +1197,16 @@ function ContentCreatorsTab() {
                   <div>
                     <p className="text-ink/40 uppercase tracking-wide text-[10px] mb-1.5">Followers by platform</p>
                     <div className="flex flex-wrap gap-3">
-                      {Object.entries(c.followers).map(([plat, count]) => (
-                        <div key={plat} className="flex items-center gap-1">
-                          <span className={`text-[10px] font-medium px-1.5 py-0.5 rounded-full ${PLATFORM_COLORS[plat.charAt(0).toUpperCase() + plat.slice(1)] ?? "bg-ink/8 text-ink/50"}`}>{plat.charAt(0).toUpperCase() + plat.slice(1)}</span>
-                          <span className="text-ink/60 font-semibold">{fmtFollowers(count)}</span>
-                        </div>
-                      ))}
+                      {Object.entries(c.followers).map(([plat, count]) => {
+                        const url = c.platform_urls[plat]
+                        const badge = <span className={`text-[10px] font-medium px-1.5 py-0.5 rounded-full ${PLATFORM_COLORS[plat] ?? "bg-ink/8 text-ink/50"}`}>{plat}</span>
+                        return (
+                          <div key={plat} className="flex items-center gap-1">
+                            {url ? <a href={url} target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">{badge}</a> : badge}
+                            <span className="text-ink/60 font-semibold">{fmtFollowers(count)}</span>
+                          </div>
+                        )
+                      })}
                     </div>
                   </div>
 

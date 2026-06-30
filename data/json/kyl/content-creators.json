@@ -3,12 +3,17 @@
     "name": "Nitin Bhatia",
     "handle": "@nitinbhatia121",
     "platforms": ["YouTube", "Instagram", "Facebook"],
+    "platform_urls": {
+      "YouTube": "https://www.youtube.com/@nitinbhatia121",
+      "Instagram": "https://www.instagram.com/nitinbhatia121",
+      "Facebook": "https://www.facebook.com/nitinbhatia121"
+    },
     "profile_url": "https://www.youtube.com/@nitinbhatia121",
     "bio": "India's most followed real estate legal educator. Covers RERA, builder disputes, home loan traps, property registration, and title issues. Known for exposing common frauds buyers face.",
     "followers": {
-      "youtube": 1600000,
-      "instagram": 280000,
-      "facebook": 120000
+      "YouTube": 1600000,
+      "Instagram": 280000,
+      "Facebook": 120000
     },
     "language": ["Hindi", "English"],
     "content_focus": ["Legal", "RERA", "Builder Disputes", "Home Loan", "Property Registration"],
@@ -23,12 +28,17 @@
     "name": "Anuj Puri",
     "handle": "@anujpurianarock",
     "platforms": ["LinkedIn", "YouTube", "Twitter/X"],
+    "platform_urls": {
+      "LinkedIn": "https://www.linkedin.com/in/anujpuri",
+      "YouTube": "https://www.youtube.com/@anujpurianarock",
+      "Twitter/X": "https://twitter.com/anujpurianarock"
+    },
     "profile_url": "https://www.linkedin.com/in/anujpuri",
     "bio": "Chairman of ANAROCK Property Consultants (India's largest independent residential advisory). Former JLL India Chairman. Weekly market commentary on residential demand, price trends, and policy impact.",
     "followers": {
-      "linkedin": 350000,
-      "youtube": 45000,
-      "twitter": 80000
+      "LinkedIn": 350000,
+      "YouTube": 45000,
+      "Twitter/X": 80000
     },
     "language": ["English"],
     "content_focus": ["Market Analysis", "Policy Impact", "Residential Demand", "Industry Commentary"],
@@ -43,11 +53,15 @@
     "name": "Prashant Thakur",
     "handle": "@prashantthakuranarock",
     "platforms": ["LinkedIn", "YouTube"],
+    "platform_urls": {
+      "LinkedIn": "https://www.linkedin.com/in/prashantthakur",
+      "YouTube": "https://www.youtube.com/@prashantthakuranarock"
+    },
     "profile_url": "https://www.linkedin.com/in/prashantthakur",
     "bio": "Director & Head of Research at ANAROCK. Publishes quarterly residential market reports covering 7 cities — sales volumes, launches, price trends. Data-driven, sourced from primary research.",
     "followers": {
-      "linkedin": 95000,
-      "youtube": 12000
+      "LinkedIn": 95000,
+      "YouTube": 12000
     },
     "language": ["English"],
     "content_focus": ["Market Data", "Quarterly Reports", "Price Trends", "Supply-Demand"],
@@ -62,12 +76,17 @@
     "name": "Pankaj Kapoor",
     "handle": "@pankajkapoorliasesforas",
     "platforms": ["LinkedIn", "YouTube", "Twitter/X"],
+    "platform_urls": {
+      "LinkedIn": "https://www.linkedin.com/in/pankaj-kapoor-liases-foras",
+      "YouTube": "https://www.youtube.com/@pankajkapoorliasesforas",
+      "Twitter/X": "https://twitter.com/pankajkapoor_lf"
+    },
     "profile_url": "https://www.linkedin.com/in/pankaj-kapoor-liases-foras",
-    "bio": "Founder & MD of Liases Foras — India's oldest independent real estate research firm. Regular media commentator on NDTV, ET Now, Bloomberg Quint for residential market data. Provides India's most trusted housing price index.",
+    "bio": "Founder & MD of Liases Foras — India's oldest independent real estate research firm. Regular media commentator on NDTV, ET Now, Bloomberg Quint for residential market data.",
     "followers": {
-      "linkedin": 75000,
-      "twitter": 35000,
-      "youtube": 8000
+      "LinkedIn": 75000,
+      "Twitter/X": 35000,
+      "YouTube": 8000
     },
     "language": ["English", "Hindi"],
     "content_focus": ["Market Research", "Price Index", "Housing Policy", "Inventory Data"],
@@ -82,11 +101,15 @@
     "name": "Real Estate Gyaan",
     "handle": "@realestategyaan",
     "platforms": ["YouTube", "Instagram"],
+    "platform_urls": {
+      "YouTube": "https://www.youtube.com/@realestategyaan",
+      "Instagram": "https://www.instagram.com/realestategyaan"
+    },
     "profile_url": "https://www.youtube.com/@realestategyaan",
     "bio": "Hindi-language real estate investment education channel. Covers plot investment, RERA project checks, home loan calculation, registry process, and land records. Targeted at first-time buyers in Tier-1 and Tier-2 cities.",
     "followers": {
-      "youtube": 850000,
-      "instagram": 95000
+      "YouTube": 850000,
+      "Instagram": 95000
     },
     "language": ["Hindi", "Hinglish"],
     "content_focus": ["Plot Investment", "RERA Check", "Home Loan", "Land Records", "Registry Process"],
@@ -101,12 +124,17 @@
     "name": "Mumbai Property Exchange",
     "handle": "@mumbaipropertyexchange",
     "platforms": ["YouTube", "Instagram", "Facebook"],
+    "platform_urls": {
+      "YouTube": "https://www.youtube.com/@mumbaipropertyexchange",
+      "Instagram": "https://www.instagram.com/mumbaipropertyexchange",
+      "Facebook": "https://www.facebook.com/mumbaipropertyexchange"
+    },
     "profile_url": "https://www.youtube.com/@mumbaipropertyexchange",
-    "bio": "Mumbai-focused real estate channel covering new project reviews, area guides (Thane, Navi Mumbai, Mira Road, Dombivli), and property investment. Bilingual — Hindi and Marathi. Popular with first-time MMR buyers.",
+    "bio": "Mumbai-focused real estate channel covering new project reviews, area guides (Thane, Navi Mumbai, Mira Road, Dombivli), and property investment. Bilingual — Hindi and Marathi.",
     "followers": {
-      "youtube": 320000,
-      "instagram": 75000,
-      "facebook": 45000
+      "YouTube": 320000,
+      "Instagram": 75000,
+      "Facebook": 45000
     },
     "language": ["Hindi", "Marathi"],
     "content_focus": ["New Projects", "Area Guide", "Investment", "MMR Suburbs"],
@@ -121,11 +149,15 @@
     "name": "Bangalore Property Guy",
     "handle": "@bangalorepropertyguy",
     "platforms": ["YouTube", "Instagram"],
+    "platform_urls": {
+      "YouTube": "https://www.youtube.com/@bangalorepropertyguy",
+      "Instagram": "https://www.instagram.com/bangalorepropertyguy"
+    },
     "profile_url": "https://www.youtube.com/@bangalorepropertyguy",
     "bio": "Bengaluru real estate creator covering North Bangalore corridor (Devanahalli, Yelahanka, Hebbal), plotted development reviews, apartment vs. plot comparison, and BBMP/BMRDA approvals.",
     "followers": {
-      "youtube": 210000,
-      "instagram": 55000
+      "YouTube": 210000,
+      "Instagram": 55000
     },
     "language": ["Kannada", "English"],
     "content_focus": ["North Bangalore", "Plotted Development", "Apartment vs Plot", "Approvals (BBMP/BMRDA)"],
@@ -140,19 +172,24 @@
     "name": "Hyderabad Real Estate Network",
     "handle": "@hyderabadrealestatenetwork",
     "platforms": ["YouTube", "Facebook", "Instagram"],
+    "platform_urls": {
+      "YouTube": "https://www.youtube.com/@hyderabadrealestatenetwork",
+      "Facebook": "https://www.facebook.com/hyderabadrealestatenetwork",
+      "Instagram": "https://www.instagram.com/hyderabadrealestatenetwork"
+    },
     "profile_url": "https://www.youtube.com/@hyderabadrealestatenetwork",
-    "bio": "Hyderabad-focused real estate content covering HMDA approved layouts, villa plots, open plots in ORR corridor, and RERA project reviews. Telugu-English bilingual, strong Facebook community of 150K+ members.",
+    "bio": "Hyderabad-focused real estate content covering HMDA approved layouts, villa plots, open plots in ORR corridor, and RERA project reviews. Telugu-English bilingual, strong Facebook community.",
     "followers": {
-      "youtube": 175000,
-      "facebook": 150000,
-      "instagram": 40000
+      "YouTube": 175000,
+      "Facebook": 150000,
+      "Instagram": 40000
     },
     "language": ["Telugu", "English", "Hindi"],
     "content_focus": ["HMDA Layouts", "Open Plots", "ORR Corridor", "Villa Plots", "RERA"],
     "geography_focus": ["Hyderabad", "Telangana", "ORR Corridor"],
     "posting_frequency": "4x/week",
     "monetisation": ["Developer Partnerships", "Facebook Group Monetisation", "Site Visit Facilitation"],
-    "relevance_to_kyl": "Hyderabad open plot market is one of India's most active. This audience directly needs land title research, HMDA approval verification, and encumbrance checks.",
+    "relevance_to_kyl": "Hyderabad open plot market is one of India's most active. Audience directly needs land title research, HMDA approval verification, and encumbrance checks.",
     "confidence": "medium",
     "notes": "Strong Facebook community is key distribution in Telangana. Open plot buyers = prime KYL customers."
   },
@@ -160,12 +197,17 @@
     "name": "Pune Property Updates",
     "handle": "@punepropertyupdates",
     "platforms": ["YouTube", "Instagram", "Facebook"],
+    "platform_urls": {
+      "YouTube": "https://www.youtube.com/@punepropertyupdates",
+      "Instagram": "https://www.instagram.com/punepropertyupdates",
+      "Facebook": "https://www.facebook.com/punepropertyupdates"
+    },
     "profile_url": "https://www.youtube.com/@punepropertyupdates",
     "bio": "Pune real estate content focused on new launches, Dhanori-Wagholi-Undri corridors, plotted scheme reviews, and PMRDA vs PCMC jurisdiction confusion for buyers.",
     "followers": {
-      "youtube": 145000,
-      "instagram": 48000,
-      "facebook": 32000
+      "YouTube": 145000,
+      "Instagram": 48000,
+      "Facebook": 32000
     },
     "language": ["Marathi", "Hindi", "English"],
     "content_focus": ["New Launches", "Plotted Schemes", "PMRDA/PCMC Jurisdictions", "Pune Suburbs"],
@@ -180,19 +222,24 @@
     "name": "Gujarat Property Guide",
     "handle": "@gujaratpropertyguide",
     "platforms": ["YouTube", "Instagram", "Facebook"],
+    "platform_urls": {
+      "YouTube": "https://www.youtube.com/@gujaratpropertyguide",
+      "Instagram": "https://www.instagram.com/gujaratpropertyguide",
+      "Facebook": "https://www.facebook.com/gujaratpropertyguide"
+    },
     "profile_url": "https://www.youtube.com/@gujaratpropertyguide",
-    "bio": "Gujarati and Hindi real estate content for Ahmedabad, Surat, Rajkot, and Vadodara. Covers RERA Gujarat, NA (non-agricultural) land conversion, plotted schemes, and investment zones around GIFT City.",
+    "bio": "Gujarati and Hindi real estate content for Ahmedabad, Surat, Rajkot, and Vadodara. Covers RERA Gujarat, NA land conversion, plotted schemes, and investment zones around GIFT City.",
     "followers": {
-      "youtube": 220000,
-      "instagram": 65000,
-      "facebook": 55000
+      "YouTube": 220000,
+      "Instagram": 65000,
+      "Facebook": 55000
     },
     "language": ["Gujarati", "Hindi"],
     "content_focus": ["NA Land Conversion", "Plotted Schemes", "RERA Gujarat", "GIFT City", "Investment"],
     "geography_focus": ["Ahmedabad", "Surat", "Rajkot", "Gujarat"],
     "posting_frequency": "3–4x/week",
     "monetisation": ["Developer Partnerships", "YouTube Revenue", "Consultation"],
-    "relevance_to_kyl": "Gujarati language dominance. NA land conversion verification is a core KYL use case — buyers need to confirm agricultural land has proper conversion order before purchase.",
+    "relevance_to_kyl": "Gujarati language dominance. NA land conversion verification is a core KYL use case.",
     "confidence": "medium",
     "notes": "Gujarat's land market has unique NA-conversion compliance need that KYL can address directly."
   },
@@ -200,12 +247,17 @@
     "name": "Delhi NCR Property Talk",
     "handle": "@delhipropertytalks",
     "platforms": ["YouTube", "Instagram", "Facebook"],
+    "platform_urls": {
+      "YouTube": "https://www.youtube.com/@delhipropertytalks",
+      "Instagram": "https://www.instagram.com/delhipropertytalks",
+      "Facebook": "https://www.facebook.com/delhipropertytalks"
+    },
     "profile_url": "https://www.youtube.com/@delhipropertytalks",
     "bio": "Delhi NCR real estate content covering Noida Extension, Yamuna Expressway, Gurgaon sectors, and farmhouse/plot investments on NH-58. Hindi-English bilingual with strong North India audience.",
     "followers": {
-      "youtube": 380000,
-      "instagram": 85000,
-      "facebook": 60000
+      "YouTube": 380000,
+      "Instagram": 85000,
+      "Facebook": 60000
     },
     "language": ["Hindi", "Hinglish"],
     "content_focus": ["Noida Extension", "Yamuna Expressway", "Gurgaon", "Plot Investment", "Farmhouse Land"],
@@ -214,37 +266,46 @@
     "monetisation": ["Developer Ads", "YouTube Revenue", "Brokerage Commission"],
     "relevance_to_kyl": "NCR plot market (Yamuna Expressway, Jewar area) is high-risk for buyers — many scam layouts. KYL's title verification directly addresses this audience's fear.",
     "confidence": "medium",
-    "notes": "Yamuna Expressway / Jewar corridor is booming due to airport and F1 track proximity. Land scams are rife — creating strong demand for verification products."
+    "notes": "Yamuna Expressway / Jewar corridor is booming due to airport and F1 track proximity. Land scams are rife."
   },
   {
     "name": "NRI Property India",
     "handle": "@nripropertyindia",
     "platforms": ["YouTube", "Instagram", "Facebook"],
+    "platform_urls": {
+      "YouTube": "https://www.youtube.com/@nripropertyindia",
+      "Instagram": "https://www.instagram.com/nripropertyindia",
+      "Facebook": "https://www.facebook.com/nripropertyindia"
+    },
     "profile_url": "https://www.youtube.com/@nripropertyindia",
     "bio": "Dedicated to NRI buyers navigating Indian property purchases remotely. Covers FEMA regulations, power of attorney risks, NRI home loans, repatriation of sale proceeds, and trusted agent selection.",
     "followers": {
-      "youtube": 165000,
-      "instagram": 72000,
-      "facebook": 88000
+      "YouTube": 165000,
+      "Instagram": 72000,
+      "Facebook": 88000
     },
     "language": ["English", "Hindi"],
     "content_focus": ["FEMA Compliance", "Power of Attorney", "NRI Home Loans", "Remote Purchase", "Title Verification"],
     "geography_focus": ["Pan-India (NRI focus)", "USA", "UAE", "UK", "Canada diaspora"],
     "posting_frequency": "2x/week",
     "monetisation": ["Consultation Fees (₹5,000–₹50,000/session)", "Affiliate", "YouTube Revenue"],
-    "relevance_to_kyl": "NRIs are the highest-value KYL target — they pay premium for remote verification, can't visit site, need digital land reports. Perfect audience for KYL's full-report product.",
+    "relevance_to_kyl": "NRIs are the highest-value KYL target — they pay premium for remote verification, can't visit site, need digital land reports.",
     "confidence": "medium",
-    "notes": "NRI audience has highest willingness to pay for land due diligence (remote, high-stakes purchase)."
+    "notes": "NRI audience has highest willingness to pay for land due diligence."
   },
   {
     "name": "Plot Mitra",
     "handle": "@plotmitra",
     "platforms": ["YouTube", "Instagram"],
+    "platform_urls": {
+      "YouTube": "https://www.youtube.com/@plotmitra",
+      "Instagram": "https://www.instagram.com/plotmitra"
+    },
     "profile_url": "https://www.youtube.com/@plotmitra",
-    "bio": "India's first YouTube channel dedicated exclusively to plot and land investment — covering layout approvals, title checks, NA vs agricultural land, land records (7/12, patta), and return on investment analysis for plots.",
+    "bio": "India's first YouTube channel dedicated exclusively to plot and land investment — covering layout approvals, title checks, NA vs agricultural land, land records (7/12, patta), and ROI analysis for plots.",
     "followers": {
-      "youtube": 290000,
-      "instagram": 62000
+      "YouTube": 290000,
+      "Instagram": 62000
     },
     "language": ["Hindi", "Hinglish"],
     "content_focus": ["Plot Investment", "Title Check", "NA Land", "7/12 Extracts", "Layout Approvals", "ROI Analysis"],
@@ -259,12 +320,17 @@
     "name": "Ashish Punamia (RERA Expert)",
     "handle": "@ashishpunamia",
     "platforms": ["YouTube", "Instagram", "LinkedIn"],
+    "platform_urls": {
+      "YouTube": "https://www.youtube.com/@ashishpunamia",
+      "Instagram": "https://www.instagram.com/ashishpunamia",
+      "LinkedIn": "https://www.linkedin.com/in/ashishpunamia"
+    },
     "profile_url": "https://www.youtube.com/@ashishpunamia",
     "bio": "MahaRERA expert and consumer advocate. Covers builder delays, RERA complaints process, OC/CC certificates, and buyer rights under MahaRERA. Marathi and Hindi content with strong Maharashtra audience.",
     "followers": {
-      "youtube": 95000,
-      "instagram": 38000,
-      "linkedin": 22000
+      "YouTube": 95000,
+      "Instagram": 38000,
+      "LinkedIn": 22000
     },
     "language": ["Marathi", "Hindi"],
     "content_focus": ["MahaRERA", "Builder Delays", "OC/CC", "Consumer Rights", "RERA Complaints"],
@@ -279,38 +345,47 @@
     "name": "Tamil Real Estate (TRE)",
     "handle": "@tamilrealestate",
     "platforms": ["YouTube", "Facebook", "Instagram"],
+    "platform_urls": {
+      "YouTube": "https://www.youtube.com/@tamilrealestate",
+      "Facebook": "https://www.facebook.com/tamilrealestate",
+      "Instagram": "https://www.instagram.com/tamilrealestate"
+    },
     "profile_url": "https://www.youtube.com/@tamilrealestate",
     "bio": "Tamil-language real estate content for Chennai, Coimbatore, Madurai, and Salem. Covers plot investments, DTCP-approved layouts, patta transfers, and encumbrance certificate process in Tamil Nadu.",
     "followers": {
-      "youtube": 185000,
-      "facebook": 95000,
-      "instagram": 42000
+      "YouTube": 185000,
+      "Facebook": 95000,
+      "Instagram": 42000
     },
     "language": ["Tamil"],
     "content_focus": ["DTCP Layouts", "Patta Transfer", "Encumbrance Certificate", "Plot Investment", "Chennai Suburbs"],
     "geography_focus": ["Tamil Nadu", "Chennai", "Coimbatore"],
     "posting_frequency": "3–4x/week",
     "monetisation": ["Developer Partnerships", "Consultation", "Facebook Group Ads"],
-    "relevance_to_kyl": "Tamil language is critical for Tamil Nadu — the DTCP layout approval and patta transfer process is exactly what KYL's report covers. Strong regional audience.",
+    "relevance_to_kyl": "Tamil language is critical for Tamil Nadu — DTCP layout approval and patta transfer are exactly what KYL's report covers.",
     "confidence": "medium",
     "notes": "Tamil content in real estate is underserved — strong first-mover advantage for KYL in Tamil Nadu partnership."
   },
   {
-    "name": "Sana Ram — Home Decor & Property",
+    "name": "Sana Ram",
     "handle": "@sana.ram",
     "platforms": ["Instagram", "YouTube"],
+    "platform_urls": {
+      "Instagram": "https://www.instagram.com/sana.ram",
+      "YouTube": "https://www.youtube.com/@sanaramofficial"
+    },
     "profile_url": "https://www.instagram.com/sana.ram",
-    "bio": "Instagram-first real estate and home content creator. Covers home buying journey, vastu for home, interior design after possession, and real estate investment for millennials. English-first with Hindi mix. Strong urban millennial audience.",
+    "bio": "Instagram-first real estate and home content creator. Covers home buying journey, vastu for home, interior design after possession, and real estate investment for millennials. English-first with Hindi mix.",
     "followers": {
-      "instagram": 480000,
-      "youtube": 85000
+      "Instagram": 480000,
+      "YouTube": 85000
     },
     "language": ["English", "Hinglish"],
     "content_focus": ["Home Buying Journey", "Vastu", "Interior Design", "Millennial Investment", "Real Estate Tips"],
     "geography_focus": ["Mumbai", "Delhi", "Bengaluru — Urban Millennials"],
     "posting_frequency": "Daily (Instagram), Weekly (YouTube)",
     "monetisation": ["Brand Collaborations", "Developer Ads", "Affiliate"],
-    "relevance_to_kyl": "Urban millennial audience buying first home — often plots in peripheral areas. Vastu + due diligence content resonates. KYL could collaborate on 'before you buy a plot' content.",
+    "relevance_to_kyl": "Urban millennial audience buying first home — often plots in peripheral areas. Vastu + due diligence content resonates.",
     "confidence": "medium",
     "notes": "More lifestyle/aspirational than technical. Large Instagram following. Adjacent audience."
   },
@@ -318,12 +393,17 @@
     "name": "Vasant Bhanushali — Surat Property",
     "handle": "@suratproperty",
     "platforms": ["YouTube", "Facebook", "Instagram"],
+    "platform_urls": {
+      "YouTube": "https://www.youtube.com/@suratproperty",
+      "Facebook": "https://www.facebook.com/suratproperty",
+      "Instagram": "https://www.instagram.com/suratproperty"
+    },
     "profile_url": "https://www.youtube.com/@suratproperty",
     "bio": "Surat-focused real estate creator in Gujarati. Covers new textile district projects, Surat Metro impact on property prices, non-agricultural land parcels, and industrial zone investments.",
     "followers": {
-      "youtube": 115000,
-      "facebook": 75000,
-      "instagram": 30000
+      "YouTube": 115000,
+      "Facebook": 75000,
+      "Instagram": 30000
     },
     "language": ["Gujarati", "Hindi"],
     "content_focus": ["Surat Real Estate", "Industrial Zones", "Metro Impact", "NA Land", "Commercial Investment"],
@@ -338,18 +418,22 @@
     "name": "Kolkata Property Zone",
     "handle": "@kolkatapropertyzone",
     "platforms": ["Facebook", "YouTube"],
+    "platform_urls": {
+      "Facebook": "https://www.facebook.com/kolkatapropertyzone",
+      "YouTube": "https://www.youtube.com/@kolkatapropertyzone"
+    },
     "profile_url": "https://www.facebook.com/kolkatapropertyzone",
-    "bio": "Kolkata and West Bengal real estate content in Bengali. Covers New Town Rajarhat, Howrah redevelopment, agricultural land conversion in WB, and registration process in Bengali for local buyers.",
+    "bio": "Kolkata and West Bengal real estate content in Bengali. Covers New Town Rajarhat, Howrah redevelopment, agricultural land conversion in WB, and registration process for local buyers.",
     "followers": {
-      "facebook": 88000,
-      "youtube": 42000
+      "Facebook": 88000,
+      "YouTube": 42000
     },
     "language": ["Bengali", "Hindi"],
     "content_focus": ["New Town Rajarhat", "WB Land Records", "Registration Process", "Agricultural Conversion"],
     "geography_focus": ["Kolkata", "West Bengal", "Howrah"],
     "posting_frequency": "2x/week",
     "monetisation": ["Developer Ads", "Facebook Monetisation"],
-    "relevance_to_kyl": "Bengali-language land records and registration content for a state with complex mutation/conversion requirements. Under-served market for KYL.",
+    "relevance_to_kyl": "Bengali-language land records and registration content for a state with complex mutation/conversion requirements.",
     "confidence": "low",
     "notes": "Facebook-dominant platform in West Bengal. Approximate figures."
   },
@@ -357,19 +441,24 @@
     "name": "PropTalks India",
     "handle": "@proptalks_india",
     "platforms": ["Instagram", "LinkedIn", "YouTube"],
+    "platform_urls": {
+      "Instagram": "https://www.instagram.com/proptalks_india",
+      "LinkedIn": "https://www.linkedin.com/company/proptalks-india",
+      "YouTube": "https://www.youtube.com/@proptalks_india"
+    },
     "profile_url": "https://www.instagram.com/proptalks_india",
     "bio": "English-language real estate investment analysis — covers REITs, commercial RE, emerging micro-markets, and data-driven investment decisions. Strong LinkedIn and Instagram presence among professionals and HNIs.",
     "followers": {
-      "instagram": 195000,
-      "linkedin": 55000,
-      "youtube": 38000
+      "Instagram": 195000,
+      "LinkedIn": 55000,
+      "YouTube": 38000
     },
     "language": ["English"],
     "content_focus": ["REITs", "Commercial RE", "Micro-market Analysis", "HNI Investment", "Data-driven RE"],
     "geography_focus": ["Pan-India", "Top-8 Cities"],
     "posting_frequency": "Daily (Instagram/LinkedIn), Weekly (YouTube)",
     "monetisation": ["Developer Collaborations", "Research Partnerships", "Premium Newsletter"],
-    "relevance_to_kyl": "Professional/HNI audience that demands data-quality content. KYL's research reports and market sizing data would resonate strongly with this audience.",
+    "relevance_to_kyl": "Professional/HNI audience that demands data-quality content. KYL's research reports and market sizing data would resonate strongly.",
     "confidence": "medium",
     "notes": "English-speaking professional audience is KYL's best potential early adopter segment."
   },
@@ -377,12 +466,17 @@
     "name": "Jaipur Property Info",
     "handle": "@jaipurpropertyinfo",
     "platforms": ["YouTube", "Facebook", "Instagram"],
+    "platform_urls": {
+      "YouTube": "https://www.youtube.com/@jaipurpropertyinfo",
+      "Facebook": "https://www.facebook.com/jaipurpropertyinfo",
+      "Instagram": "https://www.instagram.com/jaipurpropertyinfo"
+    },
     "profile_url": "https://www.youtube.com/@jaipurpropertyinfo",
     "bio": "Rajasthan real estate content in Hindi. Covers JDA-approved plots, Ajmer Road corridor, Amer area plotted schemes, agricultural to NA land conversion, and JDA auction plots in Jaipur.",
     "followers": {
-      "youtube": 130000,
-      "facebook": 60000,
-      "instagram": 28000
+      "YouTube": 130000,
+      "Facebook": 60000,
+      "Instagram": 28000
     },
     "language": ["Hindi", "Rajasthani"],
     "content_focus": ["JDA Approved Plots", "NA Conversion", "Amer Corridor", "Plotted Schemes", "JDA Auctions"],
