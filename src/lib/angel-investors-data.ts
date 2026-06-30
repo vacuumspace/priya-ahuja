@@ -19,7 +19,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/kunalshah1",
     "emails": [
-      "kunal.shah@cred.club\r\nkunal.shah@newtap.in"
+      "kunal.shah@cred.club",
+      "kunal.shah@newtap.in"
     ]
   },
   {
@@ -38,12 +39,13 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "3",
     "sno": 3,
     "name": "Raman Roy",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/raman-roy-66266917",
     "emails": [
-      "raman.roy@quatrro.com\r\nraman@indianangelnetwork.com"
+      "raman.roy@quatrro.com",
+      "raman@indianangelnetwork.com"
     ]
   },
   {
@@ -55,15 +57,16 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "http://linkedin.com/in/rajan-anandan-2481b814",
     "emails": [
-      "rajan.anandan@peakxv.com\r\nrajan@sequoiacap.com"
+      "rajan.anandan@peakxv.com",
+      "rajan@sequoiacap.com"
     ]
   },
   {
     "id": "5",
     "sno": 5,
     "name": "Aman Gupta",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/aman-gupta-7217a515",
     "emails": [
@@ -98,12 +101,15 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "8",
     "sno": 8,
     "name": "Ashish Gupta",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/ashish-gupta-9632571",
     "emails": [
-      "ashish@helionvc.com\r\nashish@mfvpartners.com\r\nashish@primevp.in\r\nashish@fretbox.in"
+      "ashish@helionvc.com",
+      "ashish@mfvpartners.com",
+      "ashish@primevp.in",
+      "ashish@fretbox.in"
     ]
   },
   {
@@ -134,12 +140,13 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "11",
     "sno": 11,
     "name": "Binny Bansal",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/binnybansal",
     "emails": [
-      "binny@xto10x.com\r\nbinny@ekartlogistics.com"
+      "binny@xto10x.com",
+      "binny@ekartlogistics.com"
     ]
   },
   {
@@ -150,9 +157,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Uttarakhand",
     "country": "India",
     "linkedin": "https://linkedin.com/in/uday-chatterjee-838b764",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "13",
@@ -182,8 +187,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "15",
     "sno": 15,
     "name": "Pradeep Kumar",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/pradeepkjaisingh",
     "emails": [
@@ -199,15 +204,17 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "Singapore\r\nIndia\r\nIndia",
     "linkedin": "http://linkedin.com/in/vijayshekhar",
     "emails": [
-      "vijay.shekhar-sharma@paytmmall.com\r\nvijay.shekhar-sharma@paytmmoney.com\r\nvijay@one97world.com"
+      "vijay.shekhar-sharma@paytmmall.com",
+      "vijay.shekhar-sharma@paytmmoney.com",
+      "vijay@one97world.com"
     ]
   },
   {
     "id": "17",
     "sno": 17,
     "name": "Lakshmi Narayanan",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/lakshmi-narayanan-37890b4",
     "emails": [
@@ -223,7 +230,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/vineetasingh",
     "emails": [
-      "vsingh@sugarcosmetics.com\r\nvineeta@fabbag.com"
+      "vsingh@sugarcosmetics.com",
+      "vineeta@fabbag.com"
     ]
   },
   {
@@ -235,7 +243,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/bikky-khosla-46b23",
     "emails": [
-      "bikkykhosla@tradeindia.com\r\nbikky@tradeindia.com"
+      "bikkykhosla@tradeindia.com",
+      "bikky@tradeindia.com"
     ]
   },
   {
@@ -258,9 +267,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/vinaysomani",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "22",
@@ -295,7 +302,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/kavitsutariya",
     "emails": [
-      "kavit@hiracoindia.com\r\nkavit@boonbox.com"
+      "kavit@hiracoindia.com",
+      "kavit@boonbox.com"
     ]
   },
   {
@@ -307,20 +315,19 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/amitgupta007",
     "emails": [
-      "ag@inmobi.com\r\namit.gupta@yulu.bike"
+      "ag@inmobi.com",
+      "amit.gupta@yulu.bike"
     ]
   },
   {
     "id": "26",
     "sno": 26,
     "name": "Hemant Gupta",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "27",
@@ -331,7 +338,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India\r\nIndia\r\nIndia",
     "linkedin": "https://linkedin.com/in/varunalagh84",
     "emails": [
-      "varun@honasa.in\r\nvarun@mamaearth.in"
+      "varun@honasa.in",
+      "varun@mamaearth.in"
     ]
   },
   {
@@ -341,10 +349,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Mumbai",
     "state": "Maharashtra",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "29",
@@ -362,10 +368,10 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "30",
     "sno": 30,
     "name": "Aprameya Radhakrishna",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
+    "linkedin": "",
     "emails": [
       "ar@kooapp.com"
     ]
@@ -379,7 +385,10 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/arjunvaidya",
     "emails": [
-      "avaidya@verlinvest.asia\r\narjun@v3.ventures\r\narjun@verlinvest.com\r\narjun.vaidya@drvaidyas.com"
+      "avaidya@verlinvest.asia",
+      "arjun@v3.ventures",
+      "arjun@verlinvest.com",
+      "arjun.vaidya@drvaidyas.com"
     ]
   },
   {
@@ -402,9 +411,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/abhinav-daga-6523a39",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "34",
@@ -415,19 +422,21 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/mekin",
     "emails": [
-      "mekin@massentrepreneurship.org\r\nmekin@udhyam.org"
+      "mekin@massentrepreneurship.org",
+      "mekin@udhyam.org"
     ]
   },
   {
     "id": "35",
     "sno": 35,
     "name": "Anand Chandrasekaran",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/anandc",
     "emails": [
-      "achandrasekaran@generalcatalyst.com\r\nanand.chandrasekaran@crescendo.ai"
+      "achandrasekaran@generalcatalyst.com",
+      "anand.chandrasekaran@crescendo.ai"
     ]
   },
   {
@@ -451,7 +460,9 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/mohandaspai",
     "emails": [
-      "mohan.pai@aarincapital.com\r\nmohan.pai@manipalglobal.com\r\nmohandaspai@3one4capital.com"
+      "mohan.pai@aarincapital.com",
+      "mohan.pai@manipalglobal.com",
+      "mohandaspai@3one4capital.com"
     ]
   },
   {
@@ -475,7 +486,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "http://linkedin.com/in/sunil-kalra-a129a621",
     "emails": [
-      "skalra@upes.ac.in\r\nsunil@strideventures.in"
+      "skalra@upes.ac.in",
+      "sunil@strideventures.in"
     ]
   },
   {
@@ -499,7 +511,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/mitesh-shah-0627873",
     "emails": [
-      "mitesh@phy-sis.com\r\nmitesh@ipventures.in"
+      "mitesh@phy-sis.com",
+      "mitesh@ipventures.in"
     ]
   },
   {
@@ -511,7 +524,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/arihantpatni",
     "emails": [
-      "arihant.patni@hivedata.in\r\narihant@ideaspringcap.com"
+      "arihant.patni@hivedata.in",
+      "arihant@ideaspringcap.com"
     ]
   },
   {
@@ -522,9 +536,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Delhi",
     "country": "India",
     "linkedin": "https://linkedin.com/in/ashneer",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "44",
@@ -533,10 +545,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Kolkata",
     "state": "West Bengal",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "45",
@@ -558,9 +568,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "http://linkedin.com/in/kushal-khandwala-76b88860",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "47",
@@ -593,7 +601,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Mumbai",
     "state": "Maharashtra",
     "country": "India",
-    "linkedin": "-",
+    "linkedin": "",
     "emails": [
       "malpani@malpaniventures.com"
     ]
@@ -618,9 +626,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Tamil Nadu",
     "country": "India",
     "linkedin": "http://linkedin.com/in/ramesh-mangaleswaran-34262b78",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "52",
@@ -630,9 +636,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/vikas-kapoor-8a2b801a2",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "53",
@@ -654,9 +658,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Karnataka",
     "country": "India",
     "linkedin": "https://linkedin.com/in/vishal-gupta-b368862",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "55",
@@ -667,7 +669,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/drriteshmalik",
     "emails": [
-      "ritesh@innov8.work\r\ninfo@drriteshmalik.com"
+      "ritesh@innov8.work",
+      "info@drriteshmalik.com"
     ]
   },
   {
@@ -715,32 +718,31 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/archana-priyadarshini-5477071",
     "emails": [
-      "archana@maxar.vc\r\narchana@fwdslash.capital\r\narchana@endurancevc.com\r\narchana.priyadarshini@pointone.capital"
+      "archana@maxar.vc",
+      "archana@fwdslash.capital",
+      "archana@endurancevc.com",
+      "archana.priyadarshini@pointone.capital"
     ]
   },
   {
     "id": "60",
     "sno": 60,
     "name": "Nitin Gupta",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "61",
     "sno": 61,
     "name": "Anil Gupta",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "62",
@@ -749,41 +751,35 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Delhi",
     "state": "Delhi",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "63",
     "sno": 63,
     "name": "Arun Venkatachalam",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/arunvenk",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "64",
     "sno": 64,
     "name": "Amit Kumar",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/heroicamit",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "65",
     "sno": 65,
     "name": "Sanjay Bansal",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/sanjay-bansal-148b88",
     "emails": [
@@ -799,20 +795,19 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/gopal-srinivasan-4630808",
     "emails": [
-      "gopal.srinivasan@tvscapital.in\r\ng.raghavan@tvs.in"
+      "gopal.srinivasan@tvscapital.in",
+      "g.raghavan@tvs.in"
     ]
   },
   {
     "id": "67",
     "sno": 67,
     "name": "Manoj Aheeray",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/manoj-aheeray-69b04912",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "68",
@@ -834,9 +829,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "http://linkedin.com/in/mahesh-damani-90a11380",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "70",
@@ -858,9 +851,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Karnataka",
     "country": "India",
     "linkedin": "https://linkedin.com/in/ganeshk",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "72",
@@ -870,33 +861,27 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "http://linkedin.com/in/utpal-doshi-a5707713",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "73",
     "sno": 73,
     "name": "Gaurav Agarwal",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/agarwalga",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "74",
     "sno": 74,
     "name": "Krishnan Akhileswaran",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/krishnan-akhileswaran-a887a120",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "75",
@@ -918,9 +903,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/udaysodhi",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "77",
@@ -930,9 +913,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Delhi",
     "country": "India",
     "linkedin": "https://linkedin.com/in/ambarish-raghuvanshi-9b7720",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "78",
@@ -955,7 +936,9 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/mubansal",
     "emails": [
-      "mukesh@nurix.ai\r\nmukesh@curefit.com\r\nmukesh@cure.fit"
+      "mukesh@nurix.ai",
+      "mukesh@curefit.com",
+      "mukesh@cure.fit"
     ]
   },
   {
@@ -974,13 +957,11 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "81",
     "sno": 81,
     "name": "Jayanand Govindaraj",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "82",
@@ -990,9 +971,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/mittersain",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "83",
@@ -1013,10 +992,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Mumbai",
     "state": "Maharashtra",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "85",
@@ -1027,7 +1004,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/anilgjain",
     "emails": [
-      "aniljain@refex.co.in\r\nanil@venturecatalysts.in"
+      "aniljain@refex.co.in",
+      "anil@venturecatalysts.in"
     ]
   },
   {
@@ -1063,7 +1041,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/zishaan",
     "emails": [
-      "zishaan.hayath@toppr.com\r\nzishaan@bharatfoundersfund.com"
+      "zishaan.hayath@toppr.com",
+      "zishaan@bharatfoundersfund.com"
     ]
   },
   {
@@ -1074,16 +1053,14 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Rajasthan",
     "country": "India",
     "linkedin": "https://linkedin.com/in/jaipurrugsyc",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "90",
     "sno": 90,
     "name": "Roman Saini",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/roman-saini-33498875",
     "emails": [
@@ -1099,15 +1076,16 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/sarathsura",
     "emails": [
-      "sarath@sunn91.com\r\nsarath@greycampus.com"
+      "sarath@sunn91.com",
+      "sarath@greycampus.com"
     ]
   },
   {
     "id": "92",
     "sno": 92,
     "name": "Ankit Agarwal",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/ankit007",
     "emails": [
@@ -1118,13 +1096,11 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "93",
     "sno": 93,
     "name": "Rabi Kiran Sahoo",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "94",
@@ -1147,7 +1123,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/junejagaurav",
     "emails": [
-      "gaurav@venturecatalysts.in\r\ngaurav.juneja@kapture.cx"
+      "gaurav@venturecatalysts.in",
+      "gaurav.juneja@kapture.cx"
     ]
   },
   {
@@ -1158,9 +1135,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "West Bengal",
     "country": "India",
     "linkedin": "http://linkedin.com/in/harsh-hada-405a706",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "97",
@@ -1195,20 +1170,19 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/absinha",
     "emails": [
-      "abhinav@eko.in\r\nabhinav@eko.co.in"
+      "abhinav@eko.in",
+      "abhinav@eko.co.in"
     ]
   },
   {
     "id": "100",
     "sno": 100,
     "name": "Nagendran Ramamurthy",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/nagendran-ramamurthy-ba508a8",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "101",
@@ -1231,7 +1205,9 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/satandon",
     "emails": [
-      "sandeep@tandongroup.com\r\nstandon@whiteboardcap.com\r\nstandon@syrmatech.com"
+      "sandeep@tandongroup.com",
+      "standon@whiteboardcap.com",
+      "standon@syrmatech.com"
     ]
   },
   {
@@ -1262,13 +1238,11 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "105",
     "sno": 105,
     "name": "Srinivas Kotta",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/srinivas-kotta-07a46516",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "106",
@@ -1279,7 +1253,10 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/sachinbansal",
     "emails": [
-      "sachin.bansal@navi.com\r\nsachin@ekartlogistics.com\r\nsachin.bansal@bacq.com\r\nsachin@ekartcourier.com"
+      "sachin.bansal@navi.com",
+      "sachin@ekartlogistics.com",
+      "sachin.bansal@bacq.com",
+      "sachin@ekartcourier.com"
     ]
   },
   {
@@ -1302,9 +1279,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/jayesh-mall-303542170",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "109",
@@ -1346,8 +1321,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "112",
     "sno": 112,
     "name": "Alok Agarwal",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/alok-agarwal-b745328",
     "emails": [
@@ -1361,10 +1336,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Mumbai",
     "state": "Maharashtra",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "114",
@@ -1387,15 +1360,16 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/srinirai",
     "emails": [
-      "srinivas@homescreennetwork.com\r\nsanumolu@elance.com"
+      "srinivas@homescreennetwork.com",
+      "sanumolu@elance.com"
     ]
   },
   {
     "id": "116",
     "sno": 116,
     "name": "Dipan Dalal",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/dipan-dalal-047b2112",
     "emails": [
@@ -1422,9 +1396,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Karnataka",
     "country": "India",
     "linkedin": "https://linkedin.com/in/krishnakumarnatarajan",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "119",
@@ -1433,10 +1405,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Delhi",
     "state": "Delhi",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "120",
@@ -1457,7 +1427,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Mumbai\r\nMumbai",
     "state": "Maharashtra\r\nMaharashtra",
     "country": "India\r\nIndia",
-    "linkedin": "-",
+    "linkedin": "",
     "emails": [
       "rakesh.jhunjhunwala@airpay.co.in"
     ]
@@ -1471,15 +1441,16 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India\r\nIndia",
     "linkedin": "https://linkedin.com/in/ankitbhati",
     "emails": [
-      "ankit@olacabs.com\r\nankit@amnic.com"
+      "ankit@olacabs.com",
+      "ankit@amnic.com"
     ]
   },
   {
     "id": "123",
     "sno": 123,
     "name": "Diwakar Nigam",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/diwakar-nigam-8181695",
     "emails": [
@@ -1507,7 +1478,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/aakrit",
     "emails": [
-      "av@peercheque.com\r\naakrit@bharatfoundersfund.com"
+      "av@peercheque.com",
+      "aakrit@bharatfoundersfund.com"
     ]
   },
   {
@@ -1517,10 +1489,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Mumbai",
     "state": "Maharashtra",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "127",
@@ -1538,12 +1508,13 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "128",
     "sno": 128,
     "name": "Tushar Patel",
-    "city": "-",
+    "city": "",
     "state": "Andhra Pradesh",
     "country": "India",
     "linkedin": "https://linkedin.com/in/tushar-patel-32a8374",
     "emails": [
-      "tushar@shubhloans.com\r\ntushar@myshubhlife.com"
+      "tushar@shubhloans.com",
+      "tushar@myshubhlife.com"
     ]
   },
   {
@@ -1553,7 +1524,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Delhi",
     "state": "Delhi",
     "country": "India",
-    "linkedin": "-",
+    "linkedin": "",
     "emails": [
       "sanjeev@getmecab.com"
     ]
@@ -1562,8 +1533,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "130",
     "sno": 130,
     "name": "Deepinder Goyal",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/deepigoyal",
     "emails": [
@@ -1578,9 +1549,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Karnataka",
     "country": "India",
     "linkedin": "https://linkedin.com/in/aneesh-reddy-38b176b",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "132",
@@ -1589,10 +1558,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Mumbai",
     "state": "Maharashtra",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "133",
@@ -1602,9 +1569,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Karnataka",
     "country": "India",
     "linkedin": "https://linkedin.com/in/sharad-junghare-64b2905",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "134",
@@ -1614,9 +1579,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Karnataka",
     "country": "India",
     "linkedin": "https://linkedin.com/in/nagapr",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "135",
@@ -1627,7 +1590,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/paula-mariwala-b6543918",
     "emails": [
-      "paula@seedfund.in\r\npaula@aureolis.co.in"
+      "paula@seedfund.in",
+      "paula@aureolis.co.in"
     ]
   },
   {
@@ -1650,9 +1614,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Karnataka",
     "country": "India",
     "linkedin": "https://linkedin.com/in/prakash-vgn-54383159",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "138",
@@ -1661,22 +1623,18 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Dehradun",
     "state": "Uttarakhand",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "139",
     "sno": 139,
     "name": "Shreyans Khemka",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/shreyans-khemka-8b675ab9",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "140",
@@ -1718,8 +1676,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "143",
     "sno": 143,
     "name": "Gaurav Gupta",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/gauravgupta123",
     "emails": [
@@ -1730,8 +1688,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "144",
     "sno": 144,
     "name": "Rahul Agarwal",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/pub/rahul-agarwal/13/153/493",
     "emails": [
@@ -1742,13 +1700,11 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "145",
     "sno": 145,
     "name": "Jigar Harish Mehta",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "146",
@@ -1771,7 +1727,10 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/pramodbhasin",
     "emails": [
-      "pramod.bhasin@kedaara.com\r\npramod@ashaventures.in\r\npramod.bhasin@clix.capital\r\npramod@wfglobal.org"
+      "pramod.bhasin@kedaara.com",
+      "pramod@ashaventures.in",
+      "pramod.bhasin@clix.capital",
+      "pramod@wfglobal.org"
     ]
   },
   {
@@ -1783,7 +1742,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/tejkapoor",
     "emails": [
-      "tej.kapoor@iciciventure.com\r\ntej@ivycapventures.com"
+      "tej.kapoor@iciciventure.com",
+      "tej@ivycapventures.com"
     ]
   },
   {
@@ -1793,10 +1753,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Nagpur",
     "state": "Maharashtra",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "150",
@@ -1806,9 +1764,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Haryana",
     "country": "India",
     "linkedin": "https://linkedin.com/in/sorabh-agarwal-52277a1",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "151",
@@ -1826,20 +1782,21 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "152",
     "sno": 152,
     "name": "Piyush Shah",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/piyush-shah-0583412",
     "emails": [
-      "piyush.shah@trufactor.io\r\npiyush@inmobi.com"
+      "piyush.shah@trufactor.io",
+      "piyush@inmobi.com"
     ]
   },
   {
     "id": "153",
     "sno": 153,
     "name": "Jaideep Mehta",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/jaideepmehta",
     "emails": [
@@ -1854,21 +1811,17 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Haryana",
     "country": "India",
     "linkedin": "https://linkedin.com/in/deepak-garg-4204b439",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "155",
     "sno": 155,
     "name": "Rekha Singh",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "156",
@@ -1879,7 +1832,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/mridula-ramesh-3453941",
     "emails": [
-      "mridula@climaction.net\r\nmridula@avaanacapital.com"
+      "mridula@climaction.net",
+      "mridula@avaanacapital.com"
     ]
   },
   {
@@ -1891,7 +1845,9 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/singhkanwaljit",
     "emails": [
-      "kanwal@firesideventures.in\r\nkanwal@firesideventures.com\r\nkanwaljit@menterra.com"
+      "kanwal@firesideventures.in",
+      "kanwal@firesideventures.com",
+      "kanwaljit@menterra.com"
     ]
   },
   {
@@ -1915,7 +1871,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/abhishekmitra",
     "emails": [
-      "abhishek@riyalto.com\r\nabhishek.gupta@numeriaventures.com"
+      "abhishek@riyalto.com",
+      "abhishek.gupta@numeriaventures.com"
     ]
   },
   {
@@ -1934,13 +1891,11 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "161",
     "sno": 161,
     "name": "Sriram Subramanya",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/sriramsubramanya",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "162",
@@ -1950,9 +1905,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Haryana",
     "country": "India",
     "linkedin": "http://linkedin.com/in/anku-jain-93a9222",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "163",
@@ -1963,7 +1916,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/ghazal-alagh-9755a0128",
     "emails": [
-      "ghazal@mamaearth.in\r\nghazal@honasa.in"
+      "ghazal@mamaearth.in",
+      "ghazal@honasa.in"
     ]
   },
   {
@@ -1974,21 +1928,17 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Karnataka",
     "country": "India",
     "linkedin": "https://linkedin.com/in/graghunandan",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "165",
     "sno": 165,
     "name": "Bhupendra Mehta",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/bhupendra-mehta-03910017",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "166",
@@ -2011,7 +1961,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/pravin-gandhi-76b164",
     "emails": [
-      "pravin.gandhi@keyventure.in\r\npravin@seedfund.in"
+      "pravin.gandhi@keyventure.in",
+      "pravin@seedfund.in"
     ]
   },
   {
@@ -2035,27 +1986,26 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/vikrantvarshney",
     "emails": [
-      "vik@sucseed.biz\r\nvv@iiit.ac.in"
+      "vik@sucseed.biz",
+      "vv@iiit.ac.in"
     ]
   },
   {
     "id": "170",
     "sno": 170,
     "name": "Pradeep Kumar",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/pub/pradeep-kumar/29/475/333",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "171",
     "sno": 171,
     "name": "Chirag Shah",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/chirag-shah-41303024",
     "emails": [
@@ -2070,16 +2020,14 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/manish-sah-b251808b",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "173",
     "sno": 173,
     "name": "Saurabh Sharma",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/saurabhsrma",
     "emails": [
@@ -2090,8 +2038,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "174",
     "sno": 174,
     "name": "Rohit Kapoor",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/rohit-kapoor-3570945",
     "emails": [
@@ -2106,9 +2054,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/anujmunot",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "176",
@@ -2118,16 +2064,14 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Rajasthan",
     "country": "India",
     "linkedin": "https://linkedin.com/in/viveklodha",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "177",
     "sno": 177,
     "name": "Ajay Prabhu",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/ajaykvp",
     "emails": [
@@ -2143,7 +2087,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/anjali-bansal-8489091",
     "emails": [
-      "anjali@avaanacapital.com\r\nabansal@tpg.com"
+      "anjali@avaanacapital.com",
+      "abansal@tpg.com"
     ]
   },
   {
@@ -2154,9 +2099,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Uttar Pradesh",
     "country": "India",
     "linkedin": "https://linkedin.com/in/ankit-gupta-26985557",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "180",
@@ -2174,8 +2117,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "181",
     "sno": 181,
     "name": "Arun Kumar",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/tvmarun",
     "emails": [
@@ -2186,13 +2129,11 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "182",
     "sno": 182,
     "name": "Arun Ganapathy",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/pub/arun-ganapathy/5/798/975",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "183",
@@ -2214,9 +2155,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/ankit-somani-b4384630",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "185",
@@ -2234,8 +2173,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "186",
     "sno": 186,
     "name": "Mohit Thukral",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/mohit-thukral-528bb714",
     "emails": [
@@ -2250,9 +2189,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Haryana",
     "country": "India",
     "linkedin": "https://linkedin.com/in/tsmiglani",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "188",
@@ -2261,10 +2198,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Amreli",
     "state": "Gujarat",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "189",
@@ -2282,8 +2217,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "190",
     "sno": 190,
     "name": "Sanjay Kapoor",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/sanjay-kapoor-b63355b2",
     "emails": [
@@ -2321,22 +2256,18 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Mumbai",
     "state": "Maharashtra",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "194",
     "sno": 194,
     "name": "Nikhil Agarwal",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "195",
@@ -2345,10 +2276,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Mumbai",
     "state": "Maharashtra",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "196",
@@ -2359,7 +2288,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/shantanu-deshpande-bb939b4a",
     "emails": [
-      "shantanu@bharatfoundersfund.com\r\nshantanu@bombayshavingcompany.com"
+      "shantanu@bharatfoundersfund.com",
+      "shantanu@bombayshavingcompany.com"
     ]
   },
   {
@@ -2369,7 +2299,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Bengaluru",
     "state": "Karnataka",
     "country": "India",
-    "linkedin": "-",
+    "linkedin": "",
     "emails": [
       "ashish@attagirl.in"
     ]
@@ -2381,10 +2311,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Delhi",
     "state": "Delhi",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "199",
@@ -2414,13 +2342,11 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "201",
     "sno": 201,
     "name": "Saurabh Agarwal",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India\r\nSingapore",
     "linkedin": "http://linkedin.com/pub/saurabh-agarwal/15/955/88a",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "202",
@@ -2443,15 +2369,16 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/saurabhsrivastava101",
     "emails": [
-      "saurabh@greenbankcapitalinc.com\r\nsaurabh@indianangelnetwork.com"
+      "saurabh@greenbankcapitalinc.com",
+      "saurabh@indianangelnetwork.com"
     ]
   },
   {
     "id": "204",
     "sno": 204,
     "name": "Rajiv Dadlani",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/dadlanirajiv",
     "emails": [
@@ -2479,7 +2406,9 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/chandrashekar-kupperi-7472b86",
     "emails": [
-      "chandrashekar@ivycapventures.com\r\nshekar@peacefulprogress.in\r\nshekar@anovacorporate.co.in"
+      "chandrashekar@ivycapventures.com",
+      "shekar@peacefulprogress.in",
+      "shekar@anovacorporate.co.in"
     ]
   },
   {
@@ -2501,34 +2430,28 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Mumbai",
     "state": "Maharashtra",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "209",
     "sno": 209,
     "name": "Ravi Nigam",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/ravi-nigam-09a64112",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "210",
     "sno": 210,
     "name": "Pradeep K Jaisingh",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/pradeepkjaisingh",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "211",
@@ -2549,10 +2472,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Mumbai",
     "state": "Maharashtra",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "213",
@@ -2570,10 +2491,10 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "214",
     "sno": 214,
     "name": "Shreya Jain",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
+    "linkedin": "",
     "emails": [
       "shreya@biotique.com"
     ]
@@ -2582,13 +2503,11 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "215",
     "sno": 215,
     "name": "Mukul Kumar Jain",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/jain-mukul-8320974",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "216",
@@ -2598,33 +2517,27 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Karnataka",
     "country": "India",
     "linkedin": "https://linkedin.com/in/rishi-pardal-8a21b15",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "217",
     "sno": 217,
     "name": "Nandita Jhaveri",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "218",
     "sno": 218,
     "name": "Sanjay Bhandarkar",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/sanjay-bhandarkar-092167a2",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "219",
@@ -2634,9 +2547,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Delhi",
     "country": "India",
     "linkedin": "http://linkedin.com/in/rajat-sikka-07031a8",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "220",
@@ -2659,7 +2570,9 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/rohitoncloud9",
     "emails": [
-      "rohit@capierinvestments.com\r\nrohit@peercapital.in\r\nrohit@cloudninecare.com"
+      "rohit@capierinvestments.com",
+      "rohit@peercapital.in",
+      "rohit@cloudninecare.com"
     ]
   },
   {
@@ -2671,7 +2584,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/venkatraju",
     "emails": [
-      "venkat@joinef.com\r\nvenkat@turbostart.co"
+      "venkat@joinef.com",
+      "venkat@turbostart.co"
     ]
   },
   {
@@ -2683,7 +2597,9 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/asish-mohapatra-22685a28",
     "emails": [
-      "asish@oxyzo.in\r\nasish.mohapatra@ofbusiness.com\r\nasish@ofbusiness.in"
+      "asish@oxyzo.in",
+      "asish.mohapatra@ofbusiness.com",
+      "asish@ofbusiness.in"
     ]
   },
   {
@@ -2694,9 +2610,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/vikas-agarwal-6b962a2",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "225",
@@ -2729,22 +2643,18 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Delhi",
     "state": "Delhi",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "228",
     "sno": 228,
     "name": "Gaurav Kumar",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/gaurav-kumar-5a8a2a17",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "229",
@@ -2754,28 +2664,24 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/tahanabee",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "230",
     "sno": 230,
     "name": "Lakshmi Narayanan",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "231",
     "sno": 231,
     "name": "Deval Tibrewalla",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/devalt",
     "emails": [
@@ -2803,7 +2709,9 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/narayan-ramachandran-a6b2941b8",
     "emails": [
-      "narayanr@patamar.com\r\nnarayan@kludein.com\r\nnr@kludein.com"
+      "narayanr@patamar.com",
+      "narayan@kludein.com",
+      "nr@kludein.com"
     ]
   },
   {
@@ -2815,7 +2723,10 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/magupta",
     "emails": [
-      "manish.gupta@damcogroup.co.uk\r\nmanish@unyscape.com\r\nmanish.gupta@testingxperts.com\r\nmanish.gupta@damcosoft.com"
+      "manish.gupta@damcogroup.co.uk",
+      "manish@unyscape.com",
+      "manish.gupta@testingxperts.com",
+      "manish.gupta@damcosoft.com"
     ]
   },
   {
@@ -2838,9 +2749,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/harish-mehta-071286",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "237",
@@ -2851,7 +2760,9 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/ashishhemrajani",
     "emails": [
-      "ashish@bookmyshow.com\r\nashish.hemrajani@bookmyshow.com\r\nashish@bigtree.in"
+      "ashish@bookmyshow.com",
+      "ashish.hemrajani@bookmyshow.com",
+      "ashish@bigtree.in"
     ]
   },
   {
@@ -2863,7 +2774,9 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/varunlaul",
     "emails": [
-      "varunlaul@gmail.com\r\nvarun@atriumangels.com\r\nvlaul@investcorp.com"
+      "varunlaul@gmail.com",
+      "varun@atriumangels.com",
+      "vlaul@investcorp.com"
     ]
   },
   {
@@ -2887,7 +2800,10 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "http://linkedin.com/in/nithin-kamath-81136242",
     "emails": [
-      "nithin@rainmatter.org\r\nnithin@rainmatter.com\r\nnikhil@truebeacon.com\r\nnithin@zerodha.com"
+      "nithin@rainmatter.org",
+      "nithin@rainmatter.com",
+      "nikhil@truebeacon.com",
+      "nithin@zerodha.com"
     ]
   },
   {
@@ -2918,8 +2834,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "243",
     "sno": 243,
     "name": "Ratish Nair",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/pub/ratish-nair/0/32/837",
     "emails": [
@@ -2946,9 +2862,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Karnataka",
     "country": "India",
     "linkedin": "https://linkedin.com/in/sanjay-guha-a3203919",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "246",
@@ -2957,10 +2871,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Delhi",
     "state": "Delhi",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "247",
@@ -2994,9 +2906,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Delhi",
     "country": "India",
     "linkedin": "http://linkedin.com/in/vivek-jain-6896863",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "250",
@@ -3014,8 +2924,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "251",
     "sno": 251,
     "name": "Siddharth Kothari",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/sid-kothari",
     "emails": [
@@ -3038,25 +2948,21 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "253",
     "sno": 253,
     "name": "Rama Rao Domalapally",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/ramakrao",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "254",
     "sno": 254,
     "name": "Tejinderpal Singh Miglani",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/tsmiglani",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "255",
@@ -3077,29 +2983,25 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Gurugram",
     "state": "Haryana",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "257",
     "sno": 257,
     "name": "Madhuri Jain",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/madhuri-jain-grover-83487840",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "258",
     "sno": 258,
     "name": "Praveen Kumar",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/praveen-kumar-490615155",
     "emails": [
@@ -3110,8 +3012,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "259",
     "sno": 259,
     "name": "Farid Ahsan",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/farid-ahsan-268b6b28",
     "emails": [
@@ -3122,25 +3024,21 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "260",
     "sno": 260,
     "name": "Sanjay Rishi",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/sanjay-rishi-1b6a5627",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "261",
     "sno": 261,
     "name": "Triptee Jain",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "262",
@@ -3163,7 +3061,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/amitdalmia",
     "emails": [
-      "amit@olivetheory.com\r\namit@scalesauce.co"
+      "amit@olivetheory.com",
+      "amit@scalesauce.co"
     ]
   },
   {
@@ -3198,33 +3097,27 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Haryana",
     "country": "India",
     "linkedin": "http://linkedin.com/in/sumitjain34",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "267",
     "sno": 267,
     "name": "Neelabh Dalmia",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "268",
     "sno": 268,
     "name": "Dharmendra M Kapoor",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "269",
@@ -3233,9 +3126,11 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Gurugram\r\nGurugram\r\nGurugram",
     "state": "Haryana\r\nHaryana\r\nHaryana",
     "country": "India\r\nIndia\r\nIndia",
-    "linkedin": "-",
+    "linkedin": "",
     "emails": [
-      "ruchi@oxyzo.in\r\nruchi@ofbusiness.in\r\nruchi@ofbusiness.com"
+      "ruchi@oxyzo.in",
+      "ruchi@ofbusiness.in",
+      "ruchi@ofbusiness.com"
     ]
   },
   {
@@ -3259,7 +3154,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/manav-garg-227254",
     "emails": [
-      "manav@together.fund\r\nmanav.garg@ekaplus.com"
+      "manav@together.fund",
+      "manav.garg@ekaplus.com"
     ]
   },
   {
@@ -3269,17 +3165,15 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Chennai",
     "state": "Tamil Nadu",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "273",
     "sno": 273,
     "name": "Hitesh Chawla",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/hiteshchawla",
     "emails": [
@@ -3306,9 +3200,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Delhi",
     "country": "India",
     "linkedin": "https://linkedin.com/in/vivekkhareatinfoedge",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "276",
@@ -3317,10 +3209,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Durgapur",
     "state": "West Bengal",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "277",
@@ -3330,9 +3220,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/vchachra",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "278",
@@ -3343,20 +3231,20 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/rajesh-gupta-7157a5101",
     "emails": [
-      "rajeshgupta@cashsuvidha.com\r\nrajesh@busy.in\r\nrajeshgupta@ushafinancial.com"
+      "rajeshgupta@cashsuvidha.com",
+      "rajesh@busy.in",
+      "rajeshgupta@ushafinancial.com"
     ]
   },
   {
     "id": "279",
     "sno": 279,
     "name": "Ramnath Rao",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/ramnath-rao-2250833",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "280",
@@ -3379,7 +3267,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/gupta1",
     "emails": [
-      "saurabh@earth5r.org\r\nsaurabh@urbanpiper.com"
+      "saurabh@earth5r.org",
+      "saurabh@urbanpiper.com"
     ]
   },
   {
@@ -3402,21 +3291,17 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/anand-jhaveri-010779",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "284",
     "sno": 284,
     "name": "Kapil Kedar",
-    "city": "-",
+    "city": "",
     "state": "Haryana",
     "country": "India",
     "linkedin": "https://linkedin.com/in/kapil-kedar-41a0243",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "285",
@@ -3426,9 +3311,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Delhi",
     "country": "India",
     "linkedin": "https://linkedin.com/in/ajaichowdhry",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "286",
@@ -3450,16 +3333,14 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/saket-agarwal-yourisraelguy",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "288",
     "sno": 288,
     "name": "Pankaj Gupta",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/pankajatlinkedin",
     "emails": [
@@ -3470,8 +3351,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "289",
     "sno": 289,
     "name": "Natarajan",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/karthiknatarajan1",
     "emails": [
@@ -3499,32 +3380,32 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/ashish-dhawan-241112",
     "emails": [
-      "ashish@centralsquarefoundation.org\r\nashish@chryscapital.com"
+      "ashish@centralsquarefoundation.org",
+      "ashish@chryscapital.com"
     ]
   },
   {
     "id": "292",
     "sno": 292,
     "name": "Manish Agarwal",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/manish15aug",
     "emails": [
-      "manish.agarwal@orionedutech.com\r\nmanish@gatewayabroad.com"
+      "manish.agarwal@orionedutech.com",
+      "manish@gatewayabroad.com"
     ]
   },
   {
     "id": "293",
     "sno": 293,
     "name": "Amit Chand",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/amitchand1981",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "294",
@@ -3546,9 +3427,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Uttar Pradesh",
     "country": "India",
     "linkedin": "https://linkedin.com/in/ishan-singh-4759b7",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "296",
@@ -3558,9 +3437,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "http://linkedin.com/in/sandeep-nailwal-60709a33",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "297",
@@ -3578,56 +3455,48 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "298",
     "sno": 298,
     "name": "Dinesh Chandra Agarwal",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "299",
     "sno": 299,
     "name": "Sujit Jevatlal Shah",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "300",
     "sno": 300,
     "name": "Gopinath Latpate",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/glatpate",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "301",
     "sno": 301,
     "name": "Gautam Kumra",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/gkumra",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "302",
     "sno": 302,
     "name": "Srinivasan B",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/srinivasan-b-172a0b6",
     "emails": [
@@ -3638,13 +3507,11 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "303",
     "sno": 303,
     "name": "Anto Chirayath",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "304",
@@ -3653,17 +3520,15 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Mumbai",
     "state": "Maharashtra",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "305",
     "sno": 305,
     "name": "Sunil Mehta",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/sunil-mehta-350a3a7",
     "emails": [
@@ -3678,16 +3543,14 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Uttar Pradesh",
     "country": "India",
     "linkedin": "https://linkedin.com/in/sachin-gupta-74a179133",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "307",
     "sno": 307,
     "name": "Anurag Agarwal",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/pub/anurag-agarwal/1/577/a29",
     "emails": [
@@ -3722,8 +3585,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "310",
     "sno": 310,
     "name": "Ashish Goyal",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/ashish-goyal-b9b35714",
     "emails": [
@@ -3734,8 +3597,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "311",
     "sno": 311,
     "name": "Atul Jain",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/atul-jain-5571661",
     "emails": [
@@ -3750,9 +3613,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Karnataka",
     "country": "India",
     "linkedin": "https://linkedin.com/in/srinath-batni-83785457",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "313",
@@ -3763,15 +3624,16 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/linkmanishvij",
     "emails": [
-      "manish.vij@quasar.co.in\r\nmanish@smile.co.in"
+      "manish.vij@quasar.co.in",
+      "manish@smile.co.in"
     ]
   },
   {
     "id": "314",
     "sno": 314,
     "name": "Ajit Surana",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/ajit-surana-97b8a799",
     "emails": [
@@ -3787,15 +3649,16 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/sandeep-kohli-05a2ba14",
     "emails": [
-      "sandeep@yum.com\r\nsandeep.k@sphinxworldbiz.com"
+      "sandeep@yum.com",
+      "sandeep.k@sphinxworldbiz.com"
     ]
   },
   {
     "id": "316",
     "sno": 316,
     "name": "Vineet Kumar",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/pub/vineet-kumar/7/9ab/114/en",
     "emails": [
@@ -3806,25 +3669,21 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "317",
     "sno": 317,
     "name": "Piyush Shah",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/piyush",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "318",
     "sno": 318,
     "name": "Rahul Verma",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/rahul-verma-0110a81",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "319",
@@ -3835,20 +3694,19 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/rajesh-yabaji-302347a",
     "emails": [
-      "yabaji@blackbuck.com\r\nrajesh@blackbuck.com"
+      "yabaji@blackbuck.com",
+      "rajesh@blackbuck.com"
     ]
   },
   {
     "id": "320",
     "sno": 320,
     "name": "Arun Khanna",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "321",
@@ -3858,15 +3716,13 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/vishalkmaheshwari",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "322",
     "sno": 322,
     "name": "Sudhir Mehta",
-    "city": "-",
+    "city": "",
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/dr-sudhir-mehta-79a2839",
@@ -3878,13 +3734,11 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "323",
     "sno": 323,
     "name": "Sandeep Singh",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/pub/sandeep-singh/47/5a6/574",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "324",
@@ -3895,19 +3749,23 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/shravan-shroff-b34a724",
     "emails": [
-      "shravan@shringar.co.in\r\nshravan.shroff@venturenursery.com"
+      "shravan@shringar.co.in",
+      "shravan.shroff@venturenursery.com"
     ]
   },
   {
     "id": "325",
     "sno": 325,
     "name": "Bhuvan Gupta",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/bhuvangupta",
     "emails": [
-      "bhuvan.gupta@ofbusiness.com\r\nbhuvan@bidassist.com\r\nbhuvan@ofbusiness.in\r\nbhuvan@oxyzo.in"
+      "bhuvan.gupta@ofbusiness.com",
+      "bhuvan@bidassist.com",
+      "bhuvan@ofbusiness.in",
+      "bhuvan@oxyzo.in"
     ]
   },
   {
@@ -3917,10 +3775,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Gurugram",
     "state": "Haryana",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "327",
@@ -3929,22 +3785,18 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Ahmedabad",
     "state": "Gujarat",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "328",
     "sno": 328,
     "name": "Manoj Kumar Agarwal",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "329",
@@ -3962,13 +3814,11 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "330",
     "sno": 330,
     "name": "Krishna Jha",
-    "city": "-",
+    "city": "",
     "state": "Karnataka",
     "country": "India",
     "linkedin": "http://linkedin.com/in/krishnajha",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "331",
@@ -4002,21 +3852,17 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/bharatbanka",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "334",
     "sno": 334,
     "name": "Rajasekar Ramaraj",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/rramaraj",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "335",
@@ -4037,10 +3883,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Ahmedabad",
     "state": "Gujarat",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "337",
@@ -4049,10 +3893,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Mumbai",
     "state": "Maharashtra",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "338",
@@ -4061,10 +3903,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Jaipur",
     "state": "Rajasthan",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "339",
@@ -4094,8 +3934,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "341",
     "sno": 341,
     "name": "Milan Patel",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/milan-patel-9674b26",
     "emails": [
@@ -4106,8 +3946,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "342",
     "sno": 342,
     "name": "Alok Gupta",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/alokgupta65",
     "emails": [
@@ -4118,8 +3958,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "343",
     "sno": 343,
     "name": "Naveen Kukreja",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/naveen-kukreja-b333013",
     "emails": [
@@ -4142,25 +3982,21 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "345",
     "sno": 345,
     "name": "Bijal Saumil Mehta",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "346",
     "sno": 346,
     "name": "Anuj Kalra",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "347",
@@ -4171,7 +4007,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/guptavarun",
     "emails": [
-      "varun@tripfactory.com\r\nvarun@tfnexus.com"
+      "varun@tripfactory.com",
+      "varun@tfnexus.com"
     ]
   },
   {
@@ -4182,9 +4019,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Karnataka",
     "country": "India",
     "linkedin": "http://linkedin.com/in/pankaj-sharma-417116b",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "349",
@@ -4195,32 +4030,29 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/pub/ravi-kumar/71/981/b76",
     "emails": [
-      "ravi@upstox.com\r\nravi@rksv.in"
+      "ravi@upstox.com",
+      "ravi@rksv.in"
     ]
   },
   {
     "id": "350",
     "sno": 350,
     "name": "Saurabh Aggarwal",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/saurabh-aggarwal-86426723",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "351",
     "sno": 351,
     "name": "Santosh Kumar",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/sakumar1",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "352",
@@ -4231,19 +4063,22 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/abhishekrungta",
     "emails": [
-      "abhi@lokaviveka.com\r\nabhi@indusnet.co.in\r\nabhishek@seeders.in"
+      "abhi@lokaviveka.com",
+      "abhi@indusnet.co.in",
+      "abhishek@seeders.in"
     ]
   },
   {
     "id": "353",
     "sno": 353,
     "name": "Rajesh Jain",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/rajesh-jain-b941",
     "emails": [
-      "rajesh.jain@netcorecloud.com\r\nrajesh@netcore.in"
+      "rajesh.jain@netcorecloud.com",
+      "rajesh@netcore.in"
     ]
   },
   {
@@ -4254,9 +4089,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://www.linkedin.com/in/drapoorvsharma/?originalSubdomain=in",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "355",
@@ -4266,9 +4099,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "http://linkedin.com/in/shailendra-nigam-6a384372",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "356",
@@ -4279,15 +4110,17 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/manish-khera",
     "emails": [
-      "manish@arthdigital.net\r\nmanish@happyness.net\r\nmanish@arthimpact.in"
+      "manish@arthdigital.net",
+      "manish@happyness.net",
+      "manish@arthimpact.in"
     ]
   },
   {
     "id": "357",
     "sno": 357,
     "name": "Abhishek Jain",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/abhishek198",
     "emails": [
@@ -4302,9 +4135,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "http://linkedin.com/in/ravitwo",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "359",
@@ -4314,16 +4145,14 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "http://linkedin.com/in/rishibhasin",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "360",
     "sno": 360,
     "name": "Sandeep Banerjee",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/sandeepbanerjeemd",
     "emails": [
@@ -4339,7 +4168,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/parikshit-dar-82bb3210",
     "emails": [
-      "parikshit@bookmyshow.com\r\nparikshit@bigtree.in"
+      "parikshit@bookmyshow.com",
+      "parikshit@bigtree.in"
     ]
   },
   {
@@ -4362,16 +4192,14 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/suhailchander",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "364",
     "sno": 364,
     "name": "Rohit Anand",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/pub/rohit-anand/12/944/9a8",
     "emails": [
@@ -4386,40 +4214,34 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Haryana",
     "country": "India",
     "linkedin": "https://linkedin.com/in/avtar-monga-3639367",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "366",
     "sno": 366,
     "name": "Karthik Venkatesh",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/karthik-venkatesh-9a4a1112",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "367",
     "sno": 367,
     "name": "Harvinderjit Singh Bhatia",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "368",
     "sno": 368,
     "name": "Bhavish Aggarwal",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/bhavishaggarwal",
     "emails": [
@@ -4430,12 +4252,13 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "369",
     "sno": 369,
     "name": "Srinivasan Namala",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/srinivasannamala",
     "emails": [
-      "srinivasan@avammune.com\r\nsrinivasan@atenporus.com"
+      "srinivasan@avammune.com",
+      "srinivasan@atenporus.com"
     ]
   },
   {
@@ -4446,9 +4269,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Telangana",
     "country": "India",
     "linkedin": "https://linkedin.com/in/bhoomija",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "371",
@@ -4478,8 +4299,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "373",
     "sno": 373,
     "name": "Saurabh Agarwal",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/saurabh-agarwal-5667302a",
     "emails": [
@@ -4494,9 +4315,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "http://linkedin.com/in/prachi-mehta-02988522",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "375",
@@ -4517,22 +4336,18 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Gurugram",
     "state": "Haryana",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "377",
     "sno": 377,
     "name": "Harsh Shah",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/harsh193",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "378",
@@ -4542,9 +4357,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/manojkumar05",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "379",
@@ -4554,21 +4367,17 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Karnataka",
     "country": "India",
     "linkedin": "https://linkedin.com/in/sunilkamath",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "380",
     "sno": 380,
     "name": "Sahil Kejriwal",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "381",
@@ -4578,21 +4387,17 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Karnataka",
     "country": "India",
     "linkedin": "https://linkedin.com/in/shantanu-ghosh-2b47025",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "382",
     "sno": 382,
     "name": "Ruchi Sihare",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "383",
@@ -4601,10 +4406,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Bengaluru",
     "state": "Karnataka",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "384",
@@ -4615,15 +4418,16 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "http://linkedin.com/in/amitreversed",
     "emails": [
-      "amit@patterbuzz.com\r\namit@careerplot.com"
+      "amit@patterbuzz.com",
+      "amit@careerplot.com"
     ]
   },
   {
     "id": "385",
     "sno": 385,
     "name": "Ajay Kumar Ghosh",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/pub/ajay-kumar/67/968/98",
     "emails": [
@@ -4650,9 +4454,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Karnataka",
     "country": "India",
     "linkedin": "https://linkedin.com/in/vmohankumar",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "388",
@@ -4661,10 +4463,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Mumbai",
     "state": "Maharashtra",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "389",
@@ -4706,13 +4506,11 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "392",
     "sno": 392,
     "name": "Srinivas Reddy",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/pub/srinivas-reddy/15/b4b/662",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "393",
@@ -4735,20 +4533,19 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "http://linkedin.com/in/rajnishkumar",
     "emails": [
-      "rajnish@ixigo.com\r\nrajnish@pristinelogistics.com"
+      "rajnish@ixigo.com",
+      "rajnish@pristinelogistics.com"
     ]
   },
   {
     "id": "395",
     "sno": 395,
     "name": "Jayant Mehrotra",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/jayant-mehrotra-637b1914",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "396",
@@ -4770,16 +4567,14 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Delhi",
     "country": "India",
     "linkedin": "https://linkedin.com/in/aseem-chauhan-81812145",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "398",
     "sno": 398,
     "name": "Shradha Sharma",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/pub/shradha-sharma/3/928/807",
     "emails": [
@@ -4790,13 +4585,11 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "399",
     "sno": 399,
     "name": "Prayerna Kaul",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "400",
@@ -4806,9 +4599,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Karnataka",
     "country": "India",
     "linkedin": "http://linkedin.com/in/bhalotia",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "401",
@@ -4826,20 +4617,18 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "402",
     "sno": 402,
     "name": "Mayur Desai",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/mayur-desai-3424b315",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "403",
     "sno": 403,
     "name": "Abhimanyu Singh",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/abhimanyusingh2",
     "emails": [
@@ -4855,15 +4644,17 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/avinash8",
     "emails": [
-      "avinash@asappp.com\r\navinash@bookmycab.com\r\navinash@zealthix.com"
+      "avinash@asappp.com",
+      "avinash@bookmycab.com",
+      "avinash@zealthix.com"
     ]
   },
   {
     "id": "405",
     "sno": 405,
     "name": "Subodh Gupta",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/subodhcgupta",
     "emails": [
@@ -4877,10 +4668,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Mumbai",
     "state": "Maharashtra",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "407",
@@ -4891,7 +4680,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "http://linkedin.com/in/knkvenkataraman",
     "emails": [
-      "venkataraman.knk@solv3.co.in\r\nknk@wipro.com"
+      "venkataraman.knk@solv3.co.in",
+      "knk@wipro.com"
     ]
   },
   {
@@ -4901,10 +4691,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Bengaluru",
     "state": "Karnataka",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "409",
@@ -4922,8 +4710,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "410",
     "sno": 410,
     "name": "Prakash Katama",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/prakash-katama-4045a322",
     "emails": [
@@ -4950,21 +4738,17 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Karnataka",
     "country": "India",
     "linkedin": "https://linkedin.com/in/graghunandan",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "413",
     "sno": 413,
     "name": "V P Rajesh",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/v-p-rajesh-cfa-788404a",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "414",
@@ -5010,21 +4794,17 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/sachinrtendulkar",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "418",
     "sno": 418,
     "name": "Shalini Srivastava",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/shalini-srivastava-1910ab94",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "419",
@@ -5042,20 +4822,18 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "420",
     "sno": 420,
     "name": "Ruchirans Jaipuria",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/ruchirans-jaipuria-77aab087",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "421",
     "sno": 421,
     "name": "Rajesh Ranavat",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/rajesh-ranavat-8561501a",
     "emails": [
@@ -5066,12 +4844,13 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "422",
     "sno": 422,
     "name": "Ajay Kaul",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/ajay-kaul-a85734",
     "emails": [
-      "ajay@agreeya.com\r\najay.kaul@agreeya.com"
+      "ajay@agreeya.com",
+      "ajay.kaul@agreeya.com"
     ]
   },
   {
@@ -5083,7 +4862,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/dhianu",
     "emails": [
-      "dhianu@fluidvc.in\r\ndhianu@agilityventures.in"
+      "dhianu@fluidvc.in",
+      "dhianu@agilityventures.in"
     ]
   },
   {
@@ -5102,13 +4882,11 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "425",
     "sno": 425,
     "name": "Anupam Saronwala",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/anupamsaronwala",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "426",
@@ -5118,9 +4896,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/amit-mehta-6b90b92",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "427",
@@ -5129,22 +4905,18 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Delhi",
     "state": "Delhi",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "428",
     "sno": 428,
     "name": "Sunil Kumar",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/sunilkumar7",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "429",
@@ -5174,8 +4946,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "431",
     "sno": 431,
     "name": "Ashish Sharma",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/pub/ashish-sharma/0/784/476/en",
     "emails": [
@@ -5186,13 +4958,11 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "432",
     "sno": 432,
     "name": "Ankur Gupta",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/ankurmnnit",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "433",
@@ -5202,9 +4972,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Tamil Nadu",
     "country": "India",
     "linkedin": "https://linkedin.com/in/padma-chandrasekaran-37752413",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "434",
@@ -5214,21 +4982,17 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Haryana",
     "country": "India",
     "linkedin": "https://linkedin.com/in/apurvachamaria",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "435",
     "sno": 435,
     "name": "Ankit Jain",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/jainankit01",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "436",
@@ -5238,9 +5002,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "http://linkedin.com/in/gulu-mirchandani-a0395312",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "437",
@@ -5251,7 +5013,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/avseq",
     "emails": [
-      "abhishek@xoxoday.com\r\nabhishek@giftxoxo.com"
+      "abhishek@xoxoday.com",
+      "abhishek@giftxoxo.com"
     ]
   },
   {
@@ -5286,9 +5049,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Haryana",
     "country": "India",
     "linkedin": "https://linkedin.com/in/rajeev-arora-5a11927b",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "441",
@@ -5298,9 +5059,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "http://linkedin.com/in/prakash-agrawal-559b21",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "442",
@@ -5310,9 +5069,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Karnataka",
     "country": "India",
     "linkedin": "http://linkedin.com/in/nagapr",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "443",
@@ -5334,21 +5091,17 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/shantanu-rastogi-4b39091",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "445",
     "sno": 445,
     "name": "Manish Shah",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/pub/manish-shah/17/738/8b1",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "446",
@@ -5381,22 +5134,18 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Mumbai",
     "state": "Maharashtra",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "449",
     "sno": 449,
     "name": "Nikhil Jain",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/nikhiljainiitb",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "450",
@@ -5405,10 +5154,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Hyderabad",
     "state": "Telangana",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "451",
@@ -5462,8 +5209,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "455",
     "sno": 455,
     "name": "Rahul Maroli",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/rahulmaroli",
     "emails": [
@@ -5490,28 +5237,27 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Delhi",
     "country": "India",
     "linkedin": "https://linkedin.com/pub/rajesh-agarwal/5/911/329",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "458",
     "sno": 458,
     "name": "Rishi Parti",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/rishi-parti-a97107a9",
     "emails": [
-      "rishi@infoxusa.com\r\nrishi@infox.com"
+      "rishi@infoxusa.com",
+      "rishi@infox.com"
     ]
   },
   {
     "id": "459",
     "sno": 459,
     "name": "Sunil Miranda",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/pub/sunil-miranda/2/3/725",
     "emails": [
@@ -5522,25 +5268,21 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "460",
     "sno": 460,
     "name": "Riddhi Vinod Shah",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "461",
     "sno": 461,
     "name": "Gopal Menon",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/gopal-menon-4550b481",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "462",
@@ -5551,7 +5293,9 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/niraj-singh-67159715",
     "emails": [
-      "niraj001@gmail.com\r\nniraj.singh@spinny.com\r\nniraj@myspinny.com"
+      "niraj001@gmail.com",
+      "niraj.singh@spinny.com",
+      "niraj@myspinny.com"
     ]
   },
   {
@@ -5562,9 +5306,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Tamil Nadu",
     "country": "India",
     "linkedin": "http://linkedin.com/in/sriram-viji-ba40774",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "464",
@@ -5586,9 +5328,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Karnataka",
     "country": "India",
     "linkedin": "https://linkedin.com/in/m-p-kumar-2499a9b",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "466",
@@ -5598,16 +5338,14 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/gautammadan",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "467",
     "sno": 467,
     "name": "Naveen Munjal",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/naveen-munjal-43176922",
     "emails": [
@@ -5621,10 +5359,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Delhi",
     "state": "Delhi",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "469",
@@ -5642,13 +5378,11 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "470",
     "sno": 470,
     "name": "Vineet Dhingra",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "471",
@@ -5657,10 +5391,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Hyderabad",
     "state": "Telangana",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "472",
@@ -5670,21 +5402,17 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Delhi",
     "country": "India",
     "linkedin": "http://linkedin.com/in/sonali-thapar-3543a859",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "473",
     "sno": 473,
     "name": "Manish Mathur",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/pub/manish-mathur/32/534/283",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "474",
@@ -5702,13 +5430,11 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "475",
     "sno": 475,
     "name": "Munir Thakor",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/munir-thakor-4a464422",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "476",
@@ -5717,22 +5443,18 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Mumbai",
     "state": "Maharashtra",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "477",
     "sno": 477,
     "name": "Nita Kapoor",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "478",
@@ -5743,20 +5465,19 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/ravish-naresh-72543359",
     "emails": [
-      "ravish@khatabook.com\r\nravish@kyte.ai"
+      "ravish@khatabook.com",
+      "ravish@kyte.ai"
     ]
   },
   {
     "id": "479",
     "sno": 479,
     "name": "Naresh Kumar Aggarwal",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/naresh-aggarwala-92642a37",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "480",
@@ -5766,9 +5487,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Delhi",
     "country": "India",
     "linkedin": "https://linkedin.com/in/rishabh-jain-8a9127126",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "481",
@@ -5777,10 +5496,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Delhi",
     "state": "Delhi",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "482",
@@ -5814,9 +5531,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Delhi",
     "country": "India",
     "linkedin": "https://linkedin.com/in/ajay-anand-a10a5b20",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "485",
@@ -5839,7 +5554,9 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/pradeep-gupta-41515a",
     "emails": [
-      "pradeep@ivycapventures.com\r\npg@cybermedia.co.in\r\npradeepg@cybermedia.co.in"
+      "pradeep@ivycapventures.com",
+      "pg@cybermedia.co.in",
+      "pradeepg@cybermedia.co.in"
     ]
   },
   {
@@ -5850,16 +5567,14 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Haryana",
     "country": "India\r\nIndia",
     "linkedin": "https://linkedin.com/in/shashank-kumar-798b258",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "488",
     "sno": 488,
     "name": "Abhishek Sharma",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India\r\nSingapore",
     "linkedin": "https://linkedin.com/in/abhishek78",
     "emails": [
@@ -5870,24 +5585,23 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "489",
     "sno": 489,
     "name": "Dharminder Singh Sandhu",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/dharminder-singh-56693222",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "490",
     "sno": 490,
     "name": "Himanshu Aggarwal",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/himanshuaggarwal",
     "emails": [
-      "himanshu.aggarwal@aspiringminds.in\r\nhimanshu@aspiringminds.com"
+      "himanshu.aggarwal@aspiringminds.in",
+      "himanshu@aspiringminds.com"
     ]
   },
   {
@@ -5906,12 +5620,13 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "492",
     "sno": 492,
     "name": "Ashok Kumar",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
+    "linkedin": "",
     "emails": [
-      "ashokj@nhb.org.in\r\nashok.kumar@nhb.org.in"
+      "ashokj@nhb.org.in",
+      "ashok.kumar@nhb.org.in"
     ]
   },
   {
@@ -5930,25 +5645,21 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "494",
     "sno": 494,
     "name": "Gaurav Jain",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/pub/gaurav-jain/7/988/551",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "495",
     "sno": 495,
     "name": "Rahul Basu",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/rahulbasu7",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "496",
@@ -5958,9 +5669,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Delhi",
     "country": "India",
     "linkedin": "https://linkedin.com/in/mohit-tandon-03b9046",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "497",
@@ -5970,9 +5679,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Delhi",
     "country": "India",
     "linkedin": "https://linkedin.com/in/harshvardhan-rajgarhia-79806234",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "498",
@@ -5982,9 +5689,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Delhi",
     "country": "India",
     "linkedin": "http://linkedin.com/in/rajan-jain-a5885b2b",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "499",
@@ -5994,9 +5699,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "http://linkedin.com/in/mayur-desai-578395116",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "500",
@@ -6007,7 +5710,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/samir-khurana-614446113",
     "emails": [
-      "samir@schandpublishing.com\r\nsamir.khurana@unaprime.com"
+      "samir@schandpublishing.com",
+      "samir.khurana@unaprime.com"
     ]
   },
   {
@@ -6026,37 +5730,31 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "502",
     "sno": 502,
     "name": "Tanmay Bhat",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/pub/tanmay-bhat/7/345/937/en",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "503",
     "sno": 503,
     "name": "Mahalingam K",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/mahalingam-krishnamurthy-0697904",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "504",
     "sno": 504,
     "name": "Ashish Goel",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/ashish-goel-b09b651",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "505",
@@ -6090,16 +5788,14 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/kalpana-maniar-68545b8",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "508",
     "sno": 508,
     "name": "Bharat Chadha",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/bcchadha",
     "emails": [
@@ -6138,9 +5834,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/unistala",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "512",
@@ -6150,16 +5844,14 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/ankurlighting",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "513",
     "sno": 513,
     "name": "Kartik Sharma",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/kartik-sharma-188614b",
     "emails": [
@@ -6174,9 +5866,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Karnataka",
     "country": "India",
     "linkedin": "https://linkedin.com/in/mohanalex",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "515",
@@ -6194,8 +5884,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "516",
     "sno": 516,
     "name": "Amit Dhanuka",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/amit-dhanuka-9463789",
     "emails": [
@@ -6222,21 +5912,17 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Delhi",
     "country": "India",
     "linkedin": "https://linkedin.com/in/p-agarwal",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "519",
     "sno": 519,
     "name": "Alok Bajpai",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "520",
@@ -6246,9 +5932,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Kerala",
     "country": "India",
     "linkedin": "https://linkedin.com/in/dqsalmaan",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "521",
@@ -6257,10 +5941,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Bengaluru",
     "state": "Karnataka",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "522",
@@ -6271,7 +5953,9 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/nitinsharma15",
     "emails": [
-      "nitin@firstprinciples.vc\r\nnitin@incrypt.co\r\nnitin@antler.co"
+      "nitin@firstprinciples.vc",
+      "nitin@incrypt.co",
+      "nitin@antler.co"
     ]
   },
   {
@@ -6294,9 +5978,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Delhi",
     "country": "India",
     "linkedin": "https://linkedin.com/in/mridul-upreti-a890aa8",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "525",
@@ -6317,22 +5999,18 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Mumbai",
     "state": "Maharashtra",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "527",
     "sno": 527,
     "name": "Niraj Dhanraj Chhajer",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "528",
@@ -6341,7 +6019,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Bengaluru",
     "state": "Karnataka",
     "country": "India",
-    "linkedin": "-",
+    "linkedin": "",
     "emails": [
       "tejas@mcaffeine.com"
     ]
@@ -6362,8 +6040,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "530",
     "sno": 530,
     "name": "Rijul Jain",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/rijuljain",
     "emails": [
@@ -6374,20 +6052,18 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "531",
     "sno": 531,
     "name": "Sukumar Uppalapati",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/sukumar-uppalapati-345bbb21",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "532",
     "sno": 532,
     "name": "Arpit Khandelwal",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/arpitkhandelwal",
     "emails": [
@@ -6410,25 +6086,21 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "534",
     "sno": 534,
     "name": "Anirudh Ravindra Somani",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "535",
     "sno": 535,
     "name": "Tanmaya Vats",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "536",
@@ -6438,9 +6110,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Delhi",
     "country": "India",
     "linkedin": "https://linkedin.com/in/akshay-chudasama-a6614862",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "537",
@@ -6462,9 +6132,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Uttar Pradesh",
     "country": "India",
     "linkedin": "https://linkedin.com/in/sandeep-batra-996814177",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "539",
@@ -6475,7 +6143,9 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/vikaschoudhury",
     "emails": [
-      "vikas@pivotventures.in\r\nvc@playbook.in\r\nvc@pivotventures.in"
+      "vikas@pivotventures.in",
+      "vc@playbook.in",
+      "vc@pivotventures.in"
     ]
   },
   {
@@ -6485,10 +6155,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Bengaluru",
     "state": "Karnataka",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "541",
@@ -6506,20 +6174,18 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "542",
     "sno": 542,
     "name": "Ankit Kedia",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/pub/ankit-kedia/5b/39/588",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "543",
     "sno": 543,
     "name": "Sandeep Agarwal",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/pureindianfoods",
     "emails": [
@@ -6535,20 +6201,19 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/agarwalvineet01",
     "emails": [
-      "vineet.agarwal@tcifreight.in\r\nvineet.agarwal@tcil.com"
+      "vineet.agarwal@tcifreight.in",
+      "vineet.agarwal@tcil.com"
     ]
   },
   {
     "id": "545",
     "sno": 545,
     "name": "Naresh Kumar",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/naresh-kumar-00116954",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "546",
@@ -6558,64 +6223,57 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Delhi",
     "country": "India",
     "linkedin": "https://linkedin.com/in/rajiv-agarwal-3a65308",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "547",
     "sno": 547,
     "name": "Neha Jain",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/ca-neha-jain-42157212b",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "548",
     "sno": 548,
     "name": "Lalit Kumar",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/lalitkgp",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "549",
     "sno": 549,
     "name": "Suresh Kumar",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
+    "linkedin": "",
     "emails": [
-      "kumar.s@thomsonreuters.com\r\nsuresh@farmbee.in"
+      "kumar.s@thomsonreuters.com",
+      "suresh@farmbee.in"
     ]
   },
   {
     "id": "550",
     "sno": 550,
     "name": "Pradeep Singh",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "551",
     "sno": 551,
     "name": "Jasminder Singh Gulati",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/gulatisinghj",
     "emails": [
@@ -6630,9 +6288,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Delhi",
     "country": "India",
     "linkedin": "https://linkedin.com/in/warikoo/en",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "553",
@@ -6641,7 +6297,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Chennai",
     "state": "Tamil Nadu",
     "country": "India",
-    "linkedin": "-",
+    "linkedin": "",
     "emails": [
       "shanmugam@freshdesk.com"
     ]
@@ -6654,9 +6310,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Haryana",
     "country": "India",
     "linkedin": "https://linkedin.com/in/vipinagarwal",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "555",
@@ -6667,7 +6321,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/patniamit",
     "emails": [
-      "amitp@nirvanaventures.in\r\namit@raayinvestments.com"
+      "amitp@nirvanaventures.in",
+      "amit@raayinvestments.com"
     ]
   },
   {
@@ -6679,15 +6334,16 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/venkkrishnan",
     "emails": [
-      "venk.krishnan@nuware.com\r\nvenk@nuventures.vc"
+      "venk.krishnan@nuware.com",
+      "venk@nuventures.vc"
     ]
   },
   {
     "id": "557",
     "sno": 557,
     "name": "Vikas Aggarwal",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/dr-vikas-aggarwal-5a3926b3",
     "emails": [
@@ -6701,7 +6357,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Bengaluru",
     "state": "Karnataka",
     "country": "India",
-    "linkedin": "-",
+    "linkedin": "",
     "emails": [
       "deepak@shivnaresh.in"
     ]
@@ -6710,8 +6366,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "559",
     "sno": 559,
     "name": "Abhishek Bansal",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/pub/abhishek-bansal/24/86/69b",
     "emails": [
@@ -6722,13 +6378,11 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "560",
     "sno": 560,
     "name": "Mohit Kumar",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/pub/mohit-kumar/26/4a3/101",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "561",
@@ -6738,16 +6392,14 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "http://linkedin.com/in/ankit-somani-b4384630",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "562",
     "sno": 562,
     "name": "Bharat Kumar",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/bkumar",
     "emails": [
@@ -6770,8 +6422,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "564",
     "sno": 564,
     "name": "Ganesh Iyer",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/iyerrganesh",
     "emails": [
@@ -6782,13 +6434,11 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "565",
     "sno": 565,
     "name": "Naveen Kumar",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/naveenkumarv019",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "566",
@@ -6830,25 +6480,21 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "569",
     "sno": 569,
     "name": "Ashish Garodia",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/agarodia",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "570",
     "sno": 570,
     "name": "Abhinav Jain",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/abhinavjain101",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "571",
@@ -6857,17 +6503,15 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Delhi",
     "state": "Delhi",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "572",
     "sno": 572,
     "name": "Suraj Saharan",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/suraj-saharan-94b3383",
     "emails": [
@@ -6883,20 +6527,19 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/vivekananda-hallekere-0483bb19",
     "emails": [
-      "vivekananda@bounceshare.com\r\nvivek@bounceshare.com"
+      "vivekananda@bounceshare.com",
+      "vivek@bounceshare.com"
     ]
   },
   {
     "id": "574",
     "sno": 574,
     "name": "Anuvrat Joshi",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/anuvrat-joshi-6b219112",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "575",
@@ -6906,9 +6549,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://www.linkedin.com/in/rahul-rathi-2769a5112/",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "576",
@@ -6918,9 +6559,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Karnataka",
     "country": "India",
     "linkedin": "http://linkedin.com/in/dharnish-bidlur-915801b9",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "577",
@@ -6938,13 +6577,11 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "578",
     "sno": 578,
     "name": "Bharat Puri",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "579",
@@ -6954,9 +6591,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/hemant-gupta-a278181",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "580",
@@ -6965,7 +6600,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Gurugram",
     "state": "Haryana",
     "country": "India",
-    "linkedin": "-",
+    "linkedin": "",
     "emails": [
       "pradeep.p@revv.co.in"
     ]
@@ -6978,21 +6613,17 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/farooqadam",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "582",
     "sno": 582,
     "name": "Rohit Rozario",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "583",
@@ -7010,25 +6641,24 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "584",
     "sno": 584,
     "name": "Vaibhav Gupta",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India\r\nSingapore",
     "linkedin": "http://linkedin.com/in/vaibhav-gupta-629568",
     "emails": [
-      "vishal@subbusbeverages.com\r\nvaibhav.gupta@udaan.com"
+      "vishal@subbusbeverages.com",
+      "vaibhav.gupta@udaan.com"
     ]
   },
   {
     "id": "585",
     "sno": 585,
     "name": "Nitin Dadoo",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/nitin-dadoo-7192a68",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "586",
@@ -7046,10 +6676,10 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "587",
     "sno": 587,
     "name": "Vishal Brahmbhatt",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
+    "linkedin": "",
     "emails": [
       "vishal@egniol.co.in"
     ]
@@ -7061,10 +6691,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Bengaluru",
     "state": "Karnataka",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "589",
@@ -7073,10 +6701,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Mumbai",
     "state": "Maharashtra",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "590",
@@ -7087,7 +6713,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/rgururaj",
     "emails": [
-      "ravi@qikpod.com\r\nravi@tie.org"
+      "ravi@qikpod.com",
+      "ravi@tie.org"
     ]
   },
   {
@@ -7097,22 +6724,18 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Mumbai",
     "state": "Maharashtra",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "592",
     "sno": 592,
     "name": "Mitesh Shah",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "593",
@@ -7123,7 +6746,9 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/showmedamani",
     "emails": [
-      "ad@artha.ventures\r\nad@artha.group\r\nanirudh@artha.vc"
+      "ad@artha.ventures",
+      "ad@artha.group",
+      "anirudh@artha.vc"
     ]
   },
   {
@@ -7134,16 +6759,14 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Karnataka",
     "country": "India",
     "linkedin": "https://linkedin.com/in/amitchaudhary7",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "595",
     "sno": 595,
     "name": "Rahul Mahipal",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/rahul-mahipal-406ab078",
     "emails": [
@@ -7157,10 +6780,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Lucknow",
     "state": "Uttar Pradesh",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "597",
@@ -7170,9 +6791,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Telangana",
     "country": "India",
     "linkedin": "https://linkedin.com/in/srinubabu-gedela-947317a",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "598",
@@ -7182,57 +6801,47 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/amardeb",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "599",
     "sno": 599,
     "name": "Anuj Khanna",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/anuj-khanna-0b3b387b",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "600",
     "sno": 600,
     "name": "Gopal Srinivasan",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "601",
     "sno": 601,
     "name": "Ramesh Damani",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/ramesh-damani-b901284",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "602",
     "sno": 602,
     "name": "Gopinath Padmanabhan",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/pgopins",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "603",
@@ -7266,9 +6875,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Tamil Nadu",
     "country": "India",
     "linkedin": "http://linkedin.com/in/navneet-agarwal-b5731341",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "606",
@@ -7279,7 +6886,10 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/madanpadaki",
     "emails": [
-      "madan@1bridge.one\r\nmadan@massentrepreneurship.org\r\nmadan.padaki@head-held-high.org\r\nmadan@tie.org"
+      "madan@1bridge.one",
+      "madan@massentrepreneurship.org",
+      "madan.padaki@head-held-high.org",
+      "madan@tie.org"
     ]
   },
   {
@@ -7289,7 +6899,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Mumbai",
     "state": "Maharashtra",
     "country": "India",
-    "linkedin": "-",
+    "linkedin": "",
     "emails": [
       "shrinivas.dempo@dempos.com"
     ]
@@ -7302,9 +6912,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Tamil Nadu",
     "country": "India",
     "linkedin": "https://linkedin.com/in/hetalsonpal",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "609",
@@ -7313,10 +6921,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Bengaluru",
     "state": "Karnataka",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "610",
@@ -7337,10 +6943,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Chandigarh",
     "state": "Union Territory Of Chandigarh",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "612",
@@ -7350,21 +6954,17 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Delhi",
     "country": "India",
     "linkedin": "https://linkedin.com/in/jainsandeepk",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "613",
     "sno": 613,
     "name": "Heena Jaffer",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "614",
@@ -7373,41 +6973,35 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Gurugram",
     "state": "Haryana",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "615",
     "sno": 615,
     "name": "Shashikant Chaudhary",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/shashichaudhary",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "616",
     "sno": 616,
     "name": "Narayanan Balakrishnan",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/narayanan-balakrishnan-26aa4515",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "617",
     "sno": 617,
     "name": "Krishna Lakamsani",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/krishnalakamsani",
     "emails": [
@@ -7418,20 +7012,18 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "618",
     "sno": 618,
     "name": "Mahesh Kumar Damani",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "619",
     "sno": 619,
     "name": "Kapil Gupta",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/kapil-gupta-937b78",
     "emails": [
@@ -7442,25 +7034,21 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "620",
     "sno": 620,
     "name": "Pawan Burad",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "621",
     "sno": 621,
     "name": "Chetan Gupta",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/chetan-gupta-768a151a",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "622",
@@ -7470,9 +7058,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Karnataka",
     "country": "India",
     "linkedin": "https://linkedin.com/in/nagendrabangalore",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "623",
@@ -7493,22 +7079,18 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Mumbai",
     "state": "Maharashtra",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "625",
     "sno": 625,
     "name": "Pawan Sharma",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/psharmaprofile",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "626",
@@ -7518,9 +7100,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Gujarat",
     "country": "India",
     "linkedin": "https://linkedin.com/in/nayan-parikh-99ba297",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "627",
@@ -7543,15 +7123,16 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/kuldeep-jain-587aab",
     "emails": [
-      "kuldeep.jain@cleanmax.com\r\nkuldeep_jain@cleanmaxsolar.com"
+      "kuldeep.jain@cleanmax.com",
+      "kuldeep_jain@cleanmaxsolar.com"
     ]
   },
   {
     "id": "629",
     "sno": 629,
     "name": "Sandeep Jain",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/sandeep-jain-028b013b",
     "emails": [
@@ -7562,22 +7143,20 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "630",
     "sno": 630,
     "name": "Manik Gupta",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "631",
     "sno": 631,
     "name": "Vikram Pandit",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
+    "linkedin": "",
     "emails": [
       "vikram@orogengroup.com"
     ]
@@ -7586,8 +7165,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "632",
     "sno": 632,
     "name": "Rajiv Sharma",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/rajivrsharma",
     "emails": [
@@ -7601,10 +7180,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Mumbai",
     "state": "Maharashtra",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "634",
@@ -7627,7 +7204,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/bhavinshah7",
     "emails": [
-      "bhavin@equirus.com\r\nbhavin@sameeksha.capital"
+      "bhavin@equirus.com",
+      "bhavin@sameeksha.capital"
     ]
   },
   {
@@ -7638,9 +7216,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Karnataka",
     "country": "India",
     "linkedin": "https://linkedin.com/in/reachsid",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "637",
@@ -7650,9 +7226,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/prashant-choksey-43027a1",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "638",
@@ -7661,29 +7235,25 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Bengaluru",
     "state": "Karnataka",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "639",
     "sno": 639,
     "name": "Vandana Jain",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/dr-vandana-jain-07b33b6",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "640",
     "sno": 640,
     "name": "Saumya Mittal",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/smittal87",
     "emails": [
@@ -7706,12 +7276,13 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "642",
     "sno": 642,
     "name": "Praveen Sinha",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/praveensinhajabong",
     "emails": [
-      "praveen@aquabrim.com\r\npraveen@pincap.in"
+      "praveen@aquabrim.com",
+      "praveen@pincap.in"
     ]
   },
   {
@@ -7722,9 +7293,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Delhi",
     "country": "India",
     "linkedin": "https://linkedin.com/in/abhishek-goyal-14839876",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "644",
@@ -7742,13 +7311,11 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "645",
     "sno": 645,
     "name": "Rahul Agarwal",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/rahul-agarwal-952694104",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "646",
@@ -7770,16 +7337,14 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Karnataka",
     "country": "India",
     "linkedin": "https://linkedin.com/in/rajiv-kuchhal-4557a42",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "648",
     "sno": 648,
     "name": "Sumer Juneja",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/sumer-juneja-48288626",
     "emails": [
@@ -7806,9 +7371,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "http://linkedin.com/in/shahbhupen",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "651",
@@ -7826,13 +7389,11 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "652",
     "sno": 652,
     "name": "Varun Jain",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/pub/varun-jain/8/126/909",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "653",
@@ -7843,15 +7404,16 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/csandipan",
     "emails": [
-      "csandipan@mihup.com\r\nsandipan@xelpmoc.in"
+      "csandipan@mihup.com",
+      "sandipan@xelpmoc.in"
     ]
   },
   {
     "id": "654",
     "sno": 654,
     "name": "Prateek Jain",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/prateek-jain-8774b636",
     "emails": [
@@ -7862,44 +7424,42 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "655",
     "sno": 655,
     "name": "Pallav Pandey",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/pallavpandey",
     "emails": [
-      "pallav.pandey@knowlarity.com\r\npallav@theuolo.com\r\npallav.pandey@theuolo.com"
+      "pallav.pandey@knowlarity.com",
+      "pallav@theuolo.com",
+      "pallav.pandey@theuolo.com"
     ]
   },
   {
     "id": "656",
     "sno": 656,
     "name": "Sachin Oswal",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/sachin-oswal-60575a63",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "657",
     "sno": 657,
     "name": "Shiven Malhotra",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "658",
     "sno": 658,
     "name": "Akshay Jain",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/akshayj",
     "emails": [
@@ -7914,40 +7474,34 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Delhi",
     "country": "India",
     "linkedin": "https://linkedin.com/in/sanjaykrishnagoyal",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "660",
     "sno": 660,
     "name": "Vinay Singh",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/vinay-singh-74596643",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "661",
     "sno": 661,
     "name": "Nitin Jain",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "662",
     "sno": 662,
     "name": "Vinod Sood",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/vinod-sood-2131012",
     "emails": [
@@ -7958,8 +7512,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "663",
     "sno": 663,
     "name": "Aniketh Jain",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/anikethjain",
     "emails": [
@@ -7974,21 +7528,17 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/pranabh-mody-889b143",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "665",
     "sno": 665,
     "name": "Arvind Srivastava",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/arvind-srivastava-7a6236",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "666",
@@ -7997,22 +7547,18 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Bengaluru",
     "state": "Karnataka",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "667",
     "sno": 667,
     "name": "Srikanth Iyengar",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "668",
@@ -8023,7 +7569,9 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/karanbhagat360one",
     "emails": [
-      "karan@iiflw.com\r\nkaran.bhagat@india-alt.com\r\nkaran@360.one"
+      "karan@iiflw.com",
+      "karan.bhagat@india-alt.com",
+      "karan@360.one"
     ]
   },
   {
@@ -8042,13 +7590,11 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "670",
     "sno": 670,
     "name": "Neha Sharma",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/neha-sharma-2a642512",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "671",
@@ -8059,7 +7605,9 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/vinodkeni",
     "emails": [
-      "vinod.keni@100unicorns.in\r\nvkeni@peachtreeadvisors.com\r\nvinod.keni@9unicorns.in"
+      "vinod.keni@100unicorns.in",
+      "vkeni@peachtreeadvisors.com",
+      "vinod.keni@9unicorns.in"
     ]
   },
   {
@@ -8082,9 +7630,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/aaryaman-vir-shah-15721952",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "674",
@@ -8106,33 +7652,27 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Chhattisgarh",
     "country": "India",
     "linkedin": "https://linkedin.com/in/ram-kumar-kakani-00033b5",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "676",
     "sno": 676,
     "name": "N Gautam",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/karthikreddyb",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "677",
     "sno": 677,
     "name": "Alok Sethi",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "678",
@@ -8142,9 +7682,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "http://linkedin.com/pub/sharad-sanghi/0/7b/394",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "679",
@@ -8154,21 +7692,17 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Uttar Pradesh",
     "country": "India",
     "linkedin": "http://linkedin.com/in/sanjay-nagi-1b4508",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "680",
     "sno": 680,
     "name": "Arjun Seth",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/arjun-seth-1259807b",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "681",
@@ -8186,8 +7720,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "682",
     "sno": 682,
     "name": "Vivek Shah",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/vivekajayshah",
     "emails": [
@@ -8198,8 +7732,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "683",
     "sno": 683,
     "name": "Thomas Mathew",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/tmathew2010",
     "emails": [
@@ -8210,8 +7744,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "684",
     "sno": 684,
     "name": "Shantanu Ghosh",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/shanghosh",
     "emails": [
@@ -8226,40 +7760,34 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Karnataka",
     "country": "India",
     "linkedin": "http://linkedin.com/in/akshayvsinghal",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "686",
     "sno": 686,
     "name": "Alagu Periyannan",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/alperi",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "687",
     "sno": 687,
     "name": "Mayank Agarwal",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "688",
     "sno": 688,
     "name": "Venkat Iyer",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/pub/venkat-iyer/3/9a1/485",
     "emails": [
@@ -8270,61 +7798,51 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "689",
     "sno": 689,
     "name": "Bhejash Joshi",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/bheshaj",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "690",
     "sno": 690,
     "name": "Sanjeev Minocha",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/sanjeevminocha",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "691",
     "sno": 691,
     "name": "Jatinder Aneja",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "692",
     "sno": 692,
     "name": "Venkatram Krishnan",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "693",
     "sno": 693,
     "name": "Deepak Maheshwari",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/deepak-maheshwari-0605b86",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "694",
@@ -8342,8 +7860,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "695",
     "sno": 695,
     "name": "Vikash Agrawal",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/vik-agrawal-a6285",
     "emails": [
@@ -8358,9 +7876,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/anshoogaur",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "697",
@@ -8378,13 +7894,11 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "698",
     "sno": 698,
     "name": "Subir Mehra",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/subir-mehra-8b16896",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "699",
@@ -8394,9 +7908,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Uttar Pradesh",
     "country": "India",
     "linkedin": "http://linkedin.com/pub/amit-sinha/1/7a6/8a3",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "700",
@@ -8406,42 +7918,36 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Karnataka",
     "country": "India",
     "linkedin": "https://linkedin.com/in/p-k-gopalakrishnan-pkg-10a11a15",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "701",
     "sno": 701,
     "name": "Chris Schagen",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "702",
     "sno": 702,
     "name": "Rekha Jhunjhunwala",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "703",
     "sno": 703,
     "name": "Sarthak Misra",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
+    "linkedin": "",
     "emails": [
       "sarthak@platestheapp.com"
     ]
@@ -8450,8 +7956,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "704",
     "sno": 704,
     "name": "Shamir Karkal",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/shamirkarkal",
     "emails": [
@@ -8462,20 +7968,18 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "705",
     "sno": 705,
     "name": "Khetan Ashok Radhavallabh",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/ashok-khetan-2b3303a3",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "706",
     "sno": 706,
     "name": "Ashok K Shah",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/ashok-k-shah-96341012a",
     "emails": [
@@ -8486,8 +7990,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "707",
     "sno": 707,
     "name": "Neeraj Gupta",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/neeraj-gupta-0799961",
     "emails": [
@@ -8498,8 +8002,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "708",
     "sno": 708,
     "name": "Sandeep Soni",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/sandeep-soni-41748a2b0",
     "emails": [
@@ -8525,10 +8029,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Chennai",
     "state": "Tamil Nadu",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "711",
@@ -8539,20 +8041,19 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/satishkumar-anavangot-377a55239",
     "emails": [
-      "anavangot@switchon.io\r\nsathish@thechennaiangels.com"
+      "anavangot@switchon.io",
+      "sathish@thechennaiangels.com"
     ]
   },
   {
     "id": "712",
     "sno": 712,
     "name": "Sachin Gupta",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "713",
@@ -8561,10 +8062,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Mumbai",
     "state": "Maharashtra",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "714",
@@ -8574,9 +8073,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/subhendu-mandal-990587",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "715",
@@ -8586,9 +8083,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Delhi",
     "country": "India",
     "linkedin": "http://linkedin.com/in/sanjeev-kumar-gupta-23547923",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "716",
@@ -8597,29 +8092,25 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Bengaluru",
     "state": "Karnataka",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "717",
     "sno": 717,
     "name": "Raghav Singhal",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/raghav-singhal-34893086",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "718",
     "sno": 718,
     "name": "Ravi Saxena",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/ravi-saxena-59802ba",
     "emails": [
@@ -8642,8 +8133,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "720",
     "sno": 720,
     "name": "Manoj Jain",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/manoj3003",
     "emails": [
@@ -8658,9 +8149,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://www.linkedin.com/in/prashantmehtawg97/",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "722",
@@ -8670,9 +8159,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Karnataka",
     "country": "India",
     "linkedin": "https://linkedin.com/in/anurag-agrawal-77451339",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "723",
@@ -8681,10 +8168,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Gurugram",
     "state": "Haryana",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "724",
@@ -8694,9 +8179,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Delhi",
     "country": "India",
     "linkedin": "https://linkedin.com/in/siddharth-shah-aa9950178",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "725",
@@ -8705,7 +8188,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Noida",
     "state": "Uttar Pradesh",
     "country": "India",
-    "linkedin": "-",
+    "linkedin": "",
     "emails": [
       "priyank.shanker-garg@taxspanner.com"
     ]
@@ -8714,13 +8197,11 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "726",
     "sno": 726,
     "name": "Pawan Gupta",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/pub/pawan-gupta/20/a54/311",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "727",
@@ -8741,10 +8222,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Delhi",
     "state": "Delhi",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "729",
@@ -8753,7 +8232,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Mumbai",
     "state": "Maharashtra",
     "country": "India",
-    "linkedin": "-",
+    "linkedin": "",
     "emails": [
       "r.subramanian@tcs.com"
     ]
@@ -8766,9 +8245,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/pareshpmadani",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "731",
@@ -8790,9 +8267,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Delhi",
     "country": "India",
     "linkedin": "https://linkedin.com/in/vipulprakash",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "733",
@@ -8801,22 +8276,18 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Mumbai",
     "state": "Maharashtra",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "734",
     "sno": 734,
     "name": "Narendra Rathi",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "735",
@@ -8825,10 +8296,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Bengaluru",
     "state": "Karnataka",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "736",
@@ -8838,21 +8307,17 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/nehaagg",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "737",
     "sno": 737,
     "name": "Sumer Sethi",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/sumersethi",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "738",
@@ -8862,9 +8327,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/virat-kohli-904304304",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "739",
@@ -8874,9 +8337,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Tamil Nadu",
     "country": "India",
     "linkedin": "http://linkedin.com/in/elango-p-3425321",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "740",
@@ -8885,10 +8346,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Mumbai",
     "state": "Maharashtra",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "741",
@@ -8910,21 +8369,17 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Karnataka",
     "country": "India",
     "linkedin": "https://linkedin.com/in/vinodkumarnagarajan",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "743",
     "sno": 743,
     "name": "Aditya Gupta",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/aditya-gupta-36a5543",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "744",
@@ -8933,17 +8388,15 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Mumbai",
     "state": "Maharashtra",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "745",
     "sno": 745,
     "name": "Gautam Khanna",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/khannag",
     "emails": [
@@ -8958,21 +8411,17 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/amitsinghthakur",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "747",
     "sno": 747,
     "name": "Mohit Garg",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/mohitgarg",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "748",
@@ -8993,22 +8442,18 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Delhi",
     "state": "Delhi",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "750",
     "sno": 750,
     "name": "Apoorv Sharma",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/pub/apoorv-sharma/87/b15/15a",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "751",
@@ -9018,16 +8463,14 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Karnataka",
     "country": "India",
     "linkedin": "https://linkedin.com/in/vinay-jain-91a65314",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "752",
     "sno": 752,
     "name": "Sandeep Gupta",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/pub/sandeep-gupta/5/219/476",
     "emails": [
@@ -9043,15 +8486,17 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/siddharth-mehta-93997915",
     "emails": [
-      "siddharth@spanache.net\r\nsiddharth@spanache.vc\r\nsiddharth@syndrometech.net"
+      "siddharth@spanache.net",
+      "siddharth@spanache.vc",
+      "siddharth@syndrometech.net"
     ]
   },
   {
     "id": "754",
     "sno": 754,
     "name": "Sudhir Kamath",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/kamathsudhir",
     "emails": [
@@ -9065,10 +8510,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Bengaluru",
     "state": "Karnataka",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "756",
@@ -9086,13 +8529,11 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "757",
     "sno": 757,
     "name": "Chirag Praful Shah",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/cachiragshah",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "758",
@@ -9103,7 +8544,9 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://www.linkedin.com/in/farooq-a-oomerbhoy-94914a5/?originalSubdomain=in",
     "emails": [
-      "farooq@trilliumvc.com\r\nfarooq@oriosvp.com\r\nfarooq@faoventures.com"
+      "farooq@trilliumvc.com",
+      "farooq@oriosvp.com",
+      "farooq@faoventures.com"
     ]
   },
   {
@@ -9126,9 +8569,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Delhi",
     "country": "India",
     "linkedin": "https://linkedin.com/in/naveen-sangari-45590152",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "761",
@@ -9146,25 +8587,21 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "762",
     "sno": 762,
     "name": "Neeraj Tyagi",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/neerajemotionfilms",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "763",
     "sno": 763,
     "name": "Rajeev Krishnan",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/rajeevkrishnan",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "764",
@@ -9186,16 +8623,14 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Karnataka",
     "country": "India",
     "linkedin": "http://linkedin.com/in/rakesh-kumar-3234739",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "766",
     "sno": 766,
     "name": "Pankaj Agarwal",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/pankajagarwal",
     "emails": [
@@ -9210,16 +8645,14 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "West Bengal",
     "country": "India",
     "linkedin": "http://linkedin.com/in/narendrashyamsukha",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "768",
     "sno": 768,
     "name": "Rahul Singh",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/pub/rahul-singh/25/702/168",
     "emails": [
@@ -9242,25 +8675,24 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "770",
     "sno": 770,
     "name": "Shuchin Bajaj",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/shuchin-bajaj-732a2217",
     "emails": [
-      "bajaj.s@ujalacygnus.com\r\nbajaj.s@cygnushospitals.com"
+      "bajaj.s@ujalacygnus.com",
+      "bajaj.s@cygnushospitals.com"
     ]
   },
   {
     "id": "771",
     "sno": 771,
     "name": "Nabendu Bhattacharyya",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "772",
@@ -9269,22 +8701,18 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Gurugram",
     "state": "Haryana",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "773",
     "sno": 773,
     "name": "Bhaskar Raju Konduru",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/bhaskar-raju-konduru-42117718",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "774",
@@ -9294,21 +8722,17 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "http://linkedin.com/in/ashokkumardamani",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "775",
     "sno": 775,
     "name": "Prashasta Seth",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/prashasta-seth-3b3b691",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "776",
@@ -9319,7 +8743,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/leobhatnagar",
     "emails": [
-      "anurag.bhatnagar@shiftalt.capital\r\nanurag@shiftalt.capital"
+      "anurag.bhatnagar@shiftalt.capital",
+      "anurag@shiftalt.capital"
     ]
   },
   {
@@ -9330,9 +8755,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Telangana",
     "country": "India",
     "linkedin": "https://linkedin.com/in/amul-sanghani-24723bb",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "778",
@@ -9350,8 +8773,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "779",
     "sno": 779,
     "name": "Sarfaraz Khimani",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://in.linkedin.com/pub/sarfaraz-khimani/11/7b3/35",
     "emails": [
@@ -9362,13 +8785,11 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "780",
     "sno": 780,
     "name": "Vikram Singh",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/vikram-singh-05116448",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "781",
@@ -9378,9 +8799,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/vikramsud",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "782",
@@ -9398,8 +8817,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "783",
     "sno": 783,
     "name": "Sanjay Bahl",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/sanjay-bahl-101933133",
     "emails": [
@@ -9413,10 +8832,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Bengaluru",
     "state": "Karnataka",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "785",
@@ -9439,7 +8856,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/mayank-bidawatka-028b2a1",
     "emails": [
-      "mb@themediaant.com\r\nmayank.bidawatka@billionhearts.co"
+      "mb@themediaant.com",
+      "mayank.bidawatka@billionhearts.co"
     ]
   },
   {
@@ -9450,9 +8868,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "http://linkedin.com/in/ashish-mody-5b312016",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "788",
@@ -9462,9 +8878,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/nitesh-damani-19394b18",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "789",
@@ -9498,9 +8912,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Karnataka",
     "country": "India",
     "linkedin": "https://linkedin.com/in/kmazumdarshaw",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "792",
@@ -9509,10 +8921,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Delhi",
     "state": "Delhi",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "793",
@@ -9530,8 +8940,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "794",
     "sno": 794,
     "name": "Anand Agarwal",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/anandagarwalsspl",
     "emails": [
@@ -9547,7 +8957,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/harshj22",
     "emails": [
-      "harsh.jain@dream11.com\r\nharsh@dream11.com"
+      "harsh.jain@dream11.com",
+      "harsh@dream11.com"
     ]
   },
   {
@@ -9569,7 +8980,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Pune",
     "state": "Maharashtra",
     "country": "India",
-    "linkedin": "-",
+    "linkedin": "",
     "emails": [
       "acp@seruminstitute.com"
     ]
@@ -9578,8 +8989,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "798",
     "sno": 798,
     "name": "Devesh Sachdev",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/devesh-sachdev-a64b2918",
     "emails": [
@@ -9594,40 +9005,34 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Delhi",
     "country": "India",
     "linkedin": "https://linkedin.com/in/arihant-jain-15016b2",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "800",
     "sno": 800,
     "name": "PS Jayakumar",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "801",
     "sno": 801,
     "name": "Ashok Singh",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/ashok-singh-b298816",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "802",
     "sno": 802,
     "name": "Deepak Gupta",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/deepak-gupta-1a9a394",
     "emails": [
@@ -9638,13 +9043,11 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "803",
     "sno": 803,
     "name": "Sanjay Kamlani",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/sanjaykamlani",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "804",
@@ -9666,16 +9069,14 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/sayalikaranjkar",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "806",
     "sno": 806,
     "name": "Meena Ganesh",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/pub/meena-ganesh/5/79/946",
     "emails": [
@@ -9689,10 +9090,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Gurugram",
     "state": "Haryana",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "808",
@@ -9713,7 +9112,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Gurugram",
     "state": "Haryana",
     "country": "India",
-    "linkedin": "-",
+    "linkedin": "",
     "emails": [
       "girish.patel@sterlinghospitals.com"
     ]
@@ -9726,52 +9125,44 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/azaykumar",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "811",
     "sno": 811,
     "name": "Swaminathan Aiyar",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/pub/swaminathan-aiyar/0/51/92",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "812",
     "sno": 812,
     "name": "Ankur Modi",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/modiankur",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "813",
     "sno": 813,
     "name": "Shankar Maruwada",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "814",
     "sno": 814,
     "name": "Saurabh Mittal",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/saurabh-mittal-6455628",
     "emails": [
@@ -9782,8 +9173,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "815",
     "sno": 815,
     "name": "Apurva Shah",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/apurva-shah-2a75954",
     "emails": [
@@ -9811,43 +9202,41 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/balakrishna-adiga-8117111",
     "emails": [
-      "balakrishna.adiga@isoninnovation.com\r\nbadiga@prachetascapital.com"
+      "balakrishna.adiga@isoninnovation.com",
+      "badiga@prachetascapital.com"
     ]
   },
   {
     "id": "818",
     "sno": 818,
     "name": "Anthony Thomas",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/anthony-thomas-a35b9835",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "819",
     "sno": 819,
     "name": "Rajesh Patil",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/pub/rajesh-patil/34/a14/b3b",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "820",
     "sno": 820,
     "name": "Ronnie Screwvala",
-    "city": "-",
+    "city": "",
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/ronnie-screwvala-83133994",
     "emails": [
-      "ronnie@upgrad.com\r\nronnie.screwvala@unilazer.com"
+      "ronnie@upgrad.com",
+      "ronnie.screwvala@unilazer.com"
     ]
   },
   {
@@ -9859,7 +9248,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/ankursingla1",
     "emails": [
-      "ankur@akosha.com\r\nankur.singla@getonedirect.com"
+      "ankur@akosha.com",
+      "ankur.singla@getonedirect.com"
     ]
   },
   {
@@ -9871,32 +9261,30 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/azhariqubal",
     "emails": [
-      "azhar@newsinshorts.com\r\nazhar@inshorts.group\r\nazhar@inshorts.com"
+      "azhar@newsinshorts.com",
+      "azhar@inshorts.group",
+      "azhar@inshorts.com"
     ]
   },
   {
     "id": "823",
     "sno": 823,
     "name": "Sanjay Arora",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://in.linkedin.com/pub/sanjay-arora/11/612/876",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "824",
     "sno": 824,
     "name": "Ramanathan V",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/ramanathan-v-7826105",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "825",
@@ -9906,21 +9294,17 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Uttar Pradesh",
     "country": "India",
     "linkedin": "http://linkedin.com/in/vipinarora1",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "826",
     "sno": 826,
     "name": "Atul Luthra",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/atulluthra",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "827",
@@ -9930,33 +9314,27 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/apurvaparekh",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "828",
     "sno": 828,
     "name": "Vallabh Bhanshali",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "829",
     "sno": 829,
     "name": "Yogesh Bathia",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/yogesh-bathia-02944910",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "830",
@@ -9967,7 +9345,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/gauravbhatnagar",
     "emails": [
-      "gaurav@tbo.com\r\ngaurav@travelboutiqueonline.com"
+      "gaurav@tbo.com",
+      "gaurav@travelboutiqueonline.com"
     ]
   },
   {
@@ -9991,7 +9370,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/sheetalbahl",
     "emails": [
-      "sb@growx.vc\r\nsheetal@merakventures.com"
+      "sb@growx.vc",
+      "sheetal@merakventures.com"
     ]
   },
   {
@@ -10010,8 +9390,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "834",
     "sno": 834,
     "name": "Shiv Babbar",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/shiv-babbar-19a1026b",
     "emails": [
@@ -10050,9 +9430,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Karnataka",
     "country": "India",
     "linkedin": "https://linkedin.com/in/visubramaniam",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "838",
@@ -10061,10 +9439,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Mumbai",
     "state": "Maharashtra",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "839",
@@ -10082,13 +9458,11 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "840",
     "sno": 840,
     "name": "Himanshu Goel",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/hkgoel",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "841",
@@ -10097,34 +9471,28 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Mumbai",
     "state": "Maharashtra",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "842",
     "sno": 842,
     "name": "Ruchir Dixit",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "843",
     "sno": 843,
     "name": "Ramanaidu Daggubati",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "844",
@@ -10133,10 +9501,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Mumbai",
     "state": "Maharashtra",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "845",
@@ -10146,16 +9512,14 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Tamil Nadu",
     "country": "India",
     "linkedin": "http://linkedin.com/in/abdulqadirbuhari",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "846",
     "sno": 846,
     "name": "Sushil Mehta",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/sushil-mehta-326177a1",
     "emails": [
@@ -10170,16 +9534,14 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Tamil Nadu",
     "country": "India",
     "linkedin": "https://linkedin.com/in/jaygovindarajan",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "848",
     "sno": 848,
     "name": "Milan Shah",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/milan-shah-39528547",
     "emails": [
@@ -10193,21 +9555,20 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Bengaluru",
     "state": "Karnataka",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "850",
     "sno": 850,
     "name": "Nimish Sanghi",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/nsanghi",
     "emails": [
-      "nimish.sanghi@paybooks.in\r\nnimish.sanghi@soais.com"
+      "nimish.sanghi@paybooks.in",
+      "nimish.sanghi@soais.com"
     ]
   },
   {
@@ -10229,22 +9590,18 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Delhi",
     "state": "Delhi",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "853",
     "sno": 853,
     "name": "Sathappan Visvanathan",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "854",
@@ -10262,20 +9619,18 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "855",
     "sno": 855,
     "name": "Amit Gupta",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "856",
     "sno": 856,
     "name": "Hiren Ashok Kapasiawala",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/hkapasia",
     "emails": [
@@ -10286,13 +9641,11 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "857",
     "sno": 857,
     "name": "Tejas Shah",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/tejasshah2",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "858",
@@ -10314,33 +9667,27 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Madhya Pradesh",
     "country": "India",
     "linkedin": "http://linkedin.com/in/singhpallav",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "860",
     "sno": 860,
     "name": "Rohit Kaushal",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "861",
     "sno": 861,
     "name": "Rahul Mukim",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "862",
@@ -10349,29 +9696,25 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Bengaluru",
     "state": "Karnataka",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "863",
     "sno": 863,
     "name": "Rajesh Sud",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/rajesh-sud-bb94381a",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "864",
     "sno": 864,
     "name": "Sumit Gupta",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/guptasumit",
     "emails": [
@@ -10422,9 +9765,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/ajay-garg-95889",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "869",
@@ -10442,8 +9783,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "870",
     "sno": 870,
     "name": "Puneet Mittal",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/puneet-mittal-02b89120",
     "emails": [
@@ -10478,13 +9819,11 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "873",
     "sno": 873,
     "name": "Sunil Chawla",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "874",
@@ -10493,10 +9832,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Hyderabad",
     "state": "Telangana",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "875",
@@ -10514,37 +9851,31 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "876",
     "sno": 876,
     "name": "Jesal Sanghvi",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "877",
     "sno": 877,
     "name": "Vivek Lodha",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "878",
     "sno": 878,
     "name": "Kalpana Babu",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "879",
@@ -10553,22 +9884,18 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Bengaluru",
     "state": "Karnataka",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "880",
     "sno": 880,
     "name": "Sudha Gopal",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/gopal-s-0b410418",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "881",
@@ -10591,7 +9918,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/bhawnabhatnagar",
     "emails": [
-      "bhawna@wefounderscircle.com\r\nbhawna@wefoundercircle.com"
+      "bhawna@wefounderscircle.com",
+      "bhawna@wefoundercircle.com"
     ]
   },
   {
@@ -10601,10 +9929,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Mumbai",
     "state": "Maharashtra",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "884",
@@ -10626,9 +9952,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Delhi",
     "country": "India",
     "linkedin": "http://linkedin.com/in/anjali-malhotra-17505525",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "886",
@@ -10637,10 +9961,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Bengaluru",
     "state": "Karnataka",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "887",
@@ -10650,21 +9972,17 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Karnataka",
     "country": "India",
     "linkedin": "https://linkedin.com/pub/parthasarathy-s/15/8ab/630",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "888",
     "sno": 888,
     "name": "Aashish Pitale",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "889",
@@ -10674,16 +9992,14 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Delhi",
     "country": "India",
     "linkedin": "https://linkedin.com/in/sandhya-chaudhary-b997345",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "890",
     "sno": 890,
     "name": "Aniket Jindal",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/aniket-jindal-23894365",
     "emails": [
@@ -10694,25 +10010,21 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "891",
     "sno": 891,
     "name": "Surendra Goyal",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "892",
     "sno": 892,
     "name": "Sharat Goyal",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/sharat-goyal-79858a6",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "893",
@@ -10721,10 +10033,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Washim",
     "state": "Maharashtra",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "894",
@@ -10735,15 +10045,16 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/vinay-bansal-383b035",
     "emails": [
-      "vinay@ipventures.in\r\nvinay@phy-sis.com"
+      "vinay@ipventures.in",
+      "vinay@phy-sis.com"
     ]
   },
   {
     "id": "895",
     "sno": 895,
     "name": "Sandeep Gupta",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/9sandeepg",
     "emails": [
@@ -10757,10 +10068,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Jalandhar",
     "state": "Punjab",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "897",
@@ -10770,9 +10079,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/satish-khanna-599b78",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "898",
@@ -10782,9 +10089,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/naveen-kshatriya-90a5068",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "899",
@@ -10794,9 +10099,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Kerala",
     "country": "India",
     "linkedin": "https://linkedin.com/in/anthonythomasa",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "900",
@@ -10814,8 +10117,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "901",
     "sno": 901,
     "name": "Yagnesh Sanghrajka",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/yagnesh270766",
     "emails": [
@@ -10831,20 +10134,19 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/rajeevmecheri",
     "emails": [
-      "rajeev@thechennaiangels.com\r\nrajeev@mecheri.in"
+      "rajeev@thechennaiangels.com",
+      "rajeev@mecheri.in"
     ]
   },
   {
     "id": "903",
     "sno": 903,
     "name": "Vikash Agarwal",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/thevikashagarwal",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "904",
@@ -10866,16 +10168,14 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Karnataka",
     "country": "India",
     "linkedin": "https://linkedin.com/in/dineshgodara",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "906",
     "sno": 906,
     "name": "Sunder Nookala",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/sundernookala",
     "emails": [
@@ -10886,12 +10186,13 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "907",
     "sno": 907,
     "name": "Mohit Agarwal",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/mohit-agarwal-1160321",
     "emails": [
-      "agarwal@emissioncritical.io\r\nmohit@emissioncritical.io"
+      "agarwal@emissioncritical.io",
+      "mohit@emissioncritical.io"
     ]
   },
   {
@@ -10910,44 +10211,41 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "909",
     "sno": 909,
     "name": "Shaival Desai",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/shaival-desai-3a564636",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "910",
     "sno": 910,
     "name": "Sumit Kumar",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/sumitkr92",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "911",
     "sno": 911,
     "name": "Anil Sharma",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/anil-sharma-49a67312",
     "emails": [
-      "anil.sharma@phicommerce.com\r\nanil.sharma@payphi.com"
+      "anil.sharma@phicommerce.com",
+      "anil.sharma@payphi.com"
     ]
   },
   {
     "id": "912",
     "sno": 912,
     "name": "Nitin Kumaar Garg",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/nitinkgarg1",
     "emails": [
@@ -10958,8 +10256,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "913",
     "sno": 913,
     "name": "Amit Khanna",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/amit-khanna-59155a12",
     "emails": [
@@ -10985,34 +10283,28 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Bengaluru",
     "state": "Karnataka",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "916",
     "sno": 916,
     "name": "Mohit Gupta",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "917",
     "sno": 917,
     "name": "Sudha Ravi",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "918",
@@ -11022,9 +10314,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Delhi",
     "country": "India",
     "linkedin": "https://linkedin.com/in/ankur-gupta-3b75a956",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "919",
@@ -11035,7 +10325,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/sujayath",
     "emails": [
-      "sujayath@shopup.org\r\nsujayath@voonik.com"
+      "sujayath@shopup.org",
+      "sujayath@voonik.com"
     ]
   },
   {
@@ -11047,7 +10338,9 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/vikasaggarwal78",
     "emails": [
-      "va@avinya.vc\r\nvikas@invstt.com\r\nvikas@wefoundercircle.com"
+      "va@avinya.vc",
+      "vikas@invstt.com",
+      "vikas@wefoundercircle.com"
     ]
   },
   {
@@ -11058,9 +10351,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Telangana",
     "country": "India",
     "linkedin": "https://linkedin.com/in/srikanth-99",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "922",
@@ -11071,7 +10362,9 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/mayank-kumar-5573243",
     "emails": [
-      "mayank@upgradabroad.com\r\nmayank@borderplus.co\r\nmayank@upgrad.com"
+      "mayank@upgradabroad.com",
+      "mayank@borderplus.co",
+      "mayank@upgrad.com"
     ]
   },
   {
@@ -11083,7 +10376,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/pub/rohit-sharma/2/253/775",
     "emails": [
-      "rohit.sharma@pokkt.com\r\nrohit@pokkt.com"
+      "rohit.sharma@pokkt.com",
+      "rohit@pokkt.com"
     ]
   },
   {
@@ -11106,21 +10400,17 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "http://linkedin.com/in/vishal-jain-9221238",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "926",
     "sno": 926,
     "name": "Rajesh Agrawal",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/rajeshagarwal1",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "927",
@@ -11129,10 +10419,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Mumbai",
     "state": "Maharashtra",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "928",
@@ -11155,20 +10443,19 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/padmajaruparel",
     "emails": [
-      "padmaja@iangroup.vc\r\npadmaja@indianangelnetwork.com"
+      "padmaja@iangroup.vc",
+      "padmaja@indianangelnetwork.com"
     ]
   },
   {
     "id": "930",
     "sno": 930,
     "name": "Sanjay Prasad",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/pub/3/2a4/8a",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "931",
@@ -11198,8 +10485,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "933",
     "sno": 933,
     "name": "Mohit Jain",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/mohitmayank",
     "emails": [
@@ -11210,13 +10497,11 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "934",
     "sno": 934,
     "name": "Aditya Arora",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/aditya-arora-13ab87105",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "935",
@@ -11239,19 +10524,23 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/himanshu-gupta",
     "emails": [
-      "himanshu@kreo-tech.com\r\nhimanshu@moneyonclick.com\r\nhimanshu@werize.com"
+      "himanshu@kreo-tech.com",
+      "himanshu@moneyonclick.com",
+      "himanshu@werize.com"
     ]
   },
   {
     "id": "937",
     "sno": 937,
     "name": "Afsal Salu",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/afsalsalu",
     "emails": [
-      "fayaz@bestdocapp.com\r\nafsal@bestdocapp.com\r\nsoudabi@bestdocapp.com"
+      "fayaz@bestdocapp.com",
+      "afsal@bestdocapp.com",
+      "soudabi@bestdocapp.com"
     ]
   },
   {
@@ -11275,7 +10564,9 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/akhil10s",
     "emails": [
-      "akhil@callzen.ai\r\nakhil@nobrokerhood.com\r\nakhil@nobroker.in"
+      "akhil@callzen.ai",
+      "akhil@nobrokerhood.com",
+      "akhil@nobroker.in"
     ]
   },
   {
@@ -11286,9 +10577,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Delhi",
     "country": "India",
     "linkedin": "https://linkedin.com/in/vijayshekhar",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "941",
@@ -11306,37 +10595,31 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "942",
     "sno": 942,
     "name": "Ayush Agrawal",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/ayushashokagrawal",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "943",
     "sno": 943,
     "name": "Abhishek Pansari",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/abhishek-pansari-814114139",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "944",
     "sno": 944,
     "name": "Praveen Gupta",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/peegee",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "945",
@@ -11346,15 +10629,13 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Karnataka",
     "country": "India",
     "linkedin": "http://linkedin.com/in/natarajanr1",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "946",
     "sno": 946,
     "name": "Snehil Saraf",
-    "city": "-",
+    "city": "",
     "state": "Telangana",
     "country": "India",
     "linkedin": "http://linkedin.com/in/snehil-saraf-194b9012",
@@ -11366,8 +10647,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "947",
     "sno": 947,
     "name": "Rohit Gupta",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/rohit-gupta-7b6b65a1",
     "emails": [
@@ -11383,7 +10664,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/akashgehani",
     "emails": [
-      "akash@umrit.fit\r\nakash@instamojo.com"
+      "akash@umrit.fit",
+      "akash@instamojo.com"
     ]
   },
   {
@@ -11394,9 +10676,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Karnataka",
     "country": "India",
     "linkedin": "https://linkedin.com/in/anup-p-395985159",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "950",
@@ -11407,7 +10687,9 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/amitsingalca",
     "emails": [
-      "amit@fluidvc.in\r\namit@realtimeaf.com\r\namit@startupbuddy.co.in"
+      "amit@fluidvc.in",
+      "amit@realtimeaf.com",
+      "amit@startupbuddy.co.in"
     ]
   },
   {
@@ -11419,7 +10701,9 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/visheshkhurana",
     "emails": [
-      "vishesh@kartrocket.com\r\nvishesh@shiprocket.in\r\nvishesh@bharatfoundersfund.com"
+      "vishesh@kartrocket.com",
+      "vishesh@shiprocket.in",
+      "vishesh@bharatfoundersfund.com"
     ]
   },
   {
@@ -11431,39 +10715,36 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/nibhrantshah",
     "emails": [
-      "nibhrant.shah@lohono.com\r\nnibhrant@isprava.com"
+      "nibhrant.shah@lohono.com",
+      "nibhrant@isprava.com"
     ]
   },
   {
     "id": "953",
     "sno": 953,
     "name": "M V Subramanian",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/mvsmani",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "954",
     "sno": 954,
     "name": "Hemant Kenia",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/hemant-kenia-2829a155",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "955",
     "sno": 955,
     "name": "Abhishek Kejriwal",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/pub/abhishek-kejriwal/18/741/b85",
     "emails": [
@@ -11474,20 +10755,18 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "956",
     "sno": 956,
     "name": "Mohan K",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/roamsoft",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "957",
     "sno": 957,
     "name": "Sharad Hegde",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/sharad-hegde-69964511",
     "emails": [
@@ -11502,9 +10781,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Delhi",
     "country": "India",
     "linkedin": "http://linkedin.com/in/borun-ghorai-14ba6031",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "959",
@@ -11515,7 +10792,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/pub/anshul-gupta/21/893/b7",
     "emails": [
-      "anshul@box8.in\r\nanshul@eatclub.in"
+      "anshul@box8.in",
+      "anshul@eatclub.in"
     ]
   },
   {
@@ -11526,9 +10804,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Delhi",
     "country": "India",
     "linkedin": "http://linkedin.com/in/paulastya-sachdev-a34b7633",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "961",
@@ -11538,16 +10814,14 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/ashutoshagr",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "962",
     "sno": 962,
     "name": "Ajay Tiwari",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/ajay-tiwari-0001254b",
     "emails": [
@@ -11563,27 +10837,26 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/sandeep-daga-05b318",
     "emails": [
-      "sandeep.daga@nineriverscapital.com\r\nsandeep@nineriverscapital.com"
+      "sandeep.daga@nineriverscapital.com",
+      "sandeep@nineriverscapital.com"
     ]
   },
   {
     "id": "964",
     "sno": 964,
     "name": "Nisarg Shah",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/nisarg-shah-2b411570",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "965",
     "sno": 965,
     "name": "Dhiraj Shah",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/dhirajshah",
     "emails": [
@@ -11611,7 +10884,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/trivediravi",
     "emails": [
-      "ravi@srijancapital.com\r\nravi@pushengage.com"
+      "ravi@srijancapital.com",
+      "ravi@pushengage.com"
     ]
   },
   {
@@ -11623,19 +10897,21 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/krishna-ramanathan-449a3a23",
     "emails": [
-      "krishna@fulcrumpe.com\r\nkrishna@fulcrumventureindia.com"
+      "krishna@fulcrumpe.com",
+      "krishna@fulcrumventureindia.com"
     ]
   },
   {
     "id": "969",
     "sno": 969,
     "name": "Ashish Kashyap",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/ashishkashyap",
     "emails": [
-      "ashish@indwealth.in\r\nashish@indmoney.com"
+      "ashish@indwealth.in",
+      "ashish@indmoney.com"
     ]
   },
   {
@@ -11682,28 +10958,27 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/nadir-godrej-ba60663",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "974",
     "sno": 974,
     "name": "Atul Kumar",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/atul-kumar-6769a91",
     "emails": [
-      "atul@freshvnf.com\r\natul@edupristine.com"
+      "atul@freshvnf.com",
+      "atul@edupristine.com"
     ]
   },
   {
     "id": "975",
     "sno": 975,
     "name": "Deepak Singh",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/deepaksingh85",
     "emails": [
@@ -11714,13 +10989,11 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "976",
     "sno": 976,
     "name": "Arjun Batra",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/arjun-batra-725b48",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "977",
@@ -11738,13 +11011,11 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "978",
     "sno": 978,
     "name": "Girish Jain",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "979",
@@ -11754,16 +11025,14 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/sarthakmisra",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "980",
     "sno": 980,
     "name": "Sandeep Mathur",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/sandeepmathur",
     "emails": [
@@ -11774,13 +11043,11 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "981",
     "sno": 981,
     "name": "Anirudh Prabhakaran",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/anirudh-prabhakaran-a050392",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "982",
@@ -11790,9 +11057,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Karnataka",
     "country": "India",
     "linkedin": "https://linkedin.com/in/ambiga-subramanian",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "983",
@@ -11802,9 +11067,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Delhi",
     "country": "India",
     "linkedin": "https://linkedin.com/in/arjunpearlseth",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "984",
@@ -11813,10 +11076,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Bengaluru",
     "state": "Karnataka",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "985",
@@ -11825,22 +11086,18 @@ export const angelInvestorsData: AngelInvestor[] = [
     "city": "Kolkata",
     "state": "West Bengal",
     "country": "India",
-    "linkedin": "-",
-    "emails": [
-      "-"
-    ]
+    "linkedin": "",
+    "emails": []
   },
   {
     "id": "986",
     "sno": 986,
     "name": "Shashank Singh",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://sg.linkedin.com/in/shashank-singh-297b052",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "987",
@@ -11850,9 +11107,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Tamil Nadu",
     "country": "India",
     "linkedin": "https://linkedin.com/in/ramki68",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "988",
@@ -11862,28 +11117,24 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/ajay-aggarwal-112aa3",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "989",
     "sno": 989,
     "name": "Vivek Chanana",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/vivek-chanana-61494522",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "990",
     "sno": 990,
     "name": "Sanjeev Agrawal",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/sanjeeva",
     "emails": [
@@ -11894,10 +11145,10 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "991",
     "sno": 991,
     "name": "Narendra Murkumbi",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
-    "linkedin": "-",
+    "linkedin": "",
     "emails": [
       "narendra.murkumbi@renukasugars.com"
     ]
@@ -11934,9 +11185,7 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Maharashtra",
     "country": "India",
     "linkedin": "https://linkedin.com/in/badrisanjeevi",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "995",
@@ -11946,16 +11195,14 @@ export const angelInvestorsData: AngelInvestor[] = [
     "state": "Karnataka",
     "country": "India",
     "linkedin": "http://linkedin.com/in/abhishekbhatewara",
-    "emails": [
-      "-"
-    ]
+    "emails": []
   },
   {
     "id": "996",
     "sno": 996,
     "name": "Sharda Balaji",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "http://linkedin.com/in/shardabalaji",
     "emails": [
@@ -11971,15 +11218,16 @@ export const angelInvestorsData: AngelInvestor[] = [
     "country": "India",
     "linkedin": "https://linkedin.com/in/vibhugarg",
     "emails": [
-      "vibhugarg@unicommerce.com\r\nvibhu@unicommerce.com"
+      "vibhugarg@unicommerce.com",
+      "vibhu@unicommerce.com"
     ]
   },
   {
     "id": "998",
     "sno": 998,
     "name": "Abhishek Choudhary",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/pub/abhishek-choudhary/71/112/4a9",
     "emails": [
@@ -12002,8 +11250,8 @@ export const angelInvestorsData: AngelInvestor[] = [
     "id": "1000",
     "sno": 1000,
     "name": "Neha Aggarwal",
-    "city": "-",
-    "state": "-",
+    "city": "",
+    "state": "",
     "country": "India",
     "linkedin": "https://linkedin.com/in/nehaleo",
     "emails": [

@@ -16,17 +16,22 @@ const workbook = XLSX.readFile(filePath)
 const sheet = workbook.Sheets[workbook.SheetNames[0]]
 const raw = XLSX.utils.sheet_to_json(sheet)
 
+function clean(val) {
+  const s = String(val ?? "").trim()
+  return s === "-" ? "" : s
+}
+
 const rows = raw.map((r, i) => {
-  const emailRaw = String(r["Emails"] ?? r["Email"] ?? "").trim()
+  const emailRaw = clean(r["Emails"] ?? r["Email"] ?? "")
   return {
     id:       String(Number(r["SNo"] ?? r["S.No."] ?? r["Sno"] ?? i + 1)),
     sno:      Number(r["SNo"] ?? r["S.No."] ?? r["Sno"] ?? i + 1),
-    name:     String(r["Name"] ?? "").trim(),
-    city:     String(r["City"] ?? "").trim(),
-    state:    String(r["State"] ?? "").trim(),
-    country:  String(r["Country"] ?? "").trim(),
-    linkedin: String(r["Linkedin"] ?? r["LinkedIn"] ?? "").trim(),
-    emails:   emailRaw ? emailRaw.split(",").map(e => e.trim()).filter(Boolean) : [],
+    name:     clean(r["Name"]),
+    city:     clean(r["City"]),
+    state:    clean(r["State"]),
+    country:  clean(r["Country"]),
+    linkedin: clean(r["Linkedin"] ?? r["LinkedIn"]),
+    emails:   emailRaw ? emailRaw.split(/[\r\n,;]+/).map(e => e.trim()).filter(Boolean) : [],
   }
 }).filter(r => r.name)
 
