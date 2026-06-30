@@ -40,6 +40,8 @@ export default async function AngelInvestorsPage() {
       isAuthenticated={!!userEmail}
       firstPage={firstPage}
       total={angelInvestorsData.length}
+      linkedinCount={angelInvestorsData.filter(r => r.linkedin).length}
+      emailCount={angelInvestorsData.filter(r => r.emails?.length > 0).length}
       userEmail={userEmail}
       userName={session?.user?.name ?? null}
       displayPrice={displayPrice}

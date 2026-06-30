@@ -40,6 +40,10 @@ type Props = {
   teamFirstPage: TeamRow[]
   firmsTotal: number
   teamTotal: number
+  firmsLinkedinCount: number
+  firmsEmailCount: number
+  teamLinkedinCount: number
+  teamEmailCount: number
   userEmail: string | null
   userName: string | null
 }
@@ -71,6 +75,7 @@ function CopyButton({ text }: { text: string }) {
 export default function InvestorListClient({
   config, isPaid: initialPaid, isAuthenticated,
   firmsFirstPage, teamFirstPage, firmsTotal, teamTotal,
+  firmsLinkedinCount, firmsEmailCount, teamLinkedinCount, teamEmailCount,
   userEmail, userName,
 }: Props) {
   const { data: session } = useSession()
@@ -404,7 +409,7 @@ export default function InvestorListClient({
           {/* Desktop table */}
           <div className="hidden sm:block pb-4">
             <div className="overflow-x-auto px-4 md:px-10">
-              <FirmsTable firms={firms} paid={paid} loading={firmsLoading} config={config} />
+              <FirmsTable firms={firms} paid={paid} loading={firmsLoading} config={config} totalCount={firmsTotalCount} linkedinCount={firmsLinkedinCount} emailCount={firmsEmailCount} />
             </div>
           </div>
 
@@ -493,7 +498,7 @@ export default function InvestorListClient({
           {/* Desktop table */}
           <div className="hidden sm:block pb-4">
             <div className="overflow-x-auto px-4 md:px-10">
-              <TeamTable team={team} paid={paid} loading={teamLoading} />
+              <TeamTable team={team} paid={paid} loading={teamLoading} totalCount={teamTotalCount} linkedinCount={teamLinkedinCount} emailCount={teamEmailCount} />
             </div>
           </div>
 
@@ -560,7 +565,7 @@ export default function InvestorListClient({
   )
 }
 
-function FirmsTable({ firms, paid, loading, config }: { firms: FirmRow[]; paid: boolean; loading: boolean; config: ListConfig }) {
+function FirmsTable({ firms, paid, loading, config, totalCount, linkedinCount, emailCount }: { firms: FirmRow[]; paid: boolean; loading: boolean; config: ListConfig; totalCount: number; linkedinCount: number; emailCount: number }) {
   const showWebsite = firms.some(f => f.website)
   return (
     <table className="w-full text-xs font-sans border-collapse table-fixed">
@@ -575,11 +580,11 @@ function FirmsTable({ firms, paid, loading, config }: { firms: FirmRow[]; paid: 
       <thead>
         <tr className="border-b border-border">
           <th className="text-left py-2.5 pr-3 text-ink/40 font-semibold">#</th>
-          <th className="text-left py-2.5 pr-3 text-ink/40 font-semibold">Name</th>
+          <th className="text-left py-2.5 pr-3 text-ink/40 font-semibold">Name <span className="font-normal text-ink/30">({totalCount.toLocaleString()})</span></th>
           <th className="text-left py-2.5 pr-3 text-ink/40 font-semibold hidden md:table-cell">Country</th>
           {showWebsite && <th className="text-left py-2.5 pr-3 text-ink/40 font-semibold hidden lg:table-cell">Website</th>}
-          <th className="text-left py-2.5 pr-3 text-ink/40 font-semibold">LinkedIn</th>
-          <th className="text-left py-2.5 text-ink/40 font-semibold">Email</th>
+          <th className="text-left py-2.5 pr-3 text-ink/40 font-semibold">LinkedIn <span className="font-normal text-ink/30">({linkedinCount.toLocaleString()})</span></th>
+          <th className="text-left py-2.5 text-ink/40 font-semibold">Email <span className="font-normal text-ink/30">({emailCount.toLocaleString()})</span></th>
         </tr>
       </thead>
       <tbody>
@@ -642,7 +647,7 @@ function FirmsTable({ firms, paid, loading, config }: { firms: FirmRow[]; paid: 
   )
 }
 
-function TeamTable({ team, paid, loading }: { team: TeamRow[]; paid: boolean; loading: boolean }) {
+function TeamTable({ team, paid, loading, totalCount, linkedinCount, emailCount }: { team: TeamRow[]; paid: boolean; loading: boolean; totalCount: number; linkedinCount: number; emailCount: number }) {
   return (
     <table className="w-full text-xs font-sans border-collapse table-fixed">
       <colgroup>
@@ -657,12 +662,12 @@ function TeamTable({ team, paid, loading }: { team: TeamRow[]; paid: boolean; lo
       <thead>
         <tr className="border-b border-border">
           <th className="text-left py-2.5 pr-3 text-ink/40 font-semibold">#</th>
-          <th className="text-left py-2.5 pr-3 text-ink/40 font-semibold">Name</th>
+          <th className="text-left py-2.5 pr-3 text-ink/40 font-semibold">Name <span className="font-normal text-ink/30">({totalCount.toLocaleString()})</span></th>
           <th className="text-left py-2.5 pr-3 text-ink/40 font-semibold">Firm</th>
           <th className="text-left py-2.5 pr-3 text-ink/40 font-semibold hidden md:table-cell">Designation</th>
           <th className="text-left py-2.5 pr-3 text-ink/40 font-semibold hidden lg:table-cell">Location</th>
-          <th className="text-left py-2.5 pr-3 text-ink/40 font-semibold">LinkedIn</th>
-          <th className="text-left py-2.5 text-ink/40 font-semibold">Email</th>
+          <th className="text-left py-2.5 pr-3 text-ink/40 font-semibold">LinkedIn <span className="font-normal text-ink/30">({linkedinCount.toLocaleString()})</span></th>
+          <th className="text-left py-2.5 text-ink/40 font-semibold">Email <span className="font-normal text-ink/30">({emailCount.toLocaleString()})</span></th>
         </tr>
       </thead>
       <tbody>

@@ -25,6 +25,8 @@ type Props = {
   isAuthenticated: boolean
   firstPage: Investor[]
   total: number
+  linkedinCount: number
+  emailCount: number
   userEmail: string | null
   userName: string | null
   displayPrice?: string
@@ -56,7 +58,7 @@ function CopyButton({ text }: { text: string }) {
   )
 }
 
-export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticated, firstPage, total, userEmail, userName, displayPrice }: Props) {
+export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticated, firstPage, total, linkedinCount, emailCount, userEmail, userName, displayPrice }: Props) {
   const price = displayPrice ?? PRICE
   const { data: session } = useSession()
   const [paid, setPaid]   = useState(initialPaid)
@@ -367,12 +369,12 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
             <thead>
               <tr className="border-b border-border">
                 <th className="text-left py-2.5 pr-4 text-ink/40 font-semibold w-8">#</th>
-                <th className="text-left py-2.5 pr-4 text-ink/40 font-semibold">Name</th>
+                <th className="text-left py-2.5 pr-4 text-ink/40 font-semibold">Name <span className="font-normal text-ink/30">({totalCount.toLocaleString()})</span></th>
                 <th className="text-left py-2.5 pr-4 text-ink/40 font-semibold">City</th>
                 <th className="text-left py-2.5 pr-4 text-ink/40 font-semibold hidden md:table-cell">State</th>
                 <th className="text-left py-2.5 pr-4 text-ink/40 font-semibold hidden lg:table-cell">Country</th>
-                <th className="text-left py-2.5 pr-4 text-ink/40 font-semibold">LinkedIn</th>
-                <th className="text-left py-2.5 text-ink/40 font-semibold">Emails</th>
+                <th className="text-left py-2.5 pr-4 text-ink/40 font-semibold">LinkedIn <span className="font-normal text-ink/30">({linkedinCount.toLocaleString()})</span></th>
+                <th className="text-left py-2.5 text-ink/40 font-semibold">Emails <span className="font-normal text-ink/30">({emailCount.toLocaleString()})</span></th>
               </tr>
             </thead>
             <tbody>

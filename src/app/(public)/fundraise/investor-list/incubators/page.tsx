@@ -75,6 +75,10 @@ export default async function IncubatorsPage() {
       teamFirstPage={teamFirstPage}
       firmsTotal={allFirms.length}
       teamTotal={allTeam.length}
+      firmsLinkedinCount={allFirms.filter(f => f.linkedin).length}
+      firmsEmailCount={allFirms.filter(f => f.emails?.length > 0).length}
+      teamLinkedinCount={allTeam.filter(t => t.linkedin).length}
+      teamEmailCount={allTeam.filter(t => t.emails?.length > 0).length}
       userEmail={userEmail}
       userName={session?.user?.name ?? null}
     />
