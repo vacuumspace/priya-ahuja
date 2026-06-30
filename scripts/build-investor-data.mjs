@@ -11,7 +11,8 @@ if (!fs.existsSync(jsonDir)) fs.mkdirSync(jsonDir, { recursive: true })
 
 function str(val) {
   if (val === null || val === undefined) return ""
-  return String(val).trim()
+  const s = String(val).trim()
+  return s === "-" ? "" : s
 }
 
 function dedupeStr(val) {
@@ -123,7 +124,7 @@ const incTeam = readSheet("incubator-accelrator.xlsx", "team", (row, i) => ({
   designation:  str(row["Designation"]),
   location:     str(row["Location"]),
   emails:       parseEmails(row["Emails"]),
-  linkedin: str(row["Link to profiles"]), summary: "",
+  linkedin: str(row["LinkedIn"]), summary: "",
 }))
 
 // ── Write JSON ────────────────────────────────────────────────────
