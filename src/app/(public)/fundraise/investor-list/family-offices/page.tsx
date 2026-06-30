@@ -26,7 +26,7 @@ const CONFIG: ListConfig = {
     "The team contacts sheet has 700 individual contacts including family principals, CIOs, and investment managers.",
     "Family offices are often underutilised by founders. They move faster than VCs, write flexible cheques, and many have deep domain networks.",
     "One-time payment. No subscriptions, no expiry. Yours forever including future refreshes.",
-    "Most contacts have both LinkedIn and email. Some have only one — LinkedIn is more commonly available, email less so.",
+    "Most contacts have both LinkedIn and email. Some have only one linkedin or email id.",
     "We verify details to the best of our ability and keep improving this list over time. That is why access is given here directly and not as a download, so we can keep updating what you see. Our intention is to genuinely help founders.",
   ],
   whyPaid: "Curating and maintaining this list takes real effort. Keeping it paid ensures it stays high quality and goes to founders who genuinely need it.",
