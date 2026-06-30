@@ -26,7 +26,7 @@ const BASE_CONFIG: Omit<ListConfig, "indianCount" | "globalCount"> = {
     "The team contacts sheet has 26,000 individual partners, associates, and analysts with their direct LinkedIn and emails.",
     "Covers investors writing pre-seed, seed, and Series A cheques in 2024-26 across fintech, SaaS, D2C, deeptech, healthtech, edtech, climate, and more.",
     "One-time payment. No subscriptions, no expiry. Yours forever including future refreshes.",
-    "A few email IDs may not be active. LinkedIn is always the most reliable fallback for outreach.",
+    "Most contacts have both LinkedIn and email. Some have only one — LinkedIn is more commonly available, email less so.",
     "We verify details to the best of our ability and keep improving this list over time. That is why access is given here directly and not as a download, so we can keep updating what you see. Our intention is to genuinely help founders.",
   ],
   whyPaid: "Curating and maintaining this list takes real effort. Keeping it paid ensures it stays high quality and goes to founders who genuinely need it.",

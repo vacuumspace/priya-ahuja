@@ -238,7 +238,7 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
               "Each entry includes direct email and LinkedIn so you can reach them without going through assistants or guessing addresses.",
               "Covers angels investing in 2024-26 across fintech, SaaS, D2C, edtech, healthtech, deeptech, consumer brands, climate tech, and more.",
               "One-time payment. No subscriptions, no expiry. Yours forever including future refreshes.",
-              "A few email IDs may not be active. LinkedIn is always the most reliable fallback for outreach.",
+              "Most contacts have both LinkedIn and email. Some have only one — LinkedIn is more commonly available, email less so.",
               "We verify details to the best of our ability and keep improving this list over time. That is why access is given here directly and not as a download, so we can keep updating what you see. Our intention is to genuinely help founders.",
             ].map((point) => (
               <p key={point} className="font-sans text-[12px] text-ink/55 leading-relaxed flex gap-2">
