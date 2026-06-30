@@ -23,7 +23,7 @@ const BASE_CONFIG: Omit<ListConfig, "indianCount" | "globalCount"> = {
   description: [
     "1,000 early stage VC firms globally, including Indian VCs and international funds actively writing cheques in Indian startups.",
     "971 firms have LinkedIn and 686 have direct email IDs. Each entry also includes website, domain focus, and country.",
-    "The team contacts sheet has 26,850 individual partners, associates, and analysts — 25,680 with LinkedIn and 13,267 with direct emails.",
+    "The team contacts sheet has 26,850 individual partners, associates, and analysts. 25,680 have LinkedIn and 13,267 have direct emails.",
     "Covers investors writing pre-seed, seed, and Series A cheques in 2024-26 across fintech, SaaS, D2C, deeptech, healthtech, edtech, climate, and more.",
     "One-time payment. No subscriptions, no expiry. Yours forever including future refreshes.",
     "Most contacts have both LinkedIn and email. Some have only one linkedin or email id.",

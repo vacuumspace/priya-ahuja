@@ -23,7 +23,7 @@ const CONFIG: ListConfig = {
   description: [
     "233 incubators and accelerators in India actively running programs for early-stage startups.",
     "200 programs have LinkedIn and 159 have direct email IDs. Each entry also includes website, location, and domain focus.",
-    "The team contacts sheet has 5,621 mentors, program managers, and directors — 5,309 with LinkedIn and 2,870 with direct emails.",
+    "The team contacts sheet has 5,621 mentors, program managers, and directors. 5,309 have LinkedIn and 2,870 have direct emails.",
     "Covers government incubators, university programs, corporate accelerators, and independent cohort-based programs across sectors.",
     "One-time payment. No subscriptions, no expiry. Yours forever including future refreshes.",
     "Most contacts have both LinkedIn and email. Some have only one linkedin or email id.",
