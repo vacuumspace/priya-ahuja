@@ -1,0 +1,49 @@
+{
+  "period": "FY2024-25",
+  "last_updated": "2025-06-30",
+  "note": "Static curated dataset — manually compiled from public sources for market sizing. Not live-scraped.",
+  "sources": [
+    {
+      "name": "Knight Frank India Real Estate Q1 2026",
+      "url": "https://www.knightfrank.co.in/research",
+      "segments": ["individual-buyers"],
+      "coverage": "7 major cities"
+    },
+    {
+      "name": "JLL India Land Transactions Report 2024",
+      "url": "https://www.jll.com/en-in/insights",
+      "segments": ["developers"],
+      "coverage": "Top 8 cities"
+    },
+    {
+      "name": "Colliers India Real Estate 2026",
+      "url": "https://www.colliers.com/en-in/research",
+      "segments": ["developers", "individual-buyers"],
+      "coverage": "Tier I + emerging cities"
+    },
+    {
+      "name": "NHB Annual Report 2024-25",
+      "url": "https://www.nhb.org.in/data-graphs/",
+      "segments": ["banks-insurers"],
+      "coverage": "All states"
+    },
+    {
+      "name": "RBI Database on Indian Economy (DBIE)",
+      "url": "https://data.rbi.org.in/DBIE/",
+      "segments": ["banks-insurers"],
+      "coverage": "State-wise credit flow"
+    },
+    {
+      "name": "99acres / Magicbricks Plot Listings",
+      "url": "https://www.99acres.com",
+      "segments": ["brokers"],
+      "coverage": "Major cities, filtered to Plot/Land type"
+    },
+    {
+      "name": "Indiastat Housing Database",
+      "url": "https://www.indiastat.com",
+      "segments": ["individual-buyers", "banks-insurers"],
+      "coverage": "All districts"
+    }
+  ]
+}

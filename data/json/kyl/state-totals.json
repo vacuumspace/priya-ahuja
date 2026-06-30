@@ -1,0 +1,200 @@
+[
+  {
+    "state": "Maharashtra",
+    "total_transactions": 95000,
+    "total_value_cr": 79000,
+    "source": "IGR Maharashtra Annual Statistics 2024-25",
+    "source_url": "https://igrmaharashtra.gov.in",
+    "confidence": "medium",
+    "notes": "All plot + independent house registrations statewide FY2024-25. Excludes flats/apartments."
+  },
+  {
+    "state": "Karnataka",
+    "total_transactions": 55000,
+    "total_value_cr": 42000,
+    "source": "Kaveri Online — IGR Karnataka 2024-25",
+    "source_url": "https://kaverionline.karnataka.gov.in",
+    "confidence": "medium",
+    "notes": "Land and site registration transactions statewide from Kaveri portal annual report."
+  },
+  {
+    "state": "Tamil Nadu",
+    "total_transactions": 65000,
+    "total_value_cr": 38000,
+    "source": "TNREGINET — IGR Tamil Nadu 2024-25",
+    "source_url": "https://www.tnreginet.net",
+    "confidence": "medium",
+    "notes": "Plot layout and independent house registrations filtered from TNREGINET annual data."
+  },
+  {
+    "state": "Telangana",
+    "total_transactions": 28000,
+    "total_value_cr": 25000,
+    "source": "IGRS Telangana Annual Report 2024-25",
+    "source_url": "https://registration.telangana.gov.in",
+    "confidence": "medium",
+    "notes": "Land and plot registrations from IGRS TS portal statewide data."
+  },
+  {
+    "state": "Andhra Pradesh",
+    "total_transactions": 48000,
+    "total_value_cr": 35000,
+    "source": "IGRS Andhra Pradesh 2024-25",
+    "source_url": "https://registration.ap.gov.in",
+    "confidence": "medium",
+    "notes": "Plot and land-linked property registrations from IGRS AP portal."
+  },
+  {
+    "state": "Uttar Pradesh",
+    "total_transactions": 85000,
+    "total_value_cr": 45000,
+    "source": "IGRSUP — UP Registration Department 2024-25",
+    "source_url": "https://igrsup.gov.in",
+    "confidence": "medium",
+    "notes": "High-volume state; plot and bhumi registrations from IGRSUP data."
+  },
+  {
+    "state": "Rajasthan",
+    "total_transactions": 35000,
+    "total_value_cr": 22000,
+    "source": "Rajasthan Registration & Stamp Dept. 2024-25",
+    "source_url": "https://igrs.rajasthan.gov.in",
+    "confidence": "medium",
+    "notes": "Plot and site registrations from IGRS Rajasthan statewide data."
+  },
+  {
+    "state": "Gujarat",
+    "total_transactions": 48000,
+    "total_value_cr": 34000,
+    "source": "RERA Gujarat + Registration Dept. 2024-25",
+    "source_url": "https://gujrera.gujarat.gov.in",
+    "confidence": "medium",
+    "notes": "Plotted schemes under RERA + sub-registrar office plot transactions."
+  },
+  {
+    "state": "Haryana",
+    "total_transactions": 24000,
+    "total_value_cr": 22000,
+    "source": "HRERA + Haryana Revenue Dept. 2024-25",
+    "source_url": "https://hrera.gov.in",
+    "confidence": "medium",
+    "notes": "HSVP plot schemes + private plotted development registrations."
+  },
+  {
+    "state": "Punjab",
+    "total_transactions": 22000,
+    "total_value_cr": 14000,
+    "source": "RERA Punjab + Revenue Dept. 2024-25",
+    "source_url": "https://rera.punjab.gov.in",
+    "confidence": "medium",
+    "notes": "Plot transactions from PRERA annual report + sub-registrar data."
+  },
+  {
+    "state": "Madhya Pradesh",
+    "total_transactions": 42000,
+    "total_value_cr": 22000,
+    "source": "RERA MP + MPIGR 2024-25",
+    "source_url": "https://www.mpigr.gov.in",
+    "confidence": "medium",
+    "notes": "Plot and bhumi registrations from MPIGR portal statewide data."
+  },
+  {
+    "state": "West Bengal",
+    "total_transactions": 28000,
+    "total_value_cr": 18000,
+    "source": "WB Registration Dept. 2024-25",
+    "source_url": "https://wbregistration.gov.in",
+    "confidence": "medium",
+    "notes": "Land and plot registrations from WB Registration Department annual data."
+  },
+  {
+    "state": "Bihar",
+    "total_transactions": 38000,
+    "total_value_cr": 15000,
+    "source": "Bihar RERA + Revenue Dept. 2024-25",
+    "source_url": "https://www.indiastat.com",
+    "confidence": "low",
+    "notes": "High volume, lower value state; land transactions from Bihar RERA and revenue records."
+  },
+  {
+    "state": "Odisha",
+    "total_transactions": 18000,
+    "total_value_cr": 10000,
+    "source": "IGR Odisha 2024-25",
+    "source_url": "https://www.igrodisha.gov.in",
+    "confidence": "medium",
+    "notes": "Plot and land sale registrations from IGR Odisha statewide."
+  },
+  {
+    "state": "Kerala",
+    "total_transactions": 26000,
+    "total_value_cr": 22000,
+    "source": "Kerala Registration Dept. 2024-25",
+    "source_url": "https://www.keralaregistration.gov.in",
+    "confidence": "medium",
+    "notes": "Cent plot + land registrations from Kerala Registration Dept. High NRI-driven per-transaction value."
+  },
+  {
+    "state": "Jharkhand",
+    "total_transactions": 12000,
+    "total_value_cr": 6500,
+    "source": "Jharkhand RERA + Revenue Dept. 2024-25",
+    "source_url": "https://www.indiastat.com",
+    "confidence": "low",
+    "notes": "Plot and land registrations estimated from Jharkhand RERA annual report."
+  },
+  {
+    "state": "Chhattisgarh",
+    "total_transactions": 14000,
+    "total_value_cr": 8000,
+    "source": "CG RERA + Revenue Dept. 2024-25",
+    "source_url": "https://www.indiastat.com",
+    "confidence": "low",
+    "notes": "Plot and land transactions from CG RERA and state revenue department."
+  },
+  {
+    "state": "Assam",
+    "total_transactions": 12000,
+    "total_value_cr": 7000,
+    "source": "Assam RERA + Revenue Dept. 2024-25",
+    "source_url": "https://www.indiastat.com",
+    "confidence": "low",
+    "notes": "Land and plot registrations estimated from Assam RERA and Indiastat."
+  },
+  {
+    "state": "Uttarakhand",
+    "total_transactions": 12000,
+    "total_value_cr": 9000,
+    "source": "RERA Uttarakhand + Revenue Dept. 2024-25",
+    "source_url": "https://www.indiastat.com",
+    "confidence": "low",
+    "notes": "Second home and hill plot registrations from UK RERA statewide data."
+  },
+  {
+    "state": "Himachal Pradesh",
+    "total_transactions": 7000,
+    "total_value_cr": 7500,
+    "source": "HP RERA + Revenue Dept. 2024-25",
+    "source_url": "https://www.indiastat.com",
+    "confidence": "low",
+    "notes": "Hill tourism plot market; restricted non-Himachali purchases limit volumes."
+  },
+  {
+    "state": "Goa",
+    "total_transactions": 3000,
+    "total_value_cr": 6000,
+    "source": "Goa RERA + iGRAS 2024-25",
+    "source_url": "https://www.indiastat.com",
+    "confidence": "medium",
+    "notes": "High per-transaction value; limited supply drives premium pricing."
+  },
+  {
+    "state": "Jammu & Kashmir",
+    "total_transactions": 9000,
+    "total_value_cr": 6000,
+    "source": "J&K Revenue Dept. 2024-25",
+    "source_url": "https://www.indiastat.com",
+    "confidence": "low",
+    "notes": "Post-Article 370 land market opening; outside buyers driving demand growth."
+  }
+]

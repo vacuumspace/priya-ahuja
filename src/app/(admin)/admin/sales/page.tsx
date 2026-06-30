@@ -49,10 +49,10 @@ const TYPE_LABELS: Record<string, string> = {
 }
 
 const TYPE_COLORS: Record<string, string> = {
-  booking:  "bg-emerald-500/20 text-emerald-400",
-  template: "bg-violet-500/20 text-violet-400",
-  angel:    "bg-pink-500/20 text-pink-400",
-  score:    "bg-ink/10 text-ink/50",
+  booking:  "bg-emerald-100 text-emerald-700",
+  template: "bg-violet-100 text-violet-700",
+  angel:    "bg-pink-100 text-pink-700",
+  score:    "bg-gray-100 text-gray-500",
 }
 
 const STATUS_COLORS: Record<string, string> = {

@@ -115,10 +115,10 @@ export default async function AdminDashboard() {
                     </div>
                     <span className={`text-[10px] font-sans font-semibold px-2 py-0.5 rounded-full capitalize flex-shrink-0 ${
                       t.kind !== "purchase"
-                        ? "bg-emerald-900/30 text-emerald-400"
+                        ? "bg-emerald-100 text-emerald-700"
                         : purchaseTag(t.slug) === "Investor List"
-                        ? "bg-pink-900/30 text-pink-400"
-                        : "bg-violet-900/30 text-violet-400"
+                        ? "bg-pink-100 text-pink-600"
+                        : "bg-violet-100 text-violet-700"
                     }`}>
                       {t.kind === "purchase" ? purchaseTag(t.slug) : "session"}
                     </span>
