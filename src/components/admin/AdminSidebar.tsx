@@ -89,6 +89,13 @@ const navGroups: NavGroup[] = [
     ],
   },
   {
+    label: "Research",
+    prefixes: ["/admin/research"],
+    items: [
+      { label: "KYL", href: "/admin/research/kyl", icon: MapPin },
+    ],
+  },
+  {
     label: "Users",
     directHref: "/admin/users",
     directIcon: Users,
@@ -97,13 +104,6 @@ const navGroups: NavGroup[] = [
     label: "Email Templates",
     directHref: "/admin/email-templates",
     directIcon: Mail,
-  },
-  {
-    label: "Research",
-    prefixes: ["/admin/research"],
-    items: [
-      { label: "KYL", href: "/admin/research/kyl", icon: MapPin },
-    ],
   },
   {
     label: "Work",
