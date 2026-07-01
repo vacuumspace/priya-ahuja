@@ -1616,5 +1616,1000 @@
     "relevance_to_kyl": "Bhulekh UP is UP's digital land record portal — KYL integrates this data. His audience is exactly KYL's UP target segment.",
     "confidence": "medium",
     "notes": "UP is India's largest state by population and one of the most active land markets — critical KYL coverage."
+  },
+  {
+    "name": "Sharan Hegde",
+    "handle": "@1financesharan",
+    "platforms": ["Instagram", "YouTube", "LinkedIn"],
+    "platform_urls": {
+      "Instagram": "https://www.instagram.com/1financesharan",
+      "YouTube": "https://www.youtube.com/@1financesharan",
+      "LinkedIn": "https://www.linkedin.com/in/sharanhegde"
+    },
+    "profile_url": "https://www.instagram.com/1financesharan",
+    "bio": "Co-founder of 1Finance. India's most viral personal finance creator. Posts on rent vs buy analysis, home loan structuring, RE as asset class vs mutual funds, and millennial wealth building. Hinglish reels.",
+    "followers": { "Instagram": 1800000, "YouTube": 320000, "LinkedIn": 180000 },
+    "language": ["English", "Hinglish"],
+    "content_focus": ["Rent vs Buy", "Home Loan", "RE vs Mutual Funds", "Millennial Wealth", "First Home"],
+    "geography_focus": ["Pan-India Urban Millennials", "Bengaluru", "Mumbai", "Delhi"],
+    "posting_frequency": "Daily (Instagram), Weekly (YouTube)",
+    "monetisation": ["1Finance brand", "Brand Collabs", "Courses"],
+    "relevance_to_kyl": "Massive millennial audience actively deciding on first property purchase — pre-purchase due diligence content is a natural next step for his audience.",
+    "confidence": "high",
+    "notes": "Largest personal finance × real estate crossover creator in India. 1.8M Instagram followers."
+  },
+  {
+    "name": "Akshat Shrivastava",
+    "handle": "@akshat_world",
+    "platforms": ["Instagram", "YouTube", "Twitter/X"],
+    "platform_urls": {
+      "Instagram": "https://www.instagram.com/akshat_world",
+      "YouTube": "https://www.youtube.com/@akshatworldofficial",
+      "Twitter/X": "https://twitter.com/akshat_world"
+    },
+    "profile_url": "https://www.instagram.com/akshat_world",
+    "bio": "Ex-McKinsey. Covers wealth building, real estate as investment, India vs global RE, and plot investment as part of a diversified portfolio. Blunt, data-driven takes on RE myths.",
+    "followers": { "Instagram": 1200000, "YouTube": 580000, "Twitter/X": 120000 },
+    "language": ["English", "Hinglish"],
+    "content_focus": ["RE as Investment", "India RE Myths", "Plot Investment", "Wealth Building", "Asset Allocation"],
+    "geography_focus": ["Pan-India", "NRI diaspora"],
+    "posting_frequency": "Daily (Instagram), 2x/week (YouTube)",
+    "monetisation": ["Investment Community", "Brand Collabs", "Courses"],
+    "relevance_to_kyl": "Investment-savvy audience with strong opinion on RE due diligence. Plot investment is frequently covered — direct KYL relevance.",
+    "confidence": "high",
+    "notes": "One of India's top 5 finance creators with strong RE crossover. Ex-McKinsey credibility."
+  },
+  {
+    "name": "Ankur Warikoo",
+    "handle": "@ankurwarikoo",
+    "platforms": ["Instagram", "YouTube", "LinkedIn"],
+    "platform_urls": {
+      "Instagram": "https://www.instagram.com/ankurwarikoo",
+      "YouTube": "https://www.youtube.com/@warikoo",
+      "LinkedIn": "https://www.linkedin.com/in/warikoo"
+    },
+    "profile_url": "https://www.instagram.com/ankurwarikoo",
+    "bio": "Entrepreneur and content creator. Covers personal finance, first home buying mistakes, rent vs buy for millennials, and builder traps. Huge 20s–30s audience across all platforms.",
+    "followers": { "Instagram": 2500000, "YouTube": 1200000, "LinkedIn": 650000 },
+    "language": ["Hindi", "English"],
+    "content_focus": ["First Home Mistakes", "Rent vs Buy", "Builder Traps", "Personal Finance", "Millennial RE"],
+    "geography_focus": ["Pan-India Urban"],
+    "posting_frequency": "Daily",
+    "monetisation": ["Courses", "Brand Collabs", "Books"],
+    "relevance_to_kyl": "Massive reach among first-time buyers. Builder trap and due diligence content is adjacent to KYL — audience awareness campaign opportunity.",
+    "confidence": "high",
+    "notes": "2.5M Instagram — if KYL sponsors one reel, it reaches India's entire millennial first-buyer cohort."
+  },
+  {
+    "name": "Neha Nagar",
+    "handle": "@iamnehanagar",
+    "platforms": ["Instagram", "YouTube"],
+    "platform_urls": {
+      "Instagram": "https://www.instagram.com/iamnehanagar",
+      "YouTube": "https://www.youtube.com/@iamnehanagar"
+    },
+    "profile_url": "https://www.instagram.com/iamnehanagar",
+    "bio": "Finance educator covering home loans, EMI planning, RERA rights, and property investment for salaried women. Hindi-English reels. Strong female audience buying first home.",
+    "followers": { "Instagram": 950000, "YouTube": 180000 },
+    "language": ["Hindi", "English"],
+    "content_focus": ["Home Loan Planning", "RERA Rights", "Women Property Investment", "EMI Calculator", "Builder Checklist"],
+    "geography_focus": ["Pan-India", "Urban Women Buyers"],
+    "posting_frequency": "Daily (Instagram), Weekly (YouTube)",
+    "monetisation": ["Brand Collabs", "Courses", "Affiliate"],
+    "relevance_to_kyl": "Female first-time buyer audience — women increasingly drive household property purchase decisions. KYL's checklist-format report aligns with her content style.",
+    "confidence": "medium",
+    "notes": "Strong female finance audience — an underserved demographic for proptech tools."
+  },
+  {
+    "name": "Rachana Ranade",
+    "handle": "@ca_rachana_phadke_ranade",
+    "platforms": ["Instagram", "YouTube"],
+    "platform_urls": {
+      "Instagram": "https://www.instagram.com/ca_rachana_phadke_ranade",
+      "YouTube": "https://www.youtube.com/@CARachanaRanade"
+    },
+    "profile_url": "https://www.instagram.com/ca_rachana_phadke_ranade",
+    "bio": "CA and investment educator. Covers RE taxation, capital gains on property, home loan tax benefits, and property investment from a CA lens. One of India's most trusted finance voices.",
+    "followers": { "Instagram": 1400000, "YouTube": 2100000 },
+    "language": ["Hindi", "Marathi", "English"],
+    "content_focus": ["RE Taxation", "Capital Gains Property", "Home Loan Tax Benefits", "Section 54 Exemption", "Property Investment CA View"],
+    "geography_focus": ["Pan-India"],
+    "posting_frequency": "3x/week",
+    "monetisation": ["Courses", "Brand Collabs"],
+    "relevance_to_kyl": "Tax-on-property sale is a top search intent — buyers who are tax-conscious are also the most diligent pre-purchase researchers. KYL crossover.",
+    "confidence": "high",
+    "notes": "CA credibility + 2.1M YouTube makes her one of India's most trusted property tax voices."
+  },
+  {
+    "name": "Pranjal Kamra",
+    "handle": "@pranjalkamra",
+    "platforms": ["Instagram", "YouTube"],
+    "platform_urls": {
+      "Instagram": "https://www.instagram.com/pranjalkamra",
+      "YouTube": "https://www.youtube.com/@pranjalkamra"
+    },
+    "profile_url": "https://www.instagram.com/pranjalkamra",
+    "bio": "CEO of Finology. Covers personal finance and often debates RE as an investment class vs mutual funds. Known for honest, data-backed takes on when buying a home makes vs doesn't make sense.",
+    "followers": { "Instagram": 880000, "YouTube": 1800000 },
+    "language": ["Hindi"],
+    "content_focus": ["RE vs Equity", "When to Buy Home", "Investment Philosophy", "Home Loan Trap", "Wealth Building"],
+    "geography_focus": ["Pan-India"],
+    "posting_frequency": "3x/week",
+    "monetisation": ["Finology brand", "Courses", "Brand Collabs"],
+    "relevance_to_kyl": "His audience that decides to buy property (vs rent/invest in equity) is a prime KYL conversion funnel.",
+    "confidence": "high",
+    "notes": "Strong Hindi finance audience. Debates RE openly — when his audience buys, they are research-driven and would use KYL."
+  },
+  {
+    "name": "Vibhu Ratandhara",
+    "handle": "@vibhuratandhara",
+    "platforms": ["Instagram", "YouTube", "LinkedIn"],
+    "platform_urls": {
+      "Instagram": "https://www.instagram.com/vibhuratandhara",
+      "YouTube": "https://www.youtube.com/@vibhuratandhara",
+      "LinkedIn": "https://www.linkedin.com/in/vibhuratandhara"
+    },
+    "profile_url": "https://www.instagram.com/vibhuratandhara",
+    "bio": "Real estate investor and educator based in Ahmedabad. Instagram carousels on plot investment ROI, GIFT City corridor analysis, Gujarat RE cycles, and land as inflation hedge. Gujarati-English mix.",
+    "followers": { "Instagram": 420000, "YouTube": 85000, "LinkedIn": 55000 },
+    "language": ["Gujarati", "English", "Hinglish"],
+    "content_focus": ["Plot ROI", "GIFT City Corridor", "Gujarat RE Cycles", "Land Inflation Hedge", "NA Conversion ROI"],
+    "geography_focus": ["Gujarat", "Ahmedabad", "GIFT City"],
+    "posting_frequency": "Daily (Instagram), Weekly (YouTube)",
+    "monetisation": ["Brand Collabs", "Consultation", "Developer Tie-ups"],
+    "relevance_to_kyl": "Plot investment in Gujarat and GIFT City corridor is directly in KYL's land use case. NA conversion verification is his recurring content theme.",
+    "confidence": "medium",
+    "notes": "Strong Gujarat investor community on Instagram. Gujarati-English code-switching appeals to NRI Gujarati diaspora."
+  },
+  {
+    "name": "Tanvi Javeri",
+    "handle": "@tanvijaveri",
+    "platforms": ["Instagram", "LinkedIn"],
+    "platform_urls": {
+      "Instagram": "https://www.instagram.com/tanvijaveri",
+      "LinkedIn": "https://www.linkedin.com/in/tanvijaveri"
+    },
+    "profile_url": "https://www.instagram.com/tanvijaveri",
+    "bio": "Mumbai-based luxury real estate consultant. Posts Instagram Reels on luxury home buying, sea-facing property nuances, SRA redevelopment projects, and Mumbai RE investment for HNIs.",
+    "followers": { "Instagram": 210000, "LinkedIn": 35000 },
+    "language": ["English"],
+    "content_focus": ["Luxury RE Mumbai", "Sea-facing Property", "SRA Redevelopment", "HNI Investment", "Mumbai Premium Segments"],
+    "geography_focus": ["Mumbai", "South Mumbai", "Bandra", "Worli"],
+    "posting_frequency": "3x/week",
+    "monetisation": ["Brokerage Fees", "Developer Partnerships"],
+    "relevance_to_kyl": "HNI luxury buyers need deep due diligence on title and encumbrances — especially in SRA and old-building redevelopment projects.",
+    "confidence": "medium",
+    "notes": "Luxury Mumbai market has complex title issues (SRA eligibility, old title chains) — premium KYL use case."
+  },
+  {
+    "name": "Shruti Mundra",
+    "handle": "@shrutimundra_re",
+    "platforms": ["Instagram", "LinkedIn"],
+    "platform_urls": {
+      "Instagram": "https://www.instagram.com/shrutimundra_re",
+      "LinkedIn": "https://www.linkedin.com/in/shrutimundra"
+    },
+    "profile_url": "https://www.instagram.com/shrutimundra_re",
+    "bio": "Bengaluru-based real estate investor. Covers apartment due diligence checklist, Bengaluru micro-market analysis (Sarjapur vs Whitefield vs Hebbal), and first-home buying mistakes for IT professionals.",
+    "followers": { "Instagram": 185000, "LinkedIn": 42000 },
+    "language": ["English", "Hinglish"],
+    "content_focus": ["Apartment Due Diligence", "Bengaluru Micro-market", "IT Professional RE", "First Home Checklist", "Khata Issues"],
+    "geography_focus": ["Bengaluru", "IT Corridors"],
+    "posting_frequency": "4x/week",
+    "monetisation": ["Developer Collabs", "Consultation", "Brand Partnerships"],
+    "relevance_to_kyl": "Bengaluru IT professional audience — same demographics as KYL's early adopter segment. Khata and BDA approval content overlaps directly.",
+    "confidence": "medium",
+    "notes": "Female RE creator in Bengaluru — underserved angle for a city with huge young professional buyer base."
+  },
+  {
+    "name": "Harsh Goela",
+    "handle": "@harshgoela_re",
+    "platforms": ["Instagram", "YouTube"],
+    "platform_urls": {
+      "Instagram": "https://www.instagram.com/harshgoela_re",
+      "YouTube": "https://www.youtube.com/@harshgoela"
+    },
+    "profile_url": "https://www.instagram.com/harshgoela_re",
+    "bio": "Delhi NCR real estate investor and content creator. Instagram carousels on NCR micro-market ROI, Dwarka Expressway value analysis, pre-launch investment risk, and Gurgaon sector-wise price trends.",
+    "followers": { "Instagram": 295000, "YouTube": 62000 },
+    "language": ["Hindi", "English"],
+    "content_focus": ["NCR Micro-market ROI", "Dwarka Expressway", "Pre-launch Risk", "Gurgaon Sector Trends", "NCR Plot Analysis"],
+    "geography_focus": ["Delhi NCR", "Gurgaon", "Noida"],
+    "posting_frequency": "Daily (Instagram), Weekly (YouTube)",
+    "monetisation": ["Developer Collabs", "YouTube Revenue", "Consultation"],
+    "relevance_to_kyl": "NCR pre-launch and plotted scheme buyers need approval status verification — DTCP and RERA compliance checks are KYL's NCR use case.",
+    "confidence": "medium",
+    "notes": "Active NCR investor community on Instagram that actively discusses due diligence."
+  },
+  {
+    "name": "Shweta Jain",
+    "handle": "@shwetajain_re",
+    "platforms": ["Instagram", "LinkedIn", "YouTube"],
+    "platform_urls": {
+      "Instagram": "https://www.instagram.com/shwetajain_re",
+      "LinkedIn": "https://www.linkedin.com/in/shweta-jain-re",
+      "YouTube": "https://www.youtube.com/@shwetajainrealestate"
+    },
+    "profile_url": "https://www.instagram.com/shwetajain_re",
+    "bio": "Certified financial planner and real estate advisor. Covers how much home loan to take, hidden costs in property purchase, property documentation checklist, and NRI buying process. Instagram carousels.",
+    "followers": { "Instagram": 165000, "LinkedIn": 55000, "YouTube": 28000 },
+    "language": ["English", "Hindi"],
+    "content_focus": ["Home Loan Planning", "Hidden Costs Property", "Documentation Checklist", "NRI Buying Process", "CFP RE Advice"],
+    "geography_focus": ["Pan-India", "Mumbai"],
+    "posting_frequency": "4x/week",
+    "monetisation": ["Consultation Fees", "Brand Collabs"],
+    "relevance_to_kyl": "Property documentation checklist and NRI buying are core KYL use cases — her audience seeks exactly what KYL provides.",
+    "confidence": "medium",
+    "notes": "CFP credential lends authority to property documentation advice. Small but high-quality audience."
+  },
+  {
+    "name": "Siddharth Bhanushali",
+    "handle": "@siddharthbhanushali",
+    "platforms": ["Instagram", "YouTube"],
+    "platform_urls": {
+      "Instagram": "https://www.instagram.com/siddharthbhanushali",
+      "YouTube": "https://www.youtube.com/@siddharthbhanushali"
+    },
+    "profile_url": "https://www.instagram.com/siddharthbhanushali",
+    "bio": "Surat and South Gujarat real estate in Gujarati. Instagram Reels on Surat new project launches, textile market area commercial plots, and Hazira industrial zone investment.",
+    "followers": { "Instagram": 145000, "YouTube": 38000 },
+    "language": ["Gujarati", "Hindi"],
+    "content_focus": ["Surat New Launches", "Commercial Plots Surat", "Hazira Industrial", "South Gujarat RE", "Gujarati RE Investment"],
+    "geography_focus": ["Surat", "South Gujarat"],
+    "posting_frequency": "Daily (Instagram), Weekly (YouTube)",
+    "monetisation": ["Developer Ads", "Brokerage Commission"],
+    "relevance_to_kyl": "Surat's industrial corridor land deals and commercial plot NA verification are KYL use cases for the Gujarati-speaking market.",
+    "confidence": "low",
+    "notes": "Gujarati Reels format is underutilised in RE — first-mover advantage for creators and KYL."
+  },
+  {
+    "name": "Himanshu Bhagat",
+    "handle": "@himanshubhagat_re",
+    "platforms": ["Instagram", "LinkedIn"],
+    "platform_urls": {
+      "Instagram": "https://www.instagram.com/himanshubhagat_re",
+      "LinkedIn": "https://www.linkedin.com/in/himanshubhagat"
+    },
+    "profile_url": "https://www.instagram.com/himanshubhagat_re",
+    "bio": "Pune-based RE agent turned content creator. Known for Instagram property walkthroughs, honest project reviews, PMRDA scheme analysis, and transparent brokerage process content.",
+    "followers": { "Instagram": 128000, "LinkedIn": 22000 },
+    "language": ["Marathi", "Hindi", "English"],
+    "content_focus": ["Pune Project Walkthroughs", "PMRDA Schemes", "Honest Project Review", "Transparent Brokerage", "Pune Suburbs"],
+    "geography_focus": ["Pune", "PMRDA Areas", "Pimpri-Chinchwad"],
+    "posting_frequency": "Daily (Instagram)",
+    "monetisation": ["Developer Tie-ups", "Brokerage Fees"],
+    "relevance_to_kyl": "PMRDA scheme verification and honest project reviews are the manual process KYL automates — natural partnership angle.",
+    "confidence": "low",
+    "notes": "Agent-turned-creator model is growing in Indian RE. Pune has a large active creator base."
+  },
+  {
+    "name": "Rahul Jain — Property Walah",
+    "handle": "@propertywalah",
+    "platforms": ["Instagram", "YouTube"],
+    "platform_urls": {
+      "Instagram": "https://www.instagram.com/propertywalah",
+      "YouTube": "https://www.youtube.com/@propertywalah"
+    },
+    "profile_url": "https://www.instagram.com/propertywalah",
+    "bio": "Rajasthan RE broker and creator. Instagram Reels on JDA plot auctions, best areas to invest in Jaipur, Ajmer Road vs Sirsi Road corridor comparison, and NA land conversion process in Rajasthan.",
+    "followers": { "Instagram": 112000, "YouTube": 42000 },
+    "language": ["Hindi", "Rajasthani"],
+    "content_focus": ["JDA Plot Auctions", "Jaipur Corridors", "NA Conversion Rajasthan", "Rajasthan Investment", "Affordable Plots"],
+    "geography_focus": ["Jaipur", "Rajasthan"],
+    "posting_frequency": "4x/week (Instagram), Weekly (YouTube)",
+    "monetisation": ["Developer Ads", "Brokerage Commission", "YouTube Revenue"],
+    "relevance_to_kyl": "JDA approval status and NA conversion verification are the due diligence steps KYL automates for Rajasthan plot buyers.",
+    "confidence": "low",
+    "notes": "Jaipur's JDA auction plots are one of North India's most searched RE content topics."
+  },
+  {
+    "name": "Meghna Sinha — Homewoner",
+    "handle": "@the_homewoner",
+    "platforms": ["Instagram", "YouTube"],
+    "platform_urls": {
+      "Instagram": "https://www.instagram.com/the_homewoner",
+      "YouTube": "https://www.youtube.com/@thehomewoner"
+    },
+    "profile_url": "https://www.instagram.com/the_homewoner",
+    "bio": "Mumbai-based homebuyer who documents her real property purchase journey — builder negotiations, home loan process, flat inspection checklist, OC/CC verification, and interior design. Aspirational yet practical.",
+    "followers": { "Instagram": 390000, "YouTube": 75000 },
+    "language": ["English", "Hinglish"],
+    "content_focus": ["Home Buying Journey", "Builder Negotiation", "OC CC Check", "Flat Inspection", "Interior After Possession"],
+    "geography_focus": ["Mumbai", "Pan-India Millennial Buyers"],
+    "posting_frequency": "4x/week (Instagram), Weekly (YouTube)",
+    "monetisation": ["Brand Collabs", "Developer Partnerships", "Affiliate"],
+    "relevance_to_kyl": "OC/CC and title verification are exact KYL use cases — her audience learns the checklist manually that KYL automates.",
+    "confidence": "medium",
+    "notes": "Lifestyle × real estate content format that makes due diligence relatable — strong partnership potential."
+  },
+  {
+    "name": "Kunal Sawhney",
+    "handle": "@kunalsawhney_re",
+    "platforms": ["Instagram", "LinkedIn"],
+    "platform_urls": {
+      "Instagram": "https://www.instagram.com/kunalsawhney_re",
+      "LinkedIn": "https://www.linkedin.com/in/kunalsawhney"
+    },
+    "profile_url": "https://www.instagram.com/kunalsawhney_re",
+    "bio": "Luxury RE specialist in Delhi NCR. Instagram Reels on DLF Phase 5 vs Aerocity, luxury villa project reviews, farmhouse land on Chattarpur, and NRI luxury buying in Delhi.",
+    "followers": { "Instagram": 155000, "LinkedIn": 32000 },
+    "language": ["English"],
+    "content_focus": ["Delhi Luxury RE", "DLF Projects", "Farmhouse Land", "Villa Reviews", "NRI Delhi Buying"],
+    "geography_focus": ["Delhi", "Gurgaon", "Aerocity"],
+    "posting_frequency": "3x/week",
+    "monetisation": ["Brokerage Fees", "Developer Partnerships"],
+    "relevance_to_kyl": "Farmhouse land on Chattarpur and luxury villa plot due diligence are premium KYL use cases — complex title chains in old Delhi areas.",
+    "confidence": "low",
+    "notes": "Delhi's old farmhouse zone land has complex title histories — premium KYL due diligence use case."
+  },
+  {
+    "name": "Aakriti Ahuja — ProProp",
+    "handle": "@proprop.in",
+    "platforms": ["Instagram", "LinkedIn"],
+    "platform_urls": {
+      "Instagram": "https://www.instagram.com/proprop.in",
+      "LinkedIn": "https://www.linkedin.com/company/proprop-india"
+    },
+    "profile_url": "https://www.instagram.com/proprop.in",
+    "bio": "Female-founded proptech startup. Instagram content on women's property rights, joint ownership benefits, property inheritance, and how to buy property as a single woman in India.",
+    "followers": { "Instagram": 135000, "LinkedIn": 28000 },
+    "language": ["English", "Hindi"],
+    "content_focus": ["Women Property Rights", "Joint Ownership", "Property Inheritance", "Single Woman Buyer", "Women RE Investment"],
+    "geography_focus": ["Pan-India", "Urban Women"],
+    "posting_frequency": "Daily (Instagram)",
+    "monetisation": ["SaaS / PropTech Revenue", "Brand Collabs"],
+    "relevance_to_kyl": "Property inheritance and title in women's name are complex legal research scenarios — KYL's title verification is highly relevant.",
+    "confidence": "medium",
+    "notes": "Women's property rights angle is underserved in proptech — first-mover brand positioning opportunity for KYL."
+  },
+  {
+    "name": "Navneet Realtors",
+    "handle": "@navneetrealtors",
+    "platforms": ["Instagram", "YouTube", "Facebook"],
+    "platform_urls": {
+      "Instagram": "https://www.instagram.com/navneetrealtors",
+      "YouTube": "https://www.youtube.com/@navneetrealtors",
+      "Facebook": "https://www.facebook.com/navneetrealtors"
+    },
+    "profile_url": "https://www.instagram.com/navneetrealtors",
+    "bio": "Hyderabad-based realtor and content creator. Reels on Hyderabad open plots vs flats, HMDA vs non-HMDA plot risk, Shadnagar and Siddipet corridor reviews, and buyer-first honest project breakdowns.",
+    "followers": { "Instagram": 195000, "YouTube": 55000, "Facebook": 42000 },
+    "language": ["Telugu", "Hindi", "English"],
+    "content_focus": ["Hyderabad Open Plots", "HMDA vs Non-HMDA Risk", "Shadnagar Siddipet", "Honest Project Reviews", "Hyderabad Corridors"],
+    "geography_focus": ["Hyderabad", "Telangana Periphery"],
+    "posting_frequency": "Daily (Instagram), 3x/week (YouTube)",
+    "monetisation": ["Developer Tie-ups", "Brokerage Commission", "YouTube Revenue"],
+    "relevance_to_kyl": "HMDA vs non-HMDA is the #1 due diligence question for Hyderabad plot buyers — exactly what KYL's clearance report checks.",
+    "confidence": "medium",
+    "notes": "HMDA approval status content has massive search volume in Hyderabad — KYL directly answers this."
+  },
+  {
+    "name": "Nivi Realty",
+    "handle": "@nivi_realty",
+    "platforms": ["Instagram", "YouTube"],
+    "platform_urls": {
+      "Instagram": "https://www.instagram.com/nivi_realty",
+      "YouTube": "https://www.youtube.com/@nivirealty"
+    },
+    "profile_url": "https://www.instagram.com/nivi_realty",
+    "bio": "Bengaluru-based female realtor. Instagram Reels on BBMP layout approvals, E-Khata vs A-Khata explained visually, North Bengaluru plotted developments, and first-home buying checklist for IT professionals.",
+    "followers": { "Instagram": 168000, "YouTube": 38000 },
+    "language": ["Kannada", "English"],
+    "content_focus": ["BBMP Layout Approvals", "E-Khata vs A-Khata", "North Bengaluru Plots", "IT Professional Home Buying", "Bengaluru Checklist"],
+    "geography_focus": ["Bengaluru", "North Bengaluru"],
+    "posting_frequency": "Daily (Instagram), Weekly (YouTube)",
+    "monetisation": ["Developer Tie-ups", "Brokerage Fees"],
+    "relevance_to_kyl": "E-Khata and BBMP layout approval verification are Bengaluru's primary land due diligence steps — KYL automates exactly these.",
+    "confidence": "medium",
+    "notes": "Female Kannada creator in Bengaluru RE is rare — strong community trust."
+  },
+  {
+    "name": "The Realty Show",
+    "handle": "@therealtyshow",
+    "platforms": ["Instagram", "YouTube", "LinkedIn"],
+    "platform_urls": {
+      "Instagram": "https://www.instagram.com/therealtyshow",
+      "YouTube": "https://www.youtube.com/@therealtyshow",
+      "LinkedIn": "https://www.linkedin.com/company/therealtyshow"
+    },
+    "profile_url": "https://www.instagram.com/therealtyshow",
+    "bio": "Pan-India property news and analysis in English. Quick Reels on RBI rate impact on home loans, new project launches in top cities, RERA news, and Supreme Court property rulings. News-format RE content.",
+    "followers": { "Instagram": 285000, "YouTube": 65000, "LinkedIn": 45000 },
+    "language": ["English"],
+    "content_focus": ["RE News", "RBI Rate Impact", "RERA Updates", "Supreme Court Rulings", "New Launches Pan-India"],
+    "geography_focus": ["Pan-India"],
+    "posting_frequency": "Daily",
+    "monetisation": ["Developer Ads", "Brand Collabs", "Sponsorship"],
+    "relevance_to_kyl": "News-format RE content audience is the most engaged research-oriented segment — high KYL adoption potential.",
+    "confidence": "medium",
+    "notes": "RE news aggregator format is growing rapidly on Instagram. High-intent audience."
+  },
+  {
+    "name": "Bhupesh Garg — Smart RE",
+    "handle": "@bhupeshgarg_re",
+    "platforms": ["Instagram", "YouTube"],
+    "platform_urls": {
+      "Instagram": "https://www.instagram.com/bhupeshgarg_re",
+      "YouTube": "https://www.youtube.com/@bhupeshgarg"
+    },
+    "profile_url": "https://www.instagram.com/bhupeshgarg_re",
+    "bio": "Chandigarh Tricity RE investor and educator. Instagram carousels on GMADA vs PUDA vs private plot safety comparison, NRI Punjabi buying guide, and Aerocity Mohali investment analysis.",
+    "followers": { "Instagram": 132000, "YouTube": 35000 },
+    "language": ["Hindi", "Punjabi"],
+    "content_focus": ["GMADA vs PUDA Safety", "Aerocity Mohali", "NRI Punjabi Guide", "Tricity Investment", "Plot Approval Comparison"],
+    "geography_focus": ["Chandigarh", "Mohali", "Panchkula", "Tricity"],
+    "posting_frequency": "4x/week (Instagram), Weekly (YouTube)",
+    "monetisation": ["Developer Ads", "Consultation", "Brokerage"],
+    "relevance_to_kyl": "Tricity plot approval comparison — GMADA vs PUDA vs private — is exactly the kind of authority-check KYL automates for buyers.",
+    "confidence": "low",
+    "notes": "Tricity has a fragmented multi-authority approval landscape — KYL simplifies this directly."
+  },
+  {
+    "name": "Aditi Gupta — The RE Girl",
+    "handle": "@thereel_estate_girl",
+    "platforms": ["Instagram", "LinkedIn"],
+    "platform_urls": {
+      "Instagram": "https://www.instagram.com/thereel_estate_girl",
+      "LinkedIn": "https://www.linkedin.com/in/aditigupta-re"
+    },
+    "profile_url": "https://www.instagram.com/thereel_estate_girl",
+    "bio": "Mumbai real estate broker and content creator. Witty, relatable Reels on builder excuses, OC delays, possession nightmares, and how to read a sale agreement. Popular among millennial homebuyers.",
+    "followers": { "Instagram": 245000, "LinkedIn": 30000 },
+    "language": ["English", "Hinglish"],
+    "content_focus": ["Builder Excuses", "OC Delays", "Possession Nightmares", "Sale Agreement Red Flags", "Buyer Rights"],
+    "geography_focus": ["Mumbai", "MMR"],
+    "posting_frequency": "Daily (Instagram)",
+    "monetisation": ["Developer Partnerships", "Brokerage Commission"],
+    "relevance_to_kyl": "OC and sale deed verification are KYL's core deliverables — she explains the problem, KYL provides the tool.",
+    "confidence": "medium",
+    "notes": "Humour-driven RE content format is underutilised — strong engagement and shareability."
+  },
+  {
+    "name": "Realty Bytes",
+    "handle": "@realtybytes_india",
+    "platforms": ["Instagram", "LinkedIn"],
+    "platform_urls": {
+      "Instagram": "https://www.instagram.com/realtybytes_india",
+      "LinkedIn": "https://www.linkedin.com/company/realtybytes-india"
+    },
+    "profile_url": "https://www.instagram.com/realtybytes_india",
+    "bio": "Data-driven Instagram RE account. Posts weekly charts on city-wise price appreciation, absorption rates, unsold inventory by city, and plot vs flat return comparison. English, infographic format.",
+    "followers": { "Instagram": 175000, "LinkedIn": 62000 },
+    "language": ["English"],
+    "content_focus": ["Price Appreciation Data", "Absorption Rates", "Unsold Inventory", "Plot vs Flat Returns", "City Market Data"],
+    "geography_focus": ["Pan-India", "Top-8 Cities"],
+    "posting_frequency": "3–4x/week",
+    "monetisation": ["Developer Data Partnerships", "Research Subscriptions"],
+    "relevance_to_kyl": "Data-infographic RE audience is KYL's most natural early adopter — they understand and trust market data products.",
+    "confidence": "medium",
+    "notes": "Infographic format drives high saves and shares — ideal for KYL research content co-creation."
+  },
+  {
+    "name": "Yash Arora — Plot Point",
+    "handle": "@plotpoint_india",
+    "platforms": ["Instagram", "YouTube"],
+    "platform_urls": {
+      "Instagram": "https://www.instagram.com/plotpoint_india",
+      "YouTube": "https://www.youtube.com/@plotpoint_india"
+    },
+    "profile_url": "https://www.instagram.com/plotpoint_india",
+    "bio": "Plot-only investment educator. Instagram carousels on 10x plot return case studies, before/after plot value in emerging corridors, how to do due diligence on a plot, and registry process step-by-step.",
+    "followers": { "Instagram": 205000, "YouTube": 48000 },
+    "language": ["Hindi", "English"],
+    "content_focus": ["Plot Return Case Studies", "Emerging Corridors", "Plot Due Diligence", "Registry Process", "Land Investment How-to"],
+    "geography_focus": ["Pan-India", "North India", "NCR"],
+    "posting_frequency": "Daily (Instagram), Weekly (YouTube)",
+    "monetisation": ["Courses", "Developer Tie-ups", "Affiliate"],
+    "relevance_to_kyl": "Plot due diligence is KYL's core product — his content teaches buyers what KYL automates. Highest direct alignment after Plot Mitra.",
+    "confidence": "medium",
+    "notes": "10x plot return case studies generate massive viral shares — KYL data can fuel this content format."
+  },
+  {
+    "name": "Santosh Bhatia — Realty IQ",
+    "handle": "@realtyiq_india",
+    "platforms": ["Instagram", "LinkedIn", "YouTube"],
+    "platform_urls": {
+      "Instagram": "https://www.instagram.com/realtyiq_india",
+      "LinkedIn": "https://www.linkedin.com/in/santoshbhatia_re",
+      "YouTube": "https://www.youtube.com/@realtyiq"
+    },
+    "profile_url": "https://www.instagram.com/realtyiq_india",
+    "bio": "Former ANAROCK consultant turned independent RE educator. Covers residential market intelligence, city-wise demand analysis, buyer segment trends, and investment timing frameworks.",
+    "followers": { "Instagram": 148000, "LinkedIn": 55000, "YouTube": 32000 },
+    "language": ["English", "Hindi"],
+    "content_focus": ["Market Intelligence", "Demand Analysis", "Buyer Segment Trends", "Investment Timing", "City Deep Dives"],
+    "geography_focus": ["Pan-India", "Top-7 Cities"],
+    "posting_frequency": "4x/week",
+    "monetisation": ["Developer Research Partnerships", "Subscription Newsletter", "Consultation"],
+    "relevance_to_kyl": "Market intelligence content is adjacent to KYL's research outputs — potential content co-creation and data-sharing partnership.",
+    "confidence": "medium",
+    "notes": "Ex-ANAROCK credibility gives strong institutional audience — bridges B2B and B2C for KYL."
+  },
+  {
+    "name": "Archana Surana — Kochi Homes",
+    "handle": "@kochihomesbyarchana",
+    "platforms": ["Instagram", "YouTube"],
+    "platform_urls": {
+      "Instagram": "https://www.instagram.com/kochihomesbyarchana",
+      "YouTube": "https://www.youtube.com/@kochihomesbyarchana"
+    },
+    "profile_url": "https://www.instagram.com/kochihomesbyarchana",
+    "bio": "Kochi-based realtor. Malayalam and English Reels on Kochi waterfront property, GCDA vs private layout difference, Kakkanad IT zone apartments and plots, and NRI Gulf-Kerala buying process.",
+    "followers": { "Instagram": 92000, "YouTube": 22000 },
+    "language": ["Malayalam", "English"],
+    "content_focus": ["Kochi Waterfront", "GCDA vs Private Layout", "Kakkanad IT Zone", "NRI Gulf Kerala", "Patta Process Kochi"],
+    "geography_focus": ["Kochi", "Ernakulam", "Kerala"],
+    "posting_frequency": "4x/week (Instagram), Weekly (YouTube)",
+    "monetisation": ["Developer Tie-ups", "Brokerage Commission"],
+    "relevance_to_kyl": "GCDA layout verification and NRI Gulf-Kerala buying are core KYL use cases in the Kerala market.",
+    "confidence": "low",
+    "notes": "Kerala Gulf NRI community is large and actively buying — Instagram Reels in Malayalam reach them effectively."
+  },
+  {
+    "name": "Vishal Rawat — NCR Plots",
+    "handle": "@ncrplots",
+    "platforms": ["Instagram", "YouTube"],
+    "platform_urls": {
+      "Instagram": "https://www.instagram.com/ncrplots",
+      "YouTube": "https://www.youtube.com/@ncrplots"
+    },
+    "profile_url": "https://www.instagram.com/ncrplots",
+    "bio": "Greater Noida and Yamuna Expressway plot specialist. Reels on YEIDA scheme allotment results, Jewar Airport zone plot availability, UP RERA plot registration, and identifying fake plot scheme advertisements.",
+    "followers": { "Instagram": 172000, "YouTube": 45000 },
+    "language": ["Hindi"],
+    "content_focus": ["YEIDA Schemes", "Jewar Airport Zone", "UP RERA Plots", "Fake Plot Scams", "Yamuna Expressway Investment"],
+    "geography_focus": ["Greater Noida", "Yamuna Expressway", "UP"],
+    "posting_frequency": "Daily (Instagram), 3x/week (YouTube)",
+    "monetisation": ["Developer Tie-ups", "YouTube Revenue", "Brokerage"],
+    "relevance_to_kyl": "Fake plot scheme exposure is literally KYL's use case — YEIDA and UP RERA verification before buying a plot.",
+    "confidence": "medium",
+    "notes": "Jewar Airport zone is one of the most scam-prone RE markets in India — KYL's highest-urgency use case."
+  },
+  {
+    "name": "Realty Wisdom",
+    "handle": "@realtywisdom",
+    "platforms": ["Instagram", "LinkedIn"],
+    "platform_urls": {
+      "Instagram": "https://www.instagram.com/realtywisdom",
+      "LinkedIn": "https://www.linkedin.com/company/realtywisdom"
+    },
+    "profile_url": "https://www.instagram.com/realtywisdom",
+    "bio": "Educational real estate content for professionals. Covers home loan eligibility hacks, RERA vs non-RERA project risks, property registration cost breakdown, and builder due diligence checklist.",
+    "followers": { "Instagram": 165000, "LinkedIn": 35000 },
+    "language": ["English", "Hinglish"],
+    "content_focus": ["Home Loan Eligibility", "RERA vs Non-RERA", "Registration Cost", "Builder Due Diligence", "Property Checklist"],
+    "geography_focus": ["Pan-India Urban Professionals"],
+    "posting_frequency": "Daily",
+    "monetisation": ["Brand Collabs", "Affiliate"],
+    "relevance_to_kyl": "Builder due diligence checklist content — same need that KYL's report addresses. Content × tool funnel opportunity.",
+    "confidence": "medium",
+    "notes": "Clean infographic format drives high saves — audiences that save checklists are KYL's prime target."
+  },
+  {
+    "name": "Priya Kapoor — Delhi Homes",
+    "handle": "@delhihomesbypriya",
+    "platforms": ["Instagram", "YouTube"],
+    "platform_urls": {
+      "Instagram": "https://www.instagram.com/delhihomesbypriya",
+      "YouTube": "https://www.youtube.com/@delhihomesbypriya"
+    },
+    "profile_url": "https://www.instagram.com/delhihomesbypriya",
+    "bio": "Delhi and South Delhi realtor. Reels on South Delhi independent house layouts, DDA flat allotment, DDA plot scheme 2025 updates, and power of attorney risks in old Delhi transactions.",
+    "followers": { "Instagram": 105000, "YouTube": 28000 },
+    "language": ["Hindi", "English"],
+    "content_focus": ["South Delhi Independent Houses", "DDA Flat Allotment", "DDA Plot Scheme", "Power of Attorney Risks", "Old Delhi Transactions"],
+    "geography_focus": ["Delhi", "South Delhi", "DDA Areas"],
+    "posting_frequency": "4x/week",
+    "monetisation": ["Brokerage Commission", "Developer Tie-ups"],
+    "relevance_to_kyl": "DDA plot scheme and old Delhi title chains are complex due diligence scenarios — KYL's verification is essential for Delhi buyers.",
+    "confidence": "low",
+    "notes": "Delhi's DDA plot scheme generates huge interest every cycle — KYL can provide allotment verification."
+  },
+  {
+    "name": "Ritesh Mehta — RE Fundamentals",
+    "handle": "@refundamentals",
+    "platforms": ["Instagram", "LinkedIn", "YouTube"],
+    "platform_urls": {
+      "Instagram": "https://www.instagram.com/refundamentals",
+      "LinkedIn": "https://www.linkedin.com/in/riteshmehta_re",
+      "YouTube": "https://www.youtube.com/@refundamentals"
+    },
+    "profile_url": "https://www.instagram.com/refundamentals",
+    "bio": "Senior Director at JLL India. Posts on office RE, data centre land acquisition, Industrial and logistics sector land, and India's emerging RE asset classes. Thought-leadership on LinkedIn with engagement on Instagram.",
+    "followers": { "Instagram": 88000, "LinkedIn": 125000, "YouTube": 18000 },
+    "language": ["English"],
+    "content_focus": ["Office RE", "Data Centre Land", "Industrial Logistics", "Emerging Asset Classes", "Institutional RE"],
+    "geography_focus": ["Pan-India", "Industrial Corridors"],
+    "posting_frequency": "3x/week",
+    "monetisation": ["JLL brand", "Speaking Engagements"],
+    "relevance_to_kyl": "Industrial and data centre land acquisition are growing enterprise KYL use cases — institutional land buyers need digital due diligence.",
+    "confidence": "high",
+    "notes": "JLL India senior voice on industrial RE — B2B KYL enterprise audience."
+  },
+  {
+    "name": "Ruchi Rathor",
+    "handle": "@ruchi_rathor",
+    "platforms": ["Instagram", "LinkedIn"],
+    "platform_urls": {
+      "Instagram": "https://www.instagram.com/ruchi_rathor",
+      "LinkedIn": "https://www.linkedin.com/in/ruchirathor"
+    },
+    "profile_url": "https://www.instagram.com/ruchi_rathor",
+    "bio": "Founder of Paysquare Consultancy. Covers NRI taxation in India, TDS on NRI property sale, FEMA real estate compliance, and repatriation of proceeds. Strong NRI finance Instagram audience.",
+    "followers": { "Instagram": 285000, "LinkedIn": 60000 },
+    "language": ["English", "Hindi"],
+    "content_focus": ["NRI Tax India", "TDS NRI Property", "FEMA RE Compliance", "Repatriation Proceeds", "NRI Investment"],
+    "geography_focus": ["USA", "UK", "UAE diaspora", "Pan-India"],
+    "posting_frequency": "Daily",
+    "monetisation": ["Consultation Fees", "Brand Collabs"],
+    "relevance_to_kyl": "NRI FEMA and tax compliance + property due diligence are adjacent use cases — her NRI audience is KYL's premium segment.",
+    "confidence": "medium",
+    "notes": "NRI tax × RE compliance is a natural gateway to land due diligence — KYL partnership opportunity."
+  },
+  {
+    "name": "Sumit Mondal — Kolkata RE",
+    "handle": "@kolkatareexpert",
+    "platforms": ["Instagram", "Facebook", "YouTube"],
+    "platform_urls": {
+      "Instagram": "https://www.instagram.com/kolkatareexpert",
+      "Facebook": "https://www.facebook.com/kolkatareexpert",
+      "YouTube": "https://www.youtube.com/@kolkatareexpert"
+    },
+    "profile_url": "https://www.instagram.com/kolkatareexpert",
+    "bio": "Kolkata and West Bengal real estate in Bengali. Instagram Reels on New Town Rajarhat projects, WB land mutation process, deed registration at Kolkata sub-registrar, and affordable plots in Howrah and Hooghly.",
+    "followers": { "Instagram": 118000, "Facebook": 75000, "YouTube": 32000 },
+    "language": ["Bengali", "Hindi"],
+    "content_focus": ["New Town Rajarhat", "WB Mutation Process", "Kolkata Registration", "Howrah Hooghly Plots", "WB Land Records"],
+    "geography_focus": ["Kolkata", "West Bengal", "New Town"],
+    "posting_frequency": "4x/week (Instagram), 2x/week (YouTube)",
+    "monetisation": ["Developer Ads", "YouTube Revenue", "Consultation"],
+    "relevance_to_kyl": "WB land mutation and Kolkata deed registration are the due diligence steps KYL covers for the Bengal market.",
+    "confidence": "low",
+    "notes": "Bengali RE content on Instagram is growing — underserved language for proptech tools."
+  },
+  {
+    "name": "PropMarketer India",
+    "handle": "@propmarketer",
+    "platforms": ["Instagram", "LinkedIn"],
+    "platform_urls": {
+      "Instagram": "https://www.instagram.com/propmarketer",
+      "LinkedIn": "https://www.linkedin.com/company/propmarketer"
+    },
+    "profile_url": "https://www.instagram.com/propmarketer",
+    "bio": "B2B real estate marketing content. Covers how developers can use digital marketing, RERA advertisement rules, PropTech tools for agents, and buyer journey in digital-first RE sales.",
+    "followers": { "Instagram": 58000, "LinkedIn": 45000 },
+    "language": ["English"],
+    "content_focus": ["Developer Marketing", "RERA Ad Rules", "Proptech for Agents", "Digital RE Sales", "Buyer Journey"],
+    "geography_focus": ["Pan-India", "RE Industry"],
+    "posting_frequency": "3x/week",
+    "monetisation": ["Agency Fees", "SaaS Partnerships"],
+    "relevance_to_kyl": "B2B RE marketing audience includes developers and agents who would integrate KYL reports into their buyer pitch.",
+    "confidence": "medium",
+    "notes": "B2B channel — useful for reaching developer and broker partners for KYL's distribution."
+  },
+  {
+    "name": "Nishant Malhotra — Wealthy RE",
+    "handle": "@wealthyre",
+    "platforms": ["Instagram", "LinkedIn", "YouTube"],
+    "platform_urls": {
+      "Instagram": "https://www.instagram.com/wealthyre",
+      "LinkedIn": "https://www.linkedin.com/in/nishantmalhotra_re",
+      "YouTube": "https://www.youtube.com/@wealthyre"
+    },
+    "profile_url": "https://www.instagram.com/wealthyre",
+    "bio": "HNI and ultra-HNI real estate advisor. Instagram content on RE portfolio construction, commercial RE for passive income, land banking strategy, and family office RE allocation in India.",
+    "followers": { "Instagram": 95000, "LinkedIn": 48000, "YouTube": 22000 },
+    "language": ["English"],
+    "content_focus": ["RE Portfolio", "Commercial RE Income", "Land Banking", "Family Office RE", "HNI Investment"],
+    "geography_focus": ["Pan-India", "HNI Segment"],
+    "posting_frequency": "3x/week",
+    "monetisation": ["Consultation", "Developer Partnerships"],
+    "relevance_to_kyl": "Land banking strategy requires deep due diligence — KYL's enterprise report for HNI land aggregation is a premium use case.",
+    "confidence": "medium",
+    "notes": "Land banking as an investment strategy is growing among HNIs — KYL's most premium B2C segment."
+  },
+  {
+    "name": "Ahmedabad Property Hub",
+    "handle": "@ahmedabadpropertyhub",
+    "platforms": ["Instagram", "YouTube", "Facebook"],
+    "platform_urls": {
+      "Instagram": "https://www.instagram.com/ahmedabadpropertyhub",
+      "YouTube": "https://www.youtube.com/@ahmedabadpropertyhub",
+      "Facebook": "https://www.facebook.com/ahmedabadpropertyhub"
+    },
+    "profile_url": "https://www.instagram.com/ahmedabadpropertyhub",
+    "bio": "Ahmedabad real estate in Gujarati and Hindi. Instagram Reels on AUDA-approved plots, Ahmedabad riverfront project impact, SG Highway corridor, and NA land conversion near GIFT City.",
+    "followers": { "Instagram": 138000, "YouTube": 42000, "Facebook": 38000 },
+    "language": ["Gujarati", "Hindi"],
+    "content_focus": ["AUDA Plots", "Ahmedabad Riverfront", "SG Highway Corridor", "GIFT City Periphery", "NA Conversion Ahmedabad"],
+    "geography_focus": ["Ahmedabad", "AUDA Region", "Gujarat"],
+    "posting_frequency": "Daily (Instagram), 3x/week (YouTube)",
+    "monetisation": ["Developer Ads", "Brokerage", "YouTube Revenue"],
+    "relevance_to_kyl": "AUDA approval verification and NA conversion near GIFT City are core KYL use cases for Ahmedabad buyers.",
+    "confidence": "low",
+    "notes": "Ahmedabad is Gujarat's largest RE market — AUDA approval is a critical due diligence step."
+  },
+  {
+    "name": "Moneywise RE",
+    "handle": "@moneywise_re",
+    "platforms": ["Instagram", "LinkedIn"],
+    "platform_urls": {
+      "Instagram": "https://www.instagram.com/moneywise_re",
+      "LinkedIn": "https://www.linkedin.com/company/moneywise-re"
+    },
+    "profile_url": "https://www.instagram.com/moneywise_re",
+    "bio": "Finance-first real estate content. Instagram carousels on how to analyse a property's yield before buying, rental income tax, plot appreciation vs rental income comparison, and SIP vs EMI debate.",
+    "followers": { "Instagram": 145000, "LinkedIn": 38000 },
+    "language": ["English"],
+    "content_focus": ["Property Yield Analysis", "Rental Income Tax", "Plot vs Rental", "SIP vs EMI", "RE Financial Analysis"],
+    "geography_focus": ["Pan-India Urban"],
+    "posting_frequency": "Daily",
+    "monetisation": ["Brand Collabs", "Affiliate", "Course"],
+    "relevance_to_kyl": "Finance-first RE buyers are KYL's most analytical customers — they demand data before any purchase decision.",
+    "confidence": "medium",
+    "notes": "Finance × RE crossover content segment is growing rapidly on Instagram — natural KYL audience."
+  },
+  {
+    "name": "Home Buying Made Easy",
+    "handle": "@homebuyingmadeeasy",
+    "platforms": ["Instagram", "YouTube"],
+    "platform_urls": {
+      "Instagram": "https://www.instagram.com/homebuyingmadeeasy",
+      "YouTube": "https://www.youtube.com/@homebuyingmadeeasy"
+    },
+    "profile_url": "https://www.instagram.com/homebuyingmadeeasy",
+    "bio": "Step-by-step home buying content for first-timers. Covers the end-to-end process from budget planning to registration, with visual checklists for each stage — legal, financial, and physical inspection.",
+    "followers": { "Instagram": 225000, "YouTube": 55000 },
+    "language": ["Hindi", "English"],
+    "content_focus": ["Home Buying Process", "Step-by-step Checklist", "Legal Due Diligence", "Physical Inspection", "Registration Process"],
+    "geography_focus": ["Pan-India"],
+    "posting_frequency": "Daily",
+    "monetisation": ["Brand Collabs", "Developer Ads", "Affiliate"],
+    "relevance_to_kyl": "Legal due diligence step in the home buying checklist is exactly KYL's product — content to tool conversion funnel.",
+    "confidence": "medium",
+    "notes": "Checklist-format content generates highest saves on Instagram — KYL report as downloadable checklist output."
+  },
+  {
+    "name": "Nikhil Gupta — Realty Sutra",
+    "handle": "@realtysutra",
+    "platforms": ["Instagram", "YouTube", "LinkedIn"],
+    "platform_urls": {
+      "Instagram": "https://www.instagram.com/realtysutra",
+      "YouTube": "https://www.youtube.com/@realtysutra",
+      "LinkedIn": "https://www.linkedin.com/in/nikhilgupta_re"
+    },
+    "profile_url": "https://www.instagram.com/realtysutra",
+    "bio": "Pune-based real estate educator. RERA consultant and builder advocate reviewer. Covers builder shortlisting, site visit checklist, Pune RERA project status check, and flat inspection day procedure.",
+    "followers": { "Instagram": 158000, "YouTube": 48000, "LinkedIn": 28000 },
+    "language": ["Hindi", "English"],
+    "content_focus": ["Builder Shortlisting", "Site Visit Checklist", "Pune RERA Status", "Flat Inspection", "RERA Complaint Process"],
+    "geography_focus": ["Pune", "Maharashtra"],
+    "posting_frequency": "Daily (Instagram), 3x/week (YouTube)",
+    "monetisation": ["Consultation", "Developer Tie-ups", "YouTube Revenue"],
+    "relevance_to_kyl": "RERA project status and builder due diligence checklist are exactly what KYL automates — he educates the use case, KYL provides the tool.",
+    "confidence": "medium",
+    "notes": "RERA consultant with large Pune following — credibility for due diligence content is high."
+  },
+  {
+    "name": "Madhu Sharma — Property Tips",
+    "handle": "@madhupropertytips",
+    "platforms": ["Instagram", "Facebook"],
+    "platform_urls": {
+      "Instagram": "https://www.instagram.com/madhupropertytips",
+      "Facebook": "https://www.facebook.com/madhupropertytips"
+    },
+    "profile_url": "https://www.instagram.com/madhupropertytips",
+    "bio": "Hindi property tips creator for mass market buyers. Short Reels on what documents to check before buying a flat, registry process in UP/Bihar, home loan documentation, and common property scams to avoid.",
+    "followers": { "Instagram": 185000, "Facebook": 55000 },
+    "language": ["Hindi"],
+    "content_focus": ["Property Document Checklist", "Registry Process Hindi", "Home Loan Documents", "Property Scam Awareness", "Buyer Tips"],
+    "geography_focus": ["North India", "UP", "Bihar", "MP"],
+    "posting_frequency": "Daily",
+    "monetisation": ["YouTube Revenue", "Affiliate"],
+    "relevance_to_kyl": "Property scam awareness and document checklist in Hindi are the exact pain points KYL solves for the mass-market Hindi-belt buyer.",
+    "confidence": "medium",
+    "notes": "Mass-market Hindi RE content is underserved on Instagram — growing fast."
+  },
+  {
+    "name": "Arun Saini — Invest in Plots",
+    "handle": "@investinplots",
+    "platforms": ["Instagram", "YouTube"],
+    "platform_urls": {
+      "Instagram": "https://www.instagram.com/investinplots",
+      "YouTube": "https://www.youtube.com/@investinplots"
+    },
+    "profile_url": "https://www.instagram.com/investinplots",
+    "bio": "Rajasthan and North India plot investment educator. Instagram Reels on how plots outperform flats over 10 years, JDA vs private layout approval risk, and how to verify NA order before buying a plot.",
+    "followers": { "Instagram": 168000, "YouTube": 52000 },
+    "language": ["Hindi"],
+    "content_focus": ["Plot vs Flat Returns", "JDA vs Private Layout Risk", "NA Order Verification", "North India Plots", "Plot Investment Strategy"],
+    "geography_focus": ["Rajasthan", "North India", "Pan-India"],
+    "posting_frequency": "Daily (Instagram), 2x/week (YouTube)",
+    "monetisation": ["Developer Tie-ups", "YouTube Revenue", "Courses"],
+    "relevance_to_kyl": "NA order verification before buying a plot is explicitly KYL's product — his content creates demand, KYL fulfils it.",
+    "confidence": "medium",
+    "notes": "NA order content is highly searched — KYL's single biggest SEO/content opportunity in Rajasthan."
+  },
+  {
+    "name": "Sneh Thadani",
+    "handle": "@snehthadani",
+    "platforms": ["Instagram", "LinkedIn"],
+    "platform_urls": {
+      "Instagram": "https://www.instagram.com/snehthadani",
+      "LinkedIn": "https://www.linkedin.com/in/snehthadani"
+    },
+    "profile_url": "https://www.instagram.com/snehthadani",
+    "bio": "Sindhi NRI real estate investor based in Dubai. Posts on how Gulf NRIs manage Indian property purchases, managing rental income remotely, and legal risks in giving power of attorney for property to relatives in India.",
+    "followers": { "Instagram": 92000, "LinkedIn": 28000 },
+    "language": ["English", "Hindi", "Sindhi"],
+    "content_focus": ["NRI Dubai RE", "Remote Property Management", "Power of Attorney Risks", "NRI Rental Income", "Gulf NRI India Buying"],
+    "geography_focus": ["UAE", "Gulf NRI diaspora", "Pan-India"],
+    "posting_frequency": "3x/week",
+    "monetisation": ["Consultation", "Property Management Services"],
+    "relevance_to_kyl": "Power of attorney misuse and remote property verification are exactly what KYL's digital report solves for Gulf NRIs.",
+    "confidence": "low",
+    "notes": "Gulf NRI community is one of India's largest property investing diaspora groups."
+  },
+  {
+    "name": "Mohit Malhotra — Lodha",
+    "handle": "@mohitmalhotra_lodha",
+    "platforms": ["LinkedIn", "Instagram"],
+    "platform_urls": {
+      "LinkedIn": "https://www.linkedin.com/in/mohitmalhotralore",
+      "Instagram": "https://www.instagram.com/mohitmalhotra_lodha"
+    },
+    "profile_url": "https://www.linkedin.com/in/mohitmalhotralore",
+    "bio": "CEO of Lodha Group. Posts on township development, land acquisition scale in India, luxury RE market trends, and Lodha's expansion into global markets. Thought leadership on India RE policy.",
+    "followers": { "LinkedIn": 160000, "Instagram": 45000 },
+    "language": ["English"],
+    "content_focus": ["Township Development", "Land Acquisition Scale", "Luxury RE", "India RE Policy", "Global Expansion"],
+    "geography_focus": ["Pan-India", "Mumbai", "London", "Dubai"],
+    "posting_frequency": "Weekly",
+    "monetisation": ["Lodha Group brand"],
+    "relevance_to_kyl": "Large-scale land acquisition is a developer-level KYL B2B use case — Lodha is exactly the enterprise segment for KYL's API product.",
+    "confidence": "high",
+    "notes": "Lodha acquires large land parcels regularly — enterprise-level KYL due diligence use case."
+  },
+  {
+    "name": "Aditya Kushwaha — Axis Ecorp",
+    "handle": "@adityakushwaha_re",
+    "platforms": ["Instagram", "LinkedIn", "YouTube"],
+    "platform_urls": {
+      "Instagram": "https://www.instagram.com/adityakushwaha_re",
+      "LinkedIn": "https://www.linkedin.com/in/aditya-kushwaha-axis",
+      "YouTube": "https://www.youtube.com/@adityakushwahaaxisecorp"
+    },
+    "profile_url": "https://www.instagram.com/adityakushwaha_re",
+    "bio": "CEO of Axis Ecorp. Posts on plotted development projects in Goa, holiday home investment, weekend home plot ROI, and regulatory compliance for resort/villa development on non-agricultural land.",
+    "followers": { "Instagram": 78000, "LinkedIn": 55000, "YouTube": 18000 },
+    "language": ["English", "Hindi"],
+    "content_focus": ["Goa Plotted Development", "Holiday Home Investment", "Weekend Home ROI", "Resort Villa Compliance", "NA Goa"],
+    "geography_focus": ["Goa", "Alibaug", "Lonavala", "Holiday Home Markets"],
+    "posting_frequency": "3x/week",
+    "monetisation": ["Axis Ecorp brand", "Developer Revenue"],
+    "relevance_to_kyl": "Goa and holiday home land compliance (CRZ, NA conversion) is a highly complex due diligence scenario — premium KYL use case.",
+    "confidence": "medium",
+    "notes": "Goa's CRZ regulations and NA conversion for holiday homes is one of India's most complex land approval processes."
+  },
+  {
+    "name": "The Hyderabad Property Show",
+    "handle": "@hyderabadpropertyshow",
+    "platforms": ["Instagram", "YouTube"],
+    "platform_urls": {
+      "Instagram": "https://www.instagram.com/hyderabadpropertyshow",
+      "YouTube": "https://www.youtube.com/@hyderabadpropertyshow"
+    },
+    "profile_url": "https://www.instagram.com/hyderabadpropertyshow",
+    "bio": "Telugu Reels on Hyderabad market update, week-wise price movement data, new HMDA layout launches, and investment-grade open plot analysis near Hyderabad ORR corridors.",
+    "followers": { "Instagram": 148000, "YouTube": 42000 },
+    "language": ["Telugu", "English"],
+    "content_focus": ["Hyderabad Market Update", "Price Movement Data", "HMDA Layout Launches", "ORR Open Plots", "Investment Grade Analysis"],
+    "geography_focus": ["Hyderabad", "ORR Corridors", "Telangana"],
+    "posting_frequency": "Daily (Instagram), 2x/week (YouTube)",
+    "monetisation": ["Developer Ads", "YouTube Revenue", "Consultation"],
+    "relevance_to_kyl": "Weekly price and HMDA launch data combined with plot due diligence verification — KYL is the natural next step after this creator's content.",
+    "confidence": "medium",
+    "notes": "Data-driven Telugu RE content on Instagram is a growing niche — high engagement from Hyderabad IT buyers."
+  },
+  {
+    "name": "Abhishek Mangal — Mumbai RE",
+    "handle": "@abhishekmangal_re",
+    "platforms": ["Instagram", "LinkedIn"],
+    "platform_urls": {
+      "Instagram": "https://www.instagram.com/abhishekmangal_re",
+      "LinkedIn": "https://www.linkedin.com/in/abhishekmangal"
+    },
+    "profile_url": "https://www.instagram.com/abhishekmangal_re",
+    "bio": "RERA-registered Mumbai broker. Instagram content on Mumbai project registration status under MahaRERA, SRA redevelopment timelines, MHADA lottery system explained, and redevelopment consent process.",
+    "followers": { "Instagram": 105000, "LinkedIn": 22000 },
+    "language": ["Hindi", "Marathi", "English"],
+    "content_focus": ["MahaRERA Registration Status", "SRA Timelines", "MHADA Lottery", "Redevelopment Consent", "Mumbai Project Updates"],
+    "geography_focus": ["Mumbai", "MMR"],
+    "posting_frequency": "Daily",
+    "monetisation": ["Brokerage Fees", "Developer Tie-ups"],
+    "relevance_to_kyl": "MahaRERA registration check is a core KYL verification step for Mumbai buyers — he explains the process, KYL automates it.",
+    "confidence": "low",
+    "notes": "RERA-registered broker with strong Instagram following lends compliance credibility to his content."
+  },
+  {
+    "name": "Karan Mehta — Realty Gyaan",
+    "handle": "@realtygyaan",
+    "platforms": ["Instagram", "YouTube"],
+    "platform_urls": {
+      "Instagram": "https://www.instagram.com/realtygyaan",
+      "YouTube": "https://www.youtube.com/@realtygyaan"
+    },
+    "profile_url": "https://www.instagram.com/realtygyaan",
+    "bio": "Pan-India Hindi real estate investor. Instagram Reels on passive income from RE, how to build a property portfolio from scratch, RERA vs non-RERA investment risk, and plot vs flat 10-year return.",
+    "followers": { "Instagram": 215000, "YouTube": 62000 },
+    "language": ["Hindi"],
+    "content_focus": ["RE Passive Income", "Property Portfolio Building", "RERA vs Non-RERA Risk", "Plot vs Flat 10-yr Return", "Beginner Investor Guide"],
+    "geography_focus": ["Pan-India"],
+    "posting_frequency": "Daily",
+    "monetisation": ["Developer Tie-ups", "YouTube Revenue", "Courses"],
+    "relevance_to_kyl": "RERA vs non-RERA risk content directly leads buyers to KYL's RERA status verification feature.",
+    "confidence": "medium",
+    "notes": "Hindi beginner investor audience is the mass-market entry point for KYL — affordable report pricing is key."
+  },
+  {
+    "name": "RERA Seva",
+    "handle": "@reraseva",
+    "platforms": ["Instagram", "LinkedIn", "YouTube"],
+    "platform_urls": {
+      "Instagram": "https://www.instagram.com/reraseva",
+      "LinkedIn": "https://www.linkedin.com/company/reraseva",
+      "YouTube": "https://www.youtube.com/@reraseva"
+    },
+    "profile_url": "https://www.instagram.com/reraseva",
+    "bio": "RERA legal advisory startup. Instagram content on RERA complaint filing, builder delay compensation, RERA refund process, and latest RERA rulings for buyers. Guides buyers through dispute resolution.",
+    "followers": { "Instagram": 92000, "LinkedIn": 32000, "YouTube": 25000 },
+    "language": ["Hindi", "English"],
+    "content_focus": ["RERA Complaint Filing", "Builder Delay Compensation", "RERA Refund Process", "RERA Rulings", "Buyer Dispute Resolution"],
+    "geography_focus": ["Pan-India"],
+    "posting_frequency": "4x/week",
+    "monetisation": ["Legal Consultation Fees", "SaaS Tool"],
+    "relevance_to_kyl": "RERA legal dispute audience is the downstream consequence of not doing pre-purchase due diligence — KYL prevents the problems RERA Seva resolves.",
+    "confidence": "medium",
+    "notes": "Pre-purchase (KYL) and post-dispute (RERA Seva) are complementary — partnership potential."
+  },
+  {
+    "name": "Ashwin Chadha — India Sothebys",
+    "handle": "@ashwinchadha",
+    "platforms": ["Instagram", "LinkedIn"],
+    "platform_urls": {
+      "Instagram": "https://www.instagram.com/ashwinchadha",
+      "LinkedIn": "https://www.linkedin.com/in/ashwinchadha"
+    },
+    "profile_url": "https://www.instagram.com/ashwinchadha",
+    "bio": "President of India Sotheby's International Realty. Posts on ultra-luxury RE, farmhouse and estate purchases in Delhi, heritage property deals, and global luxury RE market comparison for HNIs.",
+    "followers": { "Instagram": 68000, "LinkedIn": 85000 },
+    "language": ["English"],
+    "content_focus": ["Ultra-luxury RE", "Delhi Farmhouse Estates", "Heritage Property", "Luxury Global Comparison", "HNI Portfolio"],
+    "geography_focus": ["Delhi", "Mumbai", "Goa", "Global"],
+    "posting_frequency": "Weekly",
+    "monetisation": ["India Sotheby's brand", "Brokerage Commission"],
+    "relevance_to_kyl": "Ultra-luxury farmhouse and estate due diligence in Delhi/Goa is a premium KYL use case — complex title chains and heritage status checks.",
+    "confidence": "high",
+    "notes": "Heritage and farmhouse property title due diligence is extremely complex — premium KYL product fit."
+  },
+  {
+    "name": "Realty Chakra",
+    "handle": "@realtychakra",
+    "platforms": ["Instagram", "LinkedIn"],
+    "platform_urls": {
+      "Instagram": "https://www.instagram.com/realtychakra",
+      "LinkedIn": "https://www.linkedin.com/company/realtychakra"
+    },
+    "profile_url": "https://www.instagram.com/realtychakra",
+    "bio": "Real estate market intelligence startup. Weekly Instagram carousels on city-wise supply-demand data, quarterly price movement, residential absorption index, and micro-market investment thesis.",
+    "followers": { "Instagram": 82000, "LinkedIn": 40000 },
+    "language": ["English"],
+    "content_focus": ["Supply-Demand Data", "Price Movement", "Absorption Index", "Micro-market Thesis", "Market Intelligence"],
+    "geography_focus": ["Pan-India", "Top-8 Cities"],
+    "posting_frequency": "3x/week",
+    "monetisation": ["Data Subscriptions", "Developer Research", "Brand Collabs"],
+    "relevance_to_kyl": "Market intelligence data producer — KYL's research content and this creator's data are complementary products for the same buyer.",
+    "confidence": "medium",
+    "notes": "Data intelligence × proptech crossover — natural co-creation and cross-promotion with KYL."
   }
 ]
