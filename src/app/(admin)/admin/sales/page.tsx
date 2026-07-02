@@ -198,7 +198,7 @@ function TransactionsTab() {
 // ─── Summary Tab ──────────────────────────────────────────────────────────────
 
 const SEG = {
-  total:        { bar: "bg-ink/30",          text: "text-ink",         dot: "bg-ink/50" },
+  total:        { bar: "bg-peach-dark/60",   text: "text-peach-dark",  dot: "bg-peach-dark" },
   sessions:     { bar: "bg-emerald-500/60", text: "text-emerald-400", dot: "bg-emerald-400" },
   templates:    { bar: "bg-violet-500/60",  text: "text-violet-400",  dot: "bg-violet-400" },
   investorList: { bar: "bg-pink-500/60",    text: "text-pink-400",    dot: "bg-pink-400" },

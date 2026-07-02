@@ -1,4 +1,4 @@
-﻿import { auth } from "@/lib/auth"
+﻿import { auth, isAdmin } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { purchases, digitalProducts } from "@/lib/db/schema"
 import { eq } from "drizzle-orm"
@@ -13,7 +13,9 @@ export default async function FundraiseTemplatesPage() {
   const userEmail = session?.user?.email ?? null
 
   const purchaseMap: Record<string, string> = {}
-  if (userEmail) {
+  if (isAdmin(userEmail)) {
+    for (const p of products) purchaseMap[p.slug] = "admin"
+  } else if (userEmail) {
     const rows = await db
       .select({ slug: digitalProducts.slug, token: purchases.downloadToken })
       .from(purchases)

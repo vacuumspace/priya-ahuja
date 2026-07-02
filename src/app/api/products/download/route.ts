@@ -3,6 +3,7 @@ import { db } from "@/lib/db"
 import { purchases, digitalProducts } from "@/lib/db/schema"
 import { getTemplate } from "@/lib/templates-data"
 import { eq, and } from "drizzle-orm"
+import { auth, isAdmin } from "@/lib/auth"
 
 // GET /api/products/download?token=xxx&slug=yyy
 // Returns template as downloadable HTML (opens correctly in Word/Google Docs)
@@ -31,19 +32,22 @@ export async function GET(req: NextRequest) {
       return new NextResponse("Not found", { status: 404 })
     }
 
-    const [purchase] = await db
-      .select({ id: purchases.id })
-      .from(purchases)
-      .where(
-        and(
-          eq(purchases.downloadToken, token),
-          eq(purchases.productId, product.id)
+    const session = await auth()
+    if (!isAdmin(session?.user?.email)) {
+      const [purchase] = await db
+        .select({ id: purchases.id })
+        .from(purchases)
+        .where(
+          and(
+            eq(purchases.downloadToken, token),
+            eq(purchases.productId, product.id)
+          )
         )
-      )
-      .limit(1)
+        .limit(1)
 
-    if (!purchase) {
-      return new NextResponse("Invalid or expired access token", { status: 403 })
+      if (!purchase) {
+        return new NextResponse("Invalid or expired access token", { status: 403 })
+      }
     }
 
     // Build Word-compatible HTML

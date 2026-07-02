@@ -3,6 +3,7 @@ import { db } from "@/lib/db"
 import { purchases, digitalProducts } from "@/lib/db/schema"
 import { getTemplate } from "@/lib/templates-data"
 import { eq, and } from "drizzle-orm"
+import { auth, isAdmin } from "@/lib/auth"
 
 // GET /api/products/access?token=xxx&slug=yyy
 // Returns template content if the token is valid for this product
@@ -32,24 +33,27 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: "Not found" }, { status: 404 })
     }
 
-    // Validate the access token and check expiry
-    const [purchase] = await db
-      .select({ id: purchases.id, tokenExpiresAt: purchases.tokenExpiresAt })
-      .from(purchases)
-      .where(
-        and(
-          eq(purchases.downloadToken, token),
-          eq(purchases.productId, product.id)
+    const session = await auth()
+    if (!isAdmin(session?.user?.email)) {
+      // Validate the access token and check expiry
+      const [purchase] = await db
+        .select({ id: purchases.id, tokenExpiresAt: purchases.tokenExpiresAt })
+        .from(purchases)
+        .where(
+          and(
+            eq(purchases.downloadToken, token),
+            eq(purchases.productId, product.id)
+          )
         )
-      )
-      .limit(1)
+        .limit(1)
 
-    if (!purchase) {
-      return NextResponse.json({ error: "Invalid or expired access token" }, { status: 403 })
-    }
+      if (!purchase) {
+        return NextResponse.json({ error: "Invalid or expired access token" }, { status: 403 })
+      }
 
-    if (purchase.tokenExpiresAt && purchase.tokenExpiresAt < new Date()) {
-      return NextResponse.json({ error: "Access token has expired" }, { status: 403 })
+      if (purchase.tokenExpiresAt && purchase.tokenExpiresAt < new Date()) {
+        return NextResponse.json({ error: "Access token has expired" }, { status: 403 })
+      }
     }
 
     return NextResponse.json({ sections: template.sections })
@@ -81,6 +85,10 @@ export async function POST(req: NextRequest) {
 
     if (!product) {
       return NextResponse.json({ hasAccess: false })
+    }
+
+    if (isAdmin(email)) {
+      return NextResponse.json({ hasAccess: true, accessToken: "admin" })
     }
 
     const [purchase] = await db

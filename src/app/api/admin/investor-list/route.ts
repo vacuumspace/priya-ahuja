@@ -31,6 +31,20 @@ export async function GET(req: NextRequest) {
   const month    = searchParams.get("month") ?? ""   // "YYYY-MM"
   const page     = Math.max(1, parseInt(searchParams.get("page") ?? "1", 10))
 
+  // Mark unseen investor-list purchases as seen now that admin is viewing this page
+  await db
+    .update(purchases)
+    .set({ adminSeen: true })
+    .where(
+      and(
+        eq(purchases.adminSeen, false),
+        inArray(
+          purchases.productId,
+          db.select({ id: digitalProducts.id }).from(digitalProducts).where(inArray(digitalProducts.slug, [...INVESTOR_SLUGS]))
+        )
+      )
+    )
+
   // Which slugs to include
   const slugFilter = listType === "all"
     ? [...INVESTOR_SLUGS]

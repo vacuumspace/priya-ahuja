@@ -1,6 +1,6 @@
 import { db } from "@/lib/db"
 import { digitalProducts, purchases } from "@/lib/db/schema"
-import { eq, desc, ne, isNotNull, and } from "drizzle-orm"
+import { eq, desc, ne, isNotNull, and, inArray } from "drizzle-orm"
 import ProductsClient from "./ProductsClient"
 
 const ANGEL_SLUG = "angel-investor-list"
@@ -8,9 +8,21 @@ const ANGEL_SLUG = "angel-investor-list"
 export default async function ProductsPage({ searchParams }: { searchParams: Promise<{ tab?: string }> }) {
   const { tab: defaultTab } = await searchParams
 
-  // Mark all unseen purchases as seen now that admin is viewing the transactions tab
+  // Mark unseen template purchases as seen now that admin is viewing the transactions tab
+  // (investor-list purchases are shown/marked on the dedicated Investor List page)
   if (!defaultTab || defaultTab === "transactions") {
-    await db.update(purchases).set({ adminSeen: true }).where(eq(purchases.adminSeen, false))
+    await db
+      .update(purchases)
+      .set({ adminSeen: true })
+      .where(
+        and(
+          eq(purchases.adminSeen, false),
+          inArray(
+            purchases.productId,
+            db.select({ id: digitalProducts.id }).from(digitalProducts).where(ne(digitalProducts.slug, ANGEL_SLUG))
+          )
+        )
+      )
   }
 
   const [productsData, purchasesData] = await Promise.all([

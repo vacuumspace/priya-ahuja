@@ -6,6 +6,7 @@ import { getTemplate } from "@/lib/templates-data"
 import { redirect, notFound } from "next/navigation"
 import { isNotNull } from "drizzle-orm"
 import TemplateViewer from "@/components/templates/TemplateViewer"
+import { isAdmin } from "@/lib/auth"
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
@@ -35,14 +36,16 @@ export default async function TemplateViewPage({ params }: { params: Promise<{ s
 
   if (!product) notFound()
 
-  const [purchase] = await db
-    .select({ downloadToken: purchases.downloadToken })
-    .from(purchases)
-    .where(and(eq(purchases.userEmail, userEmail), eq(purchases.productId, product.id), isNotNull(purchases.downloadToken)))
-    .limit(1)
+  if (!isAdmin(userEmail)) {
+    const [purchase] = await db
+      .select({ downloadToken: purchases.downloadToken })
+      .from(purchases)
+      .where(and(eq(purchases.userEmail, userEmail), eq(purchases.productId, product.id), isNotNull(purchases.downloadToken)))
+      .limit(1)
 
-  if (!purchase?.downloadToken) {
-    redirect(template.category === "fundraise" ? "/fundraise/templates" : template.category === "startup" ? "/startup/templates" : "/templates")
+    if (!purchase?.downloadToken) {
+      redirect(template.category === "fundraise" ? "/fundraise/templates" : template.category === "startup" ? "/startup/templates" : "/templates")
+    }
   }
 
   return (
