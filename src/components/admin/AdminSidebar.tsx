@@ -187,29 +187,13 @@ export function AdminSidebar({ userEmail, collapsed, onToggle, notificationCount
         </div>
 
         {/* Nav */}
-        <nav className="flex-1 px-2 flex flex-col gap-1 overflow-y-auto scrollbar-none py-1">
+        <nav className={`flex-1 px-2 flex-col gap-1 overflow-y-auto scrollbar-none py-1 ${collapsed ? "hidden" : "flex"}`}>
           {navGroups.map((group) => {
             // ── Direct link (Users, Service Enquiries) ──────────────
             if (group.directHref && group.directIcon) {
               const isActive = pathname.startsWith(group.directHref)
               const Icon = group.directIcon
               const count = isActive ? 0 : (notificationCounts[group.directHref] ?? 0)
-              if (collapsed) {
-                return (
-                  <div key={group.label}>
-                    <div className="h-px bg-peach-dark/20 mx-1 my-1" />
-                    <Link
-                      href={group.directHref}
-                      title={group.label}
-                      className={`flex items-center justify-center py-2 rounded-lg transition-colors ${
-                        isActive ? "bg-peach-dark/30 text-ink" : "text-ink/70 hover:bg-peach-dark/20 hover:text-ink"
-                      }`}
-                    >
-                      <Icon size={16} />
-                    </Link>
-                  </div>
-                )
-              }
               return (
                 <Link
                   key={group.label}
@@ -304,18 +288,17 @@ export function AdminSidebar({ userEmail, collapsed, onToggle, notificationCount
           })}
         </nav>
 
-        {/* Footer — kept exactly as-is */}
-        <div className="px-2 py-3 border-t border-peach-dark/20 flex flex-col gap-0.5">
-          <Link
-            href="/"
-            title={collapsed ? "View site" : undefined}
-            className="flex items-center gap-3 px-2.5 py-2 rounded-lg text-sm font-sans font-medium text-ink/70 hover:bg-peach-dark/20 hover:text-ink transition-colors"
-          >
-            <Home size={16} className="flex-shrink-0" />
-            {!collapsed && <span>View site</span>}
-          </Link>
+        {/* Footer */}
+        {!collapsed && (
+          <div className="px-2 py-3 border-t border-peach-dark/20 flex flex-col gap-0.5">
+            <Link
+              href="/"
+              className="flex items-center gap-3 px-2.5 py-2 rounded-lg text-sm font-sans font-medium text-ink/70 hover:bg-peach-dark/20 hover:text-ink transition-colors"
+            >
+              <Home size={16} className="flex-shrink-0" />
+              <span>View site</span>
+            </Link>
 
-          {!collapsed ? (
             <div className="mt-1 rounded-xl bg-peach-dark/10 overflow-hidden flex flex-col-reverse">
               <button
                 onClick={() => setProfileOpen((p) => !p)}
@@ -339,16 +322,8 @@ export function AdminSidebar({ userEmail, collapsed, onToggle, notificationCount
                 </div>
               )}
             </div>
-          ) : (
-            <button
-              onClick={() => setSignOutOpen(true)}
-              title="Sign out"
-              className="flex items-center justify-center w-full py-2 rounded-lg text-ink/60 hover:bg-peach-dark/20 hover:text-ink transition-colors"
-            >
-              <LogOut size={16} />
-            </button>
-          )}
-        </div>
+          </div>
+        )}
       </aside>
 
       {signOutOpen && (

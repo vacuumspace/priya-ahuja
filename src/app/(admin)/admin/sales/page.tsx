@@ -50,9 +50,9 @@ const TYPE_LABELS: Record<string, string> = {
 }
 
 const TYPE_COLORS: Record<string, string> = {
-  booking:  "bg-emerald-100 text-emerald-700",
-  template: "bg-violet-100 text-violet-700",
-  angel:    "bg-pink-100 text-pink-700",
+  booking:  "bg-[#9DC8F0]/25 text-[#5B94C9]",
+  template: "bg-[#BEF264]/25 text-[#7CA82E]",
+  angel:    "bg-[#FFAAD4]/25 text-[#E066AC]",
   score:    "bg-gray-100 text-gray-500",
 }
 
@@ -199,10 +199,10 @@ function TransactionsTab() {
 // ─── Summary Tab ──────────────────────────────────────────────────────────────
 
 const SEG = {
-  total:        { bar: "bg-peach-dark/60",   text: "text-peach-dark",  dot: "bg-peach-dark" },
-  sessions:     { bar: "bg-emerald-500/60", text: "text-emerald-400", dot: "bg-emerald-400" },
-  templates:    { bar: "bg-violet-500/60",  text: "text-violet-400",  dot: "bg-violet-400" },
-  investorList: { bar: "bg-pink-500/60",    text: "text-pink-400",    dot: "bg-pink-400" },
+  total:        { bar: "bg-peach-dark/60", text: "text-peach-dark", dot: "bg-peach-dark" },
+  sessions:     { bar: "bg-[#9DC8F0]",     text: "text-[#5B94C9]",  dot: "bg-[#9DC8F0]" },
+  templates:    { bar: "bg-[#BEF264]",     text: "text-[#7CA82E]",  dot: "bg-[#BEF264]" },
+  investorList: { bar: "bg-[#FFAAD4]",     text: "text-[#E066AC]",  dot: "bg-[#FFAAD4]" },
 } as const
 
 const CHART_VIEWS = [
@@ -219,27 +219,44 @@ function getSegVal(m: MonthRow, view: ChartViewKey, field: "revenue" | "count"):
   return m[view][field]
 }
 
-function MiniBar({ months, getVal, color, fmt: fmtVal, label }: {
+const STACK_KEYS = ["sessions", "templates", "investorList"] as const
+
+function getStackSegments(m: MonthRow, field: "revenue" | "count") {
+  return STACK_KEYS.map(key => ({ val: m[key][field], color: SEG[key].bar }))
+}
+
+function MiniBar({ months, view, field, color, fmt: fmtVal, label }: {
   months: MonthRow[]
-  getVal: (m: MonthRow) => number
+  view: ChartViewKey
+  field: "revenue" | "count"
   color: string
   fmt: (v: number) => string
   label: string
 }) {
-  const max = Math.max(...months.map(getVal), 1)
+  const totals = months.map(m => getSegVal(m, view, field))
+  const max = Math.max(...totals, 1)
   return (
     <div>
       <p className="text-[10px] font-sans text-ink/40 uppercase tracking-widest mb-5">{label}</p>
-      <div className="flex items-end gap-1 h-20">
-        {months.map(m => {
-          const val = getVal(m)
+      <div className="flex items-end gap-1 h-36">
+        {months.map((m, i) => {
+          const val = totals[i]
+          const segments = view === "total" ? getStackSegments(m, field) : [{ val, color }]
           return (
             <div key={m.key} className="flex-1 flex flex-col items-center gap-0.5 min-w-0">
               <div className="w-full relative flex justify-center">
                 {val > 0 && (
                   <span className="text-[11px] font-medium text-ink/50 absolute -top-4 whitespace-nowrap">{fmtVal(val)}</span>
                 )}
-                <div className={`w-full rounded-t-sm ${color}`} style={{ height: `${Math.max(2, (val / max) * 68)}px` }} />
+                <div className="w-full rounded-t-sm overflow-hidden flex flex-col-reverse" style={{ height: `${Math.max(2, (val / max) * 132)}px` }}>
+                  {segments.map((seg, si) => seg.val > 0 && (
+                    <div
+                      key={si}
+                      className={seg.color}
+                      style={{ height: val > 0 ? `${(seg.val / val) * 100}%` : 0 }}
+                    />
+                  ))}
+                </div>
               </div>
               <span className="text-[10px] text-ink/40 truncate w-full text-center">{m.label}</span>
             </div>
@@ -313,14 +330,16 @@ function SummaryTab() {
         <div className="space-y-6">
           <MiniBar
             months={data.monthly}
-            getVal={m => getSegVal(m, view.key, "revenue")}
+            view={view.key}
+            field="revenue"
             color={view.color}
             fmt={fmtAmount}
             label="Amount"
           />
           <MiniBar
             months={data.monthly}
-            getVal={m => getSegVal(m, view.key, "count")}
+            view={view.key}
+            field="count"
             color={view.color}
             fmt={v => String(v)}
             label="Volume"
