@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState, useCallback } from "react"
+import { useSearchParams } from "next/navigation"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
 type Transaction = {
@@ -228,7 +229,7 @@ function MiniBar({ months, getVal, color, fmt: fmtVal, label }: {
   const max = Math.max(...months.map(getVal), 1)
   return (
     <div>
-      <p className="text-[10px] font-sans text-ink/40 uppercase tracking-widest mb-2">{label}</p>
+      <p className="text-[10px] font-sans text-ink/40 uppercase tracking-widest mb-5">{label}</p>
       <div className="flex items-end gap-1 h-20">
         {months.map(m => {
           const val = getVal(m)
@@ -236,11 +237,11 @@ function MiniBar({ months, getVal, color, fmt: fmtVal, label }: {
             <div key={m.key} className="flex-1 flex flex-col items-center gap-0.5 min-w-0">
               <div className="w-full relative flex justify-center">
                 {val > 0 && (
-                  <span className="text-[8px] text-ink/30 absolute -top-3.5 whitespace-nowrap">{fmtVal(val)}</span>
+                  <span className="text-[11px] font-medium text-ink/50 absolute -top-4 whitespace-nowrap">{fmtVal(val)}</span>
                 )}
                 <div className={`w-full rounded-t-sm ${color}`} style={{ height: `${Math.max(2, (val / max) * 68)}px` }} />
               </div>
-              <span className="text-[8px] text-ink/30 truncate w-full text-center">{m.label}</span>
+              <span className="text-[10px] text-ink/40 truncate w-full text-center">{m.label}</span>
             </div>
           )
         })}
@@ -284,42 +285,6 @@ function SummaryTab() {
 
   return (
     <div className="space-y-10">
-      {/* Month stats panel */}
-      <div className="bg-card border border-border rounded-2xl p-5">
-        <div className="flex items-center justify-between mb-4">
-          <p className="font-sans text-xs font-semibold text-ink/50 uppercase tracking-widest">{sel.label} — breakdown</p>
-          <div className="flex items-center gap-1">
-            <button
-              onClick={() => setMonthIdx(i => Math.max(0, i! - 1))}
-              disabled={monthIdx === 0}
-              className="p-1 rounded hover:bg-ink/10 disabled:opacity-20 transition-colors"
-            >
-              <ChevronLeft size={14} />
-            </button>
-            <span className="font-sans text-xs text-ink/50 px-1">{sel.label}</span>
-            <button
-              onClick={() => setMonthIdx(i => Math.min(data.monthly.length - 1, i! + 1))}
-              disabled={monthIdx === data.monthly.length - 1}
-              className="p-1 rounded hover:bg-ink/10 disabled:opacity-20 transition-colors"
-            >
-              <ChevronRight size={14} />
-            </button>
-          </div>
-        </div>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          {statRows.map(row => (
-            <div key={row.label} className="bg-background rounded-xl px-4 py-3">
-              <div className="flex items-center gap-1.5 mb-1">
-                <span className={`w-2 h-2 rounded-sm flex-shrink-0 ${row.dot}`} />
-                <p className="font-sans text-[11px] text-ink/40">{row.label}</p>
-              </div>
-              <p className={`font-sans text-base font-bold ${row.text}`}>{fmtAmount(row.revenue)}</p>
-              <p className="font-sans text-[11px] text-ink/40 mt-0.5">{row.count} sales</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
       {/* Charts */}
       <div className="bg-card border border-border rounded-2xl p-5">
         <div className="flex items-center justify-between mb-5">
@@ -362,6 +327,42 @@ function SummaryTab() {
           />
         </div>
       </div>
+
+      {/* Month stats panel */}
+      <div className="bg-card border border-border rounded-2xl p-5">
+        <div className="flex items-center justify-between mb-4">
+          <p className="font-sans text-xs font-semibold text-ink/50 uppercase tracking-widest">{sel.label} — breakdown</p>
+          <div className="flex items-center gap-1">
+            <button
+              onClick={() => setMonthIdx(i => Math.max(0, i! - 1))}
+              disabled={monthIdx === 0}
+              className="p-1 rounded hover:bg-ink/10 disabled:opacity-20 transition-colors"
+            >
+              <ChevronLeft size={14} />
+            </button>
+            <span className="font-sans text-xs text-ink/50 px-1">{sel.label}</span>
+            <button
+              onClick={() => setMonthIdx(i => Math.min(data.monthly.length - 1, i! + 1))}
+              disabled={monthIdx === data.monthly.length - 1}
+              className="p-1 rounded hover:bg-ink/10 disabled:opacity-20 transition-colors"
+            >
+              <ChevronRight size={14} />
+            </button>
+          </div>
+        </div>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          {statRows.map(row => (
+            <div key={row.label} className="bg-background rounded-xl px-4 py-3">
+              <div className="flex items-center gap-1.5 mb-1">
+                <span className={`w-2 h-2 rounded-sm flex-shrink-0 ${row.dot}`} />
+                <p className="font-sans text-[11px] text-ink/40">{row.label}</p>
+              </div>
+              <p className={`font-sans text-base font-bold ${row.text}`}>{fmtAmount(row.revenue)}</p>
+              <p className="font-sans text-[11px] text-ink/40 mt-0.5">{row.count} sales</p>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   )
 }
@@ -379,7 +380,10 @@ function StatCard({ label, value, sub }: { label: string; value: string; sub?: s
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function SalesPage() {
-  const [tab, setTab] = useState<"transactions" | "summary">("transactions")
+  const searchParams = useSearchParams()
+  const [tab, setTab] = useState<"transactions" | "summary">(
+    searchParams.get("tab") === "transactions" ? "transactions" : "summary"
+  )
 
   return (
     <div className="px-10 py-10">
@@ -389,7 +393,7 @@ export default function SalesPage() {
       </div>
 
       <div className="flex gap-1 mb-6 bg-peach-dark/10 rounded-xl p-1 w-fit">
-        {(["transactions", "summary"] as const).map((t) => (
+        {(["summary", "transactions"] as const).map((t) => (
           <button
             key={t}
             onClick={() => setTab(t)}

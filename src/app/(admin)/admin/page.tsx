@@ -90,7 +90,7 @@ export default async function AdminDashboard() {
             <h2 className="font-sans text-xs font-semibold text-ink/40 uppercase tracking-widest">
               Latest Transactions
             </h2>
-            <Link href="/admin/sales" className="text-[11px] font-sans text-ink/40 hover:text-ink transition-colors">
+            <Link href="/admin/sales?tab=transactions" className="text-[11px] font-sans text-ink/40 hover:text-ink transition-colors">
               see full list →
             </Link>
           </div>
