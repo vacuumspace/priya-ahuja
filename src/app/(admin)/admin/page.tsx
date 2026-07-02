@@ -118,7 +118,7 @@ export default async function AdminDashboard() {
                         ? "bg-[#FFE7CE] text-[#C99A6E]"
                         : purchaseTag(t.slug) === "Investor List"
                         ? "bg-[#E8875A]/25 text-[#B85A2E]"
-                        : "bg-peach/50 text-[#C97B4A]"
+                        : "bg-[#FFCBA4]/50 text-[#C97B4A]"
                     }`}>
                       {t.kind === "purchase" ? purchaseTag(t.slug) : "session"}
                     </span>
