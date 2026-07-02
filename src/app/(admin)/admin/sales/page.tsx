@@ -50,9 +50,9 @@ const TYPE_LABELS: Record<string, string> = {
 }
 
 const TYPE_COLORS: Record<string, string> = {
-  booking:  "bg-[#9DC8F0]/25 text-[#5B94C9]",
-  template: "bg-[#BEF264]/25 text-[#7CA82E]",
-  angel:    "bg-[#FFAAD4]/25 text-[#E066AC]",
+  booking:  "bg-[#FFE7CE] text-[#C99A6E]",
+  template: "bg-peach/50 text-[#C97B4A]",
+  angel:    "bg-[#E8875A]/25 text-[#B85A2E]",
   score:    "bg-gray-100 text-gray-500",
 }
 
@@ -200,9 +200,9 @@ function TransactionsTab() {
 
 const SEG = {
   total:        { bar: "bg-peach-dark/60", text: "text-peach-dark", dot: "bg-peach-dark" },
-  sessions:     { bar: "bg-[#9DC8F0]",     text: "text-[#5B94C9]",  dot: "bg-[#9DC8F0]" },
-  templates:    { bar: "bg-[#BEF264]",     text: "text-[#7CA82E]",  dot: "bg-[#BEF264]" },
-  investorList: { bar: "bg-[#FFAAD4]",     text: "text-[#E066AC]",  dot: "bg-[#FFAAD4]" },
+  sessions:     { bar: "bg-[#FFE7CE]",     text: "text-[#C99A6E]",  dot: "bg-[#FFE7CE]" },
+  templates:    { bar: "bg-peach",         text: "text-[#C97B4A]",  dot: "bg-peach" },
+  investorList: { bar: "bg-[#E8875A]",     text: "text-[#B85A2E]",  dot: "bg-[#E8875A]" },
 } as const
 
 const CHART_VIEWS = [
