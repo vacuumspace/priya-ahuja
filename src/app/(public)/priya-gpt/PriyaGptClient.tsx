@@ -73,8 +73,6 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
   const [minutesBalance, setMinutesBalance] = useState<number | null>(null)
   const [packages, setPackages] = useState<TimePackage[]>(DEFAULT_PACKAGES)
   const [remainingMs, setRemainingMs] = useState<number | null>(null)
-  const [ended, setEnded] = useState(false)
-  const [lastSessionId, setLastSessionId] = useState<string | null>(null)
   const [ratingGiven, setRatingGiven] = useState<number | null>(null)
   const [submittingRating, setSubmittingRating] = useState(false)
   const [showRateWidget, setShowRateWidget] = useState(false)
@@ -195,14 +193,11 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
   useEffect(() => {
     if (!session || session.pausedAt) return
 
+    // running out of time just stops the countdown here — it doesn't touch `session` or
+    // the message history, there's one continuous chat thread and buying more time
+    // resumes the same countdown right where it left off
     const tick = () => {
-      const ms = new Date(session.expiresAt).getTime() - Date.now()
-      setRemainingMs(ms)
-      if (ms <= 0) {
-        setLastSessionId(session.id)
-        setSession(null)
-        setEnded(true)
-      }
+      setRemainingMs(new Date(session.expiresAt).getTime() - Date.now())
     }
     tick()
     const interval = setInterval(tick, 1000)
@@ -249,6 +244,9 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
       })
   }
 
+  // ensures the caller's one chat thread has an active timer — creates it on a user's very
+  // first message ever, or reactivates it (spending the whole banked balance) after a
+  // timeout. Either way it's the same thread and the same message history throughout.
   async function startSession() {
     if (!isSignedIn) {
       signIn("google", { callbackUrl: "/priya-gpt" })
@@ -266,9 +264,6 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
         return
       }
       setSession(data.session)
-      setMessages([])
-      setEnded(false)
-      setLastSessionId(null)
       setRatingGiven(null)
       refreshBalance()
     } catch (err) {
@@ -278,23 +273,21 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
     }
   }
 
-  // credits already happened server-side; this either extends the running session's timer or, if no session yet, starts a fresh one
+  // credits already happened server-side; this adds the bought minutes onto the caller's
+  // one chat thread, creating or reactivating it as needed — same conversation either way
   async function applyPurchasedMinutes(pkg: TimePackage) {
-    if (session) {
-      const extendRes = await fetch("/api/priya-gpt/session/extend", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ minutes: pkg.minutes }),
-      })
-      const extendData = await extendRes.json()
-      if (extendRes.ok && extendData.session) {
-        setSession(extendData.session)
-        refreshBalance()
-      } else {
-        setError(extendData.error ?? "Could not add time to session")
-      }
+    const extendRes = await fetch("/api/priya-gpt/session/extend", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ minutes: pkg.minutes }),
+    })
+    const extendData = await extendRes.json()
+    if (extendRes.ok && extendData.session) {
+      setSession(extendData.session)
+      setError(null)
+      refreshBalance()
     } else {
-      startSession()
+      setError(extendData.error ?? "Could not add time to session")
     }
   }
 
@@ -427,8 +420,17 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
     setMessages((prev) => [...prev, { id: tempId, role: "user", content: text }])
     try {
       let activeSessionId = session?.id ?? null
+      const isPausedNow = Boolean(session?.pausedAt)
+      const isExpiredNow = Boolean(session) && !isPausedNow && new Date(session!.expiresAt).getTime() <= Date.now()
 
-      if (!activeSessionId) {
+      if (isPausedNow) {
+        const resumeRes = await fetch("/api/priya-gpt/session/resume", { method: "POST" })
+        const resumeData = await resumeRes.json()
+        if (resumeRes.ok && resumeData.session) {
+          activeSessionId = resumeData.session.id
+          setSession(resumeData.session)
+        }
+      } else if (!activeSessionId || isExpiredNow) {
         if (!(minutesBalance && minutesBalance > 0)) {
           // can't auto-charge without a payment popup — bail out and open the buy flow for the cheapest package
           setMessages((prev) => prev.filter((m) => m.id !== tempId))
@@ -436,6 +438,8 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
           if (packages[0]) buyPackage(packages[0], 0)
           return
         }
+        // same one chat thread throughout — this creates it on a first-ever message, or
+        // reactivates it (spending the balance) after it timed out
         const startRes = await fetch("/api/priya-gpt/session", { method: "POST" })
         const startData = await startRes.json()
         if (!startRes.ok) {
@@ -447,17 +451,8 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
         }
         activeSessionId = startData.session.id
         setSession(startData.session)
-        setEnded(false)
-        setLastSessionId(null)
         setRatingGiven(null)
         refreshBalance()
-      } else if (session?.pausedAt) {
-        const resumeRes = await fetch("/api/priya-gpt/session/resume", { method: "POST" })
-        const resumeData = await resumeRes.json()
-        if (resumeRes.ok && resumeData.session) {
-          activeSessionId = resumeData.session.id
-          setSession(resumeData.session)
-        }
       }
 
       const res = await fetch("/api/priya-gpt/chat", {
@@ -467,11 +462,6 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
       })
       const data = await res.json()
       if (!res.ok) {
-        if (data.expired) {
-          setLastSessionId(activeSessionId)
-          setSession(null)
-          setEnded(true)
-        }
         setError(data.error ?? "Something went wrong")
         return
       }
@@ -486,7 +476,6 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
     }
   }
 
-  const locked = !session
   const displayMessages =
     messages.length === 0
       ? DEFAULT_INTRO_MESSAGES
@@ -500,7 +489,11 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
   const remHours = effectiveRemainingMs !== null ? Math.max(0, Math.floor(effectiveRemainingMs / 3600000)) : 0
   const remMinutes = effectiveRemainingMs !== null ? Math.max(0, Math.floor((effectiveRemainingMs % 3600000) / 60000)) : 0
   const remSeconds = effectiveRemainingMs !== null ? Math.max(0, Math.floor((effectiveRemainingMs % 60000) / 1000)) : 0
-  const ratableSessionId = session?.id ?? lastSessionId
+  // one continuous chat thread — "locked" just means the timer needs more time to keep going,
+  // not that a session ended; ranOut distinguishes "timed out" from "never started"
+  const ranOut = Boolean(session) && !isPaused && effectiveRemainingMs !== null && effectiveRemainingMs <= 0
+  const locked = !session || ranOut
+  const ratableSessionId = session?.id ?? null
   const hasBalance = Boolean(minutesBalance && minutesBalance > 0)
 
   return (
@@ -589,7 +582,7 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
           >
             <HelpCircle size={15} />
           </button>
-          {session && (
+          {session && !ranOut && (
             <button
               onClick={togglePause}
               disabled={pausing}
@@ -600,7 +593,7 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
             </button>
           )}
           <div className="relative">
-            {session ? (
+            {session && !ranOut ? (
               <span className="inline-flex items-center gap-1.5 font-sans text-sm font-semibold text-ink/70 bg-peach-dark/20 rounded-full px-3 py-1 whitespace-nowrap">
                 <Clock size={13} className="flex-shrink-0" />
                 {String(remHours).padStart(2, "0")}:{String(remMinutes).padStart(2, "0")}:{String(remSeconds).padStart(2, "0")}
@@ -644,9 +637,9 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
         </div>
       </div>
 
-      {(error || (locked && ended)) && (
+      {(error || (locked && ranOut)) && (
         <div className="px-4 py-2 text-xs font-sans border-b border-border bg-red-50/60 text-red-700">
-          {ended && !error ? "Your session ended, start a new one to keep going." : error}
+          {ranOut && !error ? "You're out of time, add more to keep going right where you left off." : error}
         </div>
       )}
 
@@ -663,28 +656,6 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
               {buyingPackage === i ? "processing..." : `${pkg.minutes} min (${fmtRupees(pkg.price)})`}
             </button>
           ))}
-        </div>
-      )}
-
-      {locked && ended && !error && lastSessionId && (
-        <div className="flex items-center gap-2 px-4 py-2 text-xs font-sans border-b border-border bg-peach-dark/5">
-          <span className="text-ink/50">{ratingGiven ? "thanks for the feedback!" : "how was this chat?"}</span>
-          <div className="flex items-center gap-0.5">
-            {[1, 2, 3, 4, 5].map((n) => (
-              <button
-                key={n}
-                onClick={() => submitRating(lastSessionId, n)}
-                disabled={submittingRating || Boolean(ratingGiven)}
-                aria-label={`rate ${n} star`}
-                className="disabled:cursor-default"
-              >
-                <Star
-                  size={14}
-                  className={ratingGiven && n <= ratingGiven ? "fill-peach-dark text-peach-dark" : "text-ink/30"}
-                />
-              </button>
-            ))}
-          </div>
         </div>
       )}
 
@@ -748,7 +719,7 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
         {isSignedIn && !initializing && locked && !needsPurchase && (
           <div className="flex items-center gap-2 px-4 pt-2 flex-wrap">
             <span className="text-xs font-sans text-ink/40">
-              {hasBalance ? "send a message to start a new session, or add more time:" : "add time to start chatting:"}
+              {hasBalance ? "send a message to continue, or add more time:" : "add time to start chatting:"}
             </span>
             {packages.map((pkg, i) => (
               <button

@@ -2,10 +2,12 @@ import { NextRequest, NextResponse } from "next/server"
 import { auth } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { priyaGptSessions } from "@/lib/db/schema"
-import { eq, and, gt, or, isNotNull, desc } from "drizzle-orm"
+import { eq } from "drizzle-orm"
 import { spendMinutes, InsufficientTimeError } from "@/lib/priya-gpt-time"
 
-// POST: add freshly bought minutes onto the caller's currently running (or paused) session
+// POST: add freshly bought minutes onto the caller's one chat thread — whether it's
+// currently running, paused, or already timed out. There's only ever one thread per user,
+// so buying more time always continues the same conversation instead of starting a new one.
 export async function POST(req: NextRequest) {
   const session = await auth()
   if (!session?.user?.id) {
@@ -17,21 +19,11 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid minutes" }, { status: 400 })
   }
 
-  const [active] = await db
+  const [existing] = await db
     .select()
     .from(priyaGptSessions)
-    .where(
-      and(
-        eq(priyaGptSessions.userId, session.user.id),
-        or(gt(priyaGptSessions.expiresAt, new Date()), isNotNull(priyaGptSessions.pausedAt))
-      )
-    )
-    .orderBy(desc(priyaGptSessions.createdAt))
+    .where(eq(priyaGptSessions.userId, session.user.id))
     .limit(1)
-
-  if (!active) {
-    return NextResponse.json({ error: "No active session to extend" }, { status: 404 })
-  }
 
   try {
     await spendMinutes(session.user.id, minutes, "session_extend")
@@ -43,12 +35,20 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Internal server error" }, { status: 500 })
   }
 
-  const newExpiresAt = new Date(active.expiresAt.getTime() + minutes * 60 * 1000)
-  const [updated] = await db
-    .update(priyaGptSessions)
-    .set({ expiresAt: newExpiresAt })
-    .where(eq(priyaGptSessions.id, active.id))
-    .returning()
+  // if the thread already timed out, restart the window from now rather than tacking
+  // minutes onto a long-past expiry; otherwise extend the still-running countdown
+  const alreadyExpired = !existing || (existing.expiresAt.getTime() <= Date.now() && !existing.pausedAt)
+  const newExpiresAt = alreadyExpired
+    ? new Date(Date.now() + minutes * 60 * 1000)
+    : new Date(existing.expiresAt.getTime() + minutes * 60 * 1000)
 
-  return NextResponse.json({ session: updated })
+  const [result] = existing
+    ? await db
+        .update(priyaGptSessions)
+        .set({ expiresAt: newExpiresAt, pausedAt: null })
+        .where(eq(priyaGptSessions.userId, session.user.id))
+        .returning()
+    : await db.insert(priyaGptSessions).values({ userId: session.user.id, expiresAt: newExpiresAt }).returning()
+
+  return NextResponse.json({ session: result })
 }

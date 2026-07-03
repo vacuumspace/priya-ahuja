@@ -275,10 +275,9 @@ function InsightsTab() {
   const cards = [
     { label: "Total revenue", value: fmtAmount(insights.totalRevenue) },
     { label: "Active users", value: String(insights.totalUsers) },
-    { label: "Total sessions", value: String(insights.totalSessions) },
     { label: "Total messages", value: String(insights.totalMessages) },
     { label: "Minutes of chat", value: fmtMinutesShort(insights.totalMinutes) },
-    { label: "Avg messages / session", value: String(insights.avgMessagesPerSession) },
+    { label: "Avg messages / user", value: String(insights.avgMessagesPerSession) },
   ]
 
   const maxTopicCount = Math.max(...insights.topics.map((t) => t.count), 1)

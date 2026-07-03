@@ -255,13 +255,16 @@ export const priyaGptTimeTransactions = pgTable("priya_gpt_time_transactions", {
 })
 
 // ── Pitch Deck — Story ───────────────────────────────────────────
+// one row per user — a single continuous chat thread, not a series of discrete "sessions".
+// expiresAt/pausedAt just track the metered time window; running out doesn't end the chat,
+// it just requires more minutes to keep the countdown going on the same thread.
 export const priyaGptSessions = pgTable("priya_gpt_sessions", {
   id: uuid("id").primaryKey().defaultRandom(),
-  userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  userId: text("user_id").notNull().unique().references(() => users.id, { onDelete: "cascade" }),
   startedAt: timestamp("started_at").notNull().defaultNow(),
   expiresAt: timestamp("expires_at").notNull(),
   pausedAt: timestamp("paused_at"), // set while the user has paused the timer; expiresAt shifts forward by the pause duration on resume
-  rating: integer("rating"), // 1-5, set once by the user after the session ends
+  rating: integer("rating"), // 1-5, most recent rating the user gave
   ratingFeedback: text("rating_feedback"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 })
