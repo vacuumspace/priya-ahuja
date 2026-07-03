@@ -1,9 +1,9 @@
 ﻿import { auth } from "@/lib/auth"
 import { db } from "@/lib/db"
-import { bookings, purchases, services as servicesTable, digitalProducts, startupScores, startupIdeaScores, availability } from "@/lib/db/schema"
-import { eq, desc } from "drizzle-orm"
+import { bookings, purchases, services as servicesTable, digitalProducts, startupScores, startupIdeaScores, availability, priyaGptTimeTransactions } from "@/lib/db/schema"
+import { eq, and, desc } from "drizzle-orm"
 import Link from "next/link"
-import { CalendarDays, FileText, LogIn, Lightbulb, ExternalLink } from "lucide-react"
+import { CalendarDays, FileText, LogIn, Lightbulb, ExternalLink, Bot } from "lucide-react"
 import ViewTemplateButton from "@/components/templates/ViewTemplateButton"
 import SignInOptions from "@/components/SignInOptions"
 import BookingCard from "./BookingCard"
@@ -35,7 +35,11 @@ type SearchParams = Promise<{ tab?: string }>
 export default async function MySessionsPage({ searchParams }: { searchParams: SearchParams }) {
   const session = await auth()
   const params = await searchParams
-  const activeTab = params.tab === "products" ? "products" : params.tab === "tools" ? "tools" : "sessions"
+  const activeTab =
+    params.tab === "products" ? "products" :
+    params.tab === "tools" ? "tools" :
+    params.tab === "priyagpt" ? "priyagpt" :
+    "sessions"
 
   if (!session?.user?.email) {
     return (
@@ -54,7 +58,7 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
 
   const email = session.user.email
 
-  const [userBookingsRaw, userPurchases, userScores, userIdeaScores] = await Promise.all([
+  const [userBookingsRaw, userPurchases, userScores, userIdeaScores, userPriyaGptTxns] = await Promise.all([
     db
       .select({
         id: bookings.id,
@@ -111,6 +115,18 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
       .from(startupIdeaScores)
       .where(eq(startupIdeaScores.userId, session.user.id!))
       .orderBy(desc(startupIdeaScores.createdAt)),
+
+    db
+      .select({
+        id: priyaGptTimeTransactions.id,
+        deltaMinutes: priyaGptTimeTransactions.deltaMinutes,
+        amountPaise: priyaGptTimeTransactions.amountPaise,
+        razorpayPaymentId: priyaGptTimeTransactions.razorpayPaymentId,
+        createdAt: priyaGptTimeTransactions.createdAt,
+      })
+      .from(priyaGptTimeTransactions)
+      .where(and(eq(priyaGptTimeTransactions.userId, session.user.id!), eq(priyaGptTimeTransactions.reason, "purchase")))
+      .orderBy(desc(priyaGptTimeTransactions.createdAt)),
   ])
 
   // Sort bookings: upcoming (active + future slot) first ASC by slot, then past DESC by slot
@@ -134,7 +150,7 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
     <div className="min-h-screen bg-cream">
       <div className="flex justify-between items-center px-4 md:px-10 py-4 text-[13px] text-ink/50 font-sans border-b border-border">
         <span>my activity</span>
-        <span>{userBookings.length + userPurchases.length + userScores.length + userIdeaScores.length} total</span>
+        <span>{userBookings.length + userPurchases.length + userScores.length + userIdeaScores.length + userPriyaGptTxns.length} total</span>
       </div>
 
       <div className="px-4 md:px-10 pt-10 pb-16 max-w-2xl">
@@ -177,6 +193,18 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
             <Lightbulb size={12} />
             tools
             <span className="text-[12px] font-mono ml-0.5 opacity-60">{userScores.length + userIdeaScores.length}</span>
+          </Link>
+          <Link
+            href="/my-activity?tab=priyagpt"
+            className={`flex items-center gap-1.5 px-4 py-2.5 text-xs font-sans font-semibold border-b-2 transition-colors -mb-px ${
+              activeTab === "priyagpt"
+                ? "border-ink text-ink"
+                : "border-transparent text-ink/40 hover:text-ink/70"
+            }`}
+          >
+            <Bot size={12} />
+            priyagpt
+            <span className="text-[12px] font-mono ml-0.5 opacity-60">{userPriyaGptTxns.length}</span>
           </Link>
         </div>
 
@@ -363,6 +391,48 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
                           />
                         )
                       )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </section>
+        )}
+
+        {/* PriyaGPT tab */}
+        {activeTab === "priyagpt" && (
+          <section>
+            {userPriyaGptTxns.length === 0 ? (
+              <div className="border border-dashed border-border rounded-2xl p-8 text-center">
+                <p className="font-sans text-sm text-ink/50 mb-3">no PriyaGPT time purchased yet</p>
+                <Link href="/priya-gpt" className="text-xs font-sans font-semibold text-peach-dark hover:underline">
+                  try PriyaGPT →
+                </Link>
+              </div>
+            ) : (
+              <div className="flex flex-col gap-3">
+                {userPriyaGptTxns.map((t) => (
+                  <div key={t.id} className="bg-card border border-border rounded-2xl p-5">
+                    <div className="flex items-center justify-between gap-4">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="text-[12px] font-sans font-semibold px-2 py-0.5 rounded-full bg-[#A85D3A]/20 text-[#A85D3A]">
+                            PriyaGPT
+                          </span>
+                          <span className="text-[12px] font-sans text-ink/30">{formatDate(t.createdAt)}</span>
+                        </div>
+                        <p className="font-heading text-base font-700 text-ink normal-case">
+                          {t.deltaMinutes} minutes of chat time
+                        </p>
+                        {t.razorpayPaymentId && (
+                          <p className="font-sans text-[11px] text-ink/30 mt-0.5">{t.razorpayPaymentId}</p>
+                        )}
+                      </div>
+                      <div className="flex-shrink-0 text-right">
+                        <span className="font-heading text-xl font-bold text-ink">
+                          {t.amountPaise != null ? `₹${(t.amountPaise / 100).toLocaleString("en-IN")}` : "—"}
+                        </span>
+                      </div>
                     </div>
                   </div>
                 ))}
