@@ -33,25 +33,23 @@ const DEFAULT_INTRO_MESSAGES: ChatMsg[] = [
   {
     id: "intro-1",
     role: "assistant",
-    content: "Hi, I'm PriyaGPT, trained on Priya's approach to startups, fundraising, and strategy.",
+    content: "Hey. I'm PriyaGPT, available whenever you want to chat about anything related to your startup, fundraise or founder's life.",
   },
   {
     id: "intro-2",
     role: "assistant",
-    content: "Bring me anything: positioning, GTM, pricing, fundraise strategy, or a decision you're stuck on. I'll give you direct, honest takes, not just cheerleading.",
+    content: "I've seen a founder's journey inside out and it's hell of a ride. That's why I'm here to be a founder's buddy.",
   },
   {
     id: "intro-3",
     role: "assistant",
-    content: "Chat time is metered in minutes, you can pause anytime and pick up later. So, what's on your mind?",
+    content: "Tell me about you and what's going on. Let's chat :)",
   },
 ]
 
-const INTRO_MESSAGE: ChatMsg = DEFAULT_INTRO_MESSAGES[0]
-
 const ABOUT_POINTS = [
-  "trained on Priya's approach to fundraising, GTM, pricing, and startup strategy",
-  "ask about anything you're stuck on: positioning, pitch, business model, hiring, whatever",
+  "trained on Priya's approach to fundraising, GTM, team building, founder's advisor and startup strategy",
+  "ask about anything you're stuck on: strategy, pitch, business model, hiring, whatever",
   "gives direct, honest feedback, not just cheerleading",
   "chat time is metered in minutes; pause anytime, resume later, buy more when you run out",
   "a place to think out loud, not a replacement for a 1:1 session with Priya",
@@ -481,7 +479,7 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
       ? DEFAULT_INTRO_MESSAGES
       : hasMoreHistory
         ? messages
-        : [INTRO_MESSAGE, ...messages]
+        : [...DEFAULT_INTRO_MESSAGES, ...messages]
   const isPaused = Boolean(session?.pausedAt)
   const pausedRemainingMs =
     isPaused && session ? new Date(session.expiresAt).getTime() - new Date(session.pausedAt!).getTime() : null
@@ -703,7 +701,7 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
         )}
         {!isSignedIn && (
           <div className="px-4 pt-2 text-xs font-sans text-ink/40">
-            sign in to chat ·{" "}
+            sign in to chat · 5 min free ·{" "}
             {packages.map((pkg, i) => (
               <span key={i}>
                 {fmtRupees(pkg.price)}/{pkg.minutes} min{i < packages.length - 1 ? " · " : ""}
@@ -719,21 +717,25 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
           </div>
         )}
         {isSignedIn && !initializing && locked && !needsPurchase && (
-          <div className="flex items-center gap-2 px-4 pt-2 flex-wrap">
-            <span className="text-xs font-sans text-ink/40">
-              {hasBalance ? "send a message to continue, or add more time:" : "add time to start chatting:"}
-            </span>
-            {packages.map((pkg, i) => (
-              <button
-                key={i}
-                onClick={() => buyPackage(pkg, i)}
-                disabled={buyingPackage !== null}
-                className="px-3.5 py-1.5 rounded-lg bg-peach text-ink text-xs font-sans font-semibold whitespace-nowrap shadow-sm hover:brightness-95 transition disabled:opacity-50"
-              >
-                {buyingPackage === i ? "processing..." : `${pkg.minutes} min (${fmtRupees(pkg.price)})`}
-              </button>
-            ))}
-          </div>
+          hasBalance ? (
+            <div className="px-4 pt-2 text-xs font-sans text-ink/40">
+              send a message to start chatting — {minutesBalance} min ready to go
+            </div>
+          ) : (
+            <div className="flex items-center gap-2 px-4 pt-2 flex-wrap">
+              <span className="text-xs font-sans text-ink/40">add time to start chatting:</span>
+              {packages.map((pkg, i) => (
+                <button
+                  key={i}
+                  onClick={() => buyPackage(pkg, i)}
+                  disabled={buyingPackage !== null}
+                  className="px-3.5 py-1.5 rounded-lg bg-peach text-ink text-xs font-sans font-semibold whitespace-nowrap shadow-sm hover:brightness-95 transition disabled:opacity-50"
+                >
+                  {buyingPackage === i ? "processing..." : `${pkg.minutes} min (${fmtRupees(pkg.price)})`}
+                </button>
+              ))}
+            </div>
+          )
         )}
         <div className="relative flex items-end gap-2 px-3 py-3">
           {showEmojiPicker && (
