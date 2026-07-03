@@ -163,6 +163,26 @@
     -ms-overflow-style: none;
     &::-webkit-scrollbar { display: none; }
   }
+  .scrollbar-subtle {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(128, 128, 128, 0.35) transparent;
+    &::-webkit-scrollbar { width: 4px; height: 4px; }
+    &::-webkit-scrollbar-button {
+      display: none !important;
+      width: 0 !important;
+      height: 0 !important;
+    }
+    &::-webkit-scrollbar-button:single-button { display: none !important; }
+    &::-webkit-scrollbar-track { background: transparent; }
+    &::-webkit-scrollbar-track-piece { background: transparent; }
+    &::-webkit-scrollbar-corner { background: transparent; }
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(128, 128, 128, 0.35);
+      border-radius: 9999px;
+      border: none;
+    }
+    &::-webkit-scrollbar-thumb:hover { background-color: rgba(128, 128, 128, 0.55); }
+  }
 }
 
 /* When desktop sidebar is collapsed, shift main content */

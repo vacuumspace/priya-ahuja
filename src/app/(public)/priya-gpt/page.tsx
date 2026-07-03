@@ -13,8 +13,8 @@ export default async function PriyaGptPage() {
   const isAdminUser = isAdmin(session?.user?.email)
 
   return (
-    <div className="h-[calc(100dvh-52px)] md:h-screen bg-cream overflow-x-hidden flex flex-col">
-      <div className="flex-1 min-h-0 flex flex-col px-4 md:px-10 pt-2 pb-2 md:pt-6 md:pb-8">
+    <div className="h-[calc(100dvh-52px)] md:h-screen bg-cream overflow-hidden flex flex-col">
+      <div className="flex-1 min-h-0 flex flex-col px-4 md:px-10 pt-2 pb-2 md:pt-6 md:pb-8 overflow-hidden">
         <PriyaGptClient isSignedIn={isSignedIn} isAdmin={isAdminUser} />
       </div>
     </div>

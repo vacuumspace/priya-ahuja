@@ -668,7 +668,7 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
         onScroll={(e) => {
           if (e.currentTarget.scrollTop < 60) loadOlderMessages()
         }}
-        className="flex-1 overflow-y-auto overflow-x-hidden px-5 py-4 flex flex-col gap-3"
+        className="flex-1 overflow-y-auto overflow-x-hidden px-5 py-4 flex flex-col gap-3 scrollbar-subtle"
       >
         {hasMoreHistory && (
           <div className="self-center text-xs text-ink/40 font-sans py-1">
