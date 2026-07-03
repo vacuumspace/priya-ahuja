@@ -59,6 +59,16 @@ function fmtRupees(paise: number) {
   return "₹" + (paise / 100).toLocaleString("en-IN")
 }
 
+const PENDING_INPUT_KEY = "priyagpt_pending_input"
+
+// sign-in is a full-page redirect to Google and back, which unmounts this component and
+// loses whatever the user had typed — stash it first so it can be restored after they're
+// back and signed in, instead of silently vanishing.
+function signInPreservingInput(input: string) {
+  if (input.trim()) sessionStorage.setItem(PENDING_INPUT_KEY, input)
+  signIn("google", { callbackUrl: "/priya-gpt" })
+}
+
 export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: boolean; isAdmin: boolean }) {
   const [session, setSession] = useState<GptSession | null>(null)
   const [messages, setMessages] = useState<ChatMsg[]>([])
@@ -113,6 +123,15 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
         if (d.count) setFoundersCount(d.count)
       })
   }, [])
+
+  useEffect(() => {
+    if (!isSignedIn) return
+    const pending = sessionStorage.getItem(PENDING_INPUT_KEY)
+    if (pending) {
+      setInput(pending)
+      sessionStorage.removeItem(PENDING_INPUT_KEY)
+    }
+  }, [isSignedIn])
 
   useEffect(() => {
     fetch("/api/priya-gpt/packages")
@@ -247,7 +266,7 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
   // timeout. Either way it's the same thread and the same message history throughout.
   async function startSession() {
     if (!isSignedIn) {
-      signIn("google", { callbackUrl: "/priya-gpt" })
+      signInPreservingInput(input)
       return
     }
     setStarting(true)
@@ -291,7 +310,7 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
 
   async function buyPackage(pkg: TimePackage, index: number) {
     if (!isSignedIn) {
-      signIn("google", { callbackUrl: "/priya-gpt" })
+      signInPreservingInput(input)
       return
     }
     setBuyingPackage(index)
@@ -406,7 +425,7 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
   async function sendMessage() {
     if (!input.trim() || sending) return
     if (!isSignedIn) {
-      signIn("google", { callbackUrl: "/priya-gpt" })
+      signInPreservingInput(input)
       return
     }
     const text = input.trim()
@@ -696,7 +715,7 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
       <div className="relative flex flex-col border-t border-border">
         {isPaused && (
           <div className="px-4 pt-2 text-xs font-sans text-ink/40">
-            paused, your time isn&apos;t running out, send a message to resume
+            paused, your time isn&apos;t running out, send a message to resume chatting.
           </div>
         )}
         {!isSignedIn && (
@@ -709,7 +728,7 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
             ))}
             {" · "}
             <button
-              onClick={() => signIn("google", { callbackUrl: "/priya-gpt" })}
+              onClick={() => signInPreservingInput(input)}
               className="font-semibold text-peach-dark underline cursor-pointer"
             >
               sign in
@@ -719,7 +738,7 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
         {isSignedIn && !initializing && locked && !needsPurchase && (
           hasBalance ? (
             <div className="px-4 pt-2 text-xs font-sans text-ink/40">
-              send a message to start chatting — {minutesBalance} min ready to go
+              send a message to start chatting, {minutesBalance} mnts free.
             </div>
           ) : (
             <div className="flex items-center gap-2 px-4 pt-2 flex-wrap">
