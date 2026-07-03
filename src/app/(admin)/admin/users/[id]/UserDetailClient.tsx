@@ -106,8 +106,8 @@ export default function UserDetailClient({
             {t === "purchases" && purchases.length > 0 && (
               <span className="ml-1.5 font-mono text-[10px] opacity-60">{purchases.length}</span>
             )}
-            {t === "priyagpt" && priyaGptMinutes > 0 && (
-              <span className="ml-1.5 font-mono text-[10px] opacity-60">{priyaGptMinutes} min</span>
+            {t === "priyagpt" && priyaGptTransactions.length > 0 && (
+              <span className="ml-1.5 font-mono text-[10px] opacity-60">{priyaGptTransactions.length}</span>
             )}
           </button>
         ))}

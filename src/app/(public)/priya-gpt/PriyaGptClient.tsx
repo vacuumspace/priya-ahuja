@@ -592,29 +592,31 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
               {isPaused ? <Play size={13} /> : <Pause size={13} />}
             </button>
           )}
-          <div className="relative">
-            {session && !ranOut ? (
-              <span className="inline-flex items-center gap-1.5 font-sans text-sm font-semibold text-ink/70 bg-peach-dark/20 rounded-full px-3 py-1 whitespace-nowrap">
-                <Clock size={13} className="flex-shrink-0" />
-                {String(remHours).padStart(2, "0")}:{String(remMinutes).padStart(2, "0")}:{String(remSeconds).padStart(2, "0")}
-              </span>
-            ) : (
+          <div className="relative flex items-center">
+            <div className="inline-flex items-center gap-2 bg-peach-dark/20 rounded-full pl-3 pr-0.5 py-0.5 whitespace-nowrap">
+              {session && !ranOut ? (
+                <span className="inline-flex items-center gap-1.5 font-sans text-sm font-semibold text-ink/70">
+                  <Clock size={13} className="flex-shrink-0" />
+                  {String(remHours).padStart(2, "0")}:{String(remMinutes).padStart(2, "0")}:{String(remSeconds).padStart(2, "0")}
+                </span>
+              ) : (
+                <button
+                  onClick={startSession}
+                  disabled={starting || initializing || !hasBalance}
+                  className="inline-flex items-center gap-1.5 font-sans text-sm font-semibold text-ink/70 disabled:opacity-50 disabled:cursor-default"
+                >
+                  <Clock size={13} className="flex-shrink-0" />
+                  {starting ? "starting..." : initializing ? "…" : `${minutesBalance ?? 0} min`}
+                </button>
+              )}
               <button
-                onClick={startSession}
-                disabled={starting || initializing || !hasBalance}
-                className="inline-flex items-center gap-1.5 font-sans text-sm font-semibold text-ink/70 bg-peach-dark/20 rounded-full px-3 py-1 whitespace-nowrap disabled:opacity-50 disabled:cursor-default"
+                onClick={() => setShowAddTime((v) => !v)}
+                aria-label={showAddTime ? "close add time options" : "add time"}
+                className="flex-shrink-0 p-1 rounded-full text-ink/60 bg-card/60 shadow-sm hover:text-ink hover:bg-card transition-colors"
               >
-                <Clock size={13} className="flex-shrink-0" />
-                {starting ? "starting..." : initializing ? "…" : `${minutesBalance ?? 0} min`}
+                {showAddTime ? <X size={13} /> : <Plus size={13} />}
               </button>
-            )}
-            <button
-              onClick={() => setShowAddTime((v) => !v)}
-              aria-label="add time"
-              className="absolute -right-1.5 top-1/2 -translate-y-1/2 p-0.5 rounded-full text-ink/60 bg-cream border border-border hover:text-ink hover:bg-peach-dark/20 transition-colors shadow-sm"
-            >
-              <Plus size={11} />
-            </button>
+            </div>
             {showAddTime && (
               <div className="absolute right-0 top-full mt-1.5 flex flex-col gap-1 p-2 rounded-lg border border-border bg-card shadow-lg z-20 min-w-[160px]">
                 <span className="text-[11px] font-sans text-ink/40 px-1">add time</span>
