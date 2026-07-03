@@ -1,9 +1,10 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 type Booking = { id: string; status: string; createdAt: Date; serviceTitle: string | null }
 type Purchase = { id: string; createdAt: Date; productTitle: string | null }
+type PriyaGptTxn = { id: string; deltaMinutes: number; reason: string; amountPaise: number | null; createdAt: Date }
 
 type Profile = {
   phone: string | null
@@ -62,15 +63,25 @@ export default function UserDetailClient({
   profile,
   bookings,
   purchases,
+  priyaGptMinutes = 0,
+  priyaGptTransactions = [],
 }: {
   user: User
   profile: Profile | null
   bookings: Booking[]
   purchases: Purchase[]
+  priyaGptMinutes?: number
+  priyaGptTransactions?: PriyaGptTxn[]
 }) {
-  const tabs = ["profile", "sessions", "purchases"] as const
+  const tabs = ["profile", "sessions", "purchases", "priyagpt"] as const
   type Tab = typeof tabs[number]
   const [tab, setTab] = useState<Tab>("profile")
+
+  useEffect(() => {
+    const requested = new URLSearchParams(window.location.search).get("tab") as Tab | null
+    if (requested && tabs.includes(requested)) setTab(requested)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const fmt = (d: Date) => new Intl.DateTimeFormat("en-IN", { dateStyle: "medium" }).format(new Date(d))
 
@@ -94,6 +105,9 @@ export default function UserDetailClient({
             )}
             {t === "purchases" && purchases.length > 0 && (
               <span className="ml-1.5 font-mono text-[10px] opacity-60">{purchases.length}</span>
+            )}
+            {t === "priyagpt" && priyaGptMinutes > 0 && (
+              <span className="ml-1.5 font-mono text-[10px] opacity-60">{priyaGptMinutes} min</span>
             )}
           </button>
         ))}
@@ -181,6 +195,40 @@ export default function UserDetailClient({
                 <div key={p.id} className="flex items-center justify-between px-5 py-3 border-b border-border last:border-0 hover:bg-card transition-colors">
                   <span className="font-sans text-sm text-ink">{p.productTitle ?? "Product"}</span>
                   <span className="font-sans text-xs text-ink/40">{fmt(p.createdAt)}</span>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* PriyaGPT time tab */}
+      {tab === "priyagpt" && (
+        <div className="flex flex-col gap-4">
+          <div className="border border-border rounded-2xl p-5">
+            <p className="font-sans text-xs text-ink/40 uppercase tracking-wide mb-1">time remaining</p>
+            <p className="font-heading text-2xl font-800 text-ink">{priyaGptMinutes} min</p>
+          </div>
+          {priyaGptTransactions.length === 0 ? (
+            <p className="text-sm font-sans text-ink/40 border border-dashed border-border rounded-2xl p-6 text-center">
+              no PriyaGPT activity yet
+            </p>
+          ) : (
+            <div className="border border-border rounded-2xl overflow-hidden overflow-x-auto">
+              {priyaGptTransactions.map((t) => (
+                <div key={t.id} className="flex items-center justify-between px-5 py-3 border-b border-border last:border-0 hover:bg-card transition-colors">
+                  <span className="font-sans text-sm text-ink capitalize">
+                    {t.reason.replace(/_/g, " ")}
+                    {t.amountPaise != null && (
+                      <span className="ml-1.5 text-xs text-ink/40">(₹{(t.amountPaise / 100).toLocaleString("en-IN")})</span>
+                    )}
+                  </span>
+                  <div className="flex items-center gap-3">
+                    <span className={`font-sans text-sm font-semibold ${t.deltaMinutes > 0 ? "text-green-600" : "text-ink/60"}`}>
+                      {t.deltaMinutes > 0 ? "+" : "-"}{Math.abs(t.deltaMinutes)} min
+                    </span>
+                    <span className="font-sans text-xs text-ink/40">{fmt(t.createdAt)}</span>
+                  </div>
                 </div>
               ))}
             </div>

@@ -24,6 +24,7 @@ type MonthRow = {
   sessions: { revenue: number; count: number }
   templates: { revenue: number; count: number }
   investorList: { revenue: number; count: number }
+  priyagpt: { revenue: number; count: number }
 }
 
 type SummaryData = {
@@ -47,6 +48,7 @@ const TYPE_LABELS: Record<string, string> = {
   template: "Template",
   score: "Score",
   angel: "Investor List",
+  priyagpt: "PriyaGPT",
 }
 
 const TYPE_COLORS: Record<string, string> = {
@@ -54,6 +56,7 @@ const TYPE_COLORS: Record<string, string> = {
   template: "bg-[#FFCBA4]/50 text-[#C97B4A]",
   angel:    "bg-[#E8875A]/25 text-[#B85A2E]",
   score:    "bg-gray-100 text-gray-500",
+  priyagpt: "bg-[#B0E0D3]/40 text-[#3F8F76]",
 }
 
 const STATUS_COLORS: Record<string, string> = {
@@ -203,6 +206,7 @@ const SEG = {
   sessions:     { bar: "bg-[#FFE7CE]",     text: "text-[#C99A6E]",  dot: "bg-[#FFE7CE]" },
   templates:    { bar: "bg-[#FFCBA4]",     text: "text-[#C97B4A]",  dot: "bg-[#FFCBA4]" },
   investorList: { bar: "bg-[#E8875A]",     text: "text-[#B85A2E]",  dot: "bg-[#E8875A]" },
+  priyagpt:     { bar: "bg-[#8FD4BC]",     text: "text-[#3F8F76]",  dot: "bg-[#8FD4BC]" },
 } as const
 
 const CHART_VIEWS = [
@@ -210,6 +214,7 @@ const CHART_VIEWS = [
   { key: "sessions",     label: "Sessions",     color: SEG.sessions.bar },
   { key: "templates",    label: "Templates",    color: SEG.templates.bar },
   { key: "investorList", label: "Investor List",color: SEG.investorList.bar },
+  { key: "priyagpt",     label: "PriyaGPT",     color: SEG.priyagpt.bar },
 ] as const
 
 type ChartViewKey = (typeof CHART_VIEWS)[number]["key"]
@@ -219,7 +224,7 @@ function getSegVal(m: MonthRow, view: ChartViewKey, field: "revenue" | "count"):
   return m[view][field]
 }
 
-const STACK_KEYS = ["sessions", "templates", "investorList"] as const
+const STACK_KEYS = ["sessions", "templates", "investorList", "priyagpt"] as const
 
 function getStackSegments(m: MonthRow, field: "revenue" | "count") {
   return STACK_KEYS.map(key => ({ val: m[key][field], color: SEG[key].bar }))
@@ -298,6 +303,7 @@ function SummaryTab() {
     { label: "Sessions",     revenue: sel.sessions.revenue,     count: sel.sessions.count,     text: SEG.sessions.text,     dot: SEG.sessions.dot },
     { label: "Templates",    revenue: sel.templates.revenue,    count: sel.templates.count,    text: SEG.templates.text,    dot: SEG.templates.dot },
     { label: "Investor List",revenue: sel.investorList.revenue, count: sel.investorList.count, text: SEG.investorList.text, dot: SEG.investorList.dot },
+    { label: "PriyaGPT",     revenue: sel.priyagpt.revenue,     count: sel.priyagpt.count,     text: SEG.priyagpt.text,     dot: SEG.priyagpt.dot },
   ]
 
   return (
@@ -369,15 +375,15 @@ function SummaryTab() {
             </button>
           </div>
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div className="flex flex-wrap gap-2">
           {statRows.map(row => (
-            <div key={row.label} className="bg-background rounded-xl px-4 py-3">
-              <div className="flex items-center gap-1.5 mb-1">
-                <span className={`w-2 h-2 rounded-sm flex-shrink-0 ${row.dot}`} />
-                <p className="font-sans text-[11px] text-ink/40">{row.label}</p>
+            <div key={row.label} className="flex-1 bg-background rounded-lg px-3 py-2 min-w-[110px]">
+              <div className="flex items-center gap-1.5 mb-0.5">
+                <span className={`w-1.5 h-1.5 rounded-sm flex-shrink-0 ${row.dot}`} />
+                <p className="font-sans text-[10px] text-ink/40 whitespace-nowrap">{row.label}</p>
               </div>
-              <p className={`font-sans text-base font-bold ${row.text}`}>{fmtAmount(row.revenue)}</p>
-              <p className="font-sans text-[11px] text-ink/40 mt-0.5">{row.count} sales</p>
+              <p className={`font-sans text-sm font-bold ${row.text}`}>{fmtAmount(row.revenue)}</p>
+              <p className="font-sans text-[10px] text-ink/40 mt-0.5">{row.count} sales</p>
             </div>
           ))}
         </div>

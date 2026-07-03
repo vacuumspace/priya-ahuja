@@ -1,6 +1,6 @@
 import { auth, isAdmin } from "@/lib/auth"
 import { db } from "@/lib/db"
-import { bookings, purchases, startupScores, digitalProducts } from "@/lib/db/schema"
+import { bookings, purchases, startupScores, digitalProducts, priyaGptTimeTransactions } from "@/lib/db/schema"
 import { and, eq, inArray, isNotNull, like } from "drizzle-orm"
 
 export async function GET() {
@@ -9,7 +9,7 @@ export async function GET() {
     return new Response("Forbidden", { status: 403 })
   }
 
-  const [allBookings, allPurchases, allScores] = await Promise.all([
+  const [allBookings, allPurchases, allScores, priyaGptPurchases] = await Promise.all([
     db
       .select({ createdAt: bookings.createdAt, amount: bookings.amountPaid })
       .from(bookings)
@@ -30,6 +30,11 @@ export async function GET() {
       .select({ createdAt: startupScores.createdAt })
       .from(startupScores)
       .where(eq(startupScores.isPaid, true)),
+
+    db
+      .select({ createdAt: priyaGptTimeTransactions.createdAt, amountPaise: priyaGptTimeTransactions.amountPaise })
+      .from(priyaGptTimeTransactions)
+      .where(eq(priyaGptTimeTransactions.reason, "purchase")),
   ])
 
   function monthKey(d: Date) {
@@ -51,7 +56,7 @@ export async function GET() {
   }
 
   type Seg = { revenue: number; count: number }
-  type MonthData = { revenue: number; count: number; sessions: Seg; templates: Seg; investorList: Seg }
+  type MonthData = { revenue: number; count: number; sessions: Seg; templates: Seg; investorList: Seg; priyagpt: Seg }
   const monthly: Record<string, MonthData> = {}
   for (const k of months) {
     monthly[k] = {
@@ -59,6 +64,7 @@ export async function GET() {
       sessions: { revenue: 0, count: 0 },
       templates: { revenue: 0, count: 0 },
       investorList: { revenue: 0, count: 0 },
+      priyagpt: { revenue: 0, count: 0 },
     }
   }
 
@@ -95,16 +101,28 @@ export async function GET() {
     }
   }
 
+  let priyaGptRevenue = 0, priyaGptCount = 0
+  for (const r of priyaGptPurchases) {
+    const amt = r.amountPaise ?? 0
+    priyaGptRevenue += amt; priyaGptCount++
+    const k = monthKey(r.createdAt)
+    if (monthly[k]) {
+      monthly[k].revenue += amt; monthly[k].count++
+      monthly[k].priyagpt.revenue += amt; monthly[k].priyagpt.count++
+    }
+  }
+
   const monthlyChart = months.map(k => ({ key: k, label: monthLabel(k), ...monthly[k] }))
 
   return Response.json({
-    totalRevenue: sessionRevenue + templateRevenue + investorListRevenue,
-    totalTransactions: sessionCount + templateCount + investorListCount + allScores.length,
+    totalRevenue: sessionRevenue + templateRevenue + investorListRevenue + priyaGptRevenue,
+    totalTransactions: sessionCount + templateCount + investorListCount + allScores.length + priyaGptCount,
     byType: [
       { label: "Sessions",      revenue: sessionRevenue,     count: sessionCount },
       { label: "Templates",     revenue: templateRevenue,    count: templateCount },
       { label: "Investor List", revenue: investorListRevenue, count: investorListCount },
       { label: "Startup Score", revenue: 0,                  count: allScores.length },
+      { label: "PriyaGPT",      revenue: priyaGptRevenue,    count: priyaGptCount },
     ],
     monthly: monthlyChart,
   })

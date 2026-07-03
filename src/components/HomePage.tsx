@@ -262,10 +262,24 @@ export default function HomePage() {
         </div>
       </div>
 
+      {/* ── PriyaGPT ── */}
+      <div className="bg-ink rounded-2xl px-4 sm:px-6 py-5 sm:py-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 mb-14">
+        <div>
+          <p className="font-heading text-lg font-700 text-cream">meet PriyaGPT</p>
+          <p className="font-sans text-xs text-cream/45 mt-1">an ai trained on my advice, ready whenever you need it.</p>
+        </div>
+        <Link
+          href="/priya-gpt"
+          className="inline-flex items-center bg-peach-dark text-ink text-xs font-sans font-semibold px-4 py-2.5 rounded-lg hover:bg-peach-dark/80 transition-colors flex-shrink-0"
+        >
+          chat now
+        </Link>
+      </div>
+
       {/* ── Footer nav ── */}
       <div className="border-t border-peach-dark/15 pt-6 pb-2">
         <p className="text-[12px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">Featured Resources</p>
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
           {[
             {
               heading: "fundraise",
@@ -283,6 +297,13 @@ export default function HomePage() {
                 { label: "100 startup ideas", href: "/startup/ideas" },
                 { label: "resources & credits", href: "/startup/resources" },
                 { label: "idea score", href: "/startup/tools/idea-score" },
+              ],
+            },
+            {
+              heading: "priyagpt",
+              href: "/priya-gpt",
+              links: [
+                { label: "chat with priyagpt", href: "/priya-gpt", star: true },
               ],
             },
           ].map((col) => (

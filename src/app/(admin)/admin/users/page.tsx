@@ -1,5 +1,5 @@
 import { db } from "@/lib/db"
-import { users, userProfiles } from "@/lib/db/schema"
+import { users, userProfiles, priyaGptTimeBalances } from "@/lib/db/schema"
 import { desc, ilike, or, count, eq } from "drizzle-orm"
 import { UsersControls } from "./UsersControls"
 import { UserRowActions } from "./UserRowActions"
@@ -35,9 +35,11 @@ export default async function AdminUsersPage({ searchParams }: Props) {
         businessType: userProfiles.businessType,
         stage: userProfiles.stage,
         location: userProfiles.location,
+        priyaGptMinutes: priyaGptTimeBalances.minutesRemaining,
       })
       .from(users)
       .leftJoin(userProfiles, eq(users.id, userProfiles.userId))
+      .leftJoin(priyaGptTimeBalances, eq(users.id, priyaGptTimeBalances.userId))
       .where(filter)
       .orderBy(desc(users.createdAt))
       .limit(PAGE_SIZE)
@@ -58,7 +60,7 @@ export default async function AdminUsersPage({ searchParams }: Props) {
       <div className="flex flex-col gap-4">
         <UsersControls total={total} page={page} totalPages={totalPages} search={search} />
 
-        <div className="border border-border rounded-2xl overflow-hidden">
+        <div className="border border-border rounded-2xl overflow-hidden overflow-x-auto">
           {rows.length === 0 ? (
             <p className="font-sans text-sm text-ink/40 px-6 py-10 text-center">
               {search ? "No users match your search." : "No users yet."}
@@ -73,6 +75,7 @@ export default async function AdminUsersPage({ searchParams }: Props) {
                   <th className="text-left font-sans text-[11px] text-ink/40 uppercase tracking-widest px-5 py-3">Business</th>
                   <th className="text-left font-sans text-[11px] text-ink/40 uppercase tracking-widest px-5 py-3">Location</th>
                   <th className="text-left font-sans text-[11px] text-ink/40 uppercase tracking-widest px-5 py-3">Phone</th>
+                  <th className="text-left font-sans text-[11px] text-ink/40 uppercase tracking-widest px-5 py-3">PriyaGPT</th>
                   <th className="text-left font-sans text-[11px] text-ink/40 uppercase tracking-widest px-5 py-3">Signed Up</th>
                   <th className="px-5 py-3 w-20" />
                 </tr>
@@ -94,6 +97,11 @@ export default async function AdminUsersPage({ searchParams }: Props) {
                     </td>
                     <td className="px-5 py-3.5 font-sans text-sm text-ink/60">{user.location ?? "—"}</td>
                     <td className="px-5 py-3.5 font-sans text-sm text-ink/60">{user.phone ?? "—"}</td>
+                    <td className="px-5 py-3.5 font-sans text-sm">
+                      <Link href={`/admin/users/${user.id}?tab=priyagpt`} className="text-ink/70 hover:text-peach-dark transition-colors">
+                        {user.priyaGptMinutes != null ? `${user.priyaGptMinutes} min` : "—"}
+                      </Link>
+                    </td>
                     <td className="px-5 py-3.5 font-sans text-sm text-ink/50">
                       {user.createdAt
                         ? new Intl.DateTimeFormat("en-IN", {

@@ -27,6 +27,8 @@ import {
   CalendarDays,
   Briefcase,
   MapPin,
+  Bot,
+  Settings,
   type LucideIcon,
 } from "lucide-react"
 import { useState } from "react"
@@ -67,6 +69,16 @@ const navGroups: NavGroup[] = [
       { label: "Investor List", href: "/admin/investor-list", icon: TrendingUp },
       { label: "Fundability Scores", href: "/admin/startup-scores", icon: Lightbulb },
       { label: "Idea Scores", href: "/admin/idea-scores", icon: Lightbulb },
+      { label: "PriyaGPT", href: "/admin/sales?tab=transactions", icon: Bot },
+    ],
+  },
+  {
+    label: "PriyaGPT",
+    prefixes: ["/admin/priya-gpt"],
+    items: [
+      { label: "Chats", href: "/admin/priya-gpt?tab=chats", icon: MessageSquare },
+      { label: "Insights", href: "/admin/priya-gpt?tab=insights", icon: BarChart2 },
+      { label: "Settings", href: "/admin/priya-gpt?tab=settings", icon: Settings },
     ],
   },
   {

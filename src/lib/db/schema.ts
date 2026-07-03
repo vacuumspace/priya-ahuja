@@ -236,6 +236,44 @@ export const customRequests = pgTable("custom_requests", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
 })
 
+// ── PriyaGPT time balance (replaces the old money wallet) ─────────
+export const priyaGptTimeBalances = pgTable("priya_gpt_time_balances", {
+  userId: text("user_id").primaryKey().references(() => users.id, { onDelete: "cascade" }),
+  minutesRemaining: integer("minutes_remaining").notNull().default(0),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+})
+
+export const priyaGptTimeTransactions = pgTable("priya_gpt_time_transactions", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  deltaMinutes: integer("delta_minutes").notNull(), // +/- minutes
+  reason: varchar("reason", { length: 50 }).notNull(), // "purchase" | "session_start"
+  amountPaise: integer("amount_paise"), // actual rupees paid, only set on "purchase" rows
+  razorpayOrderId: text("razorpay_order_id"),
+  razorpayPaymentId: text("razorpay_payment_id"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+})
+
+// ── Pitch Deck — Story ───────────────────────────────────────────
+export const priyaGptSessions = pgTable("priya_gpt_sessions", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  startedAt: timestamp("started_at").notNull().defaultNow(),
+  expiresAt: timestamp("expires_at").notNull(),
+  pausedAt: timestamp("paused_at"), // set while the user has paused the timer; expiresAt shifts forward by the pause duration on resume
+  rating: integer("rating"), // 1-5, set once by the user after the session ends
+  ratingFeedback: text("rating_feedback"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+})
+
+export const priyaGptMessages = pgTable("priya_gpt_messages", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  sessionId: uuid("session_id").notNull().references(() => priyaGptSessions.id, { onDelete: "cascade" }),
+  role: varchar("role", { length: 20 }).notNull(), // "user" | "assistant"
+  content: text("content").notNull(),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+})
+
 export const serviceInquiries = pgTable("service_inquiries", {
   id: uuid("id").primaryKey().defaultRandom(),
   type: varchar("type", { length: 20 }).notNull(), // "tech" | "branding"

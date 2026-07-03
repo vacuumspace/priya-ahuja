@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "migrate": "drizzle-kit migrate",
+    "db:generate": "drizzle-kit generate",
     "prebuild": "node scripts/build-investor-data.mjs",
     "build": "next build",
     "start": "next start",
@@ -14,6 +15,7 @@
   "dependencies": {
     "@auth/drizzle-adapter": "^1.11.2",
     "@base-ui/react": "^1.5.0",
+    "@google/generative-ai": "^0.24.1",
     "@neondatabase/serverless": "^1.1.0",
     "@radix-ui/react-dialog": "^1.1.16",
     "@radix-ui/react-dropdown-menu": "^2.1.17",

@@ -1,6 +1,6 @@
 import { auth, isAdmin } from "@/lib/auth"
 import { db } from "@/lib/db"
-import { bookings, purchases, startupScores, services, digitalProducts, users } from "@/lib/db/schema"
+import { bookings, purchases, startupScores, services, digitalProducts, users, priyaGptTimeTransactions } from "@/lib/db/schema"
 import { and, desc, eq, inArray, isNotNull, like } from "drizzle-orm"
 
 const PAGE_SIZE = 10
@@ -15,8 +15,8 @@ export async function GET(req: Request) {
   const page = Math.max(1, parseInt(searchParams.get("page") ?? "1"))
   const offset = (page - 1) * PAGE_SIZE
 
-  // Fetch all three sources
-  const [allBookings, allPurchases, allScores] = await Promise.all([
+  // Fetch all sources
+  const [allBookings, allPurchases, allScores, allPriyaGpt] = await Promise.all([
     db
       .select({
         id: bookings.id,
@@ -60,6 +60,19 @@ export async function GET(req: Request) {
       .from(startupScores)
       .leftJoin(users, eq(startupScores.userId, users.id))
       .where(eq(startupScores.isPaid, true)),
+
+    db
+      .select({
+        id: priyaGptTimeTransactions.id,
+        amountPaise: priyaGptTimeTransactions.amountPaise,
+        razorpayPaymentId: priyaGptTimeTransactions.razorpayPaymentId,
+        createdAt: priyaGptTimeTransactions.createdAt,
+        userName: users.name,
+        userEmail: users.email,
+      })
+      .from(priyaGptTimeTransactions)
+      .leftJoin(users, eq(priyaGptTimeTransactions.userId, users.id))
+      .where(eq(priyaGptTimeTransactions.reason, "purchase")),
   ])
 
   type TxRow = {
@@ -104,6 +117,17 @@ export async function GET(req: Request) {
       userEmail: r.userEmail ?? "",
       itemName: "Startup Score",
       amount: null,
+      razorpayPaymentId: r.razorpayPaymentId,
+      status: "paid",
+      createdAt: r.createdAt,
+    })),
+    ...allPriyaGpt.map((r) => ({
+      id: r.id,
+      type: "priyagpt",
+      userName: r.userName ?? "Unknown",
+      userEmail: r.userEmail ?? "",
+      itemName: "PriyaGPT Time",
+      amount: r.amountPaise,
       razorpayPaymentId: r.razorpayPaymentId,
       status: "paid",
       createdAt: r.createdAt,

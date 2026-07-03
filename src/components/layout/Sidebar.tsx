@@ -12,6 +12,7 @@ type SidebarProps = { isAdmin?: boolean; isSignedIn?: boolean; userName?: string
 
 const topItems = [
   { label: "home", href: "/", badge: null },
+  { label: "PriyaGPT", href: "/priya-gpt", badge: null },
   { label: "connect", href: "/connect", badge: null },
 ]
 
