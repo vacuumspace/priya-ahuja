@@ -50,8 +50,8 @@ export function ServicesClient({ services }: { services: Service[] }) {
               href={`/connect/${service.slug}`}
               className="group block bg-card border border-border rounded-2xl p-6 hover:border-peach-dark/40 hover:shadow-sm transition-all"
             >
-              <div className="flex items-start justify-between gap-6">
-                <div className="flex-1">
+              <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 sm:gap-6">
+                <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-3 mb-3">
                     <span className="text-[12px] font-mono text-ink/30">
                       {String(i + 1).padStart(2, "0")}
@@ -67,14 +67,14 @@ export function ServicesClient({ services }: { services: Service[] }) {
                     {service.shortDescription}
                   </p>
                 </div>
-                <div className="text-right flex-shrink-0">
+                <div className="text-left sm:text-right flex-shrink-0">
                   <p className="font-sans font-700 text-ink text-lg">{formatPrice(service.price)}</p>
                   {service.originalPrice && (
                     <p className="text-xs text-ink/30 line-through font-sans">
                       {formatPrice(service.originalPrice)}
                     </p>
                   )}
-                  <div className="flex items-center justify-end gap-1 mt-2 text-ink/40">
+                  <div className="flex items-center justify-start sm:justify-end gap-1 mt-2 text-ink/40">
                     {service.type === "report" ? (
                       <FileText size={12} />
                     ) : service.urgencyNote ? (
