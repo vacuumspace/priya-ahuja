@@ -126,15 +126,15 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
       })
   }, [])
 
-  useEffect(() => {
+  function syncSessionFromServer() {
     if (!isSignedIn) return
     fetch("/api/priya-gpt/session")
       .then((r) => r.json())
       .then((d) => {
         if (Array.isArray(d.packages) && d.packages.length > 0) setPackages(d.packages)
         if (typeof d.minutesBalance === "number") setMinutesBalance(d.minutesBalance)
+        setSession(d.session ?? null)
         if (d.session) {
-          setSession(d.session)
           fetch(`/api/priya-gpt/chat?sessionId=${d.session.id}`)
             .then((r) => r.json())
             .then((cd) => {
@@ -147,6 +147,31 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
         }
       })
       .catch(() => setInitializing(false))
+  }
+
+  useEffect(() => {
+    syncSessionFromServer()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSignedIn])
+
+  useEffect(() => {
+    // the browser can restore this page from bfcache (back/forward nav) without remounting
+    // the component at all — our in-memory session state would then be stale (e.g. still
+    // "running" even though the server auto-paused it while the tab was away), so re-sync
+    // from the server truth whenever the tab becomes visible/restored again.
+    function onPageShow(e: PageTransitionEvent) {
+      if (e.persisted) syncSessionFromServer()
+    }
+    function onVisibilityChange() {
+      if (!document.hidden) syncSessionFromServer()
+    }
+    window.addEventListener("pageshow", onPageShow)
+    document.addEventListener("visibilitychange", onVisibilityChange)
+    return () => {
+      window.removeEventListener("pageshow", onPageShow)
+      document.removeEventListener("visibilitychange", onVisibilityChange)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSignedIn])
 
   function loadOlderMessages() {
