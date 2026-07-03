@@ -85,8 +85,8 @@ export default function RootLayout({
             "@context": "https://schema.org",
             "@type": "Person",
             name: "Priya Ahuja",
-            url: "https://www.priyaahuja.in",
-            image: "https://www.priyaahuja.in/priyadp.jpeg",
+            url: "https://priyaahuja.in",
+            image: "https://priyaahuja.in/priyadp.jpeg",
             jobTitle: "Startup & Fundraise Consultant",
             worksFor: {
               "@type": "Organization",

@@ -1,4 +1,5 @@
-﻿import { auth, isAdmin } from "@/lib/auth"
+﻿import type { Metadata } from "next"
+import { auth, isAdmin } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { purchases, digitalProducts } from "@/lib/db/schema"
 import { eq } from "drizzle-orm"
@@ -7,6 +8,18 @@ import TemplatesGrid from "@/components/templates/TemplatesGrid"
 import { CustomRequestForm } from "@/components/CustomRequestForm"
 
 const products = getTemplatesByCategory("fundraise")
+
+export const metadata: Metadata = {
+  title: "Fundraise Templates & Checklists",
+  description: "Investor pitch deck templates, fundraise checklists, and guides built from real deal experience — practical tools for founders raising capital.",
+  keywords: ["fundraise templates", "pitch deck template India", "investor checklist", "fundraising guide founders"],
+  alternates: { canonical: "https://priyaahuja.in/fundraise/templates" },
+  openGraph: {
+    title: "Fundraise Templates & Checklists | Priya Ahuja",
+    description: "Investor pitch deck templates, fundraise checklists, and guides built from real deal experience.",
+    url: "https://priyaahuja.in/fundraise/templates",
+  },
+}
 
 export default async function FundraiseTemplatesPage() {
   const session = await auth()

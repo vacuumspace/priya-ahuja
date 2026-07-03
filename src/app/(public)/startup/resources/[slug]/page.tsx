@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { notFound, redirect } from "next/navigation"
 import Link from "next/link"
 import { ArrowLeft, ExternalLink } from "lucide-react"
@@ -5,6 +6,23 @@ import { auth } from "@/lib/auth"
 import { getResourceBySlug, getDealBadgeClass } from "@/lib/resources-data"
 
 type Props = { params: Promise<{ slug: string }> }
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params
+  const resource = getResourceBySlug(slug)
+  if (!resource) return {}
+
+  const title = `${resource.name} — Startup Resource`
+  const description = resource.tagline
+  const url = `https://priyaahuja.in/startup/resources/${slug}`
+
+  return {
+    title,
+    description,
+    alternates: { canonical: url },
+    openGraph: { title: `${title} | Priya Ahuja`, description, url },
+  }
+}
 
 export default async function ResourceDetailPage({ params }: Props) {
   const { slug } = await params

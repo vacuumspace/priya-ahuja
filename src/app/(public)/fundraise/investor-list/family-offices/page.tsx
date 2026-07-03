@@ -1,5 +1,6 @@
 export const dynamic = "force-dynamic"
 
+import type { Metadata } from "next"
 import { auth, isAdmin } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { purchases, digitalProducts } from "@/lib/db/schema"
@@ -30,6 +31,18 @@ const CONFIG: ListConfig = {
     "We verify details to the best of our ability and keep improving this list over time. That is why access is given here directly and not as a download, so we can keep updating what you see. Our intention is to genuinely help founders.",
   ],
   whyPaid: "Curating and maintaining this list takes real effort. Keeping it paid ensures it stays high quality and goes to founders who genuinely need it.",
+}
+
+export const metadata: Metadata = {
+  title: "Family Office Investor List India — Contacts & LinkedIn",
+  description: "160 family offices actively investing in Indian startups, with 722 individual contacts including family principals, CIOs, and investment managers.",
+  keywords: ["family office investors India", "family office contact list", "family office India startups"],
+  alternates: { canonical: "https://priyaahuja.in/fundraise/investor-list/family-offices" },
+  openGraph: {
+    title: "Family Office Investor List India — Contacts & LinkedIn | Priya Ahuja",
+    description: "160 family offices actively investing in Indian startups, with 722 individual decision-maker contacts.",
+    url: "https://priyaahuja.in/fundraise/investor-list/family-offices",
+  },
 }
 
 export default async function FamilyOfficesPage() {

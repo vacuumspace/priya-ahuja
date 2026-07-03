@@ -1,5 +1,6 @@
 export const dynamic = "force-dynamic"
 
+import type { Metadata } from "next"
 import { auth, isAdmin } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { purchases, digitalProducts } from "@/lib/db/schema"
@@ -30,6 +31,18 @@ const CONFIG: ListConfig = {
     "We verify details to the best of our ability and keep improving this list over time. That is why access is given here directly and not as a download, so we can keep updating what you see. Our intention is to genuinely help founders.",
   ],
   whyPaid: "Curating and maintaining this list takes real effort. Keeping it paid ensures it stays high quality and goes to founders who genuinely need it.",
+}
+
+export const metadata: Metadata = {
+  title: "Incubator & Accelerator List India — Contacts",
+  description: "233 Indian incubators and accelerators running programs for early-stage startups, with 5,621 mentor and program manager contacts.",
+  keywords: ["startup incubators India", "startup accelerators India", "incubator contact list India", "accelerator programs India"],
+  alternates: { canonical: "https://priyaahuja.in/fundraise/investor-list/incubators" },
+  openGraph: {
+    title: "Incubator & Accelerator List India — Contacts | Priya Ahuja",
+    description: "233 Indian incubators and accelerators running programs for early-stage startups, with 5,621 mentor and program manager contacts.",
+    url: "https://priyaahuja.in/fundraise/investor-list/incubators",
+  },
 }
 
 export default async function IncubatorsPage() {

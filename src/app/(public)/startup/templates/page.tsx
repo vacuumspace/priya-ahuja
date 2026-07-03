@@ -1,4 +1,5 @@
-﻿import { auth, isAdmin } from "@/lib/auth"
+﻿import type { Metadata } from "next"
+import { auth, isAdmin } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { purchases, digitalProducts } from "@/lib/db/schema"
 import { eq } from "drizzle-orm"
@@ -8,6 +9,18 @@ import Link from "next/link"
 import { CustomRequestForm } from "@/components/CustomRequestForm"
 
 const products = getTemplatesByCategory("startup")
+
+export const metadata: Metadata = {
+  title: "Startup Templates & Guides",
+  description: "Templates and guides for the operational side of building a startup — hiring, product, and growth resources built from real founder experience.",
+  keywords: ["startup templates", "startup guides India", "hiring templates startup", "growth playbook founders"],
+  alternates: { canonical: "https://priyaahuja.in/startup/templates" },
+  openGraph: {
+    title: "Startup Templates & Guides | Priya Ahuja",
+    description: "Templates and guides for the operational side of building a startup — hiring, product, and growth.",
+    url: "https://priyaahuja.in/startup/templates",
+  },
+}
 
 export default async function StartupTemplatesPage() {
   const session = await auth()

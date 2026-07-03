@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { notFound, redirect } from "next/navigation"
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
@@ -5,6 +6,23 @@ import { auth } from "@/lib/auth"
 import { getIdeaBySlug, FREE_IDEAS_COUNT } from "@/lib/startup-ideas-data"
 
 type Props = { params: Promise<{ slug: string }> }
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params
+  const idea = getIdeaBySlug(slug)
+  if (!idea) return {}
+
+  const title = `${idea.title} — Startup Idea`
+  const description = idea.tagline
+  const url = `https://priyaahuja.in/startup/ideas/${slug}`
+
+  return {
+    title,
+    description,
+    alternates: { canonical: url },
+    openGraph: { title: `${title} | Priya Ahuja`, description, url },
+  }
+}
 
 function renderInline(text: string): React.ReactNode[] {
   const parts = text.split(/(\*\*.*?\*\*|\*[^*]+\*)/)

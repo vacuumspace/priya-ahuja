@@ -4,7 +4,7 @@ import { services } from "@/lib/db/schema"
 import { eq } from "drizzle-orm"
 import { posts } from "@/lib/blog-data"
 
-const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || "https://priyaahuja.com"
+const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || "https://priyaahuja.in"
 const NOW = new Date().toISOString()
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
