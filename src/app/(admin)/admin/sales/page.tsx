@@ -56,7 +56,7 @@ const TYPE_COLORS: Record<string, string> = {
   template: "bg-[#FFCBA4]/50 text-[#C97B4A]",
   angel:    "bg-[#E8875A]/25 text-[#B85A2E]",
   score:    "bg-gray-100 text-gray-500",
-  priyagpt: "bg-[#B0E0D3]/40 text-[#3F8F76]",
+  priyagpt: "bg-[#A85D3A]/25 text-[#A85D3A]",
 }
 
 const STATUS_COLORS: Record<string, string> = {
@@ -230,7 +230,7 @@ const SEG = {
   sessions:     { bar: "bg-[#FFE7CE]",     text: "text-[#C99A6E]",  dot: "bg-[#FFE7CE]" },
   templates:    { bar: "bg-[#FFCBA4]",     text: "text-[#C97B4A]",  dot: "bg-[#FFCBA4]" },
   investorList: { bar: "bg-[#E8875A]",     text: "text-[#B85A2E]",  dot: "bg-[#E8875A]" },
-  priyagpt:     { bar: "bg-[#8FD4BC]",     text: "text-[#3F8F76]",  dot: "bg-[#8FD4BC]" },
+  priyagpt:     { bar: "bg-[#A85D3A]",     text: "text-[#A85D3A]",  dot: "bg-[#A85D3A]" },
 } as const
 
 const CHART_VIEWS = [

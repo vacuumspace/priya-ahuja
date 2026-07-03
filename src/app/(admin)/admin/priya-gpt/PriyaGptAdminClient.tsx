@@ -21,9 +21,17 @@ type Insights = {
   totalMessages: number
   totalUsers: number
   totalRevenue: number
+  totalMinutes: number
   avgMessagesPerSession: number
   topics: { term: string; count: number }[]
   faqs: { question: string; count: number }[]
+}
+
+function fmtMinutesShort(minutes: number) {
+  if (minutes < 60) return `${minutes}m`
+  const h = Math.floor(minutes / 60)
+  const m = minutes % 60
+  return m === 0 ? `${h}h` : `${h}h ${m}m`
 }
 
 type SessionWithMessages = {
@@ -269,6 +277,7 @@ function InsightsTab() {
     { label: "Active users", value: String(insights.totalUsers) },
     { label: "Total sessions", value: String(insights.totalSessions) },
     { label: "Total messages", value: String(insights.totalMessages) },
+    { label: "Minutes of chat", value: fmtMinutesShort(insights.totalMinutes) },
     { label: "Avg messages / session", value: String(insights.avgMessagesPerSession) },
   ]
 

@@ -155,6 +155,8 @@ export async function GET() {
   const topics = extractTopics(texts, 12)
   const faqs = extractFaqs(texts, 10)
 
+  const totalMinutes = [...minutesMap.values()].reduce((s, m) => s + m, 0)
+
   return Response.json({
     users: perUser.map((r) => ({
       userId: r.userId,
@@ -171,6 +173,7 @@ export async function GET() {
       totalMessages: Number(totals?.totalMessages ?? 0),
       totalUsers: Number(totals?.totalUsers ?? 0),
       totalRevenue: Number(totalSpentRow?.total ?? 0),
+      totalMinutes,
       avgMessagesPerSession:
         Number(totals?.totalSessions ?? 0) > 0
           ? Math.round((Number(totals?.totalMessages ?? 0) / Number(totals?.totalSessions ?? 1)) * 10) / 10

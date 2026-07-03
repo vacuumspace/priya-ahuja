@@ -136,7 +136,7 @@ export default async function AdminDashboard() {
                     </div>
                     <span className={`text-[10px] font-sans font-semibold px-2 py-0.5 rounded-full capitalize flex-shrink-0 ${
                       t.kind === "priyagpt"
-                        ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400"
+                        ? "bg-[#A85D3A]/25 text-[#A85D3A] dark:bg-[#A85D3A]/25 dark:text-[#E0A585]"
                         : t.kind !== "purchase"
                         ? "bg-[#FFE7CE] text-[#C99A6E]"
                         : purchaseTag(t.slug) === "Investor List"
