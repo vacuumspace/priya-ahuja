@@ -17,6 +17,15 @@ const STOPWORDS = new Set([
   "does", "did", "doing", "would", "could", "should", "might", "must", "shall", "if", "because",
   "as", "until", "while", "im", "dont", "its", "get", "got", "like", "want", "need", "think",
   "know", "also", "really", "one", "going", "make", "thing", "things", "lot", "much", "way",
+  // generic conversational filler that isn't a "topic" even though it's not a classic stopword
+  "good", "great", "nice", "yes", "yeah", "yep", "no", "okay", "ok", "sure", "thanks", "thank",
+  "check", "checking", "sounds", "sound", "start", "started", "starting", "build", "building",
+  "built", "help", "helps", "helping", "name", "names", "restriction", "restrictions", "shares",
+  "share", "sharing", "right", "actually", "maybe", "probably", "basically", "definitely",
+  "something", "anything", "everything", "someone", "anyone", "everyone", "let", "lets", "sure",
+  "give", "giving", "gave", "take", "taking", "took", "look", "looking", "looked", "see", "seeing",
+  "saw", "come", "coming", "came", "go", "went", "gone", "say", "said", "saying", "tell", "telling",
+  "told", "ask", "asking", "asked", "answer", "answering", "answered", "yeah", "hey", "hi", "hello",
 ])
 
 function tokenize(text: string): string[] {
@@ -28,17 +37,21 @@ function tokenize(text: string): string[] {
     .filter((w) => w.length > 3 && !STOPWORDS.has(w))
 }
 
+// bigrams (two consecutive meaningful words) read as far more useful "topics" than lone unigrams
 function extractTopics(texts: string[], limit: number): { term: string; count: number }[] {
   const counts = new Map<string, number>()
   for (const text of texts) {
+    const words = tokenize(text)
     const seen = new Set<string>()
-    for (const word of tokenize(text)) {
-      if (seen.has(word)) continue
-      seen.add(word)
-      counts.set(word, (counts.get(word) ?? 0) + 1)
+    for (let i = 0; i < words.length - 1; i++) {
+      const phrase = `${words[i]} ${words[i + 1]}`
+      if (seen.has(phrase)) continue
+      seen.add(phrase)
+      counts.set(phrase, (counts.get(phrase) ?? 0) + 1)
     }
   }
   return [...counts.entries()]
+    .filter(([, count]) => count > 1) // drop one-off phrases; too noisy to call a "topic"
     .sort((a, b) => b[1] - a[1])
     .slice(0, limit)
     .map(([term, count]) => ({ term, count }))
@@ -99,6 +112,26 @@ export async function GET() {
 
   const spendMap = new Map(spendByUser.map((r) => [r.userId, Number(r.spent)]))
 
+  // real wall-clock time actually spent chatting, not the package minutes allotted —
+  // a session paused and abandoned early only counts time up to the pause, not its full allotment
+  const allSessions = await db
+    .select({
+      userId: priyaGptSessions.userId,
+      startedAt: priyaGptSessions.startedAt,
+      expiresAt: priyaGptSessions.expiresAt,
+      pausedAt: priyaGptSessions.pausedAt,
+    })
+    .from(priyaGptSessions)
+
+  const minutesMap = new Map<string, number>()
+  const now = Date.now()
+  for (const s of allSessions) {
+    const start = s.startedAt.getTime()
+    const end = s.pausedAt ? s.pausedAt.getTime() : Math.min(s.expiresAt.getTime(), now)
+    const minutes = Math.max(0, Math.round((end - start) / 60000))
+    minutesMap.set(s.userId, (minutesMap.get(s.userId) ?? 0) + minutes)
+  }
+
   const [totals] = await db
     .select({
       totalSessions: sql<number>`count(distinct ${priyaGptSessions.id})`,
@@ -131,6 +164,7 @@ export async function GET() {
       messageCount: Number(r.messageCount),
       lastActive: r.lastActive,
       spent: spendMap.get(r.userId) ?? 0,
+      minutesUsed: minutesMap.get(r.userId) ?? 0,
     })),
     insights: {
       totalSessions: Number(totals?.totalSessions ?? 0),

@@ -1,5 +1,5 @@
 import { db } from "@/lib/db"
-import { bookings, services, availability, purchases, digitalProducts } from "@/lib/db/schema"
+import { bookings, services, availability, purchases, digitalProducts, priyaGptTimeTransactions, users } from "@/lib/db/schema"
 import { eq, and, gte, desc, isNotNull } from "drizzle-orm"
 import Link from "next/link"
 
@@ -44,9 +44,30 @@ export default async function AdminDashboard() {
     .orderBy(desc(purchases.createdAt))
     .limit(10)
 
+  const recentPriyaGptTxns = await db
+    .select({
+      id: priyaGptTimeTransactions.id,
+      userName: users.name,
+      amount: priyaGptTimeTransactions.amountPaise,
+      createdAt: priyaGptTimeTransactions.createdAt,
+    })
+    .from(priyaGptTimeTransactions)
+    .leftJoin(users, eq(priyaGptTimeTransactions.userId, users.id))
+    .where(eq(priyaGptTimeTransactions.reason, "purchase"))
+    .orderBy(desc(priyaGptTimeTransactions.createdAt))
+    .limit(10)
+
   const recentTransactions = [
     ...recentBookingTxns.map((t) => ({ ...t, kind: "booking" as const })),
     ...recentPurchaseTxns.map((t) => ({ ...t, kind: "purchase" as const, type: null, slug: t.slug })),
+    ...recentPriyaGptTxns.map((t) => ({
+      ...t,
+      kind: "priyagpt" as const,
+      type: null,
+      slug: null,
+      label: "PriyaGPT Time",
+      userName: t.userName ?? "Unknown",
+    })),
   ]
     .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
     .slice(0, 10)
@@ -114,13 +135,15 @@ export default async function AdminDashboard() {
                       <p className="text-[10px] font-sans text-ink/30">{dateLabel}</p>
                     </div>
                     <span className={`text-[10px] font-sans font-semibold px-2 py-0.5 rounded-full capitalize flex-shrink-0 ${
-                      t.kind !== "purchase"
+                      t.kind === "priyagpt"
+                        ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400"
+                        : t.kind !== "purchase"
                         ? "bg-[#FFE7CE] text-[#C99A6E]"
                         : purchaseTag(t.slug) === "Investor List"
                         ? "bg-[#E8875A]/25 text-[#B85A2E]"
                         : "bg-[#FFCBA4]/50 text-[#C97B4A]"
                     }`}>
-                      {t.kind === "purchase" ? purchaseTag(t.slug) : "session"}
+                      {t.kind === "purchase" ? purchaseTag(t.slug) : t.kind === "priyagpt" ? "PriyaGPT" : "session"}
                     </span>
                   </div>
                 )

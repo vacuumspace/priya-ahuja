@@ -2,8 +2,10 @@ import { NextRequest, NextResponse } from "next/server"
 import { auth } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { priyaGptSessions, priyaGptMessages } from "@/lib/db/schema"
-import { eq, and, asc } from "drizzle-orm"
+import { eq, and, asc, desc, lt } from "drizzle-orm"
 import { sendChatMessage, type ChatMessage } from "@/lib/gemini"
+
+const PAGE_SIZE = 20
 
 export async function GET(req: NextRequest) {
   const session = await auth()
@@ -14,6 +16,7 @@ export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url)
   const sessionId = searchParams.get("sessionId")
   if (!sessionId) return NextResponse.json({ error: "Missing sessionId" }, { status: 400 })
+  const before = searchParams.get("before") // ISO createdAt cursor; loads the page just older than this
 
   const [gptSession] = await db
     .select()
@@ -22,13 +25,22 @@ export async function GET(req: NextRequest) {
     .limit(1)
   if (!gptSession) return NextResponse.json({ error: "Session not found" }, { status: 404 })
 
-  const messages = await db
+  // fetch newest-first so LIMIT gets the latest page, then reverse to chronological order for display
+  const page = await db
     .select()
     .from(priyaGptMessages)
-    .where(eq(priyaGptMessages.sessionId, sessionId))
-    .orderBy(asc(priyaGptMessages.createdAt))
+    .where(
+      before
+        ? and(eq(priyaGptMessages.sessionId, sessionId), lt(priyaGptMessages.createdAt, new Date(before)))
+        : eq(priyaGptMessages.sessionId, sessionId)
+    )
+    .orderBy(desc(priyaGptMessages.createdAt))
+    .limit(PAGE_SIZE + 1)
 
-  return NextResponse.json({ messages })
+  const hasMore = page.length > PAGE_SIZE
+  const messages = page.slice(0, PAGE_SIZE).reverse()
+
+  return NextResponse.json({ messages, hasMore })
 }
 
 export async function POST(req: NextRequest) {

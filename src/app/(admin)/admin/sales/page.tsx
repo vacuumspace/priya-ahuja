@@ -67,16 +67,28 @@ const STATUS_COLORS: Record<string, string> = {
 
 // ─── Transactions Tab ─────────────────────────────────────────────────────────
 
+const TYPE_FILTERS = [
+  { value: "", label: "All types" },
+  { value: "booking", label: "Session" },
+  { value: "template", label: "Template" },
+  { value: "angel", label: "Investor List" },
+  { value: "score", label: "Score" },
+  { value: "priyagpt", label: "PriyaGPT" },
+]
+
 function TransactionsTab() {
   const [data, setData] = useState<Transaction[]>([])
   const [total, setTotal] = useState(0)
   const [page, setPage] = useState(1)
+  const [typeFilter, setTypeFilter] = useState("")
   const [loading, setLoading] = useState(false)
   const pageCount = Math.max(1, Math.ceil(total / 10))
 
-  const load = useCallback((p: number) => {
+  const load = useCallback((p: number, type: string) => {
     setLoading(true)
-    fetch(`/api/admin/sales/transactions?page=${p}`)
+    const qs = new URLSearchParams({ page: String(p) })
+    if (type) qs.set("type", type)
+    fetch(`/api/admin/sales/transactions?${qs.toString()}`)
       .then((r) => r.json())
       .then((d) => {
         setData(d.transactions)
@@ -85,13 +97,25 @@ function TransactionsTab() {
       })
   }, [])
 
-  useEffect(() => { load(page) }, [page, load])
+  useEffect(() => { load(page, typeFilter) }, [page, typeFilter, load])
 
   return (
     <div>
       <div className="flex items-center justify-between mb-4">
         <p className="text-sm text-ink/50">{total} transactions total</p>
-        <div className="flex items-center gap-2 text-sm">
+        <div className="flex items-center gap-3 text-sm">
+          <select
+            value={typeFilter}
+            onChange={(e) => {
+              setTypeFilter(e.target.value)
+              setPage(1)
+            }}
+            className="text-sm border border-peach-dark/20 rounded-lg px-2 py-1 bg-card text-ink"
+          >
+            {TYPE_FILTERS.map((f) => (
+              <option key={f.value} value={f.value}>{f.label}</option>
+            ))}
+          </select>
           <button
             onClick={() => setPage((p) => Math.max(1, p - 1))}
             disabled={page === 1}

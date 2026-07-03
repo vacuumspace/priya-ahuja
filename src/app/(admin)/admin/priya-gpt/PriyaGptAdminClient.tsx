@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { Star } from "lucide-react"
+import { Star, X } from "lucide-react"
 import { DEFAULT_PRIYA_GPT_PERSONALITY, DEFAULT_PRIYA_GPT_RULES } from "@/lib/priya-gpt-defaults"
 import { FormattedMessage } from "@/lib/format-chat-message"
 
@@ -54,15 +54,12 @@ function fmtDate(d: string | null) {
   return new Intl.DateTimeFormat("en-IN", { dateStyle: "medium", timeStyle: "short" }).format(new Date(d))
 }
 
-function fmtDay(d: string) {
-  return new Intl.DateTimeFormat("en-IN", { dateStyle: "medium" }).format(new Date(d))
-}
-
 // ─── Chats Tab ──────────────────────────────────────────────────────────────
 
 function ChatsTab() {
   const [sessions, setSessions] = useState<SessionRow[] | null>(null)
   const [spentByUser, setSpentByUser] = useState<Record<string, number>>({})
+  const [minutesByUser, setMinutesByUser] = useState<Record<string, number>>({})
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const [transcript, setTranscript] = useState<SessionWithMessages | null>(null)
   const [loadingTranscript, setLoadingTranscript] = useState(false)
@@ -75,8 +72,13 @@ function ChatsTab() {
       .then((r) => r.json())
       .then((d) => {
         const map: Record<string, number> = {}
-        for (const u of d.users ?? []) map[u.userId] = u.spent
+        const minMap: Record<string, number> = {}
+        for (const u of d.users ?? []) {
+          map[u.userId] = u.spent
+          minMap[u.userId] = u.minutesUsed ?? 0
+        }
         setSpentByUser(map)
+        setMinutesByUser(minMap)
       })
   }, [])
 
@@ -96,38 +98,38 @@ function ChatsTab() {
     return <div className="text-center py-12 text-ink/40">No PriyaGPT chats yet.</div>
   }
 
-  // sessions come back sorted by date desc already; precompute day-header breaks
-  const rows = sessions.map((s, i) => {
-    const day = fmtDay(s.startedAt)
-    const prevDay = i > 0 ? fmtDay(sessions[i - 1].startedAt) : null
-    return { s, index: i + 1, day, showDayHeader: day !== prevDay }
-  })
+  const compact = Boolean(selectedId)
 
   return (
     <div className="flex gap-4 h-[70vh]">
       {/* Left: dated list */}
-      <div className="w-[45%] rounded-xl border border-peach-dark/20 overflow-y-auto">
+      <div className={`${compact ? "w-[260px]" : "w-full"} flex-shrink-0 rounded-xl border border-peach-dark/20 overflow-y-auto transition-all`}>
         <table className="w-full text-sm">
           <thead>
             <tr className="bg-peach-dark/10 text-left sticky top-0">
               <th className="px-3 py-2 font-medium text-ink/60 w-10">S.No</th>
               <th className="px-3 py-2 font-medium text-ink/60">User</th>
-              <th className="px-3 py-2 font-medium text-ink/60">Msgs</th>
-              <th className="px-3 py-2 font-medium text-ink/60">Total paid</th>
-              <th className="px-3 py-2 font-medium text-ink/60">Rating</th>
-              <th className="px-3 py-2 font-medium text-ink/60">Time</th>
+              {!compact && (
+                <>
+                  <th className="px-3 py-2 font-medium text-ink/60">Msgs</th>
+                  <th className="px-3 py-2 font-medium text-ink/60">Total paid</th>
+                  <th className="px-3 py-2 font-medium text-ink/60">Total time</th>
+                  <th className="px-3 py-2 font-medium text-ink/60">Rating</th>
+                  <th className="px-3 py-2 font-medium text-ink/60">Time</th>
+                </>
+              )}
             </tr>
           </thead>
           <tbody>
-            {rows.map(({ s, index, day, showDayHeader }) => (
+            {sessions.map((s, i) => (
               <FragmentRow
                 key={s.id}
                 s={s}
-                index={index}
-                day={day}
-                showDayHeader={showDayHeader}
+                index={i + 1}
                 totalPaid={spentByUser[s.userId] ?? 0}
+                totalMinutes={minutesByUser[s.userId] ?? 0}
                 active={selectedId === s.id}
+                compact={compact}
                 onClick={() => selectSession(s.id)}
               />
             ))}
@@ -136,70 +138,84 @@ function ChatsTab() {
       </div>
 
       {/* Right: transcript split panel */}
-      <div className="flex-1 rounded-xl border border-peach-dark/20 overflow-hidden flex flex-col">
-        {!selectedId ? (
-          <div className="flex-1 flex items-center justify-center text-ink/40 text-sm">
-            Select a chat on the left to view its transcript.
-          </div>
-        ) : loadingTranscript ? (
-          <div className="flex-1 flex items-center justify-center text-ink/40 text-sm">Loading transcript…</div>
-        ) : !transcript ? (
-          <div className="flex-1 flex items-center justify-center text-ink/40 text-sm">Could not load transcript.</div>
-        ) : (
-          <>
-            <div className="flex items-center justify-between px-4 py-2.5 border-b border-peach-dark/20 bg-peach-dark/5">
-              <p className="text-xs font-sans text-ink/50">Session started {fmtDate(transcript.startedAt)}</p>
-              <StarRating rating={transcript.rating} />
-            </div>
-            <div className="flex-1 overflow-y-auto px-4 py-3 flex flex-col gap-1.5">
-              {transcript.messages.length === 0 ? (
-                <p className="text-xs text-ink/40 italic">No messages in this session.</p>
-              ) : (
-                transcript.messages.map((m) => (
-                  <div
-                    key={m.id}
-                    className={`max-w-[70%] rounded-lg px-3 py-1.5 text-xs font-sans leading-relaxed ${
-                      m.role === "user" ? "self-end bg-ink text-cream" : "self-start bg-peach-dark/20 text-ink"
-                    }`}
+      {selectedId && (
+        <div className="flex-1 rounded-xl border border-peach-dark/20 overflow-hidden flex flex-col">
+          {loadingTranscript ? (
+            <div className="flex-1 flex items-center justify-center text-ink/40 text-sm">Loading transcript…</div>
+          ) : !transcript ? (
+            <div className="flex-1 flex items-center justify-center text-ink/40 text-sm">Could not load transcript.</div>
+          ) : (
+            <>
+              <div className="flex items-center justify-between px-4 py-2.5 border-b border-peach-dark/20 bg-peach-dark/5">
+                <p className="text-xs font-sans text-ink/50">Session started {fmtDate(transcript.startedAt)}</p>
+                <div className="flex items-center gap-2">
+                  <StarRating rating={transcript.rating} />
+                  <button
+                    onClick={() => {
+                      setSelectedId(null)
+                      setTranscript(null)
+                    }}
+                    aria-label="close transcript"
+                    className="p-1 rounded-full text-ink/40 hover:text-ink hover:bg-peach-dark/20 transition-colors"
                   >
-                    <FormattedMessage content={m.content} />
-                  </div>
-                ))
-              )}
-            </div>
-          </>
-        )}
-      </div>
+                    <X size={14} />
+                  </button>
+                </div>
+              </div>
+              <div className="flex-1 overflow-y-auto px-4 py-3 flex flex-col gap-1.5">
+                {transcript.messages.length === 0 ? (
+                  <p className="text-xs text-ink/40 italic">No messages in this session.</p>
+                ) : (
+                  transcript.messages.map((m) => (
+                    <div
+                      key={m.id}
+                      className={`max-w-[70%] rounded-lg px-3 py-1.5 text-xs font-sans leading-relaxed ${
+                        m.role === "user" ? "self-end bg-ink text-cream" : "self-start bg-peach-dark/20 text-ink"
+                      }`}
+                    >
+                      <FormattedMessage content={m.content} />
+                    </div>
+                  ))
+                )}
+              </div>
+            </>
+          )}
+        </div>
+      )}
     </div>
   )
+}
+
+function fmtMinutes(minutes: number) {
+  if (minutes < 60) return `${minutes}m`
+  const h = Math.floor(minutes / 60)
+  const m = minutes % 60
+  return m === 0 ? `${h}h` : `${h}h ${m}m`
+}
+
+function fmtDateTime(d: string) {
+  return new Intl.DateTimeFormat("en-IN", { dateStyle: "medium", timeStyle: "short" }).format(new Date(d))
 }
 
 function FragmentRow({
   s,
   index,
-  day,
-  showDayHeader,
   totalPaid,
+  totalMinutes,
   active,
+  compact,
   onClick,
 }: {
   s: SessionRow
   index: number
-  day: string
-  showDayHeader: boolean
   totalPaid: number
+  totalMinutes: number
   active: boolean
+  compact: boolean
   onClick: () => void
 }) {
-  return (
-    <>
-      {showDayHeader && (
-        <tr>
-          <td colSpan={6} className="px-3 pt-3 pb-1 text-[11px] font-sans font-semibold text-ink/40 uppercase tracking-wide">
-            {day}
-          </td>
-        </tr>
-      )}
+  if (compact) {
+    return (
       <tr
         onClick={onClick}
         className={`cursor-pointer border-t border-peach-dark/10 transition-colors ${
@@ -207,20 +223,31 @@ function FragmentRow({
         }`}
       >
         <td className="px-3 py-2 text-ink/50">{index}</td>
-        <td className="px-3 py-2">
-          <div className="font-medium text-ink">{s.userName}</div>
-          <div className="text-[11px] text-ink/50">{s.userEmail}</div>
-        </td>
-        <td className="px-3 py-2 text-ink/70">{s.messageCount}</td>
-        <td className="px-3 py-2 font-medium text-ink whitespace-nowrap">{fmtAmount(totalPaid)}</td>
-        <td className="px-3 py-2 whitespace-nowrap">
-          <StarRating rating={s.rating} />
-        </td>
-        <td className="px-3 py-2 text-ink/50 whitespace-nowrap">
-          {new Intl.DateTimeFormat("en-IN", { timeStyle: "short" }).format(new Date(s.startedAt))}
-        </td>
+        <td className="px-3 py-2 font-medium text-ink truncate">{s.userName}</td>
       </tr>
-    </>
+    )
+  }
+
+  return (
+    <tr
+      onClick={onClick}
+      className={`cursor-pointer border-t border-peach-dark/10 transition-colors ${
+        active ? "bg-peach-dark/20" : "hover:bg-peach-dark/5"
+      }`}
+    >
+      <td className="px-3 py-2 text-ink/50">{index}</td>
+      <td className="px-3 py-2">
+        <div className="font-medium text-ink">{s.userName}</div>
+        <div className="text-[11px] text-ink/50">{s.userEmail}</div>
+      </td>
+      <td className="px-3 py-2 text-ink/70">{s.messageCount}</td>
+      <td className="px-3 py-2 font-medium text-ink whitespace-nowrap">{fmtAmount(totalPaid)}</td>
+      <td className="px-3 py-2 text-ink/70 whitespace-nowrap">{fmtMinutes(totalMinutes)}</td>
+      <td className="px-3 py-2 whitespace-nowrap">
+        <StarRating rating={s.rating} />
+      </td>
+      <td className="px-3 py-2 text-ink/50 whitespace-nowrap">{fmtDateTime(s.startedAt)}</td>
+    </tr>
   )
 }
 

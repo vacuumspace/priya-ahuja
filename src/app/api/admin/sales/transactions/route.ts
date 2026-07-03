@@ -14,6 +14,7 @@ export async function GET(req: Request) {
   const { searchParams } = new URL(req.url)
   const page = Math.max(1, parseInt(searchParams.get("page") ?? "1"))
   const offset = (page - 1) * PAGE_SIZE
+  const typeFilter = searchParams.get("type")
 
   // Fetch all sources
   const [allBookings, allPurchases, allScores, allPriyaGpt] = await Promise.all([
@@ -134,10 +135,11 @@ export async function GET(req: Request) {
     })),
   ]
 
-  all.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
+  const filtered = typeFilter ? all.filter((r) => r.type === typeFilter) : all
+  filtered.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
 
-  const total = all.length
-  const page_data = all.slice(offset, offset + PAGE_SIZE).map((r) => ({
+  const total = filtered.length
+  const page_data = filtered.slice(offset, offset + PAGE_SIZE).map((r) => ({
     ...r,
     createdAt: r.createdAt.toISOString(),
   }))

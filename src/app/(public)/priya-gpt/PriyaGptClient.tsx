@@ -21,7 +21,7 @@ const EMOJI_PALETTE = [
 ]
 
 type GptSession = { id: string; expiresAt: string; pausedAt: string | null }
-type ChatMsg = { id: string; role: "user" | "assistant"; content: string }
+type ChatMsg = { id: string; role: "user" | "assistant"; content: string; createdAt?: string }
 type TimePackage = { price: number; minutes: number } // price in paise
 
 const DEFAULT_PACKAGES: TimePackage[] = [
@@ -86,6 +86,9 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
   const [revealCounts, setRevealCounts] = useState<Record<string, number>>({})
   const [revealingIds, setRevealingIds] = useState<Record<string, boolean>>({})
   const [focusMessageId, setFocusMessageId] = useState<string | null>(null)
+  const [hasMoreHistory, setHasMoreHistory] = useState(false)
+  const [loadingHistory, setLoadingHistory] = useState(false)
+  const [initializing, setInitializing] = useState(isSignedIn)
   const scrollRef = useRef<HTMLDivElement>(null)
   const messageRefs = useRef<Record<string, HTMLDivElement | null>>({})
 
@@ -134,10 +137,35 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
           setSession(d.session)
           fetch(`/api/priya-gpt/chat?sessionId=${d.session.id}`)
             .then((r) => r.json())
-            .then((cd) => setMessages(cd.messages ?? []))
+            .then((cd) => {
+              setMessages(cd.messages ?? [])
+              setHasMoreHistory(Boolean(cd.hasMore))
+            })
+            .finally(() => setInitializing(false))
+        } else {
+          setInitializing(false)
         }
       })
+      .catch(() => setInitializing(false))
   }, [isSignedIn])
+
+  function loadOlderMessages() {
+    const oldestCreatedAt = messages[0]?.createdAt
+    if (!session || loadingHistory || !hasMoreHistory || !oldestCreatedAt) return
+    setLoadingHistory(true)
+    const container = scrollRef.current
+    const prevScrollHeight = container?.scrollHeight ?? 0
+    fetch(`/api/priya-gpt/chat?sessionId=${session.id}&before=${encodeURIComponent(oldestCreatedAt)}`)
+      .then((r) => r.json())
+      .then((d) => {
+        setMessages((prev) => [...(d.messages ?? []), ...prev])
+        setHasMoreHistory(Boolean(d.hasMore))
+        requestAnimationFrame(() => {
+          if (container) container.scrollTop = container.scrollHeight - prevScrollHeight
+        })
+      })
+      .finally(() => setLoadingHistory(false))
+  }
 
   useEffect(() => {
     if (!session || session.pausedAt) return
@@ -435,7 +463,11 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
 
   const locked = !session
   const displayMessages =
-    messages.length > 0 ? [INTRO_MESSAGE, ...messages] : DEFAULT_INTRO_MESSAGES
+    messages.length === 0
+      ? DEFAULT_INTRO_MESSAGES
+      : hasMoreHistory
+        ? messages
+        : [INTRO_MESSAGE, ...messages]
   const isPaused = Boolean(session?.pausedAt)
   const pausedRemainingMs =
     isPaused && session ? new Date(session.expiresAt).getTime() - new Date(session.pausedAt!).getTime() : null
@@ -447,7 +479,7 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
   const hasBalance = Boolean(minutesBalance && minutesBalance > 0)
 
   return (
-    <div className="w-full">
+    <div className="w-full h-full flex flex-col min-h-0">
     {showAbout && (
       <div
         className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4"
@@ -478,7 +510,41 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
         </div>
       </div>
     )}
-    <div className="w-full flex flex-col h-[78vh] rounded-2xl border border-border bg-card overflow-hidden">
+    <div className="flex-shrink-0 flex items-center justify-between mb-1.5 px-1">
+      <span className="font-sans text-xs text-ink/50">★ 4.9 · {foundersCount} founders</span>
+      {ratableSessionId && !showRateWidget && (
+        <button
+          onClick={() => setShowRateWidget(true)}
+          className="font-sans text-xs font-semibold text-peach-dark"
+        >
+          rate us
+        </button>
+      )}
+      {ratableSessionId && showRateWidget && (
+        <div className="flex items-center gap-1.5">
+          <span className="font-sans text-xs text-ink/50">
+            {ratingGiven ? "thanks!" : "rate:"}
+          </span>
+          <div className="flex items-center gap-0.5">
+            {[1, 2, 3, 4, 5].map((n) => (
+              <button
+                key={n}
+                onClick={() => submitRating(ratableSessionId, n)}
+                disabled={submittingRating || Boolean(ratingGiven)}
+                aria-label={`rate ${n} star`}
+                className="disabled:cursor-default"
+              >
+                <Star
+                  size={14}
+                  className={ratingGiven && n <= ratingGiven ? "fill-peach-dark text-peach-dark" : "text-ink/30"}
+                />
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+    <div className="w-full flex flex-col flex-1 min-h-0 rounded-2xl border border-border bg-card overflow-hidden">
       <div className="flex items-center justify-between gap-3 px-4 py-2 border-b border-border bg-peach-dark/10">
         <div className="flex items-center gap-2.5 min-w-0">
           <div className="relative flex-shrink-0">
@@ -486,7 +552,7 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
             <span className="absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full bg-green-500 border-2 border-cream" />
           </div>
           <div className="min-w-0">
-            <p className="font-sans text-xs font-semibold text-ink truncate">Priya Ahuja</p>
+            <p className="font-sans text-sm font-semibold text-ink truncate">Priya Ahuja</p>
           </div>
         </div>
 
@@ -510,18 +576,18 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
           )}
           <div className="relative">
             {session ? (
-              <span className="inline-flex items-center gap-1.5 font-sans text-xs font-semibold text-ink/70 bg-peach-dark/20 rounded-full px-3 py-1 whitespace-nowrap">
+              <span className="inline-flex items-center gap-1.5 font-sans text-sm font-semibold text-ink/70 bg-peach-dark/20 rounded-full px-3 py-1 whitespace-nowrap">
                 <Clock size={13} className="flex-shrink-0" />
                 {String(remHours).padStart(2, "0")}:{String(remMinutes).padStart(2, "0")}:{String(remSeconds).padStart(2, "0")}
               </span>
             ) : (
               <button
                 onClick={startSession}
-                disabled={starting || !hasBalance}
-                className="inline-flex items-center gap-1.5 font-sans text-xs font-semibold text-ink/70 bg-peach-dark/20 rounded-full px-3 py-1 whitespace-nowrap disabled:opacity-50 disabled:cursor-default"
+                disabled={starting || initializing || !hasBalance}
+                className="inline-flex items-center gap-1.5 font-sans text-sm font-semibold text-ink/70 bg-peach-dark/20 rounded-full px-3 py-1 whitespace-nowrap disabled:opacity-50 disabled:cursor-default"
               >
                 <Clock size={13} className="flex-shrink-0" />
-                {starting ? "starting..." : `${minutesBalance ?? 0} min`}
+                {starting ? "starting..." : initializing ? "…" : `${minutesBalance ?? 0} min`}
               </button>
             )}
             <button
@@ -597,7 +663,18 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
         </div>
       )}
 
-      <div ref={scrollRef} className="flex-1 overflow-y-auto overflow-x-hidden px-5 py-4 flex flex-col gap-3">
+      <div
+        ref={scrollRef}
+        onScroll={(e) => {
+          if (e.currentTarget.scrollTop < 60) loadOlderMessages()
+        }}
+        className="flex-1 overflow-y-auto overflow-x-hidden px-5 py-4 flex flex-col gap-3"
+      >
+        {hasMoreHistory && (
+          <div className="self-center text-xs text-ink/40 font-sans py-1">
+            {loadingHistory ? "loading earlier messages…" : "scroll up for earlier messages"}
+          </div>
+        )}
         {displayMessages.map((m) => {
           const revealCount = revealCounts[m.id]
           const content = revealCount !== undefined ? m.content.slice(0, revealCount) : m.content
@@ -608,7 +685,7 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
                 messageRefs.current[m.id] = el
               }}
               className={`max-w-[85%] md:max-w-[60%] rounded-xl px-3.5 py-2.5 text-sm font-sans leading-relaxed break-words ${
-                m.role === "user" ? "self-end bg-neutral-500 text-cream" : "self-start bg-peach-dark/15 text-ink"
+                m.role === "user" ? "self-end bg-neutral-300 dark:bg-neutral-700 text-ink" : "self-start bg-peach-dark/15 text-ink"
               }`}
             >
               <FormattedMessage content={content} />
@@ -643,7 +720,7 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
             </button>
           </div>
         )}
-        {isSignedIn && locked && !needsPurchase && (
+        {isSignedIn && !initializing && locked && !needsPurchase && (
           <div className="flex items-center gap-2 px-4 pt-2 flex-wrap">
             <span className="text-xs font-sans text-ink/40">
               {hasBalance ? "send a message to start a new session, or add more time:" : "add time to start chatting:"}
@@ -706,41 +783,6 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
           </button>
         </div>
       </div>
-    </div>
-
-    <div className="flex items-center justify-between mt-2 px-1">
-      <span className="font-sans text-xs text-ink/50">★ 4.9 · {foundersCount} founders</span>
-      {ratableSessionId && !showRateWidget && (
-        <button
-          onClick={() => setShowRateWidget(true)}
-          className="font-sans text-xs font-semibold text-peach-dark"
-        >
-          rate us
-        </button>
-      )}
-      {ratableSessionId && showRateWidget && (
-        <div className="flex items-center gap-1.5">
-          <span className="font-sans text-xs text-ink/50">
-            {ratingGiven ? "thanks!" : "rate:"}
-          </span>
-          <div className="flex items-center gap-0.5">
-            {[1, 2, 3, 4, 5].map((n) => (
-              <button
-                key={n}
-                onClick={() => submitRating(ratableSessionId, n)}
-                disabled={submittingRating || Boolean(ratingGiven)}
-                aria-label={`rate ${n} star`}
-                className="disabled:cursor-default"
-              >
-                <Star
-                  size={14}
-                  className={ratingGiven && n <= ratingGiven ? "fill-peach-dark text-peach-dark" : "text-ink/30"}
-                />
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
     </div>
     </div>
   )
