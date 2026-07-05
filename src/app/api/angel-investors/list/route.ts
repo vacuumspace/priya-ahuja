@@ -7,6 +7,7 @@ import { angelInvestorsData } from "@/lib/angel-investors-data"
 
 const SLUG = "angel-investor-list"
 const PAGE_SIZE = 10
+const FREE_PAGES = 3
 
 export async function GET(req: NextRequest) {
   try {
@@ -36,18 +37,27 @@ export async function GET(req: NextRequest) {
     }
 
     if (!isPaid) {
-      // Non-paying users: all rows visible but linkedin/emails hidden
-      const preview = angelInvestorsData.map(r => ({
+      // Non-paying users are confined to a fixed teaser slice — filters/search
+      // and paging both operate within it only, so pagination or search
+      // enumeration can't be scripted to reconstruct the full paid dataset.
+      const teaserLimit = FREE_PAGES * PAGE_SIZE
+      const total = angelInvestorsData.length
+      let scoped = angelInvestorsData.slice(0, teaserLimit)
+      if (search)  scoped = scoped.filter(r => r.name.toLowerCase().includes(search.toLowerCase()))
+      if (state)   scoped = scoped.filter(r => r.state === state)
+      if (country) scoped = scoped.filter(r => r.country === country)
+
+      const preview = scoped.map(r => ({
         id: r.id, sno: r.sno, name: r.name, city: r.city,
         state: r.state, country: r.country, linkedin: "", emails: [],
       }))
-      const total = preview.length
-      const offset = (page - 1) * PAGE_SIZE
+      const effectivePage = Math.min(page, FREE_PAGES)
+      const offset = (effectivePage - 1) * PAGE_SIZE
       return NextResponse.json({
         investors: preview.slice(offset, offset + PAGE_SIZE),
         total,
-        page,
-        pageCount: Math.ceil(total / PAGE_SIZE),
+        page: effectivePage,
+        pageCount: Math.min(FREE_PAGES, Math.ceil(preview.length / PAGE_SIZE) || 1),
         isPaid: false,
       })
     }

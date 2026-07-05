@@ -35,7 +35,7 @@ export async function GET(req: NextRequest) {
     const session = await auth()
     if (!isAdmin(session?.user?.email)) {
       const [purchase] = await db
-        .select({ id: purchases.id })
+        .select({ id: purchases.id, tokenExpiresAt: purchases.tokenExpiresAt })
         .from(purchases)
         .where(
           and(
@@ -47,6 +47,10 @@ export async function GET(req: NextRequest) {
 
       if (!purchase) {
         return new NextResponse("Invalid or expired access token", { status: 403 })
+      }
+
+      if (purchase.tokenExpiresAt && purchase.tokenExpiresAt < new Date()) {
+        return new NextResponse("Access token has expired", { status: 403 })
       }
     }
 

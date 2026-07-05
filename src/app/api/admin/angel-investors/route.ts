@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import { db } from "@/lib/db"
 import { purchases, digitalProducts } from "@/lib/db/schema"
-import { auth } from "@/lib/auth"
+import { auth, isAdmin } from "@/lib/auth"
 import { eq, desc, and, like } from "drizzle-orm"
 import { angelInvestorsData } from "@/lib/angel-investors-data"
 
@@ -9,13 +9,9 @@ const ANGEL_SLUG = "angel-investor-list"
 const PAGE_SIZE = 50
 const TX_PAGE_SIZE = 10
 
-async function isAdmin(req: NextRequest) {
-  const session = await auth()
-  return !!session?.user?.email
-}
-
 export async function GET(req: NextRequest) {
-  if (!(await isAdmin(req))) {
+  const session = await auth()
+  if (!isAdmin(session?.user?.email)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   }
 
