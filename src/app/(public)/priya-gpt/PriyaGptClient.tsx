@@ -33,7 +33,7 @@ const DEFAULT_INTRO_MESSAGES: ChatMsg[] = [
   {
     id: "intro-1",
     role: "assistant",
-    content: "Hey. I'm PriyaGPT, available whenever you want to chat about anything related to your startup, fundraise or founder's life.",
+    content: "Hey. I'm PriyaGPT, powered by artificial intelligence and available whenever you want to chat about anything related to your startup, fundraise or founder's life.",
   },
   {
     id: "intro-2",
@@ -49,10 +49,11 @@ const DEFAULT_INTRO_MESSAGES: ChatMsg[] = [
 
 const ABOUT_POINTS = [
   "trained on Priya's approach to fundraising, GTM, team building, founder's advisor and startup strategy",
-  "ask about anything you're stuck on: strategy, pitch, business model, hiring, whatever",
+  "ask about anything you're stuck on: funding, strategy, pitch, team building, whatever",
   "gives direct, honest feedback, not just cheerleading",
   "chat time is metered in minutes; pause anytime, resume later, buy more when you run out",
   "a place to think out loud, not a replacement for a 1:1 session with Priya",
+  "please keep it real and respectful; abusive, spammy or harmful messages may block and ban you from chat and website permanently",
 ]
 
 function fmtRupees(paise: number) {
@@ -60,6 +61,7 @@ function fmtRupees(paise: number) {
 }
 
 const PENDING_INPUT_KEY = "priyagpt_pending_input"
+const BLOCKED_CONTACT_EMAIL = "hi@priyaahuja.in"
 
 // sign-in is a full-page redirect to Google and back, which unmounts this component and
 // loses whatever the user had typed — stash it first so it can be restored after they're
@@ -95,6 +97,7 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
   const [hasMoreHistory, setHasMoreHistory] = useState(false)
   const [loadingHistory, setLoadingHistory] = useState(false)
   const [initializing, setInitializing] = useState(isSignedIn)
+  const [blocked, setBlocked] = useState(false)
   const scrollRef = useRef<HTMLDivElement>(null)
   const messageRefs = useRef<Record<string, HTMLDivElement | null>>({})
 
@@ -148,6 +151,7 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
       .then((d) => {
         if (Array.isArray(d.packages) && d.packages.length > 0) setPackages(d.packages)
         if (typeof d.minutesBalance === "number") setMinutesBalance(d.minutesBalance)
+        setBlocked(Boolean(d.blocked))
         setSession(d.session ?? null)
         if (d.session) {
           fetch(`/api/priya-gpt/chat?sessionId=${d.session.id}`)
@@ -479,6 +483,11 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
       })
       const data = await res.json()
       if (!res.ok) {
+        if (res.status === 403 && data.error === "blocked") {
+          setBlocked(true)
+          setMessages((prev) => prev.filter((m) => m.id !== tempId))
+          return
+        }
         setError(data.error ?? "Something went wrong")
         return
       }
@@ -678,12 +687,15 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
         </div>
       )}
 
+      <div className="relative flex-1 min-h-0">
       <div
         ref={scrollRef}
         onScroll={(e) => {
-          if (e.currentTarget.scrollTop < 60) loadOlderMessages()
+          if (!blocked && e.currentTarget.scrollTop < 60) loadOlderMessages()
         }}
-        className="flex-1 overflow-y-auto overflow-x-hidden px-5 py-4 flex flex-col gap-3 scrollbar-subtle"
+        className={`h-full overflow-y-auto overflow-x-hidden px-5 py-4 flex flex-col gap-3 scrollbar-subtle ${
+          blocked ? "blur-sm pointer-events-none select-none" : ""
+        }`}
       >
         {hasMoreHistory && (
           <div className="self-center text-xs text-ink/40 font-sans py-1">
@@ -710,6 +722,18 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
         {(sending || Object.values(revealingIds).some(Boolean)) && (
           <div className="self-start text-xs text-ink/40 font-sans">typing...</div>
         )}
+      </div>
+      {blocked && (
+        <div className="absolute inset-0 flex items-center justify-center px-6">
+          <p className="text-center text-xs font-sans text-ink/50 bg-cream/80 rounded-lg px-4 py-2">
+            This conversation has been paused. If you think this is a mistake, contact{" "}
+            <a href={`mailto:${BLOCKED_CONTACT_EMAIL}`} className="underline text-ink/70">
+              {BLOCKED_CONTACT_EMAIL}
+            </a>
+            .
+          </p>
+        </div>
+      )}
       </div>
 
       <div className="relative flex flex-col border-t border-border">
@@ -791,11 +815,12 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
             }}
             placeholder="type here"
             rows={1}
-            className="flex-1 max-h-32 overflow-y-auto px-3 py-2 rounded-lg bg-peach-dark/10 text-sm font-sans text-ink outline-none focus:ring-1 focus:ring-ink/20 resize-none"
+            disabled={blocked}
+            className="flex-1 max-h-32 overflow-y-auto px-3 py-2 rounded-lg bg-peach-dark/10 text-sm font-sans text-ink outline-none focus:ring-1 focus:ring-ink/20 resize-none disabled:opacity-50"
           />
           <button
             onClick={sendMessage}
-            disabled={sending || !input.trim() || buyingPackage !== null}
+            disabled={sending || !input.trim() || buyingPackage !== null || blocked}
             className="px-4 py-2 rounded-lg bg-peach text-ink text-sm font-sans font-semibold disabled:opacity-40"
           >
             send

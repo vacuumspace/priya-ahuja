@@ -139,7 +139,28 @@ export const users = pgTable("users", {
   emailVerified: timestamp("email_verified"),
   image: text("image"),
   adminSeen: boolean("admin_seen").notNull().default(false),
+  // platform-wide block — set only via the Users admin page; also blocks sign-in (see bannedIdentities). Separate from PriyaGPT chat blocking below.
+  blocked: boolean("blocked").notNull().default(false),
+  blockedReason: text("blocked_reason"),
+  blockedAt: timestamp("blocked_at"),
+  blockedBy: varchar("blocked_by", { length: 20 }), // "admin_ban"
+  // PriyaGPT chat-only block — independent of the platform block above; sign-in still works.
+  priyaGptBlocked: boolean("priya_gpt_blocked").notNull().default(false),
+  priyaGptBlockedReason: text("priya_gpt_blocked_reason"),
+  priyaGptBlockedAt: timestamp("priya_gpt_blocked_at"),
+  priyaGptBlockedBy: varchar("priya_gpt_blocked_by", { length: 20 }), // "auto" | "admin"
+  lastSeenIp: text("last_seen_ip"),
   createdAt: timestamp("created_at").defaultNow(),
+})
+
+// permanent signup ban list — only ever written by an explicit admin action, never by the
+// auto-moderation classifier. Survives account deletion so a banned email/IP can't re-signup.
+export const bannedIdentities = pgTable("banned_identities", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  email: text("email"),
+  ip: text("ip"),
+  reason: text("reason"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
 })
 
 export const accounts = pgTable("accounts", {

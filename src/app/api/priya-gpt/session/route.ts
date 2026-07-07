@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server"
 import { auth } from "@/lib/auth"
 import { db } from "@/lib/db"
-import { priyaGptSessions } from "@/lib/db/schema"
+import { priyaGptSessions, users } from "@/lib/db/schema"
 import { eq } from "drizzle-orm"
 import { spendMinutes, getMinutesBalance, InsufficientTimeError } from "@/lib/priya-gpt-time"
 import { getTimePackages } from "@/lib/priya-gpt-packages"
@@ -26,9 +26,10 @@ export async function GET() {
     .where(eq(priyaGptSessions.userId, session.user.id))
     .limit(1)
 
-  const [packages, minutesBalance] = await Promise.all([
+  const [packages, minutesBalance, [user]] = await Promise.all([
     getTimePackages(),
     getMinutesBalance(session.user.id),
+    db.select({ priyaGptBlocked: users.priyaGptBlocked }).from(users).where(eq(users.id, session.user.id)).limit(1),
   ])
 
   return NextResponse.json({
@@ -36,6 +37,7 @@ export async function GET() {
     active: row ? isActive(row) : false,
     packages,
     minutesBalance,
+    blocked: user?.priyaGptBlocked ?? false,
   })
 }
 

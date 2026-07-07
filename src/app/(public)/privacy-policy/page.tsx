@@ -30,6 +30,11 @@ export default function PrivacyPolicyPage() {
         </section>
 
         <section>
+          <h2 className="font-semibold text-ink mb-2">Moderation & Account Safety</h2>
+          <p>To keep PriyaGPT safe from abuse, misuse, and manipulation attempts, messages may be automatically reviewed. If a message is flagged, we may restrict chat access and retain related information (such as the message, a brief reason, and the IP address it was sent from) to review the decision and prevent repeat abuse. This is used only for account safety, never for advertising or shared with third parties.</p>
+        </section>
+
+        <section>
           <h2 className="font-semibold text-ink mb-2">Contact</h2>
           <p>For any privacy-related questions, email <a href="mailto:hi@priyaahuja.in" className="text-ink underline">hi@priyaahuja.in</a>.</p>
         </section>

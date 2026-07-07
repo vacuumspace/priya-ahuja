@@ -26,12 +26,17 @@ export default function TermsPage() {
 
         <section>
           <h2 className="font-semibold text-ink mb-2">Intellectual Property</h2>
-          <p>All content on this site — including blog posts, templates, and tools — is the property of Priya Ahuja and may not be reproduced without permission.</p>
+          <p>All content on this site, including blog posts, templates, and tools, is the property of Priya Ahuja and may not be reproduced without permission.</p>
         </section>
 
         <section>
           <h2 className="font-semibold text-ink mb-2">Limitation of Liability</h2>
           <p>Advice provided is for informational purposes only. Priya Ahuja is not liable for business outcomes resulting from connect sessions.</p>
+        </section>
+
+        <section>
+          <h2 className="font-semibold text-ink mb-2">Acceptable Use & Account Suspension</h2>
+          <p>You agree not to use this site or PriyaGPT to attempt to manipulate, exploit, or extract confidential information from our systems, or to send abusive, harassing, or explicit content. We may, at our discretion, restrict or suspend access to PriyaGPT or to your account entirely if we determine these terms have been violated, with or without prior notice. If you believe an account was restricted in error, contact <a href="mailto:hi@priyaahuja.in" className="text-ink underline">hi@priyaahuja.in</a>.</p>
         </section>
 
         <section>

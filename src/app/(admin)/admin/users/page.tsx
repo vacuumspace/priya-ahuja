@@ -1,5 +1,5 @@
 import { db } from "@/lib/db"
-import { users, userProfiles, priyaGptTimeBalances } from "@/lib/db/schema"
+import { users, userProfiles } from "@/lib/db/schema"
 import { desc, ilike, or, count, eq } from "drizzle-orm"
 import { UsersControls } from "./UsersControls"
 import { UserRowActions } from "./UserRowActions"
@@ -35,11 +35,10 @@ export default async function AdminUsersPage({ searchParams }: Props) {
         businessType: userProfiles.businessType,
         stage: userProfiles.stage,
         location: userProfiles.location,
-        priyaGptMinutes: priyaGptTimeBalances.minutesRemaining,
+        blocked: users.blocked,
       })
       .from(users)
       .leftJoin(userProfiles, eq(users.id, userProfiles.userId))
-      .leftJoin(priyaGptTimeBalances, eq(users.id, priyaGptTimeBalances.userId))
       .where(filter)
       .orderBy(desc(users.createdAt))
       .limit(PAGE_SIZE)
@@ -75,7 +74,6 @@ export default async function AdminUsersPage({ searchParams }: Props) {
                   <th className="text-left font-sans text-[11px] text-ink/40 uppercase tracking-widest px-5 py-3">Business</th>
                   <th className="text-left font-sans text-[11px] text-ink/40 uppercase tracking-widest px-5 py-3">Location</th>
                   <th className="text-left font-sans text-[11px] text-ink/40 uppercase tracking-widest px-5 py-3">Phone</th>
-                  <th className="text-left font-sans text-[11px] text-ink/40 uppercase tracking-widest px-5 py-3">PriyaGPT</th>
                   <th className="text-left font-sans text-[11px] text-ink/40 uppercase tracking-widest px-5 py-3">Signed Up</th>
                   <th className="px-5 py-3 w-20" />
                 </tr>
@@ -88,6 +86,11 @@ export default async function AdminUsersPage({ searchParams }: Props) {
                       <Link href={`/admin/users/${user.id}`} className="text-ink hover:text-peach-dark transition-colors">
                         {user.name ?? "—"}
                       </Link>
+                      {user.blocked && (
+                        <span className="ml-2 px-1.5 py-0.5 rounded-full bg-red-100 text-red-700 text-[10px] font-sans font-semibold align-middle">
+                          Banned
+                        </span>
+                      )}
                     </td>
                     <td className="px-5 py-3.5 font-sans text-sm text-ink/70">{user.email}</td>
                     <td className="px-5 py-3.5 font-sans text-sm text-ink/70">
@@ -97,11 +100,6 @@ export default async function AdminUsersPage({ searchParams }: Props) {
                     </td>
                     <td className="px-5 py-3.5 font-sans text-sm text-ink/60">{user.location ?? "—"}</td>
                     <td className="px-5 py-3.5 font-sans text-sm text-ink/60">{user.phone ?? "—"}</td>
-                    <td className="px-5 py-3.5 font-sans text-sm">
-                      <Link href={`/admin/users/${user.id}?tab=priyagpt`} className="text-ink/70 hover:text-peach-dark transition-colors">
-                        {user.priyaGptMinutes != null ? `${user.priyaGptMinutes} min` : "—"}
-                      </Link>
-                    </td>
                     <td className="px-5 py-3.5 font-sans text-sm text-ink/50">
                       {user.createdAt
                         ? new Intl.DateTimeFormat("en-IN", {
@@ -111,7 +109,7 @@ export default async function AdminUsersPage({ searchParams }: Props) {
                         : "—"}
                     </td>
                     <td className="px-5 py-3.5">
-                      <UserRowActions id={user.id} name={user.name} email={user.email} />
+                      <UserRowActions id={user.id} name={user.name} email={user.email} blocked={user.blocked} />
                     </td>
                   </tr>
                 ))}

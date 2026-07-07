@@ -19,11 +19,14 @@ export async function GET() {
       expiresAt: priyaGptSessions.expiresAt,
       rating: priyaGptSessions.rating,
       messageCount: sql<number>`count(${priyaGptMessages.id})`,
+      blocked: users.priyaGptBlocked,
+      blockedReason: users.priyaGptBlockedReason,
+      blockedBy: users.priyaGptBlockedBy,
     })
     .from(priyaGptSessions)
     .leftJoin(users, eq(priyaGptSessions.userId, users.id))
     .leftJoin(priyaGptMessages, eq(priyaGptMessages.sessionId, priyaGptSessions.id))
-    .groupBy(priyaGptSessions.id, users.name, users.email, priyaGptSessions.rating)
+    .groupBy(priyaGptSessions.id, users.name, users.email, priyaGptSessions.rating, users.priyaGptBlocked, users.priyaGptBlockedReason, users.priyaGptBlockedBy)
     .orderBy(desc(priyaGptSessions.startedAt))
 
   return Response.json({
@@ -36,6 +39,9 @@ export async function GET() {
       expiresAt: r.expiresAt.toISOString(),
       rating: r.rating,
       messageCount: Number(r.messageCount),
+      blocked: r.blocked ?? false,
+      blockedReason: r.blockedReason,
+      blockedBy: r.blockedBy,
     })),
   })
 }

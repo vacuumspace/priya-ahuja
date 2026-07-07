@@ -1,6 +1,7 @@
 "use client"
 
 import { signIn } from "next-auth/react"
+import Link from "next/link"
 
 const GoogleIcon = () => (
   <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24" aria-hidden="true">
@@ -42,6 +43,11 @@ export default function SignInOptions({
         {googleLabel}
       </button>
 
+      <p className={`text-ink/35 font-sans ${compact ? "text-[10px]" : "text-[11px] text-center"}`}>
+        by signing in, you accept our{" "}
+        <Link href="/terms" className="underline hover:text-ink/60">terms</Link> and{" "}
+        <Link href="/privacy-policy" className="underline hover:text-ink/60">privacy policy</Link>
+      </p>
     </div>
   )
 }

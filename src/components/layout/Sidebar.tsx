@@ -127,7 +127,7 @@ export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEma
       </div>
 
       {/* Nav */}
-      <nav className={`flex-1 px-3 flex flex-col gap-1 overflow-y-auto scrollbar-none ${collapsed ? "hidden" : ""}`}>
+      <nav className={`flex-1 min-h-0 px-3 flex flex-col gap-1 overflow-y-auto scrollbar-none ${collapsed ? "hidden" : ""}`}>
         {topItems.map((item) => {
           const isActive = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href)
           return (

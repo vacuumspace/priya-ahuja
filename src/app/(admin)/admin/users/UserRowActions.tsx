@@ -2,19 +2,22 @@
 
 import { useState, useTransition } from "react"
 import { useRouter } from "next/navigation"
-import { Pencil, Trash2, X } from "lucide-react"
+import { Pencil, Trash2, X, ShieldBan, ShieldCheck } from "lucide-react"
 
 interface Props {
   id: string
   name: string | null
   email: string
+  blocked: boolean
 }
 
-export function UserRowActions({ id, name, email }: Props) {
+export function UserRowActions({ id, name, email, blocked }: Props) {
   const router = useRouter()
   const [isPending, startTransition] = useTransition()
   const [showDelete, setShowDelete] = useState(false)
   const [showEdit, setShowEdit] = useState(false)
+  const [showBan, setShowBan] = useState(false)
+  const [banning, setBanning] = useState(false)
   const [editName, setEditName] = useState(name ?? "")
   const [editEmail, setEditEmail] = useState(email)
   const [error, setError] = useState("")
@@ -27,6 +30,17 @@ export function UserRowActions({ id, name, email }: Props) {
     await fetch(`/api/admin/users/${id}`, { method: "DELETE" })
     setShowDelete(false)
     refresh()
+  }
+
+  async function handleBanToggle() {
+    setBanning(true)
+    try {
+      await fetch(`/api/admin/users/${id}/ban`, { method: blocked ? "DELETE" : "POST" })
+      setShowBan(false)
+      refresh()
+    } finally {
+      setBanning(false)
+    }
   }
 
   async function handleEdit(e: React.FormEvent) {
@@ -55,6 +69,13 @@ export function UserRowActions({ id, name, email }: Props) {
           title="Edit user"
         >
           <Pencil size={13} />
+        </button>
+        <button
+          onClick={() => setShowBan(true)}
+          className={`p-1 transition-colors ${blocked ? "text-red-500 hover:text-ink/60" : "text-ink/30 hover:text-red-500"}`}
+          title={blocked ? "Unban user" : "Ban user"}
+        >
+          {blocked ? <ShieldCheck size={13} /> : <ShieldBan size={13} />}
         </button>
         <button
           onClick={() => setShowDelete(true)}
@@ -91,6 +112,46 @@ export function UserRowActions({ id, name, email }: Props) {
                 className="px-4 py-2 font-sans text-sm bg-red-500 text-white rounded-xl hover:bg-red-600 disabled:opacity-50 transition-colors"
               >
                 Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Ban/unban confirmation modal */}
+      {showBan && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50" onClick={() => setShowBan(false)}>
+          <div className="bg-white dark:bg-card border border-border rounded-2xl p-6 max-w-sm w-full mx-4 shadow-xl" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-start justify-between mb-3">
+              <h2 className="font-heading text-lg font-700 text-ink">{blocked ? "Unban user?" : "Ban user?"}</h2>
+              <button onClick={() => setShowBan(false)} className="text-ink/40 hover:text-ink">
+                <X size={16} />
+              </button>
+            </div>
+            <p className="font-sans text-sm text-ink/60 mb-5">
+              {blocked ? (
+                <>
+                  <strong>{name ?? email}</strong> will be able to sign in again.
+                </>
+              ) : (
+                <>
+                  <strong>{name ?? email}</strong> will be signed out immediately and unable to sign in again, platform-wide (not just PriyaGPT).
+                </>
+              )}
+            </p>
+            <div className="flex gap-2 justify-end">
+              <button
+                onClick={() => setShowBan(false)}
+                className="px-4 py-2 font-sans text-sm border border-border rounded-xl text-ink/60 hover:bg-ink/5 transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleBanToggle}
+                disabled={banning}
+                className="px-4 py-2 font-sans text-sm bg-red-500 text-white rounded-xl hover:bg-red-600 disabled:opacity-50 transition-colors"
+              >
+                {blocked ? "Unban" : "Ban"}
               </button>
             </div>
           </div>

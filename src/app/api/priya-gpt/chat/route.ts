@@ -1,11 +1,17 @@
 import { NextRequest, NextResponse } from "next/server"
 import { auth } from "@/lib/auth"
 import { db } from "@/lib/db"
-import { priyaGptSessions, priyaGptMessages } from "@/lib/db/schema"
+import { priyaGptSessions, priyaGptMessages, users } from "@/lib/db/schema"
 import { eq, and, asc, desc, lt } from "drizzle-orm"
 import { sendChatMessage, type ChatMessage } from "@/lib/gemini"
+import { classifyMessage } from "@/lib/moderation"
 
 const PAGE_SIZE = 20
+const CONTACT_EMAIL = "hi@priyaahuja.in"
+
+function requestIp(req: NextRequest): string | null {
+  return req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? null
+}
 
 export async function GET(req: NextRequest) {
   const session = await auth()
@@ -55,6 +61,16 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Missing fields" }, { status: 400 })
   }
 
+  const [user] = await db.select().from(users).where(eq(users.id, session.user.id)).limit(1)
+  if (user?.priyaGptBlocked) {
+    return NextResponse.json({ error: "blocked", contactEmail: CONTACT_EMAIL }, { status: 403 })
+  }
+
+  const ip = requestIp(req)
+  if (ip) {
+    await db.update(users).set({ lastSeenIp: ip }).where(eq(users.id, session.user.id))
+  }
+
   const [gptSession] = await db
     .select()
     .from(priyaGptSessions)
@@ -79,6 +95,15 @@ export async function POST(req: NextRequest) {
   const chatHistory: ChatMessage[] = history.map((m) => ({ role: m.role as "user" | "assistant", content: m.content }))
 
   await db.insert(priyaGptMessages).values({ sessionId, role: "user", content: message })
+
+  const moderation = await classifyMessage(message)
+  if (moderation.flagged) {
+    await db
+      .update(users)
+      .set({ priyaGptBlocked: true, priyaGptBlockedReason: moderation.reason, priyaGptBlockedAt: new Date(), priyaGptBlockedBy: "auto" })
+      .where(eq(users.id, session.user.id))
+    return NextResponse.json({ error: "blocked", contactEmail: CONTACT_EMAIL }, { status: 403 })
+  }
 
   try {
     const reply = await sendChatMessage(chatHistory, message)

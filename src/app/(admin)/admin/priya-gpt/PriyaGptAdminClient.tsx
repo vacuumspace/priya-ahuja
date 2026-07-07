@@ -14,6 +14,9 @@ type SessionRow = {
   expiresAt: string
   rating: number | null
   messageCount: number
+  blocked: boolean
+  blockedReason: string | null
+  blockedBy: string | null
 }
 
 type Insights = {
@@ -90,6 +93,28 @@ function ChatsTab() {
       })
   }, [])
 
+  const [actingOnUserId, setActingOnUserId] = useState<string | null>(null)
+
+  async function blockUser(userId: string) {
+    setActingOnUserId(userId)
+    try {
+      await fetch(`/api/admin/priya-gpt/users/${userId}/block`, { method: "PATCH" })
+      setSessions((prev) => (prev ? prev.map((s) => (s.userId === userId ? { ...s, blocked: true, blockedReason: "Blocked by admin", blockedBy: "admin_block" } : s)) : prev))
+    } finally {
+      setActingOnUserId(null)
+    }
+  }
+
+  async function unblockUser(userId: string) {
+    setActingOnUserId(userId)
+    try {
+      await fetch(`/api/admin/priya-gpt/users/${userId}/unblock`, { method: "PATCH" })
+      setSessions((prev) => (prev ? prev.map((s) => (s.userId === userId ? { ...s, blocked: false, blockedReason: null, blockedBy: null } : s)) : prev))
+    } finally {
+      setActingOnUserId(null)
+    }
+  }
+
   function selectSession(id: string) {
     setSelectedId(id)
     setTranscript(null)
@@ -124,6 +149,7 @@ function ChatsTab() {
                   <th className="px-3 py-2 font-medium text-ink/60">Total time</th>
                   <th className="px-3 py-2 font-medium text-ink/60">Rating</th>
                   <th className="px-3 py-2 font-medium text-ink/60">Time</th>
+                  <th className="px-3 py-2 font-medium text-ink/60">Status</th>
                 </>
               )}
             </tr>
@@ -139,6 +165,9 @@ function ChatsTab() {
                 active={selectedId === s.id}
                 compact={compact}
                 onClick={() => selectSession(s.id)}
+                actingOnUserId={actingOnUserId}
+                onBlock={blockUser}
+                onUnblock={unblockUser}
               />
             ))}
           </tbody>
@@ -213,6 +242,9 @@ function FragmentRow({
   active,
   compact,
   onClick,
+  actingOnUserId,
+  onBlock,
+  onUnblock,
 }: {
   s: SessionRow
   index: number
@@ -221,6 +253,9 @@ function FragmentRow({
   active: boolean
   compact: boolean
   onClick: () => void
+  actingOnUserId: string | null
+  onBlock: (userId: string) => void
+  onUnblock: (userId: string) => void
 }) {
   if (compact) {
     return (
@@ -255,6 +290,26 @@ function FragmentRow({
         <StarRating rating={s.rating} />
       </td>
       <td className="px-3 py-2 text-ink/50 whitespace-nowrap">{fmtDateTime(s.startedAt)}</td>
+      <td className="px-3 py-2 whitespace-nowrap" onClick={(e) => e.stopPropagation()}>
+        {s.blocked ? (
+          <button
+            title={s.blockedReason ?? undefined}
+            onClick={() => onUnblock(s.userId)}
+            disabled={actingOnUserId === s.userId}
+            className="text-[11px] font-sans font-semibold text-red-600 cursor-pointer disabled:opacity-50 disabled:cursor-default"
+          >
+            unblock
+          </button>
+        ) : (
+          <button
+            onClick={() => onBlock(s.userId)}
+            disabled={actingOnUserId === s.userId}
+            className="text-[11px] font-sans font-semibold text-ink/40 hover:text-red-600 cursor-pointer disabled:opacity-50 disabled:cursor-default"
+          >
+            block
+          </button>
+        )}
+      </td>
     </tr>
   )
 }

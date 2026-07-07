@@ -49,6 +49,7 @@ export type StartupGrant = {
   _source?: string
   _live?: boolean
   _news?: boolean
+  _linkNeedsReview?: boolean
 }
 
 export const grants: StartupGrant[] = grantsJson.grants as StartupGrant[]

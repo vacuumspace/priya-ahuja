@@ -43,7 +43,7 @@
         "Recognition and media visibility through NITI Aayog network"
       ],
       "howToApply": "Monitor the AIM portal for active challenge themes. Applications are online through the AIM website. Shortlisted teams go through a technical evaluation and pitch. Selected startups sign a grant agreement and milestones are defined upfront.",
-      "applyUrl": "https://aim.gov.in/atal-new-india-challenges.php",
+      "applyUrl": "https://aim.gov.in/atal-new-india-challenge-2.0.php",
       "featured": true,
       "_source": "curated"
     },
@@ -111,7 +111,7 @@
         "Pathway to NIDHI incubation and larger DST funding programs"
       ],
       "howToApply": "Find a NIDHI-PRAYAS centre near you on the DST/NIDHI portal. Apply directly to the centre with your innovation concept. Centers have quarterly selection cycles.",
-      "applyUrl": "https://nidhi.dst.gov.in/prayas.php",
+      "applyUrl": "https://nidhi.dst.gov.in/prayas2-0/",
       "_source": "curated"
     },
     {
@@ -133,8 +133,9 @@
         "Mentorship from 200+ empanelled industry mentors"
       ],
       "howToApply": "Browse TIDE 2.0 partner incubators on the MeitY website and apply to the most relevant one for your domain. After incubation selection, the incubator nominates you for grant funding.",
-      "applyUrl": "https://www.tide20.in/",
-      "_source": "curated"
+      "applyUrl": "https://www.meity.gov.in/",
+      "_source": "curated",
+      "_linkNeedsReview": true
     },
     {
       "slug": "meity-samridh",
@@ -155,8 +156,9 @@
         "Demo Day with 100+ investors including Tier 1 VCs"
       ],
       "howToApply": "Apply through one of the 8 SAMRIDH partner accelerators (iCreate, T-Hub, NSRCEL, etc.). After selection by the partner accelerator, you go through a panel review by MeitY for grant approval.",
-      "applyUrl": "https://samridh.meity.gov.in/",
-      "_source": "curated"
+      "applyUrl": "https://www.meity.gov.in/",
+      "_source": "curated",
+      "_linkNeedsReview": true
     },
     {
       "slug": "kerala-startup-mission-seed-fund",
@@ -176,7 +178,7 @@
         "Introductions to Kerala-based angel investors and the Kerala angel network"
       ],
       "howToApply": "Apply online through the KSUM portal. The seed fund application requires a product demo, financial projections, and team details. Selection panels meet quarterly.",
-      "applyUrl": "https://startupmission.kerala.gov.in/startup-funds",
+      "applyUrl": "https://startupmission.kerala.gov.in/schemes/early-stage-funding",
       "_source": "curated"
     },
     {
@@ -199,8 +201,9 @@
         "Demo Day access to 150+ investors"
       ],
       "howToApply": "Apply through the T-Hub website during the Lab32 application window (typically Jan-Feb). Application includes product demo video, pitch deck, and team profile. Shortlisted teams go through 2 rounds of interviews.",
-      "applyUrl": "https://t-hub.co/programs/lab32/",
-      "_source": "curated"
+      "applyUrl": "https://t-hub.co/",
+      "_source": "curated",
+      "_linkNeedsReview": true
     },
     {
       "slug": "nasscom-10000-startups",
@@ -221,8 +224,9 @@
         "Investor introductions to 200+ VCs and angels in NASSCOM's ecosystem"
       ],
       "howToApply": "Apply online at 10000startups.com. Rolling applications, no fixed window. Application takes 15 minutes. Selected companies get an interview call within 2-4 weeks.",
-      "applyUrl": "https://10000startups.com/apply",
-      "_source": "curated"
+      "applyUrl": "https://nasscom.in/",
+      "_source": "curated",
+      "_linkNeedsReview": true
     },
     {
       "slug": "agri-challenge-aim",
@@ -243,7 +247,7 @@
         "Mentorship from agricultural scientists, domain experts, and farmer organisations"
       ],
       "howToApply": "Apply when an Agriculture challenge theme is live on the AIM portal. The application requires a detailed solution write-up, pilot data, and an impact framework.",
-      "applyUrl": "https://aim.gov.in/atal-new-india-challenges.php",
+      "applyUrl": "https://aim.gov.in/atal-new-india-challenge-2.0.php",
       "_source": "curated"
     },
     {
@@ -327,8 +331,9 @@
         "Access to SIDBI's marketplace for women entrepreneurs"
       ],
       "howToApply": "Approach SIDBI's nearest regional office or apply through a partner bank (UCO Bank, Bank of Baroda, etc.). Bring incorporation documents, audited financials (if available), business plan, and ownership proof. Processing typically takes 4-8 weeks.",
-      "applyUrl": "https://www.sidbi.in/en/products/wee-fund",
-      "_source": "curated"
+      "applyUrl": "https://www.sidbi.in/",
+      "_source": "curated",
+      "_linkNeedsReview": true
     },
     {
       "slug": "goldman-sachs-10000-women",
@@ -417,9 +422,10 @@
         "Mentorship from industry experts during the competition"
       ],
       "howToApply": "Register on the YUKTI portal during the annual open window. Submit your innovation idea, team details, and faculty mentor information. Shortlisted teams present at regional and national levels.",
-      "applyUrl": "https://yukti.aicte-india.org/",
+      "applyUrl": "https://www.aicte.gov.in/",
       "featured": true,
-      "_source": "curated"
+      "_source": "curated",
+      "_linkNeedsReview": true
     },
     {
       "slug": "smart-india-hackathon",
@@ -463,8 +469,9 @@
         "Platform visibility on Startup India national network"
       ],
       "howToApply": "Apply through the Startup India portal during the annual Campus Challenge window. Requires startup details, founder enrollment proof, and a pitch deck.",
-      "applyUrl": "https://www.startupindia.gov.in/content/sih/en/campus_challenge.html",
-      "_source": "curated"
+      "applyUrl": "https://www.startupindia.gov.in/",
+      "_source": "curated",
+      "_linkNeedsReview": true
     },
     {
       "slug": "dst-prism",
@@ -485,8 +492,9 @@
         "Recognition from DST which helps with follow-on funding applications"
       ],
       "howToApply": "Submit an application on the DST PRISM portal with your innovation description, prototype plan, and impact potential. Applications are reviewed on a rolling basis by a DST expert panel.",
-      "applyUrl": "https://prism.dst.gov.in/",
-      "_source": "curated"
+      "applyUrl": "https://dst.gov.in/",
+      "_source": "curated",
+      "_linkNeedsReview": true
     },
     {
       "slug": "iit-incubator-student-grants",
