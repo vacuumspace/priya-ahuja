@@ -134,6 +134,7 @@ function BookingRow({
   const [nextStepsText, setNextStepsText] = useState("")
   const [notesSending, setNotesSending] = useState(false)
   const [notesSent, setNotesSent] = useState(false)
+  const [feedbackExpanded, setFeedbackExpanded] = useState(false)
 
   const save = async (patch: Partial<Booking>) => {
     await fetch(`/api/admin/bookings/${booking.id}`, {
@@ -249,9 +250,23 @@ function BookingRow({
                 <span className="text-[11px] font-sans text-ink/60 ml-1">{booking.feedbackRating}/5</span>
               </div>
               {booking.feedbackText && (
-                <p className="text-[11px] font-sans text-ink/60 max-w-[160px] leading-relaxed line-clamp-3">
-                  {booking.feedbackText}
-                </p>
+                <button
+                  type="button"
+                  onClick={() => setFeedbackExpanded((v) => !v)}
+                  className="block text-left"
+                  title={feedbackExpanded ? "Click to collapse" : "Click to see full feedback"}
+                >
+                  <p
+                    className={`text-[11px] font-sans text-ink/60 max-w-[160px] leading-relaxed ${
+                      feedbackExpanded ? "" : "line-clamp-3"
+                    }`}
+                  >
+                    {booking.feedbackText}
+                  </p>
+                  {!feedbackExpanded && (
+                    <span className="text-[10px] font-sans text-peach-dark hover:underline">Show more</span>
+                  )}
+                </button>
               )}
             </div>
           ) : (
