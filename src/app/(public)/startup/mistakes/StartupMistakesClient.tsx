@@ -37,6 +37,18 @@ export default function StartupMistakesClient({ mistakes, isAuthenticated }: Pro
     })
   }, [mistakes, industryFilter, topicFilter])
 
+  const industryCounts = useMemo(() => {
+    const counts: Record<string, number> = {}
+    for (const m of mistakes) counts[m.industry] = (counts[m.industry] || 0) + 1
+    return counts
+  }, [mistakes])
+
+  const topicCounts = useMemo(() => {
+    const counts: Record<string, number> = {}
+    for (const m of mistakes) counts[m.topic] = (counts[m.topic] || 0) + 1
+    return counts
+  }, [mistakes])
+
   const pageCount = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE))
   const currentPage = Math.min(page, pageCount)
   const paginated = filtered.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE)
@@ -62,9 +74,9 @@ export default function StartupMistakesClient({ mistakes, isAuthenticated }: Pro
         <div>
           <p className="font-sans text-xs text-ink/40 uppercase tracking-wide mb-2">Startup</p>
           <h1 className="font-heading text-3xl md:text-5xl font-800 text-ink mb-4">
-            mistakes founders
+            real mistakes made
             <br />
-            actually made
+            & shared by founders
           </h1>
           <p className="font-sans text-sm text-ink/60 max-w-md leading-relaxed">
             real mistakes, shared by real founders: fundraising, product, co-founder splits, validation, and more. every post is reviewed before it goes live.
@@ -81,27 +93,33 @@ export default function StartupMistakesClient({ mistakes, isAuthenticated }: Pro
       </div>
 
       {/* Filters */}
-      <div className="px-4 md:px-10 pb-6 flex flex-wrap gap-3">
-        <select
-          value={industryFilter}
-          onChange={(e) => updateIndustryFilter(e.target.value)}
-          className="text-xs font-sans bg-card border border-border rounded-lg px-3 py-2 text-ink focus:outline-none"
-        >
-          <option value="all">all industries</option>
-          {MISTAKE_INDUSTRIES.map((i) => (
-            <option key={i} value={i}>{i}</option>
-          ))}
-        </select>
-        <select
-          value={topicFilter}
-          onChange={(e) => updateTopicFilter(e.target.value)}
-          className="text-xs font-sans bg-card border border-border rounded-lg px-3 py-2 text-ink focus:outline-none"
-        >
-          <option value="all">all topics</option>
-          {MISTAKE_TOPICS.map((t) => (
-            <option key={t} value={t}>{t}</option>
-          ))}
-        </select>
+      <div className="px-4 md:px-10 pb-6 flex flex-wrap items-center justify-between gap-3">
+        <div className="flex flex-wrap gap-3">
+          <select
+            value={industryFilter}
+            onChange={(e) => updateIndustryFilter(e.target.value)}
+            className="text-xs font-sans bg-card border border-border rounded-lg px-3 py-2 text-ink focus:outline-none"
+          >
+            <option value="all">all industries ({mistakes.length})</option>
+            {MISTAKE_INDUSTRIES.map((i) => (
+              <option key={i} value={i}>{i} ({industryCounts[i] || 0})</option>
+            ))}
+          </select>
+          <select
+            value={topicFilter}
+            onChange={(e) => updateTopicFilter(e.target.value)}
+            className="text-xs font-sans bg-card border border-border rounded-lg px-3 py-2 text-ink focus:outline-none"
+          >
+            <option value="all">all topics ({mistakes.length})</option>
+            {MISTAKE_TOPICS.map((t) => (
+              <option key={t} value={t}>{t} ({topicCounts[t] || 0})</option>
+            ))}
+          </select>
+        </div>
+
+        {pageCount > 1 && (
+          <Pager currentPage={currentPage} pageCount={pageCount} setPage={setPage} className="w-auto gap-4" />
+        )}
       </div>
 
       <div className="px-4 md:px-10 pb-16">
@@ -109,10 +127,6 @@ export default function StartupMistakesClient({ mistakes, isAuthenticated }: Pro
           <p className="font-sans text-sm text-ink/40">no mistakes shared here yet, be the first.</p>
         ) : (
           <>
-            {pageCount > 1 && (
-              <Pager currentPage={currentPage} pageCount={pageCount} setPage={setPage} className="pb-4" />
-            )}
-
             <div className="divide-y divide-border">
               {paginated.map((m) => (
                 <div key={m.id} className="py-5 first:pt-0">
@@ -129,7 +143,7 @@ export default function StartupMistakesClient({ mistakes, isAuthenticated }: Pro
             </div>
 
             {pageCount > 1 && (
-              <Pager currentPage={currentPage} pageCount={pageCount} setPage={setPage} className="pt-6" />
+              <Pager currentPage={currentPage} pageCount={pageCount} setPage={setPage} className="justify-center pt-6" />
             )}
           </>
         )}
@@ -182,25 +196,25 @@ function Pager({
   className?: string
 }) {
   return (
-    <div className={`flex items-center justify-between ${className}`}>
+    <div className={`flex items-center gap-2 ${className}`}>
       <button
         onClick={() => { setPage((p) => Math.max(1, p - 1)); window.scrollTo({ top: 0, behavior: "smooth" }) }}
         disabled={currentPage === 1}
-        className="inline-flex items-center gap-1 text-xs font-sans text-ink/60 hover:text-ink disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+        className="inline-flex items-center text-ink/40 hover:text-ink disabled:opacity-20 disabled:cursor-not-allowed transition-colors"
+        aria-label="previous page"
       >
-        <ChevronLeft size={14} />
-        prev
+        <ChevronLeft size={18} />
       </button>
-      <span className="text-xs font-sans text-ink/40">
-        page {currentPage} of {pageCount}
+      <span className="text-xs font-sans text-ink/30">
+        {currentPage}/{pageCount}
       </span>
       <button
         onClick={() => { setPage((p) => Math.min(pageCount, p + 1)); window.scrollTo({ top: 0, behavior: "smooth" }) }}
         disabled={currentPage === pageCount}
-        className="inline-flex items-center gap-1 text-xs font-sans text-ink/60 hover:text-ink disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+        className="inline-flex items-center text-ink/40 hover:text-ink disabled:opacity-20 disabled:cursor-not-allowed transition-colors"
+        aria-label="next page"
       >
-        next
-        <ChevronRight size={14} />
+        <ChevronRight size={18} />
       </button>
     </div>
   )
