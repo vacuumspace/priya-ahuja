@@ -34,12 +34,12 @@ const CONFIG: ListConfig = {
 }
 
 export const metadata: Metadata = {
-  title: "Family Office Investor List India — Contacts & LinkedIn",
+  title: "Family Office Investor List India - Contacts & LinkedIn",
   description: "160 family offices actively investing in Indian startups, with 722 individual contacts including family principals, CIOs, and investment managers.",
   keywords: ["family office investors India", "family office contact list", "family office India startups"],
   alternates: { canonical: "https://priyaahuja.in/fundraise/investor-list/family-offices" },
   openGraph: {
-    title: "Family Office Investor List India — Contacts & LinkedIn | Priya Ahuja",
+    title: "Family Office Investor List India - Contacts & LinkedIn | Priya Ahuja",
     description: "160 family offices actively investing in Indian startups, with 722 individual decision-maker contacts.",
     url: "https://priyaahuja.in/fundraise/investor-list/family-offices",
   },

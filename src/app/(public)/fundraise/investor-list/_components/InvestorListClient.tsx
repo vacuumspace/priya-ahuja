@@ -261,7 +261,7 @@ export default function InvestorListClient({
         )}
       </div>
 
-      {/* Description block — shown only when not paid */}
+      {/* Description block - shown only when not paid */}
       {!paid && config.description && config.description.length > 0 && (
         <div className="px-4 md:px-10 pb-8">
           <div className="bg-card border border-border rounded-xl px-5 py-4 space-y-2">
@@ -381,7 +381,7 @@ export default function InvestorListClient({
                         <a href={firm.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs font-sans text-peach-dark hover:underline">
                           view <ExternalLink size={10} />
                         </a>
-                      ) : paid ? <span className="text-ink/20 text-xs">—</span> : (
+                      ) : paid ? <span className="text-ink/20 text-xs"> - </span> : (
                         <span className="select-none blur-sm text-xs font-sans text-ink/60 pointer-events-none">view</span>
                       )}
                     </div>
@@ -396,7 +396,7 @@ export default function InvestorListClient({
                           <span className="font-sans text-xs text-ink/70 break-all">{firm.emails.join(", ")}</span>
                           <CopyButton text={firm.emails.join(", ")} />
                         </div>
-                      ) : <span className="text-ink/20 text-xs">—</span>
+                      ) : <span className="text-ink/20 text-xs"> - </span>
                     ) : (
                       <span className="select-none blur-sm text-xs font-sans text-ink/60 pointer-events-none">email@example.com</span>
                     )}
@@ -417,7 +417,7 @@ export default function InvestorListClient({
             page={firmsPage} pageCount={firmsPageCount} total={firmsTotalCount}
             paid={paid} freePages={config.freePages} loading={firmsLoading}
             label={config.firmsLabel}
-            onPage={p => fetchFirms(p, firmsSearch)}
+            onPage={p => { fetchFirms(p, firmsSearch); window.scrollTo({ top: 0, behavior: "smooth" }) }}
             onUnpaidClick={() => setShowSignIn(true)}
           />
         </>
@@ -506,7 +506,7 @@ export default function InvestorListClient({
             page={teamPage} pageCount={teamPageCount} total={teamTotalCount}
             paid={paid} freePages={config.freePages} loading={teamLoading}
             label="contacts"
-            onPage={p => fetchTeam(p, teamSearch)}
+            onPage={p => { fetchTeam(p, teamSearch); window.scrollTo({ top: 0, behavior: "smooth" }) }}
             onUnpaidClick={() => setShowSignIn(true)}
           />
         </>
@@ -606,7 +606,7 @@ function FirmsTable({ firms, paid, loading, config, totalCount, linkedinCount, e
               {firm.overview && <p className="text-[11px] text-ink/40 truncate mt-0.5" title={firm.overview}>{firm.overview}</p>}
             </td>
             <td className="py-3 pr-3 text-ink/60 hidden md:table-cell">
-              <span className="truncate block" title={firm.country}>{firm.country || "—"}</span>
+              <span className="truncate block" title={firm.country}>{firm.country || " - "}</span>
             </td>
             {showWebsite && (
               <td className="py-3 pr-3 hidden lg:table-cell">
@@ -614,7 +614,7 @@ function FirmsTable({ firms, paid, loading, config, totalCount, linkedinCount, e
                   <a href={firm.website} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-peach-dark hover:underline">
                     visit <ExternalLink size={10} />
                   </a>
-                ) : <span className="text-ink/20">—</span>}
+                ) : <span className="text-ink/20"> - </span>}
               </td>
             )}
             <td className="py-3 pr-3">
@@ -623,7 +623,7 @@ function FirmsTable({ firms, paid, loading, config, totalCount, linkedinCount, e
                   <a href={firm.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-peach-dark hover:underline">
                     view <ExternalLink size={10} />
                   </a>
-                ) : <span className="text-ink/20">—</span>
+                ) : <span className="text-ink/20"> - </span>
               ) : (
                 <span className="select-none blur-sm text-ink/60 pointer-events-none">view</span>
               )}
@@ -635,7 +635,7 @@ function FirmsTable({ firms, paid, loading, config, totalCount, linkedinCount, e
                     <span className="text-ink/70 truncate" title={firm.emails.join(", ")}>{firm.emails[0]}{firm.emails.length > 1 ? ` +${firm.emails.length - 1}` : ""}</span>
                     <CopyButton text={firm.emails.join(", ")} />
                   </div>
-                ) : <span className="text-ink/20">—</span>
+                ) : <span className="text-ink/20"> - </span>
               ) : (
                 <span className="select-none blur-sm text-ink/60 pointer-events-none">email@example.com</span>
               )}
@@ -686,16 +686,16 @@ function TeamTable({ team, paid, loading, totalCount, linkedinCount, emailCount 
           <tr key={member.id} className="border-b border-border/50 hover:bg-ink/[0.02] transition-colors">
             <td className="py-3 pr-3 text-ink/30">{member.sno}</td>
             <td className="py-3 pr-3"><span className="text-ink font-medium truncate block" title={member.teamMember}>{member.teamMember}</span></td>
-            <td className="py-3 pr-3"><span className="text-ink/60 truncate block" title={member.investorName}>{member.investorName || "—"}</span></td>
-            <td className="py-3 pr-3 hidden md:table-cell"><span className="text-ink/60 truncate block" title={member.designation}>{member.designation || "—"}</span></td>
-            <td className="py-3 pr-3 hidden lg:table-cell"><span className="text-ink/50 truncate block" title={member.location}>{member.location || "—"}</span></td>
+            <td className="py-3 pr-3"><span className="text-ink/60 truncate block" title={member.investorName}>{member.investorName || " - "}</span></td>
+            <td className="py-3 pr-3 hidden md:table-cell"><span className="text-ink/60 truncate block" title={member.designation}>{member.designation || " - "}</span></td>
+            <td className="py-3 pr-3 hidden lg:table-cell"><span className="text-ink/50 truncate block" title={member.location}>{member.location || " - "}</span></td>
             <td className="py-3 pr-3">
               {paid ? (
                 member.linkedin ? (
                   <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-peach-dark hover:underline">
                     view <ExternalLink size={10} />
                   </a>
-                ) : <span className="text-ink/20">—</span>
+                ) : <span className="text-ink/20"> - </span>
               ) : (
                 <span className="select-none blur-sm text-ink/60 pointer-events-none">view</span>
               )}
@@ -707,7 +707,7 @@ function TeamTable({ team, paid, loading, totalCount, linkedinCount, emailCount 
                     <span className="text-ink/70 truncate" title={member.emails.join(", ")}>{member.emails[0]}{member.emails.length > 1 ? ` +${member.emails.length - 1}` : ""}</span>
                     <CopyButton text={member.emails.join(", ")} />
                   </div>
-                ) : <span className="text-ink/20">—</span>
+                ) : <span className="text-ink/20"> - </span>
               ) : (
                 <span className="select-none blur-sm text-ink/60 pointer-events-none">email@example.com</span>
               )}

@@ -58,7 +58,7 @@ function RequestRow({ request, onUpdate }: { request: CustomRequest; onUpdate: (
         <td className="py-3 px-4">
           <p className="text-xs font-sans text-ink/70 line-clamp-2 max-w-xs">{request.message}</p>
         </td>
-        <td className="py-3 px-4 text-[11px] font-sans text-ink/40">{request.source ?? "—"}</td>
+        <td className="py-3 px-4 text-[11px] font-sans text-ink/40">{request.source ?? " - "}</td>
         <td className="py-3 px-4" onClick={(e) => e.stopPropagation()}>
           <select
             value={status}

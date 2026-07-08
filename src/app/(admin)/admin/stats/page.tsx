@@ -91,7 +91,7 @@ function PageViewsTable() {
   useEffect(() => { load(page) }, [page, load])
 
   if (!loading && total === 0) {
-    return <p className="text-sm text-ink/40">No page view data yet — visits will appear here once users browse the site.</p>
+    return <p className="text-sm text-ink/40">No page view data yet - visits will appear here once users browse the site.</p>
   }
 
   return (
@@ -99,9 +99,9 @@ function PageViewsTable() {
       <div className="flex items-center justify-between mb-3">
         <p className="text-sm text-ink/50">{total} pages tracked</p>
         <div className="flex items-center gap-2 text-sm">
-          <button onClick={() => setPage((p) => Math.max(1, p - 1))} disabled={page === 1} className="p-1 rounded hover:bg-peach-dark/20 disabled:opacity-30"><ChevronLeft size={16} /></button>
+          <button onClick={() => { setPage((p) => Math.max(1, p - 1)); window.scrollTo({ top: 0, behavior: "smooth" }) }} disabled={page === 1} className="p-1 rounded hover:bg-peach-dark/20 disabled:opacity-30"><ChevronLeft size={16} /></button>
           <span className="text-ink/60">{page} / {pageCount}</span>
-          <button onClick={() => setPage((p) => Math.min(pageCount, p + 1))} disabled={page === pageCount} className="p-1 rounded hover:bg-peach-dark/20 disabled:opacity-30"><ChevronRight size={16} /></button>
+          <button onClick={() => { setPage((p) => Math.min(pageCount, p + 1)); window.scrollTo({ top: 0, behavior: "smooth" }) }} disabled={page === pageCount} className="p-1 rounded hover:bg-peach-dark/20 disabled:opacity-30"><ChevronRight size={16} /></button>
         </div>
       </div>
 
@@ -123,7 +123,7 @@ function PageViewsTable() {
                 <td className="px-4 py-2.5 text-right font-medium text-ink">{r.views.toLocaleString("en-IN")}</td>
                 <td className="px-4 py-2.5 text-right">
                   {r.ctaClicks === null
-                    ? <span className="text-ink/30">—</span>
+                    ? <span className="text-ink/30"> - </span>
                     : <span className="font-medium text-ink">{r.ctaClicks}</span>
                   }
                 </td>
@@ -137,8 +137,8 @@ function PageViewsTable() {
         <div className="flex items-center justify-between mt-3 text-sm text-ink/50">
           <span>Showing {(page - 1) * 10 + 1}–{Math.min(page * 10, total)} of {total}</span>
           <div className="flex items-center gap-2">
-            <button onClick={() => setPage((p) => Math.max(1, p - 1))} disabled={page === 1} className="px-3 py-1.5 rounded-lg border border-peach-dark/20 hover:bg-peach-dark/10 disabled:opacity-30">Previous</button>
-            <button onClick={() => setPage((p) => Math.min(pageCount, p + 1))} disabled={page === pageCount} className="px-3 py-1.5 rounded-lg border border-peach-dark/20 hover:bg-peach-dark/10 disabled:opacity-30">Next</button>
+            <button onClick={() => { setPage((p) => Math.max(1, p - 1)); window.scrollTo({ top: 0, behavior: "smooth" }) }} disabled={page === 1} className="px-3 py-1.5 rounded-lg border border-peach-dark/20 hover:bg-peach-dark/10 disabled:opacity-30">Previous</button>
+            <button onClick={() => { setPage((p) => Math.min(pageCount, p + 1)); window.scrollTo({ top: 0, behavior: "smooth" }) }} disabled={page === pageCount} className="px-3 py-1.5 rounded-lg border border-peach-dark/20 hover:bg-peach-dark/10 disabled:opacity-30">Next</button>
           </div>
         </div>
       )}
@@ -195,7 +195,7 @@ export default function StatsPage() {
       <div className="mb-8">
         <h2 className="font-sans text-xs font-semibold text-ink/40 uppercase tracking-widest mb-3">CTA Conversion Rates</h2>
         {data.conversions.every((c) => c.clicks === 0) ? (
-          <p className="text-sm text-ink/40">No CTA click data yet — rates will populate once users interact with the site.</p>
+          <p className="text-sm text-ink/40">No CTA click data yet - rates will populate once users interact with the site.</p>
         ) : (
           <div className="rounded-xl border border-peach-dark/20 overflow-hidden">
             <table className="w-full text-sm">

@@ -6,13 +6,13 @@ import { posts, STARTUP_SERIES_NAME } from "@/lib/blog-data"
 import { CategoryTabs } from "./CategoryTabs"
 
 export const metadata: Metadata = {
-  title: "Startup Blog — Building Smart in India",
-  description: "Startup building advice for Indian founders — from idea validation to hiring, unit economics, go-to-market, and what investors actually look for in early-stage decks.",
+  title: "Startup Blog - Building Smart in India",
+  description: "Startup building advice for Indian founders - from idea validation to hiring, unit economics, go-to-market, and what investors actually look for in early-stage decks.",
   keywords: ["startup blog India", "startup building advice", "idea validation India", "founder advice India", "early stage startup India"],
   alternates: { canonical: "https://priyaahuja.in/startup/blog" },
   openGraph: {
-    title: "Startup Blog — Building Smart in India | Priya Ahuja",
-    description: "Startup building advice for Indian founders — from idea validation to hiring, unit economics, and go-to-market.",
+    title: "Startup Blog - Building Smart in India | Priya Ahuja",
+    description: "Startup building advice for Indian founders - from idea validation to hiring, unit economics, and go-to-market.",
     url: "https://priyaahuja.in/startup/blog",
   },
 }
@@ -44,7 +44,7 @@ export default async function StartupBlogPage({ searchParams }: Props) {
           zero to one
         </h1>
         <p className="font-sans text-sm text-ink/60 max-w-md leading-relaxed">
-          honest writing on the hard parts of starting up — co-founders, product, hiring, and finding your footing.
+          honest writing on the hard parts of starting up - co-founders, product, hiring, and finding your footing.
         </p>
       </div>
 
@@ -56,7 +56,7 @@ export default async function StartupBlogPage({ searchParams }: Props) {
               <div>
                 <p className="font-sans text-[12px] text-ink/40 uppercase tracking-wide mb-0.5">Featured Series</p>
                 <p className="font-heading text-lg font-700 text-ink">{STARTUP_SERIES_NAME}</p>
-                <p className="font-sans text-xs text-ink/60 mt-0.5">11-part guide from idea to funding — read in order or jump in anywhere.</p>
+                <p className="font-sans text-xs text-ink/60 mt-0.5">11-part guide from idea to funding - read in order or jump in anywhere.</p>
               </div>
               <span className="font-sans text-[12px] text-ink/40 bg-cream/60 px-2 py-1 rounded">
                 {seriesPosts.length} parts

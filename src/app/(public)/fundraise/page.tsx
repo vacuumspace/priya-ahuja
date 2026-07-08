@@ -4,12 +4,12 @@ import { Users, FileText, Wrench, BookOpen, Database, Award } from "lucide-react
 
 export const metadata: Metadata = {
   title: "Fundraise Resources for Indian Startups",
-  description: "Tools, data, and direct access to help Indian founders raise — fundability score, investor lists, grant programs, templates, and 1-on-1 fundraise sessions with Priya Ahuja.",
+  description: "Tools, data, and direct access to help Indian founders raise - fundability score, investor lists, grant programs, templates, and 1-on-1 fundraise sessions with Priya Ahuja.",
   keywords: ["fundraising resources India", "investor list India", "startup fundability score", "fundraise grants India", "pitch prep India", "pre-seed fundraising"],
   alternates: { canonical: "https://priyaahuja.in/fundraise" },
   openGraph: {
     title: "Fundraise Resources for Indian Startups | Priya Ahuja",
-    description: "Tools, data, and direct access to help Indian founders raise — fundability score, investor lists, grant programs, templates, and 1-on-1 sessions.",
+    description: "Tools, data, and direct access to help Indian founders raise - fundability score, investor lists, grant programs, templates, and 1-on-1 sessions.",
     url: "https://priyaahuja.in/fundraise",
   },
 }
@@ -18,7 +18,7 @@ const sections = [
   {
     slug: "fundability-score",
     title: "Startup Fundability Score",
-    description: "50 questions across 9 investor criteria — market size, traction signals, team strength, business model, defensibility, and more. Get a 0–100 score with a full breakdown and a prioritised fix list before you walk into any room.",
+    description: "50 questions across 9 investor criteria - market size, traction signals, team strength, business model, defensibility, and more. Get a 0–100 score with a full breakdown and a prioritised fix list before you walk into any room.",
     tag: "tool",
     icon: Wrench,
     badge: "free quiz · ₹499 unlock",
@@ -28,7 +28,7 @@ const sections = [
     slug: "angel-investors",
     title: "Investor List",
     star: true,
-    description: "Curated investor contact lists for founders actively fundraising — angel investors, early stage VCs, family offices, and incubators. Buy once, access forever.",
+    description: "Curated investor contact lists for founders actively fundraising - angel investors, early stage VCs, family offices, and incubators. Buy once, access forever.",
     tag: "data",
     icon: Database,
     badge: "4 lists · from ₹999",
@@ -37,7 +37,7 @@ const sections = [
   {
     slug: "grants",
     title: "Grant Resources",
-    description: "DPIIT, Startup India, AIM, BIRAC, state schemes, accelerators, and international programs — curated and filtered by sector. Sign in to see eligibility and apply links.",
+    description: "DPIIT, Startup India, AIM, BIRAC, state schemes, accelerators, and international programs - curated and filtered by sector. Sign in to see eligibility and apply links.",
     tag: "grants",
     icon: Award,
     badge: "free · sign in for details",
@@ -46,7 +46,7 @@ const sections = [
   {
     slug: "templates",
     title: "Fundraise Templates",
-    description: "Pitch deck structures, investor outreach templates, term sheet explainers, and due diligence checklists — built from real fundraising conversations, not generic startup advice.",
+    description: "Pitch deck structures, investor outreach templates, term sheet explainers, and due diligence checklists - built from real fundraising conversations, not generic startup advice.",
     tag: "downloads",
     icon: FileText,
     badge: "templates",
@@ -95,7 +95,7 @@ export default function FundraiseHubPage() {
           raise with clarity.
         </h1>
         <p className="font-sans text-base text-ink/60 max-w-md leading-relaxed">
-          tools, data, and direct access to help you understand what investors want — and walk in prepared.
+          tools, data, and direct access to help you understand what investors want - and walk in prepared.
         </p>
       </div>
 

@@ -32,6 +32,7 @@ const topicGroups = [
       { label: "tools", href: "/startup/tools" },
       { label: "templates", href: "/startup/templates" },
       { label: "100 startup ideas", href: "/startup/ideas" },
+      { label: "mistakes", href: "/startup/mistakes" },
       { label: "resources & credits", href: "/startup/resources" },
     ],
   },
@@ -42,8 +43,16 @@ const topicGroups = [
       { label: "blog", href: "/fundraise/blog" },
       { label: "tools", href: "/fundraise/tools" },
       { label: "templates", href: "/fundraise/templates" },
-      { label: "investor list", href: "/fundraise/investor-list", subItems: INVESTOR_LIST_ITEMS, star: true },
+      { label: "investor list", href: "/fundraise/investor-list", star: true },
       { label: "grants", href: "/fundraise/grants" },
+    ],
+  },
+  {
+    label: "wellbeing",
+    prefix: "/wellbeing",
+    children: [
+      { label: "blog", href: "/wellbeing/blog" },
+      { label: "tools", href: "/wellbeing/tools" },
     ],
   },
   {
@@ -72,6 +81,7 @@ export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEma
   const [open, setOpen] = useState<string | null>(() => {
     if (pathname.startsWith("/startup")) return "startup"
     if (pathname.startsWith("/fundraise")) return "fundraise"
+    if (pathname.startsWith("/wellbeing")) return "wellbeing"
     if (pathname.startsWith("/services")) return "services"
     return null
   })
@@ -288,7 +298,7 @@ export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEma
             </>
           )}
 
-          {/* Profile card — drop-up */}
+          {/* Profile card - drop-up */}
           <div className="rounded-xl bg-peach-dark/10 overflow-hidden flex flex-col-reverse mt-1">
             {/* Trigger */}
             {isSignedIn ? (
@@ -298,7 +308,7 @@ export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEma
               >
                 <div className="flex flex-col gap-0.5 min-w-0 text-left">
                   <div className="flex items-center gap-1.5">
-                    <span className="text-[11px] font-sans font-semibold text-ink leading-tight truncate">{userName ?? "—"}</span>
+                    <span className="text-[11px] font-sans font-semibold text-ink leading-tight truncate">{userName ?? " - "}</span>
                     {isAdmin && (
                       <span className="text-[9px] font-sans font-semibold uppercase tracking-wide bg-ink text-cream rounded px-1.5 py-0.5">
                         admin
@@ -375,7 +385,7 @@ export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEma
 
       {/* Mobile drawer */}
       <aside
-        className={`md:hidden fixed top-0 left-0 h-screen w-64 bg-peach flex flex-col z-50 border-r border-peach-dark/20 transition-transform duration-200 ${
+        className={`md:hidden fixed top-0 left-0 h-screen max-h-screen w-64 bg-peach flex flex-col z-50 border-r border-peach-dark/20 transition-transform duration-200 overflow-y-auto overscroll-contain ${
           mobileOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
@@ -384,7 +394,7 @@ export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEma
 
       {/* Desktop sidebar */}
       <aside
-        className={`hidden md:flex ${collapsed ? "w-12" : "sidebar-width"} fixed top-0 left-0 h-screen bg-peach flex-col z-40 border-r border-peach-dark/20 transition-all duration-200`}
+        className={`hidden md:flex ${collapsed ? "w-12" : "sidebar-width"} fixed top-0 left-0 h-screen max-h-screen bg-peach flex-col z-40 border-r border-peach-dark/20 transition-all duration-200 overflow-y-auto overscroll-contain`}
       >
         {sidebarContent}
       </aside>

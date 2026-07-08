@@ -86,7 +86,7 @@
     "revenue_fy2027_proj_cr": 480,
     "listed": false,
     "exchange": null,
-    "notes": "Best known for residential luxury segment and The Wealth Report. Publishes India Real Estate Q1 report covering 8 cities — primary source for this KYL dataset.",
+    "notes": "Best known for residential luxury segment and The Wealth Report. Publishes India Real Estate Q1 report covering 8 cities - primary source for this KYL dataset.",
     "source": "Knight Frank India Annual Review + MCA filings",
     "source_url": "https://www.knightfrank.co.in/research",
     "confidence": "medium"
@@ -201,7 +201,7 @@
     "revenue_fy2027_proj_cr": 860,
     "listed": true,
     "exchange": "NSE/BSE",
-    "notes": "India's #1 real estate portal by traffic (Similarweb). Revenue from Info Edge's real estate vertical. Strong in Tier-1/2 plot listings — primary broker data source for this KYL dataset.",
+    "notes": "India's #1 real estate portal by traffic (Similarweb). Revenue from Info Edge's real estate vertical. Strong in Tier-1/2 plot listings - primary broker data source for this KYL dataset.",
     "source": "Info Edge Annual Report FY2024 (real estate segment)",
     "source_url": "https://www.infoedge.in/investor-relations",
     "confidence": "high"
@@ -270,7 +270,7 @@
     "revenue_fy2027_proj_cr": 510,
     "listed": false,
     "exchange": null,
-    "notes": "India's second-largest real estate portal. Times Group backed — never independently listed. Strong in North India plot listings. Secondary source for KYL broker data.",
+    "notes": "India's second-largest real estate portal. Times Group backed - never independently listed. Strong in North India plot listings. Secondary source for KYL broker data.",
     "source": "Times Internet disclosures + industry estimates",
     "source_url": "https://www.magicbricks.com",
     "confidence": "medium"

@@ -18,7 +18,7 @@ export async function POST(_req: NextRequest, { params }: { params: Promise<{ id
     return NextResponse.json({ error: "Not found" }, { status: 404 })
   }
 
-  // Only abort pending bookings — if payment already went through, ignore
+  // Only abort pending bookings - if payment already went through, ignore
   if (booking.status !== "pending") {
     return NextResponse.json({ ok: true })
   }

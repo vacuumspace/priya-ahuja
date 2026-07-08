@@ -87,7 +87,7 @@ export async function GET(req: NextRequest) {
     .where(and(...conditions))
     .orderBy(desc(purchases.createdAt))
 
-  // Monthly summary (across all time, ignoring month filter — for the summary cards)
+  // Monthly summary (across all time, ignoring month filter - for the summary cards)
   const summaryRows = await db
     .select({
       id:        purchases.id,

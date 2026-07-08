@@ -67,8 +67,8 @@ export default async function AdminStartupScoresPage({ searchParams }: Props) {
                 return (
                   <tr key={row.id} className={i !== rows.length - 1 ? "border-b border-border" : ""}>
                     <td className="px-5 py-3.5 font-sans text-sm text-ink/30">{offset + i + 1}</td>
-                    <td className="px-5 py-3.5 font-sans text-sm text-ink font-medium">{row.userName ?? "—"}</td>
-                    <td className="px-5 py-3.5 font-sans text-sm text-ink/70">{row.userEmail ?? "—"}</td>
+                    <td className="px-5 py-3.5 font-sans text-sm text-ink font-medium">{row.userName ?? " - "}</td>
+                    <td className="px-5 py-3.5 font-sans text-sm text-ink/70">{row.userEmail ?? " - "}</td>
                     <td className="px-5 py-3.5">
                       <span className="font-heading text-lg font-bold text-ink">{row.totalScore}</span>
                       <span className="font-sans text-[10px] text-ink/30">/100</span>
@@ -97,7 +97,7 @@ export default async function AdminStartupScoresPage({ searchParams }: Props) {
                       </div>
                     </td>
                     <td className="px-5 py-3.5 font-sans text-sm text-ink/50">
-                      {row.createdAt ? new Date(row.createdAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" }) : "—"}
+                      {row.createdAt ? new Date(row.createdAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" }) : " - "}
                     </td>
                   </tr>
                 )

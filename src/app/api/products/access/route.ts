@@ -63,7 +63,7 @@ export async function GET(req: NextRequest) {
   }
 }
 
-// POST /api/products/access — check access by email
+// POST /api/products/access - check access by email
 export async function POST(req: NextRequest) {
   try {
     const { email, slug } = await req.json()

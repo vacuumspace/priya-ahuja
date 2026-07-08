@@ -8,7 +8,7 @@ const tools = [
   {
     slug: "fundability-score",
     title: "Startup Fundability Score",
-    description: "Not a vibes check — a structured investor lens. 50 questions across 9 segments score your startup on market size, traction signals, team, business model, defensibility, and more. Get a 0–100 score with a full breakdown of where you stand and a prioritised fix list before you walk into any room.",
+    description: "Not a vibes check - a structured investor lens. 50 questions across 9 segments score your startup on market size, traction signals, team, business model, defensibility, and more. Get a 0–100 score with a full breakdown of where you stand and a prioritised fix list before you walk into any room.",
     tag: "ideation",
     icon: Lightbulb,
     href: "/fundraise/tools/fundability-score",

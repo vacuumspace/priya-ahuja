@@ -8,7 +8,7 @@ const tools = [
   {
     slug: "startup-idea-score",
     title: "Startup Idea Score",
-    description: "Funding is a milestone, not the goal. This score tells you whether your idea is worth building — before you think about investors. Tests problem clarity, founder-market fit, demand signals, unit economics, and execution path. Brutally honest. No fluff.",
+    description: "Funding is a milestone, not the goal. This score tells you whether your idea is worth building - before you think about investors. Tests problem clarity, founder-market fit, demand signals, unit economics, and execution path. Brutally honest. No fluff.",
     tag: "ideation",
     topic: "startup",
     icon: Lightbulb,

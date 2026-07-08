@@ -61,10 +61,9 @@ function fmtRupees(paise: number) {
 }
 
 const PENDING_INPUT_KEY = "priyagpt_pending_input"
-const BLOCKED_CONTACT_EMAIL = "hi@priyaahuja.in"
 
 // sign-in is a full-page redirect to Google and back, which unmounts this component and
-// loses whatever the user had typed — stash it first so it can be restored after they're
+// loses whatever the user had typed - stash it first so it can be restored after they're
 // back and signed in, instead of silently vanishing.
 function signInPreservingInput(input: string) {
   if (input.trim()) sessionStorage.setItem(PENDING_INPUT_KEY, input)
@@ -175,7 +174,7 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
 
   useEffect(() => {
     // the browser can restore this page from bfcache (back/forward nav) without remounting
-    // the component at all — our in-memory session state would then be stale (e.g. still
+    // the component at all - our in-memory session state would then be stale (e.g. still
     // "running" even though the server auto-paused it while the tab was away), so re-sync
     // from the server truth whenever the tab becomes visible/restored again.
     function onPageShow(e: PageTransitionEvent) {
@@ -214,7 +213,7 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
   useEffect(() => {
     if (!session || session.pausedAt) return
 
-    // running out of time just stops the countdown here — it doesn't touch `session` or
+    // running out of time just stops the countdown here - it doesn't touch `session` or
     // the message history, there's one continuous chat thread and buying more time
     // resumes the same countdown right where it left off
     const tick = () => {
@@ -265,7 +264,7 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
       })
   }
 
-  // ensures the caller's one chat thread has an active timer — creates it on a user's very
+  // ensures the caller's one chat thread has an active timer - creates it on a user's very
   // first message ever, or reactivates it (spending the whole banked balance) after a
   // timeout. Either way it's the same thread and the same message history throughout.
   async function startSession() {
@@ -295,7 +294,7 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
   }
 
   // credits already happened server-side; this adds the bought minutes onto the caller's
-  // one chat thread, creating or reactivating it as needed — same conversation either way
+  // one chat thread, creating or reactivating it as needed - same conversation either way
   async function applyPurchasedMinutes(pkg: TimePackage) {
     const extendRes = await fetch("/api/priya-gpt/session/extend", {
       method: "POST",
@@ -453,13 +452,13 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
         }
       } else if (!activeSessionId || isExpiredNow) {
         if (!(minutesBalance && minutesBalance > 0)) {
-          // can't auto-charge without a payment popup — bail out and open the buy flow for the cheapest package
+          // can't auto-charge without a payment popup - bail out and open the buy flow for the cheapest package
           setMessages((prev) => prev.filter((m) => m.id !== tempId))
           setInput(text)
           if (packages[0]) buyPackage(packages[0], 0)
           return
         }
-        // same one chat thread throughout — this creates it on a first-ever message, or
+        // same one chat thread throughout - this creates it on a first-ever message, or
         // reactivates it (spending the balance) after it timed out
         const startRes = await fetch("/api/priya-gpt/session", { method: "POST" })
         const startData = await startRes.json()
@@ -515,7 +514,7 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
   const remHours = effectiveRemainingMs !== null ? Math.max(0, Math.floor(effectiveRemainingMs / 3600000)) : 0
   const remMinutes = effectiveRemainingMs !== null ? Math.max(0, Math.floor((effectiveRemainingMs % 3600000) / 60000)) : 0
   const remSeconds = effectiveRemainingMs !== null ? Math.max(0, Math.floor((effectiveRemainingMs % 60000) / 1000)) : 0
-  // one continuous chat thread — "locked" just means the timer needs more time to keep going,
+  // one continuous chat thread - "locked" just means the timer needs more time to keep going,
   // not that a session ended; ranOut distinguishes "timed out" from "never started"
   const ranOut = Boolean(session) && !isPaused && effectiveRemainingMs !== null && effectiveRemainingMs <= 0
   const locked = !session || ranOut
@@ -554,7 +553,9 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
         </div>
       </div>
     )}
-    <div className="flex-shrink-0 flex items-center justify-between mb-1.5 px-1">
+    <div className={`flex-shrink-0 flex items-center justify-between mb-1.5 px-1 ${
+      blocked ? "blur-md pointer-events-none select-none" : ""
+    }`}>
       <span className="font-sans text-xs text-ink/50">★ 4.9 · {foundersCount} founders</span>
       {ratableSessionId && !showRateWidget && (
         <button
@@ -588,7 +589,10 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
         </div>
       )}
     </div>
-    <div className="w-full flex flex-col flex-1 min-h-0 rounded-2xl border border-border bg-card overflow-hidden">
+    <div className="relative w-full flex flex-col flex-1 min-h-0">
+    <div className={`w-full flex flex-col flex-1 min-h-0 rounded-2xl border border-border bg-card overflow-hidden ${
+      blocked ? "blur-md pointer-events-none select-none" : ""
+    }`}>
       <div className="flex items-center justify-between gap-3 px-4 py-2 border-b border-border bg-peach-dark/10">
         <div className="flex items-center gap-2.5 min-w-0">
           <div className="relative flex-shrink-0">
@@ -693,9 +697,7 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
         onScroll={(e) => {
           if (!blocked && e.currentTarget.scrollTop < 60) loadOlderMessages()
         }}
-        className={`h-full overflow-y-auto overflow-x-hidden px-5 py-4 flex flex-col gap-3 scrollbar-subtle ${
-          blocked ? "blur-sm pointer-events-none select-none" : ""
-        }`}
+        className="h-full overflow-y-auto overflow-x-hidden px-5 py-4 flex flex-col gap-3 scrollbar-subtle"
       >
         {hasMoreHistory && (
           <div className="self-center text-xs text-ink/40 font-sans py-1">
@@ -723,17 +725,6 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
           <div className="self-start text-xs text-ink/40 font-sans">typing...</div>
         )}
       </div>
-      {blocked && (
-        <div className="absolute inset-0 flex items-center justify-center px-6">
-          <p className="text-center text-xs font-sans text-ink/50 bg-cream/80 rounded-lg px-4 py-2">
-            This conversation has been paused. If you think this is a mistake, contact{" "}
-            <a href={`mailto:${BLOCKED_CONTACT_EMAIL}`} className="underline text-ink/70">
-              {BLOCKED_CONTACT_EMAIL}
-            </a>
-            .
-          </p>
-        </div>
-      )}
       </div>
 
       <div className="relative flex flex-col border-t border-border">
@@ -827,6 +818,18 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
           </button>
         </div>
       </div>
+    </div>
+    {blocked && (
+      <div className="absolute inset-0 flex items-center justify-center px-6 z-10">
+        <p className="text-center text-xs font-sans text-[#8a2e3b] bg-[#f7c8ce] rounded-lg px-4 py-2 shadow-lg">
+          You've been blocked from using this feature due to a violation of our{" "}
+          <a href="/terms" className="underline text-[#8a2e3b]">
+            terms
+          </a>
+          .
+        </p>
+      </div>
+    )}
     </div>
     </div>
   )

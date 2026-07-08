@@ -25,7 +25,7 @@ export default function BookingConfirmationEmail({
   heading = "Booking Confirmed 🎉",
   serviceType = "call",
   intro = "Your session is booked and confirmed!",
-  footer = "Questions? Reply to this email or reach out on LinkedIn.\n\n— Priya Ahuja",
+  footer = "Questions? Reply to this email or reach out on LinkedIn.\n\n - Priya Ahuja",
 }: BookingConfirmationEmailProps) {
   const isAsync = serviceType === "report" || serviceType === "dm"
   return (

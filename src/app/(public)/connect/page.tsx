@@ -7,12 +7,12 @@ import { ServicesClient } from "./ServicesClient"
 
 export const metadata: Metadata = {
   title: "Book a 1-on-1 Session with Priya Ahuja",
-  description: "Book a direct session with Priya Ahuja — fundability review, pitch prep, startup strategy, idea validation, or investor Q&A. Trusted by 200+ Indian founders. Limited slots.",
+  description: "Book a direct session with Priya Ahuja - fundability review, pitch prep, startup strategy, idea validation, or investor Q&A. Trusted by 200+ Indian founders. Limited slots.",
   keywords: ["book session Priya Ahuja", "fundraise consultant India", "pitch deck review India", "startup advisor session", "1-on-1 founder coaching India"],
   alternates: { canonical: "https://priyaahuja.in/connect" },
   openGraph: {
     title: "Book a 1-on-1 Session with Priya Ahuja",
-    description: "Fundability review, pitch prep, startup strategy, or idea validation — direct 1-on-1 with Priya Ahuja. Trusted by 200+ Indian founders.",
+    description: "Fundability review, pitch prep, startup strategy, or idea validation - direct 1-on-1 with Priya Ahuja. Trusted by 200+ Indian founders.",
     url: "https://priyaahuja.in/connect",
   },
 }
@@ -28,7 +28,7 @@ const serviceJsonLd = {
   },
   "areaServed": { "@type": "Country", "name": "India" },
   "serviceType": "Startup Advisory",
-  "description": "Direct 1-on-1 sessions with Priya Ahuja — fundability review, pitch prep, startup strategy, and idea validation for Indian founders.",
+  "description": "Direct 1-on-1 sessions with Priya Ahuja - fundability review, pitch prep, startup strategy, and idea validation for Indian founders.",
   "url": "https://priyaahuja.in/connect",
 }
 

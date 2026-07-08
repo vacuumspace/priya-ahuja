@@ -5,12 +5,12 @@ import { ResourcesClient } from "./ResourcesClient"
 
 export const metadata: Metadata = {
   title: "Startup Credits & Resources for Founders",
-  description: "40+ free tools, credits, and deals curated for Indian founders — AWS ($200k), Google Cloud ($350k), OpenAI, Anthropic, HubSpot, Notion, and more. One place, no hunting.",
+  description: "40+ free tools, credits, and deals curated for Indian founders - AWS ($200k), Google Cloud ($350k), OpenAI, Anthropic, HubSpot, Notion, and more. One place, no hunting.",
   keywords: ["startup credits India", "AWS startup credits", "Google Cloud startup program", "free tools for startups", "startup deals India", "founder resources India"],
   alternates: { canonical: "https://priyaahuja.in/startup/resources" },
   openGraph: {
     title: "Startup Credits & Resources for Founders | Priya Ahuja",
-    description: "40+ free tools, credits, and deals for Indian founders — AWS, Google Cloud, OpenAI, HubSpot, and more.",
+    description: "40+ free tools, credits, and deals for Indian founders - AWS, Google Cloud, OpenAI, HubSpot, and more.",
     url: "https://priyaahuja.in/startup/resources",
   },
 }
@@ -34,7 +34,7 @@ export default async function StartupResourcesPage({ searchParams }: Props) {
           resources &amp; credits.
         </h1>
         <p className="font-sans text-sm text-ink/60 max-w-md leading-relaxed">
-          tools, credits, and deals curated for founders — from cloud infrastructure to AI models. sign in to see full details and apply links.
+          tools, credits, and deals curated for founders - from cloud infrastructure to AI models. sign in to see full details and apply links.
         </p>
       </div>
 

@@ -35,7 +35,7 @@ async function run() {
                 VALUES (${d}, '09:00', '18:00', false)`
     }
   }
-  console.log("Done — availability_schedule and availability_config tables ready.")
+  console.log("Done - availability_schedule and availability_config tables ready.")
 }
 
 run().catch((err) => { console.error(err); process.exit(1) })

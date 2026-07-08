@@ -198,7 +198,7 @@ export default async function BlogPostPage({ params }: Props) {
 
           <div className="prose-custom">{renderContent(post.content)}</div>
 
-          {/* Author card — hidden on series posts */}
+          {/* Author card - hidden on series posts */}
           {!post.series && <div className="mt-16 bg-peach/30 border border-peach-dark/20 rounded-2xl p-6">
             <p className="font-heading text-base font-700 text-ink mb-1">Priya Ahuja</p>
             <p className="font-sans text-xs text-ink/60 mb-4 leading-relaxed">

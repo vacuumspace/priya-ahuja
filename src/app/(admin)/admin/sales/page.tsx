@@ -39,7 +39,7 @@ function fmt(date: string) {
 }
 
 function fmtAmount(paise: number | null) {
-  if (paise == null) return "—"
+  if (paise == null) return " - "
   return "₹" + (paise / 100).toLocaleString("en-IN")
 }
 
@@ -117,7 +117,7 @@ function TransactionsTab() {
             ))}
           </select>
           <button
-            onClick={() => setPage((p) => Math.max(1, p - 1))}
+            onClick={() => { setPage((p) => Math.max(1, p - 1)); window.scrollTo({ top: 0, behavior: "smooth" }) }}
             disabled={page === 1}
             className="p-1 rounded hover:bg-peach-dark/20 disabled:opacity-30"
           >
@@ -127,7 +127,7 @@ function TransactionsTab() {
             {page} / {pageCount}
           </span>
           <button
-            onClick={() => setPage((p) => Math.min(pageCount, p + 1))}
+            onClick={() => { setPage((p) => Math.min(pageCount, p + 1)); window.scrollTo({ top: 0, behavior: "smooth" }) }}
             disabled={page === pageCount}
             className="p-1 rounded hover:bg-peach-dark/20 disabled:opacity-30"
           >
@@ -178,7 +178,7 @@ function TransactionsTab() {
                   <td className="px-4 py-3 text-ink/80">{tx.itemName}</td>
                   <td className="px-4 py-3 font-medium text-ink">{fmtAmount(tx.amount)}</td>
                   <td className="px-4 py-3 text-ink/50 font-mono text-xs">
-                    {tx.razorpayPaymentId ?? "—"}
+                    {tx.razorpayPaymentId ?? " - "}
                   </td>
                   <td className="px-4 py-3">
                     <span
@@ -203,14 +203,14 @@ function TransactionsTab() {
           </span>
           <div className="flex items-center gap-2">
             <button
-              onClick={() => setPage((p) => Math.max(1, p - 1))}
+              onClick={() => { setPage((p) => Math.max(1, p - 1)); window.scrollTo({ top: 0, behavior: "smooth" }) }}
               disabled={page === 1}
               className="px-3 py-1.5 rounded-lg border border-peach-dark/20 hover:bg-peach-dark/10 disabled:opacity-30"
             >
               Previous
             </button>
             <button
-              onClick={() => setPage((p) => Math.min(pageCount, p + 1))}
+              onClick={() => { setPage((p) => Math.min(pageCount, p + 1)); window.scrollTo({ top: 0, behavior: "smooth" }) }}
               disabled={page === pageCount}
               className="px-3 py-1.5 rounded-lg border border-peach-dark/20 hover:bg-peach-dark/10 disabled:opacity-30"
             >
@@ -380,7 +380,7 @@ function SummaryTab() {
       {/* Month stats panel */}
       <div className="bg-card border border-border rounded-2xl p-5">
         <div className="flex items-center justify-between mb-4">
-          <p className="font-sans text-xs font-semibold text-ink/50 uppercase tracking-widest">{sel.label} — breakdown</p>
+          <p className="font-sans text-xs font-semibold text-ink/50 uppercase tracking-widest">{sel.label} - breakdown</p>
           <div className="flex items-center gap-1">
             <button
               onClick={() => setMonthIdx(i => Math.max(0, i! - 1))}

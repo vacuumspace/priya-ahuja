@@ -38,7 +38,7 @@ export function CustomRequestForm({ source, userEmail }: CustomRequestFormProps)
     return (
       <div className="flex items-center gap-2 text-sm font-sans text-ink/60 mt-2">
         <CheckCircle size={14} className="text-green-600 flex-shrink-0" />
-        got it — i&apos;ll be in touch soon
+        got it - i&apos;ll be in touch soon
       </div>
     )
   }

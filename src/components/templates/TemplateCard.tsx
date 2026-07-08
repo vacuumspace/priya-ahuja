@@ -266,7 +266,7 @@ export default function TemplateCard({ product }: Props) {
                   </button>
                 </div>
                 <p className="font-sans text-sm text-ink/60 mb-6 leading-relaxed">
-                  After payment, you&apos;ll get instant on-site access. No download — the full content opens right here.
+                  After payment, you&apos;ll get instant on-site access. No download - the full content opens right here.
                 </p>
                 <form onSubmit={handleBuy} className="space-y-4">
                   <div>
@@ -290,7 +290,7 @@ export default function TemplateCard({ product }: Props) {
                       placeholder="you@example.com"
                       className="w-full border border-border rounded-lg px-3 py-2.5 font-sans text-sm text-ink bg-white focus:outline-none focus:border-ink/40 transition-colors"
                     />
-                    <p className="font-sans text-[13px] text-ink/40 mt-1.5">Save this email — you&apos;ll use it to access the content later.</p>
+                    <p className="font-sans text-[13px] text-ink/40 mt-1.5">Save this email - you&apos;ll use it to access the content later.</p>
                   </div>
                   {error && <p className="font-sans text-xs text-red-500">{error}</p>}
                   <button

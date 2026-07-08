@@ -19,13 +19,13 @@ export default function DownloadLinkEmail({
   accessUrl = "#",
   ctaLabel,
   intro = "Thank you for your purchase! You now have lifetime access.",
-  footer = "Make sure you're signed in with the same Google account you used to pay.\n\n— Priya Ahuja",
+  footer = "Make sure you're signed in with the same Google account you used to pay.\n\n - Priya Ahuja",
 }: DownloadLinkEmailProps) {
   const buttonLabel = ctaLabel ?? `Open ${productName}`
   return (
     <Html>
       <Head />
-      <Preview>Your access is ready — {productName}</Preview>
+      <Preview>Your access is ready - {productName}</Preview>
       <Body style={{ backgroundColor: "#FEF9E7", fontFamily: "Inter, sans-serif", margin: 0, padding: "40px 0" }}>
         <Container style={{ maxWidth: 560, margin: "0 auto", backgroundColor: "#FEF9E7", borderRadius: 16, padding: "32px 40px" }}>
           <Heading style={{ fontSize: 26, fontWeight: 800, color: "#2D2D2D", margin: "0 0 8px" }}>

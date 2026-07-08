@@ -63,8 +63,8 @@ export async function sendBookingConfirmation({
 
   const isAsync = serviceType === "report" || serviceType === "dm"
   const defaultSubject = isAsync
-    ? `payment received — your ${serviceName} review is on the way`
-    : `see you soon, ${name.split(" ")[0]} — ${serviceName} is confirmed`
+    ? `payment received - your ${serviceName} review is on the way`
+    : `see you soon, ${name.split(" ")[0]} - ${serviceName} is confirmed`
 
   const html = await render(
     BookingConfirmationEmail({
@@ -131,7 +131,7 @@ export async function sendAdminBookingNotification({
 
   const adminEmails = (process.env.ADMIN_EMAILS ?? "").split(",").map((e) => e.trim())
   const subject = type === "reschedule"
-    ? `Rescheduled: ${serviceName} — ${userName}`
+    ? `Rescheduled: ${serviceName} - ${userName}`
     : isAsync
     ? `New Review Request: ${serviceName} from ${userName}`
     : (s.email_admin_subject || `New Booking: ${serviceName}`)
@@ -272,15 +272,15 @@ export async function sendPurchaseWelcome({
     })
   )
   const subjectMap: Record<string, string> = {
-    "angel-investor-list":  "Your Angel Investor List — how to make the most of it",
-    "early-stage-vc-list":  "Your Early Stage VC List — how to use it well",
-    "family-offices-list":  "Your Family Office List — how to approach them",
-    "incubators-list":      "Your Incubator and Accelerator List — how to apply well",
-    "startup-ideas-2026":   "Your 100 startup ideas — what to do next",
+    "angel-investor-list":  "Your Angel Investor List - how to make the most of it",
+    "early-stage-vc-list":  "Your Early Stage VC List - how to use it well",
+    "family-offices-list":  "Your Family Office List - how to approach them",
+    "incubators-list":      "Your Incubator and Accelerator List - how to apply well",
+    "startup-ideas-2026":   "Your 100 startup ideas - what to do next",
   }
   await sendMail({
     to,
-    subject: subjectMap[productSlug] ?? `You're all set — ${productName}`,
+    subject: subjectMap[productSlug] ?? `You're all set - ${productName}`,
     html,
   })
 }
@@ -321,7 +321,7 @@ export async function sendMessageNotification({
   await sendMail({
     to,
     subject: recipientIsAdmin
-      ? `${senderName} sent a message — ${serviceName}`
+      ? `${senderName} sent a message - ${serviceName}`
       : `priya replied to your ${serviceName} message`,
     html,
   })
@@ -347,7 +347,7 @@ export async function sendSessionNotes({
   const html = `
     <div style="font-family:Inter,sans-serif;max-width:560px;margin:0 auto;padding:32px 24px;background:#fff;border:1px solid #e8e8e8;border-radius:12px">
       <p style="font-size:14px;color:#777;margin:0 0 20px">Hi ${firstName},</p>
-      <p style="font-size:16px;font-weight:700;color:#2D2D2D;margin:0 0 8px">Session notes — ${serviceName}</p>
+      <p style="font-size:16px;font-weight:700;color:#2D2D2D;margin:0 0 8px">Session notes - ${serviceName}</p>
       <p style="font-size:13px;color:#777;margin:0 0 24px">Here's a quick summary from our session today.</p>
 
       <p style="font-size:12px;font-weight:700;color:#2D2D2D;text-transform:uppercase;letter-spacing:0.08em;margin:0 0 8px">What we covered</p>
@@ -368,7 +368,7 @@ export async function sendSessionNotes({
 
   await sendMail({
     to,
-    subject: `session notes — ${serviceName} · ${new Date().toLocaleDateString("en-IN", { day: "numeric", month: "short" })}`,
+    subject: `session notes - ${serviceName} · ${new Date().toLocaleDateString("en-IN", { day: "numeric", month: "short" })}`,
     html,
   })
 }

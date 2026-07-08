@@ -75,7 +75,7 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
   const [showSignIn, setShowSignIn] = useState(false)
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
-  const fetchPage = useCallback(async (p: number, q: string, st: string, co: string) => {
+  const fetchPage = useCallback(async (p: number, q: string, st: string, co: string, scroll = false) => {
     setLoading(true)
     try {
       const params = new URLSearchParams({ page: String(p) })
@@ -89,6 +89,7 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
       setPageCount(data.pageCount)
       setPage(p)
       if (data.isPaid) setPaid(true)
+      if (scroll) window.scrollTo({ top: 0, behavior: "smooth" })
     } finally {
       setLoading(false)
     }
@@ -215,7 +216,7 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
           </p>
         </div>
 
-        {/* Top-right CTA — only when not paid */}
+        {/* Top-right CTA - only when not paid */}
         {!paid && (
           <div className="flex-shrink-0 flex flex-col items-start sm:items-end gap-1.5 sm:pt-1">
             <button
@@ -230,7 +231,7 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
         )}
       </div>
 
-      {/* Description block — shown only when not paid */}
+      {/* Description block - shown only when not paid */}
       {!paid && (
         <div className="px-4 md:px-10 pb-8">
           <div className="bg-card border border-border rounded-xl px-5 py-4 space-y-2">
@@ -305,7 +306,7 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
         </div>
       )}
 
-      {/* Mobile cards — shown only on small screens */}
+      {/* Mobile cards - shown only on small screens */}
       <div className="sm:hidden pb-4 px-4 space-y-3">
         {loading && Array.from({ length: 10 }).map((_, i) => (
           <div key={`skel-${i}`} className="bg-card border border-border rounded-xl p-4 space-y-2 animate-pulse">
@@ -326,7 +327,7 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
             <div className="grid grid-cols-2 gap-x-4">
               <div>
                 <p className="font-sans text-[12px] text-ink/30 uppercase tracking-wide mb-0.5">City</p>
-                <p className="font-sans text-xs text-ink/60">{[inv.city, inv.state].filter(Boolean).join(", ") || "—"}</p>
+                <p className="font-sans text-xs text-ink/60">{[inv.city, inv.state].filter(Boolean).join(", ") || " - "}</p>
               </div>
               <div>
                 <p className="font-sans text-[12px] text-ink/30 uppercase tracking-wide mb-0.5">LinkedIn</p>
@@ -336,7 +337,7 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
                       className="inline-flex items-center gap-1 text-xs font-sans text-peach-dark hover:underline">
                       view <ExternalLink size={10} />
                     </a>
-                  ) : <span className="text-ink/20">—</span>
+                  ) : <span className="text-ink/20"> - </span>
                 ) : (
                   <span className="select-none blur-sm text-xs font-sans text-ink/60 pointer-events-none">view</span>
                 )}
@@ -352,7 +353,7 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
                       <span className="break-all">{inv.emails.join(", ")}</span>
                       <CopyButton text={inv.emails.join(", ")} />
                     </div>
-                  ) : <span className="text-ink/20">—</span>
+                  ) : <span className="text-ink/20"> - </span>
                 ) : (
                   <span className="select-none blur-sm text-ink/60 pointer-events-none">email@example.com</span>
                 )}
@@ -362,7 +363,7 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
         ))}
       </div>
 
-      {/* Desktop table — hidden on small screens */}
+      {/* Desktop table - hidden on small screens */}
       <div className="hidden sm:block pb-4">
         <div className="overflow-x-auto px-4 md:px-10">
           <table className="min-w-[600px] w-full text-xs font-sans border-collapse">
@@ -393,11 +394,11 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
                 <tr key={inv.id} className="border-b border-border/50 hover:bg-ink/[0.02] transition-colors">
                   <td className="py-3 pr-4 text-ink/30">{inv.sno}</td>
                   <td className="py-3 pr-4 text-ink font-medium whitespace-nowrap">{inv.name}</td>
-                  <td className="py-3 pr-4 text-ink/60 whitespace-nowrap">{inv.city || "—"}</td>
-                  <td className="py-3 pr-4 text-ink/60 hidden md:table-cell whitespace-nowrap">{inv.state || "—"}</td>
-                  <td className="py-3 pr-4 text-ink/60 hidden lg:table-cell whitespace-nowrap">{inv.country || "—"}</td>
+                  <td className="py-3 pr-4 text-ink/60 whitespace-nowrap">{inv.city || " - "}</td>
+                  <td className="py-3 pr-4 text-ink/60 hidden md:table-cell whitespace-nowrap">{inv.state || " - "}</td>
+                  <td className="py-3 pr-4 text-ink/60 hidden lg:table-cell whitespace-nowrap">{inv.country || " - "}</td>
 
-                  {/* LinkedIn — blurred for non-paid */}
+                  {/* LinkedIn - blurred for non-paid */}
                   <td className="py-3 pr-4">
                     {paid ? (
                       inv.linkedin ? (
@@ -405,13 +406,13 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
                           className="inline-flex items-center gap-1 text-peach-dark hover:underline whitespace-nowrap">
                           view <ExternalLink size={10} />
                         </a>
-                      ) : <span className="text-ink/20">—</span>
+                      ) : <span className="text-ink/20"> - </span>
                     ) : (
                       <span className="select-none blur-sm text-ink/60 pointer-events-none">linkedin.com/in/xxxxx</span>
                     )}
                   </td>
 
-                  {/* Emails — blurred for non-paid */}
+                  {/* Emails - blurred for non-paid */}
                   <td className="py-3">
                     {paid ? (
                       inv.emails.length > 0 ? (
@@ -419,7 +420,7 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
                           <span className="text-ink/70">{inv.emails.join(", ")}</span>
                           <CopyButton text={inv.emails.join(", ")} />
                         </div>
-                      ) : <span className="text-ink/20">—</span>
+                      ) : <span className="text-ink/20"> - </span>
                     ) : (
                       <span className="select-none blur-sm text-ink/60 pointer-events-none">email@example.com</span>
                     )}
@@ -468,7 +469,7 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
           </p>
           <div className="flex items-center gap-2">
             <button
-              onClick={() => page > 1 ? fetchPage(page - 1, search, stateFilter, countryFilter) : undefined}
+              onClick={() => page > 1 ? fetchPage(page - 1, search, stateFilter, countryFilter, true) : undefined}
               disabled={page <= 1 || loading}
               className="inline-flex items-center gap-1 text-xs font-sans font-semibold text-ink/60 hover:text-ink disabled:opacity-30 disabled:cursor-not-allowed transition-colors px-3 py-1.5 border border-border rounded-lg"
             >
@@ -485,7 +486,7 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
                 return (
                   <button
                     key={p}
-                    onClick={() => isLocked ? setShowSignIn(true) : fetchPage(p, search, stateFilter, countryFilter)}
+                    onClick={() => isLocked ? setShowSignIn(true) : fetchPage(p, search, stateFilter, countryFilter, true)}
                     className={`inline-flex items-center justify-center w-7 h-7 rounded text-xs font-sans font-semibold transition-colors
                       ${isCurrent ? "bg-ink text-cream" : "border border-border text-ink/50 hover:text-ink hover:border-ink/40"}`}
                   >
@@ -499,7 +500,7 @@ export default function AngelInvestorClient({ isPaid: initialPaid, isAuthenticat
             </div>
 
             <button
-              onClick={() => !paid && page >= FREE_PAGES ? setShowSignIn(true) : fetchPage(page + 1, search, stateFilter, countryFilter)}
+              onClick={() => !paid && page >= FREE_PAGES ? setShowSignIn(true) : fetchPage(page + 1, search, stateFilter, countryFilter, true)}
               disabled={page >= pageCount || loading}
               className="inline-flex items-center gap-1 text-xs font-sans font-semibold text-ink/60 hover:text-ink disabled:opacity-30 disabled:cursor-not-allowed transition-colors px-3 py-1.5 border border-border rounded-lg"
             >

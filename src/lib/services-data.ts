@@ -1,4 +1,4 @@
-// Types and helpers for services — data lives in the database
+// Types and helpers for services - data lives in the database
 
 export type Service = {
   id: string

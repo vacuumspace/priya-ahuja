@@ -46,7 +46,7 @@ type SessionWithMessages = {
 }
 
 function StarRating({ rating }: { rating: number | null }) {
-  if (!rating) return <span className="text-ink/30">—</span>
+  if (!rating) return <span className="text-ink/30"> - </span>
   return (
     <div className="flex items-center gap-0.5">
       {[1, 2, 3, 4, 5].map((n) => (
@@ -61,7 +61,7 @@ function fmtAmount(paise: number) {
 }
 
 function fmtDate(d: string | null) {
-  if (!d) return "—"
+  if (!d) return " - "
   return new Intl.DateTimeFormat("en-IN", { dateStyle: "medium", timeStyle: "short" }).format(new Date(d))
 }
 
@@ -384,7 +384,7 @@ function InsightsTab() {
               {insights.faqs.map((f, i) => (
                 <li key={i} className="text-xs font-sans text-ink leading-snug">
                   {f.question}
-                  {f.count > 1 && <span className="text-ink/40"> — asked {f.count}×</span>}
+                  {f.count > 1 && <span className="text-ink/40"> - asked {f.count}×</span>}
                 </li>
               ))}
             </ol>
@@ -481,7 +481,7 @@ function SettingsTab({ initialSettings }: { initialSettings: Record<string, stri
           value={personality}
           onChange={(e) => setPersonality(e.target.value)}
           rows={3}
-          placeholder="e.g. sharp, friendly, direct — no vague generalities"
+          placeholder="e.g. sharp, friendly, direct - no vague generalities"
           className="w-full px-3 py-2 rounded-lg border border-peach-dark/30 bg-card text-sm font-sans text-ink outline-none focus:ring-1 focus:ring-ink/20"
         />
       </div>

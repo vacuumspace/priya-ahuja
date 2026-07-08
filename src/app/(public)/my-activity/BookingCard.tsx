@@ -239,7 +239,7 @@ export default function BookingCard({
         </div>
       </div>
 
-      {/* Date & time — prominent */}
+      {/* Date & time - prominent */}
       {(slotDate || slotStartTime) && (
         <div className="flex items-center gap-3 mb-4 bg-peach/20 border border-peach-dark/20 rounded-xl px-4 py-3">
           <div className="flex-1">
@@ -248,7 +248,7 @@ export default function BookingCard({
               <p className="font-sans text-xs text-ink/60 mt-0.5">{timeLabel}</p>
             )}
           </div>
-          {/* Countdown — only for upcoming */}
+          {/* Countdown - only for upcoming */}
           {isActive && secondsLeft !== null && secondsLeft > 0 && (
             <div className="text-right flex-shrink-0">
               <p className="text-[12px] font-sans text-ink/40 uppercase tracking-wide">starts in</p>

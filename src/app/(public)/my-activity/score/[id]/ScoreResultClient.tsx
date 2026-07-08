@@ -26,7 +26,7 @@ function getScoreBand(score: number): { label: string; color: string; directiona
   if (score >= 65) return {
     label: "almost there",
     color: "text-blue-700",
-    directional: "you have solid foundations but a few gaps investors will probe. address the weak segments before you start pitching — one strong concern can kill an otherwise good meeting.",
+    directional: "you have solid foundations but a few gaps investors will probe. address the weak segments before you start pitching - one strong concern can kill an otherwise good meeting.",
   }
   if (score >= 50) return {
     label: "building blocks in place",
@@ -36,12 +36,12 @@ function getScoreBand(score: number): { label: string; color: string; directiona
   if (score >= 35) return {
     label: "early stage, more to build",
     color: "text-orange-700",
-    directional: "it's too early to pitch institutional investors. focus on validating the problem and building evidence — customer interviews, early traction, or a prototype. come back to fundraising when the score is above 50.",
+    directional: "it's too early to pitch institutional investors. focus on validating the problem and building evidence - customer interviews, early traction, or a prototype. come back to fundraising when the score is above 50.",
   }
   return {
     label: "pre-validation",
     color: "text-red-700",
-    directional: "the idea needs more grounding before it's pitchable. spend 2–3 months on customer discovery and problem validation. the goal right now is not to raise — it's to find out if the problem is real and whether people will pay.",
+    directional: "the idea needs more grounding before it's pitchable. spend 2–3 months on customer discovery and problem validation. the goal right now is not to raise - it's to find out if the problem is real and whether people will pay.",
   }
 }
 
@@ -208,7 +208,7 @@ export default function ScoreResultClient({ totalScore, pillarScores, answers }:
         <div className="flex items-center gap-3 bg-peach/20 border border-peach-dark/20 rounded-xl px-5 py-4">
           <CheckCircle size={16} className="text-peach-dark flex-shrink-0" />
           <p className="font-sans text-sm text-ink/70">
-            exceptional score — you&apos;ve addressed every key area.
+            exceptional score - you&apos;ve addressed every key area.
           </p>
         </div>
       )}
@@ -219,7 +219,7 @@ export default function ScoreResultClient({ totalScore, pillarScores, answers }:
           want to go deeper?
         </p>
         <p className="font-sans text-sm text-ink/60 leading-relaxed mb-5">
-          book a 1:1 session with priya — turn your score into a concrete action plan.
+          book a 1:1 session with priya - turn your score into a concrete action plan.
         </p>
         <Link
           href="/connect"

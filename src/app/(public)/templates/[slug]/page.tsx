@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const template = getTemplate(slug)
   if (!template) return {}
-  return { title: `${template.title} — Priya Ahuja` }
+  return { title: `${template.title} - Priya Ahuja` }
 }
 
 export default async function TemplateViewPage({ params }: { params: Promise<{ slug: string }> }) {

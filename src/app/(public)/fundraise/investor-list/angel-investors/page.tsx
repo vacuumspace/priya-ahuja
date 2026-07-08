@@ -12,13 +12,13 @@ const SLUG = "angel-investor-list"
 const PAGE_SIZE = 10
 
 export const metadata: Metadata = {
-  title: "Angel Investor List India — Contacts & LinkedIn",
-  description: "Verified angel investor contact list for Indian startups — LinkedIn profiles and direct emails for angels actively writing pre-seed and seed cheques.",
+  title: "Angel Investor List India - Contacts & LinkedIn",
+  description: "Verified angel investor contact list for Indian startups - LinkedIn profiles and direct emails for angels actively writing pre-seed and seed cheques.",
   keywords: ["angel investor list India", "angel investor contacts", "angel investors India LinkedIn", "pre-seed angel investors India"],
   alternates: { canonical: "https://priyaahuja.in/fundraise/investor-list/angel-investors" },
   openGraph: {
-    title: "Angel Investor List India — Contacts & LinkedIn | Priya Ahuja",
-    description: "Verified angel investor contact list for Indian startups — LinkedIn profiles and direct emails for angels actively writing pre-seed and seed cheques.",
+    title: "Angel Investor List India - Contacts & LinkedIn | Priya Ahuja",
+    description: "Verified angel investor contact list for Indian startups - LinkedIn profiles and direct emails for angels actively writing pre-seed and seed cheques.",
     url: "https://priyaahuja.in/fundraise/investor-list/angel-investors",
   },
 }

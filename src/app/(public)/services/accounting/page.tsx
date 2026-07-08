@@ -95,7 +95,7 @@ export default function AccountingPage() {
           accounting that<br />works for startups.
         </h1>
         <p className="font-sans text-sm text-ink/55 leading-relaxed">
-          end-to-end accounting, GST, TDS, payroll, and audit support — handled by a team that understands the compliance needs of early-stage Indian companies.
+          end-to-end accounting, GST, TDS, payroll, and audit support - handled by a team that understands the compliance needs of early-stage Indian companies.
         </p>
         <div className="inline-flex items-center gap-2 mt-4 bg-peach/40 border border-peach-dark/25 rounded-full px-4 py-1.5">
           <span className="w-1.5 h-1.5 rounded-full bg-peach-dark/60 flex-shrink-0" />

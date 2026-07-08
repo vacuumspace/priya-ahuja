@@ -94,7 +94,7 @@ function BlockedPeriodsSection() {
   return (
     <div>
       <p className="text-[10px] font-sans text-ink/40 uppercase tracking-widest mb-1">Blocked Periods</p>
-      <p className="text-[11px] font-sans text-ink/30 mb-3">Block specific dates or date ranges — no slots will show for these days.</p>
+      <p className="text-[11px] font-sans text-ink/30 mb-3">Block specific dates or date ranges - no slots will show for these days.</p>
 
       {loading ? (
         <p className="text-xs font-sans text-ink/30">Loading…</p>
@@ -253,7 +253,7 @@ function AvailabilityTab() {
                   </button>
                 </div>
                 {rows.length === 0 && (
-                  <p className="text-xs font-sans text-ink/30">no time windows — unavailable</p>
+                  <p className="text-xs font-sans text-ink/30">no time windows - unavailable</p>
                 )}
                 {rows.map((row) => (
                   <div key={row.id} className="flex items-center gap-2">
@@ -305,7 +305,7 @@ function AvailabilityTab() {
       </div>
 
       <p className="text-[11px] font-sans text-ink/30 leading-relaxed">
-        Slot duration per booking is set by each service&apos;s duration. Slots are generated live — no pre-population needed.
+        Slot duration per booking is set by each service&apos;s duration. Slots are generated live - no pre-population needed.
       </p>
 
       <div className="border-t border-border pt-6">
@@ -853,7 +853,7 @@ function TxBookingRow({ booking, onUpdate }: { booking: Booking; onUpdate: (id: 
         <p className="text-sm font-sans font-medium text-ink">{booking.userName}</p>
         <p className="text-[11px] font-sans text-ink/40">{booking.userEmail}</p>
       </td>
-      <td className="py-3 px-4 text-xs font-sans text-ink/70">{booking.serviceTitle ?? "—"}</td>
+      <td className="py-3 px-4 text-xs font-sans text-ink/70">{booking.serviceTitle ?? " - "}</td>
       <td className="py-3 px-4">
         <select
           value={status}

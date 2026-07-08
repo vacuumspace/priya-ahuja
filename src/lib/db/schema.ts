@@ -139,12 +139,12 @@ export const users = pgTable("users", {
   emailVerified: timestamp("email_verified"),
   image: text("image"),
   adminSeen: boolean("admin_seen").notNull().default(false),
-  // platform-wide block — set only via the Users admin page; also blocks sign-in (see bannedIdentities). Separate from PriyaGPT chat blocking below.
+  // platform-wide block - set only via the Users admin page; also blocks sign-in (see bannedIdentities). Separate from PriyaGPT chat blocking below.
   blocked: boolean("blocked").notNull().default(false),
   blockedReason: text("blocked_reason"),
   blockedAt: timestamp("blocked_at"),
   blockedBy: varchar("blocked_by", { length: 20 }), // "admin_ban"
-  // PriyaGPT chat-only block — independent of the platform block above; sign-in still works.
+  // PriyaGPT chat-only block - independent of the platform block above; sign-in still works.
   priyaGptBlocked: boolean("priya_gpt_blocked").notNull().default(false),
   priyaGptBlockedReason: text("priya_gpt_blocked_reason"),
   priyaGptBlockedAt: timestamp("priya_gpt_blocked_at"),
@@ -153,7 +153,7 @@ export const users = pgTable("users", {
   createdAt: timestamp("created_at").defaultNow(),
 })
 
-// permanent signup ban list — only ever written by an explicit admin action, never by the
+// permanent signup ban list - only ever written by an explicit admin action, never by the
 // auto-moderation classifier. Survives account deletion so a banned email/IP can't re-signup.
 export const bannedIdentities = pgTable("banned_identities", {
   id: uuid("id").primaryKey().defaultRandom(),
@@ -237,6 +237,16 @@ export const startupIdeaScores = pgTable("startup_idea_scores", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
 })
 
+export const wellbeingScores = pgTable("wellbeing_scores", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  answers: jsonb("answers").notNull(),
+  totalScore: integer("total_score").notNull(),
+  categoryScores: jsonb("category_scores").notNull(),
+  adminSeen: boolean("admin_seen").notNull().default(false),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+})
+
 export const analyticsEvents = pgTable("analytics_events", {
   id: uuid("id").primaryKey().defaultRandom(),
   type: varchar("type", { length: 30 }).notNull(), // 'pageview' | 'cta_click'
@@ -275,8 +285,8 @@ export const priyaGptTimeTransactions = pgTable("priya_gpt_time_transactions", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
 })
 
-// ── Pitch Deck — Story ───────────────────────────────────────────
-// one row per user — a single continuous chat thread, not a series of discrete "sessions".
+// ── Pitch Deck - Story ───────────────────────────────────────────
+// one row per user - a single continuous chat thread, not a series of discrete "sessions".
 // expiresAt/pausedAt just track the metered time window; running out doesn't end the chat,
 // it just requires more minutes to keep the countdown going on the same thread.
 export const priyaGptSessions = pgTable("priya_gpt_sessions", {
@@ -295,6 +305,21 @@ export const priyaGptMessages = pgTable("priya_gpt_messages", {
   sessionId: uuid("session_id").notNull().references(() => priyaGptSessions.id, { onDelete: "cascade" }),
   role: varchar("role", { length: 20 }).notNull(), // "user" | "assistant"
   content: text("content").notNull(),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+})
+
+export const startupMistakes = pgTable("startup_mistakes", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  userId: text("user_id").references(() => users.id, { onDelete: "cascade" }), // null for admin-seeded posts with no linked account
+
+  userName: text("user_name").notNull(),
+  title: text("title").notNull(),
+  body: text("body").notNull(),
+  industry: varchar("industry", { length: 50 }).notNull(),
+  topic: varchar("topic", { length: 50 }).notNull(),
+  status: varchar("status", { length: 20 }).notNull().default("pending"), // pending | published | rejected
+  adminNotes: text("admin_notes"),
+  publishedAt: timestamp("published_at"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 })
 

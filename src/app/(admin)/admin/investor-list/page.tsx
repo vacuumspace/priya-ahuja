@@ -186,7 +186,7 @@ export default function InvestorListAdminPage() {
                     </td>
                   )}
                   <td className="py-3 px-4 font-sans text-sm font-medium text-ink">{fmtAmt(row.amountPaid ?? row.price)}</td>
-                  <td className="py-3 px-4 font-sans text-xs text-ink/50">{row.razorpayPaymentId ?? "—"}</td>
+                  <td className="py-3 px-4 font-sans text-xs text-ink/50">{row.razorpayPaymentId ?? " - "}</td>
                   <td className="py-3 px-4 font-sans text-xs text-ink/50">{fmt(row.createdAt)}</td>
                   <td className="py-3 px-4">
                     {row.downloadToken ? (
@@ -213,7 +213,7 @@ export default function InvestorListAdminPage() {
         <div className="flex items-center gap-3 mt-4 justify-end">
           <button
             disabled={page <= 1}
-            onClick={() => setPage(p => p - 1)}
+            onClick={() => { setPage(p => p - 1); window.scrollTo({ top: 0, behavior: "smooth" }) }}
             className="font-sans text-xs px-3 py-1.5 rounded-lg border border-border text-ink/60 disabled:opacity-30 hover:bg-card transition-colors"
           >
             Prev
@@ -221,7 +221,7 @@ export default function InvestorListAdminPage() {
           <span className="font-sans text-xs text-ink/40">{page} / {pageCount}</span>
           <button
             disabled={page >= pageCount}
-            onClick={() => setPage(p => p + 1)}
+            onClick={() => { setPage(p => p + 1); window.scrollTo({ top: 0, behavior: "smooth" }) }}
             className="font-sans text-xs px-3 py-1.5 rounded-lg border border-border text-ink/60 disabled:opacity-30 hover:bg-card transition-colors"
           >
             Next

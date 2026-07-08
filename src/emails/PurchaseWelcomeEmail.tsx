@@ -18,7 +18,7 @@ const content: Record<string, {
   ctaPath: string
 }> = {
   "angel-investor-list": {
-    subject: "Your Angel Investor List — how to make the most of it",
+    subject: "Your Angel Investor List - how to make the most of it",
     headline: "You have 900+ investors. Here's where to start.",
     body: "Most founders blast the entire list with cold emails. That rarely works. Here's a smarter approach:",
     steps: [
@@ -31,7 +31,7 @@ const content: Record<string, {
     ctaPath: "/fundraise/investor-list/angel-investors",
   },
   "early-stage-vc-list": {
-    subject: "Your Early Stage VC List — how to use it well",
+    subject: "Your Early Stage VC List - how to use it well",
     headline: "1,000+ VC firms and 26,000+ team contacts. Here's where to start.",
     body: "Most founders pitch every VC they find. The ones who raise are more targeted. Here's how to approach this:",
     steps: [
@@ -44,7 +44,7 @@ const content: Record<string, {
     ctaPath: "/fundraise/investor-list/early-stage-vc",
   },
   "family-offices-list": {
-    subject: "Your Family Office List — how to approach them",
+    subject: "Your Family Office List - how to approach them",
     headline: "160+ family offices. Here's how to reach them right.",
     body: "Family offices get far fewer cold emails than VCs. That's your advantage. Here's how to use it:",
     steps: [
@@ -57,7 +57,7 @@ const content: Record<string, {
     ctaPath: "/fundraise/investor-list/family-offices",
   },
   "incubators-list": {
-    subject: "Your Incubator and Accelerator List — how to apply well",
+    subject: "Your Incubator and Accelerator List - how to apply well",
     headline: "230+ programs. Here's how to pick the right ones.",
     body: "Applying to every program wastes time. Here's how to shortlist and approach them strategically:",
     steps: [
@@ -70,24 +70,24 @@ const content: Record<string, {
     ctaPath: "/fundraise/investor-list/incubators",
   },
   "startup-ideas-2026": {
-    subject: "Your 100 startup ideas — what to do next",
+    subject: "Your 100 startup ideas - what to do next",
     headline: "100 ideas. Now what?",
     body: "The ideas in this list are starting points, not blueprints. Here's how to actually use them:",
     steps: [
-      "Don't judge an idea from the title alone — read the full problem statement and 'why now' for each one.",
+      "Don't judge an idea from the title alone - read the full problem statement and 'why now' for each one.",
       "Shortlist 3 ideas that sit at the intersection of a problem you care about and something you have an edge on.",
       "For each shortlisted idea, spend 1 hour finding 5 potential customers before building anything.",
-      "If you want to pressure-test your shortlist, book a brainstorming session — we can work through it together.",
+      "If you want to pressure-test your shortlist, book a brainstorming session - we can work through it together.",
     ],
     ctaLabel: "Browse all 100 ideas",
     ctaPath: "/startup/ideas",
   },
   "startup-idea-score": {
-    subject: "Your idea score is ready — here's what to do with it",
+    subject: "Your idea score is ready - here's what to do with it",
     headline: "Your idea score is in. Now act on it.",
     body: "A score is only useful if you do something with it. Here's how to use your results:",
     steps: [
-      "Look at your 3 lowest-scoring segments first — those are your highest-risk areas before you build.",
+      "Look at your 3 lowest-scoring segments first - those are your highest-risk areas before you build.",
       "Don't try to fix everything at once. Pick one weak area and spend a focused week on it.",
       "Score below 60 in 'problem clarity' or 'demand signals'? Talk to 5 potential customers this week before writing a line of code.",
       "Retake the score after 4 weeks to track how your thinking has evolved.",
@@ -96,25 +96,25 @@ const content: Record<string, {
     ctaPath: "/my-activity?tab=tools",
   },
   "startup-score": {
-    subject: "Your fundability score is ready — here's what to do with it",
+    subject: "Your fundability score is ready - here's what to do with it",
     headline: "Your fundability score is in.",
     body: "Most founders take the score and move on. The ones who raise use it as a fix list. Here's how:",
     steps: [
-      "Low on 'traction signals'? Investors want proof of demand, not just a hypothesis — get 3 paying customers before pitching.",
+      "Low on 'traction signals'? Investors want proof of demand, not just a hypothesis - get 3 paying customers before pitching.",
       "Low on 'team strength'? Consider an advisor with domain cred, or a co-founder with a complementary skill set.",
-      "Low on 'business model clarity'? Work through your unit economics from first principles — not estimates.",
+      "Low on 'business model clarity'? Work through your unit economics from first principles - not estimates.",
       "Retake after 6–8 weeks once you've worked on your weak areas.",
     ],
     ctaLabel: "View your full score",
     ctaPath: "/my-activity?tab=tools",
   },
   default: {
-    subject: "You're all set — here's how to get the most out of your purchase",
+    subject: "You're all set - here's how to get the most out of your purchase",
     headline: "You're in. Here's what to do next.",
     body: "Quick tips to make the most of what you just bought:",
     steps: [
       "Access your purchase anytime from your activity dashboard.",
-      "If you get stuck or want a second opinion, book a 1-on-1 session — that's what they're for.",
+      "If you get stuck or want a second opinion, book a 1-on-1 session - that's what they're for.",
     ],
     ctaLabel: "View your activity",
     ctaPath: "/my-activity",
@@ -164,8 +164,7 @@ export default function PurchaseWelcomeEmail({
           <Text style={{ color: "#999", fontSize: 12, margin: 0, lineHeight: "1.6" }}>
             You received this because you purchased {productName}. Questions? Reply to this email.
           </Text>
-          <Text style={{ color: "#555", fontSize: 13, margin: "6px 0 0" }}>
-            — Priya Ahuja
+          <Text style={{ color: "#555", fontSize: 13, margin: "6px 0 0" }}> - Priya Ahuja
           </Text>
         </Container>
       </Body>

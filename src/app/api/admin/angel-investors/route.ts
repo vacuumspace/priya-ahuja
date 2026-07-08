@@ -46,7 +46,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ transactions, total, revenue, page, pageCount })
   }
 
-  // investors tab — in-memory filter + paginate
+  // investors tab - in-memory filter + paginate
   let filtered = angelInvestorsData
   if (search) {
     filtered = filtered.filter(r =>

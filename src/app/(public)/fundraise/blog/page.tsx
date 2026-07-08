@@ -6,12 +6,12 @@ import { posts } from "@/lib/blog-data"
 import { CategoryTabs } from "./CategoryTabs"
 
 export const metadata: Metadata = {
-  title: "Fundraise Blog — Field Notes for Indian Founders",
+  title: "Fundraise Blog - Field Notes for Indian Founders",
   description: "How investors evaluate startups, what signals matter at pre-seed vs Series A, common pitch mistakes, term sheet explainers, and what to do when fundraising stalls.",
   keywords: ["fundraising blog India", "investor evaluation criteria", "pitch mistakes India", "Series A fundraising India", "term sheet India", "pre-seed tips India"],
   alternates: { canonical: "https://priyaahuja.in/fundraise/blog" },
   openGraph: {
-    title: "Fundraise Blog — Field Notes for Indian Founders | Priya Ahuja",
+    title: "Fundraise Blog - Field Notes for Indian Founders | Priya Ahuja",
     description: "How investors evaluate startups, pitch mistakes, term sheet explainers, and what to do when fundraising stalls.",
     url: "https://priyaahuja.in/fundraise/blog",
   },

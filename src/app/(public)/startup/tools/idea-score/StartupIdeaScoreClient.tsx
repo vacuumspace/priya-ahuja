@@ -4,7 +4,7 @@ import { useState } from "react"
 import { signIn } from "next-auth/react"
 import { loadRazorpay } from "@/lib/load-razorpay"
 import Link from "next/link"
-import { ArrowLeft, RotateCcw, CheckCircle } from "lucide-react"
+import { ArrowLeft, ArrowRight, RotateCcw, CheckCircle } from "lucide-react"
 import SignInOptions from "@/components/SignInOptions"
 import { trackCta } from "@/lib/analytics"
 import {
@@ -41,7 +41,7 @@ const SAMPLE_IDEA_PILLARS = [
   {
     title: "problem clarity", earned: 9, max: 12,
     comments: [
-      { q: "can you describe the problem in one sentence?", answer: "yes, crisp and clear", level: "good", note: "strong start — problem articulation is a core founder skill." },
+      { q: "can you describe the problem in one sentence?", answer: "yes, crisp and clear", level: "good", note: "strong start - problem articulation is a core founder skill." },
       { q: "how often does your target customer face this problem?", answer: "occasionally · a few times a week", level: "mid", note: "weekly friction is real but not urgent. understand what triggers the pain." },
       { q: "what do people currently do about this problem?", answer: "manual workarounds · spreadsheets, WhatsApp, jugaad", level: "mid", note: "workarounds validate the problem exists. can you quantify what they cost?" },
     ],
@@ -87,7 +87,7 @@ const SAMPLE_IDEA_PILLARS = [
   {
     title: "build mindset", earned: 8, max: 10,
     comments: [
-      { q: "are you willing to kill the idea if the data says no?", answer: "yes, data over ego", level: "good", note: "this is the right mindset. most founders don't actually act on it — keep checking yourself." },
+      { q: "are you willing to kill the idea if the data says no?", answer: "yes, data over ego", level: "good", note: "this is the right mindset. most founders don't actually act on it - keep checking yourself." },
     ],
   },
   {
@@ -98,7 +98,7 @@ const SAMPLE_IDEA_PILLARS = [
   },
 ]
 const SAMPLE_IDEA_RECS = [
-  "your customer definition is vague — you need a named persona with a specific trigger moment, not a demographic bracket.",
+  "your customer definition is vague - you need a named persona with a specific trigger moment, not a demographic bracket.",
   "you haven't validated demand beyond personal belief. find 3 people already paying for a workaround and talk to them.",
   "unit economics are hand-wavy. even a rough back-of-napkin CAC vs LTV estimate would sharpen your thinking.",
 ]
@@ -114,7 +114,7 @@ function getIdeaScoreBand(score: number): { label: string; color: string; direct
   if (score >= 80) return {
     label: "strong foundation",
     color: "text-green-700",
-    directional: "your idea has real legs. the fundamentals are solid — now focus on sharp customer definition and early validation. most ideas at this level succeed or stall on execution, not concept.",
+    directional: "your idea has real legs. the fundamentals are solid - now focus on sharp customer definition and early validation. most ideas at this level succeed or stall on execution, not concept.",
   }
   if (score >= 65) return {
     label: "almost there",
@@ -124,7 +124,7 @@ function getIdeaScoreBand(score: number): { label: string; color: string; direct
   if (score >= 50) return {
     label: "building blocks in place",
     color: "text-amber-700",
-    directional: "there's something here, but the gaps are meaningful. don't start building yet — spend 4–6 weeks on customer discovery and problem validation before writing a line of code.",
+    directional: "there's something here, but the gaps are meaningful. don't start building yet - spend 4–6 weeks on customer discovery and problem validation before writing a line of code.",
   }
   return {
     label: "needs more groundwork",
@@ -265,6 +265,19 @@ function SampleIdeaScorecard({ userEmail }: { userEmail: string | null }) {
 function IntroView({ userEmail, onStart, price = 49900 }: { userEmail: string | null; onStart: () => void; price?: number }) {
   const isSignedIn = !!userEmail
 
+  const startButton = (className?: string) => (
+    <button
+      onClick={isSignedIn ? onStart : () => signIn("google", { callbackUrl: "/startup/tools/idea-score" })}
+      className={cn(
+        "w-full inline-flex items-center justify-center gap-2 bg-ink text-cream font-sans text-base font-bold px-6 py-4 rounded-xl hover:bg-ink/80 transition-colors shadow-md",
+        className
+      )}
+    >
+      {isSignedIn ? "Start" : "Sign in to start"}
+      <ArrowRight size={18} />
+    </button>
+  )
+
   return (
     <div className="max-w-xl mx-auto space-y-5">
       <div className="bg-card border border-border rounded-2xl p-5 sm:p-8">
@@ -275,7 +288,7 @@ function IntroView({ userEmail, onStart, price = 49900 }: { userEmail: string | 
           startup idea score
         </h1>
         <p className="font-sans text-sm text-ink/60 leading-relaxed mb-3">
-          funding is a milestone, not the goal. this tool scores your idea on whether it's worth building — before you think about investors.
+          funding is a milestone, not the goal. this tool scores your idea on whether it's worth building - before you think about investors.
         </p>
         <p className="font-sans text-sm text-ink/60 leading-relaxed mb-5">
           50 questions across 9 segments: problem clarity, founder-market fit, demand signals, customer understanding, solution thinking, business basics, execution readiness, build mindset, and risk awareness. honest scoring. no fluff.
@@ -287,12 +300,14 @@ function IntroView({ userEmail, onStart, price = 49900 }: { userEmail: string | 
         <div className="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 mb-7">
           <p className="font-sans text-xs font-semibold text-amber-800 mb-0.5">one-time access</p>
           <p className="font-sans text-[13px] text-amber-700 leading-relaxed">
-            this quiz can only be taken once. your answers and score are saved permanently to your account. take your time — once submitted, you cannot retake it.
+            this quiz can only be taken once. your answers and score are saved permanently to your account. take your time - once submitted, you cannot retake it.
           </p>
         </div>
 
+        {startButton("mb-7")}
+
         {/* Segment table */}
-        <div className="rounded-xl border border-border overflow-hidden mb-8">
+        <div className="rounded-xl border border-border overflow-hidden mb-2">
           <div className="grid grid-cols-2 text-[12px] font-sans text-ink/35 uppercase tracking-widest px-4 py-2 bg-peach/20 border-b border-border">
             <span>segment</span>
             <span className="text-right">questions</span>
@@ -311,13 +326,6 @@ function IntroView({ userEmail, onStart, price = 49900 }: { userEmail: string | 
             <span className="font-sans text-xs font-semibold text-ink text-right">50</span>
           </div>
         </div>
-
-        <button
-          onClick={isSignedIn ? onStart : () => signIn("google", { callbackUrl: "/startup/tools/idea-score" })}
-          className="inline-flex items-center gap-2 bg-ink text-cream font-sans text-sm font-semibold px-6 py-3 rounded-xl hover:bg-ink/80 transition-colors"
-        >
-          Start
-        </button>
       </div>
 
       {isSignedIn && (
@@ -501,7 +509,7 @@ function PaywallView({
         amount: orderData.amount,
         currency: "INR",
         name: "Priya Ahuja",
-        description: "Startup Idea Score — Full Analysis",
+        description: "Startup Idea Score - Full Analysis",
         order_id: orderData.orderId,
         handler: (response: {
           razorpay_order_id: string
@@ -535,7 +543,7 @@ function PaywallView({
           unlock your startup idea score
         </h2>
         <p className="font-sans text-sm text-ink/55 leading-relaxed mb-7">
-          pay once to take the quiz and get your full score — overall out of 100, all segment breakdowns, and a prioritised list of what to fix before you commit to building.
+          pay once to take the quiz and get your full score - overall out of 100, all segment breakdowns, and a prioritised list of what to fix before you commit to building.
         </p>
 
         <div className="inline-flex items-center gap-1.5 bg-peach/40 border border-peach-dark/30 rounded-lg px-3 py-1.5 mb-7">
@@ -656,7 +664,7 @@ function ResultsView({
         <div className="flex items-center gap-3 bg-peach/20 border border-peach-dark/20 rounded-xl px-5 py-4">
           <CheckCircle size={16} className="text-peach-dark flex-shrink-0" />
           <p className="font-sans text-sm text-ink/70">
-            exceptional foundation — you&apos;ve done the groundwork most founders skip.
+            exceptional foundation - you&apos;ve done the groundwork most founders skip.
           </p>
         </div>
       )}
@@ -666,7 +674,7 @@ function ResultsView({
           want to go deeper?
         </p>
         <p className="font-sans text-sm text-ink/60 leading-relaxed mb-5">
-          book a startup idea brainstorming session with priya — turn your score into a concrete 30-day plan.
+          book a startup idea brainstorming session with priya - turn your score into a concrete 30-day plan.
         </p>
         <Link
           href="/connect"

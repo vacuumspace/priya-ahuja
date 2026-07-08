@@ -15,7 +15,7 @@ const offerings = [
   {
     icon: MessageSquare,
     title: "Messaging & Positioning",
-    desc: "Clarity on who you are, who you're for, and why anyone should care — distilled into language that sticks.",
+    desc: "Clarity on who you are, who you're for, and why anyone should care - distilled into language that sticks.",
     points: ["Brand positioning statement", "Tagline & voice guidelines", "Website copy direction", "Investor & customer narrative"],
   },
   {
@@ -97,7 +97,7 @@ export default function BrandingPage() {
           look like you<br />mean it.
         </h1>
         <p className="font-sans text-sm text-ink/55 leading-relaxed">
-          brand identity, messaging, and collateral designed for founders who need to earn trust fast — with investors, customers, and hires.
+          brand identity, messaging, and collateral designed for founders who need to earn trust fast - with investors, customers, and hires.
         </p>
       </div>
 
@@ -203,7 +203,7 @@ export default function BrandingPage() {
                 rows={4}
                 value={projectDescription}
                 onChange={(e) => setProjectDescription(e.target.value)}
-                placeholder="tell us about your brand — what stage you're at, what you need help with, and who your audience is."
+                placeholder="tell us about your brand - what stage you're at, what you need help with, and who your audience is."
                 className="w-full text-sm font-sans bg-peach/10 border border-peach-dark/20 rounded-xl px-3 py-2.5 text-ink placeholder-ink/30 focus:outline-none focus:border-peach-dark/50 transition-colors resize-none"
               />
             </div>

@@ -2,9 +2,12 @@
 
 import { useRouter, usePathname, useSearchParams } from "next/navigation"
 import Link from "next/link"
+import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react"
 import { grants, ALL_SECTORS, type StartupGrant, type GrantSector } from "@/lib/grants-data"
 
-function SectorTabs({ active }: { active: string }) {
+const PAGE_SIZE = 10
+
+function SectorFilter({ active }: { active: string }) {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
@@ -21,27 +24,31 @@ function SectorTabs({ active }: { active: string }) {
     } else {
       params.set("sector", sector)
     }
+    params.delete("page")
     router.replace(`${pathname}?${params.toString()}`, { scroll: false })
   }
 
+  const options = ["All", ...ALL_SECTORS].filter((s) => counts[s] > 0)
+
   return (
-    <div className="flex items-center gap-2 pb-1 w-max">
-      {["All", ...ALL_SECTORS].filter((s) => counts[s] > 0).map((sector) => (
-        <button
-          key={sector}
-          onClick={() => setActive(sector)}
-          className={`flex items-center gap-1.5 text-[13px] font-sans px-3 py-1.5 rounded-full border whitespace-nowrap transition-all flex-shrink-0 ${
-            active === sector
-              ? "bg-ink text-cream border-ink"
-              : "bg-transparent text-ink/50 border-border hover:border-ink/30 hover:text-ink/70"
-          }`}
-        >
-          {sector}
-          <span className={`text-[11px] tabular-nums ${active === sector ? "opacity-60" : "opacity-50"}`}>
-            {counts[sector]}
-          </span>
-        </button>
-      ))}
+    <div className="relative inline-block">
+      <select
+        value={active}
+        onChange={(e) => setActive(e.target.value)}
+        style={{ backgroundColor: "var(--card)", color: "var(--card-foreground)", colorScheme: "light dark" }}
+        className="appearance-none text-[13px] font-sans pl-3.5 pr-9 py-2 rounded-full border border-border hover:border-ink/30 focus:outline-none focus:border-ink/40 cursor-pointer"
+      >
+        {options.map((sector) => (
+          <option
+            key={sector}
+            value={sector}
+            style={{ backgroundColor: "var(--card)", color: "var(--card-foreground)" }}
+          >
+            {sector} ({counts[sector]})
+          </option>
+        ))}
+      </select>
+      <ChevronDown size={14} className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-ink/40" />
     </div>
   )
 }
@@ -95,9 +102,58 @@ function GrantCard({ grant }: { grant: StartupGrant }) {
   )
 }
 
+function Pagination({ page, totalPages, compact = false }: { page: number; totalPages: number; compact?: boolean }) {
+  const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+
+  function goTo(p: number) {
+    const params = new URLSearchParams(searchParams.toString())
+    if (p <= 1) {
+      params.delete("page")
+    } else {
+      params.set("page", String(p))
+    }
+    router.push(`${pathname}?${params.toString()}`, { scroll: false })
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  }
+
+  if (totalPages <= 1) return null
+
+  const btnSize = compact ? "w-7 h-7" : "w-8 h-8"
+  const textSize = compact ? "text-[12px]" : "text-[13px]"
+
+  return (
+    <div className={`flex items-center gap-3 ${compact ? "" : "justify-center pt-4"}`}>
+      <button
+        onClick={() => goTo(page - 1)}
+        disabled={page <= 1}
+        className={`flex items-center justify-center ${btnSize} rounded-lg border border-border text-ink/50 hover:text-ink hover:border-ink/30 disabled:opacity-30 disabled:hover:text-ink/50 disabled:hover:border-border transition-colors`}
+        aria-label="Previous page"
+      >
+        <ChevronLeft size={14} />
+      </button>
+
+      <span className={`${textSize} font-sans text-ink/50 tabular-nums whitespace-nowrap`}>
+        Page {page} of {totalPages}
+      </span>
+
+      <button
+        onClick={() => goTo(page + 1)}
+        disabled={page >= totalPages}
+        className={`flex items-center justify-center ${btnSize} rounded-lg border border-border text-ink/50 hover:text-ink hover:border-ink/30 disabled:opacity-30 disabled:hover:text-ink/50 disabled:hover:border-border transition-colors`}
+        aria-label="Next page"
+      >
+        <ChevronRight size={14} />
+      </button>
+    </div>
+  )
+}
+
 export function GrantsClient({ lastRefreshed }: { activeSector?: string; lastRefreshed?: string }) {
   const searchParams = useSearchParams()
   const activeSector = searchParams.get("sector") ?? "All"
+  const page = Math.max(1, Number(searchParams.get("page") ?? "1") || 1)
 
   const updatedLabel = lastRefreshed
     ? new Date(lastRefreshed).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })
@@ -105,6 +161,10 @@ export function GrantsClient({ lastRefreshed }: { activeSector?: string; lastRef
   const filtered = activeSector === "All"
     ? grants
     : grants.filter((g) => g.sector === (activeSector as GrantSector))
+
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE))
+  const currentPage = Math.min(page, totalPages)
+  const paginated = filtered.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE)
 
   return (
     <div className="min-w-0 overflow-hidden">
@@ -114,22 +174,16 @@ export function GrantsClient({ lastRefreshed }: { activeSector?: string; lastRef
         </div>
       )}
 
-      <div className="relative border-b border-border overflow-hidden">
-        <div
-          className="overflow-x-auto py-4 px-4 md:px-10 pb-3"
-          style={{
-            scrollbarWidth: "thin",
-            scrollbarColor: "rgba(128,128,128,0.25) transparent",
-          }}
-        >
-          <SectorTabs active={activeSector} />
+      <div className="flex flex-wrap items-center justify-between gap-3 px-4 md:px-10 py-4 border-b border-border">
+        <SectorFilter active={activeSector} />
+        <div className="overflow-x-auto max-w-full">
+          <Pagination page={currentPage} totalPages={totalPages} compact />
         </div>
-        <div className="pointer-events-none absolute right-0 top-0 h-[calc(100%-6px)] w-16 bg-gradient-to-l from-cream to-transparent" />
       </div>
 
       <div className="px-4 md:px-10 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 min-w-0">
-          {filtered.map((grant) => (
+          {paginated.map((grant) => (
             <GrantCard key={grant.slug} grant={grant} />
           ))}
         </div>
@@ -137,6 +191,8 @@ export function GrantsClient({ lastRefreshed }: { activeSector?: string; lastRef
         {filtered.length === 0 && (
           <p className="font-sans text-sm text-ink/40 text-center py-16">No grants in this sector yet.</p>
         )}
+
+        <Pagination page={currentPage} totalPages={totalPages} />
       </div>
     </div>
   )

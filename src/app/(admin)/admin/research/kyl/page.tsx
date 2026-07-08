@@ -36,7 +36,7 @@ const CONFIDENCE_STYLES: Record<Confidence, string> = {
 }
 
 function fmt(n: number) {
-  if (n === 0) return "—"
+  if (n === 0) return " - "
   return n.toLocaleString("en-IN")
 }
 
@@ -185,7 +185,7 @@ const METHODOLOGY = {
   developers: [
     {
       label: "JLL India Land Transactions 2024 report",
-      detail: "JLL publishes an annual land deal tracker for institutional transactions above ~5 acres. Extracted deal count, acreage, and value for each city. This covers all developer categories — residential, commercial, industrial. Metro cities (Mumbai, Pune, Bengaluru, Hyderabad, Delhi NCR) classified as high confidence.",
+      detail: "JLL publishes an annual land deal tracker for institutional transactions above ~5 acres. Extracted deal count, acreage, and value for each city. This covers all developer categories - residential, commercial, industrial. Metro cities (Mumbai, Pune, Bengaluru, Hyderabad, Delhi NCR) classified as high confidence.",
     },
     {
       label: "Colliers India Real Estate 2026 report",
@@ -197,7 +197,7 @@ const METHODOLOGY = {
     },
     {
       label: "RERA + Indiastat for Tier-2 developer markets",
-      detail: "For states like Rajasthan, MP, UP, WB, Bihar — RERA project registrations indicate developer-acquired land parcels. Transactions below 5 acres are under-tracked by JLL/Colliers; estimated from RERA project pipeline and Indiastat data. Marked low confidence.",
+      detail: "For states like Rajasthan, MP, UP, WB, Bihar - RERA project registrations indicate developer-acquired land parcels. Transactions below 5 acres are under-tracked by JLL/Colliers; estimated from RERA project pipeline and Indiastat data. Marked low confidence.",
     },
     {
       label: "Transaction count vs. deal multiplier",
@@ -219,7 +219,7 @@ const METHODOLOGY = {
     },
     {
       label: "Interpretation caveat",
-      detail: "Broker listing count is a proxy for market activity, not closed transactions. One broker may post the same plot on both portals (double counting risk estimated at 15–20% in metros). Each listing does not equal a unique plot — same plot can be re-listed by multiple agents.",
+      detail: "Broker listing count is a proxy for market activity, not closed transactions. One broker may post the same plot on both portals (double counting risk estimated at 15–20% in metros). Each listing does not equal a unique plot - same plot can be re-listed by multiple agents.",
     },
   ],
   banksInsurers: [
@@ -229,11 +229,11 @@ const METHODOLOGY = {
     },
     {
       label: "15% plot loan share methodology",
-      detail: "NHB does not separately classify 'plot loans' vs 'home construction loans' in all states. Applied the ~15% estimate from NHB's own commentary in the FY2024-25 report which notes plot/land loans constitute ~14–16% of total housing loan portfolios at major HFCs. This is the key assumption — marked medium confidence.",
+      detail: "NHB does not separately classify 'plot loans' vs 'home construction loans' in all states. Applied the ~15% estimate from NHB's own commentary in the FY2024-25 report which notes plot/land loans constitute ~14–16% of total housing loan portfolios at major HFCs. This is the key assumption - marked medium confidence.",
     },
     {
       label: "RBI DBIE cross-check",
-      detail: "RBI's Database on Indian Economy (DBIE) publishes state-wise priority-sector lending data which includes home loans. Used this to cross-verify NHB state totals for the top 10 states. Discrepancies were typically under 8% — within rounding error.",
+      detail: "RBI's Database on Indian Economy (DBIE) publishes state-wise priority-sector lending data which includes home loans. Used this to cross-verify NHB state totals for the top 10 states. Discrepancies were typically under 8% - within rounding error.",
     },
     {
       label: "Why banks matter for KYL",
@@ -251,7 +251,7 @@ const METHODOLOGY = {
     },
     {
       label: "Funding disclosures for private firms (medium/low)",
-      detail: "NoBroker's revenue estimated from funding round disclosures and media interviews by founders (CEO Amit Agarwal has publicly discussed revenue milestones). Anarock revenue from General Atlantic investment press releases and media coverage. These are not filed accounts — treated as directional estimates.",
+      detail: "NoBroker's revenue estimated from funding round disclosures and media interviews by founders (CEO Amit Agarwal has publicly discussed revenue milestones). Anarock revenue from General Atlantic investment press releases and media coverage. These are not filed accounts - treated as directional estimates.",
     },
     {
       label: "Historical reconstruction (FY2021–FY2022)",
@@ -263,7 +263,7 @@ const METHODOLOGY = {
     },
     {
       label: "Market size (₹8,420 Cr organised)",
-      detail: "Summed FY2025 revenue estimates of the 12 tracked firms. Unorganised market (₹19,000 Cr) estimated as the residual: India has ~1.2 million registered real estate agents (RERA estimate) of which ~95% operate outside top-10 firms — their aggregate commission income at ₹15,000–20,000 avg deal commission × estimated annual transactions.",
+      detail: "Summed FY2025 revenue estimates of the 12 tracked firms. Unorganised market (₹19,000 Cr) estimated as the residual: India has ~1.2 million registered real estate agents (RERA estimate) of which ~95% operate outside top-10 firms - their aggregate commission income at ₹15,000–20,000 avg deal commission × estimated annual transactions.",
     },
   ],
 }
@@ -299,14 +299,14 @@ function TotalTable() {
             <tr key={seg} className="border-b border-border/50">
               <td className="py-3 pr-4 text-ink font-medium">{seg}</td>
               <td className="py-3 pr-4 text-ink text-right">{fmt(v.transactions)}</td>
-              <td className="py-3 pr-4 text-ink/60 text-right">{v.area_sqft > 0 ? fmt(Math.round(v.area_sqft)) : "—"}</td>
-              <td className="py-3 text-ink text-right">{v.value_cr > 0 ? `₹ ${fmt(v.value_cr)}` : "—"}</td>
+              <td className="py-3 pr-4 text-ink/60 text-right">{v.area_sqft > 0 ? fmt(Math.round(v.area_sqft)) : " - "}</td>
+              <td className="py-3 text-ink text-right">{v.value_cr > 0 ? `₹ ${fmt(v.value_cr)}` : " - "}</td>
             </tr>
           ))}
           <tr className="bg-peach-dark/10">
             <td className="py-3 pr-4 text-ink font-bold">Total</td>
             <td className="py-3 pr-4 text-ink font-bold text-right">{fmt(TOTAL.transactions)}</td>
-            <td className="py-3 pr-4 text-ink/60 font-bold text-right">{TOTAL.area_sqft > 0 ? fmt(Math.round(TOTAL.area_sqft)) : "—"}</td>
+            <td className="py-3 pr-4 text-ink/60 font-bold text-right">{TOTAL.area_sqft > 0 ? fmt(Math.round(TOTAL.area_sqft)) : " - "}</td>
             <td className="py-3 text-ink font-bold text-right">₹ {fmt(TOTAL.value_cr)}</td>
           </tr>
         </tbody>
@@ -386,7 +386,7 @@ function IndividualBuyersTable() {
                   <td className="py-2.5 pr-3 text-ink/50 text-xs">
                     {stEntry ? (
                       <a href={stEntry.source_url} target="_blank" rel="noopener noreferrer" className="hover:text-ink underline underline-offset-2">
-                        {stEntry.source.split("—")[0].trim()}
+                        {stEntry.source.split(" - ")[0].trim()}
                       </a>
                     ) : !isExpandable ? (
                       <a href={rows[0].source_url} target="_blank" rel="noopener noreferrer" className="hover:text-ink underline underline-offset-2">
@@ -424,7 +424,7 @@ function IndividualBuyersTable() {
                         <td className="py-2 pr-3 text-ink/40 text-right text-xs">₹ {fmt(othersValue)}</td>
                         <td className="py-2 pr-3 text-ink/30 text-xs">
                           <a href={stEntry!.source_url} target="_blank" rel="noopener noreferrer" className="hover:text-ink underline underline-offset-2">
-                            {stEntry!.source.split("—")[0].trim()}
+                            {stEntry!.source.split(" - ")[0].trim()}
                           </a>
                         </td>
                         <td className="py-2"><ConfidenceBadge c="low" /></td>
@@ -784,7 +784,7 @@ function AdvisoryTable() {
                       const entry = revenueMap.get(y)
                       return (
                         <td key={y} className={`py-2.5 pr-3 text-right text-sm font-medium ${entry ? ADVISORY_CONF_STYLES[entry.confidence] : "text-ink/20"}`}>
-                          {entry ? fmt(entry.revenue_cr) : "—"}
+                          {entry ? fmt(entry.revenue_cr) : " - "}
                         </td>
                       )
                     })}
@@ -886,7 +886,7 @@ type VastuCompetitor = {
 }
 
 function fmtFunding(usd: number): string {
-  if (usd === 0) return "—"
+  if (usd === 0) return " - "
   if (usd >= 1_000_000) return `$${(usd / 1_000_000).toFixed(1)}M`
   return `$${(usd / 1_000).toFixed(0)}K`
 }
@@ -942,7 +942,7 @@ function ResearchCards({ items }: { items: ResearchCompetitor[] }) {
                 </div>
                 <p className="text-xs text-ink/65 font-sans leading-relaxed">{c.positioning}</p>
                 <div className="flex flex-wrap gap-3 mt-3 text-[11px] font-sans text-ink/40">
-                  <span>{fmtFunding(c.funding_usd) !== "—" ? `${fmtFunding(c.funding_usd)} · ${c.funding_stage}` : c.funding_stage}</span>
+                  <span>{fmtFunding(c.funding_usd) !== " - " ? `${fmtFunding(c.funding_usd)} · ${c.funding_stage}` : c.funding_stage}</span>
                   <span>· {c.employees.toLocaleString("en-IN")} people</span>
                 </div>
               </button>
@@ -993,7 +993,7 @@ function VastuCards({ items }: { items: VastuCompetitor[] }) {
       </div>
 
       <p className="text-xs text-ink/45 font-sans mb-5 leading-relaxed">
-        No Vastu app or consultant integrates with property addresses, land records, or due diligence data — this is the white space KYL can own with a plot-level Vastu score layer.
+        No Vastu app or consultant integrates with property addresses, land records, or due diligence data - this is the white space KYL can own with a plot-level Vastu score layer.
       </p>
 
       <div className="grid sm:grid-cols-2 gap-4">
@@ -1009,7 +1009,7 @@ function VastuCards({ items }: { items: VastuCompetitor[] }) {
                   </div>
                   <div className="flex flex-col items-end gap-1 flex-shrink-0">
                     <span className="text-[10px] font-sans font-medium bg-ink/6 text-ink/50 px-2 py-0.5 rounded-full whitespace-nowrap">{c.type}</span>
-                    {c.app_available && <span className="text-[10px] font-sans font-medium bg-blue-50 text-blue-600 px-2 py-0.5 rounded-full">App ★{c.app_store_rating ?? "—"}</span>}
+                    {c.app_available && <span className="text-[10px] font-sans font-medium bg-blue-50 text-blue-600 px-2 py-0.5 rounded-full">App ★{c.app_store_rating ?? " - "}</span>}
                   </div>
                 </div>
                 <p className="text-xs text-ink/65 font-sans leading-relaxed">{c.positioning}</p>
@@ -1157,7 +1157,7 @@ function ContentCreatorsTab() {
                   </div>
                 </div>
 
-                {/* Platform badges — linked */}
+                {/* Platform badges - linked */}
                 <div className="flex flex-wrap gap-1 mb-2">
                   {c.platforms.map(p => (
                     c.platform_urls[p] ? (
@@ -1288,7 +1288,7 @@ export default function KYLPage() {
     <div className="p-6 max-w-6xl mx-auto">
       {/* Header */}
       <div className="mb-6">
-        <h1 className="font-heading text-2xl font-bold text-ink">KYL — Know Your Land</h1>
+        <h1 className="font-heading text-2xl font-bold text-ink">KYL - Know Your Land</h1>
       </div>
 
       {/* Main tabs */}
@@ -1323,7 +1323,7 @@ export default function KYLPage() {
             <div className="bg-peach-dark/10 rounded-xl px-4 py-4">
               <p className="text-xs text-ink/50 font-sans mb-1">Total Area</p>
               <p className="text-2xl font-heading font-bold text-ink">
-                {TOTAL.area_sqft > 0 ? `${(TOTAL.area_sqft / 1e6).toFixed(1)}M` : "—"}
+                {TOTAL.area_sqft > 0 ? `${(TOTAL.area_sqft / 1e6).toFixed(1)}M` : " - "}
               </p>
               <p className="text-xs text-ink/40 font-sans mt-0.5">sq ft (developers)</p>
             </div>
@@ -1366,7 +1366,7 @@ export default function KYLPage() {
             {activeTab === "Banks / Insurers" && <BanksTable />}
           </div>
 
-          {/* Sources footer — only in Bottom-up Market */}
+          {/* Sources footer - only in Bottom-up Market */}
           <div className="mt-10 pt-6 border-t border-border">
             <p className="text-xs text-ink/40 font-sans font-medium mb-2">Data Sources</p>
             <div className="flex flex-wrap gap-x-4 gap-y-1">

@@ -12,7 +12,7 @@
     "state": "Karnataka",
     "total_transactions": 55000,
     "total_value_cr": 42000,
-    "source": "Kaveri Online — IGR Karnataka 2024-25",
+    "source": "Kaveri Online - IGR Karnataka 2024-25",
     "source_url": "https://kaverionline.karnataka.gov.in",
     "confidence": "medium",
     "notes": "Land and site registration transactions statewide from Kaveri portal annual report."
@@ -21,7 +21,7 @@
     "state": "Tamil Nadu",
     "total_transactions": 65000,
     "total_value_cr": 38000,
-    "source": "TNREGINET — IGR Tamil Nadu 2024-25",
+    "source": "TNREGINET - IGR Tamil Nadu 2024-25",
     "source_url": "https://www.tnreginet.net",
     "confidence": "medium",
     "notes": "Plot layout and independent house registrations filtered from TNREGINET annual data."
@@ -48,7 +48,7 @@
     "state": "Uttar Pradesh",
     "total_transactions": 85000,
     "total_value_cr": 45000,
-    "source": "IGRSUP — UP Registration Department 2024-25",
+    "source": "IGRSUP - UP Registration Department 2024-25",
     "source_url": "https://igrsup.gov.in",
     "confidence": "medium",
     "notes": "High-volume state; plot and bhumi registrations from IGRSUP data."

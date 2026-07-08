@@ -5,7 +5,7 @@ import { priyaGptSessions } from "@/lib/db/schema"
 import { eq } from "drizzle-orm"
 import { spendMinutes, InsufficientTimeError } from "@/lib/priya-gpt-time"
 
-// POST: add freshly bought minutes onto the caller's one chat thread — whether it's
+// POST: add freshly bought minutes onto the caller's one chat thread - whether it's
 // currently running, paused, or already timed out. There's only ever one thread per user,
 // so buying more time always continues the same conversation instead of starting a new one.
 export async function POST(req: NextRequest) {

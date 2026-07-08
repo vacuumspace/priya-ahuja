@@ -64,7 +64,7 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ list
       isPaid = !!purchase
     }
 
-    // Unpaid users may only ever see the fixed teaser slice — search and paging
+    // Unpaid users may only ever see the fixed teaser slice - search and paging
     // are both confined to it, so scripted pagination/search enumeration can't
     // reconstruct the full paid dataset.
     const teaserLimit = config.freePages * PAGE_SIZE

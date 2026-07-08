@@ -307,8 +307,8 @@ function TemplateTransactionsTab({ initialPurchases }: { initialPurchases: Purch
                 <td className="py-3 px-4 font-sans text-sm font-medium text-ink">{p.userName}</td>
                 <td className="py-3 px-4 font-sans text-sm text-ink/70">{p.userEmail}</td>
                 <td className="py-3 px-4 font-sans text-xs text-ink/60">{p.productTitle}</td>
-                <td className="py-3 px-4 font-sans text-sm font-medium text-ink">{p.amountPaid != null ? `₹${(p.amountPaid / 100).toLocaleString("en-IN")}` : "—"}</td>
-                <td className="py-3 px-4 font-sans text-xs text-ink/50">{p.razorpayPaymentId ?? "—"}</td>
+                <td className="py-3 px-4 font-sans text-sm font-medium text-ink">{p.amountPaid != null ? `₹${(p.amountPaid / 100).toLocaleString("en-IN")}` : " - "}</td>
+                <td className="py-3 px-4 font-sans text-xs text-ink/50">{p.razorpayPaymentId ?? " - "}</td>
                 <td className="py-3 px-4 font-sans text-xs text-ink/50">
                   {new Intl.DateTimeFormat("en-IN", { dateStyle: "medium", timeStyle: "short" }).format(new Date(p.createdAt))}
                 </td>

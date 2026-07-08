@@ -81,7 +81,7 @@ function SelectField({
         onChange={(e) => onChange(e.target.value)}
         className="w-full border border-border rounded-xl px-3.5 py-2.5 font-sans text-sm text-ink bg-cream focus:outline-none focus:ring-2 focus:ring-peach-dark/40 appearance-none"
       >
-        <option value="">— select —</option>
+        <option value=""> - select - </option>
         {options.map((o) => (
           <option key={o.value} value={o.value}>{o.label}</option>
         ))}

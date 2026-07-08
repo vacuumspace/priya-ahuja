@@ -27,36 +27,36 @@ export const templates: Template[] = [
     category: "fundraise",
     comingSoon: false,
     preview:
-      "7 battle-tested cold emails, 3 follow-up sequences, and 4 LinkedIn connection messages — each with notes on why they work.",
+      "7 battle-tested cold emails, 3 follow-up sequences, and 4 LinkedIn connection messages - each with notes on why they work.",
     sections: [
       {
-        heading: "Cold Email #1 — The Warm Intro Ask",
-        body: `**Subject:** Quick intro request — [Mutual contact] suggested I reach out
+        heading: "Cold Email #1 - The Warm Intro Ask",
+        body: `**Subject:** Quick intro request - [Mutual contact] suggested I reach out
 
 Hi [Investor first name],
 
 [Mutual contact] mentioned you've backed a few companies in [space] and thought there might be a fit with what we're building.
 
-I'm [Name], co-founder of [Company]. We [one-line what you do] — we've gone from 0 to [metric] in [timeframe] with no outside capital.
+I'm [Name], co-founder of [Company]. We [one-line what you do] - we've gone from 0 to [metric] in [timeframe] with no outside capital.
 
 Would you be open to a 20-minute call this week or next?
 
 [Your name]
 
 ---
-**Why it works:** The mutual contact creates instant trust. The metric does the heavy lifting — no pitch, no ask for money, just proof of traction. Keeping it under 80 words forces you to only include what matters.`,
+**Why it works:** The mutual contact creates instant trust. The metric does the heavy lifting - no pitch, no ask for money, just proof of traction. Keeping it under 80 words forces you to only include what matters.`,
       },
       {
-        heading: "Cold Email #2 — The Traction Lede",
-        body: `**Subject:** [Company] — ₹[X]L MRR, raising seed
+        heading: "Cold Email #2 - The Traction Lede",
+        body: `**Subject:** [Company] - ₹[X]L MRR, raising seed
 
 Hi [Investor first name],
 
-We crossed ₹[X]L MRR last month. We're raising a ₹[X]Cr seed round and keeping the round tight — 3–4 investors max.
+We crossed ₹[X]L MRR last month. We're raising a ₹[X]Cr seed round and keeping the round tight - 3–4 investors max.
 
 [Company] is [one-line description]. Our customers are [who], paying [ARPU], with [retention stat].
 
-I've been following your investments in [portfolio company] and [portfolio company] — I think there's a clear thesis match.
+I've been following your investments in [portfolio company] and [portfolio company] - I think there's a clear thesis match.
 
 Happy to send the deck or hop on a call.
 
@@ -66,16 +66,16 @@ Happy to send the deck or hop on a call.
 **Why it works:** Traction in the subject line filters for investors who care about the stage you're at. Leading with revenue signals you don't need permission to exist. The small round size creates scarcity.`,
       },
       {
-        heading: "Cold Email #3 — The Insight Email",
+        heading: "Cold Email #3 - The Insight Email",
         body: `**Subject:** Something I noticed about [their portfolio company's space]
 
 Hi [Investor first name],
 
-I've been watching [portfolio company] and [competitor] for the last year — there's a pattern in how [specific insight about the market].
+I've been watching [portfolio company] and [competitor] for the last year - there's a pattern in how [specific insight about the market].
 
 We're building [Company] because of exactly this. [2 sentences on what you do differently].
 
-We just closed [X customers / ₹XL ARR / X% month-on-month growth]. Raising a ₹[X]Cr seed — would love 20 minutes.
+We just closed [X customers / ₹XL ARR / X% month-on-month growth]. Raising a ₹[X]Cr seed - would love 20 minutes.
 
 [Your name]
 
@@ -83,12 +83,12 @@ We just closed [X customers / ₹XL ARR / X% month-on-month growth]. Raising a �
 **Why it works:** This positions you as a peer, not a supplicant. Investors who've backed a company in your space want to know what's changed. The insight demonstrates you're thinking at a strategic level, not just selling.`,
       },
       {
-        heading: "Cold Email #4 — The Direct Ask",
-        body: `**Subject:** Seed round — [Company], [space]
+        heading: "Cold Email #4 - The Direct Ask",
+        body: `**Subject:** Seed round - [Company], [space]
 
 [Investor first name],
 
-[Company] — [one-liner].
+[Company] - [one-liner].
 
 Numbers:
 - ₹[X]L MRR / [X] paying customers
@@ -104,15 +104,15 @@ Worth a call?
 [Your name]
 
 ---
-**Why it works:** Some investors prefer pure signal. No story, no flattery — just numbers. Use this for investors who've explicitly said they want concise outreach, or for second-tier targets where you don't have a warm intro.`,
+**Why it works:** Some investors prefer pure signal. No story, no flattery - just numbers. Use this for investors who've explicitly said they want concise outreach, or for second-tier targets where you don't have a warm intro.`,
       },
       {
-        heading: "Cold Email #5 — The Portfolio Angle",
-        body: `**Subject:** Saw your investment in [portfolio co] — building the next layer
+        heading: "Cold Email #5 - The Portfolio Angle",
+        body: `**Subject:** Saw your investment in [portfolio co] - building the next layer
 
 Hi [Investor first name],
 
-Your bet on [portfolio company] was early and right. We're building [Company] — [one-line] — which sits directly on top of / complements / is the enterprise version of what they built.
+Your bet on [portfolio company] was early and right. We're building [Company] - [one-line] - which sits directly on top of / complements / is the enterprise version of what they built.
 
 [Portfolio company] solved [X problem]. We're solving [Y problem] for [Z customer segment], which [portfolio company] deliberately left on the table.
 
@@ -121,15 +121,15 @@ We're at ₹[X]L ARR and raising ₹[X]Cr. Happy to share the deck.
 [Your name]
 
 ---
-**Why it works:** References something the investor already believes in. Framing yourself as additive (not competitive) to a portfolio company is smart — it signals you've done your homework and there's no portfolio conflict.`,
+**Why it works:** References something the investor already believes in. Framing yourself as additive (not competitive) to a portfolio company is smart - it signals you've done your homework and there's no portfolio conflict.`,
       },
       {
-        heading: "Cold Email #6 — Post-Event Reconnect",
+        heading: "Cold Email #6 - Post-Event Reconnect",
         body: `**Subject:** Good meeting you at [event]
 
 Hi [Investor first name],
 
-Enjoyed our 5 minutes at [event] — you mentioned [specific thing they said].
+Enjoyed our 5 minutes at [event] - you mentioned [specific thing they said].
 
 To follow up properly: [Company] is [one-liner]. We've hit [key traction metric] and are raising ₹[X]Cr.
 
@@ -138,15 +138,15 @@ Here's the deck: [link]. Would you be open to a proper conversation?
 [Your name]
 
 ---
-**Why it works:** References a real human moment. Most founders send generic follow-ups — this one proves you were actually listening. The deck link respects their time.`,
+**Why it works:** References a real human moment. Most founders send generic follow-ups - this one proves you were actually listening. The deck link respects their time.`,
       },
       {
-        heading: "Cold Email #7 — The Re-Engage",
-        body: `**Subject:** [Company] — update since we last spoke
+        heading: "Cold Email #7 - The Re-Engage",
+        body: `**Subject:** [Company] - update since we last spoke
 
 Hi [Investor first name],
 
-We spoke [X months ago] — you passed because [thing you remember they said, e.g. "the market felt early"].
+We spoke [X months ago] - you passed because [thing you remember they said, e.g. "the market felt early"].
 
 Since then:
 - [Milestone 1]
@@ -158,10 +158,10 @@ The market has moved. I'd love to revisit if you have 20 minutes.
 [Your name]
 
 ---
-**Why it works:** Investors who passed once are warm leads. They already know your story. Showing you remembered why they passed — and that you've addressed it — is one of the highest-conversion outreach moves. Keep the update list tight: 3 bullets max.`,
+**Why it works:** Investors who passed once are warm leads. They already know your story. Showing you remembered why they passed - and that you've addressed it - is one of the highest-conversion outreach moves. Keep the update list tight: 3 bullets max.`,
       },
       {
-        heading: "Follow-Up Sequence #1 — Standard 3-Email Sequence",
+        heading: "Follow-Up Sequence #1 - Standard 3-Email Sequence",
         body: `**Email 1 (Day 0):** Your cold email (use any of the 7 above).
 
 **Email 2 (Day 5):**
@@ -177,21 +177,21 @@ Happy to send a 2-pager if a full deck feels like too much right now.
 **Email 3 (Day 12):**
 Subject: Re: [original subject]
 
-Last nudge — I know inboxes are brutal.
+Last nudge - I know inboxes are brutal.
 
 If the timing isn't right or it's not a fit, totally fine. Just let me know and I'll stop following up.
 
 [Your name]
 
 ---
-**Why it works:** Three emails is the maximum before you damage the relationship. The second email offers a lower-commitment option (2-pager). The third email gives them an easy out — which paradoxically gets more replies than a hard push.`,
+**Why it works:** Three emails is the maximum before you damage the relationship. The second email offers a lower-commitment option (2-pager). The third email gives them an easy out - which paradoxically gets more replies than a hard push.`,
       },
       {
-        heading: "Follow-Up Sequence #2 — The Value Add",
+        heading: "Follow-Up Sequence #2 - The Value Add",
         body: `**Email 1 (Day 0):** Your cold email.
 
 **Email 2 (Day 6):**
-Subject: Something you might find useful — Re: [Company]
+Subject: Something you might find useful - Re: [Company]
 
 Hi [name],
 
@@ -204,18 +204,18 @@ Still happy to connect on [Company] when the timing works.
 [Your name]
 
 ---
-**Why it works:** Adds value before the ask. Positions you as someone worth knowing, not just another founder in the queue. Only works if the content you share is actually good and relevant — don't be generic.`,
+**Why it works:** Adds value before the ask. Positions you as someone worth knowing, not just another founder in the queue. Only works if the content you share is actually good and relevant - don't be generic.`,
       },
       {
-        heading: "Follow-Up Sequence #3 — The Traction Update",
+        heading: "Follow-Up Sequence #3 - The Traction Update",
         body: `**Email 1 (Day 0):** Your cold email.
 
 **Email 2 (Day 7):**
-Subject: Quick update — Re: [Company]
+Subject: Quick update - Re: [Company]
 
 Hi [name],
 
-Following up from last week. Also worth sharing: we just [new milestone — customer win, revenue jump, press, etc.].
+Following up from last week. Also worth sharing: we just [new milestone - customer win, revenue jump, press, etc.].
 
 Momentum is building. Still raising, still have room in the round.
 
@@ -224,24 +224,24 @@ Worth 20 minutes?
 [Your name]
 
 ---
-**Why it works:** Traction updates as follow-ups are the highest-converting follow-up type. It's not "did you see my email" — it's "things are moving, here's proof." If you can share a real update every 5–7 days, do it.`,
+**Why it works:** Traction updates as follow-ups are the highest-converting follow-up type. It's not "did you see my email" - it's "things are moving, here's proof." If you can share a real update every 5–7 days, do it.`,
       },
       {
         heading: "LinkedIn Messages",
         body: `**Connection Request Note (300 char max):**
-Hi [name] — I'm building [Company], [one-liner]. I've been following your work on [portfolio company / theme]. Would love to connect.
+Hi [name] - I'm building [Company], [one-liner]. I've been following your work on [portfolio company / theme]. Would love to connect.
 
 ---
 **First Message After Connection:**
 Thanks for connecting, [name].
 
-[Company] — [one-liner]. We're at [key metric] and raising ₹[X]Cr.
+[Company] - [one-liner]. We're at [key metric] and raising ₹[X]Cr.
 
-I know your time is valuable — happy to share a 1-pager or short deck if it makes sense to take a look.
+I know your time is valuable - happy to share a 1-pager or short deck if it makes sense to take a look.
 
 ---
 **Message if They View Your Profile But Don't Respond to Email:**
-Hi [name] — noticed you looked at my profile. I reached out via email last week about [Company]. Happy to send a deck or connect briefly if you'd like.
+Hi [name] - noticed you looked at my profile. I reached out via email last week about [Company]. Happy to send a deck or connect briefly if you'd like.
 
 ---
 **Why these work:** LinkedIn messages should be shorter than email. Under 100 words always. The profile-view message is very high-converting because it references a signal they gave you.
@@ -253,7 +253,7 @@ Hi [name] — noticed you looked at my profile. I reached out via email last wee
 - VC events (Blume portfolio days, Elevation Basecamp, Sequoia Surge): in-person events are the highest-converting channel. A 5-minute conversation at an event is worth 10 cold emails.`,
       },
       {
-        heading: "What Kills Cold Emails — And How to Fix Them",
+        heading: "What Kills Cold Emails - And How to Fix Them",
         body: `**Mistake #1: Too long**
 The average investor spends 8 seconds on a cold email. If your email requires scrolling, it gets archived.
 Fix: 80 words maximum. If you can't say it in 80 words, you don't know what you're asking.
@@ -269,8 +269,8 @@ Fix: Traction or insight in sentence 1. Background in sentence 2 if needed.
 Fix: The email gets a call. The call gets the meeting. The meeting gets the investment. Don't skip steps.
 
 **Mistake #4: Generic subject lines**
-❌ "Introduction — [Company Name]" / "Fundraising — [Sector]"
-✅ "[Company] — ₹40L MRR, raising seed" / "Something I noticed about your investment in [portfolio co]"
+❌ "Introduction - [Company Name]" / "Fundraising - [Sector]"
+✅ "[Company] - ₹40L MRR, raising seed" / "Something I noticed about your investment in [portfolio co]"
 Fix: Your subject line must make them feel something is in it for them specifically.
 
 **Mistake #5: Sending to the wrong person**
@@ -289,7 +289,7 @@ Fix: One specific, verifiable fact that makes the investor think "that's real."
 - Warm intro from another VC: 30–60% response rate
 - Alumni network intro: 15–30% response rate
 
-This is why warm intros are non-negotiable. Your first job is to get warm — not to write better cold emails.`,
+This is why warm intros are non-negotiable. Your first job is to get warm - not to write better cold emails.`,
       },
     ],
   },
@@ -319,11 +319,11 @@ Can you articulate the problem without referencing your solution?
 
 **3. Why Now**
 Do you have a specific answer to why this company couldn't have been built 3 years ago?
-✅ Pass: Regulatory change, infrastructure shift, or behaviour change happened — you can name it.
+✅ Pass: Regulatory change, infrastructure shift, or behaviour change happened - you can name it.
 ❌ Fail: Your answer is "the market is big and growing."
 
 **4. Why You**
-Do you have an unfair advantage — domain expertise, distribution, proprietary data, or network — that you can articulate clearly?
+Do you have an unfair advantage - domain expertise, distribution, proprietary data, or network - that you can articulate clearly?
 ✅ Pass: Your answer isn't just "we're passionate."
 ❌ Fail: Any team could build what you're building.
 
@@ -338,7 +338,7 @@ Can you explain how you make money, who pays, and what the unit economics look l
 ❌ Fail: "We'll figure out monetisation later."
 
 **7. Competition**
-Do you have a clear view of the competitive landscape — not just direct competitors but substitute behaviours?
+Do you have a clear view of the competitive landscape - not just direct competitors but substitute behaviours?
 ✅ Pass: You know why customers choose you over doing nothing.
 ❌ Fail: Your answer is "there's no real competition."
 
@@ -357,7 +357,7 @@ Do you have a single source of truth for MRR/ARR that you can pull up in 30 seco
 **10. Burn Rate**
 Do you know your exact monthly burn and runway to the day?
 ✅ Pass: You know this without opening a spreadsheet.
-❌ Fail: "Around ₹X lakhs" — vague is a red flag.
+❌ Fail: "Around ₹X lakhs" - vague is a red flag.
 
 **11. Unit Economics**
 Do you know your CAC, LTV, payback period, and gross margin?
@@ -403,7 +403,7 @@ Have all founders and early employees assigned IP to the company?
 
 **19. Founder Agreements**
 Do all founders have a formal shareholders' agreement with vesting?
-✅ Pass: 4-year vest, 1-year cliff — or a clear departure from standard that's documented.
+✅ Pass: 4-year vest, 1-year cliff - or a clear departure from standard that's documented.
 ❌ Fail: No vesting, or handshake agreements only.
 
 **20. ESOP Pool**
@@ -436,7 +436,7 @@ Is your MoM growth consistent (not driven by one spike)?
 **25. Customer Interviews**
 Have you done structured interviews with your top 10 customers in the last 90 days?
 ✅ Pass: Notes on file; you know exactly why they bought and what would make them leave.
-❌ Fail: "We talk to customers all the time" — without structured data.
+❌ Fail: "We talk to customers all the time" - without structured data.
 
 **26. NPS or Equivalent**
 Do you have a quantified measure of customer love?
@@ -514,27 +514,27 @@ Do you have 3 customers who would take a call from an investor on your behalf?
 
 **40. Data Room Folder**
 Do you have a clean, organised Google Drive / Notion data room?
-✅ Pass: Deck, model, legal docs, customer evidence — all accessible from one link.
+✅ Pass: Deck, model, legal docs, customer evidence - all accessible from one link.
 ❌ Fail: Files scattered across email threads.`,
       },
       {
-        heading: "Top 20 Questions Indian Investors Ask — And How to Answer Them",
+        heading: "Top 20 Questions Indian Investors Ask - And How to Answer Them",
         body: `These are the questions that come up in 80% of seed and pre-Series A meetings with Indian VCs. Prepare written answers to all 20 before your first meeting.
 
 ---
 **ON TRACTION & METRICS**
 
 **Q: What's your MRR/ARR and growth rate?**
-Don't just say the number. Say the trajectory: "We're at ₹45L MRR — up from ₹12L MRR six months ago. That's 25% MoM for the last 5 months." Growth rate with context is more valuable than the absolute number.
+Don't just say the number. Say the trajectory: "We're at ₹45L MRR - up from ₹12L MRR six months ago. That's 25% MoM for the last 5 months." Growth rate with context is more valuable than the absolute number.
 
 **Q: What's your churn?**
 Give gross and net. "Monthly gross churn is 3.5%. Net revenue retention is 112% because we have strong expansion from existing customers." If your churn is high, acknowledge it and explain the driver and fix.
 
 **Q: What does your cohort retention look like?**
-They want to see a cohort table — monthly revenue retained from each cohort over time. If you don't have this, build it before fundraising.
+They want to see a cohort table - monthly revenue retained from each cohort over time. If you don't have this, build it before fundraising.
 
 **Q: What's your CAC and LTV?**
-Don't bluff. If you don't have enough data for a reliable LTV, say: "We don't have 24-month cohort data yet, so our LTV estimate is based on [X] — but our gross margin is [Y]% and average contract length is [Z] months, implying LTV of ₹[A]." Transparent assumptions are better than confident wrong numbers.
+Don't bluff. If you don't have enough data for a reliable LTV, say: "We don't have 24-month cohort data yet, so our LTV estimate is based on [X] - but our gross margin is [Y]% and average contract length is [Z] months, implying LTV of ₹[A]." Transparent assumptions are better than confident wrong numbers.
 
 ---
 **ON MARKET & COMPETITION**
@@ -543,7 +543,7 @@ Don't bluff. If you don't have enough data for a reliable LTV, say: "We don't ha
 Lead with a bottoms-up calculation, not a Statista quote. "[X] companies in India with [Y] characteristic × ₹[Z] ACV = ₹[A] SAM." Then say your TAM and why you believe the market is growing.
 
 **Q: Who are your competitors and why do you win?**
-Name them. Don't say "there's no one doing exactly what we do" — they'll Google it and lose trust in you. Say: "The closest alternatives are [A] and [B]. Here's where we're genuinely better and where they're better than us. We win when [specific scenario]."
+Name them. Don't say "there's no one doing exactly what we do" - they'll Google it and lose trust in you. Say: "The closest alternatives are [A] and [B]. Here's where we're genuinely better and where they're better than us. We win when [specific scenario]."
 
 **Q: Why won't [well-funded competitor] crush you?**
 "They're solving [X]. We're solving [Y], which is a different use case / segment / geography. Their customers often need both. Also, [moat: data advantage / switching costs / specific distribution you have]."
@@ -558,16 +558,16 @@ CAC, LTV, payback period. Be ready to defend every assumption. If payback is > 1
 They want to understand your gross margin trajectory and whether the business gets better or worse at scale. "Today our gross margin is 65%. At 3x revenue, we expect it to reach 75% because [specific fixed cost leverage]."
 
 **Q: What's your pricing strategy?**
-"We charge ₹[X]/month for [Y users]. We've tested [lower price] and [higher price] — [higher price] converts as well and dramatically improves LTV. We're moving upmarket deliberately."
+"We charge ₹[X]/month for [Y users]. We've tested [lower price] and [higher price] - [higher price] converts as well and dramatically improves LTV. We're moving upmarket deliberately."
 
 ---
 **ON TEAM**
 
 **Q: Why are you the right team for this?**
-Don't just list credentials. Tell the story of why you specifically have insight that others don't. "I spent 6 years as finance head at a D2C company. I lived this problem — and I know where every existing solution falls short."
+Don't just list credentials. Tell the story of why you specifically have insight that others don't. "I spent 6 years as finance head at a D2C company. I lived this problem - and I know where every existing solution falls short."
 
 **Q: Who are you missing and who will you hire?**
-Show self-awareness. "We're thin on enterprise sales. The raise includes hiring a VP Sales with enterprise SaaS experience — we have 2 candidates in final stages."
+Show self-awareness. "We're thin on enterprise sales. The raise includes hiring a VP Sales with enterprise SaaS experience - we have 2 candidates in final stages."
 
 ---
 **ON FUNDRAISING**
@@ -579,13 +579,13 @@ Show self-awareness. "We're thin on enterprise sales. The raise includes hiring 
 Be direct. "We're raising at ₹20 Cr pre-money." Then justify it: "That's 18x our current ARR, in line with comparable seed raises for B2B SaaS at our growth rate in India."
 
 **Q: Who else are you talking to?**
-You don't have to reveal names. "We're in conversations with [X] other funds. We expect to close by [date]." Creating urgency is legitimate — just don't lie about it.
+You don't have to reveal names. "We're in conversations with [X] other funds. We expect to close by [date]." Creating urgency is legitimate - just don't lie about it.
 
 **Q: What happens if you don't raise?**
 "We have [X] months runway on current burn. We're also profitable on a contribution margin basis, so we can extend runway by [cutting X] if needed." Show you're not desperate.
 
 **Q: What's your exit strategy?**
-"We're building for the long term — but in this space, strategic acquirers would include [major banks / HR software consolidators / ERP players]. The most likely path is a strategic acquisition at Series B/C or an IPO if we reach ₹100 Cr ARR."`,
+"We're building for the long term - but in this space, strategic acquirers would include [major banks / HR software consolidators / ERP players]. The most likely path is a strategic acquisition at Series B/C or an IPO if we reach ₹100 Cr ARR."`,
       },
     ],
   },
@@ -594,19 +594,19 @@ You don't have to reveal names. "We're in conversations with [X] other funds. We
     slug: "first-10-customers-playbook",
     title: "First 10 Customers Playbook",
     description:
-      "The exact outreach scripts, pricing conversations, and close tactics used to land the first 10 paying customers — without a brand, a case study, or an ad budget.",
+      "The exact outreach scripts, pricing conversations, and close tactics used to land the first 10 paying customers - without a brand, a case study, or an ad budget.",
     price: 19900,
     tag: "playbook",
     category: "startup",
     comingSoon: false,
     preview:
-      "Scripts for cold outreach, discovery calls, objection handling, and pricing conversations — written for zero-proof-point situations.",
+      "Scripts for cold outreach, discovery calls, objection handling, and pricing conversations - written for zero-proof-point situations.",
     sections: [
       {
         heading: "Why the first 10 are different",
         body: `The first 10 customers are not a scaled-down version of what comes later. They're a different game entirely.
 
-Later, customers buy because others have. They trust your case studies, your brand, your reviews. In the beginning, they're buying *you* — your credibility, your conviction, your ability to make them feel like this is worth the risk.
+Later, customers buy because others have. They trust your case studies, your brand, your reviews. In the beginning, they're buying *you* - your credibility, your conviction, your ability to make them feel like this is worth the risk.
 
 Most founders try to skip to the end: deck, landing page, ad. That's a mistake. The first 10 require direct, human selling. No shortcuts.
 
@@ -614,7 +614,7 @@ This playbook is built for B2B SaaS and services with deal sizes between ₹5K a
       },
       {
         heading: "The List: Who to Target First",
-        body: `Before you write a single message, build a list of 50 potential first customers. Not 10 — 50. You'll convert roughly 20%, so you need the pipeline.
+        body: `Before you write a single message, build a list of 50 potential first customers. Not 10 - 50. You'll convert roughly 20%, so you need the pipeline.
 
 **Tier 1: Warm network (prioritise)**
 - Former colleagues at companies that match your ICP
@@ -639,17 +639,17 @@ This playbook is built for B2B SaaS and services with deal sizes between ₹5K a
       },
       {
         heading: "Outreach Scripts",
-        body: `**Warm Network — Email:**
+        body: `**Warm Network - Email:**
 
-Subject: Quick question — [their company]
+Subject: Quick question - [their company]
 
 Hi [Name],
 
 Hope you're well. I'm working on something new and you're literally the first person I thought of.
 
-I'm building [Company] — [one-liner]. Given your work at [their company], I think you might be facing [specific problem] right now.
+I'm building [Company] - [one-liner]. Given your work at [their company], I think you might be facing [specific problem] right now.
 
-I'm not pitching you — I'd genuinely love 20 minutes to understand how you currently [solve the problem]. And if what I'm building is relevant, I'll show you.
+I'm not pitching you - I'd genuinely love 20 minutes to understand how you currently [solve the problem]. And if what I'm building is relevant, I'll show you.
 
 Would Thursday or Friday work?
 
@@ -659,24 +659,24 @@ Would Thursday or Friday work?
 **Note:** "I'm not pitching you" does two things: (1) it lowers their guard, (2) it sets up a discovery call, not a sales call. You learn more in discovery calls.
 
 ---
-**Lukewarm — LinkedIn:**
+**Lukewarm - LinkedIn:**
 
-Hi [Name] — we met at [event / via mutual] a while back.
+Hi [Name] - we met at [event / via mutual] a while back.
 
-I'm building [Company] — [one-liner]. I think [their company] might be an interesting fit because [specific reason].
+I'm building [Company] - [one-liner]. I think [their company] might be an interesting fit because [specific reason].
 
 Would you be open to a 15-minute call? I'd genuinely love your take on the problem before I sell anything.
 
 ---
-**Cold — Email (only after warm channels exhausted):**
+**Cold - Email (only after warm channels exhausted):**
 
 Subject: [Specific trigger: "Saw your recent hire for [role]"]
 
 Hi [Name],
 
-Noticed [Company] recently [trigger event]. That usually means [implication — the problem your product solves].
+Noticed [Company] recently [trigger event]. That usually means [implication - the problem your product solves].
 
-I'm building [Company] — [one-liner]. We're early, which means you'd be a design partner with direct input on the product, not just a customer.
+I'm building [Company] - [one-liner]. We're early, which means you'd be a design partner with direct input on the product, not just a customer.
 
 Worth 20 minutes?
 
@@ -687,7 +687,7 @@ Worth 20 minutes?
         body: `**Structure (20–25 minutes):**
 
 **Opening (2 min):**
-"Thanks for making time. I want to be upfront — I'm early-stage and I'm talking to [X] people this week to understand the problem before I sell anything. So this is more of a learning conversation. Is that ok?"
+"Thanks for making time. I want to be upfront - I'm early-stage and I'm talking to [X] people this week to understand the problem before I sell anything. So this is more of a learning conversation. Is that ok?"
 
 This resets the dynamic. They relax. You get honest answers.
 
@@ -706,7 +706,7 @@ This resets the dynamic. They relax. You get honest answers.
 **The pivot (5 min):**
 Only after you've genuinely listened:
 
-"Based on what you've described — [summarise their problem back to them in their words] — that's exactly what [Company] is built for. Can I show you quickly?"
+"Based on what you've described - [summarise their problem back to them in their words] - that's exactly what [Company] is built for. Can I show you quickly?"
 
 ---
 **The close (3–5 min):**
@@ -720,12 +720,12 @@ If yes: "We're working with our first 10 customers as design partners. That mean
         heading: "Handling Objections",
         body: `**"Can I see a case study first?"**
 
-"I don't have one yet — you'd be one of the first. That's actually why I'm offering design partner pricing. The upside for you is you get to shape the product. Most of our best features will come from conversations like this one."
+"I don't have one yet - you'd be one of the first. That's actually why I'm offering design partner pricing. The upside for you is you get to shape the product. Most of our best features will come from conversations like this one."
 
 ---
 **"Can we start with a free trial?"**
 
-"I don't do free trials — not because I don't believe in the product, but because I've found that paid customers get 10x more value. When you've paid, you use it properly. Can we do ₹[X] for the first month with a full refund if it's not what I described?"
+"I don't do free trials - not because I don't believe in the product, but because I've found that paid customers get 10x more value. When you've paid, you use it properly. Can we do ₹[X] for the first month with a full refund if it's not what I described?"
 
 ---
 **"Your product is too early / you don't have all the features we need"**
@@ -737,14 +737,14 @@ If yes: "We're working with our first 10 customers as design partners. That mean
 
 "Of course. What specifically would you need to see to feel confident? [Listen.] If I can address that, would you be ready to go?"
 
-Never end a call without a specific next step — a date, a deliverable, or a clear "no."
+Never end a call without a specific next step - a date, a deliverable, or a clear "no."
 
 ---
 **"It's too expensive"**
 
 "What budget does make sense for solving [the problem]?" [Let them anchor.]
 
-If their number is workable: "I can work with ₹[X] for the first [period] — but I'd want a 6-month commitment so I can actually build something meaningful for you. Does that work?"`,
+If their number is workable: "I can work with ₹[X] for the first [period] - but I'd want a 6-month commitment so I can actually build something meaningful for you. Does that work?"`,
       },
       {
         heading: "After They Say Yes",
@@ -752,7 +752,7 @@ If their number is workable: "I can work with ₹[X] for the first [period] — 
 
 **Onboard personally.** Your first 10 customers get a 1:1 onboarding call with you. Not a Loom. Not a doc. You.
 
-**Set up a communication channel.** A shared WhatsApp group or Slack channel. Direct access to you. This is the design partner relationship — use it.
+**Set up a communication channel.** A shared WhatsApp group or Slack channel. Direct access to you. This is the design partner relationship - use it.
 
 **Ask for a referral.** After your first delivery milestone: "If this has been useful, is there one person at [peer company] you could introduce me to?" The first 10 customers are your most powerful distribution if they're happy.
 
@@ -760,13 +760,13 @@ If their number is workable: "I can work with ₹[X] for the first [period] — 
       },
       {
         heading: "Sample Discovery Call Transcript",
-        body: `This is what a good discovery call actually sounds like. Read it before your first call — then re-read it after.
+        body: `This is what a good discovery call actually sounds like. Read it before your first call - then re-read it after.
 
 ---
 **Context:** You're building a B2B SaaS tool that automates vendor invoice processing for D2C brands. You're calling Rahul, CFO at a ₹20 Cr/year skincare brand.
 
 ---
-**You:** Thanks for taking the time, Rahul. Quick context — I'm researching how D2C finance teams manage vendor invoices. I'm not pitching anything today; I genuinely want to understand your current process before I build. Is that okay?
+**You:** Thanks for taking the time, Rahul. Quick context - I'm researching how D2C finance teams manage vendor invoices. I'm not pitching anything today; I genuinely want to understand your current process before I build. Is that okay?
 
 **Rahul:** Sure, go ahead.
 
@@ -784,17 +784,17 @@ If their number is workable: "I can work with ₹[X] for the first [period] — 
 
 **You:** What have you tried to fix it?
 
-**Rahul:** We tried an accounting software plugin once — it couldn't handle the complexity of our vendor invoicing. We went back to manual.
+**Rahul:** We tried an accounting software plugin once - it couldn't handle the complexity of our vendor invoicing. We went back to manual.
 
 **You:** If you could wave a magic wand and fix one thing about this process, what would it be?
 
-**Rahul:** Honestly? Just flag the discrepancies automatically before they hit the books. I don't need to automate everything — I just need to know when something's off before it causes a problem.
+**Rahul:** Honestly? Just flag the discrepancies automatically before they hit the books. I don't need to automate everything - I just need to know when something's off before it causes a problem.
 
-**You:** [pause] Based on what you've described — manual matching, discrepancies slipping through, 3–4 days every month — that's exactly the problem we're solving. Can I show you what we've built? It'll take 5 minutes.
+**You:** [pause] Based on what you've described - manual matching, discrepancies slipping through, 3–4 days every month - that's exactly the problem we're solving. Can I show you what we've built? It'll take 5 minutes.
 
 **Rahul:** Sure.
 
-**You:** [demo — shows automated discrepancy flagging with one click]
+**You:** [demo - shows automated discrepancy flagging with one click]
 
 **You:** If this had flagged that ₹4L discrepancy automatically, would that have been worth ₹5,000 a month to you?
 
@@ -802,9 +802,9 @@ If their number is workable: "I can work with ₹[X] for the first [period] — 
 
 **You:** We're working with our first 10 design partners at ₹4,999/month. You'd have direct access to me, and I'd personally help with onboarding. The first month has a full refund if it's not what I described.
 
-**Rahul:** Let me think about it — can you send me something in writing?
+**Rahul:** Let me think about it - can you send me something in writing?
 
-**You:** Absolutely. Before I do — is there anything specific you'd need to see in writing that would make you confident to move forward?
+**You:** Absolutely. Before I do - is there anything specific you'd need to see in writing that would make you confident to move forward?
 
 ---
 **What worked in this call:**
@@ -812,15 +812,15 @@ If their number is workable: "I can work with ₹[X] for the first [period] — 
 - Specific follow-up questions ("How often?", "What have you tried?") → got to the real pain
 - Reflected their words back before pitching → showed genuine listening
 - Anchored price against a real cost (₹4L problem vs. ₹5K/month solution)
-- Didn't end with "I'll send something" — asked what would make them say yes`,
+- Didn't end with "I'll send something" - asked what would make them say yes`,
       },
       {
         heading: "India-Specific Notes for Your First 10",
         body: `**WhatsApp is your CRM for the first 10.**
-For your first 10 customers, WhatsApp will do more than any CRM. Create individual chats, not a group — they need to feel like the only customer. Send updates, share prototypes, get feedback. Most Indian SMB and startup founders are more responsive on WhatsApp than email.
+For your first 10 customers, WhatsApp will do more than any CRM. Create individual chats, not a group - they need to feel like the only customer. Send updates, share prototypes, get feedback. Most Indian SMB and startup founders are more responsive on WhatsApp than email.
 
 **The referral culture works differently in India.**
-Indian founders are generally willing to refer you to peers — but they need to have experienced a win first. Don't ask for a referral in the first week. Wait until you've delivered something concrete. Then ask specifically: "Is there anyone in [specific community — like YourStory network / IAN members / your XLRI batch] who faces this problem?"
+Indian founders are generally willing to refer you to peers - but they need to have experienced a win first. Don't ask for a referral in the first week. Wait until you've delivered something concrete. Then ask specifically: "Is there anyone in [specific community - like YourStory network / IAN members / your XLRI batch] who faces this problem?"
 
 **Communities to tap before cold outreach:**
 - iSPIRT SaaS community (B2B SaaS founders)
@@ -830,7 +830,7 @@ Indian founders are generally willing to refer you to peers — but they need to
 - Alumni networks: IIT/IIM alumni in relevant roles are highly accessible via LinkedIn
 
 **Pricing reality check for Indian B2B:**
-₹5,000–₹20,000/month is the sweet spot for early design partners in Indian SMB. For enterprise, ₹50,000–₹2,00,000/year is common for seed-stage pilots. Don't price below ₹3,000/month — customers who pay that little don't engage seriously.
+₹5,000–₹20,000/month is the sweet spot for early design partners in Indian SMB. For enterprise, ₹50,000–₹2,00,000/year is common for seed-stage pilots. Don't price below ₹3,000/month - customers who pay that little don't engage seriously.
 
 **The "chai pe charcha" close:**
 For local markets, in-person meetings convert 3x better than video calls. Offer to visit their office for the first 10 customers if they're in your city. "Let me come show you in person" is under-used and over-effective.`,
@@ -853,16 +853,16 @@ For local markets, in-person meetings convert 3x better than video calls. Offer 
         heading: "Who to hire first (and who to wait on)",
         body: `**The trap:** hiring people who look good on paper instead of people who solve your actual problem.
 
-**The rule:** your first 5 hires should be people who can own a problem entirely — not people who need to be managed.
+**The rule:** your first 5 hires should be people who can own a problem entirely - not people who need to be managed.
 
 **Hire first:**
 - Someone who can extend your technical capability (if you're not technical) or your go-to-market capability (if you are)
 - The role where your absence is the biggest bottleneck
 
 **Wait on:**
-- Specialists (data scientists, designers, legal) — use contractors until the work is consistent enough to justify full-time
-- Managers — you don't need management layers at 5 people
-- "Good to have" roles — only hire when you can articulate the specific outcome you expect in 90 days
+- Specialists (data scientists, designers, legal) - use contractors until the work is consistent enough to justify full-time
+- Managers - you don't need management layers at 5 people
+- "Good to have" roles - only hire when you can articulate the specific outcome you expect in 90 days
 
 **The 90-day test:** Before posting any role, write the sentence: "In 90 days, I'll know this hire worked if [specific, measurable outcome]." If you can't write that sentence, you're not ready to hire for the role.`,
       },
@@ -870,17 +870,17 @@ For local markets, in-person meetings convert 3x better than video calls. Offer 
         heading: "Job Description Templates",
         body: `**Full-Stack Engineer (Founding Engineer)**
 
-We're [Company] — [one-liner]. We've hit [traction]. We're building [X] and we need someone who can own the backend/frontend and not wait to be told what to build.
+We're [Company] - [one-liner]. We've hit [traction]. We're building [X] and we need someone who can own the backend/frontend and not wait to be told what to build.
 
 **What you'll do:**
 - Own [specific product area] end-to-end
-- Ship weekly — we move fast and you'll be expected to keep up
+- Ship weekly - we move fast and you'll be expected to keep up
 - Talk directly to customers and translate feedback into features
 
 **What we're looking for:**
 - [X]+ years building production systems (not just side projects)
 - Strong opinions about code quality, with the pragmatism to ship anyway
-- You've worked in a small team before — you know what it's like when there's no hand-holding
+- You've worked in a small team before - you know what it's like when there's no hand-holding
 
 **What we offer:**
 - ₹[X]–[X]L CTC + ESOP
@@ -893,12 +893,12 @@ We're [Company] — [one-liner]. We've hit [traction]. We're building [X] and we
 We have product-market fit and [traction]. Now we need to grow. We're looking for someone who can run experiments, not just write briefs.
 
 **What you'll do:**
-- Own user acquisition — figure out what works, double down, kill what doesn't
+- Own user acquisition - figure out what works, double down, kill what doesn't
 - Run [channels: SEO / paid / content / partnerships] with a clear ROI lens
 - Build the growth function from scratch
 
 **What we're looking for:**
-- You've grown something before — a product, a channel, a community
+- You've grown something before - a product, a channel, a community
 - You're comfortable with numbers (not just vibes-based marketing)
 - You've worked without a big team or big budget
 
@@ -931,7 +931,7 @@ Ask: "What's the fastest you've shipped something significant? What corners did 
 **Dimension 4: Communication (1–5)**
 Observed throughout the conversation.
 1 = Unclear, verbose, hard to follow
-3 = Clear but passive — waits to be asked
+3 = Clear but passive - waits to be asked
 5 = Crisp, proactive, calibrates to audience
 
 **Dimension 5: Role Fit (1–5)**
@@ -1025,7 +1025,7 @@ Looking forward to building together.
 
 ---
 **A note on ESOP conversations:**
-When a candidate asks about ESOP value, don't oversell. Say: "Our current valuation is ₹[X]Cr. Your [X] options represent [X]% of the company on a fully diluted basis. At our target exit of ₹[X]Cr, that's ₹[X] — but I'd rather you value it at zero and be pleasantly surprised."
+When a candidate asks about ESOP value, don't oversell. Say: "Our current valuation is ₹[X]Cr. Your [X] options represent [X]% of the company on a fully diluted basis. At our target exit of ₹[X]Cr, that's ₹[X] - but I'd rather you value it at zero and be pleasantly surprised."
 
 Founders who oversell ESOP create resentment when reality hits. Be conservative.`,
       },
@@ -1078,10 +1078,10 @@ Founders who oversell ESOP create resentment when reality hits. Be conservative.
 - C-suite hire at seed: 0.5–1.5%
 - C-suite hire at Series A: 0.2–0.8%
 
-**Practical note:** Early-stage startups in India typically pay 20–30% below market cash — ESOP bridges the gap. Be transparent about this trade-off. Candidates who aren't willing to take any risk on ESOP rarely perform well in startup environments.`,
+**Practical note:** Early-stage startups in India typically pay 20–30% below market cash - ESOP bridges the gap. Be transparent about this trade-off. Candidates who aren't willing to take any risk on ESOP rarely perform well in startup environments.`,
       },
       {
-        heading: "Onboarding Checklist — First 30/60/90 Days",
+        heading: "Onboarding Checklist - First 30/60/90 Days",
         body: `**BEFORE DAY 1:**
 ☐ Laptop ordered and set up (don't make them wait on day 1)
 ☐ All accounts created: email, Slack, GitHub/Notion/Jira, AWS/GCP
@@ -1090,7 +1090,7 @@ Founders who oversell ESOP create resentment when reality hits. Be conservative.
 
 **DAYS 1–7 (Orientation):**
 ☐ Company overview: where you are, where you're going, what the next 6 months look like
-☐ Product walkthrough: give them the full demo — same one you give investors
+☐ Product walkthrough: give them the full demo - same one you give investors
 ☐ Customer context: make them read 5 customer call recordings or transcripts
 ☐ Codebase / system walkthrough (for engineers): 30 minutes, not 3 hours
 ☐ First small task: something achievable in week 1 that gives them a win
@@ -1099,11 +1099,11 @@ Founders who oversell ESOP create resentment when reality hits. Be conservative.
 **Days 8–30 (Contribution):**
 ☐ First "real" project assigned with clear success criteria
 ☐ Daily async standup: "what did you do, what will you do, any blockers"
-☐ Weekly 1:1 with you (30 minutes, structured — see 1:1 template in Founder OS)
+☐ Weekly 1:1 with you (30 minutes, structured - see 1:1 template in Founder OS)
 ☐ Feedback at day 14: "here's what's going well, here's what I'd change"
 
 **Days 31–60 (Ownership):**
-☐ Own one area end-to-end — from problem definition to shipping
+☐ Own one area end-to-end - from problem definition to shipping
 ☐ Start building relationships with customers or partners independently
 ☐ Identify and fix one internal process that's broken
 
@@ -1114,7 +1114,7 @@ If the answer isn't a clear yes, have the hard conversation at day 60, not day 8
 **Day 90 Review (formal):**
 ☐ Review against the 90-day outcome you wrote before hiring
 ☐ Confirm employment (or extend probation with specific goals)
-☐ Set next 90-day goals together — their input, your sign-off
+☐ Set next 90-day goals together - their input, your sign-off
 
 **The single most common onboarding mistake:**
 Giving new hires too little to do in week 1. They feel useless. They doubt the company. They start updating their LinkedIn. Give them something real on day 1, even if it's rough.`,
@@ -1183,7 +1183,7 @@ A few bullets. What does the feature do? What does it *not* do?
 
 ---
 **Edge Cases / Open Questions**
-List anything unresolved. Don't hide ambiguity — surface it.
+List anything unresolved. Don't hide ambiguity - surface it.
 
 ---
 **Design / Technical Notes**
@@ -1236,14 +1236,14 @@ Effort: 2 weeks = 2
 
 RICE = (3 × 2 × 0.8) / 2 = **2.4**
 
-Build a table with all your candidate features, calculate their scores, sort by RICE descending. Then gut-check: does the ranking feel right? If not, your estimates are off — adjust them.`,
+Build a table with all your candidate features, calculate their scores, sort by RICE descending. Then gut-check: does the ranking feel right? If not, your estimates are off - adjust them.`,
       },
       {
         heading: "User Story Framework",
         body: `**The format:**
 As a [persona], when [context/trigger], I want to [action/goal] so that [outcome/benefit].
 
-**Why the trigger matters:** Most user stories skip the "when" — which means they describe a feature without anchoring it in a real moment. The trigger is what makes a story useful for design and engineering.
+**Why the trigger matters:** Most user stories skip the "when" - which means they describe a feature without anchoring it in a real moment. The trigger is what makes a story useful for design and engineering.
 
 ---
 **Examples:**
@@ -1317,7 +1317,7 @@ The retro is not a post-mortem. It's a calibration. Keep it short; act on one th
     slug: "growth-experiment-tracker",
     title: "Growth Experiment Tracker & Playbook",
     description:
-      "A structured system for running, tracking, and learning from growth experiments — with 30 pre-built experiment ideas across SEO, paid, content, and referral.",
+      "A structured system for running, tracking, and learning from growth experiments - with 30 pre-built experiment ideas across SEO, paid, content, and referral.",
     price: 19900,
     tag: "playbook",
     category: "startup",
@@ -1375,10 +1375,10 @@ If we [action/change], then [metric] will [increase/decrease] by [X]% because [m
 - Qualitative observations:
 
 **Decision:**
-☐ Scale — it worked, double down
-☐ Iterate — promising signal, change [X] and retest
-☐ Kill — no signal, move on
-☐ Inconclusive — run longer / with more volume
+☐ Scale - it worked, double down
+☐ Iterate - promising signal, change [X] and retest
+☐ Kill - no signal, move on
+☐ Inconclusive - run longer / with more volume
 
 **What we learned:**
 [Most important insight, even from failures]`,
@@ -1388,13 +1388,13 @@ If we [action/change], then [metric] will [increase/decrease] by [X]% because [m
         body: `These are real-world examples of how to run, measure, and learn from growth experiments. Use them as templates for your own log.
 
 ---
-**CASE STUDY 1: B2B SaaS — Competitor comparison page**
+**CASE STUDY 1: B2B SaaS - Competitor comparison page**
 
 **Company context:** HR-tech SaaS, ₹15L MRR, targeting Indian SMBs
 
 **Hypothesis:** If we create a "[Company] vs. [Competitor A]" comparison page targeting founders actively comparing HR tools, organic traffic from high-intent searchers will convert to demos at 3x the rate of our homepage (current: 1.2%).
 
-**What we built:** A 1,500-word comparison page — their strengths, our strengths, honest comparison table, 3 customer quotes. Took 2 days to write, 1 day to design and publish.
+**What we built:** A 1,500-word comparison page - their strengths, our strengths, honest comparison table, 3 customer quotes. Took 2 days to write, 1 day to design and publish.
 
 **Measurement:** Google Search Console (impressions, CTR), GA (page traffic), HubSpot (demo requests from that URL), 60-day window.
 
@@ -1406,13 +1406,13 @@ If we [action/change], then [metric] will [increase/decrease] by [X]% because [m
 - Demo requests from page: 11 = **3.9% conversion rate** (vs. 1.2% homepage)
 - CAC from this channel: ₹8,400 (vs. ₹22,000 from paid)
 
-**Decision:** Scale — build 3 more comparison pages for competitors B, C, D.
+**Decision:** Scale - build 3 more comparison pages for competitors B, C, D.
 
-**What we learned:** High-intent searchers (people already comparing tools) convert 3x better than cold traffic. Time investment (3 days) with indefinite SEO payoff — best ROI experiment we ran all quarter.
+**What we learned:** High-intent searchers (people already comparing tools) convert 3x better than cold traffic. Time investment (3 days) with indefinite SEO payoff - best ROI experiment we ran all quarter.
 
 ---
 
-**CASE STUDY 2: D2C — Reactivation email sequence**
+**CASE STUDY 2: D2C - Reactivation email sequence**
 
 **Company context:** Skincare brand, ₹40L monthly revenue, 18% monthly churn from subscription customers
 
@@ -1436,13 +1436,13 @@ If we [action/change], then [metric] will [increase/decrease] by [X]% because [m
 - Revenue recovered: ₹2.6L (87 × avg ₹3,000 order)
 - Cost: ₹0 (existing Klaviyo subscription)
 
-**Decision:** Iterate — test earlier trigger (45 days instead of 60) and personalise Email 1 with their last product ordered.
+**Decision:** Iterate - test earlier trigger (45 days instead of 60) and personalise Email 1 with their last product ordered.
 
 **What we learned:** Near-target performance but Email 3's discount was the primary converter (62% of reactivations came from that email). Test Email 3 earlier. Also: 42% open rate on "We miss you" = relationship-style subject lines outperform promotional ones.
 
 ---
 
-**CASE STUDY 3: B2B Services — Inbound lead magnet**
+**CASE STUDY 3: B2B Services - Inbound lead magnet**
 
 **Company context:** Fractional CFO services firm, 8 clients, targeting seed-stage startups
 
@@ -1464,9 +1464,9 @@ If we [action/change], then [metric] will [increase/decrease] by [X]% because [m
 - Clients signed from sequence: 3 = ₹4.5L ARR (at ₹1.5L/year per client)
 - Cost: 4 days to build the model, 1 day for landing page
 
-**Decision:** Scale — paid distribution (targeted LinkedIn ads to founders), build 2 more lead magnets (burn rate calculator, cap table simulator).
+**Decision:** Scale - paid distribution (targeted LinkedIn ads to founders), build 2 more lead magnets (burn rate calculator, cap table simulator).
 
-**What we learned:** The WhatsApp distribution generated 70% of traffic in the first week — more than LinkedIn. Founder communities sharing useful tools is more powerful than ads at this stage. The 3 clients came from the Day 7 email ("last chance" framing). Worth A/B testing Day 7 as Day 5.`,
+**What we learned:** The WhatsApp distribution generated 70% of traffic in the first week - more than LinkedIn. Founder communities sharing useful tools is more powerful than ads at this stage. The 3 clients came from the Day 7 email ("last chance" framing). Worth A/B testing Day 7 as Day 5.`,
       },
       {
         heading: "30 Pre-Built Experiment Ideas",
@@ -1580,7 +1580,7 @@ Test showing the upgrade prompt at 3 different moments in the user journey. Meas
     slug: "founder-weekly-operating-system",
     title: "Founder Weekly Operating System",
     description:
-      "A planning and review system for solo founders and small teams — weekly review template, OKR framework, decision log, and a meeting structure that doesn't waste everyone's time.",
+      "A planning and review system for solo founders and small teams - weekly review template, OKR framework, decision log, and a meeting structure that doesn't waste everyone's time.",
     price: 19900,
     tag: "templates",
     category: "startup",
@@ -1609,8 +1609,8 @@ None of this is complicated. The hard part is doing it every week without skippi
 **Section 1: Last week (10 minutes)**
 
 What was the single most important thing I said I'd do? Did I do it?
-[ ] Yes — [what happened]
-[ ] No — [honest reason why not]
+[ ] Yes - [what happened]
+[ ] No - [honest reason why not]
 
 What were the 3 biggest outcomes from last week?
 1.
@@ -1656,7 +1656,7 @@ What am I avoiding that I need to do?`,
         body: `**The setup:**
 One company-level objective. 3 key results. Revisited weekly for 5 minutes. Reviewed honestly at quarter end.
 
-That's it. If you have more than one objective, you don't have a strategy — you have a list.
+That's it. If you have more than one objective, you don't have a strategy - you have a list.
 
 ---
 **Objective format:**
@@ -1713,7 +1713,7 @@ Both people answer these in writing, 15 minutes before:
 **Meeting structure:**
 
 **0–5 min: Quick check-in**
-How are you actually doing? (Not work — person.)
+How are you actually doing? (Not work - person.)
 
 **5–15 min: Their agenda**
 They go first. What's on their mind? What do they want help with?
@@ -1730,13 +1730,13 @@ Anything else? Anything uncomfortable that didn't get said?
 ---
 **What not to do in 1:1s:**
 - Don't use them for status updates (use async for that)
-- Don't skip them when you're busy — that's exactly when they matter most
+- Don't skip them when you're busy - that's exactly when they matter most
 - Don't do all the talking
-- Don't wait for the 1:1 to give feedback — give it in the moment, use 1:1 to follow up`,
+- Don't wait for the 1:1 to give feedback - give it in the moment, use 1:1 to follow up`,
       },
       {
         heading: "Sample Filled-In Weekly Review & OKR Example",
-        body: `**SAMPLE WEEKLY REVIEW — Week of June 2, 2025**
+        body: `**SAMPLE WEEKLY REVIEW - Week of June 2, 2025**
 
 *This is a real-looking example of what a filled weekly review looks like. Use it as a reference for what good looks like.*
 
@@ -1744,12 +1744,12 @@ Anything else? Anything uncomfortable that didn't get said?
 **Section 1: Last week**
 
 What was the single most important thing I said I'd do?
-[x] Yes — Close Sahil (CFO at Myntra Foods) as our 8th paying customer.
+[x] Yes - Close Sahil (CFO at Myntra Foods) as our 8th paying customer.
 Result: Closed at ₹12,000/month. He referred us to their portfolio company immediately.
 
 What were the 3 biggest outcomes from last week?
-1. Crossed ₹1L MRR (₹1,04,000 — milestone we've been working toward for 6 weeks)
-2. Had discovery call with potential Series A lead (Elevation) — they want to see the model next week
+1. Crossed ₹1L MRR (₹1,04,000 - milestone we've been working toward for 6 weeks)
+2. Had discovery call with potential Series A lead (Elevation) - they want to see the model next week
 3. Shipped invoice-split feature that Rahul (customer #3) has been asking for since March
 
 What didn't get done?
@@ -1757,7 +1757,7 @@ What didn't get done?
 - Didn't finish the competitive analysis for the Elevation meeting. Push to Tuesday.
 
 What did I learn?
-Sahil's referral happened within 48 hours of closing him. This tells me referral velocity is high right now — I should be asking every new customer for intros within the first week, not the first month.
+Sahil's referral happened within 48 hours of closing him. This tells me referral velocity is high right now - I should be asking every new customer for intros within the first week, not the first month.
 
 ---
 **Section 2: This week**
@@ -1768,22 +1768,22 @@ If I achieve only one thing this week, it's: [Send Elevation a clean model that 
 
 This week's tasks:
 Monday: Send investor update (30 min), finish competitive analysis (2 hrs)
-Tuesday: Rebuild financial model — 3-year, India SaaS assumptions (4 hrs)
-Wednesday: Call with Elevation partner — practice pitch with Shreya first (90 min)
+Tuesday: Rebuild financial model - 3-year, India SaaS assumptions (4 hrs)
+Wednesday: Call with Elevation partner - practice pitch with Shreya first (90 min)
 Thursday: Follow-up on 3 pipeline prospects, send Elevation model
 Friday: Weekly retro with team, plan next week
 
 This week's blockers:
-Elevation wants our gross margin calculation — need to get the number from CA by Tuesday. Email him today.
+Elevation wants our gross margin calculation - need to get the number from CA by Tuesday. Email him today.
 
 ---
 **Section 3: Energy**
-Energy level: 8/10 — ₹1L MRR crossed feels like a real inflection point.
+Energy level: 8/10 - ₹1L MRR crossed feels like a real inflection point.
 Focus protection: No Slack after 7pm this week. Too many late-night spirals that don't produce decisions.
 What I'm avoiding: The contracts backlog. Need to just do 2 per day starting tomorrow.
 
 ---
-**SAMPLE QUARTERLY OKR — Q3 2025 (July–September)**
+**SAMPLE QUARTERLY OKR - Q3 2025 (July–September)**
 
 **Objective:** Finly becomes the default finance operations tool for D2C brands in India.
 
@@ -1799,7 +1799,7 @@ What I'm avoiding: The contracts backlog. Need to just do 2 per day starting tom
 ---
 **Weekly OKR check-in (example, Week 6 of Q3):**
 
-KR 1: ARR = ₹1.8 Cr. On track? **At risk.** Added only ₹30L ARR this week vs. ₹50L needed. Need to review pipeline — too many stalled deals in "proposal sent" stage. Action this week: personally call every stalled deal.
+KR 1: ARR = ₹1.8 Cr. On track? **At risk.** Added only ₹30L ARR this week vs. ₹50L needed. Need to review pipeline - too many stalled deals in "proposal sent" stage. Action this week: personally call every stalled deal.
 
 KR 2: NRR = 111%. On track? **Yes.** Expansion module shipped. Ayushi (customer #6) upgraded to the multi-entity plan last week.
 
@@ -1811,10 +1811,10 @@ KR 3: Enterprise customers = 2. On track? **Behind.** Only added 1 enterprise cu
 Objective: Finly becomes the default finance operations tool for D2C brands in India.
 
 KR 1: Target ₹2.5 Cr / Actual ₹2.1 Cr / Score 0.72
-What drove it: Strong new customer acquisition. Let down by 2 churns (both were SMBs below ₹3K/month — we'll raise floor price next quarter).
+What drove it: Strong new customer acquisition. Let down by 2 churns (both were SMBs below ₹3K/month - we'll raise floor price next quarter).
 
 KR 2: Target 115% / Actual 117% / Score 1.0 ✅
-What drove it: Expansion module — every multi-entity customer upgraded within 30 days of launch.
+What drove it: Expansion module - every multi-entity customer upgraded within 30 days of launch.
 
 KR 3: Target 5 enterprise / Actual 3 / Score 0.6
 What happened: Pipeline was there. Sales cycle longer than estimated. In Q4, start enterprise outreach in month 1 not month 2.
@@ -1853,7 +1853,7 @@ Under what circumstances would we revisit this?
 **Where to keep it:**
 A shared Notion page or Google Doc. Indexed by date and topic. Searchable.
 
-When someone raises a debate you've had before, link them to the entry instead of repeating the conversation. If the context has changed enough to warrant re-opening it, update the log — don't just discuss and forget again.
+When someone raises a debate you've had before, link them to the entry instead of repeating the conversation. If the context has changed enough to warrant re-opening it, update the log - don't just discuss and forget again.
 
 **Decisions worth logging:**
 - Pricing changes
@@ -1866,12 +1866,12 @@ When someone raises a debate you've had before, link them to the entry instead o
     ],
   },
 
-  // ─── FUNDRAISE — LEGAL & DEAL DOCS ───────────────────────────────────────────
+  // ─── FUNDRAISE - LEGAL & DEAL DOCS ───────────────────────────────────────────
   {
     slug: "term-sheet-template",
     title: "Term Sheet (CCD, CCPS, Equity, SAFE)",
     description:
-      "Ready-to-use term sheet templates for the four most common Indian fundraising instruments — Compulsorily Convertible Debentures, Preference Shares, Equity, and SAFE notes.",
+      "Ready-to-use term sheet templates for the four most common Indian fundraising instruments - Compulsorily Convertible Debentures, Preference Shares, Equity, and SAFE notes.",
     price: 19900,
     tag: "legal",
     category: "fundraise",
@@ -1880,7 +1880,7 @@ When someone raises a debate you've had before, link them to the entry instead o
     sections: [
       {
         heading: "CCD Term Sheet Template",
-        body: `**TERM SHEET — COMPULSORILY CONVERTIBLE DEBENTURES**
+        body: `**TERM SHEET - COMPULSORILY CONVERTIBLE DEBENTURES**
 
 Date: [DATE]
 Issuer: [COMPANY NAME], a Private Limited Company incorporated under the Companies Act, 2013 (CIN: [CIN])
@@ -1928,7 +1928,7 @@ Monthly MIS within 15 days of month-end; audited financials within 90 days of ye
       },
       {
         heading: "CCPS Term Sheet Template",
-        body: `**TERM SHEET — COMPULSORILY CONVERTIBLE PREFERENCE SHARES**
+        body: `**TERM SHEET - COMPULSORILY CONVERTIBLE PREFERENCE SHARES**
 
 Date: [DATE]
 Issuer: [COMPANY NAME]
@@ -1970,7 +1970,7 @@ CCPS holders shall have the right to tag along on any founder share sale exceedi
       },
       {
         heading: "Equity Term Sheet Template",
-        body: `**TERM SHEET — EQUITY INVESTMENT**
+        body: `**TERM SHEET - EQUITY INVESTMENT**
 
 Date: [DATE]
 Company: [COMPANY NAME]
@@ -1993,10 +1993,10 @@ Investor(s): [INVESTOR NAMES]
 | **Total** | **[X]** | **100%** |
 
 **4. Use of Proceeds**
-[X]% — Product & Engineering
-[X]% — Sales & Marketing
-[X]% — Team (Hiring)
-[X]% — Operations & G&A
+[X]% - Product & Engineering
+[X]% - Sales & Marketing
+[X]% - Team (Hiring)
+[X]% - Operations & G&A
 
 **5. Governance**
 Board composition post-investment: [X] Founders + [X] Investor Director(s) + [X] Independent Director(s)
@@ -2054,23 +2054,23 @@ If Company issues another SAFE with more favourable terms, this SAFE shall autom
 *[Signature block]*`,
       },
       {
-        heading: "Negotiation Notes — Key Clauses to Watch",
+        heading: "Negotiation Notes - Key Clauses to Watch",
         body: `**Liquidation Preference**
 - 1x non-participating is founder-friendly; push back hard on anything above 1x or participating preference
-- Participating preference means investors get their money back AND participate in remaining proceeds — avoid
+- Participating preference means investors get their money back AND participate in remaining proceeds - avoid
 
 **Anti-Dilution**
-- Broad-based weighted average: accounts for all outstanding shares including options — standard and acceptable
-- Full ratchet: adjusts your price down to the lowest new share price — avoid at all costs
-- Narrow-based: only counts issued shares — be cautious
+- Broad-based weighted average: accounts for all outstanding shares including options - standard and acceptable
+- Full ratchet: adjusts your price down to the lowest new share price - avoid at all costs
+- Narrow-based: only counts issued shares - be cautious
 
 **Valuation Cap (SAFE/CCD)**
 - Negotiate the cap at 2–3x your expected next round valuation
-- Too low a cap is worse than a higher discount rate — model both scenarios before agreeing
+- Too low a cap is worse than a higher discount rate - model both scenarios before agreeing
 
 **Protective Provisions**
 - Standard: veto on new share issuance, M&A, amendments to charter
-- Watch out for: operational veto (new hires above ₹X, budget approvals) — push back
+- Watch out for: operational veto (new hires above ₹X, budget approvals) - push back
 - Any approval threshold below simple majority is a red flag
 
 **Information Rights**
@@ -2091,7 +2091,7 @@ If Company issues another SAFE with more favourable terms, this SAFE shall autom
     slug: "valuation-methodologies",
     title: "Valuation Methodologies",
     description:
-      "A practical guide to the valuation methods used in Indian startup funding rounds — DCF, comparables, scorecard, and VC method — with worked examples.",
+      "A practical guide to the valuation methods used in Indian startup funding rounds - DCF, comparables, scorecard, and VC method - with worked examples.",
     price: 19900,
     tag: "guide",
     category: "fundraise",
@@ -2105,13 +2105,13 @@ If Company issues another SAFE with more favourable terms, this SAFE shall autom
 2. What the investor's return requirements look like from their end
 3. What dilution you can afford and still have enough to raise another round
 
-That said, understanding the methods investors use lets you argue your number credibly — and spot when someone is lowballing you.
+That said, understanding the methods investors use lets you argue your number credibly - and spot when someone is lowballing you.
 
 The four most relevant methods for Indian early-stage startups:
-1. **Comparable Transactions (Comps)** — most commonly used in practice
-2. **VC Method** — used by seed/early-stage institutional investors
-3. **Scorecard Method** — used by angels and micro-VCs
-4. **DCF (Discounted Cash Flow)** — rarely used pre-Series A, but you'll encounter it at growth stage`,
+1. **Comparable Transactions (Comps)** - most commonly used in practice
+2. **VC Method** - used by seed/early-stage institutional investors
+3. **Scorecard Method** - used by angels and micro-VCs
+4. **DCF (Discounted Cash Flow)** - rarely used pre-Series A, but you'll encounter it at growth stage`,
       },
       {
         heading: "Comparable Transactions Method",
@@ -2160,7 +2160,7 @@ Post-money valuation = Exit Value ÷ Expected Multiple ÷ Dilution factor
 
 **Step 1: Estimate exit value**
 "In 7 years, what could this company be worth in an M&A or IPO?"
-Example: You're building a B2B SaaS — similar companies have exited at ₹500–1,000 Cr.
+Example: You're building a B2B SaaS - similar companies have exited at ₹500–1,000 Cr.
 Use: ₹750 Cr exit value
 
 **Step 2: Investor's required return**
@@ -2181,8 +2181,8 @@ Investor needs at entry: 8% ÷ 0.64 = 12.5% of company today
 If ₹3 Cr buys 12.5%, the post-money valuation = ₹3 Cr ÷ 0.125 = ₹24 Cr post-money
 
 **Using this:**
-- If investor offers ₹3 Cr at ₹15 Cr post-money (20% ownership), they need a 30x+ exit at ₹750 Cr — that math rarely works for a 1x fund. Push back.
-- If they offer ₹3 Cr at ₹30 Cr post-money (10%), they need only 15x at exit — much more standard`,
+- If investor offers ₹3 Cr at ₹15 Cr post-money (20% ownership), they need a 30x+ exit at ₹750 Cr - that math rarely works for a 1x fund. Push back.
+- If they offer ₹3 Cr at ₹30 Cr post-money (10%), they need only 15x at exit - much more standard`,
       },
       {
         heading: "Scorecard Method & DCF Primer",
@@ -2215,43 +2215,43 @@ At Series B+, investors will model a DCF. Key inputs:
 - 5–7 year revenue forecast
 - EBITDA margin trajectory
 - Terminal growth rate (3–5% for mature businesses)
-- WACC (Weighted Average Cost of Capital) — typically 18–25% for Indian growth companies
+- WACC (Weighted Average Cost of Capital) - typically 18–25% for Indian growth companies
 - Terminal value = Year 7 EBITDA × EV/EBITDA multiple (12–18x for SaaS)
 
-Don't lead with a DCF in early-stage pitches — it signals you don't understand how early-stage investing works.`,
+Don't lead with a DCF in early-stage pitches - it signals you don't understand how early-stage investing works.`,
       },
       {
         heading: "India Valuation Benchmarks & Worked Example",
         body: `**INDIA STARTUP VALUATION BENCHMARKS (2024–25)**
 
-These are real ranges based on publicly reported rounds and VC conversations. Use them as sanity checks — not as floor or ceiling.
+These are real ranges based on publicly reported rounds and VC conversations. Use them as sanity checks - not as floor or ceiling.
 
-**B2B SaaS — Pre-Seed / Angel**
+**B2B SaaS - Pre-Seed / Angel**
 | ARR | Typical Pre-Money Valuation | Multiple |
 |---|---|---|
 | Pre-revenue / MVP | ₹3–8 Cr | N/A (team + market bet) |
 | ₹10–30L ARR | ₹5–15 Cr | 15–30x ARR |
 | ₹30–80L ARR | ₹12–30 Cr | 15–25x ARR |
 
-**B2B SaaS — Seed**
+**B2B SaaS - Seed**
 | ARR | Typical Pre-Money Valuation | Multiple |
 |---|---|---|
 | ₹50L–₹1.5 Cr | ₹15–40 Cr | 15–25x ARR |
 | ₹1.5–3 Cr | ₹30–70 Cr | 18–25x ARR |
 
-**B2B SaaS — Pre-Series A**
+**B2B SaaS - Pre-Series A**
 | ARR | Typical Pre-Money Valuation | Multiple |
 |---|---|---|
 | ₹3–6 Cr | ₹50–120 Cr | 15–22x ARR |
 | ₹6–12 Cr | ₹100–200 Cr | 15–20x ARR |
 
-**Fintech — Seed**
+**Fintech - Seed**
 | Metric | Range | Note |
 |---|---|---|
 | TPV-based | ₹10–30 Cr valuation per ₹100 Cr monthly TPV | Regulatory risk discount applied |
 | Revenue-based | 10–18x revenue | Lower than pure SaaS due to take-rate compression risk |
 
-**D2C — Seed**
+**D2C - Seed**
 | Revenue | Typical Pre-Money | Multiple |
 |---|---|---|
 | ₹1–3 Cr monthly revenue | ₹15–40 Cr | 2–4x annualised revenue |
@@ -2287,7 +2287,7 @@ Investor needs: 15x on ₹3 Cr investment = ₹45 Cr return needed
 Ownership needed at exit: ₹45 Cr / ₹300 Cr = 15%
 Post-dilution ownership needed today: 15% / 0.64 = 23.4%
 Implied post-money: ₹3 Cr / 23.4% = ₹12.8 Cr
-Pre-money: **₹9.8 Cr** (much lower — VCs will push this down)
+Pre-money: **₹9.8 Cr** (much lower - VCs will push this down)
 
 **Method 3: Scorecard**
 Bangalore B2B SaaS baseline = ₹12 Cr pre-money (current market)
@@ -2306,7 +2306,7 @@ The founder who goes in asking for ₹36 Cr pre-money will be laughed out. The o
     slug: "transaction-documents",
     title: "Transaction Documents (SHA & SSA)",
     description:
-      "Annotated templates for Shareholders' Agreement (SHA) and Share Subscription Agreement (SSA) — the two core legal documents in every Indian VC funding transaction.",
+      "Annotated templates for Shareholders' Agreement (SHA) and Share Subscription Agreement (SSA) - the two core legal documents in every Indian VC funding transaction.",
     price: 19900,
     tag: "legal",
     category: "fundraise",
@@ -2314,7 +2314,7 @@ The founder who goes in asking for ₹36 Cr pre-money will be laughed out. The o
     preview: "Full SHA and SSA templates with clause-by-clause annotation on what to negotiate, what to accept, and what to reject.",
     sections: [
       {
-        heading: "SHA Key Clauses — Template & Annotation",
+        heading: "SHA Key Clauses - Template & Annotation",
         body: `**SHAREHOLDERS' AGREEMENT (KEY CLAUSES)**
 
 Between:
@@ -2324,23 +2324,23 @@ Between:
 4. [INVESTOR NAME] ("Investor")
 
 ---
-**CLAUSE 1 — DEFINITIONS**
+**CLAUSE 1 - DEFINITIONS**
 "Qualified Financing" means an equity financing with aggregate proceeds of at least ₹[X] Cr from one or more institutional investors.
 "Exit Event" means (a) an IPO; (b) a merger, acquisition, or consolidation resulting in a change of control; or (c) a sale of all or substantially all Company assets.
 
-*Annotation: Define Qualified Financing carefully — if the threshold is too low, minor bridges trigger conversion rights.*
+*Annotation: Define Qualified Financing carefully - if the threshold is too low, minor bridges trigger conversion rights.*
 
 ---
-**CLAUSE 5 — BOARD COMPOSITION**
+**CLAUSE 5 - BOARD COMPOSITION**
 5.1 The Board shall consist of [X] Directors.
 5.2 The Investor shall have the right to nominate [1/2] Director(s) to the Board.
 5.3 The Founders collectively shall have the right to nominate [X] Directors.
 5.4 [X] Independent Director(s) shall be appointed by mutual consent.
 
-*Annotation: Ensure your nominees always constitute a majority unless you've sold >50% — protect the casting vote.*
+*Annotation: Ensure your nominees always constitute a majority unless you've sold >50% - protect the casting vote.*
 
 ---
-**CLAUSE 8 — RESERVED MATTERS**
+**CLAUSE 8 - RESERVED MATTERS**
 The following actions require prior written consent of the Investor:
 (a) Issuance of any new shares or securities convertible into shares
 (b) Any amendment to the constitutional documents of the Company
@@ -2350,19 +2350,19 @@ The following actions require prior written consent of the Investor:
 (f) Declaration or payment of any dividend
 (g) Any single capital expenditure exceeding ₹[X]
 
-*Annotation: (g) is the most dangerous clause. Push for a high threshold — INR 50L+ at minimum for seed stage. Operational veto rights will strangle the company.*
+*Annotation: (g) is the most dangerous clause. Push for a high threshold - INR 50L+ at minimum for seed stage. Operational veto rights will strangle the company.*
 
 ---
-**CLAUSE 12 — VESTING AND LEAVER PROVISIONS**
+**CLAUSE 12 - VESTING AND LEAVER PROVISIONS**
 12.1 All Founder shares are subject to a 4-year vesting schedule with a 1-year cliff from [INCORPORATION DATE].
 12.2 Good Leaver: Departure due to death, permanent disability, or termination without cause. Unvested shares revert to the Company at Fair Market Value.
 12.3 Bad Leaver: Voluntary resignation or termination for cause within the vesting period. Unvested shares revert to the Company at face value (₹[X] per share).
 
-*Annotation: "For cause" must be exhaustively defined. Ensure it requires a Board resolution to invoke — unilateral investor invocation is a red flag.*`,
+*Annotation: "For cause" must be exhaustively defined. Ensure it requires a Board resolution to invoke - unilateral investor invocation is a red flag.*`,
       },
       {
-        heading: "SHA Key Clauses — Transfer Restrictions",
-        body: `**CLAUSE 14 — TRANSFER RESTRICTIONS**
+        heading: "SHA Key Clauses - Transfer Restrictions",
+        body: `**CLAUSE 14 - TRANSFER RESTRICTIONS**
 
 **14.1 Lock-in**
 No Founder shall transfer any shares during the Lock-in Period of [24/36] months from the Closing Date without prior written consent of the Investor.
@@ -2387,7 +2387,7 @@ In the event of any issuance of shares at a price per share lower than the price
 *Where: CP = Current Conversion Price; A = Fully diluted shares outstanding; B = Shares issuable for aggregate consideration at CP; C = Shares actually issued in Down Round*`,
       },
       {
-        heading: "SSA Template — Core Structure",
+        heading: "SSA Template - Core Structure",
         body: `**SHARE SUBSCRIPTION AGREEMENT**
 
 This Share Subscription Agreement ("Agreement") is entered into on [DATE] between:
@@ -2397,7 +2397,7 @@ This Share Subscription Agreement ("Agreement") is entered into on [DATE] betwee
 3. [INVESTOR NAME] ("Investor")
 
 ---
-**ARTICLE 2 — SUBSCRIPTION**
+**ARTICLE 2 - SUBSCRIPTION**
 
 2.1 The Investor agrees to subscribe to, and the Company agrees to allot and issue to the Investor, [X] [CCPS / Equity Shares / CCDs] at a price of ₹[X] per share, aggregating to a total subscription amount of ₹[AMOUNT] ("Subscription Amount").
 
@@ -2405,7 +2405,7 @@ This Share Subscription Agreement ("Agreement") is entered into on [DATE] betwee
 - First Tranche: ₹[X] on the Closing Date
 - Second Tranche: ₹[X] on achievement of [MILESTONE] (if applicable)
 
-**ARTICLE 3 — CONDITIONS PRECEDENT**
+**ARTICLE 3 - CONDITIONS PRECEDENT**
 
 3.1 The obligation of the Investor to subscribe is subject to:
 (a) Satisfactory completion of legal, financial, and technical due diligence
@@ -2415,7 +2415,7 @@ This Share Subscription Agreement ("Agreement") is entered into on [DATE] betwee
 (e) Shareholders' resolution (special resolution) approving the issue
 (f) Receipt of any regulatory approvals required under FEMA (for foreign investors)
 
-**ARTICLE 4 — REPRESENTATIONS & WARRANTIES**
+**ARTICLE 4 - REPRESENTATIONS & WARRANTIES**
 
 4.1 The Company and Founders represent and warrant that:
 (a) The Company is duly incorporated and in good standing
@@ -2425,7 +2425,7 @@ This Share Subscription Agreement ("Agreement") is entered into on [DATE] betwee
 (e) The Company has complied with all applicable laws, including labour, tax, and IP laws
 (f) The Company owns or has valid licenses to all IP used in the business
 
-**ARTICLE 7 — INDEMNIFICATION**
+**ARTICLE 7 - INDEMNIFICATION**
 
 7.1 The Founders shall indemnify the Investor against any loss arising from:
 (a) Any breach of representations and warranties
@@ -2440,7 +2440,7 @@ This Share Subscription Agreement ("Agreement") is entered into on [DATE] betwee
     slug: "data-bible",
     title: "Data Bible (Data Room)",
     description:
-      "A complete data room checklist and template structure for Series A and beyond — covering legal, financial, commercial, and technical due diligence documents.",
+      "A complete data room checklist and template structure for Series A and beyond - covering legal, financial, commercial, and technical due diligence documents.",
     price: 19900,
     tag: "checklist",
     category: "fundraise",
@@ -2451,20 +2451,20 @@ This Share Subscription Agreement ("Agreement") is entered into on [DATE] betwee
         heading: "Data Room Folder Structure",
         body: `**Recommended Google Drive / Notion structure:**
 
-📁 01 — Company Overview
+📁 01 - Company Overview
   - Company one-pager / executive summary
   - Pitch deck (latest version)
   - Company registration certificate
   - MOA / AOA
 
-📁 02 — Financials
+📁 02 - Financials
   - Audited P&L, Balance Sheet, Cash Flow (last 2–3 years)
   - Management accounts (last 12 months, monthly)
   - Financial model (3-year projections)
   - Cap table (current + post-investment)
   - Bank statements (last 3 months)
 
-📁 03 — Legal
+📁 03 - Legal
   - Shareholders' Agreement (existing)
   - Founders' Agreement
   - Employment agreements (key hires)
@@ -2473,26 +2473,26 @@ This Share Subscription Agreement ("Agreement") is entered into on [DATE] betwee
   - Vendor agreements (material)
   - NDA register
 
-📁 04 — Commercial
+📁 04 - Commercial
   - Customer list (with ARR, contract dates, renewal status)
   - Pipeline / CRM export
   - Churn analysis
   - Unit economics breakdown (CAC, LTV, payback)
   - Channel attribution data
 
-📁 05 — Product & Technology
+📁 05 - Product & Technology
   - Product roadmap
   - Architecture overview (non-sensitive)
   - Key technology dependencies / licenses
   - Security audit report (if available)
 
-📁 06 — Team
+📁 06 - Team
   - Org chart
   - Key employee profiles / LinkedIn
   - ESOP scheme document + allocation register
   - Offer letters (key hires)
 
-📁 07 — Compliance & Regulatory
+📁 07 - Compliance & Regulatory
   - GST registration
   - PF & ESI registration
   - ROC filings (last 2 years)
@@ -2500,7 +2500,7 @@ This Share Subscription Agreement ("Agreement") is entered into on [DATE] betwee
   - Any regulatory licences (fintech, healthcare, etc.)`,
       },
       {
-        heading: "Due Diligence Checklist — 60 Items",
+        heading: "Due Diligence Checklist - 60 Items",
         body: `**FINANCIAL DUE DILIGENCE**
 ☐ Audited financial statements (3 years)
 ☐ Monthly MIS for last 12 months
@@ -2536,7 +2536,7 @@ This Share Subscription Agreement ("Agreement") is entered into on [DATE] betwee
 **COMMERCIAL DUE DILIGENCE**
 ☐ Customer list with ARR and contract dates
 ☐ Top 10 customer profiles (use cases, health)
-☐ Churn analysis — monthly cohort data
+☐ Churn analysis - monthly cohort data
 ☐ Unit economics model (CAC, LTV, payback)
 ☐ Sales pipeline (current quarter)
 ☐ Marketing attribution breakdown
@@ -2566,7 +2566,7 @@ This Share Subscription Agreement ("Agreement") is entered into on [DATE] betwee
 - Full customer names in commercial data → replace with "Customer A, B, C"
 - Salary and compensation details for individuals
 - Personal data of employees (Aadhaar, PAN, address)
-- Login credentials, API keys, passwords — never in a data room
+- Login credentials, API keys, passwords - never in a data room
 - Unreleased product features or roadmap details you don't want leaked to competitors
 
 **Create tiered access:**
@@ -2574,7 +2574,7 @@ This Share Subscription Agreement ("Agreement") is entered into on [DATE] betwee
 - Tier 2 (Post-NDA): Full financials, customer list, legal documents
 - Tier 3 (Post-Term Sheet): Employee details, full contracts, bank statements
 
-**Use Google Drive folder permissions or Notion access control — never share an entire data room link in public channels or email threads with multiple parties.**
+**Use Google Drive folder permissions or Notion access control - never share an entire data room link in public channels or email threads with multiple parties.**
 
 **Before closing the round, revoke access for all investors who passed.**`,
       },
@@ -2584,27 +2584,27 @@ This Share Subscription Agreement ("Agreement") is entered into on [DATE] betwee
     slug: "financial-model-general",
     title: "Financial Model (General)",
     description:
-      "A clean, investor-ready 3-year financial model template for SaaS, D2C, and services businesses — with built-in scenario analysis and a cap table model.",
+      "A clean, investor-ready 3-year financial model template for SaaS, D2C, and services businesses - with built-in scenario analysis and a cap table model.",
     price: 19900,
     tag: "template",
     category: "fundraise",
     comingSoon: false,
-    preview: "P&L, cash flow, balance sheet, cohort model, unit economics, cap table, and scenario analysis — all linked and formula-driven.",
+    preview: "P&L, cash flow, balance sheet, cohort model, unit economics, cap table, and scenario analysis - all linked and formula-driven.",
     sections: [
       {
         heading: "Financial Model Structure & Setup",
         body: `**This model has 7 tabs:**
 
-1. **Inputs & Assumptions** — All hardcoded numbers live here. No hard-coding anywhere else.
-2. **Revenue Model** — Monthly recurring revenue, cohort churn, expansion, new ARR
-3. **Cost Model** — COGS, S&M, R&D, G&A broken into line items
-4. **P&L** — Profit & Loss statement (monthly, quarterly, annual)
-5. **Cash Flow** — Operating, investing, financing cash flows
-6. **Balance Sheet** — Summary balance sheet
-7. **Cap Table** — Pre/post money, dilution tracker
+1. **Inputs & Assumptions** - All hardcoded numbers live here. No hard-coding anywhere else.
+2. **Revenue Model** - Monthly recurring revenue, cohort churn, expansion, new ARR
+3. **Cost Model** - COGS, S&M, R&D, G&A broken into line items
+4. **P&L** - Profit & Loss statement (monthly, quarterly, annual)
+5. **Cash Flow** - Operating, investing, financing cash flows
+6. **Balance Sheet** - Summary balance sheet
+7. **Cap Table** - Pre/post money, dilution tracker
 
 ---
-**INPUTS TAB — KEY ASSUMPTIONS TO FILL IN:**
+**INPUTS TAB - KEY ASSUMPTIONS TO FILL IN:**
 
 *Growth Assumptions:*
 - New customers per month (Year 1 / Year 2 / Year 3): [X] / [X] / [X]
@@ -2627,7 +2627,7 @@ This Share Subscription Agreement ("Agreement") is entered into on [DATE] betwee
 - Office + infrastructure: ₹[X]/month`,
       },
       {
-        heading: "Revenue Model — Cohort Logic",
+        heading: "Revenue Model - Cohort Logic",
         body: `**MONTHLY COHORT LOGIC:**
 
 For each month, track:
@@ -2686,7 +2686,7 @@ Example: 120% growth + (−80)% margin = 40 ✅`,
 - ESOP pool: 10–15% pre-Series A
 - Investor ownership: 15–25% per round is standard
 
-**Dilution waterfall — example to Series B:**
+**Dilution waterfall - example to Series B:**
 - Pre-seed: Founders 80%, Angels 20%
 - Post-seed (20% dilution): Founders 64%, Angels 16%, Seed 20%
 - Post-Series A (20% dilution): Founders 51%, Angels 13%, Seed 16%, Series A 20%
@@ -2709,26 +2709,26 @@ Example: 120% growth + (−80)% margin = 40 ✅`,
         heading: "Deck Structure & Slide-by-Slide Guide",
         body: `**THE 12-SLIDE STRUCTURE:**
 
-1. **Cover** — Company name, tagline, contact. Nothing else.
-2. **Problem** — One slide. The problem your customer has today, not the one you've invented.
-3. **Solution** — One slide. What you do. Not how. The "what."
-4. **Product** — 1–2 screenshots or a demo GIF. Show, don't tell.
-5. **Market** — TAM/SAM/SOM. Bottom-up, not Statista.
-6. **Traction** — Your best metric, trend line, key milestones.
-7. **Business Model** — How you make money, who pays, unit economics.
-8. **Go-to-Market** — How you've grown, and how you'll grow with this capital.
-9. **Competition** — Competitive matrix. Be honest about who else is doing this.
-10. **Team** — Names, relevant experience, why you. Not a wall of logos.
-11. **Financials** — 3-year projections, current runway, use of funds.
-12. **The Ask** — How much, at what valuation, what you'll achieve.
+1. **Cover** - Company name, tagline, contact. Nothing else.
+2. **Problem** - One slide. The problem your customer has today, not the one you've invented.
+3. **Solution** - One slide. What you do. Not how. The "what."
+4. **Product** - 1–2 screenshots or a demo GIF. Show, don't tell.
+5. **Market** - TAM/SAM/SOM. Bottom-up, not Statista.
+6. **Traction** - Your best metric, trend line, key milestones.
+7. **Business Model** - How you make money, who pays, unit economics.
+8. **Go-to-Market** - How you've grown, and how you'll grow with this capital.
+9. **Competition** - Competitive matrix. Be honest about who else is doing this.
+10. **Team** - Names, relevant experience, why you. Not a wall of logos.
+11. **Financials** - 3-year projections, current runway, use of funds.
+12. **The Ask** - How much, at what valuation, what you'll achieve.
 
 ---
 **SLIDE PRINCIPLES:**
 - Max 30 words per slide in the body
-- One idea per slide — never combine two points
+- One idea per slide - never combine two points
 - Lead with data, support with narrative
 - Use consistent color scheme (2–3 colors max)
-- Every slide should be able to stand alone — investors often forward individual slides`,
+- Every slide should be able to stand alone - investors often forward individual slides`,
       },
       {
         heading: "Common Mistakes & India-Specific Notes",
@@ -2736,7 +2736,7 @@ Example: 120% growth + (−80)% margin = 40 ✅`,
 
 1. **Problem slide describes the solution**
 ❌ Wrong: "There is no single platform that manages startup fundraising"
-✅ Right: "Founders spend 300 hours on average fundraising — 60% of that time on admin"
+✅ Right: "Founders spend 300 hours on average fundraising - 60% of that time on admin"
 
 2. **Traction slide buries the lead**
 ❌ Wrong: Four metrics equally weighted, none prominent
@@ -2756,21 +2756,21 @@ Example: 120% growth + (−80)% margin = 40 ✅`,
 
 ---
 **INDIA-SPECIFIC NOTES:**
-- Indian VCs often read decks in WhatsApp forwards and screenshot chains — design for mobile readability
-- Regulatory landscape slide is valued for fintech, healthcare, edtech — add it if relevant
-- India-focused market size is more credible than global numbers — show you understand the local dynamics
-- References to prior Indian startup exits in your space build credibility — include them in the competition slide
-- Founder pedigree (IIT/IIM, prior startup, corporate experience) carries more weight in Indian VC than in the US — lead with it`,
+- Indian VCs often read decks in WhatsApp forwards and screenshot chains - design for mobile readability
+- Regulatory landscape slide is valued for fintech, healthcare, edtech - add it if relevant
+- India-focused market size is more credible than global numbers - show you understand the local dynamics
+- References to prior Indian startup exits in your space build credibility - include them in the competition slide
+- Founder pedigree (IIT/IIM, prior startup, corporate experience) carries more weight in Indian VC than in the US - lead with it`,
       },
       {
         heading: "Slide-by-Slide Detailed Annotations",
-        body: `**SLIDE 1 — COVER**
+        body: `**SLIDE 1 - COVER**
 What's on it: Company name, 1-line tagline, your name, email.
 What's NOT on it: anything else. No "confidential." No logos of investors or accelerators (yet).
 Tagline format: What you do for whom. "Automated reconciliation for D2C finance teams." Not a slogan.
 
 ---
-**SLIDE 2 — PROBLEM**
+**SLIDE 2 - PROBLEM**
 Goal: Make the investor feel the pain before they see the solution.
 - One specific scenario, told as a story: "A D2C brand with ₹5 Cr monthly revenue has 200 vendor invoices. Their accountant spends 4 days matching them. Last month, a ₹3L discrepancy slipped through."
 - Do NOT use the word "solution" on this slide.
@@ -2778,7 +2778,7 @@ Goal: Make the investor feel the pain before they see the solution.
 - One image or icon that reinforces the emotion (frustrated person, overflowing spreadsheet, missed deadline).
 
 ---
-**SLIDE 3 — SOLUTION**
+**SLIDE 3 - SOLUTION**
 Goal: Show what you do in one sentence and one image.
 - One screenshot of the product. Not a wireframe. The real thing.
 - Caption: "[Product name] does [specific thing] in [specific timeframe]."
@@ -2786,14 +2786,14 @@ Goal: Show what you do in one sentence and one image.
 - Avoid: "AI-powered platform." Say what the AI does: "Matches invoices to POs automatically."
 
 ---
-**SLIDE 4 — PRODUCT**
+**SLIDE 4 - PRODUCT**
 Goal: Show it working, not described.
 - 1–2 product screenshots showing the core workflow.
 - OR a 30-second GIF embedded in the deck (Canva/Figma support this).
 - Caption each screenshot with the outcome: "Invoice matched in 8 seconds" not "Invoice matching screen."
 
 ---
-**SLIDE 5 — MARKET**
+**SLIDE 5 - MARKET**
 Goal: Show the investor there's a large enough opportunity.
 - Build bottom-up: "[X] companies in India that [do Y] × ₹[Z] ACV = ₹[Cr] SAM."
 - TAM = total market if you had 100% share of your category.
@@ -2802,7 +2802,7 @@ Goal: Show the investor there's a large enough opportunity.
 - Sources: Your own estimates are fine if the logic is sound. Tracxn, Statista, Ministry of Commerce data for backing.
 
 ---
-**SLIDE 6 — TRACTION**
+**SLIDE 6 - TRACTION**
 The most important slide in the deck. Make the investor stop scrolling here.
 - Lead with your single best metric in 72pt font: "₹45L MRR" / "2,400 paying customers" / "180% NRR."
 - Support with a trend line (month-by-month for the last 6–12 months). Flat is bad. Consistent growth is good. One spike is a red flag.
@@ -2810,7 +2810,7 @@ The most important slide in the deck. Make the investor stop scrolling here.
 - Customer logos (if you can name them). Even 3 recognisable logos change the entire conversation.
 
 ---
-**SLIDE 7 — BUSINESS MODEL**
+**SLIDE 7 - BUSINESS MODEL**
 Goal: Explain who pays, how much, and why the unit economics work.
 - Pricing tiers (if SaaS): "₹5,000–₹25,000/month based on team size."
 - Key unit economics: "CAC ₹12,000 / LTV ₹96,000 / Payback 4 months."
@@ -2818,7 +2818,7 @@ Goal: Explain who pays, how much, and why the unit economics work.
 - Revenue mix: recurring vs. one-time if both exist.
 
 ---
-**SLIDE 8 — GO-TO-MARKET**
+**SLIDE 8 - GO-TO-MARKET**
 Goal: Show you understand how to grow.
 - What's working today: "Direct outbound + founder community referrals."
 - What you'll invest in with this capital: "Content + paid + 2 enterprise salespeople."
@@ -2826,31 +2826,31 @@ Goal: Show you understand how to grow.
 - Do NOT show a slide with 8 channels all at equal priority. Show focus.
 
 ---
-**SLIDE 9 — COMPETITION**
-Goal: Show you understand the landscape — and why you win.
+**SLIDE 9 - COMPETITION**
+Goal: Show you understand the landscape - and why you win.
 - Use a 2×2 matrix or simple table. X axis: one dimension. Y axis: another.
 - Position yourself in the top-right (better on both dimensions).
-- Name direct competitors. Don't say "there's no competition" — investors know there is.
+- Name direct competitors. Don't say "there's no competition" - investors know there is.
 - Acknowledge what competitors do well. Show where you beat them specifically.
 
 ---
-**SLIDE 10 — TEAM**
+**SLIDE 10 - TEAM**
 Goal: Show why this team will win.
 - For each founder: role, one-line credential, one specific thing they built/led/sold.
 - ❌ "Priya has 8 years of experience in finance and consulting."
-- ✅ "Priya — CFO, ex-Goldman Sachs, led ₹500 Cr IPO at 28."
+- ✅ "Priya - CFO, ex-Goldman Sachs, led ₹500 Cr IPO at 28."
 - Advisor logos if you have credible ones.
 - Hiring plan: "Raising to hire 2 engineers + 1 enterprise sales lead."
 
 ---
-**SLIDE 11 — FINANCIALS**
+**SLIDE 11 - FINANCIALS**
 - Current MRR/ARR + runway.
 - 3-year projection (revenue + EBITDA/loss).
 - Keep projections realistic. If Year 3 shows 10x revenue, show the assumptions that drive it.
 - Current burn rate and months of runway.
 
 ---
-**SLIDE 12 — THE ASK**
+**SLIDE 12 - THE ASK**
 Make this slide impossible to misread.
 - "Raising ₹[X] Cr seed / pre-Series A."
 - "At a pre-money valuation of ₹[X] Cr."
@@ -2871,7 +2871,7 @@ Make this slide impossible to misread.
     slug: "nda-fundraise",
     title: "Non-Disclosure Agreement (Fundraise)",
     description:
-      "A mutual NDA template designed for sharing confidential information with potential investors during fundraising — clean, enforceable, and founder-balanced.",
+      "A mutual NDA template designed for sharing confidential information with potential investors during fundraising - clean, enforceable, and founder-balanced.",
     price: 19900,
     tag: "legal",
     category: "fundraise",
@@ -2879,7 +2879,7 @@ Make this slide impossible to misread.
     preview: "Mutual NDA template with fundraise-specific carve-outs, practical guidance on when to use it, and a one-page simplified version.",
     sections: [
       {
-        heading: "Mutual NDA Template — Full Version",
+        heading: "Mutual NDA Template - Full Version",
         body: `**MUTUAL NON-DISCLOSURE AGREEMENT**
 
 This Mutual Non-Disclosure Agreement ("Agreement") is entered into as of [DATE] between:
@@ -2938,12 +2938,12 @@ This Agreement shall be governed by the laws of India. All disputes shall be sub
 - Details of pending regulatory applications
 
 **DON'T REQUIRE AN NDA FOR:**
-- Your pitch deck — investors see 10–20 decks per week. Requiring an NDA for a deck signals you're inexperienced and will significantly reduce the number who engage with you
+- Your pitch deck - investors see 10–20 decks per week. Requiring an NDA for a deck signals you're inexperienced and will significantly reduce the number who engage with you
 - Your high-level one-pager or executive summary
 - General product overview without technical specifics
 
 **PRACTICAL REALITY:**
-- Most institutional VCs in India will not sign NDAs at the pitch stage — this is standard practice globally, not a red flag
+- Most institutional VCs in India will not sign NDAs at the pitch stage - this is standard practice globally, not a red flag
 - Angels and family offices are more willing to sign
 - For serious investors who've expressed term sheet interest, an NDA for data room access is standard and expected
 
@@ -2953,7 +2953,7 @@ Instead of a paper NDA for data room access, use Google Drive / Notion access co
     ],
   },
 
-  // ─── STARTUP — LEGAL & BUSINESS DOCS ────────────────────────────────────────
+  // ─── STARTUP - LEGAL & BUSINESS DOCS ────────────────────────────────────────
   {
     slug: "kmp-agreement",
     title: "KMP Agreement",
@@ -3031,7 +3031,7 @@ During employment and for [12] months post-termination, the KMP shall not:
 **8. NON-COMPETE**
 For a period of [6–12] months post-termination, the KMP shall not engage in, or be employed by, any business that directly competes with the Company in [India / specified geography].
 
-*Note: Non-compete enforceability in India is limited under the Indian Contract Act — courts generally only enforce it during the period of employment. Post-employment non-compete must be reasonable in scope, geography, and duration.*
+*Note: Non-compete enforceability in India is limited under the Indian Contract Act - courts generally only enforce it during the period of employment. Post-employment non-compete must be reasonable in scope, geography, and duration.*
 
 **9. TERMINATION FOR CAUSE**
 The Company may terminate this Agreement immediately without notice or compensation in the event of:
@@ -3047,7 +3047,7 @@ The Company may terminate this Agreement immediately without notice or compensat
     slug: "employee-agreement",
     title: "Employee Agreement",
     description:
-      "A comprehensive employment agreement template for full-time hires — covering appointment, compensation, IP assignment, confidentiality, and exit provisions.",
+      "A comprehensive employment agreement template for full-time hires - covering appointment, compensation, IP assignment, confidentiality, and exit provisions.",
     price: 19900,
     tag: "legal",
     category: "startup",
@@ -3099,18 +3099,18 @@ All work product, software, inventions, or designs created by the Employee:
 shall be the sole property of the Company, and the Employee hereby assigns all rights therein.`,
       },
       {
-        heading: "Key Provisions — Annotated",
+        heading: "Key Provisions - Annotated",
         body: `**CONFIDENTIALITY**
 The Employee shall not disclose any Confidential Information during employment or for [2] years thereafter.
 
-*Annotation: Include a broad definition of confidential information — customer data, financials, product plans, trade secrets. Ensure the clause survives termination.*
+*Annotation: Include a broad definition of confidential information - customer data, financials, product plans, trade secrets. Ensure the clause survives termination.*
 
 **NON-SOLICITATION**
 For [12] months post-termination, the Employee shall not:
 (a) Recruit or solicit any Company employee
 (b) Solicit any customer or prospect the Employee dealt with in the last 12 months of employment
 
-*Annotation: This is generally enforceable in India, unlike blanket non-competes. Keep it targeted — broad non-solicit clauses are challenged in court.*
+*Annotation: This is generally enforceable in India, unlike blanket non-competes. Keep it targeted - broad non-solicit clauses are challenged in court.*
 
 **BACKGROUND VERIFICATION**
 This offer is subject to satisfactory background verification, including:
@@ -3137,7 +3137,7 @@ This Agreement shall be governed by Indian law and all disputes shall be subject
     slug: "gtm-plan",
     title: "GTM Plan",
     description:
-      "A go-to-market plan template for B2B and B2C startups — covering ICP definition, channel strategy, launch sequencing, and a 90-day execution calendar.",
+      "A go-to-market plan template for B2B and B2C startups - covering ICP definition, channel strategy, launch sequencing, and a 90-day execution calendar.",
     price: 19900,
     tag: "playbook",
     category: "startup",
@@ -3185,7 +3185,7 @@ For each potential channel, score on: Reach, Cost, Conversion, Time-to-Results
       },
       {
         heading: "90-Day GTM Calendar Template",
-        body: `**MONTH 1 — FOUNDATION (Days 1–30)**
+        body: `**MONTH 1 - FOUNDATION (Days 1–30)**
 
 Week 1–2:
 ☐ Finalise ICP (primary and secondary)
@@ -3202,7 +3202,7 @@ Week 3–4:
 ☐ Document objections and adjust messaging
 
 ---
-**MONTH 2 — TRACTION (Days 31–60)**
+**MONTH 2 - TRACTION (Days 31–60)**
 
 Week 5–6:
 ☐ Double down on the 1–2 channels showing signal
@@ -3212,12 +3212,12 @@ Week 5–6:
 
 Week 7–8:
 ☐ A/B test messaging: 3 variants of your core value prop
-☐ CAC/LTV calculation — first data points
+☐ CAC/LTV calculation - first data points
 ☐ Build case study from first customer
 ☐ Define renewal / retention play
 
 ---
-**MONTH 3 — SCALE (Days 61–90)**
+**MONTH 3 - SCALE (Days 61–90)**
 
 Week 9–10:
 ☐ Launch second acquisition channel
@@ -3231,7 +3231,7 @@ Week 11–12:
       },
       {
         heading: "Filled-In ICP Examples",
-        body: `**ICP EXAMPLE 1: B2B SaaS — Compliance automation for Indian SMBs**
+        body: `**ICP EXAMPLE 1: B2B SaaS - Compliance automation for Indian SMBs**
 
 Company Size: 50–300 employees
 Industry: Manufacturing, textiles, logistics
@@ -3248,37 +3248,37 @@ Biggest Objection: "Is this secure? Who else from our industry uses this?"
 **How to reach them:**
 - LinkedIn: Target "HR Manager" + "Manufacturing" + city
 - Industry associations: FICCI, CII SME chapters host events
-- CA referrals: CAs who service 100-employee manufacturers are the best channel — offer a referral fee
-- WhatsApp groups: Regional manufacturer WhatsApp communities (exist in every cluster — Surat textiles, Tiruppur garments, Pune auto-components)
+- CA referrals: CAs who service 100-employee manufacturers are the best channel - offer a referral fee
+- WhatsApp groups: Regional manufacturer WhatsApp communities (exist in every cluster - Surat textiles, Tiruppur garments, Pune auto-components)
 
 **What to say to them:**
 "Hi [Name], I saw [Company] recently opened an office in [city]. As you grow headcount, labour compliance across PF, ESI, and labour laws gets complicated fast. We help companies like yours stay audit-ready automatically. Worth a 15-minute call?"
 
 ---
 
-**ICP EXAMPLE 2: D2C — Skincare subscription brand targeting urban women**
+**ICP EXAMPLE 2: D2C - Skincare subscription brand targeting urban women**
 
 Demographic: Women, 27–40, Tier 1 cities (Mumbai, Delhi, Bangalore, Hyderabad)
 Income: ₹8L–₹25L household income
 Psychographic: Health-conscious, research-oriented, willing to pay premium for "clean" or "clinically backed"
 Trigger: Recently started paying attention to skin health (post-pandemic), OR dissatisfied with generic drugstore products, OR influenced by a specific skincare creator/community
-Key Pain: "I don't know which product is actually right for my skin type — I've wasted money on things that didn't work."
+Key Pain: "I don't know which product is actually right for my skin type - I've wasted money on things that didn't work."
 Alternative Today: Nykaa (generic), dermatologist (expensive, infrequent), YouTube research (overwhelming)
 Purchase Trigger: Recommendation from a friend, a content creator she follows, or a before/after she finds credible
 
 **How to reach them:**
-- Instagram: Influencers in the 10k–200k range (micro-influencers) with engaged beauty/skincare communities — better ROI than large celebrities
+- Instagram: Influencers in the 10k–200k range (micro-influencers) with engaged beauty/skincare communities - better ROI than large celebrities
 - Reddit/communities: r/IndianSkincareAddicts, Facebook groups for skincare in India
-- WhatsApp: "Refer a friend" flows once you have happy customers — skincare referrals convert 40% of the time in this demographic
-- Content: SEO-driven blogs answering "best serum for [skin type] India" — high purchase intent
+- WhatsApp: "Refer a friend" flows once you have happy customers - skincare referrals convert 40% of the time in this demographic
+- Content: SEO-driven blogs answering "best serum for [skin type] India" - high purchase intent
 
 **What NOT to do:**
-- Generic Instagram ads to women 25–40 — too broad, high CAC
-- Discounts as primary acquisition — trains your customer to wait for sales
+- Generic Instagram ads to women 25–40 - too broad, high CAC
+- Discounts as primary acquisition - trains your customer to wait for sales
 
 ---
 
-**ICP EXAMPLE 3: B2B Services — Fractional CFO for seed-stage startups**
+**ICP EXAMPLE 3: B2B Services - Fractional CFO for seed-stage startups**
 
 Company Stage: Seed to pre-Series A (₹1–15 Cr ARR)
 Industry: SaaS, fintech, healthtech, D2C
@@ -3292,8 +3292,8 @@ Budget: ₹1–3L/month for fractional engagement
 **How to reach them:**
 - Warm intros through VCs (tell investors you know: "If any of your portfolio companies need fractional CFO support...")
 - Startup communities: iSPIRT, LetsVenture, AngelList India
-- LinkedIn content: Publish posts on common financial mistakes at the seed stage — founders self-select
-- Events: Startup India, TiE events, accelerator demo days — be present where founders are`,
+- LinkedIn content: Publish posts on common financial mistakes at the seed stage - founders self-select
+- Events: Startup India, TiE events, accelerator demo days - be present where founders are`,
       },
       {
         heading: "India-Specific GTM Channels",
@@ -3306,7 +3306,7 @@ Budget: ₹1–3L/month for fractional engagement
 Conversion rate: 30–60%. The best GTM motion for early B2B. Founders trust peer recommendations over any marketing. Use LinkedIn to map which founders are 2 degrees away from your ICP. Ask for introductions specifically.
 
 **2. WhatsApp communities**
-India has active WhatsApp groups for almost every professional community — D2C founders, fintech CTOs, HR managers in manufacturing, CFOs of mid-size companies. Getting into the right group and providing value (not pitching) is more powerful than any paid channel at the seed stage. How to find them: ask customers which groups they're in.
+India has active WhatsApp groups for almost every professional community - D2C founders, fintech CTOs, HR managers in manufacturing, CFOs of mid-size companies. Getting into the right group and providing value (not pitching) is more powerful than any paid channel at the seed stage. How to find them: ask customers which groups they're in.
 
 **3. CA / Accountant partnerships**
 Chartered Accountants are trusted advisors to Indian SMBs and often have ongoing relationships with 50–200 client companies. For finance, compliance, or business software, a CA referral partnership converts at 2–3x the rate of direct outbound. Offer them a 10–20% referral fee or a branded version of your product.
@@ -3324,7 +3324,7 @@ Indian founder audiences respond to personal, honest, behind-the-scenes content.
 
 **Regional content creators:** Creators in Hindi, Tamil, Telugu, Kannada reach audiences that English content misses. For any product targeting non-metro India, vernacular content is underused and underleveraged.
 
-**WhatsApp forwards:** Indian consumers share product recommendations via WhatsApp before any other platform. Design your product experience and packaging to be "WhatsApp-forward worthy" — this is organic virality for D2C.
+**WhatsApp forwards:** Indian consumers share product recommendations via WhatsApp before any other platform. Design your product experience and packaging to be "WhatsApp-forward worthy" - this is organic virality for D2C.
 
 **UPI-linked loyalty / cashback:** Price-sensitive segments in India respond disproportionately to cashback vs. discounts. A ₹50 cashback on ₹500 converts better than 10% off because cashback is perceived as "free money."
 
@@ -3333,7 +3333,7 @@ Indian founder audiences respond to personal, honest, behind-the-scenes content.
 
 - **Google Search ads (broad):** Expensive and competitive unless you have a very specific high-intent keyword. Start with SEO, not paid search.
 - **TV / OOH:** Only makes sense at ₹5+ Cr marketing budget.
-- **Influencer gifting without a clear conversion mechanism:** Sending free product and hoping for posts is not a channel — it's wishful thinking.
+- **Influencer gifting without a clear conversion mechanism:** Sending free product and hoping for posts is not a channel - it's wishful thinking.
 - **"Viral" campaigns without existing audience:** You can't manufacture virality. Build an audience through consistent content, then engineer moments.`,
       },
     ],
@@ -3342,7 +3342,7 @@ Indian founder audiences respond to personal, honest, behind-the-scenes content.
     slug: "startup-idea-analysis",
     title: "Startup Idea Analysis",
     description:
-      "A structured framework for analysing a startup idea before committing to it — covering problem validation, market sizing, competitive moat, and founder-market fit.",
+      "A structured framework for analysing a startup idea before committing to it - covering problem validation, market sizing, competitive moat, and founder-market fit.",
     price: 19900,
     tag: "framework",
     category: "startup",
@@ -3410,7 +3410,7 @@ Your hypothetical ICP. If you don't have access, ask for introductions. If you c
 **INTERVIEW SCRIPT (30 minutes):**
 
 Opening:
-"I'm researching [problem space]. I want to understand how people like you currently [do the thing]. I'm not selling anything — I'd love to learn from your experience."
+"I'm researching [problem space]. I want to understand how people like you currently [do the thing]. I'm not selling anything - I'd love to learn from your experience."
 
 Discovery questions:
 1. "Can you walk me through the last time you had to [do the thing related to your problem]? What happened?"
@@ -3435,24 +3435,24 @@ Optional (to gauge urgency):
 
 After completing your 7-dimension scoring and your 20 validation interviews, run this final check.
 
-**GREEN FLAGS — strong signals to proceed:**
+**GREEN FLAGS - strong signals to proceed:**
 ☐ At least 15/20 interview subjects confirmed the same core pain without prompting
 ☐ At least 3 people offered to pay / sign up / introduce you to someone who would buy
-☐ You found a workaround people currently use (spreadsheet, manual process, duct-tape solution) — this proves the problem is real
-☐ The problem is recurring (not one-time) — monthly, weekly, or daily
+☐ You found a workaround people currently use (spreadsheet, manual process, duct-tape solution) - this proves the problem is real
+☐ The problem is recurring (not one-time) - monthly, weekly, or daily
 ☐ The people experiencing the problem have budget authority or can influence someone who does
 ☐ Your average idea score is 3.5+ with no single dimension below 2
 
-**YELLOW FLAGS — proceed with caution, address these before building:**
+**YELLOW FLAGS - proceed with caution, address these before building:**
 ☐ People say "it's a problem" but haven't tried to solve it yet (pain may not be severe enough)
 ☐ The person you'd sell to isn't the person experiencing the pain (long sales cycle risk)
 ☐ You have strong founder-market fit but the market size is borderline (< ₹500 Cr TAM)
 ☐ The problem exists but only for a very specific sub-segment you haven't fully defined
 ☐ Regulatory risk: your model depends on something that could be regulated or banned
 
-**RED FLAGS — stop, rethink, or pivot:**
+**RED FLAGS - stop, rethink, or pivot:**
 ☐ Fewer than 10/20 interviews confirmed the problem
-☐ Nobody has tried to solve it — "it's annoying but not worth fixing"
+☐ Nobody has tried to solve it - "it's annoying but not worth fixing"
 ☐ The person who feels the pain has no budget or influence over purchasing
 ☐ The problem can be solved by a ₹0 workaround (Excel formula, free tool, one extra person)
 ☐ A well-funded competitor already has this market (unless you have clear differentiation)
@@ -3473,7 +3473,7 @@ In India, people are especially willing to say "yes, I want this" but not commit
 **Failure mode 4: Underestimating distribution**
 A great product with no distribution path fails. Before building, answer: "How will the first 100 customers find us?" If the answer is "we'll figure it out," that's a red flag. Distribution must be as specific as the product.
 
-**Failure mode 5: India-specific — the "free is expected" problem**
+**Failure mode 5: India-specific - the "free is expected" problem**
 In some markets (SMBs, consumer), there's cultural resistance to paying for software. If your target customer currently uses WhatsApp or a free tool to solve the problem, they may resist paying. Test willingness to pay early and aggressively.
 
 **Failure mode 6: Regulation dependency**
@@ -3485,7 +3485,7 @@ Fintech, healthtech, and edtech in India are heavily regulated. If your business
     slug: "market-positioning",
     title: "Market Positioning",
     description:
-      "A positioning framework for early-stage startups — covering category creation, competitive positioning, and how to write a positioning statement that sticks.",
+      "A positioning framework for early-stage startups - covering category creation, competitive positioning, and how to write a positioning statement that sticks.",
     price: 19900,
     tag: "framework",
     category: "startup",
@@ -3496,24 +3496,24 @@ Fintech, healthtech, and edtech in India are heavily regulated. If your business
         heading: "Positioning Framework",
         body: `**THE 5 COMPONENTS OF POSITIONING (adapted from April Dunford):**
 
-1. **Competitive Alternatives** — What do customers do if your product doesn't exist?
+1. **Competitive Alternatives** - What do customers do if your product doesn't exist?
    Not your direct competitors. The status quo. Spreadsheets. WhatsApp. Doing nothing.
    *Your product competes against the alternative, not just other startups.*
 
-2. **Unique Attributes** — What do you have that alternatives don't?
+2. **Unique Attributes** - What do you have that alternatives don't?
    Features, data, integrations, team, relationships, speed.
    Be specific. "Better UX" is not an attribute.
 
-3. **Value** — What does each attribute enable for the customer?
+3. **Value** - What does each attribute enable for the customer?
    Translate each attribute into a concrete business outcome.
    Attribute: "Real-time bank data" → Value: "Finance team closes books in 2 days, not 10"
 
-4. **Customer Segments** — Who cares most about that value?
+4. **Customer Segments** - Who cares most about that value?
    Not everyone. The specific segment where your value is most valuable.
 
-5. **Market Category** — What are you?
+5. **Market Category** - What are you?
    The frame the customer uses to understand what you do and who you compete with.
-   You choose this. Choose carefully — the category determines what you're compared to.
+   You choose this. Choose carefully - the category determines what you're compared to.
 
 ---
 **POSITIONING STATEMENT TEMPLATE:**
@@ -3526,11 +3526,11 @@ For D2C brands doing ₹1–10 Cr monthly revenue who struggle with reconciling 
         heading: "Competitive Positioning Map & Messaging Hierarchy",
         body: `**COMPETITIVE POSITIONING MAP**
 
-A positioning map shows where you and competitors sit relative to each other. Pick two axes that matter most to your customer — not "price vs. quality" (too generic) but specific to your category.
+A positioning map shows where you and competitors sit relative to each other. Pick two axes that matter most to your customer - not "price vs. quality" (too generic) but specific to your category.
 
 **How to build yours:**
 Step 1: List your top 3 alternatives (including "status quo" as a competitor).
-Step 2: Identify the 2 dimensions your ICP cares most about. These come from customer interviews — what do they compare options on?
+Step 2: Identify the 2 dimensions your ICP cares most about. These come from customer interviews - what do they compare options on?
 Step 3: Plot all options honestly on the 2×2.
 
 **Example: B2B Invoice Management (India)**
@@ -3541,7 +3541,7 @@ Axes: Ease of setup (Y) vs. Level of automation (X)
 - SAP/Oracle: High automation, low ease → bottom-right
 - You (purpose-built SaaS): High automation, high ease → top-right ✅
 
-**The top-right quadrant is where you want to be.** If competitors cluster in that space, you haven't differentiated — reconsider your axes until you find dimensions where you genuinely lead.
+**The top-right quadrant is where you want to be.** If competitors cluster in that space, you haven't differentiated - reconsider your axes until you find dimensions where you genuinely lead.
 
 ---
 **MESSAGING HIERARCHY**
@@ -3581,7 +3581,7 @@ Show your landing page headline to 5 people outside your company for 5 seconds. 
 In your next 5 customer calls, describe your product using your new positioning. Listen for: Do they nod and say "yes, exactly"? Or do they look confused? Confusion = wrong positioning.
 
 **Test 3: The referral test**
-Ask a happy customer: "If you were introducing us to a peer, how would you describe us?" Their words are your best positioning. What they say is how real customers think about you — which matters more than how you think about yourself.
+Ask a happy customer: "If you were introducing us to a peer, how would you describe us?" Their words are your best positioning. What they say is how real customers think about you - which matters more than how you think about yourself.
 
 **Test 4: The competitor test**
 Send your positioning statement to someone in your network who follows your space. Ask: "Does this sound different from [Competitor A] and [Competitor B]?" If they say "not really," you've not differentiated enough.
@@ -3601,13 +3601,13 @@ Why it worked: "AI chatbot" is a crowded, commodity-sounding category. "First-re
 Why it worked: CFOs don't buy time savings. They buy cost reduction and loss prevention. Same product, different value frame, 2x conversion rate on demos.
 
 **4. Competitive alternative pivot:** Positioned against other software → repositioned against manual Excel.
-Why it worked: Most Indian SMBs weren't using any software — they were using spreadsheets. Competing against Excel is easier and more resonant than competing against established SaaS.
+Why it worked: Most Indian SMBs weren't using any software - they were using spreadsheets. Competing against Excel is easier and more resonant than competing against established SaaS.
 
 ---
 **When to reposition:**
 - Your conversion rate on demos is below 20%
 - Customers are confused about what category you're in
-- You keep losing to "we'll stick with Excel" — and you're not addressing that directly
+- You keep losing to "we'll stick with Excel" - and you're not addressing that directly
 - Your best customers use totally different words to describe your product than you do`,
       },
     ],
@@ -3616,7 +3616,7 @@ Why it worked: Most Indian SMBs weren't using any software — they were using s
     slug: "value-proposition",
     title: "Value Proposition",
     description:
-      "A value proposition design workbook — from customer jobs-to-be-done to a crisp one-liner that converts, with templates for B2B and B2C contexts.",
+      "A value proposition design workbook - from customer jobs-to-be-done to a crisp one-liner that converts, with templates for B2B and B2C contexts.",
     price: 19900,
     tag: "framework",
     category: "startup",
@@ -3625,26 +3625,26 @@ Why it worked: Most Indian SMBs weren't using any software — they were using s
     sections: [
       {
         heading: "Jobs-to-Be-Done & Value Proposition Canvas",
-        body: `**CUSTOMER PROFILE — JOBS TO BE DONE:**
+        body: `**CUSTOMER PROFILE - JOBS TO BE DONE:**
 
 For your target customer, identify three types of jobs:
 
-1. **Functional Jobs** — Practical tasks they're trying to accomplish
+1. **Functional Jobs** - Practical tasks they're trying to accomplish
    Example: "Manage my team's expense claims without chasing receipts"
 
-2. **Social Jobs** — How they want to be perceived by others
+2. **Social Jobs** - How they want to be perceived by others
    Example: "Be seen as a financially rigorous founder who investors trust"
 
-3. **Emotional Jobs** — How they want to feel
+3. **Emotional Jobs** - How they want to feel
    Example: "Feel in control of my company's finances, not anxious about month-end"
 
 ---
 **GAIN/PAIN MAP:**
 
 *Customer Pains (ranked by severity):*
-1. [Most severe pain — causes significant loss or frustration]
-2. [Moderate pain — regular friction]
-3. [Minor pain — inconvenience]
+1. [Most severe pain - causes significant loss or frustration]
+2. [Moderate pain - regular friction]
+3. [Minor pain - inconvenience]
 
 *Customer Gains (ranked by importance):*
 1. [Most desired outcome]
@@ -3674,7 +3674,7 @@ Example: "We help D2C founders reconcile payments 80% faster than spreadsheets, 
       },
       {
         heading: "Filled-In Examples: B2B SaaS & D2C",
-        body: `**EXAMPLE 1: B2B SaaS — HR Compliance Tool for Indian SMBs**
+        body: `**EXAMPLE 1: B2B SaaS - HR Compliance Tool for Indian SMBs**
 
 **Customer Profile:**
 - Who: HR managers at Indian manufacturing companies with 100–500 employees
@@ -3683,9 +3683,9 @@ Example: "We help D2C founders reconcile payments 80% faster than spreadsheets, 
 - Emotional Job: "Stop feeling anxious every time an inspector arrives."
 
 **Pains (ranked):**
-1. Severe: An unexpected labour inspector visit caught them non-compliant — ₹5L fine last year.
-2. Moderate: Manual tracking of PF contributions across 3 offices — spreadsheet errors every quarter.
-3. Minor: Can't generate compliance reports quickly for auditors — takes 3 days of manual work.
+1. Severe: An unexpected labour inspector visit caught them non-compliant - ₹5L fine last year.
+2. Moderate: Manual tracking of PF contributions across 3 offices - spreadsheet errors every quarter.
+3. Minor: Can't generate compliance reports quickly for auditors - takes 3 days of manual work.
 
 **Gains (ranked):**
 1. Most desired: "Be audit-ready at any time, with zero preparation."
@@ -3702,27 +3702,27 @@ Gain Creators:
 - Gratuity surprises → 12-month liability forecast dashboard
 
 **One-Liner:**
-"We help HR managers at Indian manufacturing companies stay labour law compliant automatically — so they never get caught off-guard by an inspector or an audit again."
+"We help HR managers at Indian manufacturing companies stay labour law compliant automatically - so they never get caught off-guard by an inspector or an audit again."
 
 ---
 
-**EXAMPLE 2: D2C — Personalised Nutrition Subscription**
+**EXAMPLE 2: D2C - Personalised Nutrition Subscription**
 
 **Customer Profile:**
 - Who: Urban Indian women, 28–40, spending ₹3,000–10,000/month on health and wellness
 - Functional Job: "Get vitamins and supplements that actually work for my specific body, not generic ones."
-- Social Job: "Be someone who takes their health seriously — someone who has a 'routine.'"
+- Social Job: "Be someone who takes their health seriously - someone who has a 'routine.'"
 - Emotional Job: "Feel like I'm making progress on my health, not just spending money and hoping."
 
 **Pains (ranked):**
-1. Severe: Bought 4 different supplement brands last year — can't remember what they're for, don't know if they work.
-2. Moderate: Confused by labels — don't know which form of iron to take (ferrous sulfate vs. bisglycinate).
+1. Severe: Bought 4 different supplement brands last year - can't remember what they're for, don't know if they work.
+2. Moderate: Confused by labels - don't know which form of iron to take (ferrous sulfate vs. bisglycinate).
 3. Minor: Generic multivitamins don't account for her vegetarian diet and vitamin D deficiency.
 
 **Gains (ranked):**
 1. Most desired: "Know exactly what I should be taking and why, in plain language."
 2. Expected: "One monthly box. No thinking required. Arrives before I run out."
-3. Unexpected delight: "My skin improved — something I wasn't expecting."
+3. Unexpected delight: "My skin improved - something I wasn't expecting."
 
 **Value Proposition Canvas:**
 Pain Relievers:
@@ -3734,7 +3734,7 @@ Gain Creators:
 - Subscription convenience → auto-renewal, pause anytime, WhatsApp support
 
 **One-Liner:**
-"We help urban Indian women get a personalised supplement routine built by nutritionists — delivered monthly, adjusted quarterly, explained in plain language."`,
+"We help urban Indian women get a personalised supplement routine built by nutritionists - delivered monthly, adjusted quarterly, explained in plain language."`,
       },
       {
         heading: "Testing Your Value Proposition",
@@ -3742,7 +3742,7 @@ Gain Creators:
 
 ---
 **Test 1: The Landing Page Conversion Test**
-Create a simple landing page (use Framer, Carrd, or Webflow — takes 2 hours) with:
+Create a simple landing page (use Framer, Carrd, or Webflow - takes 2 hours) with:
 - Your headline (the value prop, 8 words or fewer)
 - 3 bullet benefits
 - One CTA: "Get early access" or "Book a call"
@@ -3751,7 +3751,7 @@ Drive 200 visitors (LinkedIn post, community share, or ₹2,000 in ads). If conv
 
 ---
 **Test 2: The Sales Call Opening Test**
-In your next 10 discovery calls, open with your value proposition — stated exactly as you've written it: "We help [WHO] [DO WHAT] [SO THAT OUTCOME]."
+In your next 10 discovery calls, open with your value proposition - stated exactly as you've written it: "We help [WHO] [DO WHAT] [SO THAT OUTCOME]."
 
 Watch the reaction in the first 5 seconds:
 - Leaning forward, nodding, "yes, that's us" = strong resonance
@@ -3764,7 +3764,7 @@ Change the opening based on reactions. The version that generates the most "yes,
 **Test 3: The Referral Words Test**
 Ask 5 happy customers: "If you were introducing us to a peer, what would you say?"
 
-Record their exact words. The overlap between what 3+ customers say is your actual value proposition — more accurate than anything you'd write yourself.
+Record their exact words. The overlap between what 3+ customers say is your actual value proposition - more accurate than anything you'd write yourself.
 
 If their words don't match yours at all, your VP is wrong. Rewrite it in their language.
 
@@ -3774,7 +3774,7 @@ Run two LinkedIn/Meta ads to the same audience for ₹3,000 each. Same image, di
 - Ad A: Your current value prop headline
 - Ad B: An alternative framing
 
-Measure: click-through rate (not impressions, not reach — CTR). Higher CTR = stronger resonance with that audience.
+Measure: click-through rate (not impressions, not reach - CTR). Higher CTR = stronger resonance with that audience.
 
 This works best once you have 500+ target customers identifiable by job title and industry on LinkedIn.
 
@@ -3783,7 +3783,7 @@ This works best once you have 500+ target customers identifiable by job title an
 - **Too feature-focused:** "AI-powered invoice matching" → nobody buys features. Translate: "Catch invoice discrepancies before they hit the books."
 - **Too vague:** "Better finance for growing companies." → means nothing. To whom? Better how? What kind of finance?
 - **Too large a segment:** "For all businesses." → Nobody feels spoken to. Narrow until it feels too narrow, then stop.
-- **Wrong jobs:** You're solving a social or emotional job but describing a functional one. (e.g., your customer wants to feel in control — but you're selling "efficiency.")`,
+- **Wrong jobs:** You're solving a social or emotional job but describing a functional one. (e.g., your customer wants to feel in control - but you're selling "efficiency.")`,
       },
     ],
   },
@@ -3791,7 +3791,7 @@ This works best once you have 500+ target customers identifiable by job title an
     slug: "employee-offer-letter",
     title: "Employee Offer Letter Template",
     description:
-      "A clean, professional offer letter template for full-time hires — with ESOP clause variant, joining bonus variant, and guidance on offer letter best practices.",
+      "A clean, professional offer letter template for full-time hires - with ESOP clause variant, joining bonus variant, and guidance on offer letter best practices.",
     price: 19900,
     tag: "legal",
     category: "startup",
@@ -3861,7 +3861,7 @@ Date: ________________`,
       },
       {
         heading: "ESOP Offer Letter Variant",
-        body: `Use this variant when ESOP is a meaningful part of the compensation — typically for founding hires (hire #1–10) where you're asking the candidate to take a below-market cash salary in exchange for equity upside.
+        body: `Use this variant when ESOP is a meaningful part of the compensation - typically for founding hires (hire #1–10) where you're asking the candidate to take a below-market cash salary in exchange for equity upside.
 
 ---
 **[COMPANY LETTERHEAD]**
@@ -3886,14 +3886,14 @@ Subject to approval by the Board and execution of our ESOP Plan documentation, w
 Key terms of your ESOP grant:
 - **Grant size:** [X] options (representing [X]% of the company on a fully diluted basis as of [DATE])
 - **Vesting schedule:** 4-year vest with a 1-year cliff from your Start Date
-  - Cliff: [X] options vest on [DATE — 1 year from start]
+  - Cliff: [X] options vest on [DATE - 1 year from start]
   - Monthly: [X] options vest per month for the following 36 months
 - **Exercise price:** ₹[X] per option (current fair market value as determined by the Board)
 - **Exercise window:** Options must be exercised within [2] years of vesting or termination (whichever is earlier)
 - **Acceleration:** Upon a change of control (acquisition / IPO), [50% / 100%] of your unvested options will accelerate
 
 **ESOP context (plain English):**
-As of today, the company is valued at approximately ₹[X] Cr. Your [X] options represent [X]% of the company. At a ₹[Y] Cr exit, those options would be worth approximately ₹[Z], before tax. I'd encourage you to value these at zero for your personal financial planning — the upside is real, but it is uncertain and long-dated.
+As of today, the company is valued at approximately ₹[X] Cr. Your [X] options represent [X]% of the company. At a ₹[Y] Cr exit, those options would be worth approximately ₹[Z], before tax. I'd encourage you to value these at zero for your personal financial planning - the upside is real, but it is uncertain and long-dated.
 
 ---
 *All other terms as per the Standard Offer Letter above.*
@@ -3903,9 +3903,9 @@ As of today, the company is valued at approximately ₹[X] Cr. Your [X] options 
 
 Most candidates don't understand ESOP. Here's how to explain it in 2 minutes:
 
-"We're granting you [X] options. Think of each option as the right to buy one share of the company at ₹[X] — which is today's value. If the company grows to be worth 10x, your shares are worth 10x too. The vesting means you earn these over 4 years — you get 25% after 1 year, then monthly after that. If you leave before 1 year, you get nothing. After 4 years, you've earned everything.
+"We're granting you [X] options. Think of each option as the right to buy one share of the company at ₹[X] - which is today's value. If the company grows to be worth 10x, your shares are worth 10x too. The vesting means you earn these over 4 years - you get 25% after 1 year, then monthly after that. If you leave before 1 year, you get nothing. After 4 years, you've earned everything.
 
-The honest answer on what it's worth: I don't know. At our current valuation of ₹[X] Cr, your stake is worth ₹[Y] on paper. But ESOP value is only realised on an exit — IPO or acquisition. That's hopefully 5–7 years from now. So please don't factor it into your monthly budget."`,
+The honest answer on what it's worth: I don't know. At our current valuation of ₹[X] Cr, your stake is worth ₹[Y] on paper. But ESOP value is only realised on an exit - IPO or acquisition. That's hopefully 5–7 years from now. So please don't factor it into your monthly budget."`,
       },
       {
         heading: "Joining Bonus Variant & Counter-Offer Handling",
@@ -3917,7 +3917,7 @@ Use a joining bonus when:
 3. The cash offer is below market and you want to bridge a gap without inflating base salary
 
 **Joining Bonus Clause (add to standard offer letter):**
-"As part of your compensation, you will receive a joining bonus of ₹[X], payable with your first month's salary. This joining bonus is subject to a 12-month retention clause — if you leave the company within 12 months of joining for reasons other than termination without cause, you agree to repay [100% / 50%] of the joining bonus."
+"As part of your compensation, you will receive a joining bonus of ₹[X], payable with your first month's salary. This joining bonus is subject to a 12-month retention clause - if you leave the company within 12 months of joining for reasons other than termination without cause, you agree to repay [100% / 50%] of the joining bonus."
 
 **Common joining bonus amounts by seniority:**
 - Junior hires (0–3 yrs): ₹25,000–₹1,00,000
@@ -3931,18 +3931,18 @@ Use a joining bonus when:
 Counter-offers are common and will happen. Here's how to handle each scenario:
 
 **Scenario 1: They tell you upfront they're expecting a counter-offer**
-"I appreciate you telling me. Let me be direct — we've made this offer because we genuinely believe you're the right person for this role, not to win a bidding war. If your current company counter-offers, I'd encourage you to ask yourself: why are they offering now and not before? Here's our position: [your best offer, stated clearly]. I'd like an answer by [date]."
+"I appreciate you telling me. Let me be direct - we've made this offer because we genuinely believe you're the right person for this role, not to win a bidding war. If your current company counter-offers, I'd encourage you to ask yourself: why are they offering now and not before? Here's our position: [your best offer, stated clearly]. I'd like an answer by [date]."
 
 **Scenario 2: They come back with a competing offer after accepting yours**
-"I understand — that's a significant offer. Our position stands as is. If you're genuinely undecided, I'd encourage you to think beyond the number: what's the growth opportunity, the team you'll work with, the kind of problems you'll solve? We'd love to have you. Let me know by [date]."
+"I understand - that's a significant offer. Our position stands as is. If you're genuinely undecided, I'd encourage you to think beyond the number: what's the growth opportunity, the team you'll work with, the kind of problems you'll solve? We'd love to have you. Let me know by [date]."
 
 **Scenario 3: They ask for more after you've already stretched**
-"We've moved as far as we can on [cash / ESOP / title]. What I can offer instead is [specific alternative: flexible working, accelerated review at 6 months, additional ESOP tranche if milestone hit]. If the number is the deciding factor and we can't bridge it, I understand — but I want to make sure we've explored all the options first."
+"We've moved as far as we can on [cash / ESOP / title]. What I can offer instead is [specific alternative: flexible working, accelerated review at 6 months, additional ESOP tranche if milestone hit]. If the number is the deciding factor and we can't bridge it, I understand - but I want to make sure we've explored all the options first."
 
 **What never to do:**
 - Don't make an offer and then immediately negotiate against yourself
-- Don't match a counter-offer that's clearly inflated just to close — you'll create resentment when the next raise cycle comes
-- Don't give "unlimited time to decide" — give a clear deadline (3–5 business days) and stick to it
+- Don't match a counter-offer that's clearly inflated just to close - you'll create resentment when the next raise cycle comes
+- Don't give "unlimited time to decide" - give a clear deadline (3–5 business days) and stick to it
 
 **The 48-hour rule:**
 Send the offer letter, then follow up with a call 48 hours later. "I wanted to make sure you had a chance to review it. Do you have any questions?" This catches hesitation early and gives you a chance to address it before they accept a competing offer.`,
@@ -3953,7 +3953,7 @@ Send the offer letter, then follow up with a call 48 hours later. "I wanted to m
     slug: "founders-agreement",
     title: "Founders Agreement",
     description:
-      "A comprehensive founders' agreement template covering equity split, vesting, roles, decision-making, IP assignment, and exit provisions — the most important document you'll sign before your first investor.",
+      "A comprehensive founders' agreement template covering equity split, vesting, roles, decision-making, IP assignment, and exit provisions - the most important document you'll sign before your first investor.",
     price: 19900,
     tag: "legal",
     category: "startup",
@@ -3968,14 +3968,14 @@ This Agreement is entered into on [DATE] between:
 
 1. [FOUNDER 1 NAME], residing at [ADDRESS] ("Founder 1")
 2. [FOUNDER 2 NAME], residing at [ADDRESS] ("Founder 2")
-[3. [FOUNDER 3 NAME] ("Founder 3")] — if applicable
+[3. [FOUNDER 3 NAME] ("Founder 3")] - if applicable
 
 (collectively, the "Founders")
 
 for and on behalf of **[COMPANY NAME]** (to be incorporated or recently incorporated)
 
 ---
-**ARTICLE 1 — EQUITY SPLIT**
+**ARTICLE 1 - EQUITY SPLIT**
 
 1.1 The Founders agree to the following initial equity allocation:
 | Founder | Initial % | Role |
@@ -3983,21 +3983,21 @@ for and on behalf of **[COMPANY NAME]** (to be incorporated or recently incorpor
 | Founder 1 | [X]% | CEO |
 | Founder 2 | [X]% | CTO |
 | [Founder 3] | [X]% | [Role] |
-| **ESOP Pool** | **[X]%** | — |
+| **ESOP Pool** | **[X]%** | - |
 | **Total** | **100%** | |
 
 1.2 This allocation is subject to the vesting schedule set out in Article 2.
 
 1.3 The Founders acknowledge that this split reflects contributions to date (idea, initial capital, technical IP, customer relationships) as documented in Schedule 1.
 
-**ARTICLE 2 — VESTING**
+**ARTICLE 2 - VESTING**
 
 2.1 All Founder shares shall vest over 4 years with a 1-year cliff from the Incorporation Date.
 2.2 Cliff: 25% of allocated shares vest on the first anniversary of the Incorporation Date.
 2.3 Monthly vest: The remaining 75% vest equally over the following 36 months.
 2.4 Acceleration: Upon an Exit Event, [50% / 100%] of unvested shares shall accelerate.
 
-**ARTICLE 3 — ROLES & DECISION-MAKING**
+**ARTICLE 3 - ROLES & DECISION-MAKING**
 
 3.1 Roles:
 - Founder 1 shall serve as CEO, responsible for [commercial, fundraising, and company strategy]
@@ -4009,15 +4009,15 @@ for and on behalf of **[COMPANY NAME]** (to be incorporated or recently incorpor
       },
       {
         heading: "IP Assignment, Exit Provisions & Pre-Discussion Checklist",
-        body: `**ARTICLE 4 — IP ASSIGNMENT**
-All intellectual property, code, designs, trade secrets, and inventions created by any Founder — whether before or after incorporation, and related to the Company's business — are hereby assigned to the Company.
+        body: `**ARTICLE 4 - IP ASSIGNMENT**
+All intellectual property, code, designs, trade secrets, and inventions created by any Founder - whether before or after incorporation, and related to the Company's business - are hereby assigned to the Company.
 
 The Founders agree to execute any additional documents required to perfect this assignment.
 
-**ARTICLE 5 — CONFIDENTIALITY**
+**ARTICLE 5 - CONFIDENTIALITY**
 During the term and for [3] years after any Founder's departure, all Founders agree to maintain strict confidentiality of Company information.
 
-**ARTICLE 6 — LEAVER PROVISIONS**
+**ARTICLE 6 - LEAVER PROVISIONS**
 
 6.1 Good Leaver: Departure due to death, disability, or termination without cause.
 - Unvested shares are bought back at Fair Market Value (determined by independent valuation)
@@ -4027,7 +4027,7 @@ During the term and for [3] years after any Founder's departure, all Founders ag
 - Unvested shares are bought back at face value (₹10 per share)
 - Vested shares retained, but subject to ROFR at fair market value
 
-**ARTICLE 7 — DISPUTE RESOLUTION**
+**ARTICLE 7 - DISPUTE RESOLUTION**
 7.1 Founders commit to attempt good-faith resolution within [30] days of any dispute.
 7.2 If unresolved, disputes shall be referred to mediation before arbitration.
 7.3 Arbitration shall be conducted under the Arbitration and Conciliation Act, 1996, in [CITY].
@@ -4043,7 +4043,7 @@ Before signing, every founding team should explicitly discuss and agree on:
 ☐ What is each founder's financial runway? (Affects how long they can go without salary)
 ☐ What is the minimum salary each founder needs to sustain themselves?
 ☐ Are there any existing commitments (other jobs, advisory roles, equity in other companies) that need to be disclosed?
-☐ What's the vision for the company — lifestyle business or venture-scale?
+☐ What's the vision for the company - lifestyle business or venture-scale?
 ☐ Under what conditions would you be open to selling the company?`,
       },
     ],
@@ -4052,7 +4052,7 @@ Before signing, every founding team should explicitly discuss and agree on:
     slug: "nda-startup",
     title: "Non-Disclosure Agreement (Startup Operations)",
     description:
-      "NDA templates for startup operations — covering employee NDA, vendor/contractor NDA, and customer NDA, with guidance on when to use each.",
+      "NDA templates for startup operations - covering employee NDA, vendor/contractor NDA, and customer NDA, with guidance on when to use each.",
     price: 19900,
     tag: "legal",
     category: "startup",
@@ -4103,7 +4103,7 @@ Same structure, but one-way: Company's obligations are limited to reasonable car
   {
     slug: "investor-update-email",
     title: "Investor Update Email Templates",
-    description: "Monthly and quarterly investor update templates that keep your investors informed, engaged, and ready to help — without taking hours to write.",
+    description: "Monthly and quarterly investor update templates that keep your investors informed, engaged, and ready to help - without taking hours to write.",
     price: 19900,
     tag: "templates",
     category: "fundraise",
@@ -4121,11 +4121,11 @@ Investors who receive regular, honest updates are more likely to:
 
 The founders who are hardest to back in a future round are the ones who went silent for 8 months and only surfaced when they needed money.
 
-These templates are designed to take you 30 minutes or less per update. The structure is fixed — you fill in the numbers and the narrative.`,
+These templates are designed to take you 30 minutes or less per update. The structure is fixed - you fill in the numbers and the narrative.`,
       },
       {
-        heading: "Template 1 — Monthly Update (Standard)",
-        body: `**Subject:** [Company] — [Month] update
+        heading: "Template 1 - Monthly Update (Standard)",
+        body: `**Subject:** [Company] - [Month] update
 
 Hi [investor first names],
 
@@ -4133,7 +4133,7 @@ Here's our [Month] update.
 
 **The number that matters most this month:** [MRR / ARR / active users / whichever metric you're optimising for]
 
-**Month summary in one sentence:** [e.g. "Crossed ₹10L MRR for the first time, but churn picked up in the SMB segment — investigating why."]
+**Month summary in one sentence:** [e.g. "Crossed ₹10L MRR for the first time, but churn picked up in the SMB segment - investigating why."]
 
 ---
 
@@ -4145,16 +4145,16 @@ Here's our [Month] update.
 - Runway at current burn: [X months]
 
 **What went well**
-- [1–3 bullet points — be specific]
+- [1–3 bullet points - be specific]
 
 **What didn't go well / what we're working on**
-- [1–3 bullet points — be honest, include what you're doing about it]
+- [1–3 bullet points - be honest, include what you're doing about it]
 
 **Focus for next month**
 - [1–3 items you're prioritising]
 
 **Where you can help**
-- [Specific ask — intro to X, advice on Y, connection to Z]
+- [Specific ask - intro to X, advice on Y, connection to Z]
 
 [Your name]
 
@@ -4162,32 +4162,32 @@ Here's our [Month] update.
 **Notes on tone:** Direct, honest, short. Investors read dozens of updates. The ones that stand out are specific about what's working AND what isn't. Generic positivity is the fastest way to get your updates skipped.`,
       },
       {
-        heading: "Template 2 — Quarterly Update (More detailed)",
-        body: `**Subject:** [Company] Q[X] [Year] — investor update
+        heading: "Template 2 - Quarterly Update (More detailed)",
+        body: `**Subject:** [Company] Q[X] [Year] - investor update
 
 Hi [investor first names],
 
 Q[X] update below. Happy to jump on a call if anything here warrants discussion.
 
 **Quarter in one paragraph:**
-[3–5 sentences on the shape of the quarter — what you set out to do, what you achieved, and where you're heading next quarter.]
+[3–5 sentences on the shape of the quarter - what you set out to do, what you achieved, and where you're heading next quarter.]
 
 ---
 
-**Key metrics — Q[X] vs Q[X-1]**
+**Key metrics - Q[X] vs Q[X-1]**
 
 | Metric | Q[X-1] | Q[X] | Change |
 |---|---|---|---|
 | MRR / ARR | ₹X | ₹X | +X% |
 | Active customers | X | X | +X% |
-| Gross margin | X% | X% | — |
-| Burn rate (monthly) | ₹X | ₹X | — |
-| Runway | X months | X months | — |
+| Gross margin | X% | X% | - |
+| Burn rate (monthly) | ₹X | ₹X | - |
+| Runway | X months | X months | - |
 
 **Milestones reached this quarter**
 - [List 2–4 specific milestones]
 
-**Milestones missed — and why**
+**Milestones missed - and why**
 - [Be honest. Include what you learned and what you're changing.]
 
 **Key hires / team changes**
@@ -4207,8 +4207,8 @@ Q[X] update below. Happy to jump on a call if anything here warrants discussion.
 [Your name]`,
       },
       {
-        heading: "Template 3 — Tough Month Update",
-        body: `**Subject:** [Company] — [Month] update (honest version)
+        heading: "Template 3 - Tough Month Update",
+        body: `**Subject:** [Company] - [Month] update (honest version)
 
 Hi [investor first names],
 
@@ -4218,12 +4218,12 @@ This month was harder than expected. I want to be straight with you about what h
 [2–3 sentences. Be specific. Don't hedge with "macro headwinds" unless that's genuinely the cause.]
 
 **The numbers:**
-- MRR: ₹[X] (was ₹[X] last month — [–X%])
+- MRR: ₹[X] (was ₹[X] last month - [–X%])
 - Key metric: [X]
 - Runway: [X months at current burn]
 
 **What we're doing about it:**
-[Specific actions — not "we're working hard on it." What specifically changed? What's the hypothesis? What are you testing?]
+[Specific actions - not "we're working hard on it." What specifically changed? What's the hypothesis? What are you testing?]
 
 **What I need from you:**
 [Be direct. An intro? A sounding board call? A specific connection? Investors respect directness far more than silence.]
@@ -4236,12 +4236,12 @@ I'll send another update in [2 weeks / next month] with a status on the above.
 **Why this template works:** Investors have seen companies fail. What they can't forgive is being surprised at the end. A transparent tough-month update builds more trust than six months of rosy updates followed by a crisis call.`,
       },
       {
-        heading: "Template 4 — Milestone / Announcement Update",
-        body: `**Subject:** [Company] — [milestone achieved]
+        heading: "Template 4 - Milestone / Announcement Update",
+        body: `**Subject:** [Company] - [milestone achieved]
 
 Hi [investor first names],
 
-Quick update — wanted to share this directly.
+Quick update - wanted to share this directly.
 
 **The news:**
 [One sentence. Be direct: "We closed ₹X crore from [investor]", "We crossed ₹1Cr ARR today", "We signed [company] as our first enterprise customer."]
@@ -4253,7 +4253,7 @@ Quick update — wanted to share this directly.
 [1–2 sentences on what you're focused on now that this is done.]
 
 **Where you can still help:**
-[Optional, but appreciated — keeps the relationship active even when things are going well.]
+[Optional, but appreciated - keeps the relationship active even when things are going well.]
 
 Thanks for being on this journey.
 
@@ -4265,27 +4265,27 @@ Thanks for being on this journey.
   {
     slug: "cap-table-template",
     title: "Cap Table Template & Guide",
-    description: "A plain-language cap table template with worked examples — pre-seed through Series A — plus a guide to understanding dilution, option pools, and pro-rata rights.",
+    description: "A plain-language cap table template with worked examples - pre-seed through Series A - plus a guide to understanding dilution, option pools, and pro-rata rights.",
     price: 19900,
     tag: "templates",
     category: "fundraise",
     comingSoon: false,
-    preview: "Downloadable cap table structure with pre-seed, seed, and Series A scenarios — plus a founder's guide to reading and managing your cap table.",
+    preview: "Downloadable cap table structure with pre-seed, seed, and Series A scenarios - plus a founder's guide to reading and managing your cap table.",
     sections: [
       {
         heading: "What a cap table is and why it matters",
-        body: `A cap table (capitalisation table) is a record of who owns what in your company — every shareholder, the number and type of shares they hold, and the percentage of the company each holding represents.
+        body: `A cap table (capitalisation table) is a record of who owns what in your company - every shareholder, the number and type of shares they hold, and the percentage of the company each holding represents.
 
 It matters because:
 - Every funding round changes it, usually by diluting existing shareholders
-- Investors will scrutinise it before investing — a messy cap table is a red flag
+- Investors will scrutinise it before investing - a messy cap table is a red flag
 - Your future payout in any exit scenario is determined by your cap table and the rights attached to each share class
-- The option pool you create for employees comes out of the cap table (usually from the founder's share before a round — understand this before you agree to it)
+- The option pool you create for employees comes out of the cap table (usually from the founder's share before a round - understand this before you agree to it)
 
 **The earlier you manage your cap table carefully, the better your options later.**`,
       },
       {
-        heading: "Pre-seed cap table — worked example",
+        heading: "Pre-seed cap table - worked example",
         body: `**Scenario:** Two co-founders, incorporating before the first raise.
 
 **Shares issued at incorporation:**
@@ -4298,7 +4298,7 @@ It matters because:
 
 **Key decisions at incorporation:**
 - Issue enough shares to allow for future splitting without fractions (10M is standard)
-- Both founders should be on a vesting schedule — even if you trust each other, this protects both parties if one leaves
+- Both founders should be on a vesting schedule - even if you trust each other, this protects both parties if one leaves
 - Standard vesting: 4-year vesting with a 1-year cliff (nothing vests in year 1, then 25% on the cliff date, then monthly over years 2–4)
 
 **After a pre-seed round (₹1Cr at ₹4Cr post-money valuation = 25% dilution):**
@@ -4310,14 +4310,14 @@ It matters because:
 | Angel investors (CCPS) | 3,333,333 | 25% |
 | **Total (fully diluted)** | **13,333,333** | **100%** |
 
-Note: the new shares are calculated as: (25% × total post-round shares) = 3,333,333. The founders' absolute share count doesn't change — their percentage drops because more shares are in circulation.`,
+Note: the new shares are calculated as: (25% × total post-round shares) = 3,333,333. The founders' absolute share count doesn't change - their percentage drops because more shares are in circulation.`,
       },
       {
-        heading: "Seed round — option pool and dilution",
+        heading: "Seed round - option pool and dilution",
         body: `**Scenario:** Pre-seed closed. Now raising a ₹3Cr seed at ₹12Cr post-money (25% dilution again). Investor requires a 10% ESOP pool to be created before the round.
 
 **Why the option pool matters:**
-The "option pool shuffle" is one of the most misunderstood parts of early fundraising. When an investor asks for a 10% option pool "pre-money," they mean 10% of the post-round fully diluted shares — created by diluting the existing shareholders before the new money comes in.
+The "option pool shuffle" is one of the most misunderstood parts of early fundraising. When an investor asks for a 10% option pool "pre-money," they mean 10% of the post-round fully diluted shares - created by diluting the existing shareholders before the new money comes in.
 
 This means the effective pre-money valuation is lower than it appears.
 
@@ -4342,43 +4342,43 @@ This means the effective pre-money valuation is lower than it appears.
 | Seed investors (CCPS) | 4,938,271 | 25% |
 | **Total** | **19,752,085** | **100%** |
 
-**Key point:** after two 25% dilution rounds plus a 10% option pool, the founders each own ~25% of their company. This is normal and healthy for this stage — but many founders are surprised by how quickly dilution compounds.`,
+**Key point:** after two 25% dilution rounds plus a 10% option pool, the founders each own ~25% of their company. This is normal and healthy for this stage - but many founders are surprised by how quickly dilution compounds.`,
       },
       {
         heading: "Reading your cap table: key terms",
         body: `**Fully diluted shares:** The total share count including all issued shares, all unissued ESOP options, and all convertible instruments (SAFE, CCPS) as if fully converted. This is the number that matters for ownership percentage calculations.
 
-**Authorised vs issued shares:** Authorised shares are the maximum you can issue (defined in your Articles of Association). Issued shares are what's actually been given to shareholders. Always authorise more than you've issued — you need headroom for future rounds.
+**Authorised vs issued shares:** Authorised shares are the maximum you can issue (defined in your Articles of Association). Issued shares are what's actually been given to shareholders. Always authorise more than you've issued - you need headroom for future rounds.
 
-**Liquidation preference:** Most preferred shares (CCPS) carry a liquidation preference — in an exit, investors get paid back their investment (1x non-participating) before founders get anything. In a low-exit scenario, this can mean founders receive nothing. Understand what preference stack you're agreeing to.
+**Liquidation preference:** Most preferred shares (CCPS) carry a liquidation preference - in an exit, investors get paid back their investment (1x non-participating) before founders get anything. In a low-exit scenario, this can mean founders receive nothing. Understand what preference stack you're agreeing to.
 
 **Pro-rata rights:** The right for existing investors to invest in future rounds to maintain their ownership percentage. Standard at seed. Know who has these rights and for how long.
 
 **Anti-dilution:** Protects investors if you raise at a lower valuation in future. Broad-based weighted average (standard) is much better for founders than full ratchet (avoid).
 
-**Drag-along rights:** Allows majority shareholders to force minority shareholders to agree to a sale. Common in investor agreements — make sure the threshold is set appropriately (typically 75%+ approval required).`,
+**Drag-along rights:** Allows majority shareholders to force minority shareholders to agree to a sale. Common in investor agreements - make sure the threshold is set appropriately (typically 75%+ approval required).`,
       },
       {
-        heading: "Cap table hygiene — what to do",
+        heading: "Cap table hygiene - what to do",
         body: `**Before you incorporate:**
-- Decide the founder split carefully — changing it later is possible but creates friction
+- Decide the founder split carefully - changing it later is possible but creates friction
 - Agree on vesting schedules in writing, even between co-founders
 - Issue enough shares to allow for future rounds without inconvenient fractions
 
 **After each funding round:**
-- Update the cap table immediately — don't let it go stale
+- Update the cap table immediately - don't let it go stale
 - Confirm the fully diluted share count with your lawyer
 - Update your ESOP register alongside the cap table
 
 **Before the next raise:**
 - Have a lawyer review the cap table for any issues before you start investor conversations
-- Know your fully diluted post-money ownership at different dilution scenarios — don't be surprised in negotiations
+- Know your fully diluted post-money ownership at different dilution scenarios - don't be surprised in negotiations
 - Understand every preference, right, and restriction attached to every share class
 
 **Tools to manage your cap table:**
 - Carta (if you have US investors)
 - Razorpay Rize or Leegality for Indian documentation
-- A well-structured Excel/Google Sheet is fine at pre-seed and seed stage — the important thing is keeping it accurate and updated`,
+- A well-structured Excel/Google Sheet is fine at pre-seed and seed stage - the important thing is keeping it accurate and updated`,
       },
     ],
   },

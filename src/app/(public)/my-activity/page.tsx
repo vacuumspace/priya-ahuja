@@ -1,6 +1,6 @@
 ﻿import { auth } from "@/lib/auth"
 import { db } from "@/lib/db"
-import { bookings, purchases, services as servicesTable, digitalProducts, startupScores, startupIdeaScores, availability, priyaGptTimeTransactions } from "@/lib/db/schema"
+import { bookings, purchases, services as servicesTable, digitalProducts, startupScores, startupIdeaScores, wellbeingScores, availability, priyaGptTimeTransactions } from "@/lib/db/schema"
 import { eq, and, desc } from "drizzle-orm"
 import Link from "next/link"
 import { CalendarDays, FileText, LogIn, Lightbulb, ExternalLink, Bot } from "lucide-react"
@@ -30,7 +30,7 @@ function formatDate(d: Date | string) {
   })
 }
 
-type SearchParams = Promise<{ tab?: string }>
+type SearchParams = Promise<{ tab?: string; sub?: string }>
 
 export default async function MySessionsPage({ searchParams }: { searchParams: SearchParams }) {
   const session = await auth()
@@ -40,6 +40,10 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
     params.tab === "tools" ? "tools" :
     params.tab === "priyagpt" ? "priyagpt" :
     "sessions"
+  const activeToolSub =
+    params.sub === "idea" ? "idea" :
+    params.sub === "wellbeing" ? "wellbeing" :
+    "fundability"
 
   if (!session?.user?.email) {
     return (
@@ -58,7 +62,7 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
 
   const email = session.user.email
 
-  const [userBookingsRaw, userPurchases, userScores, userIdeaScores, userPriyaGptTxns] = await Promise.all([
+  const [userBookingsRaw, userPurchases, userScores, userIdeaScores, userWellbeingScores, userPriyaGptTxns] = await Promise.all([
     db
       .select({
         id: bookings.id,
@@ -118,6 +122,16 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
 
     db
       .select({
+        id: wellbeingScores.id,
+        totalScore: wellbeingScores.totalScore,
+        createdAt: wellbeingScores.createdAt,
+      })
+      .from(wellbeingScores)
+      .where(eq(wellbeingScores.userId, session.user.id!))
+      .orderBy(desc(wellbeingScores.createdAt)),
+
+    db
+      .select({
         id: priyaGptTimeTransactions.id,
         deltaMinutes: priyaGptTimeTransactions.deltaMinutes,
         amountPaise: priyaGptTimeTransactions.amountPaise,
@@ -141,7 +155,7 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
     if (aUpcoming && !bUpcoming) return -1
     if (!aUpcoming && bUpcoming) return 1
     if (aUpcoming && bUpcoming) return (aSlot!.getTime() - bSlot!.getTime()) // ASC for upcoming
-    // both past — sort DESC
+    // both past - sort DESC
     if (aSlot && bSlot) return bSlot.getTime() - aSlot.getTime()
     return 0
   })
@@ -150,7 +164,7 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
     <div className="min-h-screen bg-cream">
       <div className="flex justify-between items-center px-4 md:px-10 py-4 text-[13px] text-ink/50 font-sans border-b border-border">
         <span>my activity</span>
-        <span>{userBookings.length + userPurchases.length + userScores.length + userIdeaScores.length + userPriyaGptTxns.length} total</span>
+        <span>{userBookings.length + userPurchases.length + userScores.length + userIdeaScores.length + userWellbeingScores.length + userPriyaGptTxns.length} total</span>
       </div>
 
       <div className="px-4 md:px-10 pt-10 pb-16 max-w-2xl">
@@ -192,7 +206,7 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
           >
             <Lightbulb size={12} />
             tools
-            <span className="text-[12px] font-mono ml-0.5 opacity-60">{userScores.length + userIdeaScores.length}</span>
+            <span className="text-[12px] font-mono ml-0.5 opacity-60">{userScores.length + userIdeaScores.length + userWellbeingScores.length}</span>
           </Link>
           <Link
             href="/my-activity?tab=priyagpt"
@@ -216,7 +230,7 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
                 <CalendarDays size={32} className="text-peach-dark/40 mx-auto mb-3" />
                 <p className="font-heading text-base font-700 text-ink mb-1">no sessions yet</p>
                 <p className="font-sans text-sm text-ink/50 mb-5 leading-relaxed">
-                  book a 1:1 session with Priya — strategy, pitch review, or fundraise readiness.
+                  book a 1:1 session with Priya - strategy, pitch review, or fundraise readiness.
                 </p>
                 <Link
                   href="/connect"
@@ -251,86 +265,159 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
         {/* Tools tab */}
         {activeTab === "tools" && (
           <section>
-            {userScores.length === 0 && userIdeaScores.length === 0 ? (
-              <div className="border border-dashed border-border rounded-2xl p-8 text-center">
-                <p className="font-sans text-sm text-ink/50 mb-3">no tool results yet</p>
-                <div className="flex items-center justify-center gap-4">
+            {/* Tools sub-tabs */}
+            <div className="flex gap-1 mb-6">
+              <Link
+                href="/my-activity?tab=tools&sub=fundability"
+                className={`px-3 py-1.5 rounded-full text-[12px] font-sans font-semibold transition-colors ${
+                  activeToolSub === "fundability" ? "bg-ink text-cream" : "bg-ink/5 text-ink/50 hover:bg-ink/10"
+                }`}
+              >
+                fundability <span className="opacity-60">{userScores.length}</span>
+              </Link>
+              <Link
+                href="/my-activity?tab=tools&sub=idea"
+                className={`px-3 py-1.5 rounded-full text-[12px] font-sans font-semibold transition-colors ${
+                  activeToolSub === "idea" ? "bg-ink text-cream" : "bg-ink/5 text-ink/50 hover:bg-ink/10"
+                }`}
+              >
+                idea score <span className="opacity-60">{userIdeaScores.length}</span>
+              </Link>
+              <Link
+                href="/my-activity?tab=tools&sub=wellbeing"
+                className={`px-3 py-1.5 rounded-full text-[12px] font-sans font-semibold transition-colors ${
+                  activeToolSub === "wellbeing" ? "bg-ink text-cream" : "bg-ink/5 text-ink/50 hover:bg-ink/10"
+                }`}
+              >
+                wellbeing <span className="opacity-60">{userWellbeingScores.length}</span>
+              </Link>
+            </div>
+
+            {activeToolSub === "fundability" && (
+              userScores.length === 0 ? (
+                <div className="border border-dashed border-border rounded-2xl p-8 text-center">
+                  <p className="font-sans text-sm text-ink/50 mb-3">no fundability score results yet</p>
                   <Link href="/fundraise/tools/fundability-score" className="text-xs font-sans font-semibold text-peach-dark hover:underline">
-                    startup fundability score
-                  </Link>
-                  <span className="text-ink/20">·</span>
-                  <Link href="/startup/tools/idea-score" className="text-xs font-sans font-semibold text-peach-dark hover:underline">
-                    startup idea score
+                    take the startup fundability score
                   </Link>
                 </div>
-              </div>
-            ) : (
-              <div className="flex flex-col gap-3">
-                {userScores.map((s) => (
-                  <div key={s.id} className="bg-card border border-border rounded-2xl p-5">
-                    <div className="flex items-center justify-between gap-4">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-1">
-                          {s.isPaid ? (
-                            <span className="text-[12px] font-sans font-semibold px-2 py-0.5 rounded-full bg-green-100 text-green-700">
-                              full analysis
-                            </span>
-                          ) : (
-                            <span className="text-[12px] font-sans font-semibold px-2 py-0.5 rounded-full bg-ink/10 text-ink/40">
-                              free score
-                            </span>
-                          )}
-                          <span className="text-[12px] font-sans text-ink/30">{formatDate(s.createdAt)}</span>
+              ) : (
+                <div className="flex flex-col gap-3">
+                  {userScores.map((s) => (
+                    <div key={s.id} className="bg-card border border-border rounded-2xl p-5">
+                      <div className="flex items-center justify-between gap-4">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-1">
+                            {s.isPaid ? (
+                              <span className="text-[12px] font-sans font-semibold px-2 py-0.5 rounded-full bg-green-100 text-green-700">
+                                full analysis
+                              </span>
+                            ) : (
+                              <span className="text-[12px] font-sans font-semibold px-2 py-0.5 rounded-full bg-ink/10 text-ink/40">
+                                free score
+                              </span>
+                            )}
+                            <span className="text-[12px] font-sans text-ink/30">{formatDate(s.createdAt)}</span>
+                          </div>
+                          <p className="font-heading text-base font-700 text-ink normal-case">
+                            startup fundability score
+                          </p>
                         </div>
-                        <p className="font-heading text-base font-700 text-ink normal-case">
-                          startup fundability score
-                        </p>
+                        <div className="flex-shrink-0 text-right flex flex-col items-end gap-2">
+                          <div>
+                            <span className="font-heading text-2xl font-bold text-ink">{s.totalScore}</span>
+                            <span className="font-sans text-[12px] text-ink/30">/100</span>
+                          </div>
+                          <Link href={`/my-activity/score/${s.id}`} className="text-[13px] font-sans font-semibold text-peach-dark hover:underline">
+                            view report →
+                          </Link>
+                        </div>
                       </div>
-                      <div className="flex-shrink-0 text-right flex flex-col items-end gap-2">
-                        <div>
+                    </div>
+                  ))}
+                </div>
+              )
+            )}
+
+            {activeToolSub === "idea" && (
+              userIdeaScores.length === 0 ? (
+                <div className="border border-dashed border-border rounded-2xl p-8 text-center">
+                  <p className="font-sans text-sm text-ink/50 mb-3">no idea score results yet</p>
+                  <Link href="/startup/tools/idea-score" className="text-xs font-sans font-semibold text-peach-dark hover:underline">
+                    take the startup idea score
+                  </Link>
+                </div>
+              ) : (
+                <div className="flex flex-col gap-3">
+                  {userIdeaScores.map((s) => (
+                    <div key={s.id} className="bg-card border border-border rounded-2xl p-5">
+                      <div className="flex items-center justify-between gap-4">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-1">
+                            {s.isPaid ? (
+                              <span className="text-[12px] font-sans font-semibold px-2 py-0.5 rounded-full bg-green-100 text-green-700">
+                                full analysis
+                              </span>
+                            ) : (
+                              <span className="text-[12px] font-sans font-semibold px-2 py-0.5 rounded-full bg-ink/10 text-ink/40">
+                                free score
+                              </span>
+                            )}
+                            <span className="text-[12px] font-sans text-ink/30">{formatDate(s.createdAt)}</span>
+                          </div>
+                          <p className="font-heading text-base font-700 text-ink normal-case">
+                            startup idea score
+                          </p>
+                        </div>
+                        <div className="flex-shrink-0 text-right flex flex-col items-end gap-2">
+                          <div>
+                            <span className="font-heading text-2xl font-bold text-ink">{s.totalScore}</span>
+                            <span className="font-sans text-[12px] text-ink/30">/100</span>
+                          </div>
+                          <Link href={`/my-activity/idea-score/${s.id}`} className="text-[13px] font-sans font-semibold text-peach-dark hover:underline">
+                            view report →
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )
+            )}
+
+            {activeToolSub === "wellbeing" && (
+              userWellbeingScores.length === 0 ? (
+                <div className="border border-dashed border-border rounded-2xl p-8 text-center">
+                  <p className="font-sans text-sm text-ink/50 mb-3">no wellbeing scorecard results yet</p>
+                  <Link href="/wellbeing/tools/wellbeing-score" className="text-xs font-sans font-semibold text-peach-dark hover:underline">
+                    take the founder wellbeing scorecard
+                  </Link>
+                </div>
+              ) : (
+                <div className="flex flex-col gap-3">
+                  {userWellbeingScores.map((s) => (
+                    <div key={s.id} className="bg-card border border-border rounded-2xl p-5">
+                      <div className="flex items-center justify-between gap-4">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="text-[12px] font-sans font-semibold px-2 py-0.5 rounded-full bg-ink/10 text-ink/40">
+                              free
+                            </span>
+                            <span className="text-[12px] font-sans text-ink/30">{formatDate(s.createdAt)}</span>
+                          </div>
+                          <p className="font-heading text-base font-700 text-ink normal-case">
+                            founder wellbeing scorecard
+                          </p>
+                        </div>
+                        <div className="flex-shrink-0 text-right">
                           <span className="font-heading text-2xl font-bold text-ink">{s.totalScore}</span>
                           <span className="font-sans text-[12px] text-ink/30">/100</span>
                         </div>
-                        <Link href={`/my-activity/score/${s.id}`} className="text-[13px] font-sans font-semibold text-peach-dark hover:underline">
-                          view report →
-                        </Link>
                       </div>
                     </div>
-                  </div>
-                ))}
-                {userIdeaScores.map((s) => (
-                  <div key={s.id} className="bg-card border border-border rounded-2xl p-5">
-                    <div className="flex items-center justify-between gap-4">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-1">
-                          {s.isPaid ? (
-                            <span className="text-[12px] font-sans font-semibold px-2 py-0.5 rounded-full bg-green-100 text-green-700">
-                              full analysis
-                            </span>
-                          ) : (
-                            <span className="text-[12px] font-sans font-semibold px-2 py-0.5 rounded-full bg-ink/10 text-ink/40">
-                              free score
-                            </span>
-                          )}
-                          <span className="text-[12px] font-sans text-ink/30">{formatDate(s.createdAt)}</span>
-                        </div>
-                        <p className="font-heading text-base font-700 text-ink normal-case">
-                          startup idea score
-                        </p>
-                      </div>
-                      <div className="flex-shrink-0 text-right flex flex-col items-end gap-2">
-                        <div>
-                          <span className="font-heading text-2xl font-bold text-ink">{s.totalScore}</span>
-                          <span className="font-sans text-[12px] text-ink/30">/100</span>
-                        </div>
-                        <Link href={`/my-activity/idea-score/${s.id}`} className="text-[13px] font-sans font-semibold text-peach-dark hover:underline">
-                          view report →
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              )
             )}
           </section>
         )}
@@ -430,7 +517,7 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
                       </div>
                       <div className="flex-shrink-0 text-right">
                         <span className="font-heading text-xl font-bold text-ink">
-                          {t.amountPaise != null ? `₹${(t.amountPaise / 100).toLocaleString("en-IN")}` : "—"}
+                          {t.amountPaise != null ? `₹${(t.amountPaise / 100).toLocaleString("en-IN")}` : " - "}
                         </span>
                       </div>
                     </div>

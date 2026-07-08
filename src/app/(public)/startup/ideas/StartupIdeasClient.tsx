@@ -136,7 +136,7 @@ export default function StartupIdeasClient({ isPaid, isAuthenticated, ideas }: P
         </p>
         <div className="flex items-center gap-2">
           <button
-            onClick={() => hasAccess ? setPage(p => p - 1) : undefined}
+            onClick={() => { if (hasAccess) { setPage(p => p - 1); window.scrollTo({ top: 0, behavior: "smooth" }) } }}
             disabled={!hasAccess || page <= 1}
             className="inline-flex items-center gap-1 text-xs font-sans font-semibold text-ink/60 hover:text-ink disabled:opacity-30 disabled:cursor-not-allowed transition-colors px-3 py-1.5 border border-border rounded-lg"
           >
@@ -151,7 +151,7 @@ export default function StartupIdeasClient({ isPaid, isAuthenticated, ideas }: P
               return (
                 <button
                   key={p}
-                  onClick={() => hasAccess ? setPage(p) : setShowSignIn(true)}
+                  onClick={() => { if (hasAccess) { setPage(p); window.scrollTo({ top: 0, behavior: "smooth" }) } else { setShowSignIn(true) } }}
                   className={`inline-flex items-center justify-center w-7 h-7 rounded text-xs font-sans font-semibold transition-colors
                     ${isCurrent ? "bg-ink text-cream" : "border border-border text-ink/50 hover:text-ink hover:border-ink/40"}`}
                 >
@@ -165,7 +165,7 @@ export default function StartupIdeasClient({ isPaid, isAuthenticated, ideas }: P
           </div>
 
           <button
-            onClick={() => hasAccess ? setPage(p => p + 1) : undefined}
+            onClick={() => { if (hasAccess) { setPage(p => p + 1); window.scrollTo({ top: 0, behavior: "smooth" }) } }}
             disabled={!hasAccess || page >= pageCount}
             className="inline-flex items-center gap-1 text-xs font-sans font-semibold text-ink/60 hover:text-ink disabled:opacity-30 disabled:cursor-not-allowed transition-colors px-3 py-1.5 border border-border rounded-lg"
           >

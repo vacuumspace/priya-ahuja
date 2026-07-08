@@ -59,8 +59,8 @@ export const resources: StartupResource[] = [
     deal: "Up to $200,000 in credits",
     dealType: "credits",
     whatYouGet: [
-      "$1,000–$100,000 (Founders tier — no VC required)",
-      "Up to $200,000 (Portfolio tier — accelerator or VC-affiliated)",
+      "$1,000–$100,000 (Founders tier - no VC required)",
+      "Up to $200,000 (Portfolio tier - accelerator or VC-affiliated)",
       "AWS Business Support for 1 year",
       "Credits valid for 2 years",
     ],
@@ -92,7 +92,7 @@ export const resources: StartupResource[] = [
     name: "Microsoft for Startups",
     tagline: "Azure credits plus the full Microsoft ecosystem",
     description:
-      "Microsoft for Startups (Founders Hub) gives you Azure cloud credits, GitHub Enterprise, Microsoft 365, and access to OpenAI models through Azure OpenAI Service — all in one program. Ideal for startups already using Microsoft or planning enterprise sales.",
+      "Microsoft for Startups (Founders Hub) gives you Azure cloud credits, GitHub Enterprise, Microsoft 365, and access to OpenAI models through Azure OpenAI Service - all in one program. Ideal for startups already using Microsoft or planning enterprise sales.",
     category: "Cloud Infrastructure",
     deal: "Up to $150,000 in Azure credits",
     dealType: "credits",
@@ -112,7 +112,7 @@ export const resources: StartupResource[] = [
     name: "DigitalOcean Hatch",
     tagline: "Simple cloud for developers and early-stage startups",
     description:
-      "DigitalOcean is known for developer-friendly simplicity — VMs (Droplets), managed Kubernetes, and app platform. The Hatch program gives startups significant credits with less bureaucracy than hyperscalers, making it a popular choice for early-stage teams.",
+      "DigitalOcean is known for developer-friendly simplicity - VMs (Droplets), managed Kubernetes, and app platform. The Hatch program gives startups significant credits with less bureaucracy than hyperscalers, making it a popular choice for early-stage teams.",
     category: "Cloud Infrastructure",
     deal: "Up to $100,000 in credits",
     dealType: "credits",
@@ -130,14 +130,14 @@ export const resources: StartupResource[] = [
     name: "Cloudflare for Startups",
     tagline: "CDN, security, and edge compute for growing products",
     description:
-      "Cloudflare provides CDN, DDoS protection, WAF, serverless computing (Workers), R2 object storage, and more. Their tiered startup program scales with your funding stage — meaning the more you've raised, the more credits you unlock.",
+      "Cloudflare provides CDN, DDoS protection, WAF, serverless computing (Workers), R2 object storage, and more. Their tiered startup program scales with your funding stage - meaning the more you've raised, the more credits you unlock.",
     category: "Cloud Infrastructure",
     deal: "$10,000–$350,000 in credits (tiered by funding)",
     dealType: "credits",
     whatYouGet: [
-      "$10,000 — bootstrapped / pre-funded startups",
-      "$100,000 — startups that have raised $1M+",
-      "$350,000 — startups that have raised $5M+",
+      "$10,000 - bootstrapped / pre-funded startups",
+      "$100,000 - startups that have raised $1M+",
+      "$350,000 - startups that have raised $5M+",
       "Access to Workers, R2, D1, and all paid features",
     ],
     eligibility: "Open to all startups. Credit tier depends on funding level. No equity required.",
@@ -170,7 +170,7 @@ export const resources: StartupResource[] = [
     name: "Brex",
     tagline: "Corporate cards and banking built for startups",
     description:
-      "Brex offers corporate credit cards with high limits (based on funding, not personal credit), business checking accounts, bill pay, and treasury management — all in one platform. No personal guarantees required. Popular with VC-backed startups for managing burn.",
+      "Brex offers corporate credit cards with high limits (based on funding, not personal credit), business checking accounts, bill pay, and treasury management - all in one platform. No personal guarantees required. Popular with VC-backed startups for managing burn.",
     category: "Payments & Banking",
     deal: "Free Essentials plan (cards + checking + bill pay)",
     dealType: "free-plan",
@@ -190,7 +190,7 @@ export const resources: StartupResource[] = [
     name: "Mercury",
     tagline: "Business banking designed for startups",
     description:
-      "Mercury is a fintech offering business checking and savings accounts, virtual and physical debit cards, wire transfers, and treasury for startups. No monthly fees, no minimum balance, and a clean API — making it a favourite among early-stage founders.",
+      "Mercury is a fintech offering business checking and savings accounts, virtual and physical debit cards, wire transfers, and treasury for startups. No monthly fees, no minimum balance, and a clean API - making it a favourite among early-stage founders.",
     category: "Payments & Banking",
     deal: "Free core banking with no minimums",
     dealType: "free-plan",
@@ -212,7 +212,7 @@ export const resources: StartupResource[] = [
     name: "Mixpanel",
     tagline: "Product analytics to understand what users actually do",
     description:
-      "Mixpanel is a product analytics platform that helps you track user behavior, build funnels, run A/B experiments, and segment users by cohort. Their startup program is one of the most generous — giving you a full year free with no event limits.",
+      "Mixpanel is a product analytics platform that helps you track user behavior, build funnels, run A/B experiments, and segment users by cohort. Their startup program is one of the most generous - giving you a full year free with no event limits.",
     category: "Analytics",
     deal: "1st year free (1 billion events/year)",
     dealType: "free-plan",
@@ -250,7 +250,7 @@ export const resources: StartupResource[] = [
     name: "PostHog",
     tagline: "Open-source product analytics with session replay",
     description:
-      "PostHog is an all-in-one product analytics suite — events, funnels, session recordings, feature flags, A/B testing, and more — hosted on your own infrastructure or their cloud. A generous free tier plus a massive YC credit make it accessible at any stage.",
+      "PostHog is an all-in-one product analytics suite - events, funnels, session recordings, feature flags, A/B testing, and more - hosted on your own infrastructure or their cloud. A generous free tier plus a massive YC credit make it accessible at any stage.",
     category: "Analytics",
     deal: "$50,000/year in credits (YC); generous free tier for all",
     dealType: "credits",
@@ -258,7 +258,7 @@ export const resources: StartupResource[] = [
       "$50,000/year for YC companies",
       "1 million events/month free for all (no credit card)",
       "Session recordings, feature flags, A/B tests included",
-      "Open-source — self-hostable with no vendor lock-in",
+      "Open-source - self-hostable with no vendor lock-in",
     ],
     eligibility: "Free tier is open to everyone. YC credits require Y Combinator affiliation.",
     applyUrl: "https://posthog.com/startups",
@@ -269,7 +269,7 @@ export const resources: StartupResource[] = [
     name: "Segment (Twilio)",
     tagline: "Customer data platform to unify all your user data",
     description:
-      "Segment is a customer data platform (CDP) that collects events from your web, mobile, and server-side sources and routes them to 400+ destinations — analytics tools, CRMs, ad platforms, and data warehouses. The startup program gives two free years of the Team plan.",
+      "Segment is a customer data platform (CDP) that collects events from your web, mobile, and server-side sources and routes them to 400+ destinations - analytics tools, CRMs, ad platforms, and data warehouses. The startup program gives two free years of the Team plan.",
     category: "Analytics",
     deal: "Team plan free for 2 years (~$25,000 value)",
     dealType: "free-plan",
@@ -309,7 +309,7 @@ export const resources: StartupResource[] = [
     name: "Intercom Early Stage",
     tagline: "Customer messaging platform with AI support",
     description:
-      "Intercom is a customer communications platform with live chat, AI chatbot (Fin), email campaigns, and a shared team inbox. The Early Stage program is one of the most generous in SaaS — 93% off in year one means you can run full customer support infrastructure for almost nothing.",
+      "Intercom is a customer communications platform with live chat, AI chatbot (Fin), email campaigns, and a shared team inbox. The Early Stage program is one of the most generous in SaaS - 93% off in year one means you can run full customer support infrastructure for almost nothing.",
     category: "Communication",
     deal: "93% off Year 1, then 50% off Year 2",
     dealType: "discount",
@@ -330,7 +330,7 @@ export const resources: StartupResource[] = [
     name: "Figma for Startups",
     tagline: "The collaborative design tool for product teams",
     description:
-      "Figma is the industry-standard design tool for UI/UX — wireframes, prototypes, design systems, and developer handoff all in one. Their startup program gives you credits to use the full platform, including Figma AI features, for your early-stage product team.",
+      "Figma is the industry-standard design tool for UI/UX - wireframes, prototypes, design systems, and developer handoff all in one. Their startup program gives you credits to use the full platform, including Figma AI features, for your early-stage product team.",
     category: "Design",
     deal: "$1,000 in Figma credits",
     dealType: "credits",
@@ -351,7 +351,7 @@ export const resources: StartupResource[] = [
     name: "GitHub for Startups",
     tagline: "Code hosting, CI/CD, Copilot, and security all-in-one",
     description:
-      "GitHub for Startups gives you the full GitHub Enterprise stack — Copilot AI coding assistant, Advanced Security (GHAS), Actions for CI/CD, and unlimited private repositories. The $10,000 credit covers licenses for your entire engineering team.",
+      "GitHub for Startups gives you the full GitHub Enterprise stack - Copilot AI coding assistant, Advanced Security (GHAS), Actions for CI/CD, and unlimited private repositories. The $10,000 credit covers licenses for your entire engineering team.",
     category: "Developer Tools",
     deal: "$10,000 in GitHub Enterprise credits",
     dealType: "credits",
@@ -371,7 +371,7 @@ export const resources: StartupResource[] = [
     name: "Auth0 for Startups",
     tagline: "Authentication and identity management, out of the box",
     description:
-      "Auth0 (by Okta) handles login, registration, MFA, social sign-in, SSO, and user management so you don't have to build auth from scratch. The startup program gives you a full year free on the Professional plan — covering up to 100,000 monthly active users.",
+      "Auth0 (by Okta) handles login, registration, MFA, social sign-in, SSO, and user management so you don't have to build auth from scratch. The startup program gives you a full year free on the Professional plan - covering up to 100,000 monthly active users.",
     category: "Developer Tools",
     deal: "1 year free Professional plan (up to 100k MAU)",
     dealType: "free-plan",
@@ -391,7 +391,7 @@ export const resources: StartupResource[] = [
     name: "Datadog for Startups",
     tagline: "Infrastructure monitoring, APM, and observability",
     description:
-      "Datadog is the leading observability platform — infrastructure metrics, APM (application performance monitoring), log management, synthetics, and security. For engineering teams shipping fast, knowing what's broken before customers report it is essential.",
+      "Datadog is the leading observability platform - infrastructure metrics, APM (application performance monitoring), log management, synthetics, and security. For engineering teams shipping fast, knowing what's broken before customers report it is essential.",
     category: "Developer Tools",
     deal: "Up to $100,000 in credits for 1 year",
     dealType: "credits",
@@ -430,7 +430,7 @@ export const resources: StartupResource[] = [
     name: "Notion for Startups",
     tagline: "Docs, wikis, databases, and project management in one",
     description:
-      "Notion is the all-in-one workspace most startup teams use for their internal wiki, roadmap, meeting notes, OKRs, and CRM. The startup program gives you Business Plan (including Notion AI) for free — no need to pay until you scale.",
+      "Notion is the all-in-one workspace most startup teams use for their internal wiki, roadmap, meeting notes, OKRs, and CRM. The startup program gives you Business Plan (including Notion AI) for free - no need to pay until you scale.",
     category: "Productivity",
     deal: "Up to 6 months free Business Plan (includes Notion AI)",
     dealType: "free-plan",
@@ -449,7 +449,7 @@ export const resources: StartupResource[] = [
     name: "Linear",
     tagline: "Fast, opinionated project management for engineering teams",
     description:
-      "Linear is the issue tracker and project management tool that engineering teams actually love using. It's fast, keyboard-driven, and built for software teams — with cycles, roadmaps, and GitHub/Slack integrations. The startup plan gives you months of free access.",
+      "Linear is the issue tracker and project management tool that engineering teams actually love using. It's fast, keyboard-driven, and built for software teams - with cycles, roadmaps, and GitHub/Slack integrations. The startup plan gives you months of free access.",
     category: "Productivity",
     deal: "Up to 6 months free",
     dealType: "free-plan",
@@ -470,7 +470,7 @@ export const resources: StartupResource[] = [
     name: "HubSpot for Startups",
     tagline: "CRM, marketing, sales, and customer service platform",
     description:
-      "HubSpot is the all-in-one growth platform — free CRM, email marketing, sales pipeline, customer service ticketing, and operations tools. The startup program offers the steepest discounts in SaaS: 90% off in Year 1, making enterprise-grade CRM accessible from day one.",
+      "HubSpot is the all-in-one growth platform - free CRM, email marketing, sales pipeline, customer service ticketing, and operations tools. The startup program offers the steepest discounts in SaaS: 90% off in Year 1, making enterprise-grade CRM accessible from day one.",
     category: "CRM & Sales",
     deal: "90% off Year 1, 50% off Year 2, 25% off Year 3",
     dealType: "discount",
@@ -489,7 +489,7 @@ export const resources: StartupResource[] = [
   {
     slug: "anthropic-for-startups",
     name: "Anthropic for Startups",
-    tagline: "Claude API — the most capable AI model for complex tasks",
+    tagline: "Claude API - the most capable AI model for complex tasks",
     description:
       "Anthropic's Claude models (Opus, Sonnet, Haiku) are known for nuanced reasoning, long-context handling, and safety. The startup program provides non-dilutive API credits so you can build AI-powered features without worrying about inference costs while you find product-market fit.",
     category: "AI & LLMs",
@@ -498,7 +498,7 @@ export const resources: StartupResource[] = [
     whatYouGet: [
       "$25,000–$100,000+ depending on stage and VC affiliation",
       "Access to Claude Opus, Sonnet, and Haiku models",
-      "Non-dilutive — no equity required",
+      "Non-dilutive - no equity required",
       "12-month validity on credits",
     ],
     eligibility: "Pre-seed to Series A. Partner-backed startups (top-tier VCs and accelerators) unlock higher tiers.",
@@ -510,7 +510,7 @@ export const resources: StartupResource[] = [
     name: "OpenAI for Startups",
     tagline: "GPT-4o and o-series models for your AI product",
     description:
-      "OpenAI's startup program gives you API credits to build with GPT-4o, o1, and other models. For founders selected into OpenAI Grove (a cohort program), credits go up to $50,000 — plus access to OpenAI's team, events, and go-to-market support.",
+      "OpenAI's startup program gives you API credits to build with GPT-4o, o1, and other models. For founders selected into OpenAI Grove (a cohort program), credits go up to $50,000 - plus access to OpenAI's team, events, and go-to-market support.",
     category: "AI & LLMs",
     deal: "Up to $5,000 (standard); up to $50,000 via Grove cohort",
     dealType: "credits",
@@ -521,7 +521,7 @@ export const resources: StartupResource[] = [
       "$2,500 via Ramp partnership",
       "Credits expire 12 months from issuance",
     ],
-    eligibility: "Venture-backed startups (pre-seed to Series A). Grove is a competitive cohort — apply early.",
+    eligibility: "Venture-backed startups (pre-seed to Series A). Grove is a competitive cohort - apply early.",
     applyUrl: "https://openai.com/startups/",
     featured: true,
   },
@@ -530,17 +530,17 @@ export const resources: StartupResource[] = [
     name: "Mistral AI for Startups",
     tagline: "European frontier AI models with strong multilingual support",
     description:
-      "Mistral AI offers open-weight and proprietary models via La Plateforme, known for efficiency and strong multilingual performance. Their startup program provides substantial credits, and Mistral models are also available on AWS, Azure, and GCP — letting you stack platform credits.",
+      "Mistral AI offers open-weight and proprietary models via La Plateforme, known for efficiency and strong multilingual performance. Their startup program provides substantial credits, and Mistral models are also available on AWS, Azure, and GCP - letting you stack platform credits.",
     category: "AI & LLMs",
     deal: "Up to €30,000 (~$32,000) in API credits",
     dealType: "credits",
     whatYouGet: [
       "Up to €30,000 in La Plateforme API credits",
       "Access to Mistral Large, Small, Codestral, and Pixtral",
-      "Also available on AWS Bedrock, Azure AI, and GCP — stackable",
+      "Also available on AWS Bedrock, Azure AI, and GCP - stackable",
       "~10 startups selected per 6-month cohort",
     ],
-    eligibility: "Pre-seed to Series A. Competitive cohort selection — approximately 10 startups per cycle.",
+    eligibility: "Pre-seed to Series A. Competitive cohort selection - approximately 10 startups per cycle.",
     applyUrl: "https://mistral.ai/news/la-plateforme/",
     featured: false,
   },
@@ -549,7 +549,7 @@ export const resources: StartupResource[] = [
     name: "Together AI",
     tagline: "Open-source model inference with fine-tuning support",
     description:
-      "Together AI specializes in fast, cost-effective inference for open-source models like Llama, Qwen, and Mistral — plus fine-tuning and dedicated endpoints. Their startup accelerator goes beyond credits to include engineering hours and GTM support.",
+      "Together AI specializes in fast, cost-effective inference for open-source models like Llama, Qwen, and Mistral - plus fine-tuning and dedicated endpoints. Their startup accelerator goes beyond credits to include engineering hours and GTM support.",
     category: "AI & LLMs",
     deal: "$15,000–$50,000 in credits + engineering support",
     dealType: "credits",
@@ -559,7 +559,7 @@ export const resources: StartupResource[] = [
       "GTM and go-to-market assistance",
       "Access to serverless inference, fine-tuning, and dedicated endpoints",
     ],
-    eligibility: "AI-native application startups. Competitive selection — apply through the Together AI Startup Accelerator.",
+    eligibility: "AI-native application startups. Competitive selection - apply through the Together AI Startup Accelerator.",
     applyUrl: "https://www.together.ai/startup-accelerator",
     featured: false,
   },
@@ -568,7 +568,7 @@ export const resources: StartupResource[] = [
     name: "Replicate for Startups",
     tagline: "Run open-source AI models via API",
     description:
-      "Replicate lets you run open-source models — image generation (FLUX, SDXL), speech (Whisper), language (Llama), and more — via a simple API. No infrastructure to manage. Startup credits cover your initial compute costs while you prototype and ship.",
+      "Replicate lets you run open-source models - image generation (FLUX, SDXL), speech (Whisper), language (Llama), and more - via a simple API. No infrastructure to manage. Startup credits cover your initial compute costs while you prototype and ship.",
     category: "AI & LLMs",
     deal: "$1,000–$10,000 in inference credits",
     dealType: "credits",
@@ -585,9 +585,9 @@ export const resources: StartupResource[] = [
   {
     slug: "hugging-face",
     name: "Hugging Face for Startups",
-    tagline: "The GitHub of AI — models, datasets, and inference",
+    tagline: "The GitHub of AI - models, datasets, and inference",
     description:
-      "Hugging Face hosts 500,000+ models and datasets, provides inference endpoints, and is the hub of the open-source AI community. The startup program gives you Pro access — with private repos, inference credits, and priority support.",
+      "Hugging Face hosts 500,000+ models and datasets, provides inference endpoints, and is the hub of the open-source AI community. The startup program gives you Pro access - with private repos, inference credits, and priority support.",
     category: "AI & LLMs",
     deal: "6 months free Hugging Face Pro",
     dealType: "free-plan",
@@ -606,7 +606,7 @@ export const resources: StartupResource[] = [
     name: "Perplexity for Startups",
     tagline: "AI-powered search and research engine with API",
     description:
-      "Perplexity is an AI research and reasoning engine that answers questions with cited sources in real time — think of it as a smarter, faster search for your product. Their startup program includes both team access and API credits for building research-powered features.",
+      "Perplexity is an AI research and reasoning engine that answers questions with cited sources in real time - think of it as a smarter, faster search for your product. Their startup program includes both team access and API credits for building research-powered features.",
     category: "AI & LLMs",
     deal: "6 months free Enterprise Pro (50 seats) + $5,000 API credits",
     dealType: "free-plan",
@@ -625,7 +625,7 @@ export const resources: StartupResource[] = [
     name: "Cohere for Startups",
     tagline: "Enterprise AI models optimized for business NLP tasks",
     description:
-      "Cohere offers frontier language models fine-tuned for enterprise use cases — document search, classification, summarization, and RAG pipelines. Strong choice for B2B startups building AI features for enterprise customers who need data privacy guarantees.",
+      "Cohere offers frontier language models fine-tuned for enterprise use cases - document search, classification, summarization, and RAG pipelines. Strong choice for B2B startups building AI features for enterprise customers who need data privacy guarantees.",
     category: "AI & LLMs",
     deal: "Up to 25% off enterprise pricing",
     dealType: "discount",
@@ -646,7 +646,7 @@ export const resources: StartupResource[] = [
     name: "Pinecone for Startups",
     tagline: "Managed vector database for AI applications",
     description:
-      "Pinecone is the leading managed vector database — essential infrastructure for RAG pipelines, semantic search, recommendation systems, and long-term AI memory. Startup credits let you run production-scale vector search without upfront infra costs.",
+      "Pinecone is the leading managed vector database - essential infrastructure for RAG pipelines, semantic search, recommendation systems, and long-term AI memory. Startup credits let you run production-scale vector search without upfront infra costs.",
     category: "AI Infrastructure",
     deal: "$5,000 in credits",
     dealType: "credits",
@@ -657,7 +657,7 @@ export const resources: StartupResource[] = [
       "RBAC, backups, and Prometheus metrics",
       "7–10 business day review",
     ],
-    eligibility: "Early-stage startups. Apply directly — no VC affiliation required.",
+    eligibility: "Early-stage startups. Apply directly - no VC affiliation required.",
     applyUrl: "https://www.pinecone.io/startup-program/",
     featured: false,
   },
@@ -666,7 +666,7 @@ export const resources: StartupResource[] = [
     name: "Supabase for Startups",
     tagline: "Open-source Firebase alternative with pgvector support",
     description:
-      "Supabase is a backend-as-a-service built on PostgreSQL — with Auth, Storage, Edge Functions, and pgvector for AI embeddings. It's the go-to for startups that want Firebase-like speed of development with the power and reliability of Postgres.",
+      "Supabase is a backend-as-a-service built on PostgreSQL - with Auth, Storage, Edge Functions, and pgvector for AI embeddings. It's the go-to for startups that want Firebase-like speed of development with the power and reliability of Postgres.",
     category: "AI Infrastructure",
     deal: "Up to $3,000 in credits or 6 months free Team plan",
     dealType: "credits",
@@ -686,7 +686,7 @@ export const resources: StartupResource[] = [
     name: "Vercel for Startups",
     tagline: "Frontend cloud for shipping AI apps fast",
     description:
-      "Vercel is the platform for deploying Next.js and modern web applications — with edge functions, AI SDK, v0 AI UI generation, and zero-config deployments. The startup program covers your hosting while you focus on building, not DevOps.",
+      "Vercel is the platform for deploying Next.js and modern web applications - with edge functions, AI SDK, v0 AI UI generation, and zero-config deployments. The startup program covers your hosting while you focus on building, not DevOps.",
     category: "AI Infrastructure",
     deal: "Free Pro plan + up to $30,000 in platform credits",
     dealType: "credits",
@@ -705,7 +705,7 @@ export const resources: StartupResource[] = [
     name: "Qdrant for Startups",
     tagline: "High-performance open-source vector search engine",
     description:
-      "Qdrant is an open-source vector database known for speed and filtering capabilities — especially useful for hybrid search (combining dense and sparse vectors). The startup program bundles Qdrant Cloud discounts with partner credits from Hugging Face and LlamaCloud.",
+      "Qdrant is an open-source vector database known for speed and filtering capabilities - especially useful for hybrid search (combining dense and sparse vectors). The startup program bundles Qdrant Cloud discounts with partner credits from Hugging Face and LlamaCloud.",
     category: "AI Infrastructure",
     deal: "20% off Qdrant Cloud for 12 months + partner credits",
     dealType: "discount",
@@ -715,7 +715,7 @@ export const resources: StartupResource[] = [
       "20% discount on LlamaCloud",
       "Open-source self-hosted option always available",
     ],
-    eligibility: "Open to all startups. Apply via the Qdrant website — 7–10 business day review.",
+    eligibility: "Open to all startups. Apply via the Qdrant website - 7–10 business day review.",
     applyUrl: "https://qdrant.tech/qdrant-for-startups/",
     featured: false,
   },
@@ -726,7 +726,7 @@ export const resources: StartupResource[] = [
     name: "Cursor for Startups",
     tagline: "AI-first code editor that writes and edits code with you",
     description:
-      "Cursor is a VSCode fork with deep AI integration — it understands your entire codebase, writes multi-file edits, and can autonomously complete tasks. For early-stage engineering teams, Cursor dramatically accelerates development velocity.",
+      "Cursor is a VSCode fork with deep AI integration - it understands your entire codebase, writes multi-file edits, and can autonomously complete tasks. For early-stage engineering teams, Cursor dramatically accelerates development velocity.",
     category: "AI Coding",
     deal: "$500–$5,000+ in credits (via accelerator programs)",
     dealType: "credits",
@@ -747,7 +747,7 @@ export const resources: StartupResource[] = [
     name: "Lovable",
     tagline: "Build full-stack web apps by describing them in plain English",
     description:
-      "Lovable is an AI-powered app builder that turns natural language prompts into full-stack web applications — React frontend, Supabase backend, and deployable in minutes. Ideal for non-technical founders validating ideas fast, or technical founders who want to skip boilerplate entirely.",
+      "Lovable is an AI-powered app builder that turns natural language prompts into full-stack web applications - React frontend, Supabase backend, and deployable in minutes. Ideal for non-technical founders validating ideas fast, or technical founders who want to skip boilerplate entirely.",
     category: "AI Coding",
     deal: "Free tier available; startup credits via partner programs",
     dealType: "free-tier",
@@ -767,7 +767,7 @@ export const resources: StartupResource[] = [
     name: "Emergent",
     tagline: "AI agent that builds, runs, and deploys full apps autonomously",
     description:
-      "Emergent is an AI coding agent that can autonomously build complete web and mobile applications — not just code snippets, but working products with backend, frontend, and database wired together. Great for founders who want to go from idea to working prototype in hours.",
+      "Emergent is an AI coding agent that can autonomously build complete web and mobile applications - not just code snippets, but working products with backend, frontend, and database wired together. Great for founders who want to go from idea to working prototype in hours.",
     category: "AI Coding",
     deal: "Free tier; startup access via emergent.sh",
     dealType: "free-tier",
@@ -789,7 +789,7 @@ export const resources: StartupResource[] = [
     name: "ElevenLabs Startup Grants",
     tagline: "Realistic AI voice generation and text-to-speech API",
     description:
-      "ElevenLabs produces the most realistic AI voices for text-to-speech, voice cloning, and dubbing. If your product involves audio — narration, voice assistants, accessibility features, or content localization — ElevenLabs grants give you access to 33 million characters free.",
+      "ElevenLabs produces the most realistic AI voices for text-to-speech, voice cloning, and dubbing. If your product involves audio - narration, voice assistants, accessibility features, or content localization - ElevenLabs grants give you access to 33 million characters free.",
     category: "AI Voice & Video",
     deal: "33M characters free (~$4,000 value, 680+ hours of audio)",
     dealType: "credits",
@@ -797,10 +797,10 @@ export const resources: StartupResource[] = [
       "33 million characters of API credits (12-month validity)",
       "Equivalent to 680+ hours of generated audio",
       "Access to all voices including voice cloning",
-      "No VC backing required — no investor deck needed",
+      "No VC backing required - no investor deck needed",
       "5–10 business day review",
     ],
-    eligibility: "Startups or companies with fewer than 25 employees. No investor requirement — bootstrapped startups eligible.",
+    eligibility: "Startups or companies with fewer than 25 employees. No investor requirement - bootstrapped startups eligible.",
     applyUrl: "https://elevenlabs.io/startup-grants",
     featured: true,
   },
@@ -809,7 +809,7 @@ export const resources: StartupResource[] = [
     name: "Runway Builders Program",
     tagline: "AI video generation and video editing API",
     description:
-      "Runway builds Gen-3 and other AI video generation models. The Builders Program gives startups 500,000 API credits to integrate AI video generation into their products — ideal for media, content, edtech, or entertainment startups building video features.",
+      "Runway builds Gen-3 and other AI video generation models. The Builders Program gives startups 500,000 API credits to integrate AI video generation into their products - ideal for media, content, edtech, or entertainment startups building video features.",
     category: "AI Voice & Video",
     deal: "500,000 API credits",
     dealType: "credits",
@@ -850,7 +850,7 @@ export const resources: StartupResource[] = [
     name: "Shiprocket",
     tagline: "India's leading e-commerce shipping and logistics platform",
     description:
-      "Shiprocket aggregates 17+ courier partners (Blue Dart, Delhivery, FedEx, etc.) into one dashboard — with automated order sync, real-time tracking, NDR management, and competitive shipping rates. Essential for Indian D2C startups shipping across the country.",
+      "Shiprocket aggregates 17+ courier partners (Blue Dart, Delhivery, FedEx, etc.) into one dashboard - with automated order sync, real-time tracking, NDR management, and competitive shipping rates. Essential for Indian D2C startups shipping across the country.",
     category: "E-Commerce",
     deal: "Free plan available; startup pricing on growth plans",
     dealType: "free-tier",
@@ -870,7 +870,7 @@ export const resources: StartupResource[] = [
     name: "Dukaan",
     tagline: "Launch your online store in 30 seconds",
     description:
-      "Dukaan is an Indian-built e-commerce platform for setting up an online store instantly — no coding required. Includes catalogue management, payment collection, delivery tracking, and WhatsApp order notifications. Built specifically for Indian SMBs and D2C brands.",
+      "Dukaan is an Indian-built e-commerce platform for setting up an online store instantly - no coding required. Includes catalogue management, payment collection, delivery tracking, and WhatsApp order notifications. Built specifically for Indian SMBs and D2C brands.",
     category: "E-Commerce",
     deal: "Free plan available",
     dealType: "free-tier",
@@ -890,7 +890,7 @@ export const resources: StartupResource[] = [
     name: "GoKwik",
     tagline: "Checkout optimisation and RTO reduction for Indian D2C brands",
     description:
-      "GoKwik is an Indian commerce enablement platform that improves checkout conversion rates and reduces Return-to-Origin (RTO) — one of the biggest pain points for Indian e-commerce startups. Uses AI to assess COD risk and streamline the buying experience.",
+      "GoKwik is an Indian commerce enablement platform that improves checkout conversion rates and reduces Return-to-Origin (RTO) - one of the biggest pain points for Indian e-commerce startups. Uses AI to assess COD risk and streamline the buying experience.",
     category: "E-Commerce",
     deal: "Custom startup pricing; no upfront fee",
     dealType: null,
@@ -899,9 +899,9 @@ export const resources: StartupResource[] = [
       "AI-powered COD risk scoring to reduce RTO",
       "Higher prepaid conversion nudges",
       "Works with Shopify, WooCommerce, and custom stores",
-      "No upfront or monthly fee — success-based pricing",
+      "No upfront or monthly fee - success-based pricing",
     ],
-    eligibility: "D2C brands and e-commerce startups in India. Revenue-share model — no upfront cost.",
+    eligibility: "D2C brands and e-commerce startups in India. Revenue-share model - no upfront cost.",
     applyUrl: "https://gokwik.co",
     featured: false,
   },
@@ -910,7 +910,7 @@ export const resources: StartupResource[] = [
     name: "Unicommerce",
     tagline: "Multi-channel order and warehouse management for Indian e-commerce",
     description:
-      "Unicommerce is India's leading SaaS platform for e-commerce operations — managing orders across marketplaces (Amazon, Flipkart, Meesho), warehouses, and D2C channels from a single dashboard. Essential for startups scaling across multiple selling channels.",
+      "Unicommerce is India's leading SaaS platform for e-commerce operations - managing orders across marketplaces (Amazon, Flipkart, Meesho), warehouses, and D2C channels from a single dashboard. Essential for startups scaling across multiple selling channels.",
     category: "E-Commerce",
     deal: "Free trial available",
     dealType: "free-tier",
@@ -932,7 +932,7 @@ export const resources: StartupResource[] = [
     name: "Stripe Atlas",
     tagline: "Incorporate in Delaware and get $50,000+ in startup perks",
     description:
-      "Stripe Atlas lets you incorporate a Delaware C-corp or LLC online in days — ideal for Indian founders building global products who want US entity status for fundraising. Beyond incorporation, Atlas members get $50,000+ in partner perks from AWS, Mercury, Carta, and others.",
+      "Stripe Atlas lets you incorporate a Delaware C-corp or LLC online in days - ideal for Indian founders building global products who want US entity status for fundraising. Beyond incorporation, Atlas members get $50,000+ in partner perks from AWS, Mercury, Carta, and others.",
     category: "Legal",
     deal: "$2,500 in Stripe credits + $50,000+ in partner perks",
     dealType: "credits",

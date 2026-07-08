@@ -15,7 +15,7 @@ export async function POST(req: Request) {
     })
     return new Response(null, { status: 204 })
   } catch {
-    // Silently swallow — analytics must never break the page
+    // Silently swallow - analytics must never break the page
     return new Response(null, { status: 204 })
   }
 }

@@ -144,7 +144,7 @@ export async function getCalendarBusySlots(
     const startMin = startIST.getUTCHours() * 60 + startIST.getUTCMinutes()
     const endMin   = endIST.getUTCHours()   * 60 + endIST.getUTCMinutes()
 
-    // A single busy period may span midnight — split across dates if needed
+    // A single busy period may span midnight - split across dates if needed
     if (startIST.toISOString().slice(0, 10) === endIST.toISOString().slice(0, 10)) {
       result.push({ date, startMin, endMin })
     } else {

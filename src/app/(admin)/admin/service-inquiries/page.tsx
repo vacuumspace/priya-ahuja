@@ -74,7 +74,7 @@ function InquiryRow({ inquiry, onUpdate }: { inquiry: Inquiry; onUpdate: (id: st
              inquiry.type}
           </span>
         </td>
-        <td className="py-3 px-4 text-xs font-sans text-ink/60">{inquiry.budget ?? "—"}</td>
+        <td className="py-3 px-4 text-xs font-sans text-ink/60">{inquiry.budget ?? " - "}</td>
         <td className="py-3 px-4" onClick={(e) => e.stopPropagation()}>
           <select
             value={status}

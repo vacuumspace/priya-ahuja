@@ -1,0 +1,1618 @@
+{
+  "lastRefreshed": "2026-07-08T05:27:05.830Z",
+  "totalCount": 82,
+  "grants": [
+    {
+      "slug": "aditi",
+      "title": "Acing Development of Innovative Technologies with iDEX (ADITI)",
+      "org": "Ministry of Defence / Defence Innovation Organisation (DIO)",
+      "sector": "Defence",
+      "grantType": "grant",
+      "stage": "prototype",
+      "amountLabel": "Up to ₹25 Cr",
+      "deadlineLabel": "Ongoing challenges",
+      "description": "ADITI accelerates development of strategically critical and sensitive defence technologies through challenges and hackathons, with winning startups incubated by Partner Incubators.",
+      "eligibility": "DPIIT recognised startups, Indian companies incorporated under the Companies Act 1956/2013, and individual innovators.",
+      "whatYouGet": [
+        "Grant up to 50% of product development budget, capped at ₹25 crore",
+        "Product development budgets can scale to ₹50 crore or beyond",
+        "Partner Incubators receive up to ₹9 lakh per milestone completed"
+      ],
+      "howToApply": "Apply through ADITI challenges and hackathons announced on the iDEX website.",
+      "applyUrl": "https://idex.gov.in/",
+      "featured": false
+    },
+    {
+      "slug": "agriculture-infrastructure-financing-facility",
+      "title": "Agriculture Infrastructure Financing Facility (AIF)",
+      "org": "Agricultural & Farmers Welfare Department",
+      "sector": "AgriTech",
+      "grantType": "loan",
+      "stage": "growth",
+      "amountLabel": "3% interest subvention on loans up to ₹2 crore",
+      "deadlineLabel": "Rolling applications",
+      "description": "AIF mobilises medium- to long-term debt financing for post-harvest management infrastructure and community farming assets by offering a 3% annual interest subvention on qualifying loans.",
+      "eligibility": "Banks and financial institutions lend to PACS, marketing cooperatives, FPOs, SHGs, farmers, JLGs, agri-entrepreneurs, startups, and PPP projects sponsored by state/central agencies.",
+      "whatYouGet": [
+        "3% per annum interest subvention on loans up to ₹2 crore",
+        "Loan tenure of up to 7 years",
+        "Financing support for post-harvest and community farming infrastructure"
+      ],
+      "howToApply": "Register as a beneficiary on the AIF portal; applications are accepted year-round.",
+      "applyUrl": "https://agriinfra.dac.gov.in/Home/BeneficiaryRegistration",
+      "featured": false
+    },
+    {
+      "slug": "agrisure",
+      "title": "AgriSURE (Agri Fund for Startups & Rural Enterprises)",
+      "org": "Ministry of Agriculture & Farmers Welfare / NABARD",
+      "sector": "AgriTech",
+      "grantType": "equity",
+      "stage": "growth",
+      "amountLabel": "Ticket size up to ₹25 Cr",
+      "deadlineLabel": "Ongoing scheme",
+      "description": "AgriSURE is a ₹750 crore blended-capital fund backing technology-driven, high-impact agri and rural startups, investing both through AIFs and directly, alongside grant-in-aid and incubation support.",
+      "eligibility": "Startups working in agriculture and rural development, or SEBI-registered AIFs investing in that space.",
+      "whatYouGet": [
+        "Fund of Funds route (₹450 crore corpus) and Direct Investment route (₹300 crore corpus)",
+        "Ticket size up to ₹25 crore per startup, subject to merit",
+        "Grant-in-aid, incubation and mentoring support"
+      ],
+      "howToApply": "Eligible startups or AIFs approach NABVENTURES directly.",
+      "applyUrl": "https://nabventures.in/agrisure.aspx",
+      "featured": false
+    },
+    {
+      "slug": "antariksh-space-vcf",
+      "title": "Antariksh Venture Capital Fund (Space VCF)",
+      "org": "IN-SPACe, Department of Space",
+      "sector": "Space",
+      "grantType": "equity",
+      "stage": "growth",
+      "amountLabel": "₹1,005 crore corpus (equity investments)",
+      "deadlineLabel": "Rolling applications",
+      "description": "Antariksh Venture Capital Fund is a SEBI-registered Alternative Investment Fund backed by IN-SPACe that invests equity capital into unlisted Indian space companies to support scaling and commercialisation.",
+      "eligibility": "Indian companies operating in the space sector with a Technology Readiness Level (TRL) of 4 and above.",
+      "whatYouGet": [
+        "Privately negotiated equity or convertible instrument investment",
+        "Capital to support scaling of operations",
+        "Support for commercialisation of new space technologies"
+      ],
+      "howToApply": "Apply via the SIDBI Venture website and submit the linked Microsoft Forms application.",
+      "applyUrl": "https://www.sidbivcf.in/",
+      "featured": false
+    },
+    {
+      "slug": "atal-community-innovation-centres-acic",
+      "title": "Atal Community Innovation Centres (ACIC)",
+      "org": "Atal Innovation Mission (AIM), NITI Aayog",
+      "sector": "Social Impact",
+      "grantType": "grant",
+      "stage": "idea",
+      "amountLabel": "Up to ₹2.5 crore (50% AIM funding)",
+      "deadlineLabel": "Rolling applications",
+      "description": "ACICs bring infrastructure and capacity-building opportunities to potential entrepreneurs in aspiring, underserved regions of India, supported by the Atal Innovation Mission.",
+      "eligibility": "Academic applicants (UGC/AICTE-affiliated institutions, ITIs) and non-academic applicants (voluntary/science-and-technology organizations) with at least 3 years of existence.",
+      "whatYouGet": [
+        "Support up to ₹2.5 crore disbursed in multiple tranches",
+        "AIM funding covering 50% of total project cost",
+        "Capacity-building and infrastructure support for local entrepreneurs"
+      ],
+      "howToApply": "Submit applications online via the Atal Innovation Mission website for review by a Screening and Selection Committee.",
+      "applyUrl": "https://aim.gov.in/",
+      "featured": false
+    },
+    {
+      "slug": "atal-incubation-centres-aic",
+      "title": "Atal Incubation Centres (AICs)",
+      "org": "Atal Innovation Mission (AIM), NITI Aayog",
+      "sector": "General",
+      "grantType": "grant",
+      "stage": "prototype",
+      "amountLabel": "Up to ₹10 crore grant-in-aid",
+      "deadlineLabel": "Rolling applications",
+      "description": "AIM funds academic and non-academic institutions to set up Atal Incubation Centres, world-class sector-specific incubators that provide infrastructure, mentoring and seed-capital access to innovative startups.",
+      "eligibility": "Academic institutions (higher education, R&D institutes), and non-academic institutions such as corporates, SEBI-registered AIFs, business accelerators, and individuals.",
+      "whatYouGet": [
+        "Up to ₹5 crore (without lab facilities) or ₹10 crore (with sector-specific labs)",
+        "Grant-in-aid over a 5-year period for capital and operational expenses",
+        "No matching contribution required for government applicants"
+      ],
+      "howToApply": "Interested institutions apply via the Atal Innovation Mission website.",
+      "applyUrl": "https://aim.gov.in/aic-overview.php",
+      "featured": false
+    },
+    {
+      "slug": "atal-tinkering-labs",
+      "title": "Atal Tinkering Labs (ATL)",
+      "org": "Atal Innovation Mission (AIM), NITI Aayog",
+      "sector": "Student-Led",
+      "grantType": "grant",
+      "stage": "idea",
+      "amountLabel": "₹20 lakh grant-in-aid over 5 years",
+      "deadlineLabel": "Rolling applications",
+      "description": "Atal Tinkering Labs are innovation workspaces set up in schools across India to foster curiosity, creativity, and STEM skills among young students through hands-on, do-it-yourself learning.",
+      "eligibility": "Schools in India with at least Grade VI to X, managed by government, local bodies, private trusts/societies, or tribal/social welfare departments.",
+      "whatYouGet": [
+        "₹20 lakh grant-in-aid per school (₹10 lakh capital, ₹10 lakh operational over 5 years)",
+        "Access to tools and equipment for STEM learning",
+        "A dedicated innovation workspace within the school"
+      ],
+      "howToApply": "Interested schools apply online through the Atal Innovation Mission website.",
+      "applyUrl": "https://aim.gov.in/",
+      "featured": false
+    },
+    {
+      "slug": "bdl-start-ups",
+      "title": "BDL Start Ups",
+      "org": "Bharat Dynamics Limited (BDL)",
+      "sector": "Defence",
+      "grantType": "accelerator",
+      "stage": "early-revenue",
+      "amountLabel": null,
+      "deadlineLabel": "Rolling applications",
+      "description": "BDL Start Ups is Bharat Dynamics Limited's initiative to engage startups working on defence and allied technologies for collaboration and potential procurement.",
+      "eligibility": "Startups with technologies relevant to defence manufacturing and systems.",
+      "whatYouGet": [
+        "Collaboration opportunities with BDL",
+        "Access to defence sector pilot and procurement pathways"
+      ],
+      "howToApply": "Apply through the BDL Start Ups webpage.",
+      "applyUrl": "https://bdl-india.in/start-ups",
+      "featured": false
+    },
+    {
+      "slug": "bharati-agritech-export",
+      "title": "Bharat's Hub for Agritech, Resilience, Advancement & Incubation for Export Innovation (BHARATI)",
+      "org": "APEDA, Ministry of Commerce & Industry",
+      "sector": "AgriTech",
+      "grantType": "accelerator",
+      "stage": "early-revenue",
+      "amountLabel": null,
+      "deadlineLabel": "Rolling applications",
+      "description": "BHARATI is APEDA's flagship initiative to make agri-food and agritech startups export-ready by providing acceleration support, market access, and connections across APEDA's ecosystem to help sell innovative products globally.",
+      "eligibility": "Agri-food/agritech startups, export-enabling technology and service startups, APEDA-registered exporters, and Farmer Producer Companies developing high-value or SPS-related solutions.",
+      "whatYouGet": [
+        "Acceleration support for product development, export readiness and regulatory compliance",
+        "Access to APEDA's ecosystem of industry bodies, state boards, IITs/NITs and accelerators",
+        "Support for GI-tagged, organic, superfood and processed food categories"
+      ],
+      "howToApply": "Visit the BHARATI official portal for details on how to apply.",
+      "applyUrl": "https://apeda.gov.in/bharati/",
+      "featured": false
+    },
+    {
+      "slug": "bioangels",
+      "title": "BioAngels",
+      "org": "Department of Biotechnology (DBT) / BIRAC",
+      "sector": "HealthTech",
+      "grantType": "equity",
+      "stage": "early-revenue",
+      "amountLabel": null,
+      "deadlineLabel": "Rolling applications",
+      "description": "BioAngels is a partnership between BIRAC and the India Angel Network (IAN) that helps Biotech, Medtech, Healthtech, Pharma, Agritech and Cleantech startups raise angel investment from investors with deep domain expertise.",
+      "eligibility": "Startups and entrepreneurs operating in Biotech, Medtech, Healthtech, Pharma, Cleantech or Agritech sectors.",
+      "whatYouGet": [
+        "Access to angel investors, HNIs, family offices, strategic investors and VCs",
+        "Financial incentives alongside investment",
+        "Mentoring and market access from industry leaders"
+      ],
+      "howToApply": "Apply through the BioAngels website.",
+      "applyUrl": "https://www.birac.nic.in/Bioangels.php",
+      "featured": false
+    },
+    {
+      "slug": "bionest-programme",
+      "title": "BioNEST Programme",
+      "org": "Biotechnology Industry Research Assistance Council (BIRAC), Department of Biotechnology",
+      "sector": "HealthTech",
+      "grantType": "grant",
+      "stage": "any",
+      "amountLabel": null,
+      "deadlineLabel": "Rolling applications",
+      "description": "BioNEST supports educational institutions, incubators and biotech parks in building globally competent bio-incubation facilities that provide entrepreneurs shared infrastructure, mentorship and regulatory guidance to scale the biotech startup ecosystem.",
+      "eligibility": "Incorporated Indian legal entities such as educational institutions, business incubators, biotech parks, state government S&T bodies, biotech state councils and research hospitals.",
+      "whatYouGet": [
+        "Grant-in-aid based on project need and scope",
+        "Funding for refurbishment, equipment, furniture and operational costs",
+        "Shared access to high-end infrastructure and specialised equipment for entrepreneurs"
+      ],
+      "howToApply": "Submit applications online via the BIRAC website.",
+      "applyUrl": "https://www.birac.nic.in/desc_new.php?id=1120",
+      "featured": false
+    },
+    {
+      "slug": "biotechnology-ignition-grant",
+      "title": "Biotechnology Ignition Grant Scheme (BIG)",
+      "org": "Department of Biotechnology / BIRAC",
+      "sector": "HealthTech",
+      "grantType": "grant",
+      "stage": "idea",
+      "amountLabel": "Up to ₹50 Lakh",
+      "deadlineLabel": "Calls open twice a year (Jan & Jul)",
+      "description": "BIG is India's largest early-stage biotech funding programme, giving individual entrepreneurs and startups grant support to move promising scientific ideas toward viable products, plus access to mentors and industry networks.",
+      "eligibility": "Individual entrepreneurs and startups incubated at any incubator (BIRAC-supported or not).",
+      "whatYouGet": [
+        "Grant-in-aid of up to ₹50 lakh over up to 18 months",
+        "Networking with experts, mentors, investors and peers",
+        "Specialized training and workshops"
+      ],
+      "howToApply": "Apply online through the BIRAC website during one of the twice-yearly national calls for proposals.",
+      "applyUrl": "https://birac.nic.in/big.php",
+      "featured": true
+    },
+    {
+      "slug": "biotechnology-innovation-fund-ace",
+      "title": "Biotechnology Innovation Fund - Accelerating Entrepreneurs (AcE)",
+      "org": "Department of Biotechnology / BIRAC",
+      "sector": "HealthTech",
+      "grantType": "equity",
+      "stage": "growth",
+      "amountLabel": "Up to ₹7 Cr per startup",
+      "deadlineLabel": "Ongoing scheme",
+      "description": "The AcE Fund is a fund-of-funds that partners with SEBI-registered AIFs (Daughter Funds) to channel equity investment into biotech, medtech, and life-sciences startups at scale.",
+      "eligibility": "SEBI-registered Category I/II AIFs partner with BIRAC; startups and SMEs in healthcare, life sciences, pharma, medtech, diagnostics, industrial biotech, agritech and bio-IT receive funding through Daughter Funds.",
+      "whatYouGet": [
+        "Capital commitment up to ₹30 crore or 30% of a Daughter Fund's corpus",
+        "Ticket size up to ₹7 crore per startup, with ₹3.5 crore follow-on funding available"
+      ],
+      "howToApply": "Apply via the BIRAC AcE Fund portal, or approach a partnered Daughter Fund directly.",
+      "applyUrl": "https://birac.nic.in/aceFund.php",
+      "featured": false
+    },
+    {
+      "slug": "birac-incubator-seed-fund",
+      "title": "BIRAC Incubator SEED Fund",
+      "org": "Department of Biotechnology / BIRAC",
+      "sector": "HealthTech",
+      "grantType": "equity",
+      "stage": "idea",
+      "amountLabel": "Up to ₹30 Lakh",
+      "deadlineLabel": "Ongoing scheme",
+      "description": "The BIRAC SEED Fund provides early-stage capital to biotech and medtech startups through incubators, helping them get to the stage where they can raise from angel investors or commercial lenders.",
+      "eligibility": "Biotech, med-tech and life-sciences startups at incubators associated with the SEED Fund program.",
+      "whatYouGet": [
+        "Seed funding of up to ₹30 lakh via equity or equity-linked instruments"
+      ],
+      "howToApply": "Approach an associated incubator listed on the BIRAC SEED Fund website.",
+      "applyUrl": "https://www.birac.nic.in/seedFundNew.php",
+      "featured": false
+    },
+    {
+      "slug": "chips-to-startup-c2s",
+      "title": "Chips to Startup (C2S) Programme",
+      "org": "Ministry of Electronics and Information Technology (MeitY)",
+      "sector": "DeepTech",
+      "grantType": "grant",
+      "stage": "prototype",
+      "amountLabel": null,
+      "deadlineLabel": "Rolling applications",
+      "description": "C2S builds India's semiconductor and chip-design ecosystem by training specialised VLSI/embedded-systems manpower and supporting design of ASICs, SoCs, FPGAs and IP cores over a 5-year period.",
+      "eligibility": "Academic institutions and R&D organisations (IITs, NITs, IIITs, colleges); startups and MSMEs can participate via academia-industry collaborations, hackathons or RFPs.",
+      "whatYouGet": [
+        "Financial and technical support for approved chip-design projects",
+        "Access to EDA tools, IP repository, fabrication/MPW support and prototyping",
+        "Manpower training and mentoring support"
+      ],
+      "howToApply": "Submit project proposals online through the C2S portal in MeitY's prescribed format.",
+      "applyUrl": "https://www.c2s.gov.in/",
+      "featured": false
+    },
+    {
+      "slug": "coal-india-innovation-incubation-centre",
+      "title": "CIL Innovation & Incubation Centre (CII Centre)",
+      "org": "Coal India Limited (CIL)",
+      "sector": "CleanTech",
+      "grantType": "accelerator",
+      "stage": "prototype",
+      "amountLabel": null,
+      "deadlineLabel": "Rolling applications",
+      "description": "The CII Centre, run with IIT (ISM), incubates startups working on technologies relevant to coal, mining, and allied sectors, providing incubation support and access to research infrastructure.",
+      "eligibility": "Startups developing technologies applicable to mining, coal, or allied energy sectors.",
+      "whatYouGet": [
+        "Incubation support and mentorship",
+        "Access to IIT (ISM) research infrastructure"
+      ],
+      "howToApply": "Apply through the CII Centre portal hosted at IIT (ISM) Dhanbad.",
+      "applyUrl": "https://ciicentre.iitism.ac.in/",
+      "featured": false
+    },
+    {
+      "slug": "cgtmse",
+      "title": "Credit Guarantee Fund Trust for Micro & Small Enterprises (CGTMSE)",
+      "org": "Ministry of Micro, Small and Medium Enterprises",
+      "sector": "Manufacturing",
+      "grantType": "loan",
+      "stage": "any",
+      "amountLabel": "Up to ₹10 crore guarantee coverage",
+      "deadlineLabel": "Rolling applications",
+      "description": "CGTMSE provides collateral-free loans to Micro and Small Enterprises by guaranteeing 75% of the loan amount extended by banks, jointly run by the Ministry of MSME and SIDBI.",
+      "eligibility": "Micro and Small Enterprises, as defined by the Ministry of MSME, availing loans from banks/NBFCs/FIs registered as Member Lending Institutions with CGTMSE.",
+      "whatYouGet": [
+        "Collateral-free term loan or working capital loan",
+        "Guarantee coverage up to ₹10 crore per borrower",
+        "Modified guarantee cover for women entrepreneurs and Northeast Region units"
+      ],
+      "howToApply": "Apply directly to a registered Member Lending Institution (bank, NBFC or FI) for a term loan or working capital facility.",
+      "applyUrl": "https://www.cgtmse.in/",
+      "featured": false
+    },
+    {
+      "slug": "credit-guarantee-scheme-for-startups",
+      "title": "Credit Guarantee Scheme for Startups (CGSS)",
+      "org": "Department for Promotion of Industry and Internal Trade (DPIIT)",
+      "sector": "General",
+      "grantType": "credits",
+      "stage": "any",
+      "amountLabel": "Guarantee up to ₹20 Cr per borrower",
+      "deadlineLabel": "Ongoing scheme",
+      "description": "CGSS makes it easier for startups to get loans without collateral by having the government guarantee a portion of the credit risk to lenders. It's operated by the National Credit Guarantee Trustee Company (NCGTC).",
+      "eligibility": "DPIIT-recognised startups borrow from Member Institutions (scheduled banks, NBFCs, or SEBI-registered AIFs) that are enrolled under the scheme.",
+      "whatYouGet": [
+        "Credit guarantee up to ₹20 crore or the outstanding credit, whichever is lower",
+        "Available as transaction-based or umbrella-based cover"
+      ],
+      "howToApply": "Apply through a Member Institution or via the Jan Samarth portal for business loans under the startup scheme.",
+      "applyUrl": "https://www.jansamarth.in/business-loan-startup-scheme",
+      "featured": true
+    },
+    {
+      "slug": "design-linked-incentive-dli",
+      "title": "Design Linked Incentive (DLI) Scheme",
+      "org": "Ministry of Electronics and Information Technology (MeitY)",
+      "sector": "DeepTech",
+      "grantType": "grant",
+      "stage": "prototype",
+      "amountLabel": "Up to ₹15 crore (product) + 4-6% of net sales (deployment)",
+      "deadlineLabel": "Rolling applications",
+      "description": "DLI provides financial incentives and access to advanced semiconductor design infrastructure for domestic chip-design startups and MSMEs, under the Semicon India Programme.",
+      "eligibility": "Domestic companies, startups and MSMEs engaged in semiconductor or semiconductor-linked design, with majority resident-Indian ownership retained for 3 years post-incentive.",
+      "whatYouGet": [
+        "Access to EDA tools, IP cores, MPW prototyping and post-silicon validation support",
+        "Reimbursement of up to 50% of eligible expenditure, capped at ₹15 crore per application",
+        "Deployment-linked incentive of 4-6% of net sales turnover over 5 years, capped at ₹30 crore"
+      ],
+      "howToApply": "Register and apply on the official DLI portal, submitting project and applicant details for review and approval.",
+      "applyUrl": "http://chips-dli.gov.in/",
+      "featured": false
+    },
+    {
+      "slug": "digital-communication-innovation-square-dcis",
+      "title": "Digital Communication Innovation Square (DCIS)",
+      "org": "Department of Telecommunications (DoT)",
+      "sector": "DeepTech",
+      "grantType": "grant",
+      "stage": "prototype",
+      "amountLabel": "Up to ₹10 Cr",
+      "deadlineLabel": "Rolling applications",
+      "description": "DCIS supports the full value chain of research, design, proof-of-concept, IPR creation, and pilot manufacturing in telecom equipment, aiming to make India a global hub for digital communication production and services.",
+      "eligibility": "DPIIT recognised startups and MSMEs incorporated in India with over 51% Indian/NRI/OCI ownership and headquartered in India; individual innovators including research/academic institutions may also apply.",
+      "whatYouGet": [
+        "Startups: milestone-based support up to ₹50 lakh",
+        "MSMEs: up to ₹2 crore",
+        "Higher-funding technology products: up to ₹10 crore"
+      ],
+      "howToApply": "Apply online through the DCIS portal.",
+      "applyUrl": "https://dcis.dot.gov.in/",
+      "featured": false
+    },
+    {
+      "slug": "e-yuva",
+      "title": "E-YUVA (Entrepreneurship for Young Uprising and Innovative Achievers)",
+      "org": "Biotechnology Industry Research Assistance Council (BIRAC)",
+      "sector": "Student-Led",
+      "grantType": "fellowship",
+      "stage": "idea",
+      "amountLabel": "₹30,000-50,000/month + ₹3-5 lakh research grant",
+      "deadlineLabel": "Two calls per year",
+      "description": "E-YUVA supports young students and researchers pursuing applied, need-based entrepreneurial innovation in biotechnology, delivered through E-Yuva Centers hosted at BioNEST-supported bio-incubators. It offers two fellowship tracks for postgraduates/PhDs and undergraduates.",
+      "eligibility": "Indian students who have completed Masters/PhD (Innovation Fellows) or are pursuing undergraduate studies (E-YUVA Fellows) in any discipline.",
+      "whatYouGet": [
+        "Monthly fellowship of ₹30,000-50,000",
+        "Annual research grant of ₹3-5 lakh",
+        "Technical and business mentoring plus exposure to the bioincubation model"
+      ],
+      "howToApply": "Apply online via the BIRAC website during one of two annual calls; shortlisted teams present before a Technical Expert Committee at their EYC.",
+      "applyUrl": "https://birac.nic.in/e_yuva.php",
+      "featured": false
+    },
+    {
+      "slug": "eil-engsui",
+      "title": "EngSUI",
+      "org": "Engineers India Limited (EIL)",
+      "sector": "Manufacturing",
+      "grantType": "accelerator",
+      "stage": "early-revenue",
+      "amountLabel": null,
+      "deadlineLabel": "Rolling applications",
+      "description": "EngSUI is Engineers India Limited's startup initiative connecting startups with EIL's engineering and consultancy ecosystem for collaboration and pilots.",
+      "eligibility": "Startups with technologies relevant to engineering, consultancy, and infrastructure sectors.",
+      "whatYouGet": [
+        "Collaboration opportunities with EIL",
+        "Access to EIL's engineering and project ecosystem"
+      ],
+      "howToApply": "Apply through the EngSUI portal.",
+      "applyUrl": "https://www6.eil.co.in/engsui/Open/Default.aspx",
+      "featured": false
+    },
+    {
+      "slug": "entrepreneurship-and-skill-development-programme-esdp",
+      "title": "Entrepreneurship and Skill Development Programme (ESDP)",
+      "org": "Ministry of Micro, Small and Medium Enterprises",
+      "sector": "General",
+      "grantType": "fellowship",
+      "stage": "idea",
+      "amountLabel": null,
+      "deadlineLabel": "Ongoing scheme",
+      "description": "ESDP helps aspiring and existing entrepreneurs build practical business skills to start, manage, and grow MSMEs across sectors like e-commerce, software, biotech, and modern agriculture. Training is delivered through structured awareness, skill-development, and management modules.",
+      "eligibility": "Existing or aspiring entrepreneurs; at least 40% of beneficiaries must come from weaker sections including SC/ST/Women/Physically Handicapped.",
+      "whatYouGet": [
+        "Training under three modules: Entrepreneurship Awareness Program, Entrepreneurship-cum-Skill Development Program, and Management Development Program",
+        "Hands-on practice and demonstrations to upgrade entrepreneurial skills"
+      ],
+      "howToApply": "Apply through the websites of MSME-DFOs, MSME-TC, and other implementing agencies under the ESDP scheme.",
+      "applyUrl": "https://msmedi.dcmsme.gov.in/",
+      "featured": false
+    },
+    {
+      "slug": "fund-of-funds-for-startups",
+      "title": "Fund of Funds for Startups (FFS)",
+      "org": "Department for Promotion of Industry and Internal Trade (DPIIT)",
+      "sector": "General",
+      "grantType": "equity",
+      "stage": "growth",
+      "amountLabel": "₹10,000 Cr corpus (via AIFs)",
+      "deadlineLabel": "Ongoing scheme",
+      "description": "FFS channels government capital into SEBI-registered venture capital funds (AIFs), which in turn invest directly into startups, boosting the overall availability of risk capital in the ecosystem. It is operated by SIDBI on behalf of DPIIT.",
+      "eligibility": "SEBI-registered AIFs apply for capital; DPIIT-recognised startups receive funding indirectly through the AIFs selected under the scheme.",
+      "whatYouGet": [
+        "Capital contribution to AIFs, who must invest at least 2x that amount into startups",
+        "Access to equity and equity-linked investment across startup stages"
+      ],
+      "howToApply": "AIFs apply through SIDBI's Fund Application Portal; startups approach the selected AIFs directly for investment.",
+      "applyUrl": "https://vcfapplication.sidbi.in/login",
+      "featured": true
+    },
+    {
+      "slug": "gem-startup-runway",
+      "title": "GeM Startup Runway",
+      "org": "Department of Commerce",
+      "sector": "General",
+      "grantType": "credits",
+      "stage": "any",
+      "amountLabel": null,
+      "deadlineLabel": "Ongoing scheme",
+      "description": "The GeM Startup Runway lets recognised startups list and sell innovative products and services directly to government buyers through the Government e-Marketplace, opening up public procurement as a revenue channel.",
+      "eligibility": "DPIIT-recognised startups registered as sellers on GeM, with products/services in existing categories or emerging sectors like AI, robotics, agritech and healthtech.",
+      "whatYouGet": [
+        "Access to government buyers across ministries, departments and PSUs",
+        "Relaxation from prior turnover/experience and EMD requirements",
+        "Dedicated marketplace visibility for innovative products"
+      ],
+      "howToApply": "Register as a seller on GeM and list products under the Startup Runway category.",
+      "applyUrl": "https://gem.gov.in/Startup_Runway",
+      "featured": false
+    },
+    {
+      "slug": "genesis-gen-next-support",
+      "title": "Gen-Next Support for Innovative Startups (GENESIS)",
+      "org": "Ministry of Electronics & Information Technology (MeitY)",
+      "sector": "General",
+      "grantType": "grant",
+      "stage": "early-revenue",
+      "amountLabel": "Up to ₹1 Cr",
+      "deadlineLabel": "Rolling applications",
+      "description": "GENESIS funds Implementing Agencies such as incubators, accelerators and Section 8 entities to provide funding, mentoring, and infrastructure access to technology startups in Tier-II and Tier-III cities. It also builds ecosystem capacity in those cities.",
+      "eligibility": "Entities registered under Section 8, incubators, accelerators, UGC/AICTE-recognised educational institutes, and other startup ecosystem entities supporting startups.",
+      "whatYouGet": [
+        "Recurring financial support to about 50 Implementing Agencies",
+        "Investment/pilot funding of ₹10 lakh (early-stage) up to ₹1 crore (deep-tech) to startups",
+        "Capacity building for Tier-II/III startup ecosystems"
+      ],
+      "howToApply": "Applications are accepted year-round via the online portal.",
+      "applyUrl": "https://msh.meity.gov.in/schemes/genesis",
+      "featured": false
+    },
+    {
+      "slug": "great-technical-textiles",
+      "title": "Grant for Research & Entrepreneurship across Aspiring Innovators in Technical Textiles (GREAT)",
+      "org": "Ministry of Textiles (National Technical Textiles Mission)",
+      "sector": "Manufacturing",
+      "grantType": "grant",
+      "stage": "prototype",
+      "amountLabel": "Up to ₹50 lakh",
+      "deadlineLabel": "Application windows announced by NTTM",
+      "description": "GREAT, under the National Technical Textiles Mission, funds young innovators and startups to convert technical-textile prototypes into market-ready products, covering areas like agro-textiles, medical textiles and smart textiles.",
+      "eligibility": "Indian citizen innovators aged 21+ incubated with an eligible incubator, or startup companies (private limited/partnership/LLP) under 5 years old with turnover below ₹100 crore and at least 51% Indian ownership.",
+      "whatYouGet": [
+        "Grant-in-aid up to ₹50 lakh per proposal over 18 months",
+        "Milestone-wise disbursement, typically 40:40:20",
+        "Associated incubators get an additional 10% of the grant for mentoring and monitoring"
+      ],
+      "howToApply": "Apply online via the GREAT/NTTM startup registration portal when applications are invited.",
+      "applyUrl": "https://nttm.texmin.gov.in/StartupRegistration/StartupUserRegistration",
+      "featured": false
+    },
+    {
+      "slug": "hpcl-udgam",
+      "title": "HP Udgam",
+      "org": "Hindustan Petroleum Corporation Limited (HPCL)",
+      "sector": "General",
+      "grantType": "accelerator",
+      "stage": "early-revenue",
+      "amountLabel": null,
+      "deadlineLabel": "Rolling applications",
+      "description": "HP Udgam is HPCL's startup engagement program that connects startups with the company for collaboration, pilots, and potential funding in the energy and retail space.",
+      "eligibility": "Startups with solutions relevant to HPCL's business operations.",
+      "whatYouGet": [
+        "Collaboration opportunities with HPCL",
+        "Access to pilot programs and business mentorship"
+      ],
+      "howToApply": "Apply through the HP Udgam startup portal.",
+      "applyUrl": "https://startup.hpcl.co.in",
+      "featured": false
+    },
+    {
+      "slug": "ifsca-fintech-incentive-scheme",
+      "title": "IFSCA Fintech Incentive Scheme",
+      "org": "International Financial Services Centres Authority (IFSCA)",
+      "sector": "FinTech",
+      "grantType": "grant",
+      "stage": "prototype",
+      "amountLabel": "Up to ₹75 lakh",
+      "deadlineLabel": "Rolling applications",
+      "description": "This scheme offers a tiered set of grants to fintech entities and accelerators operating out of IFSCs, helping them move from proof-of-concept to sandbox testing and market entry. It also supports greener fintech innovation with a dedicated grant category.",
+      "eligibility": "Fintech startups and accelerators developing or converting ideas into a Minimum Viable Product, operating within the IFSC framework.",
+      "whatYouGet": [
+        "Fintech Startup Grant of up to ₹15 lakh",
+        "Proof of Concept (PoC) grant of up to ₹50 lakh",
+        "Sandbox grant of up to ₹30 lakh",
+        "Green FinTech Grant of up to ₹75 lakh",
+        "Accelerator Grant of up to ₹10 lakh for accelerators"
+      ],
+      "howToApply": "Apply through the IFSCA website following the process outlined on their 'How to Apply' page.",
+      "applyUrl": "https://ifsca.gov.in/Pages/Contents/FinTech",
+      "featured": false
+    },
+    {
+      "slug": "ifsca-regulatory-sandbox",
+      "title": "IFSCA Regulatory Sandbox",
+      "org": "International Financial Services Centres Authority (IFSCA)",
+      "sector": "FinTech",
+      "grantType": "accelerator",
+      "stage": "prototype",
+      "amountLabel": null,
+      "deadlineLabel": "Rolling applications",
+      "description": "IFSCA's regulatory sandbox allows fintech startups to test innovative products and services within IFSC jurisdictions under a relaxed regulatory framework before full-scale launch.",
+      "eligibility": "Fintech entities with innovative products/services seeking to test in a live but controlled regulatory environment within IFSCs.",
+      "whatYouGet": [
+        "Ability to test fintech innovations under relaxed regulatory requirements",
+        "Regulatory guidance during the testing period"
+      ],
+      "howToApply": "Apply through the IFSCA regulatory sandbox framework and legal notifications.",
+      "applyUrl": "https://ifsca.gov.in/Legal/Index?MId=IeTjhim8HvY=",
+      "featured": false
+    },
+    {
+      "slug": "inspace-seed-fund-scheme",
+      "title": "IN-SPACe Seed Fund Scheme",
+      "org": "IN-SPACe, Department of Space",
+      "sector": "Space",
+      "grantType": "grant",
+      "stage": "idea",
+      "amountLabel": "Up to ₹1 Cr",
+      "deadlineLabel": "Periodic announcements",
+      "description": "This scheme provides milestone-based grant funding, mentoring and networking to early-stage space-tech startups so they can move ideas into prototypes, administered by the space sector regulator IN-SPACe.",
+      "eligibility": "DPIIT recognised early-stage startups working on innovative space-technology projects that have not received more than ₹50 lakh support under any other Central/State scheme.",
+      "whatYouGet": [
+        "Grant of up to ₹1 crore on a milestone basis",
+        "Mentorship and training",
+        "Networking opportunities with the space ecosystem"
+      ],
+      "howToApply": "Watch for periodic announcements of opportunities on the IN-SPACe website and apply accordingly.",
+      "applyUrl": "https://www.inspace.gov.in/inspace?id=announcement_for_opportunities",
+      "featured": false
+    },
+    {
+      "slug": "iocl-ind-s-up",
+      "title": "IndS_UP StartUp Scheme",
+      "org": "Indian Oil Corporation Limited (IOCL)",
+      "sector": "General",
+      "grantType": "grant",
+      "stage": "early-revenue",
+      "amountLabel": null,
+      "deadlineLabel": "Rolling applications",
+      "description": "IndS_UP is IOCL's startup scheme run through its R&D Centre, supporting startups developing technologies relevant to the oil and gas industry.",
+      "eligibility": "Startups with technologies relevant to IOCL's R&D and business focus areas.",
+      "whatYouGet": [
+        "Engagement with IOCL's R&D Centre",
+        "Potential funding and pilot collaboration"
+      ],
+      "howToApply": "Apply through IOCL's R&D Centre startup page.",
+      "applyUrl": "https://startupfund.indianoil.in/OpenInnovation.aspx",
+      "featured": false
+    },
+    {
+      "slug": "innovation-agri-entrepreneurship-program-rkvy",
+      "title": "Innovation & Agri-Entrepreneurship Program (RKVY)",
+      "org": "Ministry of Agriculture & Farmers Welfare",
+      "sector": "AgriTech",
+      "grantType": "grant",
+      "stage": "idea",
+      "amountLabel": "₹5 Lakh (pre-seed) - ₹25 Lakh (seed)",
+      "deadlineLabel": "Ongoing scheme",
+      "description": "This RKVY-funded program builds India's agri-incubation ecosystem, giving early-stage agri-entrepreneurs pre-seed and seed grants through a network of R-ABIs (agribusiness incubators).",
+      "eligibility": "DPIIT-recognised startups working in agriculture and allied areas, applying through R-ABIs.",
+      "whatYouGet": [
+        "Pre-seed support up to ₹5 lakh",
+        "Seed-stage support up to ₹25 lakh",
+        "Incubation and mentoring support"
+      ],
+      "howToApply": "Apply online via the Agri Startup portal to be routed to an R-ABI.",
+      "applyUrl": "https://agristartup.gov.in/",
+      "featured": false
+    },
+    {
+      "slug": "idex",
+      "title": "Innovations for Defence Excellence (iDEX)",
+      "org": "Ministry of Defence / Defence Innovation Organisation (DIO)",
+      "sector": "Defence",
+      "grantType": "grant",
+      "stage": "prototype",
+      "amountLabel": "₹1.5 Cr – ₹10 Cr",
+      "deadlineLabel": "Ongoing challenges",
+      "description": "iDEX is DIO's flagship framework, launched in 2018, that funds startups, MSMEs and individual innovators to develop defence technologies, reducing import dependence and building self-reliance in defence production.",
+      "eligibility": "DPIIT recognised startups, companies incorporated under the Companies Act that qualify as MSMEs, and individual innovators.",
+      "whatYouGet": [
+        "Grants ranging from ₹1.5 crore to ₹10 crore based on the challenge",
+        "Access to accelerator programs and challenges run via Partner Incubators",
+        "Mentoring and infrastructure/test facility access"
+      ],
+      "howToApply": "Apply to open Challenges listed on the iDEX portal.",
+      "applyUrl": "https://idex.gov.in/challenges",
+      "featured": true
+    },
+    {
+      "slug": "international-cooperation-scheme",
+      "title": "International Cooperation Scheme",
+      "org": "Ministry of Micro, Small and Medium Enterprises",
+      "sector": "Manufacturing",
+      "grantType": "grant",
+      "stage": "growth",
+      "amountLabel": "Reimbursement-based financial assistance",
+      "deadlineLabel": "Rolling applications",
+      "description": "The International Cooperation Scheme helps MSMEs access export markets by reimbursing costs of participating in international trade fairs, exhibitions and buyer-seller meets, and building export market intelligence.",
+      "eligibility": "MSMEs, State/Central Government organizations/institutions, and registered industry/enterprise associations.",
+      "whatYouGet": [
+        "Reimbursement for participation in international exhibitions and buyer-seller meets",
+        "Capacity Building of First Time Exporters (CBFTE) support for new MSE exporters",
+        "Access to international market intelligence dissemination"
+      ],
+      "howToApply": "Apply through the International Cooperation scheme's online portal.",
+      "applyUrl": "https://msme.gov.in/international-cooperation",
+      "featured": false
+    },
+    {
+      "slug": "leap-fund",
+      "title": "LEAP Fund (Launching Entrepreneurial Driven Affordable Products)",
+      "org": "Department of Biotechnology (DBT) / BIRAC",
+      "sector": "HealthTech",
+      "grantType": "equity",
+      "stage": "early-revenue",
+      "amountLabel": "₹30 Lakh - ₹1 Cr per startup",
+      "deadlineLabel": "Ongoing scheme",
+      "description": "LEAP Fund helps biotech startups past the seed stage by funding piloting and commercialisation of affordable products, positioning them to raise venture capital, delivered via BioNEST bioincubator partners.",
+      "eligibility": "Startups in biotech, med-tech or life-sciences with funding needs above the SEED Fund's ₹30 lakh threshold.",
+      "whatYouGet": [
+        "Funding of more than ₹30 lakh and up to ₹1 crore per startup",
+        "Delivered through BioNEST bioincubators, each backed with up to ₹5 crore"
+      ],
+      "howToApply": "Apply via the BIRAC LEAP Fund portal or through a BioNEST bioincubator partner.",
+      "applyUrl": "https://birac.nic.in/leapFundNew.php",
+      "featured": false
+    },
+    {
+      "slug": "mission-on-advanced-and-high-impact-research-mahir",
+      "title": "Mission on Advanced and High-Impact Research (MAHIR)",
+      "org": "Ministry of Power and Ministry of New and Renewable Energy",
+      "sector": "CleanTech",
+      "grantType": "grant",
+      "stage": "prototype",
+      "amountLabel": null,
+      "deadlineLabel": "Rolling applications",
+      "description": "MAHIR is a national mission to identify and develop emerging power-sector technologies through indigenous research, development, and demonstration at scale. Focus areas include carbon capture, green hydrogen for mobility, AI automation, geothermal energy, and lithium-ion battery alternatives.",
+      "eligibility": "Academia, industry, startups, and R&D institutions working in carbon capture & utilization, green hydrogen, automation/AI, geothermal energy, or alternatives to lithium-ion storage.",
+      "whatYouGet": [
+        "Financial support tailored to project nature, budget, and infrastructure needs",
+        "Support for indigenous research, development, and demonstration of emerging power technologies"
+      ],
+      "howToApply": "Applicants review the call for proposals on the CPRI website and apply as per the guidelines.",
+      "applyUrl": "https://cpri.res.in/en/content/mahir",
+      "featured": false
+    },
+    {
+      "slug": "msme-champions-scheme",
+      "title": "MSME Champions Scheme (erstwhile CLCS-TUS)",
+      "org": "Ministry of MSME",
+      "sector": "Manufacturing",
+      "grantType": "grant",
+      "stage": "any",
+      "amountLabel": "Subsidy/incentive amounts vary by component",
+      "deadlineLabel": "Ongoing scheme (2021-22 to 2025-26)",
+      "description": "The MSME Champions Scheme merges six earlier technology-upgradation schemes into three components to help MSMEs improve quality, adopt new technology, and become more competitive through certification, design, and lean manufacturing support.",
+      "eligibility": "Micro, Small and Medium Enterprises across sectors seeking technology upgradation, quality certification, or design/incubation support.",
+      "whatYouGet": [
+        "Subsidy on ZED certification costs",
+        "Financial assistance for testing, quality and product improvement",
+        "Handholding support and graded incentives under Sustainable, Competitive and Innovative components"
+      ],
+      "howToApply": "Apply through the Champions portal, which also handles grievance handholding for MSMEs.",
+      "applyUrl": "https://champions.gov.in/Government-India/Ministry-MSME-Portal-handholding/msme-problem-complaint-welcome.htm",
+      "featured": false
+    },
+    {
+      "slug": "nidhi-tbi",
+      "title": "National Initiative for Developing and Harnessing Innovations - Technology Business Incubator (NIDHI-TBI)",
+      "org": "Department of Science and Technology",
+      "sector": "General",
+      "grantType": "grant",
+      "stage": "any",
+      "amountLabel": null,
+      "deadlineLabel": "Rolling proposals",
+      "description": "NIDHI-TBI funds host institutions to set up Technology Business Incubators that convert technology-based innovations into startups, covering both non-recurring and recurring incubator expenses.",
+      "eligibility": "Academic/technical/R&D institutes with a track record in technology entrepreneurship, or not-for-profit legal entities (society/trust/Section 8 company) registered in India for promoting innovation.",
+      "whatYouGet": [
+        "Up to 100% support for renovation/furnishing at publicly funded institutes",
+        "Percentage-based support for other institutes' non-recurring capital costs",
+        "Funding of recurring TBI expenditure based on actuals"
+      ],
+      "howToApply": "Submit a proposal in the prescribed proforma available on the NIDHI portal.",
+      "applyUrl": "https://nidhi.dst.gov.in/nidhitbi/",
+      "featured": false
+    },
+    {
+      "slug": "national-livestock-mission",
+      "title": "National Livestock Mission (NLM)",
+      "org": "Department of Animal Husbandry & Dairying",
+      "sector": "AgriTech",
+      "grantType": "grant",
+      "stage": "early-revenue",
+      "amountLabel": "100% assistance for R&D/Innovation activities",
+      "deadlineLabel": "Rolling applications",
+      "description": "NLM aims to develop entrepreneurs in the animal husbandry sector by building forward and backward linkages between unorganized producers and the organized market. It funds research, extension, and innovation activities, and runs a Startup Grand Challenge Programme focused on sheep, goat, poultry, pig, feed, and fodder.",
+      "eligibility": "ICAR Institutes, Central Institutes, State Government University farms, other credible institutions, and startups.",
+      "whatYouGet": [
+        "100% Central Government assistance for Extension, R&D, and Innovation activities",
+        "Incentives for problem-solving in sheep, goat, poultry, pig, feed and fodder segments",
+        "Participation opportunities via the Startup Grand Challenge Programme"
+      ],
+      "howToApply": "Central agencies/university farms submit proposals to the NLM division through their parent organization or State Animal Husbandry Department; applications are made via the NLM portal.",
+      "applyUrl": "https://nlm.udyamimitra.in/Login/Login",
+      "featured": false
+    },
+    {
+      "slug": "nm-icps-technology-innovation-hubs",
+      "title": "National Mission on Interdisciplinary Cyber-Physical Systems (NM-ICPS) - Technology Innovation Hubs",
+      "org": "Department of Science & Technology (DST)",
+      "sector": "DeepTech",
+      "grantType": "grant",
+      "stage": "any",
+      "amountLabel": null,
+      "deadlineLabel": "Periodic calls for proposals",
+      "description": "NM-ICPS funds 25 Technology Innovation Hubs across India that carry out R&D, translational research, product development and startup incubation in cyber-physical systems and related advanced technologies.",
+      "eligibility": "Individuals and entities including startups, students, entrepreneurs and researchers under the 25 Technology Innovation Hubs.",
+      "whatYouGet": [
+        "Financial support for research and development",
+        "Non-financial support such as mentoring and infrastructure access",
+        "Pathway from prototype to commercialisation and scaling"
+      ],
+      "howToApply": "Check the call-for-proposals section of the NM-ICPS website regularly for open opportunities.",
+      "applyUrl": "https://nmicps.in/",
+      "featured": false
+    },
+    {
+      "slug": "national-quantum-mission",
+      "title": "National Quantum Mission (NQM)",
+      "org": "Department of Science & Technology (DST)",
+      "sector": "DeepTech",
+      "grantType": "grant",
+      "stage": "prototype",
+      "amountLabel": null,
+      "deadlineLabel": "Ongoing scheme",
+      "description": "NQM funds research and startup development in quantum computing, communication, sensing and materials through four dedicated Thematic Hubs set up at premier institutions, aiming to build India's quantum tech capability.",
+      "eligibility": "Academic institutions, R&D labs and consortia in quantum tech, plus DPIIT-registered, Indian-owned startups working in quantum technology.",
+      "whatYouGet": [
+        "Seed/prototype funding routed through T-Hubs and TIHs",
+        "Scale-up support for quantum product commercialisation",
+        "Access to research infrastructure and academia collaboration"
+      ],
+      "howToApply": "Startups apply through online calls/challenges issued by DST/NQM or the relevant Thematic Hub.",
+      "applyUrl": "https://www.psa.gov.in/mission/national-quantum-mission/26",
+      "featured": false
+    },
+    {
+      "slug": "national-sc-st-hub-scheme",
+      "title": "National SC-ST Hub Scheme",
+      "org": "Ministry of Micro, Small & Medium Enterprises",
+      "sector": "Social Impact",
+      "grantType": "grant",
+      "stage": "any",
+      "amountLabel": "25% subsidy (up to ₹25 lakh) plus other support",
+      "deadlineLabel": "Ongoing scheme",
+      "description": "The National SC-ST Hub Scheme provides professional support to SC/ST entrepreneurs to help them meet public procurement obligations, adopt sound business practices, and access funding, training and marketing support.",
+      "eligibility": "Existing and aspiring Scheduled Caste and Scheduled Tribe entrepreneurs.",
+      "whatYouGet": [
+        "Special credit-linked capital subsidy for technology enablement",
+        "25% subsidy on plant/machinery purchase, capped at ₹25 lakh",
+        "Marketing, mentoring, skills training and trade tool-kit support"
+      ],
+      "howToApply": "Apply online through the National SC-ST Hub (NSSH) website.",
+      "applyUrl": "https://www.scsthub.in/",
+      "featured": false
+    },
+    {
+      "slug": "nidhi-coe",
+      "title": "NIDHI - Centres of Excellence (CoE)",
+      "org": "Department of Science and Technology (DST)",
+      "sector": "General",
+      "grantType": "grant",
+      "stage": "growth",
+      "amountLabel": "Up to ₹50 Cr over 5 years",
+      "deadlineLabel": "Rolling proposals",
+      "description": "NIDHI-CoE builds world-class facilities and services at established incubators to help high-potential technology startups convert innovations into scalable, marketable businesses.",
+      "eligibility": "Existing incubators with at least 5 years of incubation experience; host institution should be at least 8 years old (waived for government-created entities); non-academic applicants must be a registered not-for-profit legal entity.",
+      "whatYouGet": [
+        "Enhanced support up to ₹50 crore over 5 years",
+        "100% support for public institutions including building costs",
+        "Recurring support of ₹20 crore and up to ₹1 crore for equipment at private institutions"
+      ],
+      "howToApply": "Submit proposals year-round in the format provided on the NIDHI portal.",
+      "applyUrl": "https://nidhi.dst.gov.in/nidhicoe/",
+      "featured": false
+    },
+    {
+      "slug": "nidhi-eir",
+      "title": "NIDHI - Entrepreneur in Residence (NIDHI-EIR)",
+      "org": "Department of Science and Technology (DST)",
+      "sector": "Student-Led",
+      "grantType": "fellowship",
+      "stage": "idea",
+      "amountLabel": "₹10,000 – ₹30,000/month",
+      "deadlineLabel": "Announced locally by NIDHI-TBIs",
+      "description": "NIDHI-EIR is a fellowship run through selected NIDHI Technology Business Incubators that gives monthly stipends, co-working space, and mentoring to graduates pursuing a promising technology business idea.",
+      "eligibility": "Indian citizens who completed at least 4 years of full-time undergraduate/postgraduate education, or a 3-year diploma plus 2 years of full-time work experience.",
+      "whatYouGet": [
+        "Monthly fellowship of ₹10,000 to ₹30,000 for 12 months, extendable to 18 months",
+        "Co-working space to develop the idea into a marketable product",
+        "Mentoring from experienced entrepreneurs and industry insight"
+      ],
+      "howToApply": "Apply through the local NIDHI-TBI program announcement in the prescribed format.",
+      "applyUrl": "https://nidhi.dst.gov.in/nidhieir/",
+      "featured": false
+    },
+    {
+      "slug": "nidhi-i-tbi",
+      "title": "NIDHI - Inclusive Technology Business Incubator (i-TBI)",
+      "org": "Department of Science and Technology (DST)",
+      "sector": "General",
+      "grantType": "grant",
+      "stage": "any",
+      "amountLabel": "Up to ₹5 Cr",
+      "deadlineLabel": "Rolling proposals",
+      "description": "NIDHI i-TBI funds institutions in regions with nascent innovation ecosystems to set up incubators, helping normalize access to startup resources and value creation across underserved geographies.",
+      "eligibility": "Host institutions providing 7,000-10,000 sq ft of built-up space, willing to establish a separate Section 8 company to manage the i-TBI and accommodate at least 30 startups.",
+      "whatYouGet": [
+        "Capital fund for i-TBI infrastructure, up to ₹5 crore over 3 years",
+        "Non-recurring funding shared 50:50 (private) or 75:25 (public) with DST",
+        "Ignition grant for prototype/product development"
+      ],
+      "howToApply": "Apply via the online NIDHI portal.",
+      "applyUrl": "https://nidhi.dst.gov.in/nidhiitbi/",
+      "featured": false
+    },
+    {
+      "slug": "nidhi-prayas-2",
+      "title": "NIDHI PRAYAS 2.0 (Promotion and Acceleration of Young and Aspiring Technology Entrepreneurs)",
+      "org": "Department of Science & Technology (DST)",
+      "sector": "DeepTech",
+      "grantType": "grant",
+      "stage": "idea",
+      "amountLabel": "Up to ₹40 Lakh (Advance PRAYAS Centres)",
+      "deadlineLabel": "Ongoing scheme",
+      "description": "PRAYAS 2.0 is a pre-incubation grant program that bridges the earliest funding gap for idea and proof-of-concept stage innovators, with enhanced tiers for deep-tech innovation delivered through PRAYAS Centres and Advance PRAYAS Centres.",
+      "eligibility": "Individual innovators or DPIIT-recognised startups incorporated less than 5 years, with annual turnover under ₹1 crore.",
+      "whatYouGet": [
+        "Level 1 (PCs): up to ₹20 lakh grant for prototyping",
+        "Level 2 (APCs): up to ₹40 lakh grant for deep-tech prototyping"
+      ],
+      "howToApply": "Applicant incubators submit proposals via the NIDHI PRAYAS PMU portal.",
+      "applyUrl": "https://nidhi-prayas.org/",
+      "featured": false
+    },
+    {
+      "slug": "nidhi-seed-support-program",
+      "title": "NIDHI Seed Support Program (SSP)",
+      "org": "Department of Science & Technology (DST)",
+      "sector": "General",
+      "grantType": "grant",
+      "stage": "prototype",
+      "amountLabel": null,
+      "deadlineLabel": "Ongoing scheme",
+      "description": "NIDHI-SSP gives seed support to promising startups already incubated at NIDHI-supported STEPs and Technology Business Incubators, helping them push through product development and testing.",
+      "eligibility": "DPIIT-recognised startups incubated at a NIDHI STEP/TBI for at least 3 months, with at least 51% Indian promoter shareholding.",
+      "whatYouGet": [
+        "Support for product development, testing and trials",
+        "Test marketing and mentoring",
+        "Professional consultancy and IPR assistance"
+      ],
+      "howToApply": "Apply through the incubating STEP/TBI as per details on the NIDHI SSP website.",
+      "applyUrl": "https://nidhi.dst.gov.in/nidhissp/",
+      "featured": false
+    },
+    {
+      "slug": "nidhi-accelerator",
+      "title": "NIDHI-Accelerator",
+      "org": "Department of Science and Technology (DST)",
+      "sector": "General",
+      "grantType": "accelerator",
+      "stage": "early-revenue",
+      "amountLabel": "Up to ₹40 lakh per cohort",
+      "deadlineLabel": "Rolling proposals",
+      "description": "NIDHI-Accelerator is a post-incubation program that helps existing TBIs run short, intensive accelerator cohorts with mentoring, networking, and demo-day support to fast-track promising startups' growth.",
+      "eligibility": "TBIs previously or currently funded by DST or another government body, in existence for at least 3 years, having incubated at least 20 startups across domains.",
+      "whatYouGet": [
+        "Accelerator program funding up to ₹30 lakh covering manpower, logistics, mentoring and infrastructure",
+        "Demo Day Award budget up to ₹10 lakh for top 3-5 startups",
+        "Total contribution capped at ₹40 lakh per cohort"
+      ],
+      "howToApply": "Apply via the online NIDHI portal.",
+      "applyUrl": "https://nidhi.dst.gov.in/schemes-programmes/nidhiaccelerator/",
+      "featured": false
+    },
+    {
+      "slug": "ongc-startup-fund",
+      "title": "ONGC Startup Fund",
+      "org": "Oil and Natural Gas Corporation (ONGC)",
+      "sector": "General",
+      "grantType": "grant",
+      "stage": "early-revenue",
+      "amountLabel": null,
+      "deadlineLabel": "Rolling applications",
+      "description": "ONGC runs a dedicated startup fund and platform to identify and support startups with technologies relevant to the oil and gas sector.",
+      "eligibility": "Startups with technology solutions relevant to ONGC's operations.",
+      "whatYouGet": [
+        "Access to ONGC's startup engagement platform",
+        "Potential funding and pilot opportunities with ONGC"
+      ],
+      "howToApply": "Apply via the ONGC Startup portal.",
+      "applyUrl": "https://startup.ongc.co.in/web/ongcstartup",
+      "featured": false
+    },
+    {
+      "slug": "gail-pankh",
+      "title": "Pankh",
+      "org": "GAIL (India) Limited",
+      "sector": "General",
+      "grantType": "grant",
+      "stage": "early-revenue",
+      "amountLabel": null,
+      "deadlineLabel": "Rolling applications",
+      "description": "Pankh is GAIL's startup initiative offering funding and collaboration support to startups working on solutions relevant to the natural gas and energy sector.",
+      "eligibility": "Startups with technologies relevant to GAIL's gas and energy operations.",
+      "whatYouGet": [
+        "Funding and business collaboration opportunities with GAIL",
+        "Access to GAIL's pilot and deployment ecosystem"
+      ],
+      "howToApply": "Apply through GAIL's startup registration portal.",
+      "applyUrl": "https://gailebank.gail.co.in/GSUICBG/frmStartUpGAIL.aspx",
+      "featured": false
+    },
+    {
+      "slug": "pmfme",
+      "title": "Pradhan Mantri Formalisation of Micro Food Processing Enterprises (PMFME) Scheme",
+      "org": "Ministry of Food Processing Industries (MoFPI)",
+      "sector": "AgriTech",
+      "grantType": "grant",
+      "stage": "any",
+      "amountLabel": "35% credit-linked subsidy, up to ₹10 lakh per unit",
+      "deadlineLabel": "Ongoing scheme",
+      "description": "PMFME helps small, unorganized food processing businesses formalize, improve their products, and grow by offering financial support, training, and access to One District One Product-based incubation centres.",
+      "eligibility": "Existing individual micro-entrepreneurs, micro units, SHGs, FPOs, and cooperatives in the food processing sector.",
+      "whatYouGet": [
+        "Credit-linked capital subsidy at 35% of project cost, capped at ₹10 lakh per unit",
+        "35% grant with credit linkage for FPOs and producer cooperatives",
+        "Seed capital of ₹40,000 per SHG member for working capital and tools"
+      ],
+      "howToApply": "Apply through the PMFME online portal.",
+      "applyUrl": "https://pmfme.mofpi.gov.in/pmfme/#/Login",
+      "featured": false
+    },
+    {
+      "slug": "pmmy",
+      "title": "Pradhan Mantri Mudra Yojana (PMMY)",
+      "org": "Ministry of Finance",
+      "sector": "General",
+      "grantType": "loan",
+      "stage": "idea",
+      "amountLabel": "Up to ₹20 lakh (Shishu/Kishor/Tarun/TarunPlus)",
+      "deadlineLabel": "Rolling applications",
+      "description": "PMMY provides collateral-free refinance-backed loans of up to ₹20 lakh to micro and small income-generating businesses across trading, manufacturing, services and allied agriculture activities.",
+      "eligibility": "Individuals, proprietorships, partnerships, and companies running or starting micro/small income-generating enterprises.",
+      "whatYouGet": [
+        "Shishu loans up to ₹50,000",
+        "Kishor loans of ₹50,000 to ₹5 lakh, Tarun loans of ₹5-10 lakh",
+        "TarunPlus loans of ₹10-20 lakh for term loan, overdraft, working capital or composite needs"
+      ],
+      "howToApply": "Apply at any bank branch, NBFC or MFI, or online via the Jan Samarth Business Loan Portal or Udyamimitra portal.",
+      "applyUrl": "https://www.mudra.org.in/",
+      "featured": false
+    },
+    {
+      "slug": "bpcl-project-ankur",
+      "title": "Project Ankur / Ankur Fund and Launch Pad for Entrepreneurship",
+      "org": "Bharat Petroleum Corporation Limited (BPCL)",
+      "sector": "General",
+      "grantType": "accelerator",
+      "stage": "early-revenue",
+      "amountLabel": null,
+      "deadlineLabel": "Rolling applications",
+      "description": "BPCL supports startups through Project Ankur (Ankur Fund) and its Launch Pad for Entrepreneurship, offering funding and mentorship avenues for startups aligned with its business.",
+      "eligibility": "Startups with solutions relevant to BPCL's energy and retail operations.",
+      "whatYouGet": [
+        "Funding support through the Ankur Fund",
+        "Mentorship and incubation via the Launch Pad for Entrepreneurship"
+      ],
+      "howToApply": "Apply through BPCL's startup portal.",
+      "applyUrl": "https://ebiz.bpc.co.in/BPCLStartup/",
+      "featured": false
+    },
+    {
+      "slug": "pace",
+      "title": "Promoting Academic Research Conversion to Enterprise (PACE)",
+      "org": "Department of Biotechnology (DBT)",
+      "sector": "DeepTech",
+      "grantType": "grant",
+      "stage": "prototype",
+      "amountLabel": "Up to ₹50 lakh (AIR); no ceiling (CRS)",
+      "deadlineLabel": "Twice-yearly calls (Apr-May, Sep-Oct)",
+      "description": "PACE helps academic institutions convert important research into early-stage products up to proof-of-concept stage, and then supports industry partnerships to validate those innovations for real-world use.",
+      "eligibility": "Academia (institutes, universities, NGOs, research foundations) apply under the Academic Innovation Research component; the Contract Research Scheme requires mandatory collaboration with an Indian-majority-owned industry partner.",
+      "whatYouGet": [
+        "BIRAC contribution of up to 100% of project cost",
+        "AIR funding capped at ₹50 lakh per project",
+        "CRS funding provided to both academic and industry partners with no funding ceiling"
+      ],
+      "howToApply": "Apply online during twice-yearly calls for applications; BIRAC may also announce need-based additional calls.",
+      "applyUrl": "https://birac.nic.in/desc_new.php?id=286",
+      "featured": false
+    },
+    {
+      "slug": "prism-scheme",
+      "title": "Promoting Innovations in Individuals, Start-ups and MSMEs (PRISM)",
+      "org": "Department of Science & Technology (DST) / DSIR",
+      "sector": "General",
+      "grantType": "grant",
+      "stage": "idea",
+      "amountLabel": "Up to ₹50 Lakh (Phase II)",
+      "deadlineLabel": "Ongoing scheme",
+      "description": "PRISM funds individual innovators and MSMEs to convert raw ideas into working prototypes and eventually patentable, commercialisable technologies, implemented through TePP Outreach Cluster Innovation Centres nationwide.",
+      "eligibility": "Any Indian citizen with an innovative idea, or public-funded institutions/organisations promoting innovation, applying through TOCICs.",
+      "whatYouGet": [
+        "Phase I: up to ₹2 lakh (Category I) or ₹20 lakh (Category II), up to 90% of project cost",
+        "Phase II: up to ₹50 lakh, up to 50% of project cost",
+        "PRISM-R&D: up to ₹50 lakh for MSME-cluster solutions"
+      ],
+      "howToApply": "Apply through a TePP Outreach cum Cluster Innovation Centre (TOCIC), evaluated by the PRISM Advisory and Screening Committee.",
+      "applyUrl": "https://www.dsir.gov.in/offerings/schemes-and-services/details/promoting-innovations-in-individuals-start-ups-and-msmes-prism-kjMwITMtQWa",
+      "featured": true
+    },
+    {
+      "slug": "st-prism-mining-minerals",
+      "title": "Promotion of Research & Innovation in Mining, Minerals & Recycling Sector (S&T-PRISM)",
+      "org": "Ministry of Mines",
+      "sector": "Manufacturing",
+      "grantType": "grant",
+      "stage": "prototype",
+      "amountLabel": "Up to ₹2 Cr",
+      "deadlineLabel": "Per scheme guidelines",
+      "description": "S&T-PRISM funds early-stage startups and incubation centres in mining, mineral processing, metallurgy and recycling to move from research through prototype to pilot-ready solutions.",
+      "eligibility": "Startups operating at early stages in the mining and metal industry.",
+      "whatYouGet": [
+        "Grant of up to ₹2 crore on a milestone basis to startups",
+        "Grant of up to ₹10 crore to incubators, milestone-based",
+        "Support across the full research-to-manufacturing value chain"
+      ],
+      "howToApply": "Follow the process laid out in the published scheme guidelines document.",
+      "applyUrl": "https://mines.gov.in/admin/storage/app/uploads/655212bdb9e5b1699877565.pdf",
+      "featured": false
+    },
+    {
+      "slug": "research-development-innovation-scheme",
+      "title": "Research, Development & Innovation (RDI) Scheme",
+      "org": "Department of Science & Technology (DST)",
+      "sector": "DeepTech",
+      "grantType": "loan",
+      "stage": "growth",
+      "amountLabel": "₹1 Lakh Cr outlay",
+      "deadlineLabel": "Ongoing scheme",
+      "description": "The RDI Scheme is a large Cabinet-approved fund aimed at catalyzing private-sector R&D in strategic technologies, routed through second-level fund managers like AIFs, DFIs and NBFCs down to individual companies and startups.",
+      "eligibility": "Funding flows to Second Level Fund Managers (AIFs, DFIs, NBFCs, FROs), who then fund private companies including DPIIT-recognised startups working on RDI-intensive technology.",
+      "whatYouGet": [
+        "Debt funding of up to 50% of project cost via loan or convertible debt",
+        "Equity funding of up to 50% of a funding round's value"
+      ],
+      "howToApply": "Apply through Second Level Fund Managers such as the Technology Development Board's registration portal.",
+      "applyUrl": "https://rdifund.anrf.gov.in/",
+      "featured": false
+    },
+    {
+      "slug": "samridh",
+      "title": "SAMRIDH (Startup Accelerators of MeitY for Product Innovation, Development & Growth)",
+      "org": "Ministry of Electronics & Information Technology (MeitY)",
+      "sector": "General",
+      "grantType": "accelerator",
+      "stage": "early-revenue",
+      "amountLabel": "Up to ₹80 Lakh (₹40L govt + ₹40L matched)",
+      "deadlineLabel": "Ongoing scheme",
+      "description": "SAMRIDH funds accelerators to run structured programs for IT-based startups, matching government investment with private capital and providing customer, investor and internationalisation support.",
+      "eligibility": "Section 8 or Society-registered not-for-profit accelerators, and IT-based startups selected into their cohorts.",
+      "whatYouGet": [
+        "Up to ₹40 lakh investment per startup, matched by an equal private investment",
+        "Accelerator support budget of up to ₹20 lakh per cohort",
+        "Customer connect, investor connect and internationalisation support"
+      ],
+      "howToApply": "Startups apply through an accelerator listed on the MeitY Startup Hub (MSH).",
+      "applyUrl": "https://msh.meity.gov.in/schemes/samridh",
+      "featured": true
+    },
+    {
+      "slug": "bhel-sanrachna-platform",
+      "title": "SanRachna Platform",
+      "org": "Bharat Heavy Electricals Limited (BHEL)",
+      "sector": "Manufacturing",
+      "grantType": "accelerator",
+      "stage": "early-revenue",
+      "amountLabel": null,
+      "deadlineLabel": "Rolling applications",
+      "description": "SanRachna is BHEL's startup engagement platform connecting startups with the company's manufacturing and engineering ecosystem for collaboration and pilots.",
+      "eligibility": "Startups with technologies applicable to BHEL's heavy engineering and manufacturing operations.",
+      "whatYouGet": [
+        "Collaboration opportunities with BHEL",
+        "Access to BHEL's industrial ecosystem for pilots and scale-up"
+      ],
+      "howToApply": "Apply through the SanRachna platform.",
+      "applyUrl": "https://sanrachna.bhel.in/home",
+      "featured": false
+    },
+    {
+      "slug": "scheme-for-facilitating-startups-ip-protection",
+      "title": "Scheme for Facilitating Startups Intellectual Property Protection (SIPP)",
+      "org": "Department for Promotion of Industry and Internal Trade (DPIIT)",
+      "sector": "General",
+      "grantType": "grant",
+      "stage": "any",
+      "amountLabel": "Facilitator fees covered; statutory fees only",
+      "deadlineLabel": "Ongoing scheme",
+      "description": "SIPP helps startups protect their inventions and brands by paying for professional IP facilitators who assist with patent, trademark and design filings, so startups only bear statutory government fees.",
+      "eligibility": "DPIIT-recognised startups that haven't already used another government scheme to pay facilitator fees for the same IP application.",
+      "whatYouGet": [
+        "End-to-end assistance for patent, trademark and design filings",
+        "Facilitator professional fees paid/reimbursed by the government",
+        "Support through examination, hearings, and opposition handling"
+      ],
+      "howToApply": "Apply via the IP India SIPP portal to be connected with an empanelled IP facilitator.",
+      "applyUrl": "https://ipindia.gov.in/page-content/startups-intellectual-property-protection-sipp",
+      "featured": false
+    },
+    {
+      "slug": "established-incubation-centres-eic",
+      "title": "Scheme for Scale-up Support to Established Incubation Centres (EICs)",
+      "org": "Atal Innovation Mission (AIM), NITI Aayog",
+      "sector": "General",
+      "grantType": "grant",
+      "stage": "growth",
+      "amountLabel": "Up to ₹10 crore grant-in-aid",
+      "deadlineLabel": "Rolling applications",
+      "description": "This scheme helps existing, established incubators refurbish and expand their space, team, tools, and seed-funding capabilities so they can support a larger number of startups.",
+      "eligibility": "Established Incubation Centres registered in India (public, private, or PPP mode) operational for at least three years as of 1 August 2017.",
+      "whatYouGet": [
+        "Grant-in-aid of up to ₹10 crore",
+        "Support for refurbishment, team expansion, tools and equipment",
+        "Eligibility to apply for the grant up to three times"
+      ],
+      "howToApply": "Interested EICs apply via the Atal Innovation Mission website.",
+      "applyUrl": "https://aim.gov.in/atal-incubation-centres.php",
+      "featured": false
+    },
+    {
+      "slug": "sti-hubs-for-sc-st-communities",
+      "title": "Science Technology and Innovation (STI) Hubs for Development of SC and ST Communities",
+      "org": "Department of Science and Technology (DST)",
+      "sector": "Social Impact",
+      "grantType": "grant",
+      "stage": "idea",
+      "amountLabel": null,
+      "deadlineLabel": "Rolling applications",
+      "description": "STI Hubs support local academic and research institutions in applying science and technology to improve livelihoods and preserve indigenous knowledge in Scheduled Caste and Scheduled Tribe communities. The scheme funds infrastructure and equipment needed to set up such hubs.",
+      "eligibility": "Local academic or S&T institutions, R&D labs, and S&T-based voluntary organizations (NGOs) with a majority SC or ST population in their catchment area.",
+      "whatYouGet": [
+        "Financial support to establish an STI Hub",
+        "Funding for equipment purchase, small infrastructure, and common facility centres/construction costs"
+      ],
+      "howToApply": "Visit the DST website for the call for proposals and application details.",
+      "applyUrl": "https://dst.gov.in/callforproposals/science-technology-and-innovation-sti-hubs-development-scheduled-caste-sc-and",
+      "featured": false
+    },
+    {
+      "slug": "sebi-regulatory-sandbox",
+      "title": "SEBI Regulatory Sandbox",
+      "org": "Securities and Exchange Board of India (SEBI)",
+      "sector": "FinTech",
+      "grantType": "accelerator",
+      "stage": "prototype",
+      "amountLabel": null,
+      "deadlineLabel": "Rolling applications",
+      "description": "SEBI's regulatory sandbox lets fintech and market infrastructure innovators test new products and services related to the securities market in a live, controlled environment with relaxed regulations.",
+      "eligibility": "Entities registered with SEBI (and eligible fintech innovators) seeking to test securities-market-related innovations.",
+      "whatYouGet": [
+        "Live testing environment with relaxed regulatory requirements",
+        "Guidance from SEBI during the sandbox period"
+      ],
+      "howToApply": "Apply per the revised regulatory sandbox framework circular published by SEBI.",
+      "applyUrl": "https://www.sebi.gov.in/legal/circulars/jun-2021/revised-framework-for-regulatory-sandbox_50521.html",
+      "featured": false
+    },
+    {
+      "slug": "sri-fund",
+      "title": "Self-Reliant India Fund (SRI Fund)",
+      "org": "Ministry of Micro, Small and Medium Enterprises",
+      "sector": "Manufacturing",
+      "grantType": "equity",
+      "stage": "growth",
+      "amountLabel": "₹50,000 crore total corpus (equity/quasi-equity)",
+      "deadlineLabel": "Rolling applications",
+      "description": "The SRI Fund channels ₹50,000 crore in equity and quasi-equity growth capital to MSMEs through empanelled daughter funds managed by NSIC Venture Capital Fund Limited.",
+      "eligibility": "MSMEs as defined under the MSMED Act with potential and viability to grow into larger units.",
+      "whatYouGet": [
+        "Growth capital via equity or quasi-equity instruments",
+        "Access to a list of empanelled Daughter Funds by sector focus",
+        "Support to scale operations toward becoming larger enterprises"
+      ],
+      "howToApply": "Submit an expression of interest via the NVCFL website or directly approach an empanelled Daughter Fund aligned to your sector/stage.",
+      "applyUrl": "https://www.nvcfl.co.in/",
+      "featured": false
+    },
+    {
+      "slug": "sbiri",
+      "title": "Small Business Innovation Research Initiative (SBIRI)",
+      "org": "Department of Biotechnology (DBT)",
+      "sector": "HealthTech",
+      "grantType": "grant",
+      "stage": "prototype",
+      "amountLabel": "Up to 100% of project cost (₹50 lakh), 70% above that",
+      "deadlineLabel": "Twice-yearly calls (Apr-May, Sep-Oct)",
+      "description": "SBIRI supports biotech startups in developing and validating product and process innovations, often in partnership with research institutions, through a public-private partnership funding model.",
+      "eligibility": "Biotechnology startups, with or without partnerships with public/private universities, research institutions, or societies/foundations/NGOs.",
+      "whatYouGet": [
+        "100% BIRAC grant-in-aid for project costs up to ₹50 lakh",
+        "₹50 lakh plus 70% of costs above ₹50 lakh for larger projects",
+        "Collaboration support with public institutions and industry"
+      ],
+      "howToApply": "Apply online during the twice-yearly calls for applications announced by BIRAC.",
+      "applyUrl": "https://birac.nic.in/desc_new.php?id=217",
+      "featured": false
+    },
+    {
+      "slug": "space-technology-adoption-fund-taf",
+      "title": "Space Technology Adoption Fund (TAF)",
+      "org": "IN-SPACe, Department of Space",
+      "sector": "Space",
+      "grantType": "grant",
+      "stage": "prototype",
+      "amountLabel": "Up to ₹25 crore (40-60% of project cost)",
+      "deadlineLabel": "Rolling applications",
+      "description": "TAF helps Indian non-government space entities transform early-stage technologies into commercially viable products by partially funding the journey from TRL 3/4 to TRL 8/9.",
+      "eligibility": "Indian non-government entities in the space sector, including startups, MSMEs and large industry.",
+      "whatYouGet": [
+        "Up to 60% funding for startups/MSMEs, 40% for large industry",
+        "Maximum project funding capped at ₹25 crore",
+        "Support to advance technology readiness toward commercialisation"
+      ],
+      "howToApply": "Register and apply on the IN-SPACe website.",
+      "applyUrl": "https://www.inspace.gov.in/inspace?id=inspace_taf",
+      "featured": false
+    },
+    {
+      "slug": "sparsh-scheme",
+      "title": "SPARSH (Social Innovation Programme for Products Affordable & Relevant to Social Health)",
+      "org": "Department of Biotechnology (DBT) / BIRAC",
+      "sector": "Social Impact",
+      "grantType": "grant",
+      "stage": "idea",
+      "amountLabel": "Up to ₹50 Lakh",
+      "deadlineLabel": "LoI calls twice a year",
+      "description": "SPARSH nurtures 'social innovators' in biotech to develop affordable healthcare products and services aimed at closing gaps in underserved communities' access to health solutions.",
+      "eligibility": "Biotech Indian startups or LLPs less than 3 years old, and Indian academic scientists/researchers, applying under the Affordable Product Development component.",
+      "whatYouGet": [
+        "Grant-in-aid of up to ₹50 lakh over up to 18 months"
+      ],
+      "howToApply": "Submit a Letter of Intent online via the BIRAC website during a themed call.",
+      "applyUrl": "https://www.birac.nic.in/",
+      "featured": false
+    },
+    {
+      "slug": "stand-up-india",
+      "title": "Stand-Up India",
+      "org": "Department of Financial Services",
+      "sector": "Women-Led",
+      "grantType": "loan",
+      "stage": "idea",
+      "amountLabel": "₹10 lakh to ₹1 crore composite loan",
+      "deadlineLabel": "Ongoing scheme",
+      "description": "Stand-Up India facilitates bank loans to help SC/ST and women entrepreneurs set up their first greenfield enterprise in manufacturing, services, trading, or agri-allied activities.",
+      "eligibility": "Applicants must be from the SC/ST category or be a woman, above 18 years of age, setting up a greenfield enterprise; at least one SC/ST and one woman entrepreneur per bank branch are targeted.",
+      "whatYouGet": [
+        "Composite loan (term loan plus working capital) of ₹10 lakh to ₹1 crore",
+        "Repayment period of 7 years",
+        "Maximum moratorium period of 18 months"
+      ],
+      "howToApply": "Apply through participating scheduled commercial bank branches; the scheme was operational through March 2025.",
+      "applyUrl": "https://static.pib.gov.in/WriteReadData/specificdocs/documents/2022/apr/doc20224535701.pdf",
+      "featured": true
+    },
+    {
+      "slug": "oil-india-start-up-fund",
+      "title": "Start Up Fund",
+      "org": "Oil India Limited (OIL)",
+      "sector": "General",
+      "grantType": "grant",
+      "stage": "early-revenue",
+      "amountLabel": null,
+      "deadlineLabel": "Rolling applications",
+      "description": "Oil India Limited runs a dedicated Start Up Fund to support startups developing technologies and solutions relevant to the oil and gas sector.",
+      "eligibility": "Startups with technologies relevant to OIL's exploration, production, and allied operations.",
+      "whatYouGet": [
+        "Funding support through OIL's Start Up Fund",
+        "Potential collaboration and pilot opportunities with OIL"
+      ],
+      "howToApply": "Apply through the OIL Start Up Fund webpage.",
+      "applyUrl": "https://www.oil-india.com/start-fund",
+      "featured": false
+    },
+    {
+      "slug": "startup-village-entrepreneurship-programme-svep",
+      "title": "Start-up Village Entrepreneurship Programme (SVEP)",
+      "org": "Ministry of Rural Development (MoRD)",
+      "sector": "Social Impact",
+      "grantType": "grant",
+      "stage": "idea",
+      "amountLabel": null,
+      "deadlineLabel": "Ongoing scheme",
+      "description": "SVEP is a sub-scheme under the Deendayal Antyodaya Yojana - National Rural Livelihoods Mission that helps rural Self-Help Group members and their families start small non-farm businesses. It provides local business support through Community Resource Persons and access to a dedicated capital fund.",
+      "eligibility": "Members of Self-Help Groups (SHGs) or their family members setting up small non-farm enterprises in blocks selected by States/UTs under the SVEP guidelines.",
+      "whatYouGet": [
+        "Business support services from a cadre of Community Resource Person - Enterprise Promotion (CRP-EP)",
+        "Access to capital through a dedicated Community Enterprise Fund (CEF)"
+      ],
+      "howToApply": "Apply via the SVEP portal.",
+      "applyUrl": "https://svep.nrlm.gov.in/landing",
+      "featured": false
+    },
+    {
+      "slug": "sail-startup-connect",
+      "title": "Startup Connect",
+      "org": "Steel Authority of India Limited (SAIL)",
+      "sector": "Manufacturing",
+      "grantType": "accelerator",
+      "stage": "early-revenue",
+      "amountLabel": null,
+      "deadlineLabel": "Rolling applications",
+      "description": "Startup Connect is SAIL's platform to identify and engage startups with technologies applicable to the steel manufacturing sector.",
+      "eligibility": "Startups with solutions relevant to steel manufacturing and allied industrial processes.",
+      "whatYouGet": [
+        "Collaboration opportunities with SAIL",
+        "Access to SAIL's industrial pilot and deployment ecosystem"
+      ],
+      "howToApply": "Apply through the SAIL Startup Connect web application.",
+      "applyUrl": "https://webapp.sailcorp.in/startup/",
+      "featured": false
+    },
+    {
+      "slug": "startup-india-fund-of-funds-2",
+      "title": "Startup India Fund of Funds 2.0",
+      "org": "Department for Promotion of Industry and Internal Trade (DPIIT)",
+      "sector": "DeepTech",
+      "grantType": "equity",
+      "stage": "growth",
+      "amountLabel": "₹10,000 Cr corpus (via AIFs)",
+      "deadlineLabel": "Ongoing scheme",
+      "description": "FoF 2.0 is the successor to the original Fund of Funds, again routing government capital through SIDBI and other implementing agencies into SEBI-registered AIFs, with priority given to deep-tech, manufacturing, and early-growth-stage startups.",
+      "eligibility": "SEBI-registered Category I and II AIFs apply for capital; DPIIT-recognised startups receive funding indirectly through participating AIFs.",
+      "whatYouGet": [
+        "Capital routed through AIFs into deep-tech, manufacturing and sector-agnostic startups",
+        "Minimum investment multipliers defined for various priority segments"
+      ],
+      "howToApply": "AIFs apply through SIDBI's Fund Application Portal; eligible startups approach selected AIFs for investment.",
+      "applyUrl": "https://vcfapplication.sidbi.in/login",
+      "featured": false
+    },
+    {
+      "slug": "startup-india-seed-fund-scheme",
+      "title": "Startup India Seed Fund Scheme (SISFS)",
+      "org": "Department for Promotion of Industry and Internal Trade (DPIIT)",
+      "sector": "General",
+      "grantType": "grant",
+      "stage": "idea",
+      "amountLabel": "Up to ₹70 Lakh (₹20L grant + ₹50L investment)",
+      "deadlineLabel": "Applications closed 31 May 2026; disbursals ongoing",
+      "description": "SISFS gives early-stage startups the seed capital needed to move from an idea to a validated product, closing the funding gap before angel or VC investors typically step in. It supports proof of concept, prototyping, product trials, and initial market entry.",
+      "eligibility": "DPIIT-recognised startups incorporated within the last 2 years, with a technology-driven, scalable business idea, that have not received more than ₹10 lakh from another government scheme.",
+      "whatYouGet": [
+        "Up to ₹20 lakh grant for proof of concept, prototyping or trials",
+        "Up to ₹50 lakh for market entry/commercialisation via convertible debentures or debt instruments"
+      ],
+      "howToApply": "Apply online at the SISFS portal; applications are screened by incubators managing the seed fund.",
+      "applyUrl": "https://seedfund.startupindia.gov.in/",
+      "featured": true
+    },
+    {
+      "slug": "stpi-ngis",
+      "title": "STPI Next Generation Incubation Scheme (NGIS)",
+      "org": "Ministry of Electronics & Information Technology (MeitY) / STPI",
+      "sector": "DeepTech",
+      "grantType": "grant",
+      "stage": "prototype",
+      "amountLabel": "Up to ₹25 lakh",
+      "deadlineLabel": "Open calls, periodic",
+      "description": "NGIS is STPI's incubation scheme that nurtures early-stage software product and technology startups in Tier-II/III cities with seed funding, infrastructure, and mentorship, aiming to handhold 300 startups across 12 incubation locations.",
+      "eligibility": "Indian startups working on software product development or technology-based solutions; DPIIT recognition encouraged, individuals/academicians/LLPs may also participate.",
+      "whatYouGet": [
+        "Seed/risk funding up to ₹25 lakh",
+        "Access to incubation infrastructure, labs, equipment and testing facilities",
+        "Mentoring, industry networking and internship/challenge grants"
+      ],
+      "howToApply": "Submit proposals online through the STPI/NGIS application portal during open calls.",
+      "applyUrl": "https://stpi.in/en/about-ngis",
+      "featured": false
+    },
+    {
+      "slug": "sitare",
+      "title": "Students Innovations for Translation & Advancement of Research Explorations (SITARE)",
+      "org": "Department of Biotechnology (DBT)",
+      "sector": "Student-Led",
+      "grantType": "grant",
+      "stage": "idea",
+      "amountLabel": "Up to ₹15 lakh (GYTI); Up to ₹1 lakh (Appreciation Grant)",
+      "deadlineLabel": "Annual call (Aug/Sep)",
+      "description": "SITARE supports student innovators in biotechnology with funding, training and mentoring to help turn promising research ideas into practical solutions or startups, through two components: GYTI awards and an Appreciation Grant for undergraduates.",
+      "eligibility": "SITARE-GYTI is open to Indian students pursuing PhD/Masters in any discipline; SITARE-Appreciation Grant is for undergraduate students, preferably from Tier II/III cities and aspirational districts.",
+      "whatYouGet": [
+        "Up to ₹15 lakh funding for GYTI projects with commercial/startup potential",
+        "Up to ₹1 lakh for students attending Biotech Innovation Ignition School workshops",
+        "Training and mentoring support"
+      ],
+      "howToApply": "Submit applications online via the BIRAC portal after registering as a user; GYTI calls open once a year for 45-60 days.",
+      "applyUrl": "https://www.birac.nic.in/",
+      "featured": false
+    },
+    {
+      "slug": "technology-development-fund-tdf",
+      "title": "Technology Development Fund (TDF)",
+      "org": "DRDO, Ministry of Defence",
+      "sector": "Defence",
+      "grantType": "grant",
+      "stage": "prototype",
+      "amountLabel": "Up to ₹10 Cr (90% funding)",
+      "deadlineLabel": "Rolling applications",
+      "description": "TDF, part of the Make in India initiative, funds Indian companies and startups to develop defence technologies domestically against requirements raised by Service Headquarters, reducing import dependence.",
+      "eligibility": "Indian-registered companies/LLPs/firms, including DPIIT-recognised startups incubated at a Central/State assisted incubator, with at least 50% Indian ownership.",
+      "whatYouGet": [
+        "Grant funding for projects costing up to ₹10 crore",
+        "Funding of up to 90% of project cost",
+        "Support for prototype development and trials"
+      ],
+      "howToApply": "Register and apply digitally on the TDF portal.",
+      "applyUrl": "https://tdf.drdo.gov.in/",
+      "featured": false
+    },
+    {
+      "slug": "technology-development-cum-incubation-centers",
+      "title": "Technology Development-cum-Incubation Centers (TDIC)",
+      "org": "Department of Atomic Energy",
+      "sector": "DeepTech",
+      "grantType": "accelerator",
+      "stage": "prototype",
+      "amountLabel": null,
+      "deadlineLabel": "Rolling applications",
+      "description": "TDIC centers give startups and industries access to research facilities and mentoring to turn strong nuclear-sector-adjacent technology ideas into real products. They aim to link India's startup ecosystem with the nuclear research establishment.",
+      "eligibility": "Startups, MSMEs, and industries with robust proposals based on sound original ideas.",
+      "whatYouGet": [
+        "Infrastructure and value-added services including prototyping facilities, test beds, and pilot implementation",
+        "Access to a network of mentors offering sector-specific knowledge and guidance",
+        "Support for nucleation, incubation, and growth of technology-based enterprises"
+      ],
+      "howToApply": "Interested applicants visit the nearest Technology Development-cum-Incubation Center; for example, at IGCAR, applicants submit a proposal with an Expression of Interest to incubation@igcar.gov.in.",
+      "applyUrl": "https://www.igcar.gov.in/incubation.html",
+      "featured": false
+    },
+    {
+      "slug": "tide-2-0",
+      "title": "TIDE 2.0 (Technology Incubation & Development of Entrepreneurs)",
+      "org": "Ministry of Electronics and Information Technology (MeitY)",
+      "sector": "DeepTech",
+      "grantType": "grant",
+      "stage": "prototype",
+      "amountLabel": "Up to ₹4 lakh (PoC), ₹7 lakh (prototype), ₹40 lakh (product/market)",
+      "deadlineLabel": "Rolling via incubators",
+      "description": "TIDE 2.0 helps early-stage tech startups access funding, incubation and mentoring to turn ideas and prototypes into market-ready products, delivered through a network of MeitY-supported incubators.",
+      "eligibility": "Information technology based, DPIIT-recognised startups working with or applying through MeitY Startup Hub-affiliated incubators.",
+      "whatYouGet": [
+        "Up to ₹4 lakh for idea to proof-of-concept stage",
+        "Up to ₹7 lakh for prototype development",
+        "Up to ₹40 lakh investment for product development and market outreach"
+      ],
+      "howToApply": "Identify a suitable TIDE 2.0-supported incubator via the MeitY Startup Hub website and apply through that incubator.",
+      "applyUrl": "https://msh.meity.gov.in/schemes/tide",
+      "featured": true
+    },
+    {
+      "slug": "sidbi-ubharte-sitaare",
+      "title": "Ubharte Sitaare",
+      "org": "EXIM Bank and SIDBI (supported by RBI)",
+      "sector": "General",
+      "grantType": "equity",
+      "stage": "growth",
+      "amountLabel": null,
+      "deadlineLabel": "Rolling applications",
+      "description": "Ubharte Sitaare is a fund jointly promoted by EXIM Bank and SIDBI to identify and support export-oriented Indian companies and startups with high growth potential, offering equity and financial assistance to help them scale globally.",
+      "eligibility": "Export-oriented Indian companies and startups with strong growth potential but facing early-stage financial constraints.",
+      "whatYouGet": [
+        "Equity and quasi-equity support",
+        "Handholding and advisory support to boost export competitiveness"
+      ],
+      "howToApply": "Apply through the SIDBI Ventures Ubharte Sitaare Fund page.",
+      "applyUrl": "https://www.eximbankindia.in/ubharte-sitaare-programme",
+      "featured": false
+    },
+    {
+      "slug": "venture-capital-fund-for-scheduled-castes-vcf-sc",
+      "title": "Venture Capital Fund for Scheduled Castes (VCF-SC)",
+      "org": "Ministry of Social Justice and Empowerment",
+      "sector": "Social Impact",
+      "grantType": "loan",
+      "stage": "growth",
+      "amountLabel": "₹10 lakh to ₹15 crore",
+      "deadlineLabel": "Rolling applications",
+      "description": "VCF-SC is a ₹750 crore corpus fund, managed by IFCI Venture Capital Ltd, that provides concessional finance to Scheduled Caste entrepreneurs to help them start or scale businesses. It targets manufacturing, services, and allied sectors including startups and incubated units.",
+      "eligibility": "Companies with at least 51% shareholding by Scheduled Caste entrepreneurs and management control for the past 6 months (for assistance up to ₹50 lakh) or 12 months (for assistance above ₹50 lakh).",
+      "whatYouGet": [
+        "Loans from ₹10 lakh to ₹15 crore at a 4% coupon rate",
+        "Up to 75% of project cost funded for assistance up to ₹5 crore",
+        "Up to 50% of project cost funded for assistance above ₹5 crore"
+      ],
+      "howToApply": "Apply online through the VCF-SC portal.",
+      "applyUrl": "https://vcfsc.in/apply-online.html",
+      "featured": false
+    },
+    {
+      "slug": "yuva-sahakar",
+      "title": "Yuva Sahakar - Cooperative Enterprise Support and Innovation Scheme",
+      "org": "Ministry of Cooperation",
+      "sector": "General",
+      "grantType": "loan",
+      "stage": "idea",
+      "amountLabel": null,
+      "deadlineLabel": "Rolling applications",
+      "description": "Yuva Sahakar supports newly formed cooperative societies with innovative, value-chain-enhancing ideas through long-term finance and interest concessions. It gives special encouragement to cooperatives in the Northeast, Aspirational Districts, and those led by women, SC/ST, or PwD members.",
+      "eligibility": "Newly formed cooperative societies, with priority for those in the Northeastern Region, Aspirational Districts, or led by women, SC/ST, and PwD members.",
+      "whatYouGet": [
+        "Long-term financial support to cooperative startups",
+        "2% interest concession on term loans",
+        "Ability to converge with other government subsidies"
+      ],
+      "howToApply": "Review scheme details and apply as per the NCDC-published guidelines document.",
+      "applyUrl": "https://www.ncdc.in/documents/other/3908071119Yuva.pdf",
+      "featured": false
+    }
+  ]
+}

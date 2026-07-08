@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const idea = getIdeaBySlug(slug)
   if (!idea) return {}
 
-  const title = `${idea.title} — Startup Idea`
+  const title = `${idea.title} - Startup Idea`
   const description = idea.tagline
   const url = `https://priyaahuja.in/startup/ideas/${slug}`
 

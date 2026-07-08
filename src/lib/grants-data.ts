@@ -1,4 +1,4 @@
-import grantsJson from "./grants-data.json"
+import grantsJson from "../../data/json/grants.json"
 
 export type GrantSector =
   | "General"
@@ -12,6 +12,8 @@ export type GrantSector =
   | "Social Impact"
   | "Women-Led"
   | "Student-Led"
+  | "Defence"
+  | "Space"
 
 export const ALL_SECTORS: GrantSector[] = [
   "General",
@@ -25,6 +27,8 @@ export const ALL_SECTORS: GrantSector[] = [
   "Social Impact",
   "Women-Led",
   "Student-Led",
+  "Defence",
+  "Space",
 ]
 
 export type GrantType = "grant" | "loan" | "equity" | "credits" | "fellowship" | "accelerator"
@@ -40,16 +44,12 @@ export type StartupGrant = {
   amountLabel: string | null
   deadlineLabel: string
   description: string
-  // gated fields — only shown after sign-in
+  // gated fields - only shown after sign-in
   eligibility: string
   whatYouGet: string[]
   howToApply: string
   applyUrl: string
   featured?: boolean
-  _source?: string
-  _live?: boolean
-  _news?: boolean
-  _linkNeedsReview?: boolean
 }
 
 export const grants: StartupGrant[] = grantsJson.grants as StartupGrant[]

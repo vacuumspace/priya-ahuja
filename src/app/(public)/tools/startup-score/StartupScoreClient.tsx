@@ -4,7 +4,7 @@ import { useState } from "react"
 import { signIn } from "next-auth/react"
 import { loadRazorpay } from "@/lib/load-razorpay"
 import Link from "next/link"
-import { ArrowLeft, RotateCcw, CheckCircle } from "lucide-react"
+import { ArrowLeft, ArrowRight, RotateCcw, CheckCircle } from "lucide-react"
 import SignInOptions from "@/components/SignInOptions"
 import { trackCta } from "@/lib/analytics"
 import {
@@ -39,6 +39,19 @@ function cn(...classes: (string | false | undefined | null)[]) {
 function IntroView({ userEmail, onStart, price = 49900 }: { userEmail: string | null; onStart: () => void; price?: number }) {
   const isSignedIn = !!userEmail
 
+  const startButton = (className?: string) => (
+    <button
+      onClick={isSignedIn ? onStart : () => signIn("google", { callbackUrl: "/fundraise/tools/fundability-score" })}
+      className={cn(
+        "w-full inline-flex items-center justify-center gap-2 bg-ink text-cream font-sans text-base font-bold px-6 py-4 rounded-xl hover:bg-ink/80 transition-colors shadow-md",
+        className
+      )}
+    >
+      {isSignedIn ? "Start" : "Sign in to start"}
+      <ArrowRight size={18} />
+    </button>
+  )
+
   return (
     <div className="max-w-xl mx-auto space-y-5">
       <div className="bg-card border border-border rounded-2xl p-5 sm:p-8">
@@ -49,7 +62,7 @@ function IntroView({ userEmail, onStart, price = 49900 }: { userEmail: string | 
           startup fundability score
         </h1>
         <p className="font-sans text-sm text-ink/60 leading-relaxed mb-5">
-          this is not a "is my idea good?" test. it scores your startup on the exact criteria investors use when deciding whether to fund you — market size, traction signals, team strength, business model clarity, competitive defensibility, and more. answer 50 questions across 9 segments and get a 0–100 score with a full breakdown of where you stand and what to fix before you walk into a room.
+          this is not a "is my idea good?" test. it scores your startup on the exact criteria investors use when deciding whether to fund you - market size, traction signals, team strength, business model clarity, competitive defensibility, and more. answer 50 questions across 9 segments and get a 0–100 score with a full breakdown of where you stand and what to fix before you walk into a room.
         </p>
         <div className="inline-flex items-center gap-1.5 bg-peach/40 border border-peach-dark/30 rounded-lg px-3 py-1.5 mb-3">
           <span className="font-sans text-xs text-ink/50">full breakdown</span>
@@ -58,12 +71,14 @@ function IntroView({ userEmail, onStart, price = 49900 }: { userEmail: string | 
         <div className="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 mb-7">
           <p className="font-sans text-xs font-semibold text-amber-800 mb-0.5">one-time access</p>
           <p className="font-sans text-[13px] text-amber-700 leading-relaxed">
-            this quiz can only be taken once. your answers and score are saved permanently to your account. take your time — once submitted, you cannot retake it.
+            this quiz can only be taken once. your answers and score are saved permanently to your account. take your time - once submitted, you cannot retake it.
           </p>
         </div>
 
+        {startButton("mb-7")}
+
         {/* Segment table */}
-        <div className="rounded-xl border border-border overflow-hidden mb-8">
+        <div className="rounded-xl border border-border overflow-hidden mb-2">
           <div className="grid grid-cols-2 text-[12px] font-sans text-ink/35 uppercase tracking-widest px-4 py-2 bg-peach/20 border-b border-border">
             <span>segment</span>
             <span className="text-right">questions</span>
@@ -82,13 +97,6 @@ function IntroView({ userEmail, onStart, price = 49900 }: { userEmail: string | 
             <span className="font-sans text-xs font-semibold text-ink text-right">50</span>
           </div>
         </div>
-
-        <button
-          onClick={isSignedIn ? onStart : () => signIn("google", { callbackUrl: "/fundraise/tools/fundability-score" })}
-          className="inline-flex items-center gap-2 bg-ink text-cream font-sans text-sm font-semibold px-6 py-3 rounded-xl hover:bg-ink/80 transition-colors"
-        >
-          Start
-        </button>
       </div>
 
       {isSignedIn && (
@@ -168,7 +176,7 @@ const SAMPLE_FUND_PILLARS = [
   },
 ]
 const SAMPLE_FUND_RECS = [
-  "your TAM/SAM/SOM numbers are estimates with no sourcing — investors will ask for methodology. build a bottom-up view.",
+  "your TAM/SAM/SOM numbers are estimates with no sourcing - investors will ask for methodology. build a bottom-up view.",
   "competitive moat is thin. price is not a defensible advantage. identify one structural barrier (network effect, data, switching cost) you can build toward.",
   "go-to-market is 'word of mouth and content'. that's not a channel, it's a hope. name your first 10 customers and how you'll reach them.",
 ]
@@ -182,7 +190,7 @@ function getScoreBand(score: number): { label: string; color: string; directiona
   if (score >= 65) return {
     label: "almost there",
     color: "text-blue-700",
-    directional: "you have solid foundations but a few gaps investors will probe. address the weak segments before you start pitching — one strong concern can kill an otherwise good meeting.",
+    directional: "you have solid foundations but a few gaps investors will probe. address the weak segments before you start pitching - one strong concern can kill an otherwise good meeting.",
   }
   if (score >= 50) return {
     label: "building blocks in place",
@@ -192,12 +200,12 @@ function getScoreBand(score: number): { label: string; color: string; directiona
   if (score >= 35) return {
     label: "early stage, more to build",
     color: "text-orange-700",
-    directional: "it's too early to pitch institutional investors. focus on validating the problem and building evidence — customer interviews, early traction, or a prototype. come back to fundraising when the score is above 50.",
+    directional: "it's too early to pitch institutional investors. focus on validating the problem and building evidence - customer interviews, early traction, or a prototype. come back to fundraising when the score is above 50.",
   }
   return {
     label: "pre-validation",
     color: "text-red-700",
-    directional: "the idea needs more grounding before it's pitchable. spend 2–3 months on customer discovery and problem validation. the goal right now is not to raise — it's to find out if the problem is real and whether people will pay.",
+    directional: "the idea needs more grounding before it's pitchable. spend 2–3 months on customer discovery and problem validation. the goal right now is not to raise - it's to find out if the problem is real and whether people will pay.",
   }
 }
 
@@ -505,7 +513,7 @@ function PaywallView({
         amount: orderData.amount,
         currency: "INR",
         name: "Priya Ahuja",
-        description: "Startup Fundability Score — Full Analysis",
+        description: "Startup Fundability Score - Full Analysis",
         order_id: orderData.orderId,
         handler: (response: {
           razorpay_order_id: string
@@ -541,7 +549,7 @@ function PaywallView({
           unlock your startup fundability score
         </h2>
         <p className="font-sans text-sm text-ink/55 leading-relaxed mb-7">
-          pay once to take the 50-question quiz and get your full score — overall out of 100, all 9 segment breakdowns, and a prioritised list of exactly what to fix before you pitch to investors.
+          pay once to take the 50-question quiz and get your full score - overall out of 100, all 9 segment breakdowns, and a prioritised list of exactly what to fix before you pitch to investors.
         </p>
 
         <div className="inline-flex items-center gap-1.5 bg-peach/40 border border-peach-dark/30 rounded-lg px-3 py-1.5 mb-7">
@@ -671,7 +679,7 @@ function ResultsView({
         <div className="flex items-center gap-3 bg-peach/20 border border-peach-dark/20 rounded-xl px-5 py-4">
           <CheckCircle size={16} className="text-peach-dark flex-shrink-0" />
           <p className="font-sans text-sm text-ink/70">
-            exceptional score — you&apos;ve addressed every key area.
+            exceptional score - you&apos;ve addressed every key area.
           </p>
         </div>
       )}
@@ -682,7 +690,7 @@ function ResultsView({
           want to go deeper?
         </p>
         <p className="font-sans text-sm text-ink/60 leading-relaxed mb-5">
-          book a startup idea brainstorming session with priya — turn your score into a concrete action plan.
+          book a startup idea brainstorming session with priya - turn your score into a concrete action plan.
         </p>
         <Link
           href="/connect"
@@ -736,7 +744,7 @@ export default function StartupScoreClient({ userEmail, userName, isAdmin = fals
       setStep((s) => s + 1)
       return
     }
-    // Last segment — submit
+    // Last segment - submit
     if (isAdmin) {
       const totalScore = computeTotal(answers)
       const pillarScores = computePillarScores(answers)

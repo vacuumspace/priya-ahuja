@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
 
     if (slotId) {
       if (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(slotId)) {
-        // Datetime string — find or create the availability row then lock atomically
+        // Datetime string - find or create the availability row then lock atomically
         const [date, startTime] = slotId.split("T")
         const [h, m] = startTime.split(":").map(Number)
         const endTotal = h * 60 + m + (service.durationMin ?? 30)
@@ -61,7 +61,7 @@ export async function POST(req: NextRequest) {
           }
           resolvedSlotId = locked[0].id
         } else {
-          // Slot row doesn't exist yet — insert with isBooked: true
+          // Slot row doesn't exist yet - insert with isBooked: true
           const [newSlot] = await db
             .insert(availability)
             .values({ serviceId: service.id, date, startTime, endTime, isBooked: true })
@@ -69,7 +69,7 @@ export async function POST(req: NextRequest) {
           resolvedSlotId = newSlot.id
         }
       } else {
-        // UUID slot id — atomic update: only succeeds if still unbooked
+        // UUID slot id - atomic update: only succeeds if still unbooked
         const locked = await db
           .update(availability)
           .set({ isBooked: true })

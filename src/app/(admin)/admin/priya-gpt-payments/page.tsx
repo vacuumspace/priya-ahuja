@@ -18,7 +18,7 @@ function fmt(date: string) {
   return new Intl.DateTimeFormat("en-IN", { dateStyle: "medium", timeStyle: "short" }).format(new Date(date))
 }
 function fmtAmt(paise: number | null) {
-  if (paise == null) return "—"
+  if (paise == null) return " - "
   return "₹" + (paise / 100).toLocaleString("en-IN")
 }
 function fmtMonth(ym: string) {
@@ -113,7 +113,7 @@ export default function PriyaGptPaymentsAdminPage() {
                   <td className="py-3 px-4 font-sans text-sm text-ink/70">{row.userEmail}</td>
                   <td className="py-3 px-4 font-sans text-sm text-ink/70">{row.deltaMinutes} min</td>
                   <td className="py-3 px-4 font-sans text-sm font-medium text-ink">{fmtAmt(row.amountPaise)}</td>
-                  <td className="py-3 px-4 font-sans text-xs text-ink/50">{row.razorpayPaymentId ?? "—"}</td>
+                  <td className="py-3 px-4 font-sans text-xs text-ink/50">{row.razorpayPaymentId ?? " - "}</td>
                   <td className="py-3 px-4 font-sans text-xs text-ink/50">{fmt(row.createdAt)}</td>
                 </tr>
               ))}
@@ -126,7 +126,7 @@ export default function PriyaGptPaymentsAdminPage() {
         <div className="flex items-center gap-3 mt-4 justify-end">
           <button
             disabled={page <= 1}
-            onClick={() => setPage((p) => p - 1)}
+            onClick={() => { setPage((p) => p - 1); window.scrollTo({ top: 0, behavior: "smooth" }) }}
             className="font-sans text-xs px-3 py-1.5 rounded-lg border border-border text-ink/60 disabled:opacity-30 hover:bg-card transition-colors"
           >
             Prev
@@ -134,7 +134,7 @@ export default function PriyaGptPaymentsAdminPage() {
           <span className="font-sans text-xs text-ink/40">{page} / {pageCount}</span>
           <button
             disabled={page >= pageCount}
-            onClick={() => setPage((p) => p + 1)}
+            onClick={() => { setPage((p) => p + 1); window.scrollTo({ top: 0, behavior: "smooth" }) }}
             className="font-sans text-xs px-3 py-1.5 rounded-lg border border-border text-ink/60 disabled:opacity-30 hover:bg-card transition-colors"
           >
             Next

@@ -155,18 +155,18 @@ export default function AngelInvestorsAdminPage() {
                     <tr key={inv.id} className={i !== investors.length - 1 ? "border-b border-border" : ""}>
                       <td className="py-3 px-4 font-sans text-xs text-ink/30">{inv.sno}</td>
                       <td className="py-3 px-4 font-sans text-sm font-medium text-ink">{inv.name}</td>
-                      <td className="py-3 px-4 font-sans text-sm text-ink/70">{inv.city || "—"}</td>
-                      <td className="py-3 px-4 font-sans text-sm text-ink/70">{inv.state || "—"}</td>
-                      <td className="py-3 px-4 font-sans text-sm text-ink/70">{inv.country || "—"}</td>
+                      <td className="py-3 px-4 font-sans text-sm text-ink/70">{inv.city || " - "}</td>
+                      <td className="py-3 px-4 font-sans text-sm text-ink/70">{inv.state || " - "}</td>
+                      <td className="py-3 px-4 font-sans text-sm text-ink/70">{inv.country || " - "}</td>
                       <td className="py-3 px-4 font-sans text-sm text-ink/60">
                         {inv.linkedin ? (
                           <a href={inv.linkedin} target="_blank" rel="noreferrer" className="underline underline-offset-2 hover:text-ink">
                             link
                           </a>
-                        ) : "—"}
+                        ) : " - "}
                       </td>
                       <td className="py-3 px-4 font-sans text-xs text-ink/60">
-                        {inv.emails?.length ? inv.emails.join(", ") : "—"}
+                        {inv.emails?.length ? inv.emails.join(", ") : " - "}
                       </td>
                     </tr>
                   ))}
@@ -225,7 +225,7 @@ export default function AngelInvestorsAdminPage() {
                       <td className="py-3 px-4 font-sans text-sm font-medium text-ink">{tx.userName}</td>
                       <td className="py-3 px-4 font-sans text-sm text-ink/70">{tx.userEmail}</td>
                       <td className="py-3 px-4 font-sans text-sm font-medium text-ink">{fmtAmount(tx.amountPaid ?? tx.price)}</td>
-                      <td className="py-3 px-4 font-sans text-xs text-ink/50">{tx.razorpayPaymentId ?? "—"}</td>
+                      <td className="py-3 px-4 font-sans text-xs text-ink/50">{tx.razorpayPaymentId ?? " - "}</td>
                       <td className="py-3 px-4 font-sans text-xs text-ink/50">{fmt(tx.createdAt)}</td>
                       <td className="py-3 px-4">
                         {tx.downloadToken ? (

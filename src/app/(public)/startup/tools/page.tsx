@@ -8,7 +8,7 @@ const tools = [
   {
     slug: "startup-idea-score",
     title: "Startup Idea Score",
-    description: "Funding is a milestone, not the goal. This score tells you whether your idea is worth building in the first place — before you think about investors. It tests problem clarity (is the pain real and frequent?), founder-market fit (why are you the right person?), demand signals (are people already doing something to solve this?), unit economics (can the numbers ever work?), and execution path (do you know your first 90 days?). Brutally honest. No fluff.",
+    description: "Funding is a milestone, not the goal. This score tells you whether your idea is worth building in the first place - before you think about investors. It tests problem clarity (is the pain real and frequent?), founder-market fit (why are you the right person?), demand signals (are people already doing something to solve this?), unit economics (can the numbers ever work?), and execution path (do you know your first 90 days?). Brutally honest. No fluff.",
     tag: "ideation",
     icon: Lightbulb,
     href: "/startup/tools/idea-score",
@@ -36,7 +36,7 @@ export default function StartupToolsPage() {
           building smart
         </h1>
         <p className="font-sans text-sm text-ink/60 max-w-md leading-relaxed">
-          tools focused on building a real business — not pitching one.
+          tools focused on building a real business - not pitching one.
         </p>
       </div>
 

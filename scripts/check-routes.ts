@@ -1,5 +1,5 @@
 /**
- * Health check script — verifies all public routes return 200.
+ * Health check script - verifies all public routes return 200.
  * Run with: npx tsx scripts/check-routes.ts
  * Make sure the dev server (or prod) is running at BASE_URL.
  */
@@ -142,7 +142,7 @@ async function main() {
   try {
     await fetch(`${BASE_URL}/`, { signal: AbortSignal.timeout(5000) })
   } catch {
-    console.error(`❌  Cannot reach ${BASE_URL} — is the dev server running?\n    Start it with: npm run dev\n`)
+    console.error(`❌  Cannot reach ${BASE_URL} - is the dev server running?\n    Start it with: npm run dev\n`)
     process.exit(1)
   }
 
@@ -163,7 +163,7 @@ async function main() {
     .where(eq(services.isActive, true))
 
   if (activeServices.length === 0) {
-    console.warn("⚠  No active services found in DB — /connect/[slug] routes skipped.\n")
+    console.warn("⚠  No active services found in DB - /connect/[slug] routes skipped.\n")
   } else {
     for (const { slug } of activeServices) routes.push(`/connect/${slug}`)
   }

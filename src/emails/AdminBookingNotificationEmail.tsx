@@ -42,7 +42,7 @@ export default function AdminBookingNotificationEmail({
   return (
     <Html>
       <Head />
-      <Preview>{isReschedule ? `Rescheduled: ${serviceName} — ${userName}` : `New Booking: ${serviceName} from ${userName}`}</Preview>
+      <Preview>{isReschedule ? `Rescheduled: ${serviceName} - ${userName}` : `New Booking: ${serviceName} from ${userName}`}</Preview>
       <Body style={{ backgroundColor: "#f8f8f8", fontFamily: "Inter, sans-serif", margin: 0, padding: "40px 0" }}>
         <Container style={{ maxWidth: 560, margin: "0 auto", backgroundColor: "#ffffff", borderRadius: 12, padding: "32px 40px", border: "1px solid #e8e8e8" }}>
           <Heading style={{ fontSize: 22, fontWeight: 800, color: "#2D2D2D", margin: "0 0 6px" }}>
@@ -64,7 +64,7 @@ export default function AdminBookingNotificationEmail({
             )}
             {isAsync ? (
               <Text style={{ margin: message ? "0 0 8px" : "0", color: "#2D2D2D", fontSize: 14 }}>
-                <strong>Delivery:</strong> Personal review (no AI) — respond within 5–7 days via email
+                <strong>Delivery:</strong> Personal review (no AI) - respond within 5–7 days via email
               </Text>
             ) : date && time ? (
               <Text style={{ margin: message ? "0 0 8px" : "0", color: isReschedule ? "#FFA07A" : "#2D2D2D", fontSize: 14, fontWeight: isReschedule ? 700 : 400 }}>

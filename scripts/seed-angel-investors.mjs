@@ -68,5 +68,5 @@ for (let i = 0; i < rows.length; i += batchSize) {
   process.stdout.write(`\rInserted ${inserted}/${rows.length}...`)
 }
 
-console.log(`\nDone — ${inserted} investors seeded.`)
+console.log(`\nDone - ${inserted} investors seeded.`)
 await client.end()

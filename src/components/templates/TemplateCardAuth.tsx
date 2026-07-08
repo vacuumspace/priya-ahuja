@@ -140,7 +140,7 @@ export default function TemplateCardAuth({ product, isAuthenticated, purchaseTok
               <p className="font-sans font-700 text-ink text-sm">{price}</p>
 
               {purchaseToken ? (
-                // Already purchased — view + download
+                // Already purchased - view + download
                 <div className="flex items-center gap-2">
                   <button
                     onClick={openTemplate}
@@ -160,7 +160,7 @@ export default function TemplateCardAuth({ product, isAuthenticated, purchaseTok
                   </a>
                 </div>
               ) : (
-                // Buy — opens sign-in modal if not authenticated, buy modal if authenticated
+                // Buy - opens sign-in modal if not authenticated, buy modal if authenticated
                 <button
                   onClick={() => isAuthenticated ? setModal({ type: "buy" }) : setModal({ type: "sign-in" })}
                   className="inline-flex items-center gap-1.5 bg-ink text-cream text-xs font-sans font-semibold px-4 py-2 rounded-lg hover:bg-ink/80 transition-colors"
@@ -214,7 +214,7 @@ export default function TemplateCardAuth({ product, isAuthenticated, purchaseTok
                   <button onClick={close} className="text-ink/40 hover:text-ink transition-colors"><X size={18} /></button>
                 </div>
                 <p className="font-sans text-sm text-ink/60 mb-4 leading-relaxed">
-                  After payment, you&apos;ll get instant access — view online and download as a Word document. Saved to your account permanently with no download limits.
+                  After payment, you&apos;ll get instant access - view online and download as a Word document. Saved to your account permanently with no download limits.
                 </p>
                 <form onSubmit={handleBuy} className="space-y-4">
                   {error && <p className="font-sans text-xs text-red-500">{error}</p>}

@@ -82,11 +82,25 @@ const navGroups: NavGroup[] = [
     ],
   },
   {
+    label: "Wellbeing",
+    prefixes: ["/admin/wellbeing"],
+    items: [
+      { label: "Submissions", href: "/admin/wellbeing?tab=submissions", icon: Lightbulb },
+    ],
+  },
+  {
     label: "Enquiry",
     prefixes: ["/admin/custom-requests", "/admin/service-inquiries"],
     items: [
       { label: "Custom Requests", href: "/admin/custom-requests", icon: MessageSquare },
       { label: "Service Enquiries", href: "/admin/service-inquiries", icon: Inbox },
+    ],
+  },
+  {
+    label: "Community",
+    prefixes: ["/admin/startup-mistakes"],
+    items: [
+      { label: "Startup Mistakes", href: "/admin/startup-mistakes", icon: Lightbulb },
     ],
   },
   {

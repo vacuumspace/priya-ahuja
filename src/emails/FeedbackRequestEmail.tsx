@@ -23,7 +23,7 @@ export default function FeedbackRequestEmail({
             how was the session?
           </Heading>
           <Text style={{ color: "#555", fontSize: 15, margin: "0 0 28px", lineHeight: "1.6" }}>
-            Hi {name}, your <strong>{serviceName}</strong> is now complete. I&apos;d love to hear what you thought — it takes less than a minute.
+            Hi {name}, your <strong>{serviceName}</strong> is now complete. I&apos;d love to hear what you thought - it takes less than a minute.
           </Text>
 
           <Section style={{ textAlign: "center", marginBottom: 28 }}>
@@ -46,7 +46,7 @@ export default function FeedbackRequestEmail({
 
           <Hr style={{ borderColor: "#F0E8D0", margin: "0 0 20px" }} />
           <Text style={{ color: "#555", fontSize: 13, margin: 0, lineHeight: "1.6" }}>
-            Questions? Just reply to this email.{"\n\n"}— Priya Ahuja
+            Questions? Just reply to this email.{"\n\n"} - Priya Ahuja
           </Text>
         </Container>
       </Body>

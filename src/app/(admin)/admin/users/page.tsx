@@ -84,7 +84,7 @@ export default async function AdminUsersPage({ searchParams }: Props) {
                     <td className="px-5 py-3.5 font-sans text-sm text-ink/30">{offset + i + 1}</td>
                     <td className="px-5 py-3.5 font-sans text-sm font-medium">
                       <Link href={`/admin/users/${user.id}`} className="text-ink hover:text-peach-dark transition-colors">
-                        {user.name ?? "—"}
+                        {user.name ?? " - "}
                       </Link>
                       {user.blocked && (
                         <span className="ml-2 px-1.5 py-0.5 rounded-full bg-red-100 text-red-700 text-[10px] font-sans font-semibold align-middle">
@@ -96,17 +96,17 @@ export default async function AdminUsersPage({ searchParams }: Props) {
                     <td className="px-5 py-3.5 font-sans text-sm text-ink/70">
                       {user.businessName ? (
                         <span>{user.businessName}{user.stage ? <span className="ml-1.5 text-[10px] text-ink/40">· {user.stage}</span> : null}</span>
-                      ) : "—"}
+                      ) : " - "}
                     </td>
-                    <td className="px-5 py-3.5 font-sans text-sm text-ink/60">{user.location ?? "—"}</td>
-                    <td className="px-5 py-3.5 font-sans text-sm text-ink/60">{user.phone ?? "—"}</td>
+                    <td className="px-5 py-3.5 font-sans text-sm text-ink/60">{user.location ?? " - "}</td>
+                    <td className="px-5 py-3.5 font-sans text-sm text-ink/60">{user.phone ?? " - "}</td>
                     <td className="px-5 py-3.5 font-sans text-sm text-ink/50">
                       {user.createdAt
                         ? new Intl.DateTimeFormat("en-IN", {
                             dateStyle: "medium",
                             timeStyle: "short",
                           }).format(new Date(user.createdAt))
-                        : "—"}
+                        : " - "}
                     </td>
                     <td className="px-5 py-3.5">
                       <UserRowActions id={user.id} name={user.name} email={user.email} blocked={user.blocked} />

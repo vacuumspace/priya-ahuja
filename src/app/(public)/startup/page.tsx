@@ -1,10 +1,10 @@
 ﻿import type { Metadata } from "next"
 import Link from "next/link"
-import { Lightbulb, FileText, Wrench, BookOpen, Users, Gift } from "lucide-react"
+import { Lightbulb, FileText, Wrench, BookOpen, Users, Gift, AlertTriangle } from "lucide-react"
 
 export const metadata: Metadata = {
   title: "Startup Resources for Indian Founders",
-  description: "100 startup ideas, idea validation score, templates, resources & credits, and 1-on-1 sessions — everything you need to go from idea to traction as an Indian founder.",
+  description: "100 startup ideas, idea validation score, templates, resources & credits, and 1-on-1 sessions - everything you need to go from idea to traction as an Indian founder.",
   keywords: ["startup resources India", "startup ideas India", "idea validation tool", "startup templates", "founder tools India", "startup credits India"],
   alternates: { canonical: "https://priyaahuja.in/startup" },
   openGraph: {
@@ -18,7 +18,7 @@ const sections = [
   {
     slug: "ideas",
     title: "100 Startup Ideas for 2026",
-    description: "Non-obvious, high-potential startup ideas for Indian founders — each with the real problem, market opportunity, and why now. Curated, not crowd-sourced.",
+    description: "Non-obvious, high-potential startup ideas for Indian founders - each with the real problem, market opportunity, and why now. Curated, not crowd-sourced.",
     tag: "content",
     icon: Lightbulb,
     badge: "100 ideas",
@@ -27,7 +27,7 @@ const sections = [
   {
     slug: "idea-score",
     title: "Startup Idea Score",
-    description: "50 questions across 9 segments — problem clarity, founder-market fit, demand signals, customer understanding, and more. Find out if your idea is worth building before you commit.",
+    description: "50 questions across 9 segments - problem clarity, founder-market fit, demand signals, customer understanding, and more. Find out if your idea is worth building before you commit.",
     tag: "tool",
     icon: Wrench,
     badge: "free quiz · ₹499 unlock",
@@ -36,7 +36,7 @@ const sections = [
   {
     slug: "templates",
     title: "Startup Templates",
-    description: "Frameworks, checklists, and guides built for the early-stage founder — not generic business advice repackaged. Download once, use across every pitch and planning cycle.",
+    description: "Frameworks, checklists, and guides built for the early-stage founder - not generic business advice repackaged. Download once, use across every pitch and planning cycle.",
     tag: "downloads",
     icon: FileText,
     badge: "templates",
@@ -45,16 +45,25 @@ const sections = [
   {
     slug: "blog",
     title: "Startup Blog",
-    description: "Honest takes on startup building — from idea validation to hiring your first 10, unit economics, and what investors actually look for in early-stage decks.",
+    description: "Honest takes on startup building - from idea validation to hiring your first 10, unit economics, and what investors actually look for in early-stage decks.",
     tag: "reading",
     icon: BookOpen,
     badge: "articles",
     href: "/startup/blog",
   },
   {
+    slug: "mistakes",
+    title: "Startup Mistakes",
+    description: "Real mistakes founders made: fundraising, product, co-founder splits, validation, and more. Shared by founders, reviewed before publishing.",
+    tag: "community",
+    icon: AlertTriangle,
+    badge: "founder stories",
+    href: "/startup/mistakes",
+  },
+  {
     slug: "resources",
     title: "Resources & Credits",
-    description: "Tools, credits, and deals curated for founders — from cloud infrastructure to AI models. 40+ programs including AWS ($200k), Google Cloud ($350k), OpenAI, Anthropic, HubSpot, and more.",
+    description: "Tools, credits, and deals curated for founders - from cloud infrastructure to AI models. 40+ programs including AWS ($200k), Google Cloud ($350k), OpenAI, Anthropic, HubSpot, and more.",
     tag: "free",
     icon: Gift,
     badge: "40+ tools",
@@ -63,7 +72,7 @@ const sections = [
   {
     slug: "connect",
     title: "1-on-1 Startup Sessions",
-    description: "Book a direct session with Priya — idea brainstorming, go-to-market, first principles review of your business model, or a no-filter sanity check before your next big move.",
+    description: "Book a direct session with Priya - idea brainstorming, go-to-market, first principles review of your business model, or a no-filter sanity check before your next big move.",
     tag: "session",
     icon: Users,
     badge: "book a session",
@@ -78,6 +87,7 @@ const tagColors: Record<string, string> = {
   reading: "bg-blue-50 text-blue-600",
   session: "bg-ink/10 text-ink/60",
   free: "bg-mint/20 text-green-700",
+  community: "bg-red-50 text-red-600",
 }
 
 export default function StartupHubPage() {
@@ -94,7 +104,7 @@ export default function StartupHubPage() {
           build to win.
         </h1>
         <p className="font-sans text-base text-ink/60 max-w-md leading-relaxed">
-          everything you need to go from idea to traction — tools, templates, curated content, and direct access to Priya.
+          everything you need to go from idea to traction - tools, templates, curated content, and direct access to Priya.
         </p>
       </div>
 

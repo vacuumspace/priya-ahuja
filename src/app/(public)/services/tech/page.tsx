@@ -10,7 +10,7 @@ const offerings = [
   {
     icon: Sparkles,
     title: "AI Native Products",
-    desc: "Products built with AI at the core — not bolted on. LLM-powered features, intelligent automation, and agent workflows that actually ship.",
+    desc: "Products built with AI at the core - not bolted on. LLM-powered features, intelligent automation, and agent workflows that actually ship.",
     points: ["LLM integration & prompt engineering", "AI agents & automation pipelines", "RAG systems & knowledge bases", "AI-first UX design"],
     highlight: true,
   },
@@ -23,13 +23,13 @@ const offerings = [
   {
     icon: Globe,
     title: "Websites",
-    desc: "Fast, conversion-focused websites — from landing pages to full-stack web platforms.",
+    desc: "Fast, conversion-focused websites - from landing pages to full-stack web platforms.",
     points: ["Next.js / React", "SEO & Core Web Vitals optimised", "CMS integration", "Custom dashboards & portals"],
   },
   {
     icon: Code2,
     title: "Software & Internal Tools",
-    desc: "Custom software built for your ops — CRMs, ERPs, automation pipelines, and internal dashboards.",
+    desc: "Custom software built for your ops - CRMs, ERPs, automation pipelines, and internal dashboards.",
     points: ["Admin panels & workflows", "API integrations", "Data pipelines & reporting", "SaaS product development"],
   },
 ]
@@ -106,7 +106,7 @@ export default function TechPage() {
           build what<br />you&apos;re imagining.
         </h1>
         <p className="font-sans text-sm text-ink/55 leading-relaxed">
-          from idea to shipped product — mobile apps, websites, and custom software built with the speed and clarity that early-stage companies need.
+          from idea to shipped product - mobile apps, websites, and custom software built with the speed and clarity that early-stage companies need.
         </p>
       </div>
 
@@ -213,7 +213,7 @@ export default function TechPage() {
                 rows={4}
                 value={projectDescription}
                 onChange={(e) => setProjectDescription(e.target.value)}
-                placeholder="tell us what you're building — what problem it solves, who uses it, and where you are right now (idea, wireframe, existing product)."
+                placeholder="tell us what you're building - what problem it solves, who uses it, and where you are right now (idea, wireframe, existing product)."
                 className="w-full text-sm font-sans bg-peach/10 border border-peach-dark/20 rounded-xl px-3 py-2.5 text-ink placeholder-ink/30 focus:outline-none focus:border-peach-dark/50 transition-colors resize-none"
               />
             </div>

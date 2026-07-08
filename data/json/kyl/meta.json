@@ -1,7 +1,7 @@
 {
   "period": "FY2024-25",
   "last_updated": "2025-06-30",
-  "note": "Static curated dataset — manually compiled from public sources for market sizing. Not live-scraped.",
+  "note": "Static curated dataset - manually compiled from public sources for market sizing. Not live-scraped.",
   "sources": [
     {
       "name": "Knight Frank India Real Estate Q1 2026",

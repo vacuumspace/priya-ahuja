@@ -14,7 +14,7 @@ const items = [
   {
     slug: "pitch-deck-teardown-discussion",
     title: "Pitch Deck Teardown & Discussion",
-    shortDescription: "Live teardown of your pitch deck — slide by slide, story, numbers, and red flags, followed by a working discussion.",
+    shortDescription: "Live teardown of your pitch deck - slide by slide, story, numbers, and red flags, followed by a working discussion.",
     description: "We'll go through your deck together in real time. I'll break down what's working, what's killing your story, and where investors will check out. You'll leave with specific rewrites, not vague suggestions.",
     price: 800000,
     durationMin: 60,
@@ -31,7 +31,7 @@ const items = [
     slug: "fundraise-strategy",
     title: "Fundraise Strategy",
     shortDescription: "A focused session to sharpen your fundraising thesis, investor targeting, and overall raise narrative.",
-    description: "We'll audit your fundraising approach end to end — target cheque sizes, the right investor personas, warm intro paths, and the narrative that makes VCs lean in. You'll leave with a clear game plan.",
+    description: "We'll audit your fundraising approach end to end - target cheque sizes, the right investor personas, warm intro paths, and the narrative that makes VCs lean in. You'll leave with a clear game plan.",
     price: 600000,
     durationMin: 45,
     type: "call",
@@ -45,8 +45,8 @@ const items = [
   {
     slug: "fundraise-readiness-due-diligence-prep",
     title: "Fundraise Readiness & Due Diligence Prep",
-    shortDescription: "Find out if you're truly ready to raise — and stress-test your data room, metrics, and DD responses before investors do.",
-    description: "An honest readiness assessment plus hands-on DD prep. We'll check your traction, story, team signals, and timing — then drill into your data room and the questions you'll face in diligence so nothing catches you off guard.",
+    shortDescription: "Find out if you're truly ready to raise - and stress-test your data room, metrics, and DD responses before investors do.",
+    description: "An honest readiness assessment plus hands-on DD prep. We'll check your traction, story, team signals, and timing - then drill into your data room and the questions you'll face in diligence so nothing catches you off guard.",
     price: 700000,
     durationMin: 60,
     type: "call",
@@ -60,7 +60,7 @@ const items = [
   {
     slug: "term-sheet-discussion",
     title: "Term Sheet Discussion",
-    shortDescription: "Understand every clause in your term sheet before you sign — what's market, what's aggressive, and where to push back.",
+    shortDescription: "Understand every clause in your term sheet before you sign - what's market, what's aggressive, and where to push back.",
     description: "We'll go through your term sheet line by line. I'll flag what's standard, what's founder-unfriendly, and where you have room to negotiate without burning the relationship. No legalese, just plain talk.",
     price: 750000,
     durationMin: 60,
@@ -92,7 +92,7 @@ const items = [
     slug: "financial-projection-preparation",
     title: "Financial Projection Preparation",
     shortDescription: "Build investor-ready financial projections that are defensible, credible, and tell the right story about your growth.",
-    description: "We'll work through your financial model together — revenue assumptions, unit economics, cost structure, and the 3-year projections investors will poke holes in. You'll leave with a model that holds up under scrutiny and a clear narrative to go with it.",
+    description: "We'll work through your financial model together - revenue assumptions, unit economics, cost structure, and the 3-year projections investors will poke holes in. You'll leave with a model that holds up under scrutiny and a clear narrative to go with it.",
     price: 850000,
     durationMin: 60,
     type: "call",
@@ -105,7 +105,7 @@ const items = [
       "Investor-ready model narrative",
       "Sensitivity analysis walkthrough",
     ],
-    whoIsItFor: "Founders preparing for fundraising who need a financial model that investors will actually believe — not just a spreadsheet with optimistic hockey sticks.",
+    whoIsItFor: "Founders preparing for fundraising who need a financial model that investors will actually believe - not just a spreadsheet with optimistic hockey sticks.",
     acceptsDeckLink: true,
     deckLinkLabel: "Share your financial model (optional)",
     deckLinkPlaceholder: "https://docs.google.com/spreadsheets/... or drive link",
@@ -128,8 +128,8 @@ const items = [
   {
     slug: "launch-gtm-strategy",
     title: "Launch & GTM Strategy",
-    shortDescription: "Build a focused go-to-market plan — who to target first, how to reach them, and what a successful launch looks like.",
-    description: "We'll map your ICP, define your first channel, set launch milestones, and figure out what 'working' looks like in the first 90 days. No theory — a plan you can actually execute.",
+    shortDescription: "Build a focused go-to-market plan - who to target first, how to reach them, and what a successful launch looks like.",
+    description: "We'll map your ICP, define your first channel, set launch milestones, and figure out what 'working' looks like in the first 90 days. No theory - a plan you can actually execute.",
     price: 550000,
     durationMin: 45,
     type: "call",
@@ -141,7 +141,7 @@ const items = [
   {
     slug: "product-review",
     title: "Product Review",
-    shortDescription: "An honest outside look at your product — what's working, what's breaking the experience, and what to fix first.",
+    shortDescription: "An honest outside look at your product - what's working, what's breaking the experience, and what to fix first.",
     description: "I'll review your product (live walkthrough or recorded demo) and give direct, prioritised feedback on UX, core loop, onboarding, and the features that are pulling focus away from what matters.",
     price: 500000,
     durationMin: 45,
@@ -156,14 +156,14 @@ const items = [
   {
     slug: "branding-positioning-analysis",
     title: "Branding & Positioning Analysis",
-    shortDescription: "Get clear on what you stand for, who you're for, and why you're different — so your positioning does the selling.",
+    shortDescription: "Get clear on what you stand for, who you're for, and why you're different - so your positioning does the selling.",
     description: "We'll audit your current positioning, find the gaps between how you describe yourself and how your market perceives you, and build a sharper, more differentiated point of view that resonates with the right buyers.",
     price: 500000,
     durationMin: 45,
     type: "call",
     tag: "strategy",
     highlights: ["Positioning audit", "Differentiation clarity", "Messaging hierarchy", "ICP language alignment", "Tagline & category framing"],
-    whoIsItFor: "Founders whose product is solid but whose messaging isn't converting — or who are entering a crowded market.",
+    whoIsItFor: "Founders whose product is solid but whose messaging isn't converting - or who are entering a crowded market.",
     acceptsDeckLink: true,
     deckLinkLabel: "Share your current pitch/website/one-pager (optional)",
     deckLinkPlaceholder: "https://yoursite.com or drive link",
@@ -171,8 +171,8 @@ const items = [
   {
     slug: "startup-strategy",
     title: "Startup Strategy",
-    shortDescription: "A working session on your biggest strategic challenge — go-to-market, pricing, pivot, or competitive response.",
-    description: "Bring your most pressing strategic question and we'll work through it together. Structured problem framing, options mapping, and a clear point of view on the right move — not a list of considerations.",
+    shortDescription: "A working session on your biggest strategic challenge - go-to-market, pricing, pivot, or competitive response.",
+    description: "Bring your most pressing strategic question and we'll work through it together. Structured problem framing, options mapping, and a clear point of view on the right move - not a list of considerations.",
     price: 500000,
     durationMin: 45,
     type: "call",
@@ -185,13 +185,13 @@ const items = [
     slug: "product-development-discussion",
     title: "Product Development Discussion",
     shortDescription: "Work through your product roadmap, build vs. buy decisions, and what to ship next with a founder who's been there.",
-    description: "We'll dig into your current roadmap, the bets you're making, and the tradeoffs between speed and quality. Whether it's prioritisation, hiring your first engineer, or deciding what not to build — this is the session for it.",
+    description: "We'll dig into your current roadmap, the bets you're making, and the tradeoffs between speed and quality. Whether it's prioritisation, hiring your first engineer, or deciding what not to build - this is the session for it.",
     price: 500000,
     durationMin: 45,
     type: "call",
     tag: "strategy",
     highlights: ["Roadmap prioritisation", "Build vs. buy decisions", "Velocity vs. quality tradeoffs", "First engineering hire timing", "What to cut from the backlog"],
-    whoIsItFor: "Founders making key product decisions — especially early-stage teams figuring out what to build next.",
+    whoIsItFor: "Founders making key product decisions - especially early-stage teams figuring out what to build next.",
     acceptsDeckLink: true,
     deckLinkLabel: "Share your roadmap or product spec (optional)",
     deckLinkPlaceholder: "https://notion.so/... or drive link",
@@ -231,7 +231,7 @@ async function seed() {
     console.log(`✓ ${row[0].slug}`)
   }
 
-  console.log(`\nDone — ${items.length} services added.`)
+  console.log(`\nDone - ${items.length} services added.`)
 }
 
 seed().catch((err) => { console.error(err); process.exit(1) })

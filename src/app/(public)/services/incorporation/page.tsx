@@ -22,22 +22,22 @@ const offerings = [
     icon: ClipboardList,
     title: "Annual Compliance (MCA Filings)",
     points: [
-      "MGT-7 / MGT-7A — Annual Return",
-      "AOC-4 — Financial Statements filing",
-      "MGT-14 — Resolutions & agreements",
-      "DIR-3 KYC — Director KYC annual update",
-      "INC-20A — Business commencement declaration",
+      "MGT-7 / MGT-7A - Annual Return",
+      "AOC-4 - Financial Statements filing",
+      "MGT-14 - Resolutions & agreements",
+      "DIR-3 KYC - Director KYC annual update",
+      "INC-20A - Business commencement declaration",
     ],
   },
   {
     icon: FileCheck,
     title: "Event-Based MCA Filings",
     points: [
-      "SH-7 — Change in authorised capital",
-      "PAS-3 — Allotment of shares",
-      "DIR-12 — Director appointments & resignations",
-      "INC-28 — Order filings",
-      "CHG-1 / CHG-4 — Charge creation & satisfaction",
+      "SH-7 - Change in authorised capital",
+      "PAS-3 - Allotment of shares",
+      "DIR-12 - Director appointments & resignations",
+      "INC-28 - Order filings",
+      "CHG-1 / CHG-4 - Charge creation & satisfaction",
     ],
   },
   {
@@ -136,7 +136,7 @@ export default function IncorporationPage() {
           stay compliant,<br />stay protected.
         </h1>
         <p className="font-sans text-sm text-ink/55 leading-relaxed">
-          from company incorporation to annual MCA filings and statutory audits — end-to-end legal compliance handled so you never miss a deadline.
+          from company incorporation to annual MCA filings and statutory audits - end-to-end legal compliance handled so you never miss a deadline.
         </p>
         <div className="inline-flex items-center gap-2 mt-4 bg-peach/40 border border-peach-dark/25 rounded-full px-4 py-1.5">
           <span className="w-1.5 h-1.5 rounded-full bg-peach-dark/60 flex-shrink-0" />
@@ -236,7 +236,7 @@ export default function IncorporationPage() {
                 rows={4}
                 value={projectDescription}
                 onChange={(e) => setProjectDescription(e.target.value)}
-                placeholder="briefly describe what you need — company type, current compliance status, any upcoming deadlines, etc."
+                placeholder="briefly describe what you need - company type, current compliance status, any upcoming deadlines, etc."
                 className="w-full text-sm font-sans bg-peach/10 border border-peach-dark/20 rounded-xl px-3 py-2.5 text-ink placeholder-ink/30 focus:outline-none focus:border-peach-dark/50 transition-colors resize-none"
               />
             </div>

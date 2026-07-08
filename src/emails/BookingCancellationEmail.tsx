@@ -19,7 +19,7 @@ export default function BookingCancellationEmail({
   isAdmin = false,
   appUrl = "https://priyaahuja.com",
   body = "The booking has been cancelled.",
-  footer = "— Priya Ahuja",
+  footer = " - Priya Ahuja",
 }: BookingCancellationEmailProps) {
   return (
     <Html>

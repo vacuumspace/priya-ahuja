@@ -105,7 +105,7 @@ export default async function AdminDashboard() {
 
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
 
-        {/* Left — Transactions */}
+        {/* Left - Transactions */}
         <div>
           <div className="flex items-center justify-between mb-3">
             <h2 className="font-sans text-xs font-semibold text-ink/40 uppercase tracking-widest">
@@ -123,12 +123,12 @@ export default async function AdminDashboard() {
                 const dateLabel = new Date(t.createdAt).toLocaleDateString("en-IN", {
                   day: "numeric", month: "short", year: "numeric",
                 })
-                const amountRs = t.amount != null ? `₹${(t.amount / 100).toLocaleString("en-IN")}` : "—"
+                const amountRs = t.amount != null ? `₹${(t.amount / 100).toLocaleString("en-IN")}` : " - "
                 return (
                   <div key={`${t.kind}-${t.id}`} className="bg-card border border-border rounded-xl px-4 py-3 flex items-center gap-4">
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-sans font-medium text-ink truncate">{t.userName}</p>
-                      <p className="text-[11px] font-sans text-ink/40 truncate">{t.label ?? "—"}</p>
+                      <p className="text-[11px] font-sans text-ink/40 truncate">{t.label ?? " - "}</p>
                     </div>
                     <div className="text-right flex-shrink-0">
                       <p className="text-sm font-sans font-semibold text-ink">{amountRs}</p>
@@ -152,7 +152,7 @@ export default async function AdminDashboard() {
           )}
         </div>
 
-        {/* Right — Upcoming Bookings */}
+        {/* Right - Upcoming Bookings */}
         <div>
           <div className="flex items-center justify-between mb-3">
             <h2 className="font-sans text-xs font-semibold text-ink/40 uppercase tracking-widest">
@@ -179,7 +179,7 @@ export default async function AdminDashboard() {
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-sans font-medium text-ink truncate">{b.userName}</p>
-                      <p className="text-[11px] font-sans text-ink/40 truncate">{b.serviceTitle ?? "—"}</p>
+                      <p className="text-[11px] font-sans text-ink/40 truncate">{b.serviceTitle ?? " - "}</p>
                     </div>
                     <span className={`text-[10px] font-sans font-semibold px-2 py-0.5 rounded-full capitalize flex-shrink-0 ${STATUS_COLORS[b.status] ?? "bg-ink/10 text-ink/40"}`}>
                       {b.status}

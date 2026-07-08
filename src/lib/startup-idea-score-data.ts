@@ -40,7 +40,7 @@ export const IDEA_QUESTIONS: Question[] = [
   // ─── Segment 0: Problem Clarity ────────────────────────────────────────────
   {
     id: 1,
-    text: "can you write the exact problem you're solving in one sentence — without jargon?",
+    text: "can you write the exact problem you're solving in one sentence - without jargon?",
     pillarIndex: 0,
     options: [
       { label: "not yet",             sublabel: "still working on articulating it clearly",              points: 0 },
@@ -64,7 +64,7 @@ export const IDEA_QUESTIONS: Question[] = [
     ],
     recommendationByOption: [
       "Infrequent problems are very hard to build habits around. Ask: what's the version of this problem that's annoying every single week? That's your starting point.",
-      "Weekly pain is workable, but daily friction is the sweet spot. Find the trigger moment — when exactly does the problem hit? That's where your product hooks.",
+      "Weekly pain is workable, but daily friction is the sweet spot. Find the trigger moment - when exactly does the problem hit? That's where your product hooks.",
       null,
     ],
   },
@@ -78,8 +78,8 @@ export const IDEA_QUESTIONS: Question[] = [
       { label: "paying for bad solutions", sublabel: "spending money on something that barely works",        points: 2 },
     ],
     recommendationByOption: [
-      "If people ignore the problem, that's a signal it's not painful enough. Find the version where they actively try to solve it — that's the real problem.",
-      "Manual workarounds are gold — they prove the pain is real. List every workaround your users have built. Each one is a feature idea and a proof point.",
+      "If people ignore the problem, that's a signal it's not painful enough. Find the version where they actively try to solve it - that's the real problem.",
+      "Manual workarounds are gold - they prove the pain is real. List every workaround your users have built. Each one is a feature idea and a proof point.",
       null,
     ],
   },
@@ -93,7 +93,7 @@ export const IDEA_QUESTIONS: Question[] = [
       { label: "significant and measurable", sublabel: "quantifiable loss of money, time, or opportunity",   points: 2 },
     ],
     recommendationByOption: [
-      "If the cost is trivial, users won't pay to fix it. Reframe the problem around the consequence, not the symptom — what does it lead to if unsolved?",
+      "If the cost is trivial, users won't pay to fix it. Reframe the problem around the consequence, not the symptom - what does it lead to if unsolved?",
       "Can you quantify the cost? '3 hours a week × 50 weeks = 150 hours' is more compelling than 'takes too long.' Make the cost concrete.",
       null,
     ],
@@ -109,7 +109,7 @@ export const IDEA_QUESTIONS: Question[] = [
     ],
     recommendationByOption: [
       "If the market is already solving the problem, your window is closing. Either move faster or find the version of the problem that isn't being solved.",
-      "Static pain is real but less urgent. Look for the trigger that makes it suddenly worse — legislation, new tech, population shift. A tailwind makes your timing argument far stronger.",
+      "Static pain is real but less urgent. Look for the trigger that makes it suddenly worse - legislation, new tech, population shift. A tailwind makes your timing argument far stronger.",
       null,
     ],
   },
@@ -132,7 +132,7 @@ export const IDEA_QUESTIONS: Question[] = [
   // ─── Segment 1: Founder-Market Fit ─────────────────────────────────────────
   {
     id: 7,
-    text: "why are you the right person to build this — what makes your background relevant?",
+    text: "why are you the right person to build this - what makes your background relevant?",
     pillarIndex: 1,
     options: [
       { label: "no specific reason",     sublabel: "i just think it's a good idea",                         points: 0 },
@@ -155,14 +155,14 @@ export const IDEA_QUESTIONS: Question[] = [
       { label: "deep expertise",   sublabel: "years of hands-on experience, know where the bodies are", points: 2 },
     ],
     recommendationByOption: [
-      "Surface-level knowledge leads to solving the wrong version of the problem. Do 60 days of immersion: shadow professionals, take a job, consult — before building.",
+      "Surface-level knowledge leads to solving the wrong version of the problem. Do 60 days of immersion: shadow professionals, take a job, consult - before building.",
       "Working knowledge is a start. Find one 'industry insider' advisor who can stress-test every assumption you have. What you don't know is what will kill you.",
       null,
     ],
   },
   {
     id: 9,
-    text: "do you have direct, existing access to your first 10 potential users — people you could call today?",
+    text: "do you have direct, existing access to your first 10 potential users - people you could call today?",
     pillarIndex: 1,
     options: [
       { label: "no",                       sublabel: "i don't know how to reach them yet",              points: 0 },
@@ -192,7 +192,7 @@ export const IDEA_QUESTIONS: Question[] = [
   },
   {
     id: 11,
-    text: "what is the honest reason you want to build this — mission, problem obsession, or business opportunity?",
+    text: "what is the honest reason you want to build this - mission, problem obsession, or business opportunity?",
     pillarIndex: 1,
     options: [
       { label: "mainly the business case",     sublabel: "i see a market gap, not a passion",             points: 0 },
@@ -207,7 +207,7 @@ export const IDEA_QUESTIONS: Question[] = [
   },
   {
     id: 12,
-    text: "do you have any structural unfair advantages — network, knowledge, trust, or access?",
+    text: "do you have any structural unfair advantages - network, knowledge, trust, or access?",
     pillarIndex: 1,
     options: [
       { label: "none that i can identify",  sublabel: "starting on a level playing field",                   points: 0 },
@@ -215,7 +215,7 @@ export const IDEA_QUESTIONS: Question[] = [
       { label: "multiple stacked",          sublabel: "two or more advantages that compound each other",     points: 2 },
     ],
     recommendationByOption: [
-      "No unfair advantage means you're competing on speed and luck alone. List 10 things you know, have, or can do that took years to build. One of those is probably your advantage — look harder.",
+      "No unfair advantage means you're competing on speed and luck alone. List 10 things you know, have, or can do that took years to build. One of those is probably your advantage - look harder.",
       "One advantage is enough to start. But identify how to build a second: your first advantage gets you in the room; the second makes you win the room.",
       null,
     ],
@@ -224,7 +224,7 @@ export const IDEA_QUESTIONS: Question[] = [
   // ─── Segment 2: Demand Signals ──────────────────────────────────────────────
   {
     id: 13,
-    text: "are people already spending money — or significant time — on partial solutions to this problem?",
+    text: "are people already spending money - or significant time - on partial solutions to this problem?",
     pillarIndex: 2,
     options: [
       { label: "no, they're not spending",     sublabel: "people tolerate the problem without paying",            points: 0 },
@@ -232,7 +232,7 @@ export const IDEA_QUESTIONS: Question[] = [
       { label: "yes, paying for bad options",  sublabel: "money is flowing to imperfect solutions already",      points: 2 },
     ],
     recommendationByOption: [
-      "No spending means no validated market yet. Find the single thing in this space people do pay for — even tangentially. That's where willingness to pay exists.",
+      "No spending means no validated market yet. Find the single thing in this space people do pay for - even tangentially. That's where willingness to pay exists.",
       "Workarounds prove pain but not willingness to pay. Your job is to convert their time cost into a money argument: 'You're spending 5 hours a week; what's your time worth?'",
       null,
     ],
@@ -243,12 +243,12 @@ export const IDEA_QUESTIONS: Question[] = [
     pillarIndex: 2,
     options: [
       { label: "polite but blank",      sublabel: "they nod but don't lean in",                          points: 0 },
-      { label: "recognition",           sublabel: "'yes, that is annoying' — they get it",               points: 1 },
-      { label: "visceral reaction",     sublabel: "'oh god yes, i hate that' — they feel it physically", points: 2 },
+      { label: "recognition",           sublabel: "'yes, that is annoying' - they get it",               points: 1 },
+      { label: "visceral reaction",     sublabel: "'oh god yes, i hate that' - they feel it physically", points: 2 },
     ],
     recommendationByOption: [
       "If strangers aren't engaged, the problem isn't resonant enough. Either your description is off, or the problem isn't as universal as you think. Reframe and test again with 10 new people.",
-      "Recognition is a good signal. Now find the version of the story that gets the visceral reaction — there's usually a more specific, more painful version hiding inside the general one.",
+      "Recognition is a good signal. Now find the version of the story that gets the visceral reaction - there's usually a more specific, more painful version hiding inside the general one.",
       null,
     ],
   },
@@ -277,8 +277,8 @@ export const IDEA_QUESTIONS: Question[] = [
       { label: "very easy",    sublabel: "found 5 people in under a day",                        points: 2 },
     ],
     recommendationByOption: [
-      "Struggling to find users is itself a signal — if people are hard to find, they're hard to reach as customers too. Your distribution problem starts here.",
-      "Took effort is normal. Now map where you found them. That's your first distribution channel — go deeper on the one that worked.",
+      "Struggling to find users is itself a signal - if people are hard to find, they're hard to reach as customers too. Your distribution problem starts here.",
+      "Took effort is normal. Now map where you found them. That's your first distribution channel - go deeper on the one that worked.",
       null,
     ],
   },
@@ -301,12 +301,12 @@ export const IDEA_QUESTIONS: Question[] = [
   // ─── Segment 3: Customer Understanding ─────────────────────────────────────
   {
     id: 18,
-    text: "can you describe your first target customer in precise detail — role, daily routine, goal, and frustration?",
+    text: "can you describe your first target customer in precise detail - role, daily routine, goal, and frustration?",
     pillarIndex: 3,
     options: [
       { label: "broad description",   sublabel: "'small business owners' or 'busy professionals'",        points: 0 },
       { label: "decent specificity",  sublabel: "i know the job title and some pain points",              points: 1 },
-      { label: "very specific",       sublabel: "i can describe a real person — what they do each morning, what they hate, what they want", points: 2 },
+      { label: "very specific",       sublabel: "i can describe a real person - what they do each morning, what they hate, what they want", points: 2 },
     ],
     recommendationByOption: [
       "'Small business owners' is not a customer. Pick one: a 35-year-old solo CA in Pune managing 40 SME clients, hates following up on GST documents. Specificity is what makes marketing work.",
@@ -325,13 +325,13 @@ export const IDEA_QUESTIONS: Question[] = [
     ],
     recommendationByOption: [
       "Without knowing the trigger, you can't write copy, run ads, or design onboarding. Ask 5 users: 'Tell me about the last time you felt frustrated by this. What were you doing right before?' The trigger is in the answer.",
-      "A theory is good — test it. Ask 5 users to walk you through what happened right before they searched for a solution. If your theory is right 3 out of 5 times, it's confirmed.",
+      "A theory is good - test it. Ask 5 users to walk you through what happened right before they searched for a solution. If your theory is right 3 out of 5 times, it's confirmed.",
       null,
     ],
   },
   {
     id: 20,
-    text: "what have your target users already tried that didn't work — and why exactly did it fail them?",
+    text: "what have your target users already tried that didn't work - and why exactly did it fail them?",
     pillarIndex: 3,
     options: [
       { label: "haven't asked",          sublabel: "don't know what they've tried before",                   points: 0 },
@@ -361,7 +361,7 @@ export const IDEA_QUESTIONS: Question[] = [
   },
   {
     id: 22,
-    text: "do you know where your target customers spend time online — communities, newsletters, influencers they follow?",
+    text: "do you know where your target customers spend time online - communities, newsletters, influencers they follow?",
     pillarIndex: 3,
     options: [
       { label: "no idea",         sublabel: "haven't mapped their online behaviour",                      points: 0 },
@@ -370,7 +370,7 @@ export const IDEA_QUESTIONS: Question[] = [
     ],
     recommendationByOption: [
       "Not knowing where users live online means you can't reach them without paid ads. Find 3 people in your target segment and ask: 'What do you read every morning? Who do you follow in this space?'",
-      "General platforms aren't enough. LinkedIn is 800M people — that's not a targeting strategy. Find the specific sub-communities: niche newsletters, Slack groups, local WhatsApp groups.",
+      "General platforms aren't enough. LinkedIn is 800M people - that's not a targeting strategy. Find the specific sub-communities: niche newsletters, Slack groups, local WhatsApp groups.",
       null,
     ],
   },
@@ -384,7 +384,7 @@ export const IDEA_QUESTIONS: Question[] = [
       { label: "20 or more",    sublabel: "large enough that patterns are emerging",    points: 2 },
     ],
     recommendationByOption: [
-      "Friends give you comfort, not insight. Their politeness biases every answer. Do 10 cold discovery calls this week — the discomfort of cold outreach is the point.",
+      "Friends give you comfort, not insight. Their politeness biases every answer. Do 10 cold discovery calls this week - the discomfort of cold outreach is the point.",
       "5–15 is progress but not enough for patterns. You need 20+ before you can trust a theme. Who said something that surprised you? Go find 10 more people like them.",
       null,
     ],
@@ -393,7 +393,7 @@ export const IDEA_QUESTIONS: Question[] = [
   // ─── Segment 4: Solution Clarity ────────────────────────────────────────────
   {
     id: 24,
-    text: "can you explain your solution in one sentence — without using 'platform,' 'ecosystem,' or 'AI-powered'?",
+    text: "can you explain your solution in one sentence - without using 'platform,' 'ecosystem,' or 'AI-powered'?",
     pillarIndex: 4,
     options: [
       { label: "not yet",         sublabel: "still figuring out exactly what i'm building",               points: 0 },
@@ -408,7 +408,7 @@ export const IDEA_QUESTIONS: Question[] = [
   },
   {
     id: 25,
-    text: "what is the smallest version of your solution that would be genuinely useful — not impressive, just useful?",
+    text: "what is the smallest version of your solution that would be genuinely useful - not impressive, just useful?",
     pillarIndex: 4,
     options: [
       { label: "not sure yet",         sublabel: "haven't mapped minimum scope",                          points: 0 },
@@ -432,13 +432,13 @@ export const IDEA_QUESTIONS: Question[] = [
     ],
     recommendationByOption: [
       "Without an aha moment, your product leaks users. Map it now: what's the one thing a new user needs to do or see to understand the value? Design the entire onboarding around reaching that moment.",
-      "Test your hypothesis by watching 5 new users — don't explain anything. See if they hit the moment you predicted. If not, redesign. The aha moment is the most important part of your product.",
+      "Test your hypothesis by watching 5 new users - don't explain anything. See if they hit the moment you predicted. If not, redesign. The aha moment is the most important part of your product.",
       null,
     ],
   },
   {
     id: 27,
-    text: "what are you explicitly NOT building — and can you hold that boundary under pressure?",
+    text: "what are you explicitly NOT building - and can you hold that boundary under pressure?",
     pillarIndex: 4,
     options: [
       { label: "haven't decided",        sublabel: "open to building whatever users want",                 points: 0 },
@@ -447,7 +447,7 @@ export const IDEA_QUESTIONS: Question[] = [
     ],
     recommendationByOption: [
       "No boundaries mean feature creep by default. Write a 'not now' list: things users will ask for that you will say no to for the next 12 months. Every no protects your yes.",
-      "Loose guardrails get bulldozed by the first enthusiastic user. Write the reason for each exclusion — 'not now because X' is much easier to defend than 'we just decided not to.'",
+      "Loose guardrails get bulldozed by the first enthusiastic user. Write the reason for each exclusion - 'not now because X' is much easier to defend than 'we just decided not to.'",
       null,
     ],
   },
@@ -462,7 +462,7 @@ export const IDEA_QUESTIONS: Question[] = [
     ],
     recommendationByOption: [
       "If you need everything to be in place before starting, you'll never start. Identify the single biggest gap. Is there a version of the MVP that sidesteps that gap entirely?",
-      "Mostly-buildable is fine. Identify the one thing you can't do — is it a deal-breaker for the first version, or just a nice-to-have? Cut it from v1 and ship what you can.",
+      "Mostly-buildable is fine. Identify the one thing you can't do - is it a deal-breaker for the first version, or just a nice-to-have? Cut it from v1 and ship what you can.",
       null,
     ],
   },
@@ -470,7 +470,7 @@ export const IDEA_QUESTIONS: Question[] = [
   // ─── Segment 5: Business Basics ─────────────────────────────────────────────
   {
     id: 29,
-    text: "can you describe a realistic way this makes money in the first year — not a future plan, but now?",
+    text: "can you describe a realistic way this makes money in the first year - not a future plan, but now?",
     pillarIndex: 5,
     options: [
       { label: "not sure yet",        sublabel: "will figure out monetisation later",                         points: 0 },
@@ -478,14 +478,14 @@ export const IDEA_QUESTIONS: Question[] = [
       { label: "clear and near-term", sublabel: "know exactly how i'd charge and who'd pay, starting with first users", points: 2 },
     ],
     recommendationByOption: [
-      "'We'll monetise later' is not a plan — it's a delay of a very hard problem. Write three ways you could charge for this today. Even if they're not scalable, they force you to think about value exchange.",
+      "'We'll monetise later' is not a plan - it's a delay of a very hard problem. Write three ways you could charge for this today. Even if they're not scalable, they force you to think about value exchange.",
       "An untested monetisation idea is an assumption. The only test that counts is someone paying. What's the smallest thing you could charge for right now?",
       null,
     ],
   },
   {
     id: 30,
-    text: "have you tested whether someone would pay for this — even in rough, unfinished form?",
+    text: "have you tested whether someone would pay for this - even in rough, unfinished form?",
     pillarIndex: 5,
     options: [
       { label: "no",               sublabel: "haven't asked anyone to pay",               points: 0 },
@@ -494,7 +494,7 @@ export const IDEA_QUESTIONS: Question[] = [
     ],
     recommendationByOption: [
       "An untested willingness to pay is the single most dangerous assumption in early startups. Ask 5 users: 'Would you pay ₹X for this right now?' If yes, collect the money. If not, find out why.",
-      "Verbal yes is worth nothing — it's polite, not committed. Ask the person who said yes to pay ₹500 upfront for early access. That conversation teaches you more than 50 surveys.",
+      "Verbal yes is worth nothing - it's polite, not committed. Ask the person who said yes to pay ₹500 upfront for early access. That conversation teaches you more than 50 surveys.",
       null,
     ],
   },
@@ -508,7 +508,7 @@ export const IDEA_QUESTIONS: Question[] = [
       { label: "grounded estimate", sublabel: "anchored in what similar tools charge or what users have indicated", points: 2 },
     ],
     recommendationByOption: [
-      "Not knowing annual value per customer means you can't plan anything — marketing spend, team size, or growth targets. Research what similar tools charge. That's your starting anchor.",
+      "Not knowing annual value per customer means you can't plan anything - marketing spend, team size, or growth targets. Research what similar tools charge. That's your starting anchor.",
       "Intuition-based estimates are usually off by 3–5x. Research 3 comparable products, look at their pricing, and triangulate. Your estimate should be defensible in a 1-minute explanation.",
       null,
     ],
@@ -523,14 +523,14 @@ export const IDEA_QUESTIONS: Question[] = [
       { label: "yes, have a clear path",     sublabel: "know exactly who my first customer is and how to reach them", points: 2 },
     ],
     recommendationByOption: [
-      "If you need ads to get your first customer, you don't have a product yet — you have a hypothesis. Your first 10 customers should come from direct outreach, not paid channels. Find them manually.",
+      "If you need ads to get your first customer, you don't have a product yet - you have a hypothesis. Your first 10 customers should come from direct outreach, not paid channels. Find them manually.",
       "Warm effort is fine. Write down the exact names of the first 5 people you'd approach and what you'd say to each. The act of writing names forces clarity that 'I'll reach out to my network' never does.",
       null,
     ],
   },
   {
     id: 33,
-    text: "is there a natural expansion path — more usage within the same customer, or adjacent use cases?",
+    text: "is there a natural expansion path - more usage within the same customer, or adjacent use cases?",
     pillarIndex: 5,
     options: [
       { label: "not obvious",         sublabel: "it feels like a one-time or one-size product",            points: 0 },
@@ -586,13 +586,13 @@ export const IDEA_QUESTIONS: Question[] = [
     ],
     recommendationByOption: [
       "Building on untested assumptions is the most expensive mistake in startups. Write your top 3 assumptions. Rank them by 'if this is wrong, everything falls apart.' Test the top one first, before anything else.",
-      "Partial testing is progress. Identify the one assumption you haven't tested that would kill the idea if wrong. Build the cheapest possible test for it — no code needed.",
+      "Partial testing is progress. Identify the one assumption you haven't tested that would kill the idea if wrong. Build the cheapest possible test for it - no code needed.",
       null,
     ],
   },
   {
     id: 37,
-    text: "do you have direct access to your first 10 users right now — people you could share a working version with today?",
+    text: "do you have direct access to your first 10 users right now - people you could share a working version with today?",
     pillarIndex: 6,
     options: [
       { label: "no",                    sublabel: "haven't built a user pipeline yet",                   points: 0 },
@@ -607,7 +607,7 @@ export const IDEA_QUESTIONS: Question[] = [
   },
   {
     id: 38,
-    text: "does your current life situation — time, money, other commitments — allow you to seriously pursue this?",
+    text: "does your current life situation - time, money, other commitments - allow you to seriously pursue this?",
     pillarIndex: 6,
     options: [
       { label: "no, significant constraints",  sublabel: "full-time job, family pressure, or financial stress blocking this",  points: 0 },
@@ -631,7 +631,7 @@ export const IDEA_QUESTIONS: Question[] = [
     ],
     recommendationByOption: [
       "Building without a specific person to build for is how you end up building for nobody. Right now, write a name. If no name comes, that's your most important problem.",
-      "A type is not a person. A type doesn't give you feedback, doesn't pay you, and doesn't refer others. Convert the type to a name — message one person in that category today.",
+      "A type is not a person. A type doesn't give you feedback, doesn't pay you, and doesn't refer others. Convert the type to a name - message one person in that category today.",
       null,
     ],
   },
@@ -669,7 +669,7 @@ export const IDEA_QUESTIONS: Question[] = [
   },
   {
     id: 42,
-    text: "have you talked to anyone who tried to build something similar and failed — and do you know why they failed?",
+    text: "have you talked to anyone who tried to build something similar and failed - and do you know why they failed?",
     pillarIndex: 7,
     options: [
       { label: "no",            sublabel: "haven't researched failed attempts",                           points: 0 },
@@ -678,7 +678,7 @@ export const IDEA_QUESTIONS: Question[] = [
     ],
     recommendationByOption: [
       "Not learning from failed attempts is a costly mistake. Search for 'startup graveyard' posts in your space. Find founders on LinkedIn who tried this. Buy them a coffee. The reasons they failed are the most valuable research you'll do.",
-      "Knowing attempts failed but not why is incomplete. The 'why' is everything — did they run out of money, misread the customer, build the wrong thing? Find out. Each failure has a different lesson.",
+      "Knowing attempts failed but not why is incomplete. The 'why' is everything - did they run out of money, misread the customer, build the wrong thing? Find out. Each failure has a different lesson.",
       null,
     ],
   },
@@ -708,7 +708,7 @@ export const IDEA_QUESTIONS: Question[] = [
     ],
     recommendationByOption: [
       "Waiting for perfect information in early-stage startups means never deciding. Most decisions can be reversed in 2 weeks. Set a rule: if a decision can be undone in 30 days, make it in 48 hours.",
-      "Keeping options open is comfortable but costs time. Optionality is expensive in early startups — every 'maybe' is a distraction. Commit, and update only when you have actual evidence, not when you feel uncertain.",
+      "Keeping options open is comfortable but costs time. Optionality is expensive in early startups - every 'maybe' is a distraction. Commit, and update only when you have actual evidence, not when you feel uncertain.",
       null,
     ],
   },
@@ -716,7 +716,7 @@ export const IDEA_QUESTIONS: Question[] = [
   // ─── Segment 8: Risk Awareness ───────────────────────────────────────────────
   {
     id: 45,
-    text: "what is the single biggest reason this idea could fail — and is it something you can control?",
+    text: "what is the single biggest reason this idea could fail - and is it something you can control?",
     pillarIndex: 8,
     options: [
       { label: "not sure what the biggest risk is",  sublabel: "haven't done a risk assessment",                    points: 0 },
@@ -754,7 +754,7 @@ export const IDEA_QUESTIONS: Question[] = [
       { label: "yes, have a clear test",        sublabel: "know how to test the core hypothesis in days, not months", points: 2 },
     ],
     recommendationByOption: [
-      "Almost nothing requires building a full product to test. A landing page with a waitlist, a manual-behind-the-scenes demo, a paid consultation — each one tests the hypothesis faster than code. What's the cheapest way to find out if you're right?",
+      "Almost nothing requires building a full product to test. A landing page with a waitlist, a manual-behind-the-scenes demo, a paid consultation - each one tests the hypothesis faster than code. What's the cheapest way to find out if you're right?",
       "If you're thinking about a lighter test, stop thinking and design it. Write: what is the hypothesis? What evidence would prove it right? How do I get that evidence without writing code?",
       null,
     ],

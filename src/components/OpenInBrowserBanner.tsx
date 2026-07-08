@@ -35,7 +35,7 @@ export function OpenInBrowserBanner() {
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-sm text-white px-4 py-3 text-sm flex items-center justify-between gap-3">
       <p className="font-medium">
-        For the best experience —{' '}
+        For the best experience - {' '}
         <span className="text-gray-300">{instruction}</span>
       </p>
       <button

@@ -22,6 +22,27 @@
       "when": 1782212348306,
       "tag": "0002_brown_shotgun",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1783485713111,
+      "tag": "0003_startup_mistakes",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1783487107424,
+      "tag": "0004_startup_mistakes_nullable_user",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1783487667139,
+      "tag": "0005_fixed_colossus",
+      "breakpoints": true
     }
   ]
 }

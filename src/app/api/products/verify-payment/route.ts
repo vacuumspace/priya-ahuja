@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Order mismatch" }, { status: 400 })
     }
 
-    // Idempotency: already confirmed — return the existing token
+    // Idempotency: already confirmed - return the existing token
     if (purchase.downloadToken && purchase.razorpayPaymentId) {
       return NextResponse.json({ success: true, accessToken: purchase.downloadToken })
     }

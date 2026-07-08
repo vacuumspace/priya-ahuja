@@ -34,12 +34,12 @@ const CONFIG: ListConfig = {
 }
 
 export const metadata: Metadata = {
-  title: "Incubator & Accelerator List India — Contacts",
+  title: "Incubator & Accelerator List India - Contacts",
   description: "233 Indian incubators and accelerators running programs for early-stage startups, with 5,621 mentor and program manager contacts.",
   keywords: ["startup incubators India", "startup accelerators India", "incubator contact list India", "accelerator programs India"],
   alternates: { canonical: "https://priyaahuja.in/fundraise/investor-list/incubators" },
   openGraph: {
-    title: "Incubator & Accelerator List India — Contacts | Priya Ahuja",
+    title: "Incubator & Accelerator List India - Contacts | Priya Ahuja",
     description: "233 Indian incubators and accelerators running programs for early-stage startups, with 5,621 mentor and program manager contacts.",
     url: "https://priyaahuja.in/fundraise/investor-list/incubators",
   },

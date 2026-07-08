@@ -112,8 +112,7 @@ export async function GET() {
 
   const spendMap = new Map(spendByUser.map((r) => [r.userId, Number(r.spent)]))
 
-  // real wall-clock time actually spent chatting, not the package minutes allotted —
-  // a session paused and abandoned early only counts time up to the pause, not its full allotment
+  // real wall-clock time actually spent chatting, not the package minutes allotted - // a session paused and abandoned early only counts time up to the pause, not its full allotment
   const allSessions = await db
     .select({
       userId: priyaGptSessions.userId,

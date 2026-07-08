@@ -6,7 +6,7 @@ import { eq } from "drizzle-orm"
 import { spendMinutes, getMinutesBalance, InsufficientTimeError } from "@/lib/priya-gpt-time"
 import { getTimePackages } from "@/lib/priya-gpt-packages"
 
-// there's exactly one continuous chat thread per user — no separate "sessions" to start or
+// there's exactly one continuous chat thread per user - no separate "sessions" to start or
 // end. expiresAt/pausedAt just track the metered time window on that one thread.
 function isActive(row: { expiresAt: Date; pausedAt: Date | null }) {
   return Boolean(row.pausedAt) || row.expiresAt.getTime() > Date.now()

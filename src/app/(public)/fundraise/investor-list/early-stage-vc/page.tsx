@@ -34,12 +34,12 @@ const BASE_CONFIG: Omit<ListConfig, "indianCount" | "globalCount"> = {
 }
 
 export const metadata: Metadata = {
-  title: "Early Stage VC List — 1000+ Firms & Team Contacts",
+  title: "Early Stage VC List - 1000+ Firms & Team Contacts",
   description: "1,000 early stage VC firms globally, including Indian VCs and international funds writing pre-seed, seed, and Series A cheques. Includes 26,850 individual partner and analyst contacts.",
   keywords: ["early stage VC list India", "VC investor contacts", "seed stage VC firms India", "Series A investors India", "venture capital contact list"],
   alternates: { canonical: "https://priyaahuja.in/fundraise/investor-list/early-stage-vc" },
   openGraph: {
-    title: "Early Stage VC List — 1000+ Firms & Team Contacts | Priya Ahuja",
+    title: "Early Stage VC List - 1000+ Firms & Team Contacts | Priya Ahuja",
     description: "1,000 early stage VC firms globally, including Indian VCs writing pre-seed, seed, and Series A cheques, plus 26,850 individual partner contacts.",
     url: "https://priyaahuja.in/fundraise/investor-list/early-stage-vc",
   },

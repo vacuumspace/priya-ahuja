@@ -1,0 +1,1 @@
+ALTER TABLE "startup_mistakes" ALTER COLUMN "user_id" DROP NOT NULL;

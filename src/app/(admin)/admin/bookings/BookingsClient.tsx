@@ -197,7 +197,7 @@ function BookingRow({
           )}
           <p className="text-[11px] font-sans text-ink/40">{booking.userEmail}</p>
         </td>
-        <td className="py-3 px-4 text-xs font-sans text-ink/70">{booking.serviceTitle ?? "—"}</td>
+        <td className="py-3 px-4 text-xs font-sans text-ink/70">{booking.serviceTitle ?? " - "}</td>
         <td className="py-3 px-4">
           <select
             value={status}
@@ -255,7 +255,7 @@ function BookingRow({
               )}
             </div>
           ) : (
-            <span className="text-[11px] font-sans text-ink/30">—</span>
+            <span className="text-[11px] font-sans text-ink/30"> - </span>
           )}
         </td>
         <td className="py-3 px-4">
@@ -443,7 +443,7 @@ export default function BookingsClient({ initialBookings }: { initialBookings: B
     setBookings((prev) => prev.map((b) => (b.id === id ? { ...b, status: "cancelled" } : b)))
   }
 
-  // Sorted months newest first — by slot date
+  // Sorted months newest first - by slot date
   const months = Array.from(new Set(bookings.map(b => getMonthKey(b.slotDate)))).sort((a, b) => b.localeCompare(a))
   const [monthIdx, setMonthIdx] = useState(0)
 

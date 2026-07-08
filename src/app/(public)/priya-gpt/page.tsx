@@ -4,7 +4,7 @@ import PriyaGptClient from "./PriyaGptClient"
 
 export const metadata: Metadata = {
   title: "PriyaGPT",
-  description: "Brainstorm your startup idea with PriyaGPT — an AI chat built to think through positioning, GTM, and pricing with you.",
+  description: "Brainstorm your startup idea with PriyaGPT - an AI chat built to think through positioning, GTM, and pricing with you.",
 }
 
 export default async function PriyaGptPage() {

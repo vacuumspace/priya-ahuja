@@ -306,6 +306,14 @@ export default function HomePage() {
                 { label: "chat with priyagpt", href: "/priya-gpt", star: true },
               ],
             },
+            {
+              heading: "wellbeing",
+              href: "/wellbeing",
+              links: [
+                { label: "blog", href: "/wellbeing/blog" },
+                { label: "scorecard", href: "/wellbeing/tools/wellbeing-score" },
+              ],
+            },
           ].map((col) => (
             <div key={col.heading}>
               <Link href={col.href} className="font-sans text-[13px] font-semibold text-ink/50 hover:text-ink/80 transition-colors uppercase tracking-wide mb-2.5 block">

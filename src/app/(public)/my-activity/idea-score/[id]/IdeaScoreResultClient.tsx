@@ -92,7 +92,7 @@ export default function IdeaScoreResultClient({ totalScore, pillarScores, answer
         <div className="flex items-center gap-3 bg-peach/20 border border-peach-dark/20 rounded-xl px-5 py-4">
           <CheckCircle size={16} className="text-peach-dark flex-shrink-0" />
           <p className="font-sans text-sm text-ink/70">
-            exceptional foundation — you&apos;ve done the groundwork most founders skip.
+            exceptional foundation - you&apos;ve done the groundwork most founders skip.
           </p>
         </div>
       )}
@@ -102,7 +102,7 @@ export default function IdeaScoreResultClient({ totalScore, pillarScores, answer
           want to go deeper?
         </p>
         <p className="font-sans text-sm text-ink/60 leading-relaxed mb-5">
-          book a startup idea brainstorming session with priya — turn your score into a concrete 30-day plan.
+          book a startup idea brainstorming session with priya - turn your score into a concrete 30-day plan.
         </p>
         <Link
           href="/connect"

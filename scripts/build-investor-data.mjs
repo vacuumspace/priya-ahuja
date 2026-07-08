@@ -140,5 +140,5 @@ const files = {
 for (const [name, data] of Object.entries(files)) {
   const outPath = path.join(jsonDir, name)
   fs.writeFileSync(outPath, JSON.stringify(data))
-  console.log(`✓ ${name} — ${data.length} rows`)
+  console.log(`✓ ${name} - ${data.length} rows`)
 }

@@ -19,7 +19,7 @@ const TEMPLATES: Template[] = [
     fields: [
       { key: "email_confirmation_subject", label: "Subject line", placeholder: "Booking Confirmed: Your session is locked in" },
       { key: "email_confirmation_intro", label: "Intro text", placeholder: "Your session is booked and confirmed!", multiline: false },
-      { key: "email_confirmation_footer", label: "Footer / signature", multiline: true, placeholder: "Questions? Reply to this email or reach out on LinkedIn.\n\n— Priya Ahuja" },
+      { key: "email_confirmation_footer", label: "Footer / signature", multiline: true, placeholder: "Questions? Reply to this email or reach out on LinkedIn.\n\n - Priya Ahuja" },
     ],
   },
   {
@@ -40,7 +40,7 @@ const TEMPLATES: Template[] = [
     fields: [
       { key: "email_cancellation_subject", label: "Subject line", placeholder: "Booking Cancelled" },
       { key: "email_cancellation_body", label: "Body text", placeholder: "Your booking has been cancelled. We hope to see you again soon.", multiline: false },
-      { key: "email_cancellation_footer", label: "Footer / signature", multiline: true, placeholder: "— Priya Ahuja" },
+      { key: "email_cancellation_footer", label: "Footer / signature", multiline: true, placeholder: " - Priya Ahuja" },
     ],
   },
   {
@@ -51,7 +51,7 @@ const TEMPLATES: Template[] = [
     fields: [
       { key: "email_download_subject", label: "Subject line", placeholder: "Your download is ready" },
       { key: "email_download_intro", label: "Intro text", placeholder: "Thank you for your purchase! Your download is ready." },
-      { key: "email_download_footer", label: "Footer / signature", multiline: true, placeholder: "This link expires in 48 hours.\n\n— Priya Ahuja" },
+      { key: "email_download_footer", label: "Footer / signature", multiline: true, placeholder: "This link expires in 48 hours.\n\n - Priya Ahuja" },
     ],
   },
 ]

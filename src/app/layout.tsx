@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Priya Ahuja - Startup & Fundraise Consultant",
     description:
-      "Book a 1:1 session with Priya Ahuja — startup & fundraise consultant at Groww Ventures. Trusted by 200+ founders across India.",
+      "Book a 1:1 session with Priya Ahuja - startup & fundraise consultant at Groww Ventures. Trusted by 200+ founders across India.",
     creator: "@pitchtopriya",
   },
   icons: {
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     url: process.env.NEXT_PUBLIC_APP_URL || "https://priyaahuja.in",
     title: "Priya Ahuja - Startup & Fundraise Consultant",
     description:
-      "Book a 1:1 session with Priya Ahuja — startup & fundraise consultant at Groww Ventures. Trusted by 200+ founders across India.",
+      "Book a 1:1 session with Priya Ahuja - startup & fundraise consultant at Groww Ventures. Trusted by 200+ founders across India.",
     images: [{ url: "/priyadp.jpeg", width: 1200, height: 630, alt: "Priya Ahuja - Startup & Fundraise Consultant" }],
   },
   alternates: {

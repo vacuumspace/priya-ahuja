@@ -191,7 +191,7 @@ export default function ToolsAdminClient({
 
       {/* Analytics */}
       <section>
-        <p className="text-[10px] font-sans text-ink/40 uppercase tracking-widest mb-4">Startup Score — Analytics</p>
+        <p className="text-[10px] font-sans text-ink/40 uppercase tracking-widest mb-4">Startup Score - Analytics</p>
 
         {/* Stats row */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-2xl mb-6">
@@ -211,7 +211,7 @@ export default function ToolsAdminClient({
         {/* Recent activity */}
         {analytics.recentDays.length > 0 ? (
           <div className="max-w-2xl bg-card border border-border rounded-2xl p-6">
-            <p className="font-sans text-[11px] text-ink/40 uppercase tracking-widest mb-4">submissions — last 7 days</p>
+            <p className="font-sans text-[11px] text-ink/40 uppercase tracking-widest mb-4">submissions - last 7 days</p>
             <div className="space-y-2">
               {analytics.recentDays.map((day) => {
                 const maxSubmissions = Math.max(...analytics.recentDays.map((d) => Number(d.submissions)), 1)
@@ -237,7 +237,7 @@ export default function ToolsAdminClient({
           </div>
         ) : (
           <div className="max-w-2xl bg-card border border-border rounded-2xl px-6 py-8 text-center">
-            <p className="font-sans text-sm text-ink/40">no submissions yet — share the tool to get your first data point.</p>
+            <p className="font-sans text-sm text-ink/40">no submissions yet - share the tool to get your first data point.</p>
           </div>
         )}
       </section>

@@ -2,9 +2,9 @@ import type { Metadata } from "next"
 import KYLResearchClient from "./KYLResearchClient"
 
 export const metadata: Metadata = {
-  title: "Know Your Land (KYL) — India Land Market Research | Priya Ahuja",
+  title: "Know Your Land (KYL) - India Land Market Research | Priya Ahuja",
   description:
-    "Bottom-up sizing of India's land transaction market across individual buyers, developers, brokers, and banks. Data from IGRS portals, RERA, NHB, Knight Frank, JLL, and Colliers — FY2024-25.",
+    "Bottom-up sizing of India's land transaction market across individual buyers, developers, brokers, and banks. Data from IGRS portals, RERA, NHB, Knight Frank, JLL, and Colliers - FY2024-25.",
   keywords: [
     "India land market size",
     "plot transactions India",
@@ -15,9 +15,9 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "https://priyaahuja.in/research/kyl" },
   openGraph: {
-    title: "Know Your Land (KYL) — India Land Market Research",
+    title: "Know Your Land (KYL) - India Land Market Research",
     description:
-      "Bottom-up sizing of India's land transaction market — individual buyers, developers, brokers, and banks. FY2024-25 data from IGRS, RERA, NHB, and top consultancies.",
+      "Bottom-up sizing of India's land transaction market - individual buyers, developers, brokers, and banks. FY2024-25 data from IGRS, RERA, NHB, and top consultancies.",
     url: "https://priyaahuja.in/research/kyl",
   },
 }

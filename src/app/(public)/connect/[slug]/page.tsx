@@ -40,9 +40,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       type: "website",
       url,
-      title: `${service.title} — Priya Ahuja`,
+      title: `${service.title} - Priya Ahuja`,
       description: desc,
-      images: [{ url: "/priyadp.jpeg", width: 1200, height: 630, alt: `${service.title} — Priya Ahuja` }],
+      images: [{ url: "/priyadp.jpeg", width: 1200, height: 630, alt: `${service.title} - Priya Ahuja` }],
     },
   }
 }

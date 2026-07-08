@@ -11,7 +11,7 @@ export async function GET() {
 
   const results: Record<string, { ok: boolean; detail: string }> = {}
 
-  // Test SMTP — actually send a mail to admin
+  // Test SMTP - actually send a mail to admin
   try {
     const transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
@@ -25,7 +25,7 @@ export async function GET() {
     await transporter.sendMail({
       from: `"Priya Ahuja" <${process.env.EMAIL_USER}>`,
       to: process.env.EMAIL_USER,
-      subject: "Integration test — SMTP working",
+      subject: "Integration test - SMTP working",
       html: "<p>This is a test email sent from /api/admin/test-integrations.</p>",
     })
     results.smtp = { ok: true, detail: `Test email sent to ${process.env.EMAIL_USER}` }
@@ -33,12 +33,12 @@ export async function GET() {
     results.smtp = { ok: false, detail: String(err) }
   }
 
-  // Test Google Calendar — actually create an event and check for Meet link, then delete it
+  // Test Google Calendar - actually create an event and check for Meet link, then delete it
   try {
     const tomorrow = new Date(Date.now() + 24 * 60 * 60 * 1000)
     const date = tomorrow.toISOString().slice(0, 10)
     const { eventId, meetLink } = await createCalendarEvent({
-      summary: "Integration Test — delete me",
+      summary: "Integration Test - delete me",
       date,
       startTime: "10:00",
       endTime: "10:30",
@@ -50,7 +50,7 @@ export async function GET() {
       ok: true,
       detail: meetLink
         ? `Event created + deleted. Meet link generated: ${meetLink}`
-        : "Event created + deleted BUT no Meet link returned — Google Meet may not be enabled for this Workspace account",
+        : "Event created + deleted BUT no Meet link returned - Google Meet may not be enabled for this Workspace account",
     }
   } catch (err: unknown) {
     results.googleCalendar = { ok: false, detail: String(err) }

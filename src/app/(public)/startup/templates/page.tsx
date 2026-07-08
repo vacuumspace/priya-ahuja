@@ -12,12 +12,12 @@ const products = getTemplatesByCategory("startup")
 
 export const metadata: Metadata = {
   title: "Startup Templates & Guides",
-  description: "Templates and guides for the operational side of building a startup — hiring, product, and growth resources built from real founder experience.",
+  description: "Templates and guides for the operational side of building a startup - hiring, product, and growth resources built from real founder experience.",
   keywords: ["startup templates", "startup guides India", "hiring templates startup", "growth playbook founders"],
   alternates: { canonical: "https://priyaahuja.in/startup/templates" },
   openGraph: {
     title: "Startup Templates & Guides | Priya Ahuja",
-    description: "Templates and guides for the operational side of building a startup — hiring, product, and growth.",
+    description: "Templates and guides for the operational side of building a startup - hiring, product, and growth.",
     url: "https://priyaahuja.in/startup/templates",
   },
 }
@@ -55,7 +55,7 @@ export default async function StartupTemplatesPage() {
             not fluff
           </h1>
           <p className="font-sans text-sm text-ink/60 max-w-md leading-relaxed">
-            templates and guides for the operational side of building a startup — hiring, product, and growth.
+            templates and guides for the operational side of building a startup - hiring, product, and growth.
           </p>
         </div>
 

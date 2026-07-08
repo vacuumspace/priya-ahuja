@@ -37,7 +37,7 @@ export async function GET(req: NextRequest) {
     }
 
     if (!isPaid) {
-      // Non-paying users are confined to a fixed teaser slice — filters/search
+      // Non-paying users are confined to a fixed teaser slice - filters/search
       // and paging both operate within it only, so pagination or search
       // enumeration can't be scripted to reconstruct the full paid dataset.
       const teaserLimit = FREE_PAGES * PAGE_SIZE

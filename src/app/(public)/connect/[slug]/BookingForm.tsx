@@ -350,7 +350,7 @@ function BookingFormInner({ service }: { service: Service }) {
         </p>
         <p className="font-sans text-sm text-ink/60 leading-relaxed mb-2">
           {isRescheduleMode
-            ? "your session has been moved — check your email for the updated time."
+            ? "your session has been moved - check your email for the updated time."
             : service.type === "report"
             ? "payment received. since i review your documents personally without any ai, it takes me some time to review in detail. i'll surely respond within 5–7 days. thanks :) track progress and message me through my activity."
             : "we've sent you a confirmation email. the google meet link is in your email and in my activity."}
@@ -376,7 +376,7 @@ function BookingFormInner({ service }: { service: Service }) {
     <form onSubmit={handleSubmit} className="space-y-4">
       {isRescheduleMode && (
         <div className="bg-amber-50 border border-amber-200 rounded-xl px-3 py-2 text-xs font-sans text-amber-700">
-          Pick a new time below. No payment needed — your original booking will be updated.
+          Pick a new time below. No payment needed - your original booking will be updated.
         </div>
       )}
       {isRescheduleMode && (
@@ -443,7 +443,7 @@ function BookingFormInner({ service }: { service: Service }) {
             id="message"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            placeholder={service.type === "report" ? "specific areas to focus on, key concerns…" : "brief context helps me prepare — stage, what you're stuck on…"}
+            placeholder={service.type === "report" ? "specific areas to focus on, key concerns…" : "brief context helps me prepare - stage, what you're stuck on…"}
             rows={3}
             className="bg-cream border-border text-sm resize-none"
           />

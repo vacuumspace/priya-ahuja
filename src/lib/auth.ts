@@ -32,7 +32,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       return true
     },
     async session({ session, user }) {
-      // catches an already-signed-in browser whose cookie predates a ban — signIn() only
+      // catches an already-signed-in browser whose cookie predates a ban - signIn() only
       // guards new logins, so an existing session needs its own check on every read to cut
       // access off immediately instead of waiting for the cookie to expire or a sign-out.
       if (await isEmailBanned(user.email)) {

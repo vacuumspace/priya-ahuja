@@ -11,7 +11,7 @@ const products = getTemplatesByCategory("fundraise")
 
 export const metadata: Metadata = {
   title: "Fundraise Templates & Checklists",
-  description: "Investor pitch deck templates, fundraise checklists, and guides built from real deal experience — practical tools for founders raising capital.",
+  description: "Investor pitch deck templates, fundraise checklists, and guides built from real deal experience - practical tools for founders raising capital.",
   keywords: ["fundraise templates", "pitch deck template India", "investor checklist", "fundraising guide founders"],
   alternates: { canonical: "https://priyaahuja.in/fundraise/templates" },
   openGraph: {

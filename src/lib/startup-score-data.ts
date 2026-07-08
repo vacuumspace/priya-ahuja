@@ -63,7 +63,7 @@ export const QUESTIONS: Question[] = [
     ],
     recommendationByOption: [
       "Low-frequency problems are hard to monetise. Validate whether the pain intensity is high enough to justify the purchase even if infrequent.",
-      "Weekly pain is workable. Document the exact trigger moments — that's where your activation hook lives.",
+      "Weekly pain is workable. Document the exact trigger moments - that's where your activation hook lives.",
       null,
     ],
   },
@@ -78,7 +78,7 @@ export const QUESTIONS: Question[] = [
     ],
     recommendationByOption: [
       "If the problem has no real cost, users won't pay to solve it. Reframe around a sub-problem that does have economic impact.",
-      "Quantify the cost. 'Time saved' is weak — convert it to money or risk, then use that number in your pitch.",
+      "Quantify the cost. 'Time saved' is weak - convert it to money or risk, then use that number in your pitch.",
       null,
     ],
   },
@@ -92,8 +92,8 @@ export const QUESTIONS: Question[] = [
       { label: "long-standing and unsolved",    sublabel: "people have tolerated this for a long time",  points: 2 },
     ],
     recommendationByOption: [
-      "Newly emerging problems are risky — the pain may not be real yet. Validate whether it's actually a problem or just early noise.",
-      "A partially-solved problem is a real opportunity. Map exactly where the existing solutions fall short — that's your wedge.",
+      "Newly emerging problems are risky - the pain may not be real yet. Validate whether it's actually a problem or just early noise.",
+      "A partially-solved problem is a real opportunity. Map exactly where the existing solutions fall short - that's your wedge.",
       null,
     ],
   },
@@ -114,15 +114,15 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: 6,
-    text: "can you answer 'why you?' — what gives you credibility or unique insight into this problem that an investor would find compelling?",
+    text: "can you answer 'why you?' - what gives you credibility or unique insight into this problem that an investor would find compelling?",
     pillarIndex: 0,
     options: [
       { label: "no strong reason",      sublabel: "i spotted the opportunity but have no specific edge",        points: 0 },
       { label: "adjacent credibility",  sublabel: "worked in a related area or with this customer type",       points: 1 },
-      { label: "clear founder edge",    sublabel: "lived the problem, domain expertise, or unique access — investors would nod", points: 2 },
+      { label: "clear founder edge",    sublabel: "lived the problem, domain expertise, or unique access - investors would nod", points: 2 },
     ],
     recommendationByOption: [
-      "Investors back people as much as ideas. 'Why you?' is one of the first questions in every pitch. If your answer is 'i saw a gap,' that's not enough. Find the version of your background that earns the right to build this — domain experience, a specific network, or firsthand pain.",
+      "Investors back people as much as ideas. 'Why you?' is one of the first questions in every pitch. If your answer is 'i saw a gap,' that's not enough. Find the version of your background that earns the right to build this - domain experience, a specific network, or firsthand pain.",
       "Adjacent experience is a start. Make the connection explicit in your pitch: 'Because I spent 4 years in X, I understand Y better than anyone who just researched it.' Investors want to feel the founder-market fit, not just hear about it.",
       null,
     ],
@@ -140,7 +140,7 @@ export const QUESTIONS: Question[] = [
     ],
     recommendationByOption: [
       "A sub-$100M TAM makes venture funding nearly impossible. Validate whether your category is part of a larger market.",
-      "Map adjacent markets and document your path to a $1B+ opportunity — investors think in multiples.",
+      "Map adjacent markets and document your path to a $1B+ opportunity - investors think in multiples.",
       null,
     ],
   },
@@ -155,7 +155,7 @@ export const QUESTIONS: Question[] = [
     ],
     recommendationByOption: [
       "Shrinking markets are existential for startups. Identify the tailwind or consider whether you're solving for a legacy context.",
-      "Document the growth drivers — regulation, behaviour change, technology shift. Investors need to feel the momentum.",
+      "Document the growth drivers - regulation, behaviour change, technology shift. Investors need to feel the momentum.",
       null,
     ],
   },
@@ -169,7 +169,7 @@ export const QUESTIONS: Question[] = [
       { label: "narrow, specific, reachable", sublabel: "a specific persona with known channels", points: 2 },
     ],
     recommendationByOption: [
-      "Targeting everyone means converting no one. Pick one persona, one job title, one industry — dominate that before expanding.",
+      "Targeting everyone means converting no one. Pick one persona, one job title, one industry - dominate that before expanding.",
       "Narrow your ICP further. Who feels the pain most acutely? Start there and expand outward once you have density.",
       null,
     ],
@@ -184,7 +184,7 @@ export const QUESTIONS: Question[] = [
       { label: "highly fragmented",           sublabel: "many weak players or underserved niche", points: 2 },
     ],
     recommendationByOption: [
-      "Entering a market owned by giants requires a strong wedge. Map which segment they serve poorly — that's your beachhead.",
+      "Entering a market owned by giants requires a strong wedge. Map which segment they serve poorly - that's your beachhead.",
       "In a competitive market, your differentiation must be crisp. Define the one dimension you win on and make it the whole story.",
       null,
     ],
@@ -200,7 +200,7 @@ export const QUESTIONS: Question[] = [
     ],
     recommendationByOption: [
       "If regulation is a headwind, map your compliance path before scaling. Ignoring it is a landmine.",
-      "Neutral is fine, but actively look for a macro trend you can attach to — it makes fundraising stories much stronger.",
+      "Neutral is fine, but actively look for a macro trend you can attach to - it makes fundraising stories much stronger.",
       null,
     ],
   },
@@ -247,7 +247,7 @@ export const QUESTIONS: Question[] = [
     ],
     recommendationByOption: [
       "An idea with no prototype means all assumptions are untested. Build the smallest testable version in 2 weeks.",
-      "An MVP is a good start. Now get 10 people to use it without you explaining how — see where they drop off.",
+      "An MVP is a good start. Now get 10 people to use it without you explaining how - see where they drop off.",
       null,
     ],
   },
@@ -261,7 +261,7 @@ export const QUESTIONS: Question[] = [
       { label: "fast",         sublabel: "weekly iterations are possible",   points: 2 },
     ],
     recommendationByOption: [
-      "Slow iteration is a competitive disadvantage early. Simplify the stack or scope — speed of learning beats breadth of features.",
+      "Slow iteration is a competitive disadvantage early. Simplify the stack or scope - speed of learning beats breadth of features.",
       "Moderate pace is fine, but identify the one bottleneck slowing you down. Removing it could 2x your learning speed.",
       null,
     ],
@@ -291,7 +291,7 @@ export const QUESTIONS: Question[] = [
       { label: "structured sessions",      sublabel: "usability tests or jobs-to-be-done interviews", points: 2 },
     ],
     recommendationByOption: [
-      "No user testing means you're building on assumptions. Do 5 structured sessions this week — watch them use the product, don't explain.",
+      "No user testing means you're building on assumptions. Do 5 structured sessions this week - watch them use the product, don't explain.",
       "Informal feedback is biased. Run structured sessions: give a task, say nothing, observe. The silence is the data.",
       null,
     ],
@@ -319,7 +319,7 @@ export const QUESTIONS: Question[] = [
     pillarIndex: 3,
     options: [
       { label: "no moat",          sublabel: "anyone could build this tomorrow",                      points: 0 },
-      { label: "possible moat",    sublabel: "network effects, data, or switching cost — in theory",  points: 1 },
+      { label: "possible moat",    sublabel: "network effects, data, or switching cost - in theory",  points: 1 },
       { label: "clear moat",       sublabel: "demonstrably hard for competitors to replicate",        points: 2 },
     ],
     recommendationByOption: [
@@ -339,7 +339,7 @@ export const QUESTIONS: Question[] = [
     ],
     recommendationByOption: [
       "Price and features are temporary. Define the structural advantage you'll build in the next 12 months.",
-      "One strong advantage is a start. Plan the second — layered moats compound over time.",
+      "One strong advantage is a start. Plan the second - layered moats compound over time.",
       null,
     ],
   },
@@ -353,7 +353,7 @@ export const QUESTIONS: Question[] = [
       { label: "over a year",             sublabel: "structurally difficult to replicate",  points: 2 },
     ],
     recommendationByOption: [
-      "If you can be copied in 3 months, your defensibility is zero. Build the thing that takes longer — proprietary data, network, or contracts.",
+      "If you can be copied in 3 months, your defensibility is zero. Build the thing that takes longer - proprietary data, network, or contracts.",
       "6–12 months buys time but not safety. Identify what makes you progressively harder to catch as you grow.",
       null,
     ],
@@ -368,7 +368,7 @@ export const QUESTIONS: Question[] = [
       { label: "two or more",    sublabel: "stacked proprietary advantages",             points: 2 },
     ],
     recommendationByOption: [
-      "Without any proprietary asset, you compete on execution alone — that's hard to sustain. Identify one asset you can own.",
+      "Without any proprietary asset, you compete on execution alone - that's hard to sustain. Identify one asset you can own.",
       "Build on your one advantage. If it's data, collect more. If it's a relationship, deepen it or replicate it.",
       null,
     ],
@@ -416,7 +416,7 @@ export const QUESTIONS: Question[] = [
     ],
     recommendationByOption: [
       "A solo founder without a team plan is a serious gap. Map the 3 key hires you need and start building relationships now.",
-      "Actively looking is better than not. Set a deadline — if no co-founder in 60 days, hire a fractional lead for the critical gap.",
+      "Actively looking is better than not. Set a deadline - if no co-founder in 60 days, hire a fractional lead for the critical gap.",
       null,
     ],
   },
@@ -430,8 +430,8 @@ export const QUESTIONS: Question[] = [
       { label: "launched a paid product",     sublabel: "built and shipped something people paid for",    points: 2 },
     ],
     recommendationByOption: [
-      "No prior build experience makes the first product hard. Partner with someone who has shipped before — even as an advisor.",
-      "Internal tools count as experience. The gap is user empathy and distribution — invest time learning those two.",
+      "No prior build experience makes the first product hard. Partner with someone who has shipped before - even as an advisor.",
+      "Internal tools count as experience. The gap is user empathy and distribution - invest time learning those two.",
       null,
     ],
   },
@@ -445,7 +445,7 @@ export const QUESTIONS: Question[] = [
       { label: "yes, in-house",     sublabel: "core tech capability on team",   points: 2 },
     ],
     recommendationByOption: [
-      "No technical capability means relying entirely on contractors — expensive and slow. Find a technical co-founder before building anything substantial.",
+      "No technical capability means relying entirely on contractors - expensive and slow. Find a technical co-founder before building anything substantial.",
       "Partial tech is manageable. Identify the single biggest technical risk and ensure someone owns it.",
       null,
     ],
@@ -461,7 +461,7 @@ export const QUESTIONS: Question[] = [
     ],
     recommendationByOption: [
       "No advisors means you're missing external pattern matching. Find one domain expert and one operator who has scaled a startup.",
-      "An informal advisor is a start. Give them a small equity stake and a structured monthly commitment — convert them to engaged.",
+      "An informal advisor is a start. Give them a small equity stake and a structured monthly commitment - convert them to engaged.",
       null,
     ],
   },
@@ -476,7 +476,7 @@ export const QUESTIONS: Question[] = [
     ],
     recommendationByOption: [
       "Part-time founders move too slowly in competitive markets. Set a clear trigger: what milestone makes you go full-time?",
-      "Transitioning is good progress. Set a hard date, not a soft intention — ambiguity kills momentum.",
+      "Transitioning is good progress. Set a hard date, not a soft intention - ambiguity kills momentum.",
       null,
     ],
   },
@@ -493,13 +493,13 @@ export const QUESTIONS: Question[] = [
     ],
     recommendationByOption: [
       "Zero customer discovery is the highest-risk position. Schedule 15 conversations with your target persona this month.",
-      "Under 10 is a sample size problem. You need 20+ before patterns emerge — the insights compound fast.",
+      "Under 10 is a sample size problem. You need 20+ before patterns emerge - the insights compound fast.",
       null,
     ],
   },
   {
     id: 31,
-    text: "do you have paying customers or signed pilots — the kind of proof that ends investor scepticism?",
+    text: "do you have paying customers or signed pilots - the kind of proof that ends investor scepticism?",
     pillarIndex: 5,
     options: [
       { label: "no",                  sublabel: "no customers or pilots yet",                   points: 0 },
@@ -507,14 +507,14 @@ export const QUESTIONS: Question[] = [
       { label: "paying customers",    sublabel: "real money has exchanged hands",               points: 2 },
     ],
     recommendationByOption: [
-      "No customers is the single biggest red flag for most investors at seed. Before your next pitch, get one person to pay something — even ₹500. A paying customer transforms your credibility instantly.",
-      "Free pilots are useful for product learning but don't move investors. Convert at least one to paid before fundraising — even a nominal amount. An investor will ask: 'Why aren't they paying?' Be ready to answer that.",
+      "No customers is the single biggest red flag for most investors at seed. Before your next pitch, get one person to pay something - even ₹500. A paying customer transforms your credibility instantly.",
+      "Free pilots are useful for product learning but don't move investors. Convert at least one to paid before fundraising - even a nominal amount. An investor will ask: 'Why aren't they paying?' Be ready to answer that.",
       null,
     ],
   },
   {
     id: 32,
-    text: "do you have a distribution thesis — a credible, specific theory for how you'll acquire customers at scale?",
+    text: "do you have a distribution thesis - a credible, specific theory for how you'll acquire customers at scale?",
     pillarIndex: 5,
     options: [
       { label: "no thesis yet",             sublabel: "will figure out distribution after building",          points: 0 },
@@ -529,16 +529,16 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: 33,
-    text: "what does your early retention look like — the metric investors will ask about before any other?",
+    text: "what does your early retention look like - the metric investors will ask about before any other?",
     pillarIndex: 5,
     options: [
       { label: "no data",              sublabel: "haven't tracked it yet",                                   points: 0 },
-      { label: "users churn quickly",  sublabel: "most don't come back — and i know it's a problem",        points: 1 },
+      { label: "users churn quickly",  sublabel: "most don't come back - and i know it's a problem",        points: 1 },
       { label: "users return",         sublabel: "week-2 or month-2 retention is strong and i can show it", points: 2 },
     ],
     recommendationByOption: [
-      "Retention is the first number every serious investor asks for. It's more important than growth. If you don't have it, don't fundraise yet — get 10 users to use the product for 4 weeks and measure whether they come back. That data changes everything.",
-      "Knowing you have a retention problem is step one. Fix it before fundraising — growth on top of a leaky bucket is the most common way to burn investor money. Run 5 exit interviews this week and find the pattern.",
+      "Retention is the first number every serious investor asks for. It's more important than growth. If you don't have it, don't fundraise yet - get 10 users to use the product for 4 weeks and measure whether they come back. That data changes everything.",
+      "Knowing you have a retention problem is step one. Fix it before fundraising - growth on top of a leaky bucket is the most common way to burn investor money. Run 5 exit interviews this week and find the pattern.",
       null,
     ],
   },
@@ -549,17 +549,17 @@ export const QUESTIONS: Question[] = [
     options: [
       { label: "no user data yet",            sublabel: "no input received or tracked",                       points: 0 },
       { label: "feedback received, some shifts", sublabel: "made minor adjustments but no sharp pivot",      points: 1 },
-      { label: "clear learning arc",          sublabel: "changed ICP, positioning, or core feature based on evidence — and can show the before/after", points: 2 },
+      { label: "clear learning arc",          sublabel: "changed ICP, positioning, or core feature based on evidence - and can show the before/after", points: 2 },
     ],
     recommendationByOption: [
       "Investors pattern-match on founder learning speed. No iteration signal reads as 'hasn't talked to users.' Get 10 users on the product, track what they do, and document what you changed as a result.",
-      "Minor adjustments show responsiveness. But investors want to see a sharp learning — a moment where evidence overrode your original assumption. Identify the sharpest thing you learned and make it part of your narrative.",
+      "Minor adjustments show responsiveness. But investors want to see a sharp learning - a moment where evidence overrode your original assumption. Identify the sharpest thing you learned and make it part of your narrative.",
       null,
     ],
   },
   {
     id: 35,
-    text: "what is your NPS or equivalent organic referral signal — the number investors use as a PMF proxy?",
+    text: "what is your NPS or equivalent organic referral signal - the number investors use as a PMF proxy?",
     pillarIndex: 5,
     options: [
       { label: "no data",            sublabel: "haven't measured satisfaction or referrals",           points: 0 },
@@ -568,7 +568,7 @@ export const QUESTIONS: Question[] = [
     ],
     recommendationByOption: [
       "Investors use NPS or organic referral rate as their best proxy for product-market fit. Send one question to your users today: 'How likely are you to recommend us to someone else? (0–10)' The score tells you where you are, and the follow-up tells you why.",
-      "Vague happiness doesn't move investors. Formalise it: send an NPS survey to all active users, calculate the score, and include it in your deck. A number — even an imperfect one — is more compelling than 'users love it.'",
+      "Vague happiness doesn't move investors. Formalise it: send an NPS survey to all active users, calculate the score, and include it in your deck. A number - even an imperfect one - is more compelling than 'users love it.'",
       null,
     ],
   },
@@ -576,7 +576,7 @@ export const QUESTIONS: Question[] = [
   // ─── Segment 6: Business Model ─────────────────────────────────────────────
   {
     id: 36,
-    text: "how clear and tested is your revenue model — can you explain it in one sentence and back it with a number?",
+    text: "how clear and tested is your revenue model - can you explain it in one sentence and back it with a number?",
     pillarIndex: 6,
     options: [
       { label: "no model yet",          sublabel: "haven't decided how to charge",                                points: 0 },
@@ -629,8 +629,8 @@ export const QUESTIONS: Question[] = [
       { label: "fully scalable",                 sublabel: "self-serve or clearly tiered pricing", points: 2 },
     ],
     recommendationByOption: [
-      "Custom pricing per deal doesn't scale. Move toward packaged tiers — even 3 options is better than none.",
-      "Semi-scalable is progress. Remove the last manual step — what would it take to go fully self-serve?",
+      "Custom pricing per deal doesn't scale. Move toward packaged tiers - even 3 options is better than none.",
+      "Semi-scalable is progress. Remove the last manual step - what would it take to go fully self-serve?",
       null,
     ],
   },
@@ -644,14 +644,14 @@ export const QUESTIONS: Question[] = [
       { label: "yes, with money",  sublabel: "someone has actually paid",               points: 2 },
     ],
     recommendationByOption: [
-      "Untested pricing means you're guessing. Ask 5 users: 'Would you pay ₹X/month?' — even a yes or no changes everything.",
+      "Untested pricing means you're guessing. Ask 5 users: 'Would you pay ₹X/month?' - even a yes or no changes everything.",
       "Survey answers on price are unreliable. Real money is the only test. Charge for something, even a small beta access fee.",
       null,
     ],
   },
   {
     id: 41,
-    text: "is your revenue recurring — the model structure that drives the highest investor valuations?",
+    text: "is your revenue recurring - the model structure that drives the highest investor valuations?",
     pillarIndex: 6,
     options: [
       { label: "transactional only",  sublabel: "one-time purchases, no recurring component",          points: 0 },
@@ -659,8 +659,8 @@ export const QUESTIONS: Question[] = [
       { label: "primarily recurring", sublabel: "subscription or annual contract is the primary model", points: 2 },
     ],
     recommendationByOption: [
-      "Transactional businesses trade at 1–3x revenue; SaaS trades at 5–15x. Investors price this in. Find the repeating use case in your product and build a subscription tier — even if only some customers take it. ARR changes your valuation story fundamentally.",
-      "Moving toward recurring is the right direction. The question investors ask: what % of your revenue renews without you doing more work? Increase that number before fundraising — it directly affects your valuation multiple.",
+      "Transactional businesses trade at 1–3x revenue; SaaS trades at 5–15x. Investors price this in. Find the repeating use case in your product and build a subscription tier - even if only some customers take it. ARR changes your valuation story fundamentally.",
+      "Moving toward recurring is the right direction. The question investors ask: what % of your revenue renews without you doing more work? Increase that number before fundraising - it directly affects your valuation multiple.",
       null,
     ],
   },
@@ -691,7 +691,7 @@ export const QUESTIONS: Question[] = [
       { label: "organic, PLG, or partner", sublabel: "content, referral, or integration-led", points: 2 },
     ],
     recommendationByOption: [
-      "No defined channel means no repeatable growth. Pick one and go deep — breadth comes after proving one works.",
+      "No defined channel means no repeatable growth. Pick one and go deep - breadth comes after proving one works.",
       "Paid and outbound work but don't compound. Plan the organic channel in parallel so your CAC drops over time.",
       null,
     ],
@@ -706,7 +706,7 @@ export const QUESTIONS: Question[] = [
       { label: "at least one live",  sublabel: "a partnership or integration that's active", points: 2 },
     ],
     recommendationByOption: [
-      "No distribution leverage means you're competing on effort alone. Identify one partner whose audience trusts you — one relationship can unlock 100 customers.",
+      "No distribution leverage means you're competing on effort alone. Identify one partner whose audience trusts you - one relationship can unlock 100 customers.",
       "Conversations are good. Move at least one to a live test, even if small. Proof of distribution is worth more than promises.",
       null,
     ],
@@ -737,7 +737,7 @@ export const QUESTIONS: Question[] = [
     ],
     recommendationByOption: [
       "Without an organic engine, all growth is paid. Pick one: content, community, or in-product virality. Start small but start now.",
-      "Early stage is fine. Focus on one format and one platform — consistency beats volume in the early days.",
+      "Early stage is fine. Focus on one format and one platform - consistency beats volume in the early days.",
       null,
     ],
   },
@@ -753,7 +753,7 @@ export const QUESTIONS: Question[] = [
       { label: "fast",        sublabel: "weekly releases or micro-experiments", points: 2 },
     ],
     recommendationByOption: [
-      "Slow shipping is a strategic problem. Cut scope radically — what's the smallest change that would teach you the most?",
+      "Slow shipping is a strategic problem. Cut scope radically - what's the smallest change that would teach you the most?",
       "2–4 week cycles are workable. Identify the bottleneck: is it decisions, dependencies, or testing? Remove the single biggest blocker.",
       null,
     ],
@@ -783,14 +783,14 @@ export const QUESTIONS: Question[] = [
       { label: "documented and repeatable", sublabel: "a clear playbook that anyone can follow",   points: 2 },
     ],
     recommendationByOption: [
-      "No process means you can't delegate or improve. Document what you did for your last 3 customers — that's your v1 playbook.",
-      "Ad hoc works for 10 customers, not 100. Write down the steps and hand them to someone who wasn't there — see if they can replicate it.",
+      "No process means you can't delegate or improve. Document what you did for your last 3 customers - that's your v1 playbook.",
+      "Ad hoc works for 10 customers, not 100. Write down the steps and hand them to someone who wasn't there - see if they can replicate it.",
       null,
     ],
   },
   {
     id: 50,
-    text: "can you walk an investor through your biggest risk and your specific mitigation — showing you've thought further than the pitch?",
+    text: "can you walk an investor through your biggest risk and your specific mitigation - showing you've thought further than the pitch?",
     pillarIndex: 8,
     options: [
       { label: "not sure what it is",       sublabel: "haven't mapped where things could break",                  points: 0 },
@@ -798,7 +798,7 @@ export const QUESTIONS: Question[] = [
       { label: "identified and mitigating", sublabel: "can name the risk, the plan, and the evidence it's working", points: 2 },
     ],
     recommendationByOption: [
-      "Investors ask about risks specifically to test self-awareness. 'We don't see any major risks' is the answer that ends deals. Do a 30-minute pre-mortem: write every reason this fails in 12 months. The most likely one is your answer — and your mitigation plan is what keeps the investor in the room.",
+      "Investors ask about risks specifically to test self-awareness. 'We don't see any major risks' is the answer that ends deals. Do a 30-minute pre-mortem: write every reason this fails in 12 months. The most likely one is your answer - and your mitigation plan is what keeps the investor in the room.",
       "Knowing the risk without a plan reads as passive. Frame it for your pitch: 'Our biggest risk is X. Here's what we're doing about it and here's how we'll know it's working.' That structure shows maturity. Write it out before your next investor conversation.",
       null,
     ],

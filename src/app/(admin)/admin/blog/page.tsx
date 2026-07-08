@@ -83,7 +83,7 @@ export default function BlogPage() {
                   <td className="py-3 px-5 text-xs font-sans text-ink/50">
                     {post.publishedAt
                       ? new Date(post.publishedAt).toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" })
-                      : "—"}
+                      : " - "}
                   </td>
                   <td className="py-3 px-5">
                     <button
