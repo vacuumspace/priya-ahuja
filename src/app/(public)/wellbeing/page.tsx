@@ -73,9 +73,6 @@ export default function WellbeingHubPage() {
                     <div className="flex items-center gap-2 flex-wrap mb-2">
                       <h2 className="font-heading text-lg font-700 text-ink">
                         {section.title}
-                        {"star" in section && section.star && (
-                          <span className="ml-1.5 text-sm text-peach-dark dark:text-[#FEF9E7]">★</span>
-                        )}
                       </h2>
                     </div>
                     <p className="font-sans text-base text-ink/60 leading-relaxed mb-3">{section.description}</p>
