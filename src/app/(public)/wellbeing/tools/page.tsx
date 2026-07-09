@@ -30,7 +30,7 @@ export default function WellbeingToolsPage() {
           staying whole
         </h1>
         <p className="font-sans text-sm text-ink/60 max-w-md leading-relaxed">
-          free, no-signup-required tools to check in on yourself - not just the business.
+          free tools to check in on yourself - not just the business.
         </p>
       </div>
 
