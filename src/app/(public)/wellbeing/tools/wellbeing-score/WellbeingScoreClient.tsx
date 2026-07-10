@@ -5,6 +5,7 @@ import { signIn } from "next-auth/react"
 import Link from "next/link"
 import { ArrowLeft, ArrowRight, RotateCcw, CheckCircle } from "lucide-react"
 import SignInOptions from "@/components/SignInOptions"
+import SampleReportBanner from "@/components/SampleReportBanner"
 import {
   WELLBEING_CATEGORIES,
   WELLBEING_QUESTIONS,
@@ -58,12 +59,7 @@ function SampleWellbeingScorecard({ userEmail }: { userEmail: string | null }) {
   const band = getWellbeingBand(SAMPLE_WELLBEING_SCORE)
 
   return (
-    <div className="space-y-4">
-      <div className="flex items-center justify-between px-1">
-        <p className="text-[12px] font-sans text-ink/40 uppercase tracking-[0.15em]">sample report</p>
-        <span className="text-[12px] font-sans text-ink/30 bg-ink/5 px-2 py-0.5 rounded-full">example only</span>
-      </div>
-
+    <SampleReportBanner description="how your wellbeing scorecard will look - example answers, not yours">
       <div className={cn("relative", !isSignedIn && "select-none")}>
         <div className={cn(!isSignedIn && "blur-sm pointer-events-none")}>
           <div className="bg-card border border-border rounded-2xl overflow-hidden mb-4">
@@ -137,7 +133,7 @@ function SampleWellbeingScorecard({ userEmail }: { userEmail: string | null }) {
           </div>
         )}
       </div>
-    </div>
+    </SampleReportBanner>
   )
 }
 

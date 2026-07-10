@@ -6,6 +6,7 @@ import { loadRazorpay } from "@/lib/load-razorpay"
 import Link from "next/link"
 import { ArrowLeft, ArrowRight, RotateCcw, CheckCircle } from "lucide-react"
 import SignInOptions from "@/components/SignInOptions"
+import SampleReportBanner from "@/components/SampleReportBanner"
 import { trackCta } from "@/lib/analytics"
 import {
   IDEA_PILLARS,
@@ -141,12 +142,7 @@ function SampleIdeaScorecard({ userEmail }: { userEmail: string | null }) {
   const band = getIdeaScoreBand(SAMPLE_IDEA_SCORE)
 
   return (
-    <div className="space-y-4">
-      <div className="flex items-center justify-between px-1">
-        <p className="text-[12px] font-sans text-ink/40 uppercase tracking-[0.15em]">sample report</p>
-        <span className="text-[12px] font-sans text-ink/30 bg-ink/5 px-2 py-0.5 rounded-full">example only</span>
-      </div>
-
+    <SampleReportBanner description="how your idea scorecard will look - example answers, not yours">
       <div className={cn("relative", !isSignedIn && "select-none")}>
         <div className={cn(!isSignedIn && "blur-sm pointer-events-none")}>
           {/* Score + band */}
@@ -256,7 +252,7 @@ function SampleIdeaScorecard({ userEmail }: { userEmail: string | null }) {
           </div>
         )}
       </div>
-    </div>
+    </SampleReportBanner>
   )
 }
 
