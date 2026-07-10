@@ -1138,112 +1138,127 @@ function ContentCreatorsTab() {
         ))}
       </div>
 
-      {/* Creator cards */}
-      <div className="grid sm:grid-cols-2 gap-4">
-        {filtered.map(c => {
-          const isOpen = open === c.name
-          const totalReach = Object.values(c.followers).reduce((a, b) => a + b, 0)
-          return (
-            <div key={c.name} className={`border rounded-xl overflow-hidden ${isOpen ? "border-border" : "border-border/40"}`}>
-              <button onClick={() => setOpen(isOpen ? null : c.name)} className="w-full text-left px-4 py-4 hover:bg-peach-dark/5 transition-colors">
-                <div className="flex items-start justify-between gap-2 mb-2">
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-semibold text-ink font-sans">{c.name}</p>
-                    <p className="text-[11px] text-ink/40 font-sans mt-0.5">{c.handle}</p>
-                  </div>
-                  <div className="flex-shrink-0 text-right">
-                    <p className="text-base font-heading font-bold text-ink">{fmtFollowers(totalReach)}</p>
-                    <p className="text-[10px] text-ink/35 font-sans">total reach</p>
-                  </div>
-                </div>
+      {/* Creator table */}
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm font-sans">
+          <thead>
+            <tr className="border-b border-border text-left">
+              <th className="pb-2 pr-1 text-xs text-ink/50 font-medium w-6"></th>
+              <th className="pb-2 pr-3 text-xs text-ink/50 font-medium">Creator</th>
+              <th className="pb-2 pr-3 text-xs text-ink/50 font-medium">Platforms</th>
+              <th className="pb-2 pr-3 text-xs text-ink/50 font-medium text-right">Reach</th>
+              <th className="pb-2 pr-3 text-xs text-ink/50 font-medium">Languages</th>
+              <th className="pb-2 pr-3 text-xs text-ink/50 font-medium">Focus</th>
+              <th className="pb-2 text-xs text-ink/50 font-medium">Confidence</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filtered
+              .slice()
+              .sort((a, b) =>
+                Object.values(b.followers).reduce((x, y) => x + y, 0) -
+                Object.values(a.followers).reduce((x, y) => x + y, 0)
+              )
+              .map(c => {
+                const isOpen = open === c.name
+                const totalReach = Object.values(c.followers).reduce((a, b) => a + b, 0)
+                return (
+                  <Fragment key={c.name}>
+                    <tr
+                      onClick={() => setOpen(isOpen ? null : c.name)}
+                      className="border-b border-border/50 cursor-pointer hover:bg-peach-dark/5"
+                    >
+                      <td className="py-2.5 pr-1 w-6">
+                        <ChevronRight size={14} className={`text-ink/30 transition-transform ${isOpen ? "rotate-90" : ""}`} />
+                      </td>
+                      <td className="py-2.5 pr-3">
+                        <div className="font-medium text-ink whitespace-nowrap">{c.name}</div>
+                        <div className="text-[10px] text-ink/40 mt-0.5">{c.handle}</div>
+                      </td>
+                      <td className="py-2.5 pr-3">
+                        <div className="flex flex-wrap gap-1">
+                          {c.platforms.map(p => (
+                            c.platform_urls[p] ? (
+                              <a key={p} href={c.platform_urls[p]} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}
+                                className={`text-[10px] font-sans font-medium px-2 py-0.5 rounded-full hover:opacity-75 transition-opacity whitespace-nowrap ${PLATFORM_COLORS[p] ?? "bg-ink/8 text-ink/50"}`}>{p} ↗</a>
+                            ) : (
+                              <span key={p} title="No verified link" className={`text-[10px] font-sans font-medium px-2 py-0.5 rounded-full opacity-50 whitespace-nowrap ${PLATFORM_COLORS[p] ?? "bg-ink/8 text-ink/50"}`}>{p}</span>
+                            )
+                          ))}
+                        </div>
+                      </td>
+                      <td className="py-2.5 pr-3 text-ink text-right font-medium">{totalReach > 0 ? fmtFollowers(totalReach) : " - "}</td>
+                      <td className="py-2.5 pr-3 text-ink/60 text-xs whitespace-nowrap">{c.language.join(", ")}</td>
+                      <td className="py-2.5 pr-3 text-ink/50 text-xs">
+                        {c.content_focus.slice(0, 3).join(", ")}
+                        {c.content_focus.length > 3 && <span className="text-ink/35"> +{c.content_focus.length - 3}</span>}
+                      </td>
+                      <td className="py-2.5"><ConfidenceBadge c={c.confidence} /></td>
+                    </tr>
 
-                {/* Platform badges - linked */}
-                <div className="flex flex-wrap gap-1 mb-2">
-                  {c.platforms.map(p => (
-                    c.platform_urls[p] ? (
-                      <a key={p} href={c.platform_urls[p]} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}
-                        className={`text-[10px] font-sans font-medium px-2 py-0.5 rounded-full hover:opacity-75 transition-opacity ${PLATFORM_COLORS[p] ?? "bg-ink/8 text-ink/50"}`}>{p} ↗</a>
-                    ) : (
-                      <span key={p} className={`text-[10px] font-sans font-medium px-2 py-0.5 rounded-full ${PLATFORM_COLORS[p] ?? "bg-ink/8 text-ink/50"}`}>{p}</span>
-                    )
-                  ))}
-                </div>
+                    {isOpen && (
+                      <tr className="border-b border-border/30 bg-peach-dark/5">
+                        <td colSpan={7} className="px-4 py-4">
+                          <div className="space-y-3 text-xs font-sans">
+                            <div>
+                              <p className="text-ink/40 uppercase tracking-wide text-[10px] mb-1">About</p>
+                              <p className="text-ink/70 leading-relaxed">{c.bio}</p>
+                            </div>
 
-                {/* Language badges */}
-                <div className="flex flex-wrap gap-1 mb-2">
-                  {c.language.map(l => (
-                    <span key={l} className="text-[10px] font-sans bg-amber-50 text-amber-700 px-2 py-0.5 rounded-full">{l}</span>
-                  ))}
-                </div>
+                            {Object.keys(c.followers).length > 0 && (
+                              <div>
+                                <p className="text-ink/40 uppercase tracking-wide text-[10px] mb-1.5">Followers by platform</p>
+                                <div className="flex flex-wrap gap-3">
+                                  {Object.entries(c.followers).map(([plat, count]) => {
+                                    const url = c.platform_urls[plat]
+                                    const badge = <span className={`text-[10px] font-medium px-1.5 py-0.5 rounded-full ${PLATFORM_COLORS[plat] ?? "bg-ink/8 text-ink/50"}`}>{plat}</span>
+                                    return (
+                                      <div key={plat} className="flex items-center gap-1">
+                                        {url ? <a href={url} target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">{badge}</a> : badge}
+                                        <span className="text-ink/60 font-semibold">{fmtFollowers(count)}</span>
+                                      </div>
+                                    )
+                                  })}
+                                </div>
+                              </div>
+                            )}
 
-                <p className="text-xs text-ink/55 font-sans leading-relaxed line-clamp-2">{c.bio}</p>
+                            <div className="grid sm:grid-cols-3 gap-3">
+                              <div>
+                                <p className="text-ink/40 uppercase tracking-wide text-[10px] mb-1">Geography</p>
+                                <p className="text-ink/65">{c.geography_focus.join(", ")}</p>
+                              </div>
+                              <div>
+                                <p className="text-ink/40 uppercase tracking-wide text-[10px] mb-1">Posts</p>
+                                <p className="text-ink/65">{c.posting_frequency}</p>
+                              </div>
+                              <div>
+                                <p className="text-ink/40 uppercase tracking-wide text-[10px] mb-1">How they earn</p>
+                                <p className="text-ink/65">{c.monetisation.join(", ")}</p>
+                              </div>
+                            </div>
 
-                <div className="flex flex-wrap gap-1 mt-2">
-                  {c.content_focus.slice(0, 3).map(f => (
-                    <span key={f} className="text-[10px] bg-ink/5 text-ink/50 px-1.5 py-0.5 rounded font-sans">{f}</span>
-                  ))}
-                  {c.content_focus.length > 3 && <span className="text-[10px] text-ink/35 font-sans px-1">+{c.content_focus.length - 3}</span>}
-                </div>
-              </button>
+                            <div>
+                              <p className="text-ink/40 uppercase tracking-wide text-[10px] mb-1">KYL partnership angle</p>
+                              <p className="text-ink/70 leading-relaxed">{c.relevance_to_kyl}</p>
+                            </div>
 
-              {isOpen && (
-                <div className="border-t border-border/30 px-4 py-4 bg-peach-dark/4 space-y-3 text-xs font-sans">
-                  <div>
-                    <p className="text-ink/40 uppercase tracking-wide text-[10px] mb-1">About</p>
-                    <p className="text-ink/70 leading-relaxed">{c.bio}</p>
-                  </div>
-
-                  {/* Per-platform followers */}
-                  <div>
-                    <p className="text-ink/40 uppercase tracking-wide text-[10px] mb-1.5">Followers by platform</p>
-                    <div className="flex flex-wrap gap-3">
-                      {Object.entries(c.followers).map(([plat, count]) => {
-                        const url = c.platform_urls[plat]
-                        const badge = <span className={`text-[10px] font-medium px-1.5 py-0.5 rounded-full ${PLATFORM_COLORS[plat] ?? "bg-ink/8 text-ink/50"}`}>{plat}</span>
-                        return (
-                          <div key={plat} className="flex items-center gap-1">
-                            {url ? <a href={url} target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">{badge}</a> : badge}
-                            <span className="text-ink/60 font-semibold">{fmtFollowers(count)}</span>
+                            {c.profile_url && (
+                              <a href={c.profile_url} target="_blank" rel="noopener noreferrer" className="inline-block text-ink/40 hover:text-ink underline underline-offset-2">{c.handle} ↗</a>
+                            )}
                           </div>
-                        )
-                      })}
-                    </div>
-                  </div>
-
-                  <div className="grid sm:grid-cols-2 gap-3">
-                    <div>
-                      <p className="text-ink/40 uppercase tracking-wide text-[10px] mb-1">Geography</p>
-                      <p className="text-ink/65">{c.geography_focus.join(", ")}</p>
-                    </div>
-                    <div>
-                      <p className="text-ink/40 uppercase tracking-wide text-[10px] mb-1">Posts</p>
-                      <p className="text-ink/65">{c.posting_frequency}</p>
-                    </div>
-                  </div>
-
-                  <div>
-                    <p className="text-ink/40 uppercase tracking-wide text-[10px] mb-1">How they earn</p>
-                    <p className="text-ink/65">{c.monetisation.join(", ")}</p>
-                  </div>
-
-                  <div>
-                    <p className="text-ink/40 uppercase tracking-wide text-[10px] mb-1">KYL partnership angle</p>
-                    <p className="text-ink/70 leading-relaxed">{c.relevance_to_kyl}</p>
-                  </div>
-
-                  <div className="flex items-center justify-between">
-                    <a href={c.profile_url} target="_blank" rel="noopener noreferrer" className="text-ink/40 hover:text-ink underline underline-offset-2">{c.handle} ↗</a>
-                    <ConfidenceBadge c={c.confidence} />
-                  </div>
-                </div>
-              )}
-            </div>
-          )
-        })}
+                        </td>
+                      </tr>
+                    )}
+                  </Fragment>
+                )
+              })}
+          </tbody>
+        </table>
       </div>
 
       <p className="mt-5 text-[11px] text-ink/35 font-sans leading-relaxed">
-        Follower counts are approximate and sourced from public profiles. Confidence badge reflects data reliability. Platform reach is additive across platforms for each creator (some audience overlap expected).
+        Rows sorted by combined reach. Follower counts are approximate and sourced from public profiles. Confidence badge reflects data reliability. Platform reach is additive across platforms for each creator (some audience overlap expected). Greyed-out platform badges have no verified profile link - the account could not be located during link verification.
       </p>
     </div>
   )
