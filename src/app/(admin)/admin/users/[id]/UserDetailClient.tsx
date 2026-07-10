@@ -5,6 +5,8 @@ import { useState, useEffect } from "react"
 type Booking = { id: string; status: string; createdAt: Date; serviceTitle: string | null }
 type Purchase = { id: string; createdAt: Date; productTitle: string | null }
 type PriyaGptTxn = { id: string; deltaMinutes: number; reason: string; amountPaise: number | null; createdAt: Date }
+type PitchDeck = { id: string; fileName: string; totalScore: number; isPaid: boolean; amountPaid: number | null; createdAt: Date }
+type ToolScore = { id: string; totalScore: number; isPaid: boolean; createdAt: Date }
 
 type Profile = {
   phone: string | null
@@ -65,6 +67,9 @@ export default function UserDetailClient({
   purchases,
   priyaGptMinutes = 0,
   priyaGptTransactions = [],
+  pitchDecks = [],
+  fundScores = [],
+  ideaScores = [],
 }: {
   user: User
   profile: Profile | null
@@ -72,8 +77,12 @@ export default function UserDetailClient({
   purchases: Purchase[]
   priyaGptMinutes?: number
   priyaGptTransactions?: PriyaGptTxn[]
+  pitchDecks?: PitchDeck[]
+  fundScores?: ToolScore[]
+  ideaScores?: ToolScore[]
 }) {
-  const tabs = ["profile", "sessions", "purchases", "priyagpt"] as const
+  const toolsCount = pitchDecks.length + fundScores.length + ideaScores.length
+  const tabs = ["profile", "sessions", "purchases", "tools", "priyagpt"] as const
   type Tab = typeof tabs[number]
   const [tab, setTab] = useState<Tab>("profile")
 
@@ -105,6 +114,9 @@ export default function UserDetailClient({
             )}
             {t === "purchases" && purchases.length > 0 && (
               <span className="ml-1.5 font-mono text-[10px] opacity-60">{purchases.length}</span>
+            )}
+            {t === "tools" && toolsCount > 0 && (
+              <span className="ml-1.5 font-mono text-[10px] opacity-60">{toolsCount}</span>
             )}
             {t === "priyagpt" && priyaGptTransactions.length > 0 && (
               <span className="ml-1.5 font-mono text-[10px] opacity-60">{priyaGptTransactions.length}</span>
@@ -198,6 +210,66 @@ export default function UserDetailClient({
                 </div>
               ))}
             </div>
+          )}
+        </div>
+      )}
+
+      {/* Tools tab */}
+      {tab === "tools" && (
+        <div className="flex flex-col gap-5">
+          {toolsCount === 0 ? (
+            <p className="text-sm font-sans text-ink/40 border border-dashed border-border rounded-2xl p-6 text-center">
+              no tool activity yet
+            </p>
+          ) : (
+            <>
+              {pitchDecks.length > 0 && (
+                <Section title="pitch deck analyses">
+                  {pitchDecks.map((p) => (
+                    <div key={p.id} className="flex items-center justify-between gap-3 py-2.5 border-b border-border last:border-0">
+                      <div className="min-w-0">
+                        <p className="font-sans text-sm text-ink truncate">{p.fileName}</p>
+                        <p className="font-sans text-xs text-ink/40">
+                          {p.isPaid
+                            ? `paid${p.amountPaid != null ? ` · ₹${(p.amountPaid / 100).toLocaleString("en-IN")}` : ""}`
+                            : "admin test"}
+                        </p>
+                      </div>
+                      <div className="flex items-center gap-3 flex-shrink-0">
+                        <span className="font-heading text-base font-bold text-ink">{p.totalScore}<span className="font-sans text-[10px] text-ink/30">/100</span></span>
+                        <span className="font-sans text-xs text-ink/40">{fmt(p.createdAt)}</span>
+                      </div>
+                    </div>
+                  ))}
+                </Section>
+              )}
+              {fundScores.length > 0 && (
+                <Section title="fundability scores">
+                  {fundScores.map((s) => (
+                    <div key={s.id} className="flex items-center justify-between gap-3 py-2.5 border-b border-border last:border-0">
+                      <span className="font-sans text-xs text-ink/40">{s.isPaid ? "paid" : "free"}</span>
+                      <div className="flex items-center gap-3">
+                        <span className="font-heading text-base font-bold text-ink">{s.totalScore}<span className="font-sans text-[10px] text-ink/30">/100</span></span>
+                        <span className="font-sans text-xs text-ink/40">{fmt(s.createdAt)}</span>
+                      </div>
+                    </div>
+                  ))}
+                </Section>
+              )}
+              {ideaScores.length > 0 && (
+                <Section title="idea scores">
+                  {ideaScores.map((s) => (
+                    <div key={s.id} className="flex items-center justify-between gap-3 py-2.5 border-b border-border last:border-0">
+                      <span className="font-sans text-xs text-ink/40">{s.isPaid ? "paid" : "free"}</span>
+                      <div className="flex items-center gap-3">
+                        <span className="font-heading text-base font-bold text-ink">{s.totalScore}<span className="font-sans text-[10px] text-ink/30">/100</span></span>
+                        <span className="font-sans text-xs text-ink/40">{fmt(s.createdAt)}</span>
+                      </div>
+                    </div>
+                  ))}
+                </Section>
+              )}
+            </>
           )}
         </div>
       )}

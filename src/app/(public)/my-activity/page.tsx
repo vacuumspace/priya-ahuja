@@ -1,6 +1,6 @@
 ﻿import { auth } from "@/lib/auth"
 import { db } from "@/lib/db"
-import { bookings, purchases, services as servicesTable, digitalProducts, startupScores, startupIdeaScores, wellbeingScores, availability, priyaGptTimeTransactions } from "@/lib/db/schema"
+import { bookings, purchases, services as servicesTable, digitalProducts, startupScores, startupIdeaScores, wellbeingScores, pitchDeckAnalyses, availability, priyaGptTimeTransactions } from "@/lib/db/schema"
 import { eq, and, desc } from "drizzle-orm"
 import Link from "next/link"
 import { CalendarDays, FileText, LogIn, Lightbulb, ExternalLink, Bot } from "lucide-react"
@@ -43,6 +43,7 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
   const activeToolSub =
     params.sub === "idea" ? "idea" :
     params.sub === "wellbeing" ? "wellbeing" :
+    params.sub === "pitchdeck" ? "pitchdeck" :
     "fundability"
 
   if (!session?.user?.email) {
@@ -62,7 +63,7 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
 
   const email = session.user.email
 
-  const [userBookingsRaw, userPurchases, userScores, userIdeaScores, userWellbeingScores, userPriyaGptTxns] = await Promise.all([
+  const [userBookingsRaw, userPurchases, userScores, userIdeaScores, userWellbeingScores, userPitchDecks, userPriyaGptTxns] = await Promise.all([
     db
       .select({
         id: bookings.id,
@@ -132,6 +133,18 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
 
     db
       .select({
+        id: pitchDeckAnalyses.id,
+        fileName: pitchDeckAnalyses.fileName,
+        totalScore: pitchDeckAnalyses.totalScore,
+        isPaid: pitchDeckAnalyses.isPaid,
+        createdAt: pitchDeckAnalyses.createdAt,
+      })
+      .from(pitchDeckAnalyses)
+      .where(eq(pitchDeckAnalyses.userId, session.user.id!))
+      .orderBy(desc(pitchDeckAnalyses.createdAt)),
+
+    db
+      .select({
         id: priyaGptTimeTransactions.id,
         deltaMinutes: priyaGptTimeTransactions.deltaMinutes,
         amountPaise: priyaGptTimeTransactions.amountPaise,
@@ -164,7 +177,7 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
     <div className="min-h-screen bg-cream">
       <div className="flex justify-between items-center px-4 md:px-10 py-4 text-[13px] text-ink/50 font-sans border-b border-border">
         <span>my activity</span>
-        <span>{userBookings.length + userPurchases.length + userScores.length + userIdeaScores.length + userWellbeingScores.length + userPriyaGptTxns.length} total</span>
+        <span>{userBookings.length + userPurchases.length + userScores.length + userIdeaScores.length + userWellbeingScores.length + userPitchDecks.length + userPriyaGptTxns.length} total</span>
       </div>
 
       <div className="px-4 md:px-10 pt-10 pb-16 max-w-2xl">
@@ -206,7 +219,7 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
           >
             <Lightbulb size={12} />
             tools
-            <span className="text-[12px] font-mono ml-0.5 opacity-60">{userScores.length + userIdeaScores.length + userWellbeingScores.length}</span>
+            <span className="text-[12px] font-mono ml-0.5 opacity-60">{userScores.length + userIdeaScores.length + userWellbeingScores.length + userPitchDecks.length}</span>
           </Link>
           <Link
             href="/my-activity?tab=priyagpt"
@@ -290,6 +303,14 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
                 }`}
               >
                 wellbeing <span className="opacity-60">{userWellbeingScores.length}</span>
+              </Link>
+              <Link
+                href="/my-activity?tab=tools&sub=pitchdeck"
+                className={`px-3 py-1.5 rounded-full text-[12px] font-sans font-semibold transition-colors ${
+                  activeToolSub === "pitchdeck" ? "bg-ink text-cream" : "bg-ink/5 text-ink/50 hover:bg-ink/10"
+                }`}
+              >
+                pitch deck <span className="opacity-60">{userPitchDecks.length}</span>
               </Link>
             </div>
 
@@ -412,6 +433,47 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
                         <div className="flex-shrink-0 text-right">
                           <span className="font-heading text-2xl font-bold text-ink">{s.totalScore}</span>
                           <span className="font-sans text-[12px] text-ink/30">/100</span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )
+            )}
+
+            {activeToolSub === "pitchdeck" && (
+              userPitchDecks.length === 0 ? (
+                <div className="border border-dashed border-border rounded-2xl p-8 text-center">
+                  <p className="font-sans text-sm text-ink/50 mb-3">no pitch deck analyses yet</p>
+                  <Link href="/fundraise/tools/pitch-deck-analyser" className="text-xs font-sans font-semibold text-peach-dark hover:underline">
+                    analyse your pitch deck
+                  </Link>
+                </div>
+              ) : (
+                <div className="flex flex-col gap-3">
+                  {userPitchDecks.map((s) => (
+                    <div key={s.id} className="bg-card border border-border rounded-2xl p-5">
+                      <div className="flex items-center justify-between gap-4">
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="text-[12px] font-sans font-semibold px-2 py-0.5 rounded-full bg-green-100 text-green-700">
+                              full report
+                            </span>
+                            <span className="text-[12px] font-sans text-ink/30">{formatDate(s.createdAt)}</span>
+                          </div>
+                          <p className="font-heading text-base font-700 text-ink normal-case">
+                            pitch deck analysis
+                          </p>
+                          <p className="font-sans text-[12px] text-ink/40 truncate">{s.fileName}</p>
+                        </div>
+                        <div className="flex-shrink-0 text-right flex flex-col items-end gap-2">
+                          <div>
+                            <span className="font-heading text-2xl font-bold text-ink">{s.totalScore}</span>
+                            <span className="font-sans text-[12px] text-ink/30">/100</span>
+                          </div>
+                          <Link href={`/my-activity/pitch-deck/${s.id}`} className="text-[13px] font-sans font-semibold text-peach-dark hover:underline">
+                            view report →
+                          </Link>
                         </div>
                       </div>
                     </div>

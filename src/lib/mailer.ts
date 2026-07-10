@@ -277,6 +277,7 @@ export async function sendPurchaseWelcome({
     "family-offices-list":  "Your Family Office List - how to approach them",
     "incubators-list":      "Your Incubator and Accelerator List - how to apply well",
     "startup-ideas-2026":   "Your 100 startup ideas - what to do next",
+    "pitch-deck-analyser":  "Your pitch deck analysis is ready - here's how to use it",
   }
   await sendMail({
     to,

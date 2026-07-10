@@ -77,6 +77,7 @@ export default function ToolsAdminClient({
     {
       key: "tool_startup_score_live",
       priceKey: "price_startup_score",
+      defaultPrice: 49900,
       label: "Startup Fundability Score",
       description: "50-question quiz scoring startups on investor criteria. Free score, paid full analysis.",
       href: "/admin/startup-scores",
@@ -84,9 +85,18 @@ export default function ToolsAdminClient({
     {
       key: "tool_startup_idea_score_live",
       priceKey: "price_idea_score",
+      defaultPrice: 49900,
       label: "Startup Idea Score",
       description: "Startup idea evaluation tool. Free score, paid full analysis.",
       href: "/admin/idea-scores",
+    },
+    {
+      key: "tool_pitch_deck_analyser_live",
+      priceKey: "price_pitch_deck_analyser",
+      defaultPrice: 19900,
+      label: "Pitch Deck Analyser",
+      description: "Gemini-powered PDF pitch deck analysis - score, 20-section audit, story rewrites. Paid, sign-in required.",
+      href: "/admin/pitch-decks",
     },
   ]
 
@@ -124,7 +134,7 @@ export default function ToolsAdminClient({
                   <div className="flex items-center gap-2 mt-1">
                     <span className="text-[11px] font-sans text-ink/50">price:</span>
                     <span className="text-[11px] font-sans font-semibold text-ink">
-                      ₹{((parseInt(settings[tool.priceKey] ?? "49900", 10)) / 100).toLocaleString("en-IN")}
+                      ₹{((parseInt(settings[tool.priceKey] ?? String(tool.defaultPrice), 10)) / 100).toLocaleString("en-IN")}
                     </span>
                     <input
                       type="number"

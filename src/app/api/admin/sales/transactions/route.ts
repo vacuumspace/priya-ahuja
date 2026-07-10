@@ -1,6 +1,6 @@
 import { auth, isAdmin } from "@/lib/auth"
 import { db } from "@/lib/db"
-import { bookings, purchases, startupScores, services, digitalProducts, users, priyaGptTimeTransactions } from "@/lib/db/schema"
+import { bookings, purchases, startupScores, pitchDeckAnalyses, services, digitalProducts, users, priyaGptTimeTransactions } from "@/lib/db/schema"
 import { and, desc, eq, inArray, isNotNull, like } from "drizzle-orm"
 
 const PAGE_SIZE = 10
@@ -17,7 +17,7 @@ export async function GET(req: Request) {
   const typeFilter = searchParams.get("type")
 
   // Fetch all sources
-  const [allBookings, allPurchases, allScores, allPriyaGpt] = await Promise.all([
+  const [allBookings, allPurchases, allScores, allPitchDecks, allPriyaGpt] = await Promise.all([
     db
       .select({
         id: bookings.id,
@@ -61,6 +61,19 @@ export async function GET(req: Request) {
       .from(startupScores)
       .leftJoin(users, eq(startupScores.userId, users.id))
       .where(eq(startupScores.isPaid, true)),
+
+    db
+      .select({
+        id: pitchDeckAnalyses.id,
+        amountPaid: pitchDeckAnalyses.amountPaid,
+        razorpayPaymentId: pitchDeckAnalyses.razorpayPaymentId,
+        createdAt: pitchDeckAnalyses.createdAt,
+        userName: users.name,
+        userEmail: users.email,
+      })
+      .from(pitchDeckAnalyses)
+      .leftJoin(users, eq(pitchDeckAnalyses.userId, users.id))
+      .where(eq(pitchDeckAnalyses.isPaid, true)),
 
     db
       .select({
@@ -118,6 +131,17 @@ export async function GET(req: Request) {
       userEmail: r.userEmail ?? "",
       itemName: "Startup Score",
       amount: null,
+      razorpayPaymentId: r.razorpayPaymentId,
+      status: "paid",
+      createdAt: r.createdAt,
+    })),
+    ...allPitchDecks.map((r) => ({
+      id: r.id,
+      type: "pitchdeck",
+      userName: r.userName ?? "Unknown",
+      userEmail: r.userEmail ?? "",
+      itemName: "Pitch Deck Analysis",
+      amount: r.amountPaid,
       razorpayPaymentId: r.razorpayPaymentId,
       status: "paid",
       createdAt: r.createdAt,

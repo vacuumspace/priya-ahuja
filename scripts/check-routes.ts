@@ -28,6 +28,7 @@ const STATIC_ROUTES = [
   "/fundraise/angel-investors",
   "/fundraise/tools",
   "/fundraise/tools/fundability-score",
+  "/fundraise/tools/pitch-deck-analyser",
   "/fundraise/templates",
   "/startup",
   "/startup/blog",

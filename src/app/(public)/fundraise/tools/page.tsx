@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { Lightbulb } from "lucide-react"
+import { Lightbulb, FileSearch } from "lucide-react"
 
 const tools = [
   {
@@ -12,6 +12,14 @@ const tools = [
     tag: "ideation",
     icon: Lightbulb,
     href: "/fundraise/tools/fundability-score",
+  },
+  {
+    slug: "pitch-deck-analyser",
+    title: "Pitch Deck Analyser",
+    description: "Investors spend under 3 minutes on your deck. Upload your PDF and get the same read-through - AI-powered, investor-calibrated. Score out of 100, a 20-section audit from problem to niche to moat to ask, the silent red flags VCs never tell you about, and your weakest lines rewritten so the story becomes fundable.",
+    tag: "pitching",
+    icon: FileSearch,
+    href: "/fundraise/tools/pitch-deck-analyser",
   },
 ]
 

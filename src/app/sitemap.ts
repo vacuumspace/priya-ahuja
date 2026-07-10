@@ -18,6 +18,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE_URL}/connect`, priority: 0.9, changeFrequency: "weekly", lastModified: NOW },
     { url: `${BASE_URL}/fundraise/angel-investors`, priority: 0.8, changeFrequency: "monthly", lastModified: NOW },
     { url: `${BASE_URL}/fundraise/tools/fundability-score`, priority: 0.8, changeFrequency: "monthly", lastModified: NOW },
+    { url: `${BASE_URL}/fundraise/tools/pitch-deck-analyser`, priority: 0.8, changeFrequency: "monthly", lastModified: NOW },
     { url: `${BASE_URL}/startup/tools/idea-score`, priority: 0.8, changeFrequency: "monthly", lastModified: NOW },
     { url: `${BASE_URL}/blog`, priority: 0.7, changeFrequency: "weekly", lastModified: NOW },
     { url: `${BASE_URL}/startup/templates`, priority: 0.7, changeFrequency: "monthly", lastModified: NOW },

@@ -1,6 +1,6 @@
 import { auth, isAdmin } from "@/lib/auth"
 import { db } from "@/lib/db"
-import { bookings, purchases, digitalProducts, startupScores, startupIdeaScores, customRequests, bookingMessages, users, serviceInquiries, startupMistakes } from "@/lib/db/schema"
+import { bookings, purchases, digitalProducts, startupScores, startupIdeaScores, pitchDeckAnalyses, customRequests, bookingMessages, users, serviceInquiries, startupMistakes } from "@/lib/db/schema"
 import { eq, count, and, notInArray, ne } from "drizzle-orm"
 
 const ANGEL_SLUG = "angel-investor-list"
@@ -11,7 +11,7 @@ export async function GET() {
     return new Response("Forbidden", { status: 403 })
   }
 
-  const [unseenBookings, unseenTemplatePurchases, unseenInvestorListPurchases, unseenFundability, unseenIdea, newCustomRequests, unreadMessages, unseenUsers, newServiceInquiries, pendingMistakes] =
+  const [unseenBookings, unseenTemplatePurchases, unseenInvestorListPurchases, unseenFundability, unseenIdea, unseenPitchDecks, newCustomRequests, unreadMessages, unseenUsers, newServiceInquiries, pendingMistakes] =
     await Promise.all([
       db.select({ count: count() }).from(bookings).where(
         and(notInArray(bookings.status, ["cancelled", "pending"]), eq(bookings.adminSeen, false))
@@ -24,6 +24,7 @@ export async function GET() {
         .where(and(eq(purchases.adminSeen, false), eq(digitalProducts.slug, ANGEL_SLUG))),
       db.select({ count: count() }).from(startupScores).where(eq(startupScores.adminSeen, false)),
       db.select({ count: count() }).from(startupIdeaScores).where(eq(startupIdeaScores.adminSeen, false)),
+      db.select({ count: count() }).from(pitchDeckAnalyses).where(eq(pitchDeckAnalyses.adminSeen, false)),
       db.select({ count: count() }).from(customRequests).where(eq(customRequests.status, "new")),
       db.select({ count: count() }).from(bookingMessages).where(
         and(eq(bookingMessages.isAdmin, false), eq(bookingMessages.adminRead, false))
@@ -39,6 +40,7 @@ export async function GET() {
     "/admin/investor-list": unseenInvestorListPurchases[0].count,
     "/admin/startup-scores": unseenFundability[0].count,
     "/admin/idea-scores": unseenIdea[0].count,
+    "/admin/pitch-decks": unseenPitchDecks[0].count,
     "/admin/custom-requests": newCustomRequests[0].count,
     "/admin/service-inquiries": newServiceInquiries[0].count,
     "/admin/users": unseenUsers[0].count,

@@ -1,7 +1,7 @@
 import { auth, isAdmin } from "@/lib/auth"
 import { db } from "@/lib/db"
 import {
-  bookings, purchases, startupScores, serviceInquiries,
+  bookings, purchases, startupScores, pitchDeckAnalyses, serviceInquiries,
   users, services, analyticsEvents,
 } from "@/lib/db/schema"
 import { eq, not, count } from "drizzle-orm"
@@ -23,6 +23,7 @@ export async function GET() {
     pageViewTotal,
     ctaClicks,
     angelPurchases,
+    paidPitchDecks,
   ] = await Promise.all([
     db.select({ createdAt: bookings.createdAt, status: bookings.status })
       .from(bookings)
@@ -61,6 +62,8 @@ export async function GET() {
 
     // Angel investor purchases count (for conversion rate)
     db.select({ cnt: count() }).from(purchases),
+
+    db.select({ cnt: count() }).from(pitchDeckAnalyses).where(eq(pitchDeckAnalyses.isPaid, true)),
   ])
 
   function monthKey(d: Date | null) {
@@ -133,6 +136,13 @@ export async function GET() {
       clicks: ctaMap["startup-score-unlock"] ?? 0,
       completions: paidScores,
       rate: convRate(paidScores, ctaMap["startup-score-unlock"] ?? 0),
+    },
+    {
+      label: "Pitch Deck Analyser",
+      ctaId: "pitch-deck-analyser-unlock",
+      clicks: ctaMap["pitch-deck-analyser-unlock"] ?? 0,
+      completions: Number(paidPitchDecks[0]?.cnt ?? 0),
+      rate: convRate(Number(paidPitchDecks[0]?.cnt ?? 0), ctaMap["pitch-deck-analyser-unlock"] ?? 0),
     },
     {
       label: "Accounting Inquiry",

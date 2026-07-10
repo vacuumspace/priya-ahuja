@@ -237,6 +237,21 @@ export const startupIdeaScores = pgTable("startup_idea_scores", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
 })
 
+export const pitchDeckAnalyses = pgTable("pitch_deck_analyses", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  fileName: text("file_name").notNull(),
+  fileSizeBytes: integer("file_size_bytes"),
+  totalScore: integer("total_score").notNull(),
+  report: jsonb("report").notNull(), // full PitchDeckReport JSON from Gemini
+  isPaid: boolean("is_paid").notNull().default(false),
+  amountPaid: integer("amount_paid"), // paise actually captured; null for admin test runs
+  razorpayOrderId: text("razorpay_order_id"),
+  razorpayPaymentId: text("razorpay_payment_id"),
+  adminSeen: boolean("admin_seen").notNull().default(false),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+})
+
 export const wellbeingScores = pgTable("wellbeing_scores", {
   id: uuid("id").primaryKey().defaultRandom(),
   userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),

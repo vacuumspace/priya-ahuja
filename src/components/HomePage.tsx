@@ -288,6 +288,7 @@ export default function HomePage() {
                 { label: "investor lists", href: "/fundraise/investor-list", star: true },
                 { label: "grants", href: "/fundraise/grants" },
                 { label: "fundability score", href: "/fundraise/tools/fundability-score" },
+                { label: "pitch deck analyser", href: "/fundraise/tools/pitch-deck-analyser" },
               ],
             },
             {

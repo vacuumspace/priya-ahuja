@@ -1,6 +1,6 @@
 ﻿import type { Metadata } from "next"
 import Link from "next/link"
-import { Users, FileText, Wrench, BookOpen, Database, Award } from "lucide-react"
+import { Users, FileText, Wrench, BookOpen, Database, Award, FileSearch } from "lucide-react"
 
 export const metadata: Metadata = {
   title: "Fundraise Resources for Indian Startups",
@@ -23,6 +23,15 @@ const sections = [
     icon: Wrench,
     badge: "free quiz · ₹499 unlock",
     href: "/fundraise/tools/fundability-score",
+  },
+  {
+    slug: "pitch-deck-analyser",
+    title: "Pitch Deck Analyser",
+    description: "Upload your deck PDF and get the read-through an investor gives it - score out of 100, a 20-section audit from problem to moat, your weakest lines rewritten, and the silent red flags VCs never tell you about.",
+    tag: "tool",
+    icon: FileSearch,
+    badge: "AI analysis · ₹199",
+    href: "/fundraise/tools/pitch-deck-analyser",
   },
   {
     slug: "angel-investors",

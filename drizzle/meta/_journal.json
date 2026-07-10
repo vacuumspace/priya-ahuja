@@ -162,6 +162,20 @@
       "when": 1783493632000,
       "tag": "0005_fixed_colossus",
       "breakpoints": true
+    },
+    {
+      "idx": 23,
+      "version": "7",
+      "when": 1783660612400,
+      "tag": "0017_pitch_deck_analyses",
+      "breakpoints": true
+    },
+    {
+      "idx": 24,
+      "version": "7",
+      "when": 1783677694870,
+      "tag": "0018_pitch_deck_amount",
+      "breakpoints": true
     }
   ]
 }

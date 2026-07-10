@@ -108,6 +108,20 @@ const content: Record<string, {
     ctaLabel: "View your full score",
     ctaPath: "/my-activity?tab=tools",
   },
+  "pitch-deck-analyser": {
+    subject: "Your pitch deck analysis is ready - here's how to use it",
+    headline: "Your deck analysis is in. Now fix the story.",
+    body: "The report is only worth the edits you make from it. Here's how to work through it:",
+    steps: [
+      "Start with the action plan at the bottom - it's ordered by leverage, so fix things in that sequence.",
+      "Apply the story rewrites first. Your one-liner and your ask are what investors remember - get those right before touching anything else.",
+      "Read the 'silent deal-killers' twice. Investors won't tell you about these - they just won't reply.",
+      "Prep answers to every investor question in the report before your next meeting - or better, answer them in the deck itself.",
+      "Once you've reworked the deck, book a 1:1 pitch review to pressure-test the live delivery.",
+    ],
+    ctaLabel: "View your full report",
+    ctaPath: "/my-activity?tab=tools&sub=pitchdeck",
+  },
   default: {
     subject: "You're all set - here's how to get the most out of your purchase",
     headline: "You're in. Here's what to do next.",

@@ -29,6 +29,7 @@ import {
   MapPin,
   Bot,
   Settings,
+  FileSearch,
   type LucideIcon,
 } from "lucide-react"
 import { useState } from "react"
@@ -62,13 +63,14 @@ const navGroups: NavGroup[] = [
   },
   {
     label: "Transactions",
-    prefixes: ["/admin/bookings", "/admin/startup-scores", "/admin/idea-scores", "/admin/investor-list", "/admin/priya-gpt-payments"],
+    prefixes: ["/admin/bookings", "/admin/startup-scores", "/admin/idea-scores", "/admin/pitch-decks", "/admin/investor-list", "/admin/priya-gpt-payments"],
     items: [
       { label: "Bookings", href: "/admin/bookings", icon: CalendarCheck },
       { label: "Templates", href: "/admin/products?tab=transactions", icon: FileStack },
       { label: "Investor List", href: "/admin/investor-list", icon: TrendingUp },
       { label: "Fundability Scores", href: "/admin/startup-scores", icon: Lightbulb },
       { label: "Idea Scores", href: "/admin/idea-scores", icon: Lightbulb },
+      { label: "Pitch Decks", href: "/admin/pitch-decks", icon: FileSearch },
       { label: "PriyaGPT", href: "/admin/priya-gpt-payments", icon: Bot },
     ],
   },

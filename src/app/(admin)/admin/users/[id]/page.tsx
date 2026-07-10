@@ -1,5 +1,5 @@
 import { db } from "@/lib/db"
-import { users, userProfiles, bookings, purchases, services as servicesTable, digitalProducts, priyaGptTimeBalances, priyaGptTimeTransactions } from "@/lib/db/schema"
+import { users, userProfiles, bookings, purchases, services as servicesTable, digitalProducts, priyaGptTimeBalances, priyaGptTimeTransactions, pitchDeckAnalyses, startupScores, startupIdeaScores } from "@/lib/db/schema"
 import { eq, desc } from "drizzle-orm"
 import { notFound } from "next/navigation"
 import Link from "next/link"
@@ -18,7 +18,7 @@ export default async function AdminUserDetailPage({ params }: Props) {
 
   const [profile] = await db.select().from(userProfiles).where(eq(userProfiles.userId, id))
 
-  const [userBookings, userPurchases, [priyaGptBalanceRow], priyaGptTxns] = await Promise.all([
+  const [userBookings, userPurchases, [priyaGptBalanceRow], priyaGptTxns, userPitchDecks, userFundScores, userIdeaScores] = await Promise.all([
     db
       .select({ id: bookings.id, status: bookings.status, createdAt: bookings.createdAt, serviceTitle: servicesTable.title })
       .from(bookings)
@@ -36,6 +36,24 @@ export default async function AdminUserDetailPage({ params }: Props) {
     db.select().from(priyaGptTimeBalances).where(eq(priyaGptTimeBalances.userId, id)).limit(1),
 
     db.select().from(priyaGptTimeTransactions).where(eq(priyaGptTimeTransactions.userId, id)).orderBy(desc(priyaGptTimeTransactions.createdAt)),
+
+    db
+      .select({ id: pitchDeckAnalyses.id, fileName: pitchDeckAnalyses.fileName, totalScore: pitchDeckAnalyses.totalScore, isPaid: pitchDeckAnalyses.isPaid, amountPaid: pitchDeckAnalyses.amountPaid, createdAt: pitchDeckAnalyses.createdAt })
+      .from(pitchDeckAnalyses)
+      .where(eq(pitchDeckAnalyses.userId, id))
+      .orderBy(desc(pitchDeckAnalyses.createdAt)),
+
+    db
+      .select({ id: startupScores.id, totalScore: startupScores.totalScore, isPaid: startupScores.isPaid, createdAt: startupScores.createdAt })
+      .from(startupScores)
+      .where(eq(startupScores.userId, id))
+      .orderBy(desc(startupScores.createdAt)),
+
+    db
+      .select({ id: startupIdeaScores.id, totalScore: startupIdeaScores.totalScore, isPaid: startupIdeaScores.isPaid, createdAt: startupIdeaScores.createdAt })
+      .from(startupIdeaScores)
+      .where(eq(startupIdeaScores.userId, id))
+      .orderBy(desc(startupIdeaScores.createdAt)),
   ])
 
   return (
@@ -57,6 +75,9 @@ export default async function AdminUserDetailPage({ params }: Props) {
         purchases={userPurchases.map((p) => ({ ...p, createdAt: new Date(p.createdAt) }))}
         priyaGptMinutes={priyaGptBalanceRow?.minutesRemaining ?? 0}
         priyaGptTransactions={priyaGptTxns.map((t) => ({ ...t, createdAt: new Date(t.createdAt) }))}
+        pitchDecks={userPitchDecks.map((p) => ({ ...p, createdAt: new Date(p.createdAt) }))}
+        fundScores={userFundScores.map((s) => ({ ...s, createdAt: new Date(s.createdAt) }))}
+        ideaScores={userIdeaScores.map((s) => ({ ...s, createdAt: new Date(s.createdAt) }))}
       />
     </div>
   )
