@@ -504,12 +504,6 @@ function ResultsView({ report, fileName }: { report: PitchDeckReport; fileName: 
           book a pitch review session
         </Link>
       </div>
-
-      <div className="border-t border-border pt-5 pb-2">
-        <p className="font-sans text-[12px] text-ink/30 leading-relaxed text-center max-w-md mx-auto">
-          disclaimer: this AI-generated analysis is for informational purposes only and is not investment advice or a guarantee of fundraising outcomes. investors weigh many factors beyond the deck. use it as one honest data point, not a verdict.
-        </p>
-      </div>
     </div>
   )
 }
