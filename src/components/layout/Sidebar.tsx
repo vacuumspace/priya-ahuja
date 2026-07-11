@@ -31,7 +31,7 @@ const topicGroups = [
       { label: "blog", href: "/startup/blog" },
       { label: "tools", href: "/startup/tools" },
       { label: "templates", href: "/startup/templates" },
-      { label: "100 startup ideas", href: "/startup/ideas" },
+      { label: "startup ideas", href: "/startup/ideas" },
       { label: "mistakes", href: "/startup/mistakes" },
       { label: "resources & credits", href: "/startup/resources" },
     ],

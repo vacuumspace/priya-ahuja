@@ -17,11 +17,11 @@ export const metadata: Metadata = {
 const sections = [
   {
     slug: "ideas",
-    title: "100 Startup Ideas for 2026",
-    description: "Non-obvious, high-potential startup ideas for Indian founders - each with the real problem, market opportunity, and why now. Curated, not crowd-sourced.",
+    title: "Startup Ideas for 2026",
+    description: "200 non-obvious, high-potential startup ideas for Indian founders - 100 tech ideas and 100 D2C brand ideas, each with the real problem, market opportunity, and why now. Curated, not crowd-sourced.",
     tag: "content",
     icon: Lightbulb,
-    badge: "100 ideas",
+    badge: "100 tech + 100 d2c",
     href: "/startup/ideas",
   },
   {

@@ -295,7 +295,8 @@ export default function HomePage() {
               heading: "startup",
               href: "/startup",
               links: [
-                { label: "100 startup ideas", href: "/startup/ideas" },
+                { label: "100 tech startup ideas", href: "/startup/ideas/tech" },
+                { label: "100 d2c startup ideas", href: "/startup/ideas/d2c" },
                 { label: "resources & credits", href: "/startup/resources" },
                 { label: "idea score", href: "/startup/tools/idea-score" },
               ],

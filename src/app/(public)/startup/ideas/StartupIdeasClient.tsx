@@ -1,10 +1,11 @@
-﻿"use client"
+"use client"
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { Lock, X, ChevronLeft, ChevronRight } from "lucide-react"
 import SignInOptions from "@/components/SignInOptions"
+import ServicesPromo, { type ServicePromo } from "@/components/ServicesPromo"
 import { FREE_IDEAS_COUNT, type StartupIdea } from "@/lib/startup-ideas-data"
 
 type Props = {
@@ -13,18 +14,39 @@ type Props = {
   ideas: StartupIdea[]
   userEmail: string | null
   userName: string | null
+  basePath?: string
+  crumbLeft?: string
+  crumbRight?: string
+  headingLine1?: string
+  headingLine2?: string
+  description?: string
+  signinNote?: string
+  servicesHeading?: string
+  services?: ServicePromo[]
 }
 
 const PAGE_SIZE = 10
-const TOTAL_IDEAS = 100
 
-export default function StartupIdeasClient({ isPaid, isAuthenticated, ideas }: Props) {
+export default function StartupIdeasClient({
+  isPaid,
+  isAuthenticated,
+  ideas,
+  basePath = "/startup/ideas",
+  crumbLeft = "startup · ideas 2026",
+  crumbRight = "100 ideas for Indian founders",
+  headingLine1 = "100 tech startup ideas",
+  headingLine2 = "for 2026",
+  description = "Curated unique and out of the box tech ideas for Indian founders, each with the real problem, market opportunity, and why now. Under tapped, non-obvious, and high potential ideas that you won't find elsewhere.",
+  signinNote = "100 tech startup ideas · free access",
+  servicesHeading,
+  services,
+}: Props) {
   const router = useRouter()
   const [showSignIn, setShowSignIn] = useState(false)
   const [page, setPage] = useState(1)
 
   const hasAccess = isAuthenticated || isPaid
-  const total = TOTAL_IDEAS
+  const total = ideas.length
   const pageCount = Math.ceil(total / PAGE_SIZE)
   const visibleIdeas = hasAccess
     ? ideas.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
@@ -34,7 +56,7 @@ export default function StartupIdeasClient({ isPaid, isAuthenticated, ideas }: P
   const end = Math.min(page * PAGE_SIZE, total)
 
   function handleRowClick(slug: string, isClickable: boolean) {
-    if (isClickable) router.push(`/startup/ideas/${slug}`)
+    if (isClickable) router.push(`${basePath}/${slug}`)
     else setShowSignIn(true)
   }
 
@@ -42,8 +64,8 @@ export default function StartupIdeasClient({ isPaid, isAuthenticated, ideas }: P
     <div className="min-h-screen bg-cream w-full max-w-full overflow-x-hidden">
       {/* Header bar */}
       <div className="flex justify-between items-center px-4 md:px-10 py-4 text-[13px] text-ink/50 font-sans border-b border-border">
-        <span>startup · ideas 2026</span>
-        <span>100 ideas for Indian founders</span>
+        <span>{crumbLeft}</span>
+        <span>{crumbRight}</span>
       </div>
 
       {/* Title + CTA */}
@@ -51,14 +73,12 @@ export default function StartupIdeasClient({ isPaid, isAuthenticated, ideas }: P
         <div>
           <p className="font-sans text-xs text-ink/40 uppercase tracking-wide mb-2">Startup</p>
           <h1 className="font-heading text-3xl md:text-5xl font-800 text-ink mb-4">
-            100 startup ideas
+            {headingLine1}
             <br />
-            for 2026
+            {headingLine2}
           </h1>
           <p className="font-sans text-sm text-ink/60 max-w-md leading-relaxed">
-            Curated unique and out of the box ideas for Indian founders, each with the real problem, market opportunity, and why now.
-            Ideas are evergreen, not only tech or trend-specific, and covers across the industry categories.
-            Under tapped, non-obvious, and high potential ideas that you won't find elsewhere.
+            {description}
           </p>
           <p className="font-sans text-sm text-ink/70 max-w-md mt-3 font-semibold">Click on the idea to see the details.</p>
         </div>
@@ -71,7 +91,7 @@ export default function StartupIdeasClient({ isPaid, isAuthenticated, ideas }: P
             >
               sign in to read
             </button>
-            <span className="text-[12px] font-sans text-ink/40">free · all 100 ideas unlocked</span>
+            <span className="text-[12px] font-sans text-ink/40">free · all {total} ideas unlocked</span>
           </div>
         )}
       </div>
@@ -175,7 +195,7 @@ export default function StartupIdeasClient({ isPaid, isAuthenticated, ideas }: P
       </div>
 
       {/* Subtle connect CTA */}
-      <div className="mx-4 md:mx-10 mb-16 px-5 py-4 border border-border rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      <div className={`mx-4 md:mx-10 ${services?.length ? "mb-8" : "mb-16"} px-5 py-4 border border-border rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3`}>
         <p className="font-sans text-xs text-ink/40">
           want to brainstorm a specific idea with me?
         </p>
@@ -183,6 +203,13 @@ export default function StartupIdeasClient({ isPaid, isAuthenticated, ideas }: P
           book a startup brainstorming session →
         </Link>
       </div>
+
+      {/* Services promo */}
+      {services && services.length > 0 && servicesHeading && (
+        <div className="mx-4 md:mx-10 mb-16">
+          <ServicesPromo heading={servicesHeading} services={services} />
+        </div>
+      )}
 
       {/* Sign-in modal */}
       {showSignIn && (
@@ -194,17 +221,17 @@ export default function StartupIdeasClient({ isPaid, isAuthenticated, ideas }: P
             <div className="flex items-start justify-between mb-4">
               <div>
                 <h3 className="font-heading text-xl font-700 text-ink">sign in to continue</h3>
-                <p className="font-sans text-xs text-ink/40 mt-0.5">100 startup ideas · free access</p>
+                <p className="font-sans text-xs text-ink/40 mt-0.5">{signinNote}</p>
               </div>
               <button onClick={() => setShowSignIn(false)} className="text-ink/40 hover:text-ink transition-colors">
                 <X size={18} />
               </button>
             </div>
             <p className="font-sans text-sm text-ink/60 mb-5 leading-relaxed">
-              sign in for free access to all 100 ideas.
+              sign in for free access to all {total} ideas.
             </p>
             <SignInOptions
-              callbackUrl={typeof window !== "undefined" ? window.location.href : "/startup/ideas"}
+              callbackUrl={typeof window !== "undefined" ? window.location.href : basePath}
               compact
             />
           </div>

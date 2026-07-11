@@ -33,6 +33,8 @@ const STATIC_ROUTES = [
   "/startup",
   "/startup/blog",
   "/startup/ideas",
+  "/startup/ideas/tech",
+  "/startup/ideas/d2c",
   "/startup/tools",
   "/startup/tools/idea-score",
   "/startup/templates",
