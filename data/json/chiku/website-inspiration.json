@@ -1,0 +1,226 @@
+[
+  {
+    "name": "Liquid Death",
+    "category": "Canned water",
+    "website": "https://liquiddeath.com",
+    "why": "Death-metal branding for... water. Skulls, 'Murder Your Thirst', horror-comedy product videos and merch drops - the site feels like a band page, not a beverage store.",
+    "steal": "Total commitment to a bit. Pick one exaggerated brand universe and never break character anywhere on the site."
+  },
+  {
+    "name": "Recess",
+    "category": "Sparkling water",
+    "website": "https://takearecess.com",
+    "why": "Dreamy surrealist world - floating objects, pastel gradients, hypnotic scroll physics, a can-shaped cart that fizzes on hover. Site is designed to make you feel the calm the drink sells.",
+    "steal": "Make the site itself deliver the product's emotional promise. Micro-interactions (cart, hover, scroll) as brand moments."
+  },
+  {
+    "name": "Vacation",
+    "category": "Sunscreen",
+    "website": "https://vacation.inc",
+    "why": "An entire fictional 1980s resort corporation - fake employee ID cards, Miami-vice type gradients, 'leisure-enhancing' copy, even a business-card generator that made users 'employees'.",
+    "steal": "World-building over web design. Give visitors a role inside the brand story, not just a catalogue."
+  },
+  {
+    "name": "Poolsuite",
+    "category": "Internet radio / lifestyle",
+    "website": "https://poolsuite.net",
+    "why": "The whole site is a working retro Macintosh desktop - draggable windows, summer radio channels, pixel UI. One of the most screenshotted websites on the internet.",
+    "steal": "An interface metaphor (old OS, magazine, boutique) can make a site unforgettable on its own."
+  },
+  {
+    "name": "MSCHF",
+    "category": "Drop collective",
+    "website": "https://mschf.xyz",
+    "why": "Chaotic anti-brand that ships a bizarre product every two weeks - the site is a numbered archive of stunts. No hero banners, no funnel, pure intrigue.",
+    "steal": "Scarcity + numbered drops + zero explanation creates cult curiosity. Works for limited capsule collections."
+  },
+  {
+    "name": "Starface",
+    "category": "Skincare (pimple patches)",
+    "website": "https://starface.world",
+    "why": "Y2K smiley-star universe on a .world domain - acid yellows, chunky cursors, mascot-led everything. Made acne care loud instead of clinical.",
+    "steal": "Flip the category's visual code. If everyone whispers elegance, shout play (or vice versa). Also: unusual TLDs (.world, .inc) set tone before the site loads."
+  },
+  {
+    "name": "Omsom",
+    "category": "Asian pantry sauces",
+    "website": "https://omsom.com",
+    "why": "'Proud + loud' - neon colour blocking, giant type, unapologetic founder-story energy. The brand voice is the design.",
+    "steal": "A strong point of view (cultural pride, boldness) expressed typographically beats generic 'premium minimal'."
+  },
+  {
+    "name": "Graza",
+    "category": "Olive oil",
+    "website": "https://www.graza.co",
+    "why": "Made olive oil fun - squeeze-bottle mascot illustrations, hand-drawn scribbles, chef-meme energy. Turned a commodity into a personality.",
+    "steal": "Illustration systems give infinite, ownable brand assets - cheaper and more distinctive than photoshoots."
+  },
+  {
+    "name": "Fishwife",
+    "category": "Tinned fish",
+    "website": "https://eatfishwife.com",
+    "why": "Maximalist illustrated tins turned into a whole site aesthetic - riso-print colours, wallpaper patterns, editorial recipes. Tinned fish as a lifestyle.",
+    "steal": "Let packaging art direct the website - one continuous visual system from product in hand to pixels."
+  },
+  {
+    "name": "Aura Bora",
+    "category": "Herbal sparkling water",
+    "website": "https://aurabora.com",
+    "why": "Storybook surrealism - talking animal characters, 'Aura Bora Land' page, whimsical illustrated flavour worlds for basil-and-lavender water.",
+    "steal": "Flavours/collections as illustrated 'worlds' - could map beautifully to fabric/craft stories."
+  },
+  {
+    "name": "Surreal",
+    "category": "Protein cereal",
+    "website": "https://eatsurreal.co.uk",
+    "why": "Meme-first copywriting famous for celebrity-endorsement spoofs ('endorsed by a guy named Ronaldo'). The website reads like a stand-up set.",
+    "steal": "Copywriting IS design. A witty voice makes even a simple Shopify layout feel crazy."
+  },
+  {
+    "name": "Magic Spoon",
+    "category": "Cereal",
+    "website": "https://magicspoon.com",
+    "why": "Saturday-morning-cartoon nostalgia rebuilt for adults - hyper-saturated 3D cereal worlds, floating loops, retro-future type.",
+    "steal": "Nostalgia, executed at premium quality, converts. Pick an era your audience loves and modernise it."
+  },
+  {
+    "name": "Dr. Squatch",
+    "category": "Men's soap",
+    "website": "https://drsquatch.com",
+    "why": "Lumberjack-bro comedy empire - viral infomercial videos embedded everywhere, 'manly' copy pushed to parody levels.",
+    "steal": "Video-led landing pages with a repeatable comedic format build recall fast."
+  },
+  {
+    "name": "Tushy",
+    "category": "Bidets",
+    "website": "https://hellotushy.com",
+    "why": "Sells toilet hygiene with relentless poop puns, peach emojis and taboo-breaking cheek. Made an awkward category shareable.",
+    "steal": "Humour dissolves category awkwardness - useful anywhere purchase anxiety exists (fit, body, price)."
+  },
+  {
+    "name": "Who Gives A Crap",
+    "category": "Toilet paper",
+    "website": "https://whogivesacrap.org",
+    "why": "Charity-meets-comedy - bold striped wrap design, cheeky name, 50% of profits to sanitation, on a .org that sells product.",
+    "steal": "Mission + mischief together. Do-good messaging doesn't have to be earnest and beige."
+  },
+  {
+    "name": "Chubbies",
+    "category": "Men's shorts",
+    "website": "https://www.chubbiesshorts.com",
+    "why": "'Weekend apparel' worldview - every product name, photo and microcopy is a joke about Friday-at-5pm freedom.",
+    "steal": "Sell an occasion/feeling (the weekend) rather than a garment. Chiku could own 'the 9-to-9 power drape' the same way."
+  },
+  {
+    "name": "Not Pot",
+    "category": "CBD gummies",
+    "website": "https://notpot.com",
+    "why": "Web-1.0 cuteness - pixel bears, pastel chaos, hand-made vibes with an anti-corporate wink. Feels like a friend's weird homepage.",
+    "steal": "Deliberate lo-fi/DIY aesthetics read as honest and young against polished competitors."
+  },
+  {
+    "name": "Ghia",
+    "category": "Non-alcoholic apéritif",
+    "website": "https://drinkghia.com",
+    "why": "Matisse-esque Mediterranean art direction - sculptural product photography, sun-baked palette, feels like a Riviera gallery not a store.",
+    "steal": "Art-book restraint is its own kind of crazy. Premium can mean gallery, not luxury-template."
+  },
+  {
+    "name": "Palace Skateboards",
+    "category": "Streetwear",
+    "website": "https://palaceskateboards.com",
+    "why": "Legendary absurdist product descriptions - each item gets a nonsense poem instead of specs. People visit just to read them.",
+    "steal": "One tiny recurring surface (product descriptions) done weirdly can become the thing people share."
+  },
+  {
+    "name": "Glossier",
+    "category": "Beauty",
+    "website": "https://www.glossier.com",
+    "why": "The D2C benchmark - built from a blog community outward; millennial-pink minimalism, UGC-as-content, 'skin first' editorial commerce.",
+    "steal": "Community and content before catalogue - the site feels like a magazine you can shop."
+  },
+  {
+    "name": "Snif",
+    "category": "Fragrance",
+    "website": "https://snif.co",
+    "why": "Gen-Z fragrance without the French-perfume pretence - loud colour, blunt names, try-before-you-buy model front and centre.",
+    "steal": "De-snob a premium category: plain talk + bold visuals + risk-free trial."
+  },
+  {
+    "name": "Feastables",
+    "category": "Chocolate (MrBeast)",
+    "website": "https://feastables.com",
+    "why": "Creator-economy commerce - gamified packaging, sweepstakes baked into the product, chunky game-UI design language.",
+    "steal": "Gamification (codes, prizes, drops) turns buyers into repeat players - and creators into distribution."
+  },
+  {
+    "name": "Ffern",
+    "category": "Organic fragrance",
+    "website": "https://ffern.co",
+    "why": "You can't just buy it - you join 'the ledger'. Four seasonal fragrances a year, made to order in Somerset only for ledger members, released on the solstice/equinox. The site reads like a nature almanac.",
+    "steal": "Membership-by-ledger + seasonal releases = built-in scarcity and ritual. A 'made only for those on the list' model would feel deeply premium for limited weave collections."
+  },
+  {
+    "name": "Flamingo Estate",
+    "category": "Home & wellness",
+    "website": "https://flamingoestate.com",
+    "why": "The brand IS a real 7-acre LA hillside estate - products come 'from the garden', shot in lush editorial style; started as pandemic produce boxes for friends.",
+    "steal": "Anchor the brand to a real physical place with a story. 'From our ateliers in ___' gives provenance a home and every product a setting."
+  },
+  {
+    "name": "Bode",
+    "category": "Luxury apparel",
+    "website": "https://www.bodenewyork.com",
+    "why": "One-of-a-kind garments cut from antique quilts, grain sacks and Victorian linens - every product page is a tiny history lesson; luxury built on textile memory.",
+    "steal": "The most relevant reference for chiku: one-of-one pieces from heritage textiles, with the fabric's story told on the product page itself."
+  },
+  {
+    "name": "Story mfg.",
+    "category": "Slow-made clothing",
+    "website": "https://www.storymfg.com",
+    "why": "'Grown, not made' - plant-dyed, hand-loomed psychedelic clothing with a Positive Product Manifesto; craft ideology presented like an art zine.",
+    "steal": "Publish a manifesto page. Stating what you refuse to do (synthetic dyes, fast drops) is a luxury signal in itself."
+  },
+  {
+    "name": "Officine Universelle Buly 1803",
+    "category": "Beauty / apothecary",
+    "website": "https://buly1803.com/en-us",
+    "why": "A 19th-century Parisian apothecary resurrected in 2014 (now LVMH) - engraved typography, calligraphy services, water-based perfumes; the site feels like stepping into 1803.",
+    "steal": "Commit to a period aesthetic completely - type, language, packaging, even services (their calligraphy = your monogramming/embroidery personalisation)."
+  },
+  {
+    "name": "Brunello Cucinelli",
+    "category": "Luxury fashion",
+    "website": "https://www.brunellocucinelli.com",
+    "why": "Sells cashmere through philosophy - 'Humanistic Capitalism', the restored village of Solomeo, letters from the founder quoting Greek philosophers. The site is half store, half moral essay.",
+    "steal": "A founder worldview, written in the founder's voice, elevates product into belief. Luxury customers buy the philosophy first."
+  },
+  {
+    "name": "Gentle Monster",
+    "category": "Eyewear",
+    "website": "https://www.gentlemonster.com",
+    "why": "Korean eyewear label famous for surreal kinetic-robot store installations - the site carries the same sci-fi art-exhibition energy; products presented like museum objects.",
+    "steal": "Treat campaigns as art installations, not photoshoots. One jaw-dropping set piece per collection gives the site (and press) something to talk about."
+  },
+  {
+    "name": "Aesop",
+    "category": "Skincare",
+    "website": "https://www.aesop.com",
+    "why": "Literary luxury - literary quotes woven throughout, muted interiors, every store architecturally unique and documented on the site like a design journal.",
+    "steal": "Restraint + intelligence as brand voice. Quoting poetry/literature (Indian poets, in chiku's case) makes a commerce site feel cultured, not salesy."
+  },
+  {
+    "name": "Freitag",
+    "category": "Bags (recycled tarps)",
+    "website": "https://www.freitag.ch",
+    "why": "Every bag is cut from a used truck tarpaulin, so no two are alike - the site sells individual bags photographed one by one, plus a SWAP platform for circular exchange.",
+    "steal": "When products are one-of-a-kind, photograph and sell each piece individually - uniqueness becomes the shopping experience."
+  },
+  {
+    "name": "Sézane",
+    "category": "Womenswear",
+    "website": "https://www.sezane.com",
+    "why": "French-girl commerce as a journal - numbered weekly drops, archive raffles via 'La Liste', philanthropy programme woven in; feels like a Paris apartment, not a store.",
+    "steal": "Journal-style merchandising + small numbered drops + a waitlist for archive pieces - premium womenswear mechanics proven at scale."
+  }
+]

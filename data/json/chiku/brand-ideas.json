@@ -1,0 +1,44 @@
+[
+  {
+    "name": "Wave",
+    "tagline": "She moves. Rooms follow.",
+    "vibe": "Fluid, assured, always in motion. Never shouts, never poses - fabric mid-stride, wind in the drape, long-exposure blur. The energy of a woman who moves through rooms and everything around her shifts.",
+    "meaning": "Noun - a natural phenomenon: a moving ridge on the surface of water, travelling forward while the water itself stays. Also: a hand gesture of greeting, a surge of something spreading ('a wave of change'), and a soft curve (in hair, in fabric).",
+    "similar_words": ["Tide", "Current", "Drift", "Swell", "Flow", "Breeze", "Surge", "Cascade"]
+  },
+  {
+    "name": "Boardroom",
+    "tagline": "The room is yours.",
+    "vibe": "Crisp, declarative, in command. Mahogany, brass and charcoal handloom; hard window light, glass towers, one woman at the head of a long table. Speaks like a term sheet - 'Approved.'",
+    "meaning": "Noun - a place: the room where a company's board of directors meets and its biggest decisions are made. A compound of 'board' (the governing body) + 'room'. By extension: shorthand for corporate power itself ('boardroom politics').",
+    "similar_words": ["Corner Office", "Quorum", "The Chair", "Agenda", "Minutes", "Charter", "Verdict", "Signature"]
+  },
+  {
+    "name": "Doe",
+    "tagline": "Soft eyes. Steady step.",
+    "vibe": "Gentle but alert - grace with awareness. Fawn, beige and warm-tan palette, morning-forest calm, soft daylight, unhurried movement. Femininity that is quiet, watchful and completely unafraid.",
+    "meaning": "Noun - an animal: the female of the deer (also of the rabbit and hare). Known for grace, stillness and acute alertness - 'doe-eyed' describes large, gentle, watchful eyes. Three letters, one soft syllable.",
+    "similar_words": ["Fawn", "Wren", "Dove", "Lark", "Hind", "Roe", "Sable", "Heron"]
+  },
+  {
+    "name": "Ocelot",
+    "tagline": "Rare by nature.",
+    "vibe": "Sleek, feline, self-possessed - wild elegance that answers to no one. Dappled golden-dusk palette, spotted textures, low light, solitary confidence. The exotic-print energy of fashion, carried by a real animal.",
+    "meaning": "Noun - an animal: a small wild cat of the Americas with a golden, dark-dappled coat. Solitary, nocturnal and famously beautiful - its fur was once so coveted that the species had to be protected. Pronounced OSS-eh-lot.",
+    "similar_words": ["Lynx", "Serval", "Caracal", "Civet", "Panther", "Jaguar", "Sable", "Puma"]
+  },
+  {
+    "name": "Sinew",
+    "tagline": "Strength runs through.",
+    "vibe": "Taut, structural, quietly powerful - strength hidden under softness. Muted earth tones, corded and ribbed textures, close-ups of weave under tension. Nothing decorative; everything load-bearing.",
+    "meaning": "Noun - anatomy: a tendon, the tough fibrous cord that ties muscle to bone. Figuratively, the source of strength ('the sinews of a nation'). Textile root: sinew was humanity's first sewing thread - garments were literally stitched with it for millennia.",
+    "similar_words": ["Fibre", "Nerve", "Spine", "Mettle", "Grit", "Marrow", "Cord", "Tensile"]
+  },
+  {
+    "name": "Valence",
+    "tagline": "The power to bond.",
+    "vibe": "Cerebral, precise, quietly charged - laboratory minimalism with warmth underneath. Clean lines, periodic-table typography, ion-blue and graphite palette. Intelligence as the aesthetic.",
+    "meaning": "Noun - chemistry: an atom's combining power, how many bonds it can form. In psychology: the emotional charge of a thing, positive or negative. Near-homophone of 'valance' - a draped fabric border, making it secretly a textile word too.",
+    "similar_words": ["Bond", "Charge", "Element", "Catalyst", "Orbit", "Ion", "Lattice", "Alloy"]
+  }
+]

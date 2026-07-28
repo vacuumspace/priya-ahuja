@@ -30,6 +30,7 @@ import {
   Bot,
   Settings,
   FileSearch,
+  Shirt,
   type LucideIcon,
 } from "lucide-react"
 import { useState } from "react"
@@ -121,6 +122,7 @@ const navGroups: NavGroup[] = [
     prefixes: ["/admin/research"],
     items: [
       { label: "KYL", href: "/admin/research/kyl", icon: MapPin },
+      { label: "Chiku", href: "/admin/research/chiku", icon: Shirt },
     ],
   },
   {
