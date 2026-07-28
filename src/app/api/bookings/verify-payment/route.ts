@@ -40,18 +40,22 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ success: true })
     }
 
-    if (booking.status === "cancelled") {
-      return NextResponse.json({ error: "Booking was cancelled" }, { status: 400 })
-    }
-
     // Verify HMAC signature
     const isValid = verifyPaymentSignature(razorpayOrderId, razorpayPaymentId, razorpaySignature)
     if (!isValid) {
-      if (booking.slotId) {
+      if (booking.status !== "cancelled" && booking.slotId) {
         await db.update(availability).set({ isBooked: false }).where(eq(availability.id, booking.slotId))
       }
       await db.update(bookings).set({ status: "cancelled" }).where(eq(bookings.id, bookingId))
       return NextResponse.json({ error: "Invalid payment signature" }, { status: 400 })
+    }
+
+    // A booking can be "cancelled" here if an earlier attempt on the same
+    // order failed and the customer retried checkout successfully. The
+    // signature above proves this payment is genuine, so it must win over
+    // a prior cancellation rather than be rejected.
+    if (booking.slotId) {
+      await db.update(availability).set({ isBooked: true }).where(eq(availability.id, booking.slotId))
     }
 
     const [service] = await db

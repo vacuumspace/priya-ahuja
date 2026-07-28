@@ -67,6 +67,7 @@ export default function UserDetailClient({
   purchases,
   priyaGptMinutes = 0,
   priyaGptTransactions = [],
+  priyaGptHasChatted = false,
   pitchDecks = [],
   fundScores = [],
   ideaScores = [],
@@ -77,6 +78,7 @@ export default function UserDetailClient({
   purchases: Purchase[]
   priyaGptMinutes?: number
   priyaGptTransactions?: PriyaGptTxn[]
+  priyaGptHasChatted?: boolean
   pitchDecks?: PitchDeck[]
   fundScores?: ToolScore[]
   ideaScores?: ToolScore[]
@@ -118,7 +120,7 @@ export default function UserDetailClient({
             {t === "tools" && toolsCount > 0 && (
               <span className="ml-1.5 font-mono text-[10px] opacity-60">{toolsCount}</span>
             )}
-            {t === "priyagpt" && priyaGptTransactions.length > 0 && (
+            {t === "priyagpt" && priyaGptHasChatted && priyaGptTransactions.length > 0 && (
               <span className="ml-1.5 font-mono text-[10px] opacity-60">{priyaGptTransactions.length}</span>
             )}
           </button>
@@ -277,6 +279,12 @@ export default function UserDetailClient({
       {/* PriyaGPT time tab */}
       {tab === "priyagpt" && (
         <div className="flex flex-col gap-4">
+          {!priyaGptHasChatted ? (
+            <p className="text-sm font-sans text-ink/40 border border-dashed border-border rounded-2xl p-6 text-center">
+              no PriyaGPT activity yet
+            </p>
+          ) : (
+          <>
           <div className="border border-border rounded-2xl p-5">
             <p className="font-sans text-xs text-ink/40 uppercase tracking-wide mb-1">time remaining</p>
             <p className="font-heading text-2xl font-800 text-ink">{priyaGptMinutes} min</p>
@@ -304,6 +312,8 @@ export default function UserDetailClient({
                 </div>
               ))}
             </div>
+          )}
+          </>
           )}
         </div>
       )}

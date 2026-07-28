@@ -21,18 +21,25 @@ export async function POST(req: NextRequest) {
   if (!orderId) return NextResponse.json({ ok: true })
 
   if (event.event === "payment.captured") {
-    // Server-side confirmation: mark booking confirmed if still pending
+    // Server-side confirmation: mark booking confirmed if not already done.
+    // A booking can be "cancelled" here if an earlier payment attempt on the
+    // same order failed (see payment.failed below) and the customer then
+    // retried checkout successfully - money has landed, so it must win over
+    // a prior cancellation rather than be silently dropped.
     const [booking] = await db
       .select()
       .from(bookings)
       .where(eq(bookings.razorpayOrderId, orderId))
       .limit(1)
 
-    if (booking && booking.status === "pending") {
+    if (booking && booking.status !== "confirmed" && booking.status !== "completed") {
+      if (booking.slotId) {
+        await db.update(availability).set({ isBooked: true }).where(eq(availability.id, booking.slotId))
+      }
       await db
         .update(bookings)
         .set({ status: "confirmed", razorpayPaymentId: paymentId ?? booking.razorpayPaymentId, amountPaid: amountCaptured ?? booking.amountPaid })
-        .where(and(eq(bookings.id, booking.id), eq(bookings.status, "pending")))
+        .where(eq(bookings.id, booking.id))
       // Note: calendar event and confirmation email are handled by client-side verify-payment.
       // This webhook acts as a safety net if the client call never completes.
     }

@@ -1,6 +1,6 @@
 import { db } from "@/lib/db"
-import { users, userProfiles, bookings, purchases, services as servicesTable, digitalProducts, priyaGptTimeBalances, priyaGptTimeTransactions, pitchDeckAnalyses, startupScores, startupIdeaScores } from "@/lib/db/schema"
-import { eq, desc } from "drizzle-orm"
+import { users, userProfiles, bookings, purchases, services as servicesTable, digitalProducts, priyaGptTimeBalances, priyaGptTimeTransactions, priyaGptSessions, priyaGptMessages, pitchDeckAnalyses, startupScores, startupIdeaScores } from "@/lib/db/schema"
+import { eq, desc, sql } from "drizzle-orm"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
@@ -18,7 +18,7 @@ export default async function AdminUserDetailPage({ params }: Props) {
 
   const [profile] = await db.select().from(userProfiles).where(eq(userProfiles.userId, id))
 
-  const [userBookings, userPurchases, [priyaGptBalanceRow], priyaGptTxns, userPitchDecks, userFundScores, userIdeaScores] = await Promise.all([
+  const [userBookings, userPurchases, [priyaGptBalanceRow], priyaGptTxns, [priyaGptMsgCountRow], userPitchDecks, userFundScores, userIdeaScores] = await Promise.all([
     db
       .select({ id: bookings.id, status: bookings.status, createdAt: bookings.createdAt, serviceTitle: servicesTable.title })
       .from(bookings)
@@ -36,6 +36,12 @@ export default async function AdminUserDetailPage({ params }: Props) {
     db.select().from(priyaGptTimeBalances).where(eq(priyaGptTimeBalances.userId, id)).limit(1),
 
     db.select().from(priyaGptTimeTransactions).where(eq(priyaGptTimeTransactions.userId, id)).orderBy(desc(priyaGptTimeTransactions.createdAt)),
+
+    db
+      .select({ count: sql<number>`count(*)`.mapWith(Number) })
+      .from(priyaGptMessages)
+      .innerJoin(priyaGptSessions, eq(priyaGptMessages.sessionId, priyaGptSessions.id))
+      .where(eq(priyaGptSessions.userId, id)),
 
     db
       .select({ id: pitchDeckAnalyses.id, fileName: pitchDeckAnalyses.fileName, totalScore: pitchDeckAnalyses.totalScore, isPaid: pitchDeckAnalyses.isPaid, amountPaid: pitchDeckAnalyses.amountPaid, createdAt: pitchDeckAnalyses.createdAt })
@@ -75,6 +81,7 @@ export default async function AdminUserDetailPage({ params }: Props) {
         purchases={userPurchases.map((p) => ({ ...p, createdAt: new Date(p.createdAt) }))}
         priyaGptMinutes={priyaGptBalanceRow?.minutesRemaining ?? 0}
         priyaGptTransactions={priyaGptTxns.map((t) => ({ ...t, createdAt: new Date(t.createdAt) }))}
+        priyaGptHasChatted={(priyaGptMsgCountRow?.count ?? 0) > 0}
         pitchDecks={userPitchDecks.map((p) => ({ ...p, createdAt: new Date(p.createdAt) }))}
         fundScores={userFundScores.map((s) => ({ ...s, createdAt: new Date(s.createdAt) }))}
         ideaScores={userIdeaScores.map((s) => ({ ...s, createdAt: new Date(s.createdAt) }))}
