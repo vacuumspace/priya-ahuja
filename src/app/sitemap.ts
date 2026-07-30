@@ -16,6 +16,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: BASE_URL, priority: 1.0, changeFrequency: "weekly", lastModified: NOW },
     { url: `${BASE_URL}/connect`, priority: 0.9, changeFrequency: "weekly", lastModified: NOW },
+    { url: `${BASE_URL}/services/consultancy`, priority: 0.8, changeFrequency: "monthly", lastModified: NOW },
     { url: `${BASE_URL}/fundraise/angel-investors`, priority: 0.8, changeFrequency: "monthly", lastModified: NOW },
     { url: `${BASE_URL}/fundraise/tools/fundability-score`, priority: 0.8, changeFrequency: "monthly", lastModified: NOW },
     { url: `${BASE_URL}/fundraise/tools/pitch-deck-analyser`, priority: 0.8, changeFrequency: "monthly", lastModified: NOW },

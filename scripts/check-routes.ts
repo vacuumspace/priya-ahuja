@@ -22,6 +22,7 @@ const db = drizzle(sql)
 const STATIC_ROUTES = [
   "/",
   "/connect",
+  "/services/consultancy",
   "/blog",
   "/fundraise",
   "/fundraise/blog",

@@ -8,6 +8,7 @@ type Inquiry = {
   name: string
   email: string
   phone: string | null
+  website: string | null
   budget: string | null
   projectDescription: string
   status: string
@@ -58,6 +59,17 @@ function InquiryRow({ inquiry, onUpdate }: { inquiry: Inquiry; onUpdate: (id: st
           <p className="text-sm font-sans font-medium text-ink">{inquiry.name}</p>
           <p className="text-[11px] font-sans text-ink/40">{inquiry.email}</p>
           {inquiry.phone && <p className="text-[11px] font-sans text-ink/40">{inquiry.phone}</p>}
+          {inquiry.website && (
+            <a
+              href={inquiry.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="text-[11px] font-sans text-peach-dark hover:underline break-all"
+            >
+              {inquiry.website}
+            </a>
+          )}
         </td>
         <td className="py-3 px-4">
           <span className={`text-[10px] font-sans px-2 py-0.5 rounded font-medium ${
@@ -65,12 +77,14 @@ function InquiryRow({ inquiry, onUpdate }: { inquiry: Inquiry; onUpdate: (id: st
             inquiry.type === "branding" ? "bg-purple-100 text-purple-700" :
             inquiry.type === "accounting" ? "bg-green-100 text-green-700" :
             inquiry.type === "incorporation" ? "bg-orange-100 text-orange-700" :
+            inquiry.type === "consultancy" ? "bg-pink-100 text-pink-700" :
             "bg-ink/10 text-ink/60"
           }`}>
             {inquiry.type === "tech" ? "tech dev" :
              inquiry.type === "branding" ? "branding" :
              inquiry.type === "accounting" ? "accounting" :
              inquiry.type === "incorporation" ? "incorporation" :
+             inquiry.type === "consultancy" ? "consultancy" :
              inquiry.type}
           </span>
         </td>
@@ -103,7 +117,9 @@ function InquiryRow({ inquiry, onUpdate }: { inquiry: Inquiry; onUpdate: (id: st
       {expanded && (
         <tr className="border-b border-border bg-peach/10">
           <td colSpan={6} className="px-4 py-3">
-            <p className="text-[10px] font-sans text-ink/40 uppercase tracking-wide mb-1">Project Description</p>
+            <p className="text-[10px] font-sans text-ink/40 uppercase tracking-wide mb-1">
+              {inquiry.type === "consultancy" ? "Message" : "Project Description"}
+            </p>
             <p className="text-sm font-sans text-ink/70 leading-relaxed">{inquiry.projectDescription}</p>
           </td>
         </tr>
@@ -115,7 +131,7 @@ function InquiryRow({ inquiry, onUpdate }: { inquiry: Inquiry; onUpdate: (id: st
 export default function ServiceInquiriesPage() {
   const [inquiries, setInquiries] = useState<Inquiry[]>([])
   const [loading, setLoading] = useState(true)
-  const [filter, setFilter] = useState<"all" | "tech" | "branding" | "accounting" | "incorporation">("all")
+  const [filter, setFilter] = useState<"all" | "tech" | "branding" | "accounting" | "incorporation" | "consultancy">("all")
 
   useEffect(() => {
     fetch("/api/admin/service-inquiries")
@@ -135,7 +151,7 @@ export default function ServiceInquiriesPage() {
         <h1 className="font-heading text-3xl font-800 text-ink">Service Inquiries</h1>
         <p className="font-sans text-sm text-ink/50 mt-1">{inquiries.length} total</p>
         <div className="flex items-center gap-1 mt-3 flex-wrap">
-          {(["all", "tech", "branding", "accounting", "incorporation"] as const).map((f) => (
+          {(["all", "tech", "branding", "accounting", "incorporation", "consultancy"] as const).map((f) => (
             <button
               key={f}
               onClick={() => setFilter(f)}

@@ -59,6 +59,7 @@ const topicGroups = [
     label: "services",
     prefix: "/services",
     children: [
+      { label: "consultancy", href: "/services/consultancy" },
       { label: "tech product development", href: "/services/tech" },
       { label: "branding", href: "/services/branding" },
       { label: "finance", href: "/services/accounting" },

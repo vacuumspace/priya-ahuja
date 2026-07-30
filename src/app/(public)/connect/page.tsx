@@ -4,6 +4,7 @@ import { services as servicesTable } from "@/lib/db/schema"
 import { eq, asc } from "drizzle-orm"
 import { type Service } from "@/lib/services-data"
 import { ServicesClient } from "./ServicesClient"
+import { ConsultancyCta } from "./ConsultancyCta"
 
 export const metadata: Metadata = {
   title: "Book a 1-on-1 Session with Priya Ahuja",
@@ -70,6 +71,10 @@ export default async function ServicesPage() {
       </div>
 
       <ServicesClient services={activeServices} />
+
+      <div className="px-4 md:px-10 pb-16 -mt-6">
+        <ConsultancyCta />
+      </div>
     </div>
   )
 }

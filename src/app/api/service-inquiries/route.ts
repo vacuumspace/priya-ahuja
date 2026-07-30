@@ -1,5 +1,6 @@
 import { db } from "@/lib/db"
 import { serviceInquiries } from "@/lib/db/schema"
+import { auth } from "@/lib/auth"
 import nodemailer from "nodemailer"
 
 const transporter = nodemailer.createTransport({
@@ -11,15 +12,26 @@ const transporter = nodemailer.createTransport({
 
 export async function POST(req: Request) {
   const body = await req.json()
-  const { type, name, email, phone, budget, projectDescription } = body
+  const { type, name, email, phone, budget, website, projectDescription } = body
 
   if (!type || !name || !email || !projectDescription) {
     return Response.json({ error: "Missing required fields" }, { status: 400 })
   }
 
+  if (type === "consultancy") {
+    const session = await auth()
+    if (!session?.user?.email) {
+      return Response.json({ error: "Sign in required" }, { status: 401 })
+    }
+    const wordCount = projectDescription.trim().split(/\s+/).filter(Boolean).length
+    if (wordCount > 100) {
+      return Response.json({ error: "Message must be 100 words or fewer" }, { status: 400 })
+    }
+  }
+
   const [row] = await db
     .insert(serviceInquiries)
-    .values({ type, name, email, phone: phone || null, budget: budget || null, projectDescription })
+    .values({ type, name, email, phone: phone || null, website: website || null, budget: budget || null, projectDescription })
     .returning()
 
   const adminEmails = (process.env.ADMIN_EMAILS ?? "").split(",").map((e) => e.trim())
@@ -32,6 +44,7 @@ export async function POST(req: Request) {
         <tr><td style="padding:6px 0;color:#999">Email</td><td style="padding:6px 0"><a href="mailto:${email}" style="color:#FFA07A">${email}</a></td></tr>
         <tr><td style="padding:6px 0;color:#999">Type</td><td style="padding:6px 0;color:#2D2D2D">${type}</td></tr>
         ${phone ? `<tr><td style="padding:6px 0;color:#999">Phone</td><td style="padding:6px 0;color:#2D2D2D">${phone}</td></tr>` : ""}
+        ${website ? `<tr><td style="padding:6px 0;color:#999">Website</td><td style="padding:6px 0"><a href="${website}" style="color:#FFA07A">${website}</a></td></tr>` : ""}
         ${budget ? `<tr><td style="padding:6px 0;color:#999">Budget</td><td style="padding:6px 0;color:#2D2D2D">${budget}</td></tr>` : ""}
       </table>
       <p style="font-size:12px;font-weight:700;color:#2D2D2D;text-transform:uppercase;letter-spacing:0.08em;margin:0 0 8px">Project Description</p>

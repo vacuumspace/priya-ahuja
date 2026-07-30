@@ -4,6 +4,7 @@ import { services as servicesTable } from "@/lib/db/schema"
 import { eq } from "drizzle-orm"
 import { formatPrice, getDurationLabel, type Service } from "@/lib/services-data"
 import { BookingForm } from "./BookingForm"
+import { ConsultancyCta } from "../ConsultancyCta"
 import { CheckCircle, Clock, MessageSquare, FileText, ArrowLeft, Zap } from "lucide-react"
 import Link from "next/link"
 import { Metadata } from "next"
@@ -129,6 +130,10 @@ export default async function ServiceDetailPage({ params }: Props) {
             )}
           </div>
 
+        </div>
+
+        <div className="mt-10">
+          <ConsultancyCta />
         </div>
       </div>
     </div>

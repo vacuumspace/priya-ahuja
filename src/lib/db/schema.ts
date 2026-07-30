@@ -354,10 +354,11 @@ export const startupMistakes = pgTable("startup_mistakes", {
 
 export const serviceInquiries = pgTable("service_inquiries", {
   id: uuid("id").primaryKey().defaultRandom(),
-  type: varchar("type", { length: 20 }).notNull(), // "tech" | "branding"
+  type: varchar("type", { length: 20 }).notNull(), // "tech" | "branding" | "consultancy"
   name: text("name").notNull(),
   email: text("email").notNull(),
   phone: text("phone"),
+  website: text("website"),
   budget: varchar("budget", { length: 50 }),
   projectDescription: text("project_description").notNull(),
   status: varchar("status", { length: 20 }).notNull().default("new"), // new | reviewing | in-progress | closed
