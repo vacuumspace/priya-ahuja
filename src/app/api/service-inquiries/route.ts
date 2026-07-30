@@ -53,12 +53,18 @@ export async function POST(req: Request) {
     </div>
   `
 
-  transporter.sendMail({
-    from: `"${process.env.MAIL_FROM_NAME ?? "Priya Ahuja"}" <${process.env.EMAIL_USER}>`,
-    to: adminEmails,
-    subject: `New Service Enquiry from ${name} (${type})`,
-    html,
-  }).catch(console.error)
+  // must await: on serverless the function freezes once the response returns,
+  // so a fire-and-forget send silently gets dropped
+  try {
+    await transporter.sendMail({
+      from: `"${process.env.MAIL_FROM_NAME ?? "Priya Ahuja"}" <${process.env.EMAIL_USER}>`,
+      to: adminEmails,
+      subject: `New Service Enquiry from ${name} (${type})`,
+      html,
+    })
+  } catch (err) {
+    console.error("Service enquiry admin email failed:", err)
+  }
 
   return Response.json(row, { status: 201 })
 }
