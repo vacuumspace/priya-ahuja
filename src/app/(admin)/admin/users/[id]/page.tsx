@@ -1,6 +1,6 @@
 import { db } from "@/lib/db"
-import { users, userProfiles, bookings, purchases, services as servicesTable, digitalProducts, priyaGptTimeBalances, priyaGptTimeTransactions, priyaGptSessions, priyaGptMessages, pitchDeckAnalyses, startupScores, startupIdeaScores } from "@/lib/db/schema"
-import { eq, desc, sql } from "drizzle-orm"
+import { users, userProfiles, bookings, purchases, services as servicesTable, digitalProducts, priyaGptTimeBalances, priyaGptTimeTransactions, priyaGptSessions, priyaGptMessages, pitchDeckAnalyses, pitchDeckUnlocks, startupScores, startupIdeaScores } from "@/lib/db/schema"
+import { eq, desc, sql, and } from "drizzle-orm"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
@@ -18,7 +18,7 @@ export default async function AdminUserDetailPage({ params }: Props) {
 
   const [profile] = await db.select().from(userProfiles).where(eq(userProfiles.userId, id))
 
-  const [userBookings, userPurchases, [priyaGptBalanceRow], priyaGptTxns, [priyaGptMsgCountRow], userPitchDecks, userFundScores, userIdeaScores] = await Promise.all([
+  const [userBookings, userPurchases, [priyaGptBalanceRow], priyaGptTxns, [priyaGptMsgCountRow], userPitchDecks, userPitchDeckUnlocks, userFundScores, userIdeaScores] = await Promise.all([
     db
       .select({ id: bookings.id, status: bookings.status, createdAt: bookings.createdAt, serviceTitle: servicesTable.title })
       .from(bookings)
@@ -48,6 +48,13 @@ export default async function AdminUserDetailPage({ params }: Props) {
       .from(pitchDeckAnalyses)
       .where(eq(pitchDeckAnalyses.userId, id))
       .orderBy(desc(pitchDeckAnalyses.createdAt)),
+
+    // Captured payments the user hasn't turned into an analysis yet
+    db
+      .select({ id: pitchDeckUnlocks.id, amountPaise: pitchDeckUnlocks.amountPaise, razorpayPaymentId: pitchDeckUnlocks.razorpayPaymentId, createdAt: pitchDeckUnlocks.createdAt })
+      .from(pitchDeckUnlocks)
+      .where(and(eq(pitchDeckUnlocks.userId, id), eq(pitchDeckUnlocks.status, "paid")))
+      .orderBy(desc(pitchDeckUnlocks.createdAt)),
 
     db
       .select({ id: startupScores.id, totalScore: startupScores.totalScore, isPaid: startupScores.isPaid, createdAt: startupScores.createdAt })
@@ -83,6 +90,7 @@ export default async function AdminUserDetailPage({ params }: Props) {
         priyaGptTransactions={priyaGptTxns.map((t) => ({ ...t, createdAt: new Date(t.createdAt) }))}
         priyaGptHasChatted={(priyaGptMsgCountRow?.count ?? 0) > 0}
         pitchDecks={userPitchDecks.map((p) => ({ ...p, createdAt: new Date(p.createdAt) }))}
+        pitchDeckUnlocks={userPitchDeckUnlocks.map((u) => ({ ...u, createdAt: new Date(u.createdAt) }))}
         fundScores={userFundScores.map((s) => ({ ...s, createdAt: new Date(s.createdAt) }))}
         ideaScores={userIdeaScores.map((s) => ({ ...s, createdAt: new Date(s.createdAt) }))}
       />

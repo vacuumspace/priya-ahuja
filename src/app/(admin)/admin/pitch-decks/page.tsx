@@ -1,5 +1,5 @@
 import { db } from "@/lib/db"
-import { pitchDeckAnalyses, users } from "@/lib/db/schema"
+import { pitchDeckAnalyses, pitchDeckUnlocks, users } from "@/lib/db/schema"
 import { desc, count, eq } from "drizzle-orm"
 import Link from "next/link"
 
@@ -15,7 +15,7 @@ export default async function AdminPitchDecksPage({ searchParams }: Props) {
 
   await db.update(pitchDeckAnalyses).set({ adminSeen: true }).where(eq(pitchDeckAnalyses.adminSeen, false))
 
-  const [totalResult, rows] = await Promise.all([
+  const [totalResult, rows, unusedUnlocks] = await Promise.all([
     db.select({ count: count() }).from(pitchDeckAnalyses),
     db
       .select({
@@ -32,6 +32,21 @@ export default async function AdminPitchDecksPage({ searchParams }: Props) {
       .orderBy(desc(pitchDeckAnalyses.createdAt))
       .limit(PAGE_SIZE)
       .offset((page - 1) * PAGE_SIZE),
+
+    // Captured payments where the buyer hasn't uploaded a deck yet
+    db
+      .select({
+        id: pitchDeckUnlocks.id,
+        amountPaise: pitchDeckUnlocks.amountPaise,
+        razorpayPaymentId: pitchDeckUnlocks.razorpayPaymentId,
+        createdAt: pitchDeckUnlocks.createdAt,
+        userName: users.name,
+        userEmail: users.email,
+      })
+      .from(pitchDeckUnlocks)
+      .leftJoin(users, eq(pitchDeckUnlocks.userId, users.id))
+      .where(eq(pitchDeckUnlocks.status, "paid"))
+      .orderBy(desc(pitchDeckUnlocks.createdAt)),
   ])
 
   const total = totalResult[0].count
@@ -44,6 +59,31 @@ export default async function AdminPitchDecksPage({ searchParams }: Props) {
         <h1 className="font-heading text-3xl font-800 text-ink">Pitch Deck Analyses</h1>
         <p className="font-sans text-sm text-ink/50 mt-1">{total} total analyses</p>
       </div>
+
+      {unusedUnlocks.length > 0 && (
+        <div className="border border-amber-200 bg-amber-50 rounded-2xl overflow-hidden mb-6">
+          <div className="px-5 py-3 border-b border-amber-200">
+            <h2 className="font-heading text-base font-700 text-amber-900">paid, deck not uploaded yet</h2>
+            <p className="font-sans text-xs text-amber-800/70 mt-0.5">these users completed payment but haven&apos;t run their analysis - they can upload any time without paying again</p>
+          </div>
+          <div className="px-5 py-1">
+            {unusedUnlocks.map((u) => (
+              <div key={u.id} className="flex items-center justify-between gap-3 py-2.5 border-b border-amber-200/60 last:border-0">
+                <div className="min-w-0">
+                  <p className="font-sans text-sm font-medium text-ink truncate">{u.userName ?? "Unknown"}</p>
+                  <p className="font-sans text-xs text-ink/50 truncate">{u.userEmail ?? " - "}{u.razorpayPaymentId ? ` · ${u.razorpayPaymentId}` : ""}</p>
+                </div>
+                <div className="flex items-center gap-3 flex-shrink-0">
+                  <span className="font-sans text-sm font-semibold text-ink">₹{(u.amountPaise / 100).toLocaleString("en-IN")}</span>
+                  <span className="font-sans text-xs text-ink/50">
+                    {new Date(u.createdAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       <div className="border border-border rounded-2xl overflow-hidden">
         {rows.length === 0 ? (
