@@ -39,7 +39,7 @@ const WHAT_YOU_GET = [
   { title: "investor question prep", desc: "the questions your deck fails to answer - before you're in the room" },
 ]
 
-function IntroView({ userEmail, onStart, price }: { userEmail: string | null; onStart: () => void; price: number }) {
+function IntroView({ userEmail, onStart, price, hasPaidUnlock = false }: { userEmail: string | null; onStart: () => void; price: number; hasPaidUnlock?: boolean }) {
   const isSignedIn = !!userEmail
 
   return (
@@ -54,10 +54,17 @@ function IntroView({ userEmail, onStart, price }: { userEmail: string | null; on
         <p className="font-sans text-sm text-ink/60 leading-relaxed mb-5">
           an investor spends under 3 minutes on your deck before deciding whether you get a meeting. this tool reads your deck the same way - then tells you what that read-through actually communicated, section by section, and exactly how to fix the story so it earns the meeting.
         </p>
-        <div className="inline-flex items-center gap-1.5 bg-peach/40 border border-peach-dark/30 rounded-lg px-3 py-1.5 mb-7">
-          <span className="font-sans text-xs text-ink/50">full report</span>
-          <span className="font-sans text-sm font-bold text-ink">{formatPrice(price)}</span>
-        </div>
+        {hasPaidUnlock ? (
+          <div className="inline-flex items-center gap-1.5 bg-green-50 border border-green-200 rounded-lg px-3 py-1.5 mb-7">
+            <CheckCircle size={13} className="text-green-700" />
+            <span className="font-sans text-xs text-green-800">payment received - upload your deck, you won&apos;t be charged again</span>
+          </div>
+        ) : (
+          <div className="inline-flex items-center gap-1.5 bg-peach/40 border border-peach-dark/30 rounded-lg px-3 py-1.5 mb-7">
+            <span className="font-sans text-xs text-ink/50">full report</span>
+            <span className="font-sans text-sm font-bold text-ink">{formatPrice(price)}</span>
+          </div>
+        )}
 
         <button
           onClick={isSignedIn ? onStart : () => signIn("google", { callbackUrl: TOOL_PATH })}
@@ -174,16 +181,28 @@ function PaywallView({
         name: "Priya Ahuja",
         description: "Pitch Deck Analyser - Full Report",
         order_id: orderData.orderId,
-        handler: (response: {
+        handler: async (response: {
           razorpay_order_id: string
           razorpay_payment_id: string
           razorpay_signature: string
         }) => {
-          onPaid({
+          const info = {
             razorpayOrderId: response.razorpay_order_id,
             razorpayPaymentId: response.razorpay_payment_id,
             razorpaySignature: response.razorpay_signature,
-          })
+          }
+          // Persist the payment server-side right away so it survives a
+          // closed tab or refresh; upload works even if this call fails.
+          try {
+            await fetch("/api/tools/pitch-deck-analyser/verify-payment", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(info),
+            })
+          } catch {
+            // webhook will confirm it server-side
+          }
+          onPaid(info)
         },
         prefill: { name: userName, email: userEmail },
         theme: { color: "#2D2D2D" },
@@ -515,11 +534,13 @@ export default function PitchDeckAnalyserClient({
   userName,
   isAdmin = false,
   price = 19900,
+  hasPaidUnlock = false,
 }: {
   userEmail: string | null
   userName: string
   isAdmin?: boolean
   price?: number
+  hasPaidUnlock?: boolean
 }) {
   const [view, setView] = useState<"intro" | "paywall" | "upload" | "analysing" | "results">("intro")
   const [paymentInfo, setPaymentInfo] = useState<PaymentInfo | null>(null)
@@ -528,7 +549,8 @@ export default function PitchDeckAnalyserClient({
   const [submitError, setSubmitError] = useState("")
 
   function handleStart() {
-    setView(isAdmin ? "upload" : "paywall")
+    // hasPaidUnlock: an earlier captured payment was never used - skip the paywall
+    setView(isAdmin || hasPaidUnlock ? "upload" : "paywall")
   }
 
   function handlePaid(info: PaymentInfo) {
@@ -538,7 +560,7 @@ export default function PitchDeckAnalyserClient({
   }
 
   async function handleSubmit(file: File) {
-    if (!isAdmin && !paymentInfo) {
+    if (!isAdmin && !paymentInfo && !hasPaidUnlock) {
       setSubmitError("payment not found - go back and complete payment first.")
       return
     }
@@ -586,7 +608,7 @@ export default function PitchDeckAnalyserClient({
   return (
     <div className="py-6 px-4 md:py-8 md:px-8">
       {view === "intro" && (
-        <IntroView userEmail={userEmail} onStart={handleStart} price={price} />
+        <IntroView userEmail={userEmail} onStart={handleStart} price={price} hasPaidUnlock={hasPaidUnlock} />
       )}
       {view === "paywall" && userEmail && (
         <PaywallView

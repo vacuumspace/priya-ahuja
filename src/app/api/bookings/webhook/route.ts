@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import { db } from "@/lib/db"
-import { bookings, availability, purchases } from "@/lib/db/schema"
-import { eq, and } from "drizzle-orm"
+import { bookings, availability, purchases, pitchDeckUnlocks } from "@/lib/db/schema"
+import { eq, and, ne } from "drizzle-orm"
 import { verifyWebhookSignature } from "@/lib/razorpay"
 import crypto from "crypto"
 
@@ -67,6 +67,17 @@ export async function POST(req: NextRequest) {
         .where(and(eq(purchases.id, purchase.id), eq(purchases.downloadToken, null as unknown as string)))
         // Welcome email is handled by client-side verify-payment; skipped here to avoid duplication.
     }
+
+    // Mark a pitch deck analyser unlock as paid - safety net for buyers whose
+    // browser never returns after checkout (common with UPI app hand-offs).
+    await db
+      .update(pitchDeckUnlocks)
+      .set({
+        status: "paid",
+        razorpayPaymentId: paymentId,
+        ...(amountCaptured ? { amountPaise: amountCaptured } : {}),
+      })
+      .where(and(eq(pitchDeckUnlocks.razorpayOrderId, orderId), ne(pitchDeckUnlocks.status, "consumed")))
   }
 
   if (event.event === "payment.failed") {

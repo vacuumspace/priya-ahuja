@@ -1,6 +1,6 @@
 import { auth, isAdmin } from "@/lib/auth"
 import { db } from "@/lib/db"
-import { bookings, purchases, startupScores, pitchDeckAnalyses, digitalProducts, priyaGptTimeTransactions } from "@/lib/db/schema"
+import { bookings, purchases, startupScores, pitchDeckAnalyses, pitchDeckUnlocks, digitalProducts, priyaGptTimeTransactions } from "@/lib/db/schema"
 import { and, eq, inArray, isNotNull, like } from "drizzle-orm"
 
 export async function GET() {
@@ -9,7 +9,7 @@ export async function GET() {
     return new Response("Forbidden", { status: 403 })
   }
 
-  const [allBookings, allPurchases, allScores, allPitchDecks, priyaGptPurchases] = await Promise.all([
+  const [allBookings, allPurchases, allScores, allPitchDecks, unusedUnlocks, priyaGptPurchases] = await Promise.all([
     db
       .select({ createdAt: bookings.createdAt, amount: bookings.amountPaid })
       .from(bookings)
@@ -35,6 +35,12 @@ export async function GET() {
       .select({ createdAt: pitchDeckAnalyses.createdAt, amountPaid: pitchDeckAnalyses.amountPaid })
       .from(pitchDeckAnalyses)
       .where(eq(pitchDeckAnalyses.isPaid, true)),
+
+    // Captured pitch deck payments not yet turned into an analysis
+    db
+      .select({ createdAt: pitchDeckUnlocks.createdAt, amountPaise: pitchDeckUnlocks.amountPaise })
+      .from(pitchDeckUnlocks)
+      .where(eq(pitchDeckUnlocks.status, "paid")),
 
     db
       .select({ createdAt: priyaGptTimeTransactions.createdAt, amountPaise: priyaGptTimeTransactions.amountPaise })
@@ -108,8 +114,8 @@ export async function GET() {
   }
 
   let pitchDeckRevenue = 0, pitchDeckCount = 0
-  for (const r of allPitchDecks) {
-    const amt = r.amountPaid ?? 0
+  for (const r of [...allPitchDecks.map(a => ({ createdAt: a.createdAt, amount: a.amountPaid })), ...unusedUnlocks.map(u => ({ createdAt: u.createdAt, amount: u.amountPaise }))]) {
+    const amt = r.amount ?? 0
     pitchDeckRevenue += amt; pitchDeckCount++
     const k = monthKey(r.createdAt)
     if (monthly[k]) {

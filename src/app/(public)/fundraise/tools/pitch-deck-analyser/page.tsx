@@ -1,7 +1,7 @@
 import { auth, isAdmin } from "@/lib/auth"
 import { db } from "@/lib/db"
-import { siteSettings } from "@/lib/db/schema"
-import { eq } from "drizzle-orm"
+import { siteSettings, pitchDeckUnlocks } from "@/lib/db/schema"
+import { and, eq } from "drizzle-orm"
 import PitchDeckAnalyserClient from "./PitchDeckAnalyserClient"
 
 export const metadata = {
@@ -16,12 +16,26 @@ export default async function PitchDeckAnalyserPage() {
   ])
   const email = session?.user?.email ?? null
   const price = priceSetting[0] ? parseInt(priceSetting[0].value, 10) : 19900
+
+  // A captured payment the user never got to use (closed tab, failed upload) -
+  // lets them go straight to upload instead of being asked to pay again.
+  let hasPaidUnlock = false
+  if (session?.user?.id) {
+    const [unlock] = await db
+      .select({ id: pitchDeckUnlocks.id })
+      .from(pitchDeckUnlocks)
+      .where(and(eq(pitchDeckUnlocks.userId, session.user.id), eq(pitchDeckUnlocks.status, "paid")))
+      .limit(1)
+    hasPaidUnlock = !!unlock
+  }
+
   return (
     <PitchDeckAnalyserClient
       userEmail={email}
       userName={session?.user?.name ?? ""}
       isAdmin={isAdmin(email)}
       price={price}
+      hasPaidUnlock={hasPaidUnlock}
     />
   )
 }

@@ -252,6 +252,20 @@ export const pitchDeckAnalyses = pgTable("pitch_deck_analyses", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
 })
 
+// A paid-for pitch deck analysis credit. Created when the Razorpay order is
+// created, marked "paid" on payment capture (client verify or webhook), and
+// "consumed" when the analysis row is saved - so a captured payment survives
+// a closed tab or failed upload and the user isn't asked to pay again.
+export const pitchDeckUnlocks = pgTable("pitch_deck_unlocks", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  razorpayOrderId: text("razorpay_order_id").notNull().unique(),
+  razorpayPaymentId: text("razorpay_payment_id"),
+  amountPaise: integer("amount_paise").notNull(),
+  status: varchar("status", { length: 20 }).notNull().default("pending"), // 'pending' | 'paid' | 'consumed'
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+})
+
 export const wellbeingScores = pgTable("wellbeing_scores", {
   id: uuid("id").primaryKey().defaultRandom(),
   userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),

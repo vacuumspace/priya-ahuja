@@ -1,7 +1,7 @@
 import { auth, isAdmin } from "@/lib/auth"
 import { db } from "@/lib/db"
-import { bookings, purchases, startupScores, pitchDeckAnalyses, services, digitalProducts, users, priyaGptTimeTransactions } from "@/lib/db/schema"
-import { and, desc, eq, inArray, isNotNull, like } from "drizzle-orm"
+import { bookings, purchases, startupScores, pitchDeckAnalyses, pitchDeckUnlocks, services, digitalProducts, users, priyaGptTimeTransactions } from "@/lib/db/schema"
+import { and, eq, inArray, isNotNull, like } from "drizzle-orm"
 
 const PAGE_SIZE = 10
 
@@ -17,7 +17,7 @@ export async function GET(req: Request) {
   const typeFilter = searchParams.get("type")
 
   // Fetch all sources
-  const [allBookings, allPurchases, allScores, allPitchDecks, allPriyaGpt] = await Promise.all([
+  const [allBookings, allPurchases, allScores, allPitchDecks, unusedUnlocks, allPriyaGpt] = await Promise.all([
     db
       .select({
         id: bookings.id,
@@ -74,6 +74,21 @@ export async function GET(req: Request) {
       .from(pitchDeckAnalyses)
       .leftJoin(users, eq(pitchDeckAnalyses.userId, users.id))
       .where(eq(pitchDeckAnalyses.isPaid, true)),
+
+    // Captured payments where the buyer hasn't run the analysis yet -
+    // consumed unlocks show up as pitch_deck_analyses rows instead
+    db
+      .select({
+        id: pitchDeckUnlocks.id,
+        amountPaise: pitchDeckUnlocks.amountPaise,
+        razorpayPaymentId: pitchDeckUnlocks.razorpayPaymentId,
+        createdAt: pitchDeckUnlocks.createdAt,
+        userName: users.name,
+        userEmail: users.email,
+      })
+      .from(pitchDeckUnlocks)
+      .leftJoin(users, eq(pitchDeckUnlocks.userId, users.id))
+      .where(eq(pitchDeckUnlocks.status, "paid")),
 
     db
       .select({
@@ -142,6 +157,17 @@ export async function GET(req: Request) {
       userEmail: r.userEmail ?? "",
       itemName: "Pitch Deck Analysis",
       amount: r.amountPaid,
+      razorpayPaymentId: r.razorpayPaymentId,
+      status: "paid",
+      createdAt: r.createdAt,
+    })),
+    ...unusedUnlocks.map((r) => ({
+      id: r.id,
+      type: "pitchdeck",
+      userName: r.userName ?? "Unknown",
+      userEmail: r.userEmail ?? "",
+      itemName: "Pitch Deck Analysis (paid, not run yet)",
+      amount: r.amountPaise,
       razorpayPaymentId: r.razorpayPaymentId,
       status: "paid",
       createdAt: r.createdAt,
