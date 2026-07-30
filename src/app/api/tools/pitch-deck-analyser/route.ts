@@ -68,7 +68,7 @@ export async function POST(req: NextRequest) {
         .update(`${razorpayOrderId}|${razorpayPaymentId}`)
         .digest("hex")
       if (expected !== razorpaySignature) {
-        return NextResponse.json({ error: "Payment verification failed" }, { status: 400 })
+        return NextResponse.json({ error: "Payment verification failed", paymentRequired: true }, { status: 400 })
       }
 
       try {
@@ -90,7 +90,7 @@ export async function POST(req: NextRequest) {
         .where(and(eq(pitchDeckUnlocks.userId, session.user.id), eq(pitchDeckUnlocks.status, "paid")))
         .limit(1)
       if (!unlock) {
-        return NextResponse.json({ error: "Missing payment details" }, { status: 400 })
+        return NextResponse.json({ error: "Missing payment details", paymentRequired: true }, { status: 400 })
       }
       razorpayOrderId = unlock.razorpayOrderId
       razorpayPaymentId = unlock.razorpayPaymentId ?? ""
@@ -105,7 +105,7 @@ export async function POST(req: NextRequest) {
         .where(eq(pitchDeckAnalyses.razorpayPaymentId, razorpayPaymentId))
         .limit(1)
       if (existing) {
-        return NextResponse.json({ error: "Payment already used" }, { status: 409 })
+        return NextResponse.json({ error: "Payment already used", paymentRequired: true }, { status: 409 })
       }
     }
   }

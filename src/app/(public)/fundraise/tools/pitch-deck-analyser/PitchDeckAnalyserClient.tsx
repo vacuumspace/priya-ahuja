@@ -150,12 +150,14 @@ function PaywallView({
   onPaid,
   onBack,
   price,
+  notice,
 }: {
   userEmail: string
   userName: string
   onPaid: (info: PaymentInfo) => void
   onBack: () => void
   price: number
+  notice?: string
 }) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
@@ -229,6 +231,12 @@ function PaywallView({
         <p className="font-sans text-sm text-ink/55 leading-relaxed mb-7">
           pay once to upload your deck and get the full report - overall score, 20-section audit, story rewrites, silent deal-killers, and the investor questions you&apos;re not ready for yet.
         </p>
+
+        {notice && (
+          <div className="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 mb-6">
+            <p className="font-sans text-xs text-amber-800 leading-relaxed">{notice}</p>
+          </div>
+        )}
 
         <div className="inline-flex items-center gap-1.5 bg-peach/40 border border-peach-dark/30 rounded-lg px-3 py-1.5 mb-7">
           <span className="font-sans text-xs text-ink/50">full report</span>
@@ -490,7 +498,7 @@ function AnalysingView({ fileName }: { fileName: string }) {
 
 // ── Results ───────────────────────────────────────────────────────────────────
 
-function ResultsView({ report, fileName }: { report: PitchDeckReport; fileName: string }) {
+function ResultsView({ report, fileName, onRestart }: { report: PitchDeckReport; fileName: string; onRestart: () => void }) {
   return (
     <div className="max-w-xl mx-auto space-y-5">
       <div className="flex items-center justify-between mb-1 print:hidden">
@@ -523,6 +531,13 @@ function ResultsView({ report, fileName }: { report: PitchDeckReport; fileName: 
           book a pitch review session
         </Link>
       </div>
+
+      <button
+        onClick={onRestart}
+        className="flex items-center gap-1.5 text-[13px] font-sans text-ink/35 hover:text-ink/60 transition-colors mx-auto print:hidden"
+      >
+        analyse another deck <ArrowRight size={11} />
+      </button>
     </div>
   )
 }
@@ -544,24 +559,29 @@ export default function PitchDeckAnalyserClient({
 }) {
   const [view, setView] = useState<"intro" | "paywall" | "upload" | "analysing" | "results">("intro")
   const [paymentInfo, setPaymentInfo] = useState<PaymentInfo | null>(null)
+  // Server-known unused payment; cleared once a report is generated so the
+  // next run correctly asks for payment instead of erroring
+  const [unlockAvailable, setUnlockAvailable] = useState(hasPaidUnlock)
+  const [paywallNotice, setPaywallNotice] = useState("")
   const [report, setReport] = useState<PitchDeckReport | null>(null)
   const [fileName, setFileName] = useState("")
   const [submitError, setSubmitError] = useState("")
 
   function handleStart() {
-    // hasPaidUnlock: an earlier captured payment was never used - skip the paywall
-    setView(isAdmin || hasPaidUnlock ? "upload" : "paywall")
+    // unlockAvailable: an earlier captured payment was never used - skip the paywall
+    setView(isAdmin || paymentInfo || unlockAvailable ? "upload" : "paywall")
   }
 
   function handlePaid(info: PaymentInfo) {
     setPaymentInfo(info)
     setSubmitError("")
+    setPaywallNotice("")
     setView("upload")
   }
 
   async function handleSubmit(file: File) {
-    if (!isAdmin && !paymentInfo && !hasPaidUnlock) {
-      setSubmitError("payment not found - go back and complete payment first.")
+    if (!isAdmin && !paymentInfo && !unlockAvailable) {
+      setView("paywall")
       return
     }
     setSubmitError("")
@@ -585,6 +605,15 @@ export default function PitchDeckAnalyserClient({
       const data = await res.json()
 
       if (!res.ok) {
+        if (data.paymentRequired) {
+          // the payment was already spent (or none exists) - ask for a fresh one
+          setPaymentInfo(null)
+          setUnlockAvailable(false)
+          setPaywallNotice("your earlier payment was already used for a report. pay again to analyse another deck - every analysis is a fresh full report.")
+          setView("paywall")
+          window.scrollTo({ top: 0, behavior: "smooth" })
+          return
+        }
         // payment stays valid on analysis failures - send them back to upload to retry
         setSubmitError(
           data.error ||
@@ -594,6 +623,9 @@ export default function PitchDeckAnalyserClient({
         return
       }
 
+      // this run consumed the payment - a new analysis needs a new one
+      setPaymentInfo(null)
+      setUnlockAvailable(false)
       setReport(data.report)
       setView("results")
       window.scrollTo({ top: 0, behavior: "smooth" })
@@ -608,7 +640,7 @@ export default function PitchDeckAnalyserClient({
   return (
     <div className="py-6 px-4 md:py-8 md:px-8">
       {view === "intro" && (
-        <IntroView userEmail={userEmail} onStart={handleStart} price={price} hasPaidUnlock={hasPaidUnlock} />
+        <IntroView userEmail={userEmail} onStart={handleStart} price={price} hasPaidUnlock={!isAdmin && (unlockAvailable || !!paymentInfo)} />
       )}
       {view === "paywall" && userEmail && (
         <PaywallView
@@ -617,6 +649,7 @@ export default function PitchDeckAnalyserClient({
           onPaid={handlePaid}
           onBack={() => setView("intro")}
           price={price}
+          notice={paywallNotice}
         />
       )}
       {view === "upload" && (
@@ -629,7 +662,7 @@ export default function PitchDeckAnalyserClient({
       )}
       {view === "analysing" && <AnalysingView fileName={fileName} />}
       {view === "results" && report && (
-        <ResultsView report={report} fileName={fileName} />
+        <ResultsView report={report} fileName={fileName} onRestart={handleStart} />
       )}
     </div>
   )
