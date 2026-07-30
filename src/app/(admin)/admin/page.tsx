@@ -1,5 +1,5 @@
 import { db } from "@/lib/db"
-import { bookings, services, availability, purchases, digitalProducts, priyaGptTimeTransactions, users } from "@/lib/db/schema"
+import { bookings, services, availability, purchases, digitalProducts, priyaGptTimeTransactions, pitchDeckAnalyses, pitchDeckUnlocks, users } from "@/lib/db/schema"
 import { eq, and, gte, desc, isNotNull } from "drizzle-orm"
 import Link from "next/link"
 
@@ -57,6 +57,33 @@ export default async function AdminDashboard() {
     .orderBy(desc(priyaGptTimeTransactions.createdAt))
     .limit(10)
 
+  const recentPitchDeckTxns = await db
+    .select({
+      id: pitchDeckAnalyses.id,
+      userName: users.name,
+      amount: pitchDeckAnalyses.amountPaid,
+      createdAt: pitchDeckAnalyses.createdAt,
+    })
+    .from(pitchDeckAnalyses)
+    .leftJoin(users, eq(pitchDeckAnalyses.userId, users.id))
+    .where(eq(pitchDeckAnalyses.isPaid, true))
+    .orderBy(desc(pitchDeckAnalyses.createdAt))
+    .limit(10)
+
+  // Captured payments where the buyer hasn't run the analysis yet
+  const recentUnlockTxns = await db
+    .select({
+      id: pitchDeckUnlocks.id,
+      userName: users.name,
+      amount: pitchDeckUnlocks.amountPaise,
+      createdAt: pitchDeckUnlocks.createdAt,
+    })
+    .from(pitchDeckUnlocks)
+    .leftJoin(users, eq(pitchDeckUnlocks.userId, users.id))
+    .where(eq(pitchDeckUnlocks.status, "paid"))
+    .orderBy(desc(pitchDeckUnlocks.createdAt))
+    .limit(10)
+
   const recentTransactions = [
     ...recentBookingTxns.map((t) => ({ ...t, kind: "booking" as const })),
     ...recentPurchaseTxns.map((t) => ({ ...t, kind: "purchase" as const, type: null, slug: t.slug })),
@@ -66,6 +93,22 @@ export default async function AdminDashboard() {
       type: null,
       slug: null,
       label: "PriyaGPT Time",
+      userName: t.userName ?? "Unknown",
+    })),
+    ...recentPitchDeckTxns.map((t) => ({
+      ...t,
+      kind: "pitchdeck" as const,
+      type: null,
+      slug: null,
+      label: "Pitch Deck Analysis",
+      userName: t.userName ?? "Unknown",
+    })),
+    ...recentUnlockTxns.map((t) => ({
+      ...t,
+      kind: "pitchdeck" as const,
+      type: null,
+      slug: null,
+      label: "Pitch Deck Analysis (paid, not run yet)",
       userName: t.userName ?? "Unknown",
     })),
   ]
@@ -137,13 +180,15 @@ export default async function AdminDashboard() {
                     <span className={`text-[10px] font-sans font-semibold px-2 py-0.5 rounded-full capitalize flex-shrink-0 ${
                       t.kind === "priyagpt"
                         ? "bg-[#A85D3A]/25 text-[#A85D3A] dark:bg-[#A85D3A]/25 dark:text-[#E0A585]"
+                        : t.kind === "pitchdeck"
+                        ? "bg-[#D98E5A]/25 text-[#A8642E]"
                         : t.kind !== "purchase"
                         ? "bg-[#FFE7CE] text-[#C99A6E]"
                         : purchaseTag(t.slug) === "Investor List"
                         ? "bg-[#E8875A]/25 text-[#B85A2E]"
                         : "bg-[#FFCBA4]/50 text-[#C97B4A]"
                     }`}>
-                      {t.kind === "purchase" ? purchaseTag(t.slug) : t.kind === "priyagpt" ? "PriyaGPT" : "session"}
+                      {t.kind === "purchase" ? purchaseTag(t.slug) : t.kind === "priyagpt" ? "PriyaGPT" : t.kind === "pitchdeck" ? "Pitch Deck" : "session"}
                     </span>
                   </div>
                 )
