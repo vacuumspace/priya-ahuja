@@ -266,6 +266,20 @@ export const pitchDeckUnlocks = pgTable("pitch_deck_unlocks", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
 })
 
+// Same durable-payment pattern as pitch_deck_unlocks, shared by the quiz
+// tools (fundability/startup score, idea score) where a long quiz sits
+// between payment and the saved result.
+export const toolUnlocks = pgTable("tool_unlocks", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  tool: varchar("tool", { length: 40 }).notNull(), // 'startup-score' | 'startup-idea-score'
+  userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  razorpayOrderId: text("razorpay_order_id").notNull().unique(),
+  razorpayPaymentId: text("razorpay_payment_id"),
+  amountPaise: integer("amount_paise").notNull(),
+  status: varchar("status", { length: 20 }).notNull().default("pending"), // 'pending' | 'paid' | 'consumed'
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+})
+
 export const wellbeingScores = pgTable("wellbeing_scores", {
   id: uuid("id").primaryKey().defaultRandom(),
   userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
@@ -311,6 +325,7 @@ export const priyaGptTimeTransactions = pgTable("priya_gpt_time_transactions", {
   amountPaise: integer("amount_paise"), // actual rupees paid, only set on "purchase" rows
   razorpayOrderId: text("razorpay_order_id"),
   razorpayPaymentId: text("razorpay_payment_id"),
+  adminSeen: boolean("admin_seen").notNull().default(false),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 })
 

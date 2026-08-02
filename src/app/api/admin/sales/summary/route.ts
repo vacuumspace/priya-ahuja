@@ -1,6 +1,6 @@
 import { auth, isAdmin } from "@/lib/auth"
 import { db } from "@/lib/db"
-import { bookings, purchases, startupScores, pitchDeckAnalyses, pitchDeckUnlocks, digitalProducts, priyaGptTimeTransactions } from "@/lib/db/schema"
+import { bookings, purchases, startupScores, startupIdeaScores, pitchDeckAnalyses, pitchDeckUnlocks, toolUnlocks, digitalProducts, priyaGptTimeTransactions } from "@/lib/db/schema"
 import { and, eq, inArray, isNotNull, like } from "drizzle-orm"
 
 export async function GET() {
@@ -9,7 +9,7 @@ export async function GET() {
     return new Response("Forbidden", { status: 403 })
   }
 
-  const [allBookings, allPurchases, allScores, allPitchDecks, unusedUnlocks, priyaGptPurchases] = await Promise.all([
+  const [allBookings, allPurchases, allScores, allIdeaScores, allPitchDecks, unusedPitchDeckUnlocks, priyaGptPurchases, unusedToolUnlocks] = await Promise.all([
     db
       .select({ createdAt: bookings.createdAt, amount: bookings.amountPaid })
       .from(bookings)
@@ -32,6 +32,11 @@ export async function GET() {
       .where(eq(startupScores.isPaid, true)),
 
     db
+      .select({ createdAt: startupIdeaScores.createdAt })
+      .from(startupIdeaScores)
+      .where(eq(startupIdeaScores.isPaid, true)),
+
+    db
       .select({ createdAt: pitchDeckAnalyses.createdAt, amountPaid: pitchDeckAnalyses.amountPaid })
       .from(pitchDeckAnalyses)
       .where(eq(pitchDeckAnalyses.isPaid, true)),
@@ -46,6 +51,12 @@ export async function GET() {
       .select({ createdAt: priyaGptTimeTransactions.createdAt, amountPaise: priyaGptTimeTransactions.amountPaise })
       .from(priyaGptTimeTransactions)
       .where(eq(priyaGptTimeTransactions.reason, "purchase")),
+
+    // Captured startup-score / idea-score payments not yet turned into a result
+    db
+      .select({ createdAt: toolUnlocks.createdAt, amountPaise: toolUnlocks.amountPaise })
+      .from(toolUnlocks)
+      .where(eq(toolUnlocks.status, "paid")),
   ])
 
   function monthKey(d: Date) {
@@ -114,7 +125,7 @@ export async function GET() {
   }
 
   let pitchDeckRevenue = 0, pitchDeckCount = 0
-  for (const r of [...allPitchDecks.map(a => ({ createdAt: a.createdAt, amount: a.amountPaid })), ...unusedUnlocks.map(u => ({ createdAt: u.createdAt, amount: u.amountPaise }))]) {
+  for (const r of [...allPitchDecks.map(a => ({ createdAt: a.createdAt, amount: a.amountPaid })), ...unusedPitchDeckUnlocks.map(u => ({ createdAt: u.createdAt, amount: u.amountPaise }))]) {
     const amt = r.amount ?? 0
     pitchDeckRevenue += amt; pitchDeckCount++
     const k = monthKey(r.createdAt)
@@ -123,6 +134,14 @@ export async function GET() {
       monthly[k].pitchDeck.revenue += amt; monthly[k].pitchDeck.count++
     }
   }
+
+  // startup_scores/startup_idea_scores don't record amount paid, so revenue
+  // for completed quizzes is untracked; unused unlocks do carry the amount
+  let scoreRevenue = 0
+  for (const r of unusedToolUnlocks) {
+    scoreRevenue += r.amountPaise ?? 0
+  }
+  const scoreCount = allScores.length + allIdeaScores.length + unusedToolUnlocks.length
 
   let priyaGptRevenue = 0, priyaGptCount = 0
   for (const r of priyaGptPurchases) {
@@ -138,13 +157,13 @@ export async function GET() {
   const monthlyChart = months.map(k => ({ key: k, label: monthLabel(k), ...monthly[k] }))
 
   return Response.json({
-    totalRevenue: sessionRevenue + templateRevenue + investorListRevenue + priyaGptRevenue + pitchDeckRevenue,
-    totalTransactions: sessionCount + templateCount + investorListCount + allScores.length + priyaGptCount + pitchDeckCount,
+    totalRevenue: sessionRevenue + templateRevenue + investorListRevenue + priyaGptRevenue + pitchDeckRevenue + scoreRevenue,
+    totalTransactions: sessionCount + templateCount + investorListCount + scoreCount + priyaGptCount + pitchDeckCount,
     byType: [
       { label: "Sessions",      revenue: sessionRevenue,     count: sessionCount },
       { label: "Templates",     revenue: templateRevenue,    count: templateCount },
       { label: "Investor List", revenue: investorListRevenue, count: investorListCount },
-      { label: "Startup Score", revenue: 0,                  count: allScores.length },
+      { label: "Startup Score", revenue: scoreRevenue,       count: scoreCount },
       { label: "Pitch Deck",    revenue: pitchDeckRevenue,   count: pitchDeckCount },
       { label: "PriyaGPT",      revenue: priyaGptRevenue,    count: priyaGptCount },
     ],

@@ -2,8 +2,8 @@ import { NextRequest, NextResponse } from "next/server"
 import { createHmac } from "crypto"
 import { auth } from "@/lib/auth"
 import { db } from "@/lib/db"
-import { startupScores, siteSettings } from "@/lib/db/schema"
-import { eq } from "drizzle-orm"
+import { startupScores, siteSettings, toolUnlocks } from "@/lib/db/schema"
+import { and, eq } from "drizzle-orm"
 import {
   computeTotal,
   computePillarScores,
@@ -32,44 +32,66 @@ export async function POST(req: NextRequest) {
   }
 
   const body = await req.json()
-  const { answers, razorpayOrderId, razorpayPaymentId, razorpaySignature } = body as {
-    answers: Answers
-    razorpayOrderId: string
-    razorpayPaymentId: string
-    razorpaySignature: string
-  }
+  const { answers } = body as { answers: Answers }
+  let { razorpayOrderId, razorpayPaymentId } = body as { razorpayOrderId?: string; razorpayPaymentId?: string }
+  const razorpaySignature = (body as { razorpaySignature?: string }).razorpaySignature
 
-  if (!answers || !razorpayOrderId || !razorpayPaymentId || !razorpaySignature) {
+  if (!answers) {
     return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
   }
 
-  // Idempotency: reject if this paymentId was already used
-  const [existing] = await db
-    .select({ id: startupScores.id })
-    .from(startupScores)
-    .where(eq(startupScores.razorpayPaymentId, razorpayPaymentId))
-    .limit(1)
-
-  if (existing) {
-    return NextResponse.json({ error: "Payment already used" }, { status: 409 })
-  }
-
-  const secret = process.env.RAZORPAY_KEY_SECRET!
-  const expected = createHmac("sha256", secret)
-    .update(`${razorpayOrderId}|${razorpayPaymentId}`)
-    .digest("hex")
-  if (expected !== razorpaySignature) {
-    return NextResponse.json({ error: "Payment verification failed" }, { status: 400 })
-  }
-
-  try {
-    const rzOrder = await fetchRazorpayOrder(razorpayOrderId)
-    if (rzOrder.amount !== PRICE_PAISE) {
-      console.error(`Startup score amount mismatch: expected ${PRICE_PAISE}, got ${rzOrder.amount}`)
-      return NextResponse.json({ error: "Payment amount mismatch" }, { status: 400 })
+  if (razorpayOrderId && razorpayPaymentId && razorpaySignature) {
+    const secret = process.env.RAZORPAY_KEY_SECRET!
+    const expected = createHmac("sha256", secret)
+      .update(`${razorpayOrderId}|${razorpayPaymentId}`)
+      .digest("hex")
+    if (expected !== razorpaySignature) {
+      return NextResponse.json({ error: "Payment verification failed", paymentRequired: true }, { status: 400 })
     }
-  } catch (err) {
-    console.error("Razorpay order fetch failed (continuing):", err)
+
+    try {
+      const rzOrder = await fetchRazorpayOrder(razorpayOrderId)
+      if (rzOrder.amount !== PRICE_PAISE) {
+        console.error(`Startup score amount mismatch: expected ${PRICE_PAISE}, got ${rzOrder.amount}`)
+        return NextResponse.json({ error: "Payment amount mismatch" }, { status: 400 })
+      }
+    } catch (err) {
+      console.error("Razorpay order fetch failed (continuing):", err)
+    }
+  } else {
+    // No payment details from the client (paid earlier, then refreshed or
+    // came back later) - fall back to an unused paid unlock on the account.
+    const [unlock] = await db
+      .select()
+      .from(toolUnlocks)
+      .where(and(
+        eq(toolUnlocks.userId, session.user.id),
+        eq(toolUnlocks.tool, "startup-score"),
+        eq(toolUnlocks.status, "paid"),
+      ))
+      .limit(1)
+    if (!unlock) {
+      return NextResponse.json({ error: "Missing payment details", paymentRequired: true }, { status: 400 })
+    }
+    razorpayOrderId = unlock.razorpayOrderId
+    razorpayPaymentId = unlock.razorpayPaymentId ?? ""
+  }
+
+  // Idempotency: reject if this paymentId was already used
+  if (razorpayPaymentId) {
+    const [existing] = await db
+      .select({ id: startupScores.id })
+      .from(startupScores)
+      .where(eq(startupScores.razorpayPaymentId, razorpayPaymentId))
+      .limit(1)
+
+    if (existing) {
+      // A spent payment can't back an unlock either - retire it
+      if (razorpayOrderId) {
+        await db.update(toolUnlocks).set({ status: "consumed" }).where(eq(toolUnlocks.razorpayOrderId, razorpayOrderId))
+      }
+      return NextResponse.json({ error: "Payment already used", paymentRequired: true }, { status: 409 })
+    }
   }
 
   const totalScore = computeTotal(answers)
@@ -88,6 +110,10 @@ export async function POST(req: NextRequest) {
       razorpayPaymentId,
     })
     .returning({ id: startupScores.id })
+
+  if (razorpayOrderId) {
+    await db.update(toolUnlocks).set({ status: "consumed", razorpayPaymentId: razorpayPaymentId || null }).where(eq(toolUnlocks.razorpayOrderId, razorpayOrderId))
+  }
 
   if (session.user.email) {
     sendPurchaseWelcome({

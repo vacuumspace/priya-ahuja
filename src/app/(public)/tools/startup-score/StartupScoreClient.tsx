@@ -37,7 +37,7 @@ function cn(...classes: (string | false | undefined | null)[]) {
 
 // ── Intro ─────────────────────────────────────────────────────────────────────
 
-function IntroView({ userEmail, onStart, price = 49900 }: { userEmail: string | null; onStart: () => void; price?: number }) {
+function IntroView({ userEmail, onStart, price = 49900, hasPaidUnlock = false }: { userEmail: string | null; onStart: () => void; price?: number; hasPaidUnlock?: boolean }) {
   const isSignedIn = !!userEmail
 
   const startButton = (className?: string) => (
@@ -65,10 +65,17 @@ function IntroView({ userEmail, onStart, price = 49900 }: { userEmail: string | 
         <p className="font-sans text-sm text-ink/60 leading-relaxed mb-5">
           this is not a "is my idea good?" test. it scores your startup on the exact criteria investors use when deciding whether to fund you - market size, traction signals, team strength, business model clarity, competitive defensibility, and more. answer 50 questions across 9 segments and get a 0–100 score with a full breakdown of where you stand and what to fix before you walk into a room.
         </p>
-        <div className="inline-flex items-center gap-1.5 bg-peach/40 border border-peach-dark/30 rounded-lg px-3 py-1.5 mb-3">
-          <span className="font-sans text-xs text-ink/50">full breakdown</span>
-          <span className="font-sans text-sm font-bold text-ink">₹{(price / 100).toLocaleString("en-IN")}</span>
-        </div>
+        {hasPaidUnlock ? (
+          <div className="inline-flex items-center gap-1.5 bg-green-50 border border-green-200 rounded-lg px-3 py-1.5 mb-3">
+            <CheckCircle size={13} className="text-green-700" />
+            <span className="font-sans text-xs text-green-800">payment received - start the quiz, you won&apos;t be charged again</span>
+          </div>
+        ) : (
+          <div className="inline-flex items-center gap-1.5 bg-peach/40 border border-peach-dark/30 rounded-lg px-3 py-1.5 mb-3">
+            <span className="font-sans text-xs text-ink/50">full breakdown</span>
+            <span className="font-sans text-sm font-bold text-ink">₹{(price / 100).toLocaleString("en-IN")}</span>
+          </div>
+        )}
         <div className="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 mb-7">
           <p className="font-sans text-xs font-semibold text-amber-800 mb-0.5">one-time access</p>
           <p className="font-sans text-[13px] text-amber-700 leading-relaxed">
@@ -480,12 +487,14 @@ function PaywallView({
   onPaid,
   onBack,
   price = 49900,
+  notice,
 }: {
   userEmail: string
   userName: string
   onPaid: (info: PaymentInfo) => void
   onBack: () => void
   price?: number
+  notice?: string
 }) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
@@ -511,16 +520,28 @@ function PaywallView({
         name: "Priya Ahuja",
         description: "Startup Fundability Score - Full Analysis",
         order_id: orderData.orderId,
-        handler: (response: {
+        handler: async (response: {
           razorpay_order_id: string
           razorpay_payment_id: string
           razorpay_signature: string
         }) => {
-          onPaid({
+          const info = {
             razorpayOrderId: response.razorpay_order_id,
             razorpayPaymentId: response.razorpay_payment_id,
             razorpaySignature: response.razorpay_signature,
-          })
+          }
+          // Persist the payment server-side right away so it survives a
+          // closed tab or refresh; the quiz works even if this call fails.
+          try {
+            await fetch("/api/tools/verify-unlock", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(info),
+            })
+          } catch {
+            // webhook will confirm it server-side
+          }
+          onPaid(info)
         },
         prefill: { name: userName, email: userEmail },
         theme: { color: "#2D2D2D" },
@@ -547,6 +568,12 @@ function PaywallView({
         <p className="font-sans text-sm text-ink/55 leading-relaxed mb-7">
           pay once to take the 50-question quiz and get your full score - overall out of 100, all 9 segment breakdowns, and a prioritised list of exactly what to fix before you pitch to investors.
         </p>
+
+        {notice && (
+          <div className="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 mb-6">
+            <p className="font-sans text-xs text-amber-800 leading-relaxed">{notice}</p>
+          </div>
+        )}
 
         <div className="inline-flex items-center gap-1.5 bg-peach/40 border border-peach-dark/30 rounded-lg px-3 py-1.5 mb-7">
           <span className="font-sans text-xs text-ink/50">full breakdown</span>
@@ -716,20 +743,48 @@ function ResultsView({
 
 // ── Main ──────────────────────────────────────────────────────────────────────
 
-export default function StartupScoreClient({ userEmail, userName, isAdmin = false, price = 49900 }: { userEmail: string | null; userName: string; isAdmin?: boolean; price?: number }) {
+// Quiz answers survive a refresh - with 50 questions between payment and
+// save, losing them mid-way was costing users their session (and payment,
+// before tool_unlocks existed)
+const ANSWERS_STORAGE_KEY = "startup-score-answers"
+
+function loadSavedAnswers(): Answers {
+  if (typeof window === "undefined") return {}
+  try {
+    return JSON.parse(sessionStorage.getItem(ANSWERS_STORAGE_KEY) ?? "{}")
+  } catch {
+    return {}
+  }
+}
+
+export default function StartupScoreClient({ userEmail, userName, isAdmin = false, price = 49900, hasPaidUnlock = false }: { userEmail: string | null; userName: string; isAdmin?: boolean; price?: number; hasPaidUnlock?: boolean }) {
   const [view, setView] = useState<"intro" | "paywall" | "quiz" | "results">("intro")
   const [step, setStep] = useState(0)
-  const [answers, setAnswers] = useState<Answers>({})
+  const [answers, setAnswers] = useState<Answers>(loadSavedAnswers)
   const [result, setResult] = useState<ResultData | null>(null)
   const [paymentInfo, setPaymentInfo] = useState<PaymentInfo | null>(null)
+  // Server-known unused payment; cleared once a score is saved so the next
+  // attempt correctly asks for payment instead of erroring
+  const [unlockAvailable, setUnlockAvailable] = useState(hasPaidUnlock)
+  const [paywallNotice, setPaywallNotice] = useState("")
   const [submitError, setSubmitError] = useState("")
 
+  const canTakeQuiz = isAdmin || !!paymentInfo || unlockAvailable
+
   function handleAnswer(qId: number, val: OptionValue) {
-    setAnswers((prev) => ({ ...prev, [qId]: val }))
+    setAnswers((prev) => {
+      const next = { ...prev, [qId]: val }
+      try { sessionStorage.setItem(ANSWERS_STORAGE_KEY, JSON.stringify(next)) } catch {}
+      return next
+    })
+  }
+
+  function clearSavedAnswers() {
+    try { sessionStorage.removeItem(ANSWERS_STORAGE_KEY) } catch {}
   }
 
   function handleBack() {
-    if (view === "quiz" && step === 0) { setView(isAdmin ? "intro" : "paywall"); return }
+    if (view === "quiz" && step === 0) { setView(canTakeQuiz ? "intro" : "paywall"); return }
     if (view === "quiz" && step > 0) { setStep((s) => s - 1); return }
     if (view === "paywall") { setView("intro"); return }
   }
@@ -748,16 +803,28 @@ export default function StartupScoreClient({ userEmail, userName, isAdmin = fals
       setView("results")
       return
     }
-    if (!paymentInfo) return
+    if (!paymentInfo && !unlockAvailable) {
+      setView("paywall")
+      return
+    }
     setSubmitError("")
     try {
       const submitRes = await fetch("/api/tools/startup-score", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ answers, ...paymentInfo }),
+        // without paymentInfo the server falls back to the account's unused paid unlock
+        body: JSON.stringify({ answers, ...(paymentInfo ?? {}) }),
       })
       const data = await submitRes.json()
       if (!submitRes.ok) {
+        if (data.paymentRequired) {
+          // the payment was already spent (or none exists) - ask for a fresh one
+          setPaymentInfo(null)
+          setUnlockAvailable(false)
+          setPaywallNotice("your earlier payment was already used. complete payment to get your score - your quiz answers are saved.")
+          setView("paywall")
+          return
+        }
         setSubmitError(data.error || "Submission failed. Email hi@priyaahuja.in with your payment ID.")
         return
       }
@@ -765,6 +832,10 @@ export default function StartupScoreClient({ userEmail, userName, isAdmin = fals
       for (const [k, v] of Object.entries(data.pillarScores as Record<string, { earned: number; max: number }>)) {
         pillarScores[Number(k)] = v
       }
+      // this run consumed the payment - a new attempt needs a new one
+      setPaymentInfo(null)
+      setUnlockAvailable(false)
+      clearSavedAnswers()
       setResult({ id: data.id, totalScore: data.totalScore, pillarScores })
       setView("results")
     } catch {
@@ -774,12 +845,15 @@ export default function StartupScoreClient({ userEmail, userName, isAdmin = fals
 
   function handlePaid(info: PaymentInfo) {
     setPaymentInfo(info)
+    setPaywallNotice("")
+    // answers may already be filled in (paid → quiz → payment lost → re-paid)
     setStep(0)
     setView("quiz")
   }
 
   function handleReset() {
     setAnswers({})
+    clearSavedAnswers()
     setStep(0)
     setResult(null)
     setPaymentInfo(null)
@@ -790,7 +864,12 @@ export default function StartupScoreClient({ userEmail, userName, isAdmin = fals
   return (
     <div className="py-6 px-4 md:py-8 md:px-8">
       {view === "intro" && (
-        <IntroView userEmail={userEmail} onStart={() => isAdmin ? setView("quiz") : setView("paywall")} price={price} />
+        <IntroView
+          userEmail={userEmail}
+          onStart={() => setView(canTakeQuiz ? "quiz" : "paywall")}
+          price={price}
+          hasPaidUnlock={!isAdmin && canTakeQuiz}
+        />
       )}
       {view === "paywall" && userEmail && (
         <PaywallView
@@ -799,6 +878,7 @@ export default function StartupScoreClient({ userEmail, userName, isAdmin = fals
           onPaid={handlePaid}
           onBack={handleBack}
           price={price}
+          notice={paywallNotice}
         />
       )}
       {view === "quiz" && (

@@ -1,5 +1,5 @@
 import { db } from "@/lib/db"
-import { users, userProfiles, bookings, purchases, services as servicesTable, digitalProducts, priyaGptTimeBalances, priyaGptTimeTransactions, priyaGptSessions, priyaGptMessages, pitchDeckAnalyses, pitchDeckUnlocks, startupScores, startupIdeaScores } from "@/lib/db/schema"
+import { users, userProfiles, bookings, purchases, services as servicesTable, digitalProducts, priyaGptTimeBalances, priyaGptTimeTransactions, priyaGptSessions, priyaGptMessages, pitchDeckAnalyses, pitchDeckUnlocks, startupScores, startupIdeaScores, toolUnlocks } from "@/lib/db/schema"
 import { eq, desc, sql, and } from "drizzle-orm"
 import { notFound } from "next/navigation"
 import Link from "next/link"
@@ -18,7 +18,7 @@ export default async function AdminUserDetailPage({ params }: Props) {
 
   const [profile] = await db.select().from(userProfiles).where(eq(userProfiles.userId, id))
 
-  const [userBookings, userPurchases, [priyaGptBalanceRow], priyaGptTxns, [priyaGptMsgCountRow], userPitchDecks, userPitchDeckUnlocks, userFundScores, userIdeaScores] = await Promise.all([
+  const [userBookings, userPurchases, [priyaGptBalanceRow], priyaGptTxns, [priyaGptMsgCountRow], userPitchDecks, userPitchDeckUnlocks, userFundScores, userIdeaScores, userToolUnlocks] = await Promise.all([
     db
       .select({ id: bookings.id, status: bookings.status, createdAt: bookings.createdAt, serviceTitle: servicesTable.title })
       .from(bookings)
@@ -67,6 +67,13 @@ export default async function AdminUserDetailPage({ params }: Props) {
       .from(startupIdeaScores)
       .where(eq(startupIdeaScores.userId, id))
       .orderBy(desc(startupIdeaScores.createdAt)),
+
+    // Captured startup-score / idea-score payments not yet turned into a result
+    db
+      .select({ id: toolUnlocks.id, tool: toolUnlocks.tool, amountPaise: toolUnlocks.amountPaise, razorpayPaymentId: toolUnlocks.razorpayPaymentId, createdAt: toolUnlocks.createdAt })
+      .from(toolUnlocks)
+      .where(and(eq(toolUnlocks.userId, id), eq(toolUnlocks.status, "paid")))
+      .orderBy(desc(toolUnlocks.createdAt)),
   ])
 
   return (
@@ -93,6 +100,7 @@ export default async function AdminUserDetailPage({ params }: Props) {
         pitchDeckUnlocks={userPitchDeckUnlocks.map((u) => ({ ...u, createdAt: new Date(u.createdAt) }))}
         fundScores={userFundScores.map((s) => ({ ...s, createdAt: new Date(s.createdAt) }))}
         ideaScores={userIdeaScores.map((s) => ({ ...s, createdAt: new Date(s.createdAt) }))}
+        toolUnlocks={userToolUnlocks.map((u) => ({ ...u, createdAt: new Date(u.createdAt) }))}
       />
     </div>
   )

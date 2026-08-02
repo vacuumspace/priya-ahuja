@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server"
 import { auth } from "@/lib/auth"
 import { db } from "@/lib/db"
-import { siteSettings } from "@/lib/db/schema"
+import { siteSettings, toolUnlocks } from "@/lib/db/schema"
 import { eq } from "drizzle-orm"
 import { getRazorpayInstance } from "@/lib/razorpay"
 
@@ -25,6 +25,16 @@ export async function POST() {
       amount: price,
       currency: "INR",
       receipt: `startup_score_${Date.now()}`,
+      notes: { product: "startup-score", userId: session.user.id },
+    })
+
+    // Durable record of who this order belongs to - the webhook marks it paid
+    // even if the buyer's browser never comes back after checkout.
+    await db.insert(toolUnlocks).values({
+      tool: "startup-score",
+      userId: session.user.id,
+      razorpayOrderId: order.id,
+      amountPaise: price,
     })
 
     return NextResponse.json({

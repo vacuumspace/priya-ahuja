@@ -1,6 +1,6 @@
 import { auth, isAdmin } from "@/lib/auth"
 import { db } from "@/lib/db"
-import { bookings, purchases, startupScores, pitchDeckAnalyses, pitchDeckUnlocks, services, digitalProducts, users, priyaGptTimeTransactions } from "@/lib/db/schema"
+import { bookings, purchases, startupScores, startupIdeaScores, pitchDeckAnalyses, pitchDeckUnlocks, toolUnlocks, services, digitalProducts, users, priyaGptTimeTransactions } from "@/lib/db/schema"
 import { and, eq, inArray, isNotNull, like } from "drizzle-orm"
 
 const PAGE_SIZE = 10
@@ -17,7 +17,7 @@ export async function GET(req: Request) {
   const typeFilter = searchParams.get("type")
 
   // Fetch all sources
-  const [allBookings, allPurchases, allScores, allPitchDecks, unusedUnlocks, allPriyaGpt] = await Promise.all([
+  const [allBookings, allPurchases, allScores, allIdeaScores, allPitchDecks, unusedPitchDeckUnlocks, allPriyaGpt, unusedToolUnlocks] = await Promise.all([
     db
       .select({
         id: bookings.id,
@@ -64,6 +64,19 @@ export async function GET(req: Request) {
 
     db
       .select({
+        id: startupIdeaScores.id,
+        userId: startupIdeaScores.userId,
+        razorpayPaymentId: startupIdeaScores.razorpayPaymentId,
+        createdAt: startupIdeaScores.createdAt,
+        userName: users.name,
+        userEmail: users.email,
+      })
+      .from(startupIdeaScores)
+      .leftJoin(users, eq(startupIdeaScores.userId, users.id))
+      .where(eq(startupIdeaScores.isPaid, true)),
+
+    db
+      .select({
         id: pitchDeckAnalyses.id,
         amountPaid: pitchDeckAnalyses.amountPaid,
         razorpayPaymentId: pitchDeckAnalyses.razorpayPaymentId,
@@ -102,6 +115,22 @@ export async function GET(req: Request) {
       .from(priyaGptTimeTransactions)
       .leftJoin(users, eq(priyaGptTimeTransactions.userId, users.id))
       .where(eq(priyaGptTimeTransactions.reason, "purchase")),
+
+    // Captured startup-score / idea-score payments where the quiz hasn't
+    // been submitted yet - consumed unlocks show up via their score tables
+    db
+      .select({
+        id: toolUnlocks.id,
+        tool: toolUnlocks.tool,
+        amountPaise: toolUnlocks.amountPaise,
+        razorpayPaymentId: toolUnlocks.razorpayPaymentId,
+        createdAt: toolUnlocks.createdAt,
+        userName: users.name,
+        userEmail: users.email,
+      })
+      .from(toolUnlocks)
+      .leftJoin(users, eq(toolUnlocks.userId, users.id))
+      .where(eq(toolUnlocks.status, "paid")),
   ])
 
   type TxRow = {
@@ -150,6 +179,17 @@ export async function GET(req: Request) {
       status: "paid",
       createdAt: r.createdAt,
     })),
+    ...allIdeaScores.map((r) => ({
+      id: r.id,
+      type: "ideascore",
+      userName: r.userName ?? "Unknown",
+      userEmail: r.userEmail ?? "",
+      itemName: "Startup Idea Score",
+      amount: null,
+      razorpayPaymentId: r.razorpayPaymentId,
+      status: "paid",
+      createdAt: r.createdAt,
+    })),
     ...allPitchDecks.map((r) => ({
       id: r.id,
       type: "pitchdeck",
@@ -161,12 +201,23 @@ export async function GET(req: Request) {
       status: "paid",
       createdAt: r.createdAt,
     })),
-    ...unusedUnlocks.map((r) => ({
+    ...unusedPitchDeckUnlocks.map((r) => ({
       id: r.id,
       type: "pitchdeck",
       userName: r.userName ?? "Unknown",
       userEmail: r.userEmail ?? "",
       itemName: "Pitch Deck Analysis (paid, not run yet)",
+      amount: r.amountPaise,
+      razorpayPaymentId: r.razorpayPaymentId,
+      status: "paid",
+      createdAt: r.createdAt,
+    })),
+    ...unusedToolUnlocks.map((r) => ({
+      id: r.id,
+      type: r.tool === "startup-idea-score" ? "ideascore" : "score",
+      userName: r.userName ?? "Unknown",
+      userEmail: r.userEmail ?? "",
+      itemName: `${r.tool === "startup-idea-score" ? "Startup Idea Score" : "Startup Score"} (paid, not taken yet)`,
       amount: r.amountPaise,
       razorpayPaymentId: r.razorpayPaymentId,
       status: "paid",
