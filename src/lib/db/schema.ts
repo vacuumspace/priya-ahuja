@@ -317,6 +317,23 @@ export const priyaGptTimeBalances = pgTable("priya_gpt_time_balances", {
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 })
 
+// Same durable-payment pattern as pitch_deck_unlocks/tool_unlocks. The gap
+// here is smaller (minutes are credited by the same handler that gets the
+// Razorpay success callback) but a lost network call or closed tab right
+// after payment still left captured money with zero DB trace and no
+// webhook safety net, since priya_gpt_time_transactions rows were only
+// ever written from that one client-triggered call.
+export const priyaGptTimeUnlocks = pgTable("priya_gpt_time_unlocks", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  minutes: integer("minutes").notNull(),
+  razorpayOrderId: text("razorpay_order_id").notNull().unique(),
+  razorpayPaymentId: text("razorpay_payment_id"),
+  amountPaise: integer("amount_paise").notNull(),
+  status: varchar("status", { length: 20 }).notNull().default("pending"), // 'pending' | 'paid' | 'consumed'
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+})
+
 export const priyaGptTimeTransactions = pgTable("priya_gpt_time_transactions", {
   id: uuid("id").primaryKey().defaultRandom(),
   userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),

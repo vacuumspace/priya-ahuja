@@ -1,5 +1,5 @@
 import { db } from "@/lib/db"
-import { users, userProfiles, bookings, purchases, services as servicesTable, digitalProducts, priyaGptTimeBalances, priyaGptTimeTransactions, priyaGptSessions, priyaGptMessages, pitchDeckAnalyses, pitchDeckUnlocks, startupScores, startupIdeaScores, toolUnlocks } from "@/lib/db/schema"
+import { users, userProfiles, bookings, purchases, services as servicesTable, digitalProducts, priyaGptTimeBalances, priyaGptTimeTransactions, priyaGptTimeUnlocks, priyaGptSessions, priyaGptMessages, pitchDeckAnalyses, pitchDeckUnlocks, startupScores, startupIdeaScores, toolUnlocks } from "@/lib/db/schema"
 import { eq, desc, sql, and } from "drizzle-orm"
 import { notFound } from "next/navigation"
 import Link from "next/link"
@@ -18,7 +18,7 @@ export default async function AdminUserDetailPage({ params }: Props) {
 
   const [profile] = await db.select().from(userProfiles).where(eq(userProfiles.userId, id))
 
-  const [userBookings, userPurchases, [priyaGptBalanceRow], priyaGptTxns, [priyaGptMsgCountRow], userPitchDecks, userPitchDeckUnlocks, userFundScores, userIdeaScores, userToolUnlocks] = await Promise.all([
+  const [userBookings, userPurchases, [priyaGptBalanceRow], priyaGptTxns, [priyaGptMsgCountRow], userPitchDecks, userPitchDeckUnlocks, userFundScores, userIdeaScores, userToolUnlocks, userPriyaGptUnlocks] = await Promise.all([
     db
       .select({ id: bookings.id, status: bookings.status, createdAt: bookings.createdAt, serviceTitle: servicesTable.title })
       .from(bookings)
@@ -74,6 +74,13 @@ export default async function AdminUserDetailPage({ params }: Props) {
       .from(toolUnlocks)
       .where(and(eq(toolUnlocks.userId, id), eq(toolUnlocks.status, "paid")))
       .orderBy(desc(toolUnlocks.createdAt)),
+
+    // Captured PriyaGPT time payments not yet applied to a balance
+    db
+      .select({ id: priyaGptTimeUnlocks.id, minutes: priyaGptTimeUnlocks.minutes, amountPaise: priyaGptTimeUnlocks.amountPaise, razorpayPaymentId: priyaGptTimeUnlocks.razorpayPaymentId, createdAt: priyaGptTimeUnlocks.createdAt })
+      .from(priyaGptTimeUnlocks)
+      .where(and(eq(priyaGptTimeUnlocks.userId, id), eq(priyaGptTimeUnlocks.status, "paid")))
+      .orderBy(desc(priyaGptTimeUnlocks.createdAt)),
   ])
 
   return (
@@ -101,6 +108,7 @@ export default async function AdminUserDetailPage({ params }: Props) {
         fundScores={userFundScores.map((s) => ({ ...s, createdAt: new Date(s.createdAt) }))}
         ideaScores={userIdeaScores.map((s) => ({ ...s, createdAt: new Date(s.createdAt) }))}
         toolUnlocks={userToolUnlocks.map((u) => ({ ...u, createdAt: new Date(u.createdAt) }))}
+        priyaGptUnlocks={userPriyaGptUnlocks.map((u) => ({ ...u, createdAt: new Date(u.createdAt) }))}
       />
     </div>
   )

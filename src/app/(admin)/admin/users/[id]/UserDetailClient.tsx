@@ -9,6 +9,7 @@ type PitchDeck = { id: string; fileName: string; totalScore: number; isPaid: boo
 type PitchDeckUnlock = { id: string; amountPaise: number; razorpayPaymentId: string | null; createdAt: Date }
 type ToolScore = { id: string; totalScore: number; isPaid: boolean; createdAt: Date }
 type ToolUnlock = { id: string; tool: string; amountPaise: number; razorpayPaymentId: string | null; createdAt: Date }
+type PriyaGptUnlock = { id: string; minutes: number; amountPaise: number; razorpayPaymentId: string | null; createdAt: Date }
 
 type Profile = {
   phone: string | null
@@ -75,6 +76,7 @@ export default function UserDetailClient({
   fundScores = [],
   ideaScores = [],
   toolUnlocks = [],
+  priyaGptUnlocks = [],
 }: {
   user: User
   profile: Profile | null
@@ -88,6 +90,7 @@ export default function UserDetailClient({
   fundScores?: ToolScore[]
   ideaScores?: ToolScore[]
   toolUnlocks?: ToolUnlock[]
+  priyaGptUnlocks?: PriyaGptUnlock[]
 }) {
   const toolsCount = pitchDecks.length + pitchDeckUnlocks.length + fundScores.length + ideaScores.length + toolUnlocks.length
   const tabs = ["profile", "sessions", "purchases", "tools", "priyagpt"] as const
@@ -319,6 +322,22 @@ export default function UserDetailClient({
       {/* PriyaGPT time tab */}
       {tab === "priyagpt" && (
         <div className="flex flex-col gap-4">
+          {priyaGptUnlocks.length > 0 && (
+            <Section title="priyagpt time - paid, not credited yet">
+              {priyaGptUnlocks.map((u) => (
+                <div key={u.id} className="flex items-center justify-between gap-3 py-2.5 border-b border-border last:border-0">
+                  <div className="min-w-0">
+                    <p className="font-sans text-sm text-ink">{u.minutes} min · ₹{(u.amountPaise / 100).toLocaleString("en-IN")} paid</p>
+                    {u.razorpayPaymentId && <p className="font-sans text-xs text-ink/40 truncate">{u.razorpayPaymentId}</p>}
+                  </div>
+                  <div className="flex items-center gap-3 flex-shrink-0">
+                    <span className="text-[11px] font-sans font-semibold px-2 py-0.5 rounded-full bg-amber-100 text-amber-700">unused</span>
+                    <span className="font-sans text-xs text-ink/40">{fmt(u.createdAt)}</span>
+                  </div>
+                </div>
+              ))}
+            </Section>
+          )}
           {!priyaGptHasChatted ? (
             <p className="text-sm font-sans text-ink/40 border border-dashed border-border rounded-2xl p-6 text-center">
               no PriyaGPT activity yet

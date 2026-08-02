@@ -1,6 +1,6 @@
 import { auth, isAdmin } from "@/lib/auth"
 import { db } from "@/lib/db"
-import { bookings, purchases, startupScores, startupIdeaScores, pitchDeckAnalyses, pitchDeckUnlocks, toolUnlocks, services, digitalProducts, users, priyaGptTimeTransactions } from "@/lib/db/schema"
+import { bookings, purchases, startupScores, startupIdeaScores, pitchDeckAnalyses, pitchDeckUnlocks, toolUnlocks, services, digitalProducts, users, priyaGptTimeTransactions, priyaGptTimeUnlocks } from "@/lib/db/schema"
 import { and, eq, inArray, isNotNull, like } from "drizzle-orm"
 
 const PAGE_SIZE = 10
@@ -17,7 +17,7 @@ export async function GET(req: Request) {
   const typeFilter = searchParams.get("type")
 
   // Fetch all sources
-  const [allBookings, allPurchases, allScores, allIdeaScores, allPitchDecks, unusedPitchDeckUnlocks, allPriyaGpt, unusedToolUnlocks] = await Promise.all([
+  const [allBookings, allPurchases, allScores, allIdeaScores, allPitchDecks, unusedPitchDeckUnlocks, allPriyaGpt, unusedToolUnlocks, unusedPriyaGptUnlocks] = await Promise.all([
     db
       .select({
         id: bookings.id,
@@ -131,6 +131,21 @@ export async function GET(req: Request) {
       .from(toolUnlocks)
       .leftJoin(users, eq(toolUnlocks.userId, users.id))
       .where(eq(toolUnlocks.status, "paid")),
+
+    // Captured PriyaGPT time payments not yet applied to a balance
+    db
+      .select({
+        id: priyaGptTimeUnlocks.id,
+        minutes: priyaGptTimeUnlocks.minutes,
+        amountPaise: priyaGptTimeUnlocks.amountPaise,
+        razorpayPaymentId: priyaGptTimeUnlocks.razorpayPaymentId,
+        createdAt: priyaGptTimeUnlocks.createdAt,
+        userName: users.name,
+        userEmail: users.email,
+      })
+      .from(priyaGptTimeUnlocks)
+      .leftJoin(users, eq(priyaGptTimeUnlocks.userId, users.id))
+      .where(eq(priyaGptTimeUnlocks.status, "paid")),
   ])
 
   type TxRow = {
@@ -229,6 +244,17 @@ export async function GET(req: Request) {
       userName: r.userName ?? "Unknown",
       userEmail: r.userEmail ?? "",
       itemName: "PriyaGPT Time",
+      amount: r.amountPaise,
+      razorpayPaymentId: r.razorpayPaymentId,
+      status: "paid",
+      createdAt: r.createdAt,
+    })),
+    ...unusedPriyaGptUnlocks.map((r) => ({
+      id: r.id,
+      type: "priyagpt",
+      userName: r.userName ?? "Unknown",
+      userEmail: r.userEmail ?? "",
+      itemName: `PriyaGPT Time - ${r.minutes} min (paid, not credited yet)`,
       amount: r.amountPaise,
       razorpayPaymentId: r.razorpayPaymentId,
       status: "paid",

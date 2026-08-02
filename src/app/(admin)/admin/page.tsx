@@ -1,5 +1,5 @@
 import { db } from "@/lib/db"
-import { bookings, services, availability, purchases, digitalProducts, priyaGptTimeTransactions, pitchDeckAnalyses, pitchDeckUnlocks, toolUnlocks, users } from "@/lib/db/schema"
+import { bookings, services, availability, purchases, digitalProducts, priyaGptTimeTransactions, priyaGptTimeUnlocks, pitchDeckAnalyses, pitchDeckUnlocks, toolUnlocks, users } from "@/lib/db/schema"
 import { eq, and, gte, desc, isNotNull } from "drizzle-orm"
 import Link from "next/link"
 
@@ -99,6 +99,21 @@ export default async function AdminDashboard() {
     .orderBy(desc(toolUnlocks.createdAt))
     .limit(10)
 
+  // Captured PriyaGPT time payments not yet applied to a balance
+  const recentPriyaGptUnlockTxns = await db
+    .select({
+      id: priyaGptTimeUnlocks.id,
+      minutes: priyaGptTimeUnlocks.minutes,
+      userName: users.name,
+      amount: priyaGptTimeUnlocks.amountPaise,
+      createdAt: priyaGptTimeUnlocks.createdAt,
+    })
+    .from(priyaGptTimeUnlocks)
+    .leftJoin(users, eq(priyaGptTimeUnlocks.userId, users.id))
+    .where(eq(priyaGptTimeUnlocks.status, "paid"))
+    .orderBy(desc(priyaGptTimeUnlocks.createdAt))
+    .limit(10)
+
   const recentTransactions = [
     ...recentBookingTxns.map((t) => ({ ...t, kind: "booking" as const })),
     ...recentPurchaseTxns.map((t) => ({ ...t, kind: "purchase" as const, type: null, slug: t.slug })),
@@ -132,6 +147,14 @@ export default async function AdminDashboard() {
       type: null,
       slug: null,
       label: `${t.tool === "startup-idea-score" ? "Startup Idea Score" : "Startup Score"} (paid, not taken yet)`,
+      userName: t.userName ?? "Unknown",
+    })),
+    ...recentPriyaGptUnlockTxns.map((t) => ({
+      ...t,
+      kind: "priyagpt" as const,
+      type: null,
+      slug: null,
+      label: `PriyaGPT Time - ${t.minutes} min (paid, not credited yet)`,
       userName: t.userName ?? "Unknown",
     })),
   ]

@@ -1,6 +1,6 @@
 import { auth, isAdmin } from "@/lib/auth"
 import { db } from "@/lib/db"
-import { bookings, purchases, startupScores, startupIdeaScores, pitchDeckAnalyses, pitchDeckUnlocks, toolUnlocks, digitalProducts, priyaGptTimeTransactions } from "@/lib/db/schema"
+import { bookings, purchases, startupScores, startupIdeaScores, pitchDeckAnalyses, pitchDeckUnlocks, toolUnlocks, digitalProducts, priyaGptTimeTransactions, priyaGptTimeUnlocks } from "@/lib/db/schema"
 import { and, eq, inArray, isNotNull, like } from "drizzle-orm"
 
 export async function GET() {
@@ -9,7 +9,7 @@ export async function GET() {
     return new Response("Forbidden", { status: 403 })
   }
 
-  const [allBookings, allPurchases, allScores, allIdeaScores, allPitchDecks, unusedPitchDeckUnlocks, priyaGptPurchases, unusedToolUnlocks] = await Promise.all([
+  const [allBookings, allPurchases, allScores, allIdeaScores, allPitchDecks, unusedPitchDeckUnlocks, priyaGptPurchases, unusedToolUnlocks, unusedPriyaGptUnlocks] = await Promise.all([
     db
       .select({ createdAt: bookings.createdAt, amount: bookings.amountPaid })
       .from(bookings)
@@ -57,6 +57,12 @@ export async function GET() {
       .select({ createdAt: toolUnlocks.createdAt, amountPaise: toolUnlocks.amountPaise })
       .from(toolUnlocks)
       .where(eq(toolUnlocks.status, "paid")),
+
+    // Captured PriyaGPT time payments not yet applied to a balance
+    db
+      .select({ createdAt: priyaGptTimeUnlocks.createdAt, amountPaise: priyaGptTimeUnlocks.amountPaise })
+      .from(priyaGptTimeUnlocks)
+      .where(eq(priyaGptTimeUnlocks.status, "paid")),
   ])
 
   function monthKey(d: Date) {
@@ -144,7 +150,7 @@ export async function GET() {
   const scoreCount = allScores.length + allIdeaScores.length + unusedToolUnlocks.length
 
   let priyaGptRevenue = 0, priyaGptCount = 0
-  for (const r of priyaGptPurchases) {
+  for (const r of [...priyaGptPurchases, ...unusedPriyaGptUnlocks]) {
     const amt = r.amountPaise ?? 0
     priyaGptRevenue += amt; priyaGptCount++
     const k = monthKey(r.createdAt)

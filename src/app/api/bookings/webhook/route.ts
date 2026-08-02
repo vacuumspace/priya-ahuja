@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { db } from "@/lib/db"
-import { bookings, availability, purchases, pitchDeckUnlocks, toolUnlocks } from "@/lib/db/schema"
+import { bookings, availability, purchases, pitchDeckUnlocks, toolUnlocks, priyaGptTimeUnlocks } from "@/lib/db/schema"
 import { eq, and, ne } from "drizzle-orm"
 import { verifyWebhookSignature } from "@/lib/razorpay"
 import crypto from "crypto"
@@ -88,6 +88,16 @@ export async function POST(req: NextRequest) {
         ...(amountCaptured ? { amountPaise: amountCaptured } : {}),
       })
       .where(and(eq(toolUnlocks.razorpayOrderId, orderId), ne(toolUnlocks.status, "consumed")))
+
+    // Same for PriyaGPT time purchases
+    await db
+      .update(priyaGptTimeUnlocks)
+      .set({
+        status: "paid",
+        razorpayPaymentId: paymentId,
+        ...(amountCaptured ? { amountPaise: amountCaptured } : {}),
+      })
+      .where(and(eq(priyaGptTimeUnlocks.razorpayOrderId, orderId), ne(priyaGptTimeUnlocks.status, "consumed")))
   }
 
   if (event.event === "payment.failed") {

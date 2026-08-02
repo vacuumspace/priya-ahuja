@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import { auth } from "@/lib/auth"
+import { db } from "@/lib/db"
+import { priyaGptTimeUnlocks } from "@/lib/db/schema"
 import { getRazorpayInstance } from "@/lib/razorpay"
 import { getTimePackages } from "@/lib/priya-gpt-packages"
 
@@ -24,6 +26,17 @@ export async function POST(req: NextRequest) {
       amount: pkg.price,
       currency: "INR",
       receipt: `priya_gpt_time_${Date.now()}`,
+      notes: { product: "priya-gpt-time", userId: session.user.id },
+    })
+
+    // Durable record of who this order belongs to and how many minutes it
+    // buys - the webhook marks it paid even if the buyer's browser never
+    // comes back after checkout.
+    await db.insert(priyaGptTimeUnlocks).values({
+      userId: session.user.id,
+      minutes: pkg.minutes,
+      razorpayOrderId: order.id,
+      amountPaise: pkg.price,
     })
 
     return NextResponse.json({

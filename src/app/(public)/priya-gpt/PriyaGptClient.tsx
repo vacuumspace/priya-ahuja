@@ -264,6 +264,21 @@ export default function PriyaGptClient({ isSignedIn, isAdmin }: { isSignedIn: bo
       })
   }
 
+  // Silently claims a captured payment that never got applied last time
+  // (closed tab / dropped network right after paying, before minutes were
+  // added). No-op if there's nothing unclaimed - the server just says so.
+  useEffect(() => {
+    if (!isSignedIn) return
+    fetch("/api/priya-gpt/time/purchase", { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" })
+      .then((r) => r.json().then((d) => ({ ok: r.ok, d })))
+      .then(({ ok, d }) => {
+        if (ok && typeof d.minutesRemaining === "number") {
+          setMinutesBalance(d.minutesRemaining)
+        }
+      })
+      .catch(() => {})
+  }, [isSignedIn])
+
   // ensures the caller's one chat thread has an active timer - creates it on a user's very
   // first message ever, or reactivates it (spending the whole banked balance) after a
   // timeout. Either way it's the same thread and the same message history throughout.
