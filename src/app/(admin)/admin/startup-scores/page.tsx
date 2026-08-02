@@ -1,6 +1,6 @@
 import { db } from "@/lib/db"
-import { startupScores, users } from "@/lib/db/schema"
-import { desc, count, eq } from "drizzle-orm"
+import { startupScores, toolUnlocks, users } from "@/lib/db/schema"
+import { desc, count, eq, and } from "drizzle-orm"
 import { PILLARS } from "@/lib/startup-score-data"
 import Link from "next/link"
 
@@ -16,7 +16,7 @@ export default async function AdminStartupScoresPage({ searchParams }: Props) {
 
   await db.update(startupScores).set({ adminSeen: true }).where(eq(startupScores.adminSeen, false))
 
-  const [totalResult, rows] = await Promise.all([
+  const [totalResult, rows, unusedUnlocks] = await Promise.all([
     db.select({ count: count() }).from(startupScores),
     db
       .select({
@@ -33,6 +33,20 @@ export default async function AdminStartupScoresPage({ searchParams }: Props) {
       .orderBy(desc(startupScores.createdAt))
       .limit(PAGE_SIZE)
       .offset((page - 1) * PAGE_SIZE),
+
+    // Captured payments where the buyer hasn't taken the quiz yet
+    db
+      .select({
+        id: toolUnlocks.id,
+        amountPaise: toolUnlocks.amountPaise,
+        razorpayPaymentId: toolUnlocks.razorpayPaymentId,
+        createdAt: toolUnlocks.createdAt,
+        userName: users.name,
+        userEmail: users.email,
+      })
+      .from(toolUnlocks)
+      .leftJoin(users, eq(toolUnlocks.userId, users.id))
+      .where(and(eq(toolUnlocks.tool, "startup-score"), eq(toolUnlocks.status, "paid"))),
   ])
 
   const total = totalResult[0].count
@@ -45,6 +59,31 @@ export default async function AdminStartupScoresPage({ searchParams }: Props) {
         <h1 className="font-heading text-3xl font-800 text-ink">Startup Scores</h1>
         <p className="font-sans text-sm text-ink/50 mt-1">{total} total submissions</p>
       </div>
+
+      {unusedUnlocks.length > 0 && (
+        <div className="border border-amber-200 bg-amber-50 rounded-2xl overflow-hidden mb-6">
+          <div className="px-5 py-3 border-b border-amber-200">
+            <h2 className="font-heading text-base font-700 text-amber-900">paid, quiz not taken yet</h2>
+            <p className="font-sans text-xs text-amber-800/70 mt-0.5">these users completed payment but haven&apos;t submitted the quiz - they can take it any time without paying again</p>
+          </div>
+          <div className="px-5 py-1">
+            {unusedUnlocks.map((u) => (
+              <div key={u.id} className="flex items-center justify-between gap-3 py-2.5 border-b border-amber-200/60 last:border-0">
+                <div className="min-w-0">
+                  <p className="font-sans text-sm font-medium text-ink truncate">{u.userName ?? "Unknown"}</p>
+                  <p className="font-sans text-xs text-ink/50 truncate">{u.userEmail ?? " - "}{u.razorpayPaymentId ? ` · ${u.razorpayPaymentId}` : ""}</p>
+                </div>
+                <div className="flex items-center gap-3 flex-shrink-0">
+                  <span className="font-sans text-sm font-semibold text-ink">₹{(u.amountPaise / 100).toLocaleString("en-IN")}</span>
+                  <span className="font-sans text-xs text-ink/50">
+                    {new Date(u.createdAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       <div className="border border-border rounded-2xl overflow-hidden">
         {rows.length === 0 ? (
