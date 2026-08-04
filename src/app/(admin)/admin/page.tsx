@@ -1,5 +1,5 @@
 import { db } from "@/lib/db"
-import { bookings, services, availability, purchases, digitalProducts, priyaGptTimeTransactions, priyaGptTimeUnlocks, pitchDeckAnalyses, pitchDeckUnlocks, toolUnlocks, users } from "@/lib/db/schema"
+import { bookings, services, availability, purchases, digitalProducts, priyaGptTimeTransactions, priyaGptTimeUnlocks, pitchDeckAnalyses, pitchDeckUnlocks, toolUnlocks, startupScores, startupIdeaScores, users } from "@/lib/db/schema"
 import { eq, and, gte, desc, isNotNull } from "drizzle-orm"
 import Link from "next/link"
 
@@ -84,6 +84,32 @@ export default async function AdminDashboard() {
     .orderBy(desc(pitchDeckUnlocks.createdAt))
     .limit(10)
 
+  const recentScoreTxns = await db
+    .select({
+      id: startupScores.id,
+      userName: users.name,
+      amount: startupScores.amountPaid,
+      createdAt: startupScores.createdAt,
+    })
+    .from(startupScores)
+    .leftJoin(users, eq(startupScores.userId, users.id))
+    .where(eq(startupScores.isPaid, true))
+    .orderBy(desc(startupScores.createdAt))
+    .limit(10)
+
+  const recentIdeaScoreTxns = await db
+    .select({
+      id: startupIdeaScores.id,
+      userName: users.name,
+      amount: startupIdeaScores.amountPaid,
+      createdAt: startupIdeaScores.createdAt,
+    })
+    .from(startupIdeaScores)
+    .leftJoin(users, eq(startupIdeaScores.userId, users.id))
+    .where(eq(startupIdeaScores.isPaid, true))
+    .orderBy(desc(startupIdeaScores.createdAt))
+    .limit(10)
+
   // Captured startup-score / idea-score payments not yet turned into a result
   const recentToolUnlockTxns = await db
     .select({
@@ -139,6 +165,22 @@ export default async function AdminDashboard() {
       type: null,
       slug: null,
       label: "Pitch Deck Analysis (paid, not run yet)",
+      userName: t.userName ?? "Unknown",
+    })),
+    ...recentScoreTxns.map((t) => ({
+      ...t,
+      kind: "score" as const,
+      type: null,
+      slug: null,
+      label: "Startup Fundability Score",
+      userName: t.userName ?? "Unknown",
+    })),
+    ...recentIdeaScoreTxns.map((t) => ({
+      ...t,
+      kind: "score" as const,
+      type: null,
+      slug: null,
+      label: "Startup Idea Score",
       userName: t.userName ?? "Unknown",
     })),
     ...recentToolUnlockTxns.map((t) => ({
