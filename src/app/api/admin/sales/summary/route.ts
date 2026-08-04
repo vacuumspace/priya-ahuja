@@ -27,12 +27,12 @@ export async function GET() {
       .where(and(like(purchases.razorpayPaymentId, "pay_%"), isNotNull(purchases.amountPaid))),
 
     db
-      .select({ createdAt: startupScores.createdAt })
+      .select({ createdAt: startupScores.createdAt, amountPaid: startupScores.amountPaid })
       .from(startupScores)
       .where(eq(startupScores.isPaid, true)),
 
     db
-      .select({ createdAt: startupIdeaScores.createdAt })
+      .select({ createdAt: startupIdeaScores.createdAt, amountPaid: startupIdeaScores.amountPaid })
       .from(startupIdeaScores)
       .where(eq(startupIdeaScores.isPaid, true)),
 
@@ -84,7 +84,7 @@ export async function GET() {
   }
 
   type Seg = { revenue: number; count: number }
-  type MonthData = { revenue: number; count: number; sessions: Seg; templates: Seg; investorList: Seg; priyagpt: Seg; pitchDeck: Seg }
+  type MonthData = { revenue: number; count: number; sessions: Seg; templates: Seg; investorList: Seg; priyagpt: Seg; pitchDeck: Seg; score: Seg }
   const monthly: Record<string, MonthData> = {}
   for (const k of months) {
     monthly[k] = {
@@ -94,6 +94,7 @@ export async function GET() {
       investorList: { revenue: 0, count: 0 },
       priyagpt: { revenue: 0, count: 0 },
       pitchDeck: { revenue: 0, count: 0 },
+      score: { revenue: 0, count: 0 },
     }
   }
 
@@ -141,13 +142,20 @@ export async function GET() {
     }
   }
 
-  // startup_scores/startup_idea_scores don't record amount paid, so revenue
-  // for completed quizzes is untracked; unused unlocks do carry the amount
-  let scoreRevenue = 0
-  for (const r of unusedToolUnlocks) {
-    scoreRevenue += r.amountPaise ?? 0
+  let scoreRevenue = 0, scoreCount = 0
+  for (const r of [
+    ...allScores.map(a => ({ createdAt: a.createdAt, amount: a.amountPaid })),
+    ...allIdeaScores.map(a => ({ createdAt: a.createdAt, amount: a.amountPaid })),
+    ...unusedToolUnlocks.map(u => ({ createdAt: u.createdAt, amount: u.amountPaise })),
+  ]) {
+    const amt = r.amount ?? 0
+    scoreRevenue += amt; scoreCount++
+    const k = monthKey(r.createdAt)
+    if (monthly[k]) {
+      monthly[k].revenue += amt; monthly[k].count++
+      monthly[k].score.revenue += amt; monthly[k].score.count++
+    }
   }
-  const scoreCount = allScores.length + allIdeaScores.length + unusedToolUnlocks.length
 
   let priyaGptRevenue = 0, priyaGptCount = 0
   for (const r of [...priyaGptPurchases, ...unusedPriyaGptUnlocks]) {

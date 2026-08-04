@@ -217,6 +217,7 @@ export const startupScores = pgTable("startup_scores", {
   pillarScores: jsonb("pillar_scores").notNull(),
   scoreBand: text("score_band").notNull(),
   isPaid: boolean("is_paid").notNull().default(false),
+  amountPaid: integer("amount_paid"), // paise actually captured; null for admin test runs
   razorpayOrderId: text("razorpay_order_id"),
   razorpayPaymentId: text("razorpay_payment_id"),
   adminSeen: boolean("admin_seen").notNull().default(false),
@@ -231,6 +232,7 @@ export const startupIdeaScores = pgTable("startup_idea_scores", {
   totalScore: integer("total_score").notNull(),
   pillarScores: jsonb("pillar_scores").notNull(),
   isPaid: boolean("is_paid").notNull().default(false),
+  amountPaid: integer("amount_paid"), // paise actually captured; null for admin test runs
   razorpayOrderId: text("razorpay_order_id"),
   razorpayPaymentId: text("razorpay_payment_id"),
   adminSeen: boolean("admin_seen").notNull().default(false),

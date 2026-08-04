@@ -24,6 +24,7 @@ export default async function AdminStartupScoresPage({ searchParams }: Props) {
         totalScore: startupScores.totalScore,
         pillarScores: startupScores.pillarScores,
         isPaid: startupScores.isPaid,
+        amountPaid: startupScores.amountPaid,
         createdAt: startupScores.createdAt,
         userName: users.name,
         userEmail: users.email,
@@ -97,6 +98,7 @@ export default async function AdminStartupScoresPage({ searchParams }: Props) {
                 <th className="text-left font-sans text-[11px] text-ink/40 uppercase tracking-widest px-5 py-3">Email</th>
                 <th className="text-left font-sans text-[11px] text-ink/40 uppercase tracking-widest px-5 py-3">Score</th>
                 <th className="text-left font-sans text-[11px] text-ink/40 uppercase tracking-widest px-5 py-3">Segments</th>
+                <th className="text-left font-sans text-[11px] text-ink/40 uppercase tracking-widest px-5 py-3">Paid</th>
                 <th className="text-left font-sans text-[11px] text-ink/40 uppercase tracking-widest px-5 py-3">Date</th>
               </tr>
             </thead>
@@ -134,6 +136,13 @@ export default async function AdminStartupScoresPage({ searchParams }: Props) {
                           )
                         })}
                       </div>
+                    </td>
+                    <td className="px-5 py-3.5">
+                      <span className={`text-[11px] font-sans font-semibold px-2 py-0.5 rounded-full ${
+                        row.isPaid ? "bg-green-100 text-green-700" : "bg-ink/10 text-ink/40"
+                      }`}>
+                        {row.isPaid ? (row.amountPaid != null ? `₹${(row.amountPaid / 100).toLocaleString("en-IN")}` : "paid") : "admin test"}
+                      </span>
                     </td>
                     <td className="px-5 py-3.5 font-sans text-sm text-ink/50">
                       {row.createdAt ? new Date(row.createdAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" }) : " - "}

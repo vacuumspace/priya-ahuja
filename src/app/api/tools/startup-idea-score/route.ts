@@ -40,6 +40,8 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
   }
 
+  let amountPaid = PRICE_PAISE
+
   if (razorpayOrderId && razorpayPaymentId && razorpaySignature) {
     const secret = process.env.RAZORPAY_KEY_SECRET!
     const expected = createHmac("sha256", secret)
@@ -56,6 +58,7 @@ export async function POST(req: NextRequest) {
         console.error(`Idea score amount mismatch: expected ${PRICE_PAISE}, got ${rzOrder.amount}`)
         return NextResponse.json({ error: "Payment amount mismatch" }, { status: 400 })
       }
+      amountPaid = rzOrder.amount
     } catch (err) {
       console.error("Razorpay order fetch failed (continuing):", err)
     }
@@ -76,6 +79,7 @@ export async function POST(req: NextRequest) {
     }
     razorpayOrderId = unlock.razorpayOrderId
     razorpayPaymentId = unlock.razorpayPaymentId ?? ""
+    amountPaid = unlock.amountPaise
   }
 
   // Idempotency: reject if this paymentId was already used
@@ -106,6 +110,7 @@ export async function POST(req: NextRequest) {
       totalScore,
       pillarScores,
       isPaid: true,
+      amountPaid,
       razorpayOrderId,
       razorpayPaymentId,
     })

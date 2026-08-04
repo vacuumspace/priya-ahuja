@@ -57,13 +57,13 @@ export default async function AdminUserDetailPage({ params }: Props) {
       .orderBy(desc(pitchDeckUnlocks.createdAt)),
 
     db
-      .select({ id: startupScores.id, totalScore: startupScores.totalScore, isPaid: startupScores.isPaid, createdAt: startupScores.createdAt })
+      .select({ id: startupScores.id, totalScore: startupScores.totalScore, isPaid: startupScores.isPaid, amountPaid: startupScores.amountPaid, createdAt: startupScores.createdAt })
       .from(startupScores)
       .where(eq(startupScores.userId, id))
       .orderBy(desc(startupScores.createdAt)),
 
     db
-      .select({ id: startupIdeaScores.id, totalScore: startupIdeaScores.totalScore, isPaid: startupIdeaScores.isPaid, createdAt: startupIdeaScores.createdAt })
+      .select({ id: startupIdeaScores.id, totalScore: startupIdeaScores.totalScore, isPaid: startupIdeaScores.isPaid, amountPaid: startupIdeaScores.amountPaid, createdAt: startupIdeaScores.createdAt })
       .from(startupIdeaScores)
       .where(eq(startupIdeaScores.userId, id))
       .orderBy(desc(startupIdeaScores.createdAt)),

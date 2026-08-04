@@ -53,6 +53,7 @@ export async function GET(req: Request) {
       .select({
         id: startupScores.id,
         userId: startupScores.userId,
+        amountPaid: startupScores.amountPaid,
         razorpayPaymentId: startupScores.razorpayPaymentId,
         createdAt: startupScores.createdAt,
         userName: users.name,
@@ -66,6 +67,7 @@ export async function GET(req: Request) {
       .select({
         id: startupIdeaScores.id,
         userId: startupIdeaScores.userId,
+        amountPaid: startupIdeaScores.amountPaid,
         razorpayPaymentId: startupIdeaScores.razorpayPaymentId,
         createdAt: startupIdeaScores.createdAt,
         userName: users.name,
@@ -189,7 +191,7 @@ export async function GET(req: Request) {
       userName: r.userName ?? "Unknown",
       userEmail: r.userEmail ?? "",
       itemName: "Startup Score",
-      amount: null,
+      amount: r.amountPaid,
       razorpayPaymentId: r.razorpayPaymentId,
       status: "paid",
       createdAt: r.createdAt,
@@ -200,7 +202,7 @@ export async function GET(req: Request) {
       userName: r.userName ?? "Unknown",
       userEmail: r.userEmail ?? "",
       itemName: "Startup Idea Score",
-      amount: null,
+      amount: r.amountPaid,
       razorpayPaymentId: r.razorpayPaymentId,
       status: "paid",
       createdAt: r.createdAt,

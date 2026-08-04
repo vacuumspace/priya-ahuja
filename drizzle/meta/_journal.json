@@ -211,6 +211,13 @@
       "when": 1785997000000,
       "tag": "0029_priya_gpt_time_unlocks",
       "breakpoints": true
+    },
+    {
+      "idx": 30,
+      "version": "7",
+      "when": 1785998000000,
+      "tag": "0030_score_amount_paid",
+      "breakpoints": true
     }
   ]
 }

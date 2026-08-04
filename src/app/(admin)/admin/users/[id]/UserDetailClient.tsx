@@ -7,7 +7,7 @@ type Purchase = { id: string; createdAt: Date; productTitle: string | null }
 type PriyaGptTxn = { id: string; deltaMinutes: number; reason: string; amountPaise: number | null; createdAt: Date }
 type PitchDeck = { id: string; fileName: string; totalScore: number; isPaid: boolean; amountPaid: number | null; createdAt: Date }
 type PitchDeckUnlock = { id: string; amountPaise: number; razorpayPaymentId: string | null; createdAt: Date }
-type ToolScore = { id: string; totalScore: number; isPaid: boolean; createdAt: Date }
+type ToolScore = { id: string; totalScore: number; isPaid: boolean; amountPaid: number | null; createdAt: Date }
 type ToolUnlock = { id: string; tool: string; amountPaise: number; razorpayPaymentId: string | null; createdAt: Date }
 type PriyaGptUnlock = { id: string; minutes: number; amountPaise: number; razorpayPaymentId: string | null; createdAt: Date }
 
@@ -292,7 +292,9 @@ export default function UserDetailClient({
                 <Section title="fundability scores">
                   {fundScores.map((s) => (
                     <div key={s.id} className="flex items-center justify-between gap-3 py-2.5 border-b border-border last:border-0">
-                      <span className="font-sans text-xs text-ink/40">{s.isPaid ? "paid" : "free"}</span>
+                      <span className="font-sans text-xs text-ink/40">
+                        {s.isPaid ? `paid${s.amountPaid != null ? ` · ₹${(s.amountPaid / 100).toLocaleString("en-IN")}` : ""}` : "free"}
+                      </span>
                       <div className="flex items-center gap-3">
                         <span className="font-heading text-base font-bold text-ink">{s.totalScore}<span className="font-sans text-[10px] text-ink/30">/100</span></span>
                         <span className="font-sans text-xs text-ink/40">{fmt(s.createdAt)}</span>
@@ -305,7 +307,9 @@ export default function UserDetailClient({
                 <Section title="idea scores">
                   {ideaScores.map((s) => (
                     <div key={s.id} className="flex items-center justify-between gap-3 py-2.5 border-b border-border last:border-0">
-                      <span className="font-sans text-xs text-ink/40">{s.isPaid ? "paid" : "free"}</span>
+                      <span className="font-sans text-xs text-ink/40">
+                        {s.isPaid ? `paid${s.amountPaid != null ? ` · ₹${(s.amountPaid / 100).toLocaleString("en-IN")}` : ""}` : "free"}
+                      </span>
                       <div className="flex items-center gap-3">
                         <span className="font-heading text-base font-bold text-ink">{s.totalScore}<span className="font-sans text-[10px] text-ink/30">/100</span></span>
                         <span className="font-sans text-xs text-ink/40">{fmt(s.createdAt)}</span>
