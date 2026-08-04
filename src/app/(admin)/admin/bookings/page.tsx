@@ -1,13 +1,19 @@
 import { db } from "@/lib/db"
-import { bookings, services, availability, users } from "@/lib/db/schema"
+import { bookings, bookingMessages, services, availability, users } from "@/lib/db/schema"
 import { eq, desc, asc, and, notInArray, like } from "drizzle-orm"
 import BookingsClient from "./BookingsClient"
 
 export default async function BookingsPage() {
-  await db
-    .update(bookings)
-    .set({ adminSeen: true })
-    .where(and(eq(bookings.adminSeen, false), notInArray(bookings.status, ["cancelled", "pending"])))
+  await Promise.all([
+    db
+      .update(bookings)
+      .set({ adminSeen: true })
+      .where(and(eq(bookings.adminSeen, false), notInArray(bookings.status, ["cancelled", "pending"]))),
+    db
+      .update(bookingMessages)
+      .set({ adminRead: true })
+      .where(and(eq(bookingMessages.isAdmin, false), eq(bookingMessages.adminRead, false))),
+  ])
 
   const rows = await db
     .select({

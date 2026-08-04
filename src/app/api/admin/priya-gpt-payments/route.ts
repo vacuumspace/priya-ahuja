@@ -16,6 +16,12 @@ export async function GET(req: NextRequest) {
   const month = searchParams.get("month") ?? "" // "YYYY-MM"
   const page = Math.max(1, parseInt(searchParams.get("page") ?? "1", 10))
 
+  // Mark unseen payments as seen now that admin is viewing this page
+  await db
+    .update(priyaGptTimeTransactions)
+    .set({ adminSeen: true })
+    .where(and(eq(priyaGptTimeTransactions.reason, "purchase"), eq(priyaGptTimeTransactions.adminSeen, false)))
+
   let dateFrom: Date | null = null
   let dateTo: Date | null = null
   if (month && /^\d{4}-\d{2}$/.test(month)) {
