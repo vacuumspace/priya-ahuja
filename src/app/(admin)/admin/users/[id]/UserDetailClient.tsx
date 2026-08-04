@@ -6,10 +6,17 @@ type Booking = { id: string; status: string; createdAt: Date; serviceTitle: stri
 type Purchase = { id: string; createdAt: Date; productTitle: string | null }
 type PriyaGptTxn = { id: string; deltaMinutes: number; reason: string; amountPaise: number | null; createdAt: Date }
 type PitchDeck = { id: string; fileName: string; totalScore: number; isPaid: boolean; amountPaid: number | null; createdAt: Date }
-type PitchDeckUnlock = { id: string; amountPaise: number; razorpayPaymentId: string | null; createdAt: Date }
+type PitchDeckUnlock = { id: string; amountPaise: number; razorpayPaymentId: string | null; status: string; createdAt: Date }
 type ToolScore = { id: string; totalScore: number; isPaid: boolean; amountPaid: number | null; createdAt: Date }
-type ToolUnlock = { id: string; tool: string; amountPaise: number; razorpayPaymentId: string | null; createdAt: Date }
-type PriyaGptUnlock = { id: string; minutes: number; amountPaise: number; razorpayPaymentId: string | null; createdAt: Date }
+type ToolUnlock = { id: string; tool: string; amountPaise: number; razorpayPaymentId: string | null; status: string; createdAt: Date }
+type PriyaGptUnlock = { id: string; minutes: number; amountPaise: number; razorpayPaymentId: string | null; status: string; createdAt: Date }
+
+function UnlockStatusBadge({ status }: { status: string }) {
+  if (status === "refunded") {
+    return <span className="text-[11px] font-sans font-semibold px-2 py-0.5 rounded-full bg-ink/10 text-ink/40">refunded</span>
+  }
+  return <span className="text-[11px] font-sans font-semibold px-2 py-0.5 rounded-full bg-amber-100 text-amber-700">unused</span>
+}
 
 type Profile = {
   phone: string | null
@@ -245,7 +252,7 @@ export default function UserDetailClient({
                         {u.razorpayPaymentId && <p className="font-sans text-xs text-ink/40 truncate">{u.razorpayPaymentId}</p>}
                       </div>
                       <div className="flex items-center gap-3 flex-shrink-0">
-                        <span className="text-[11px] font-sans font-semibold px-2 py-0.5 rounded-full bg-amber-100 text-amber-700">unused</span>
+                        <UnlockStatusBadge status={u.status} />
                         <span className="font-sans text-xs text-ink/40">{fmt(u.createdAt)}</span>
                       </div>
                     </div>
@@ -261,7 +268,7 @@ export default function UserDetailClient({
                         {u.razorpayPaymentId && <p className="font-sans text-xs text-ink/40 truncate">{u.razorpayPaymentId}</p>}
                       </div>
                       <div className="flex items-center gap-3 flex-shrink-0">
-                        <span className="text-[11px] font-sans font-semibold px-2 py-0.5 rounded-full bg-amber-100 text-amber-700">unused</span>
+                        <UnlockStatusBadge status={u.status} />
                         <span className="font-sans text-xs text-ink/40">{fmt(u.createdAt)}</span>
                       </div>
                     </div>
@@ -335,7 +342,7 @@ export default function UserDetailClient({
                     {u.razorpayPaymentId && <p className="font-sans text-xs text-ink/40 truncate">{u.razorpayPaymentId}</p>}
                   </div>
                   <div className="flex items-center gap-3 flex-shrink-0">
-                    <span className="text-[11px] font-sans font-semibold px-2 py-0.5 rounded-full bg-amber-100 text-amber-700">unused</span>
+                    <UnlockStatusBadge status={u.status} />
                     <span className="font-sans text-xs text-ink/40">{fmt(u.createdAt)}</span>
                   </div>
                 </div>

@@ -1,6 +1,6 @@
 import { db } from "@/lib/db"
 import { users, userProfiles, bookings, purchases, services as servicesTable, digitalProducts, priyaGptTimeBalances, priyaGptTimeTransactions, priyaGptTimeUnlocks, priyaGptSessions, priyaGptMessages, pitchDeckAnalyses, pitchDeckUnlocks, startupScores, startupIdeaScores, toolUnlocks } from "@/lib/db/schema"
-import { eq, desc, sql, and } from "drizzle-orm"
+import { eq, desc, sql, and, inArray } from "drizzle-orm"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
@@ -49,11 +49,13 @@ export default async function AdminUserDetailPage({ params }: Props) {
       .where(eq(pitchDeckAnalyses.userId, id))
       .orderBy(desc(pitchDeckAnalyses.createdAt)),
 
-    // Captured payments the user hasn't turned into an analysis yet
+    // Captured payments the user hasn't turned into an analysis yet, plus
+    // any that were refunded before being used - so a voided payment stays
+    // visible instead of silently disappearing from the admin trail
     db
-      .select({ id: pitchDeckUnlocks.id, amountPaise: pitchDeckUnlocks.amountPaise, razorpayPaymentId: pitchDeckUnlocks.razorpayPaymentId, createdAt: pitchDeckUnlocks.createdAt })
+      .select({ id: pitchDeckUnlocks.id, amountPaise: pitchDeckUnlocks.amountPaise, razorpayPaymentId: pitchDeckUnlocks.razorpayPaymentId, status: pitchDeckUnlocks.status, createdAt: pitchDeckUnlocks.createdAt })
       .from(pitchDeckUnlocks)
-      .where(and(eq(pitchDeckUnlocks.userId, id), eq(pitchDeckUnlocks.status, "paid")))
+      .where(and(eq(pitchDeckUnlocks.userId, id), inArray(pitchDeckUnlocks.status, ["paid", "refunded"])))
       .orderBy(desc(pitchDeckUnlocks.createdAt)),
 
     db
@@ -68,18 +70,20 @@ export default async function AdminUserDetailPage({ params }: Props) {
       .where(eq(startupIdeaScores.userId, id))
       .orderBy(desc(startupIdeaScores.createdAt)),
 
-    // Captured startup-score / idea-score payments not yet turned into a result
+    // Captured startup-score / idea-score payments not yet turned into a
+    // result, plus any refunded before use
     db
-      .select({ id: toolUnlocks.id, tool: toolUnlocks.tool, amountPaise: toolUnlocks.amountPaise, razorpayPaymentId: toolUnlocks.razorpayPaymentId, createdAt: toolUnlocks.createdAt })
+      .select({ id: toolUnlocks.id, tool: toolUnlocks.tool, amountPaise: toolUnlocks.amountPaise, razorpayPaymentId: toolUnlocks.razorpayPaymentId, status: toolUnlocks.status, createdAt: toolUnlocks.createdAt })
       .from(toolUnlocks)
-      .where(and(eq(toolUnlocks.userId, id), eq(toolUnlocks.status, "paid")))
+      .where(and(eq(toolUnlocks.userId, id), inArray(toolUnlocks.status, ["paid", "refunded"])))
       .orderBy(desc(toolUnlocks.createdAt)),
 
-    // Captured PriyaGPT time payments not yet applied to a balance
+    // Captured PriyaGPT time payments not yet applied to a balance, plus
+    // any refunded before use
     db
-      .select({ id: priyaGptTimeUnlocks.id, minutes: priyaGptTimeUnlocks.minutes, amountPaise: priyaGptTimeUnlocks.amountPaise, razorpayPaymentId: priyaGptTimeUnlocks.razorpayPaymentId, createdAt: priyaGptTimeUnlocks.createdAt })
+      .select({ id: priyaGptTimeUnlocks.id, minutes: priyaGptTimeUnlocks.minutes, amountPaise: priyaGptTimeUnlocks.amountPaise, razorpayPaymentId: priyaGptTimeUnlocks.razorpayPaymentId, status: priyaGptTimeUnlocks.status, createdAt: priyaGptTimeUnlocks.createdAt })
       .from(priyaGptTimeUnlocks)
-      .where(and(eq(priyaGptTimeUnlocks.userId, id), eq(priyaGptTimeUnlocks.status, "paid")))
+      .where(and(eq(priyaGptTimeUnlocks.userId, id), inArray(priyaGptTimeUnlocks.status, ["paid", "refunded"])))
       .orderBy(desc(priyaGptTimeUnlocks.createdAt)),
   ])
 

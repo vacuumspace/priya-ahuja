@@ -1,6 +1,6 @@
 import { db } from "@/lib/db"
 import { pitchDeckAnalyses, pitchDeckUnlocks, users } from "@/lib/db/schema"
-import { desc, count, eq } from "drizzle-orm"
+import { desc, count, eq, inArray } from "drizzle-orm"
 import Link from "next/link"
 
 const PAGE_SIZE = 20
@@ -33,19 +33,21 @@ export default async function AdminPitchDecksPage({ searchParams }: Props) {
       .limit(PAGE_SIZE)
       .offset((page - 1) * PAGE_SIZE),
 
-    // Captured payments where the buyer hasn't uploaded a deck yet
+    // Captured payments where the buyer hasn't uploaded a deck yet, plus
+    // any refunded before use - a voided payment should never just vanish
     db
       .select({
         id: pitchDeckUnlocks.id,
         amountPaise: pitchDeckUnlocks.amountPaise,
         razorpayPaymentId: pitchDeckUnlocks.razorpayPaymentId,
+        status: pitchDeckUnlocks.status,
         createdAt: pitchDeckUnlocks.createdAt,
         userName: users.name,
         userEmail: users.email,
       })
       .from(pitchDeckUnlocks)
       .leftJoin(users, eq(pitchDeckUnlocks.userId, users.id))
-      .where(eq(pitchDeckUnlocks.status, "paid"))
+      .where(inArray(pitchDeckUnlocks.status, ["paid", "refunded"]))
       .orderBy(desc(pitchDeckUnlocks.createdAt)),
   ])
 
@@ -74,6 +76,9 @@ export default async function AdminPitchDecksPage({ searchParams }: Props) {
                   <p className="font-sans text-xs text-ink/50 truncate">{u.userEmail ?? " - "}{u.razorpayPaymentId ? ` · ${u.razorpayPaymentId}` : ""}</p>
                 </div>
                 <div className="flex items-center gap-3 flex-shrink-0">
+                  {u.status === "refunded" && (
+                    <span className="text-[11px] font-sans font-semibold px-2 py-0.5 rounded-full bg-ink/10 text-ink/40">refunded</span>
+                  )}
                   <span className="font-sans text-sm font-semibold text-ink">₹{(u.amountPaise / 100).toLocaleString("en-IN")}</span>
                   <span className="font-sans text-xs text-ink/50">
                     {new Date(u.createdAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}

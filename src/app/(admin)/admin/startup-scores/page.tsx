@@ -1,6 +1,6 @@
 import { db } from "@/lib/db"
 import { startupScores, toolUnlocks, users } from "@/lib/db/schema"
-import { desc, count, eq, and } from "drizzle-orm"
+import { desc, count, eq, and, inArray } from "drizzle-orm"
 import { PILLARS } from "@/lib/startup-score-data"
 import Link from "next/link"
 
@@ -35,19 +35,21 @@ export default async function AdminStartupScoresPage({ searchParams }: Props) {
       .limit(PAGE_SIZE)
       .offset((page - 1) * PAGE_SIZE),
 
-    // Captured payments where the buyer hasn't taken the quiz yet
+    // Captured payments where the buyer hasn't taken the quiz yet, plus
+    // any refunded before use - a voided payment should never just vanish
     db
       .select({
         id: toolUnlocks.id,
         amountPaise: toolUnlocks.amountPaise,
         razorpayPaymentId: toolUnlocks.razorpayPaymentId,
+        status: toolUnlocks.status,
         createdAt: toolUnlocks.createdAt,
         userName: users.name,
         userEmail: users.email,
       })
       .from(toolUnlocks)
       .leftJoin(users, eq(toolUnlocks.userId, users.id))
-      .where(and(eq(toolUnlocks.tool, "startup-score"), eq(toolUnlocks.status, "paid"))),
+      .where(and(eq(toolUnlocks.tool, "startup-score"), inArray(toolUnlocks.status, ["paid", "refunded"]))),
   ])
 
   const total = totalResult[0].count
@@ -75,6 +77,9 @@ export default async function AdminStartupScoresPage({ searchParams }: Props) {
                   <p className="font-sans text-xs text-ink/50 truncate">{u.userEmail ?? " - "}{u.razorpayPaymentId ? ` · ${u.razorpayPaymentId}` : ""}</p>
                 </div>
                 <div className="flex items-center gap-3 flex-shrink-0">
+                  {u.status === "refunded" && (
+                    <span className="text-[11px] font-sans font-semibold px-2 py-0.5 rounded-full bg-ink/10 text-ink/40">refunded</span>
+                  )}
                   <span className="font-sans text-sm font-semibold text-ink">₹{(u.amountPaise / 100).toLocaleString("en-IN")}</span>
                   <span className="font-sans text-xs text-ink/50">
                     {new Date(u.createdAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}

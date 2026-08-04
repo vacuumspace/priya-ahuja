@@ -3,6 +3,8 @@ import { db } from "@/lib/db"
 import { bookings, purchases, startupScores, startupIdeaScores, pitchDeckAnalyses, pitchDeckUnlocks, toolUnlocks, services, digitalProducts, users, priyaGptTimeTransactions, priyaGptTimeUnlocks } from "@/lib/db/schema"
 import { and, eq, inArray, isNotNull, like } from "drizzle-orm"
 
+const OPEN_UNLOCK_STATUSES = ["paid", "refunded"] as const
+
 const PAGE_SIZE = 10
 
 export async function GET(req: Request) {
@@ -90,20 +92,22 @@ export async function GET(req: Request) {
       .leftJoin(users, eq(pitchDeckAnalyses.userId, users.id))
       .where(eq(pitchDeckAnalyses.isPaid, true)),
 
-    // Captured payments where the buyer hasn't run the analysis yet -
-    // consumed unlocks show up as pitch_deck_analyses rows instead
+    // Captured payments where the buyer hasn't run the analysis yet, plus
+    // any refunded before use - consumed unlocks show up as
+    // pitch_deck_analyses rows instead
     db
       .select({
         id: pitchDeckUnlocks.id,
         amountPaise: pitchDeckUnlocks.amountPaise,
         razorpayPaymentId: pitchDeckUnlocks.razorpayPaymentId,
+        unlockStatus: pitchDeckUnlocks.status,
         createdAt: pitchDeckUnlocks.createdAt,
         userName: users.name,
         userEmail: users.email,
       })
       .from(pitchDeckUnlocks)
       .leftJoin(users, eq(pitchDeckUnlocks.userId, users.id))
-      .where(eq(pitchDeckUnlocks.status, "paid")),
+      .where(inArray(pitchDeckUnlocks.status, OPEN_UNLOCK_STATUSES)),
 
     db
       .select({
@@ -119,35 +123,39 @@ export async function GET(req: Request) {
       .where(eq(priyaGptTimeTransactions.reason, "purchase")),
 
     // Captured startup-score / idea-score payments where the quiz hasn't
-    // been submitted yet - consumed unlocks show up via their score tables
+    // been submitted yet, plus any refunded before use - consumed unlocks
+    // show up via their score tables instead
     db
       .select({
         id: toolUnlocks.id,
         tool: toolUnlocks.tool,
         amountPaise: toolUnlocks.amountPaise,
         razorpayPaymentId: toolUnlocks.razorpayPaymentId,
+        unlockStatus: toolUnlocks.status,
         createdAt: toolUnlocks.createdAt,
         userName: users.name,
         userEmail: users.email,
       })
       .from(toolUnlocks)
       .leftJoin(users, eq(toolUnlocks.userId, users.id))
-      .where(eq(toolUnlocks.status, "paid")),
+      .where(inArray(toolUnlocks.status, OPEN_UNLOCK_STATUSES)),
 
-    // Captured PriyaGPT time payments not yet applied to a balance
+    // Captured PriyaGPT time payments not yet applied to a balance, plus
+    // any refunded before use
     db
       .select({
         id: priyaGptTimeUnlocks.id,
         minutes: priyaGptTimeUnlocks.minutes,
         amountPaise: priyaGptTimeUnlocks.amountPaise,
         razorpayPaymentId: priyaGptTimeUnlocks.razorpayPaymentId,
+        unlockStatus: priyaGptTimeUnlocks.status,
         createdAt: priyaGptTimeUnlocks.createdAt,
         userName: users.name,
         userEmail: users.email,
       })
       .from(priyaGptTimeUnlocks)
       .leftJoin(users, eq(priyaGptTimeUnlocks.userId, users.id))
-      .where(eq(priyaGptTimeUnlocks.status, "paid")),
+      .where(inArray(priyaGptTimeUnlocks.status, OPEN_UNLOCK_STATUSES)),
   ])
 
   type TxRow = {
@@ -223,10 +231,10 @@ export async function GET(req: Request) {
       type: "pitchdeck",
       userName: r.userName ?? "Unknown",
       userEmail: r.userEmail ?? "",
-      itemName: "Pitch Deck Analysis (paid, not run yet)",
+      itemName: r.unlockStatus === "refunded" ? "Pitch Deck Analysis (refunded, not run)" : "Pitch Deck Analysis (paid, not run yet)",
       amount: r.amountPaise,
       razorpayPaymentId: r.razorpayPaymentId,
-      status: "paid",
+      status: r.unlockStatus,
       createdAt: r.createdAt,
     })),
     ...unusedToolUnlocks.map((r) => ({
@@ -234,10 +242,10 @@ export async function GET(req: Request) {
       type: r.tool === "startup-idea-score" ? "ideascore" : "score",
       userName: r.userName ?? "Unknown",
       userEmail: r.userEmail ?? "",
-      itemName: `${r.tool === "startup-idea-score" ? "Startup Idea Score" : "Startup Score"} (paid, not taken yet)`,
+      itemName: `${r.tool === "startup-idea-score" ? "Startup Idea Score" : "Startup Score"} ${r.unlockStatus === "refunded" ? "(refunded, not taken)" : "(paid, not taken yet)"}`,
       amount: r.amountPaise,
       razorpayPaymentId: r.razorpayPaymentId,
-      status: "paid",
+      status: r.unlockStatus,
       createdAt: r.createdAt,
     })),
     ...allPriyaGpt.map((r) => ({
@@ -256,10 +264,10 @@ export async function GET(req: Request) {
       type: "priyagpt",
       userName: r.userName ?? "Unknown",
       userEmail: r.userEmail ?? "",
-      itemName: `PriyaGPT Time - ${r.minutes} min (paid, not credited yet)`,
+      itemName: `PriyaGPT Time - ${r.minutes} min ${r.unlockStatus === "refunded" ? "(refunded, not credited)" : "(paid, not credited yet)"}`,
       amount: r.amountPaise,
       razorpayPaymentId: r.razorpayPaymentId,
-      status: "paid",
+      status: r.unlockStatus,
       createdAt: r.createdAt,
     })),
   ]

@@ -67,6 +67,7 @@ const TYPE_COLORS: Record<string, string> = {
 
 const STATUS_COLORS: Record<string, string> = {
   paid: "bg-green-100 text-green-800",
+  refunded: "bg-ink/10 text-ink/50",
   confirmed: "bg-green-100 text-green-800",
   completed: "bg-blue-100 text-blue-800",
 }
