@@ -8,6 +8,10 @@ import { type Service, formatPrice, getDurationLabel } from "@/lib/services-data
 const FUNDRAISE_TAGS = ["fundraising"]
 const STARTUP_TAGS = ["strategy", "deals", "career", "urgent"]
 
+const TAG_LABELS: Record<string, string> = {
+  strategy: "startup",
+}
+
 const tabs = ["all", "fundraise", "startup"] as const
 type Tab = (typeof tabs)[number]
 
@@ -57,7 +61,7 @@ export function ServicesClient({ services }: { services: Service[] }) {
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <span className="text-[12px] bg-amber-tag text-ink/60 px-2 py-0.5 rounded font-sans">
-                      {service.tag}
+                      {TAG_LABELS[service.tag] ?? service.tag}
                     </span>
                   </div>
                   <h2 className="font-heading text-xl font-700 text-ink mb-2 normal-case">
