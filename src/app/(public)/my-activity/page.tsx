@@ -1,7 +1,7 @@
 ﻿import { auth } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { bookings, purchases, services as servicesTable, digitalProducts, startupScores, startupIdeaScores, wellbeingScores, pitchDeckAnalyses, availability, priyaGptTimeTransactions } from "@/lib/db/schema"
-import { eq, and, desc } from "drizzle-orm"
+import { eq, and, desc, isNotNull } from "drizzle-orm"
 import Link from "next/link"
 import { CalendarDays, FileText, LogIn, Lightbulb, ExternalLink, Bot } from "lucide-react"
 import ViewTemplateButton from "@/components/templates/ViewTemplateButton"
@@ -95,7 +95,7 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
       })
       .from(purchases)
       .leftJoin(digitalProducts, eq(purchases.productId, digitalProducts.id))
-      .where(eq(purchases.userEmail, email))
+      .where(and(eq(purchases.userEmail, email), isNotNull(purchases.razorpayPaymentId)))
       .orderBy(desc(purchases.createdAt)),
 
     db

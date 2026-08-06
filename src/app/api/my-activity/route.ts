@@ -2,7 +2,7 @@ import { NextResponse } from "next/server"
 import { auth } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { bookings, purchases, services as servicesTable, digitalProducts } from "@/lib/db/schema"
-import { eq, desc } from "drizzle-orm"
+import { eq, desc, and, isNotNull } from "drizzle-orm"
 
 export async function GET() {
   const session = await auth()
@@ -37,7 +37,7 @@ export async function GET() {
       })
       .from(purchases)
       .leftJoin(digitalProducts, eq(purchases.productId, digitalProducts.id))
-      .where(eq(purchases.userEmail, email))
+      .where(and(eq(purchases.userEmail, email), isNotNull(purchases.razorpayPaymentId)))
       .orderBy(desc(purchases.createdAt)),
   ])
 
