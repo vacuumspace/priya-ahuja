@@ -1,6 +1,6 @@
 import { db } from "@/lib/db"
 import { users, userProfiles, bookings, purchases, services as servicesTable, digitalProducts, priyaGptTimeBalances, priyaGptTimeTransactions, priyaGptTimeUnlocks, priyaGptSessions, priyaGptMessages, pitchDeckAnalyses, pitchDeckUnlocks, startupScores, startupIdeaScores, toolUnlocks } from "@/lib/db/schema"
-import { eq, desc, sql, and, inArray } from "drizzle-orm"
+import { eq, desc, sql, and, inArray, isNotNull } from "drizzle-orm"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
@@ -30,7 +30,7 @@ export default async function AdminUserDetailPage({ params }: Props) {
       .select({ id: purchases.id, createdAt: purchases.createdAt, productTitle: digitalProducts.title })
       .from(purchases)
       .leftJoin(digitalProducts, eq(purchases.productId, digitalProducts.id))
-      .where(eq(purchases.userEmail, user.email))
+      .where(and(eq(purchases.userEmail, user.email), isNotNull(purchases.razorpayPaymentId)))
       .orderBy(desc(purchases.createdAt)),
 
     db.select().from(priyaGptTimeBalances).where(eq(priyaGptTimeBalances.userId, id)).limit(1),
