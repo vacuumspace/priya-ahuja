@@ -1,0 +1,1 @@
+DROP TABLE "ai_feed_items" CASCADE;

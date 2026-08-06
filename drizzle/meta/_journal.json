@@ -218,6 +218,20 @@
       "when": 1785998000000,
       "tag": "0030_score_amount_paid",
       "breakpoints": true
+    },
+    {
+      "idx": 31,
+      "version": "7",
+      "when": 1786007841458,
+      "tag": "0031_fluffy_human_torch",
+      "breakpoints": true
+    },
+    {
+      "idx": 32,
+      "version": "7",
+      "when": 1786011921293,
+      "tag": "0032_drop_ai_feed_items",
+      "breakpoints": true
     }
   ]
 }
