@@ -1,9 +1,8 @@
 import { auth, isAdmin } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { bookings, purchases, digitalProducts, startupScores, startupIdeaScores, pitchDeckAnalyses, customRequests, bookingMessages, users, serviceInquiries, startupMistakes, priyaGptTimeTransactions } from "@/lib/db/schema"
-import { eq, count, and, notInArray, ne } from "drizzle-orm"
-
-const ANGEL_SLUG = "angel-investor-list"
+import { eq, count, and, notInArray, inArray } from "drizzle-orm"
+import { INVESTOR_SLUGS } from "@/app/api/admin/investor-list/route"
 
 export async function GET() {
   const session = await auth()
@@ -18,10 +17,10 @@ export async function GET() {
       ),
       db.select({ count: count() }).from(purchases)
         .innerJoin(digitalProducts, eq(purchases.productId, digitalProducts.id))
-        .where(and(eq(purchases.adminSeen, false), ne(digitalProducts.slug, ANGEL_SLUG))),
+        .where(and(eq(purchases.adminSeen, false), notInArray(digitalProducts.slug, [...INVESTOR_SLUGS]))),
       db.select({ count: count() }).from(purchases)
         .innerJoin(digitalProducts, eq(purchases.productId, digitalProducts.id))
-        .where(and(eq(purchases.adminSeen, false), eq(digitalProducts.slug, ANGEL_SLUG))),
+        .where(and(eq(purchases.adminSeen, false), inArray(digitalProducts.slug, [...INVESTOR_SLUGS]))),
       db.select({ count: count() }).from(startupScores).where(eq(startupScores.adminSeen, false)),
       db.select({ count: count() }).from(startupIdeaScores).where(eq(startupIdeaScores.adminSeen, false)),
       db.select({ count: count() }).from(pitchDeckAnalyses).where(eq(pitchDeckAnalyses.adminSeen, false)),

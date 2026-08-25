@@ -184,7 +184,7 @@ export async function GET(req: Request) {
     })),
     ...allPurchases.map((r) => ({
       id: r.id,
-      type: r.slug === "angel-investor-list" ? "angel" : "template",
+      type: r.slug?.endsWith("-list") ? "angel" : "template",
       userName: r.userName,
       userEmail: r.userEmail ?? "",
       itemName: r.itemName ?? "Template",

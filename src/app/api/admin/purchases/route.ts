@@ -1,9 +1,8 @@
 import { auth, isAdmin } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { purchases, digitalProducts } from "@/lib/db/schema"
-import { eq, desc, ne } from "drizzle-orm"
-
-const ANGEL_SLUG = "angel-investor-list"
+import { eq, desc, notInArray } from "drizzle-orm"
+import { INVESTOR_SLUGS } from "@/app/api/admin/investor-list/route"
 
 export async function GET() {
   const session = await auth()
@@ -25,7 +24,7 @@ export async function GET() {
     })
     .from(purchases)
     .innerJoin(digitalProducts, eq(purchases.productId, digitalProducts.id))
-    .where(ne(digitalProducts.slug, ANGEL_SLUG))
+    .where(notInArray(digitalProducts.slug, [...INVESTOR_SLUGS]))
     .orderBy(desc(purchases.createdAt))
 
   return Response.json(rows)

@@ -1,9 +1,8 @@
 import { db } from "@/lib/db"
 import { digitalProducts, purchases } from "@/lib/db/schema"
-import { eq, desc, ne, isNotNull, and, inArray } from "drizzle-orm"
+import { eq, desc, notInArray, isNotNull, and, inArray } from "drizzle-orm"
 import ProductsClient from "./ProductsClient"
-
-const ANGEL_SLUG = "angel-investor-list"
+import { INVESTOR_SLUGS } from "@/app/api/admin/investor-list/route"
 
 export default async function ProductsPage({ searchParams }: { searchParams: Promise<{ tab?: string }> }) {
   const { tab: defaultTab } = await searchParams
@@ -19,7 +18,7 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
           eq(purchases.adminSeen, false),
           inArray(
             purchases.productId,
-            db.select({ id: digitalProducts.id }).from(digitalProducts).where(ne(digitalProducts.slug, ANGEL_SLUG))
+            db.select({ id: digitalProducts.id }).from(digitalProducts).where(notInArray(digitalProducts.slug, [...INVESTOR_SLUGS]))
           )
         )
       )
@@ -41,7 +40,7 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
       })
       .from(purchases)
       .innerJoin(digitalProducts, eq(purchases.productId, digitalProducts.id))
-      .where(and(ne(digitalProducts.slug, ANGEL_SLUG), isNotNull(purchases.razorpayPaymentId)))
+      .where(and(notInArray(digitalProducts.slug, [...INVESTOR_SLUGS]), isNotNull(purchases.razorpayPaymentId)))
       .orderBy(desc(purchases.createdAt)),
   ])
 
