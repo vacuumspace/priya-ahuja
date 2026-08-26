@@ -232,6 +232,13 @@
       "when": 1786011921293,
       "tag": "0032_drop_ai_feed_items",
       "breakpoints": true
+    },
+    {
+      "idx": 33,
+      "version": "7",
+      "when": 1787721120004,
+      "tag": "0033_booking_confirmation_email_sent",
+      "breakpoints": true
     }
   ]
 }

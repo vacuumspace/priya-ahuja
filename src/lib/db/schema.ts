@@ -51,6 +51,7 @@ export const bookings = pgTable("bookings", {
   msgEmailEnabled: boolean("msg_email_enabled").notNull().default(true),
   rescheduleCount: integer("reschedule_count").notNull().default(0),
   adminSeen: boolean("admin_seen").notNull().default(false),
+  confirmationEmailSent: boolean("confirmation_email_sent").notNull().default(false),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 })
 

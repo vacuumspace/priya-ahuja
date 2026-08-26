@@ -1,8 +1,10 @@
 import { NextRequest, NextResponse } from "next/server"
 import { db } from "@/lib/db"
-import { bookings, availability, purchases, pitchDeckUnlocks, toolUnlocks, priyaGptTimeUnlocks } from "@/lib/db/schema"
-import { eq, and, ne } from "drizzle-orm"
+import { bookings, availability, purchases, pitchDeckUnlocks, toolUnlocks, priyaGptTimeUnlocks, services as servicesTable } from "@/lib/db/schema"
+import { eq, and, ne, isNull } from "drizzle-orm"
 import { verifyWebhookSignature } from "@/lib/razorpay"
+import { createCalendarEvent } from "@/lib/google-calendar"
+import { sendBookingConfirmation, sendAdminBookingNotification } from "@/lib/mailer"
 import crypto from "crypto"
 
 export async function POST(req: NextRequest) {
@@ -40,8 +42,96 @@ export async function POST(req: NextRequest) {
         .update(bookings)
         .set({ status: "confirmed", razorpayPaymentId: paymentId ?? booking.razorpayPaymentId, amountPaid: amountCaptured ?? booking.amountPaid })
         .where(eq(bookings.id, booking.id))
-      // Note: calendar event and confirmation email are handled by client-side verify-payment.
-      // This webhook acts as a safety net if the client call never completes.
+    }
+
+    // Fallback: the calendar invite + Meet link and the confirmation emails
+    // are normally created/sent by the client-side verify-payment call right
+    // after checkout. If the customer's browser never made it back (tab
+    // closed, UPI app hand-off that didn't return, etc.), that call never
+    // fires and the booking would otherwise stay confirmed with neither.
+    // Each side is guarded by its own re-check/atomic claim so a concurrent
+    // verify-payment call can't cause a duplicate invite or email.
+    if (booking && booking.slotId) {
+      const [slot] = await db.select().from(availability).where(eq(availability.id, booking.slotId)).limit(1)
+      const [service] = await db
+        .select({ title: servicesTable.title, type: servicesTable.type })
+        .from(servicesTable)
+        .where(eq(servicesTable.id, booking.serviceId))
+        .limit(1)
+
+      if (slot) {
+        const serviceName = service?.title ?? "Session"
+        const serviceType = (service?.type ?? "call") as "call" | "dm" | "report"
+        let meetLink = booking.meetLink ?? undefined
+
+        if (!booking.googleCalendarEventId) {
+          const [current] = await db
+            .select({ googleCalendarEventId: bookings.googleCalendarEventId })
+            .from(bookings)
+            .where(eq(bookings.id, booking.id))
+            .limit(1)
+
+          if (current && !current.googleCalendarEventId) {
+            try {
+              const cal = await createCalendarEvent({
+                summary: `${serviceName} – ${booking.userName}`,
+                description: booking.message ?? undefined,
+                date: slot.date,
+                startTime: slot.startTime,
+                endTime: slot.endTime,
+                attendeeEmail: booking.userEmail,
+                attendeeName: booking.userName,
+              })
+              meetLink = cal.meetLink ?? meetLink
+              await db
+                .update(bookings)
+                .set({ meetLink: cal.meetLink, googleCalendarEventId: cal.eventId })
+                .where(and(eq(bookings.id, booking.id), isNull(bookings.googleCalendarEventId)))
+            } catch (err) {
+              console.error("Webhook fallback calendar creation failed:", err)
+              await db
+                .update(bookings)
+                .set({ adminNotes: `[calendar error] ${String(err)}` })
+                .where(eq(bookings.id, booking.id))
+            }
+          }
+        }
+
+        if (!booking.confirmationEmailSent) {
+          const claimed = await db
+            .update(bookings)
+            .set({ confirmationEmailSent: true })
+            .where(and(eq(bookings.id, booking.id), eq(bookings.confirmationEmailSent, false)))
+            .returning({ id: bookings.id })
+
+          if (claimed.length > 0) {
+            const dateLabel = new Date(`${slot.date}T${slot.startTime}:00+05:30`).toLocaleDateString("en-IN", {
+              day: "numeric", month: "long", year: "numeric",
+            })
+            const timeLabel = `${slot.startTime} IST`
+
+            sendBookingConfirmation({
+              to: booking.userEmail,
+              name: booking.userName,
+              serviceName,
+              serviceType,
+              date: dateLabel,
+              time: timeLabel,
+              meetLink,
+            }).catch((e) => console.error("[webhook] sendBookingConfirmation failed:", e))
+
+            sendAdminBookingNotification({
+              serviceName,
+              serviceType,
+              userName: booking.userName,
+              userEmail: booking.userEmail,
+              date: dateLabel,
+              time: timeLabel,
+              message: booking.message ?? undefined,
+            }).catch((e) => console.error("[webhook] sendAdminBookingNotification failed:", e))
+          }
+        }
+      }
     }
 
     // Also confirm a pending product purchase if one matches this order

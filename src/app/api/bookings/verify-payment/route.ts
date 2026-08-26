@@ -3,7 +3,7 @@ import { auth } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { bookings, availability, services as servicesTable } from "@/lib/db/schema"
 import { verifyPaymentSignature, fetchRazorpayOrder } from "@/lib/razorpay"
-import { eq } from "drizzle-orm"
+import { eq, and } from "drizzle-orm"
 import { sendBookingConfirmation, sendAdminBookingNotification } from "@/lib/mailer"
 import { createCalendarEvent } from "@/lib/google-calendar"
 
@@ -142,25 +142,34 @@ export async function POST(req: NextRequest) {
       : "TBD"
     const timeLabel = slot ? `${slot.startTime} IST` : "TBD"
 
-    sendBookingConfirmation({
-      to: confirmedBooking.userEmail,
-      name: confirmedBooking.userName,
-      serviceName,
-      serviceType,
-      date: slot ? dateLabel : undefined,
-      time: slot ? timeLabel : undefined,
-      meetLink,
-    }).catch((e) => console.error("[mailer] sendBookingConfirmation failed:", e))
+    // Atomic claim so a concurrent webhook fallback can't send a duplicate confirmation email
+    const claimed = await db
+      .update(bookings)
+      .set({ confirmationEmailSent: true })
+      .where(and(eq(bookings.id, confirmedBooking.id), eq(bookings.confirmationEmailSent, false)))
+      .returning({ id: bookings.id })
 
-    sendAdminBookingNotification({
-      serviceName,
-      serviceType,
-      userName: confirmedBooking.userName,
-      userEmail: confirmedBooking.userEmail,
-      date: slot ? dateLabel : undefined,
-      time: slot ? timeLabel : undefined,
-      message: confirmedBooking.message ?? undefined,
-    }).catch((e) => console.error("[mailer] sendAdminBookingNotification failed:", e))
+    if (claimed.length > 0) {
+      sendBookingConfirmation({
+        to: confirmedBooking.userEmail,
+        name: confirmedBooking.userName,
+        serviceName,
+        serviceType,
+        date: slot ? dateLabel : undefined,
+        time: slot ? timeLabel : undefined,
+        meetLink,
+      }).catch((e) => console.error("[mailer] sendBookingConfirmation failed:", e))
+
+      sendAdminBookingNotification({
+        serviceName,
+        serviceType,
+        userName: confirmedBooking.userName,
+        userEmail: confirmedBooking.userEmail,
+        date: slot ? dateLabel : undefined,
+        time: slot ? timeLabel : undefined,
+        message: confirmedBooking.message ?? undefined,
+      }).catch((e) => console.error("[mailer] sendAdminBookingNotification failed:", e))
+    }
 
     return NextResponse.json({ success: true })
   } catch (err) {

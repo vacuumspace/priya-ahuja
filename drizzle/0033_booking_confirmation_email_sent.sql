@@ -1,0 +1,1 @@
+ALTER TABLE "bookings" ADD COLUMN "confirmation_email_sent" boolean DEFAULT false NOT NULL;
