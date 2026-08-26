@@ -46,6 +46,11 @@ const testimonials = [
   },
 ]
 
+// TEMP: main domain is in maintenance for ~2 weeks, so this subdomain's homepage
+// shows only the connect CTA + featured resources. Flip back to true to restore
+// the full homepage once the maintenance window ends.
+const SHOW_FULL_HOMEPAGE = false
+
 export default function HomePage() {
   const [idx, setIdx] = useState(0)
 
@@ -56,6 +61,8 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-cream max-w-2xl mx-auto px-5 md:px-10 py-8 md:py-20">
+
+      {SHOW_FULL_HOMEPAGE && <>
 
       {/* ── Top bar: profile left, CTA right ── */}
       <div className="flex items-start justify-between mb-12 gap-3">
@@ -168,6 +175,8 @@ export default function HomePage() {
         </div>
       </div>
 
+      </>}
+
       {/* ── CTA ── */}
       <div className="bg-ink rounded-2xl px-4 sm:px-6 py-5 sm:py-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 mb-14">
         <div>
@@ -181,6 +190,8 @@ export default function HomePage() {
           connect
         </Link>
       </div>
+
+      {SHOW_FULL_HOMEPAGE && <>
 
       {/* ── About ── */}
       <div className="mb-14">
@@ -275,6 +286,8 @@ export default function HomePage() {
           chat now
         </Link>
       </div>
+
+      </>}
 
       {/* ── Footer nav ── */}
       <div className="border-t border-peach-dark/15 pt-6 pb-2">
