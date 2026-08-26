@@ -12,6 +12,7 @@ import PurchaseWelcomeEmail from "@/emails/PurchaseWelcomeEmail"
 
 const FROM_EMAIL = process.env.EMAIL_USER!
 const FROM_NAME = process.env.MAIL_FROM_NAME ?? "Priya Ahuja"
+const APP_URL = process.env.EMAIL_APP_URL || process.env.NEXT_PUBLIC_APP_URL
 
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
@@ -121,7 +122,7 @@ export async function sendAdminBookingNotification({
       date,
       time,
       message,
-      appUrl: process.env.NEXT_PUBLIC_APP_URL,
+      appUrl: APP_URL,
       intro: s.email_admin_intro,
       type,
       previousDate,
@@ -205,7 +206,7 @@ export async function sendBookingCancellation({
       name,
       serviceName,
       isAdmin,
-      appUrl: process.env.NEXT_PUBLIC_APP_URL,
+      appUrl: APP_URL,
       body: s.email_cancellation_body,
       footer: s.email_cancellation_footer,
     })
@@ -268,7 +269,7 @@ export async function sendPurchaseWelcome({
       name,
       productSlug,
       productName,
-      appUrl: process.env.NEXT_PUBLIC_APP_URL,
+      appUrl: APP_URL,
     })
   )
   const subjectMap: Record<string, string> = {
@@ -302,8 +303,8 @@ export async function sendMessageNotification({
   recipientIsAdmin: boolean
 }) {
   const dashboardUrl = recipientIsAdmin
-    ? `${process.env.NEXT_PUBLIC_APP_URL}/admin/bookings`
-    : `${process.env.NEXT_PUBLIC_APP_URL}/my-activity`
+    ? `${APP_URL}/admin/bookings`
+    : `${APP_URL}/my-activity`
 
   const html = `
     <div style="font-family:Inter,sans-serif;max-width:560px;margin:0 auto;padding:32px 24px;background:#fff;border:1px solid #e8e8e8;border-radius:12px">
@@ -344,7 +345,7 @@ export async function sendSessionNotes({
   bookingId: string
 }) {
   const firstName = name.split(" ")[0]
-  const activityUrl = `${process.env.NEXT_PUBLIC_APP_URL}/my-activity`
+  const activityUrl = `${APP_URL}/my-activity`
   const html = `
     <div style="font-family:Inter,sans-serif;max-width:560px;margin:0 auto;padding:32px 24px;background:#fff;border:1px solid #e8e8e8;border-radius:12px">
       <p style="font-size:14px;color:#777;margin:0 0 20px">Hi ${firstName},</p>
@@ -385,7 +386,7 @@ export async function sendFeedbackRequest({
   serviceName: string
   bookingId: string
 }) {
-  const feedbackUrl = `${process.env.NEXT_PUBLIC_APP_URL}/my-activity/feedback/${bookingId}`
+  const feedbackUrl = `${APP_URL}/my-activity/feedback/${bookingId}`
   const html = await render(FeedbackRequestEmail({ name, serviceName, feedbackUrl }))
 
   await sendMail({

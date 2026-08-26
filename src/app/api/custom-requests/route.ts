@@ -23,7 +23,7 @@ export async function POST(req: Request) {
     .returning()
 
   const adminEmails = (process.env.ADMIN_EMAILS ?? "").split(",").map((e) => e.trim())
-  const adminUrl = `${process.env.NEXT_PUBLIC_APP_URL}/admin/custom-requests`
+  const adminUrl = `${process.env.EMAIL_APP_URL || process.env.NEXT_PUBLIC_APP_URL}/admin/custom-requests`
   const html = `
     <div style="font-family:Inter,sans-serif;max-width:560px;margin:0 auto;padding:32px 24px;background:#fff;border:1px solid #e8e8e8;border-radius:12px">
       <p style="font-size:16px;font-weight:700;color:#2D2D2D;margin:0 0 16px">New Custom Request</p>

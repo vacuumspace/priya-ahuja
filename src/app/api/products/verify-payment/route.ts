@@ -100,7 +100,7 @@ export async function POST(req: NextRequest) {
         to: purchase.userEmail,
         name: purchase.userName || "there",
         productName: product.title,
-        accessUrl: `${process.env.NEXT_PUBLIC_APP_URL}${accessPath}`,
+        accessUrl: `${process.env.EMAIL_APP_URL || process.env.NEXT_PUBLIC_APP_URL}${accessPath}`,
       }).catch(err => console.error("sendAccessLink error:", err))
     }
 
