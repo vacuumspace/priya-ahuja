@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     template: "%s | Priya Ahuja",
   },
   description:
-    "Priya Ahuja is a startup & fundraise consultant at Groww Ventures. Book a 1:1 session for fundraising readiness, investor pitch review, startup strategy, and business model feedback. Trusted by 200+ founders across India.",
+    "Priya Ahuja is a startup & fundraise consultant at a consumer fintech startup. Book a 1:1 session for fundraising readiness, investor pitch review, startup strategy, and business model feedback. Trusted by 200+ founders across India.",
   keywords: ["fundraising consultant India", "startup advisor India", "investor pitch review", "fundraise readiness", "startup strategy consultant", "pre-seed fundraising India", "pitch to priya", "angel investor list India", "startup idea validation"],
   authors: [{ name: "Priya Ahuja" }],
   creator: "Priya Ahuja",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Priya Ahuja - Startup & Fundraise Consultant",
     description:
-      "Book a 1:1 session with Priya Ahuja - startup & fundraise consultant at Groww Ventures. Trusted by 200+ founders across India.",
+      "Book a 1:1 session with Priya Ahuja - startup & fundraise consultant at a consumer fintech startup. Trusted by 200+ founders across India.",
     creator: "@pitchtopriya",
   },
   icons: {
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     url: process.env.NEXT_PUBLIC_APP_URL || "https://priyaahuja.in",
     title: "Priya Ahuja - Startup & Fundraise Consultant",
     description:
-      "Book a 1:1 session with Priya Ahuja - startup & fundraise consultant at Groww Ventures. Trusted by 200+ founders across India.",
+      "Book a 1:1 session with Priya Ahuja - startup & fundraise consultant at a consumer fintech startup. Trusted by 200+ founders across India.",
     images: [{ url: "/priyadp.jpeg", width: 1200, height: 630, alt: "Priya Ahuja - Startup & Fundraise Consultant" }],
   },
   alternates: {
@@ -90,11 +90,10 @@ export default function RootLayout({
             jobTitle: "Startup & Fundraise Consultant",
             worksFor: {
               "@type": "Organization",
-              name: "Groww Ventures",
-              url: "https://groww.in",
+              name: "a consumer fintech startup",
             },
             description:
-              "Startup and fundraise consultant at Groww Ventures. Helping early-stage founders with fundraising readiness, investor pitch review, and startup strategy. 200+ founders advised across India.",
+              "Startup and fundraise consultant at a consumer fintech startup. Helping early-stage founders with fundraising readiness, investor pitch review, and startup strategy. 200+ founders advised across India.",
             sameAs: [
               "https://www.linkedin.com/in/ca-priya-harwani/",
               "https://www.instagram.com/pitchtopriya",
