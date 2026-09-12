@@ -32,7 +32,6 @@ const topicGroups = [
       { label: "tools", href: "/startup/tools" },
       { label: "templates", href: "/startup/templates" },
       { label: "startup ideas", href: "/startup/ideas" },
-      { label: "mistakes", href: "/startup/mistakes" },
       { label: "resources & credits", href: "/startup/resources" },
     ],
   },
@@ -45,14 +44,6 @@ const topicGroups = [
       { label: "templates", href: "/fundraise/templates" },
       { label: "investor list", href: "/fundraise/investor-list", star: true },
       { label: "grants", href: "/fundraise/grants" },
-    ],
-  },
-  {
-    label: "wellbeing",
-    prefix: "/wellbeing",
-    children: [
-      { label: "blog", href: "/wellbeing/blog" },
-      { label: "tools", href: "/wellbeing/tools" },
     ],
   },
   {
@@ -82,7 +73,6 @@ export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEma
   const [open, setOpen] = useState<string | null>(() => {
     if (pathname.startsWith("/startup")) return "startup"
     if (pathname.startsWith("/fundraise")) return "fundraise"
-    if (pathname.startsWith("/wellbeing")) return "wellbeing"
     if (pathname.startsWith("/services")) return "services"
     return null
   })

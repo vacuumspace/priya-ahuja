@@ -283,16 +283,6 @@ export const toolUnlocks = pgTable("tool_unlocks", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
 })
 
-export const wellbeingScores = pgTable("wellbeing_scores", {
-  id: uuid("id").primaryKey().defaultRandom(),
-  userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
-  answers: jsonb("answers").notNull(),
-  totalScore: integer("total_score").notNull(),
-  categoryScores: jsonb("category_scores").notNull(),
-  adminSeen: boolean("admin_seen").notNull().default(false),
-  createdAt: timestamp("created_at").notNull().defaultNow(),
-})
-
 export const analyticsEvents = pgTable("analytics_events", {
   id: uuid("id").primaryKey().defaultRandom(),
   type: varchar("type", { length: 30 }).notNull(), // 'pageview' | 'cta_click'
@@ -369,21 +359,6 @@ export const priyaGptMessages = pgTable("priya_gpt_messages", {
   sessionId: uuid("session_id").notNull().references(() => priyaGptSessions.id, { onDelete: "cascade" }),
   role: varchar("role", { length: 20 }).notNull(), // "user" | "assistant"
   content: text("content").notNull(),
-  createdAt: timestamp("created_at").notNull().defaultNow(),
-})
-
-export const startupMistakes = pgTable("startup_mistakes", {
-  id: uuid("id").primaryKey().defaultRandom(),
-  userId: text("user_id").references(() => users.id, { onDelete: "cascade" }), // null for admin-seeded posts with no linked account
-
-  userName: text("user_name").notNull(),
-  title: text("title").notNull(),
-  body: text("body").notNull(),
-  industry: varchar("industry", { length: 50 }).notNull(),
-  topic: varchar("topic", { length: 50 }).notNull(),
-  status: varchar("status", { length: 20 }).notNull().default("pending"), // pending | published | rejected
-  adminNotes: text("admin_notes"),
-  publishedAt: timestamp("published_at"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 })
 

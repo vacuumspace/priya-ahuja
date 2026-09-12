@@ -1,6 +1,6 @@
 ﻿import type { Metadata } from "next"
 import Link from "next/link"
-import { Lightbulb, FileText, Wrench, BookOpen, Users, Gift, AlertTriangle } from "lucide-react"
+import { Lightbulb, FileText, Wrench, BookOpen, Users, Gift } from "lucide-react"
 
 export const metadata: Metadata = {
   title: "Startup Resources for Indian Founders",
@@ -50,15 +50,6 @@ const sections = [
     icon: BookOpen,
     badge: "articles",
     href: "/startup/blog",
-  },
-  {
-    slug: "mistakes",
-    title: "Startup Mistakes",
-    description: "Real mistakes founders made: fundraising, product, co-founder splits, validation, and more. Shared by founders, reviewed before publishing.",
-    tag: "community",
-    icon: AlertTriangle,
-    badge: "founder stories",
-    href: "/startup/mistakes",
   },
   {
     slug: "resources",

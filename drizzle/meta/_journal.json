@@ -239,6 +239,13 @@
       "when": 1787721120004,
       "tag": "0033_booking_confirmation_email_sent",
       "breakpoints": true
+    },
+    {
+      "idx": 34,
+      "version": "7",
+      "when": 1789219019730,
+      "tag": "0034_drop_mistakes_and_wellbeing",
+      "breakpoints": true
     }
   ]
 }
