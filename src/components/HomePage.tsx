@@ -72,7 +72,7 @@ export default function HomePage() {
           </div>
           <div>
             <p className="font-heading text-base font-700 text-ink">Priya Ahuja</p>
-            <p className="font-sans text-xs text-ink/40 mt-0.5">vc at a consumer fintech startup · startup consultant & advisor</p>
+            <p className="font-sans text-xs text-ink/40 mt-0.5">startup strategy & fundraise consultant</p>
             <p className="font-sans text-xs text-ink/40 mt-0.5">bangalore, india</p>
             <div className="flex gap-2.5 mt-1.5">
               <a href="https://www.linkedin.com/in/ca-priya-harwani/" target="_blank" rel="noopener noreferrer" className="text-ink/35 hover:text-ink transition-colors" aria-label="LinkedIn">
