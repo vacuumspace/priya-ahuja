@@ -15,7 +15,6 @@ async function isEmailBanned(email: string | null | undefined): Promise<boolean>
 }
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
-  debug: true, // TEMP: diagnosing Configuration error on priya.priyaahuja.in - remove once resolved
   adapter: DrizzleAdapter(db, {
     usersTable: users,
     accountsTable: accounts,
