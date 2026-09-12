@@ -113,13 +113,13 @@ export default function HomePage() {
               { value: "250+", label: "founders advised", sub: "across fintech, saas, consumer-tech & d2c" },
               { value: "₹200cr+", label: "fundraise guided", sub: "across pre-seed to pre-series A & series A rounds" },
               { value: "5.0★", label: "avg. session rating", sub: "from 50+ independent reviews" },
-              { value: "4 yrs", label: "inside startup investment", sub: "investment, strategy, m&a at a consumer fintech startup, india's #1 retail investment app" },
+              { value: "4 yrs", label: "inside startup investment", sub: "investment, strategy & m&a experience across the startup ecosystem" },
               { value: "12+", label: "sectors covered", sub: "fintech, edtech, healthtech, b2b, d2c, social platforms & more" },
               { value: "100%", label: "actionable advice", sub: "every session ends with clear next steps you can act on today" },
               { value: "250+", label: "founders advised", sub: "across fintech, saas, consumer-tech & d2c" },
               { value: "₹200cr+", label: "fundraise guided", sub: "across pre-seed to pre-series A & series A rounds" },
               { value: "5.0★", label: "avg. session rating", sub: "from 50+ independent reviews" },
-              { value: "4 yrs", label: "inside startup investment", sub: "investment, strategy, m&a at a consumer fintech startup, india's #1 retail investment app" },
+              { value: "4 yrs", label: "inside startup investment", sub: "investment, strategy & m&a experience across the startup ecosystem" },
               { value: "12+", label: "sectors covered", sub: "fintech, edtech, healthtech, b2b, d2c, social platforms & more" },
               { value: "100%", label: "actionable advice", sub: "every session ends with clear next steps you can act on today" },
             ].map((s, i) => (
@@ -187,9 +187,9 @@ export default function HomePage() {
         <p className="text-[12px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">about</p>
         <div className="space-y-3 font-sans text-base text-ink/60 leading-relaxed">
           <p>
-            i work at the vc and strategic investment arm of a consumer fintech startup, india&apos;s #1
-            retail investment platform. day to day, that means fintech investments, m&amp;a, and
-            working closely with startups at the intersection of capital and strategy.
+            i work in venture and strategic investments, focused on the consumer fintech space. day
+            to day, that means fintech investments, m&amp;a, and working closely with startups at the
+            intersection of capital and strategy.
           </p>
           <p>
             after years of evaluating hundreds of companies, i&apos;ve learned what the best founders
