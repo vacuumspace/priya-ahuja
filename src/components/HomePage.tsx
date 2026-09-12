@@ -187,9 +187,8 @@ export default function HomePage() {
         <p className="text-[12px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">about</p>
         <div className="space-y-3 font-sans text-base text-ink/60 leading-relaxed">
           <p>
-            i work in venture and strategic investments, focused on the consumer fintech space. day
-            to day, that means fintech investments, m&amp;a, and working closely with startups at the
-            intersection of capital and strategy.
+            i have 4+ years of hands-on startup investment &amp; strategic consulting experience,
+            working closely with founders at the intersection of capital and strategy.
           </p>
           <p>
             after years of evaluating hundreds of companies, i&apos;ve learned what the best founders
