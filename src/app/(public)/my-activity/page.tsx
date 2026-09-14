@@ -173,7 +173,7 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
         <h1 className="font-heading text-3xl font-800 text-ink mb-6">my activity</h1>
 
         {/* Sub-tabs */}
-        <div className="flex gap-1 mb-8 border-b border-border">
+        <div className="flex flex-wrap gap-1 mb-8 border-b border-border">
           <Link
             href="/my-activity?tab=sessions"
             className={`flex items-center gap-1.5 px-4 py-2.5 text-xs font-sans font-semibold border-b-2 transition-colors -mb-px ${
@@ -268,7 +268,7 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
         {activeTab === "tools" && (
           <section>
             {/* Tools sub-tabs */}
-            <div className="flex gap-1 mb-6">
+            <div className="flex flex-wrap gap-1 mb-6">
               <Link
                 href="/my-activity?tab=tools&sub=fundability"
                 className={`px-3 py-1.5 rounded-full text-[12px] font-sans font-semibold transition-colors ${

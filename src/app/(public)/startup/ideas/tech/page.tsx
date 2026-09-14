@@ -41,7 +41,7 @@ export default async function TechStartupIdeasPage() {
     <StartupIdeasClient
       isPaid={isPaid}
       isAuthenticated={!!userEmail}
-      ideas={startupIdeas}
+      ideas={startupIdeas.map(({ content, ...rest }) => rest)}
       userEmail={userEmail}
       userName={session?.user?.name ?? null}
       basePath="/startup/ideas"

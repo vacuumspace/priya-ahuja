@@ -11,7 +11,7 @@ import { FREE_IDEAS_COUNT, type StartupIdea } from "@/lib/startup-ideas-data"
 type Props = {
   isPaid: boolean
   isAuthenticated: boolean
-  ideas: StartupIdea[]
+  ideas: Omit<StartupIdea, "content">[]
   userEmail: string | null
   userName: string | null
   basePath?: string

@@ -104,7 +104,7 @@ export default function WorkPage() {
               <p className="font-sans text-[12px] text-ink/40 uppercase tracking-wider">at scale, inside a platform</p>
             </div>
             <p className="font-sans text-base text-ink/70 leading-relaxed">
-              over 4+ years, i've been part of the investment and strategy function at a large-scale fintech platform, working
+              over 7+ years, i've been part of the investment and strategy function at a large-scale fintech platform, working
               across significant capital deployed into fintech startups. the portfolio spans both B2B and B2C: a wealth management
               platform, a financial data analytics company, and account aggregator infrastructure. beyond the deals themselves, i'm
               embedded in internal business strategy, product direction, and investor relations, including supporting large fundraises

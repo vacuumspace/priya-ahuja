@@ -31,9 +31,9 @@ export default async function ProfilePage() {
 
   return (
     <div className="min-h-screen bg-cream">
-      <div className="flex justify-between items-center px-4 md:px-10 py-4 text-[13px] text-ink/50 font-sans border-b border-border">
-        <span>profile</span>
-        <span>{session.user.email}</span>
+      <div className="flex justify-between items-center gap-3 px-4 md:px-10 py-4 text-[13px] text-ink/50 font-sans border-b border-border">
+        <span className="flex-shrink-0">profile</span>
+        <span className="min-w-0 truncate">{session.user.email}</span>
       </div>
 
       <div className="px-4 md:px-10 pt-10 pb-16 max-w-2xl">

@@ -23,7 +23,7 @@ export default async function D2CStartupIdeasPage() {
     <StartupIdeasClient
       isPaid={isAdmin(userEmail)}
       isAuthenticated={!!userEmail}
-      ideas={d2cStartupIdeas}
+      ideas={d2cStartupIdeas.map(({ content, ...rest }) => rest)}
       userEmail={userEmail}
       userName={session?.user?.name ?? null}
       basePath="/startup/ideas/d2c"

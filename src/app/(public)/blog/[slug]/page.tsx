@@ -166,7 +166,7 @@ export default async function BlogPostPage({ params }: Props) {
           <span>{post.readTime} read</span>
         </div>
 
-        <article className="px-4 md:px-10 pt-12 pb-20 max-w-2xl">
+        <article className="px-4 md:px-10 pt-12 pb-12 md:pb-20 max-w-2xl">
           {/* Series banner with dropdown */}
           {post.series && (
             <SeriesDropdown
@@ -202,7 +202,7 @@ export default async function BlogPostPage({ params }: Props) {
           {!post.series && <div className="mt-16 bg-peach/30 border border-peach-dark/20 rounded-2xl p-6">
             <p className="font-heading text-base font-700 text-ink mb-1">Priya Ahuja</p>
             <p className="font-sans text-xs text-ink/60 mb-4 leading-relaxed">
-              4+ years in startup investment & strategic consulting. Writing about fundraising, VC careers, and startup strategy from the inside.
+              7+ years in startup investment & strategic consulting. Writing about fundraising, VC careers, and startup strategy from the inside.
             </p>
             <a
               href="https://www.instagram.com/pitchtopriya"

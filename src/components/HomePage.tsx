@@ -113,13 +113,13 @@ export default function HomePage() {
               { value: "250+", label: "founders advised", sub: "across fintech, saas, consumer-tech & d2c" },
               { value: "₹200cr+", label: "fundraise guided", sub: "across pre-seed to pre-series A & series A rounds" },
               { value: "5.0★", label: "avg. session rating", sub: "from 50+ independent reviews" },
-              { value: "4 yrs", label: "inside startup investment", sub: "investment, strategy & m&a experience across the startup ecosystem" },
+              { value: "7 yrs", label: "inside startup investment", sub: "investment, strategy & m&a experience across the startup ecosystem" },
               { value: "12+", label: "sectors covered", sub: "fintech, edtech, healthtech, b2b, d2c, social platforms & more" },
               { value: "100%", label: "actionable advice", sub: "every session ends with clear next steps you can act on today" },
               { value: "250+", label: "founders advised", sub: "across fintech, saas, consumer-tech & d2c" },
               { value: "₹200cr+", label: "fundraise guided", sub: "across pre-seed to pre-series A & series A rounds" },
               { value: "5.0★", label: "avg. session rating", sub: "from 50+ independent reviews" },
-              { value: "4 yrs", label: "inside startup investment", sub: "investment, strategy & m&a experience across the startup ecosystem" },
+              { value: "7 yrs", label: "inside startup investment", sub: "investment, strategy & m&a experience across the startup ecosystem" },
               { value: "12+", label: "sectors covered", sub: "fintech, edtech, healthtech, b2b, d2c, social platforms & more" },
               { value: "100%", label: "actionable advice", sub: "every session ends with clear next steps you can act on today" },
             ].map((s, i) => (
@@ -187,7 +187,7 @@ export default function HomePage() {
         <p className="text-[12px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">about</p>
         <div className="space-y-3 font-sans text-base text-ink/60 leading-relaxed">
           <p>
-            i have 4+ years of hands-on startup investment &amp; strategic consulting experience,
+            i have 7+ years of hands-on startup investment &amp; strategic consulting experience,
             working closely with founders at the intersection of capital and strategy.
           </p>
           <p>
