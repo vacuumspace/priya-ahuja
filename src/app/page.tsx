@@ -16,18 +16,23 @@ export const metadata: Metadata = {
 const PROMO_CUTOFF_MS_BEFORE_START = 2 * 60 * 60 * 1000
 
 export default async function RootPage() {
-  const [soonest] = await db
+  const active = await db
     .select()
     .from(workshops)
     .where(eq(workshops.isActive, true))
     .orderBy(asc(workshops.date), asc(workshops.startTime))
-    .limit(1)
+
+  // "soonest" must be the next workshop that hasn't started yet - ordering by
+  // date alone would surface a past workshop (e.g. a historical record seeded
+  // with an earlier date) ahead of the actual upcoming one.
+  const now = new Date()
+  const soonest = active.find((w) => new Date(`${w.date}T${w.startTime}:00+05:30`) > now)
 
   let promoWorkshop: PromoWorkshop | null = null
   if (soonest) {
     const start = new Date(`${soonest.date}T${soonest.startTime}:00+05:30`)
     const cutoff = new Date(start.getTime() - PROMO_CUTOFF_MS_BEFORE_START)
-    if (new Date() < cutoff) {
+    if (now < cutoff) {
       promoWorkshop = {
         slug: soonest.slug,
         title: soonest.title,

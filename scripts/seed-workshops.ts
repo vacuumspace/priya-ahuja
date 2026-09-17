@@ -15,12 +15,16 @@ const db = drizzle(sql, { schema: { workshops } })
 const items = [
   {
     slug: "fundable-pitch-deck",
-    title: "Fundable Pitch Deck Workshop",
-    description: `I've evaluated 1000+ pitch decks across fundraising rounds, and the pattern is always the same: investors don't reject a deck because the design is weak. They reject it because the story doesn't add up.
+    title: "Fundable Pitch Deck Workshop: For Early Stage Founders",
+    description: `The investor you're gonna pitch also has short attention span.
 
-This workshop is a slide-by-slide breakdown of what makes a deck investable: how investors actually read a deck, the slides that quietly kill deals, and how to frame your traction, market, and ask so they land.
+The average VC spends under 4 minutes on a deck, gives your first slide more than double the attention of every slide after it, and closes the tab on nearly half the decks before reaching the ask. Attention isn't a footnote here - it's the whole game.
 
-We'll cover every slide that belongs in an investable deck: problem, solution, market sizing, business model, traction, team, and the ask, plus the mistakes that lose investor interest in the first two minutes.
+This workshop is a slide-by-slide breakdown of what actually holds that attention: the unusual detail that makes an investor stop skimming, the pattern break that makes your deck feel different from the fifty they saw that week, and the story thread that carries them from problem to ask without losing them along the way.
+
+We'll cover every slide that belongs in an investable deck: problem, solution, market sizing, business model, traction, team, and the ask, built around what keeps investor attention instead of what merely looks complete.
+
+Built for early stage founders across all sectors - b2b, b2c, saas, d2c, fintech, or anything in between - and every stage from pre-seed to series A. What investors look for shifts with stage (a pre-seed deck sells conviction, a seed deck sells early signal, a series A deck sells a growth story), and we'll cover how to frame each slide differently depending on where you are.
 
 This workshop is interactive, not a lecture. You can ask anything related to your own pitch deck, and we'll work through it together, live.
 
@@ -34,6 +38,22 @@ Gifts for Founders
     price: 99900, // ₹999 in paise
   },
 ]
+
+// Historical record only - these two sessions were actually run live, just
+// not through this site (no real registrations/calendar event behind them),
+// so seed() below skips calendar creation for any item dated in the past.
+// Same title/description as the live workshop by design - it's the same
+// workshop, just past instances of it.
+const [upcoming] = items
+const pastItems = [
+  { ...upcoming, slug: "fundable-pitch-deck-aug-2026", date: "2026-08-02" },
+  { ...upcoming, slug: "fundable-pitch-deck-sep-2026", date: "2026-09-06" },
+]
+items.push(...pastItems)
+
+function isPastItem(item: (typeof items)[number]): boolean {
+  return new Date(`${item.date}T${item.endTime}:00+05:30`) < new Date()
+}
 
 // The workshop row is the one source of truth for date/time/title/description;
 // this keeps the shared calendar event in lockstep with it every time the
@@ -56,6 +76,12 @@ async function seed() {
       }
       await db.update(workshops).set({ ...item, isActive: true }).where(eq(workshops.id, existing.id))
       console.log(`✓ updated ${item.slug}`)
+      continue
+    }
+
+    if (isPastItem(item)) {
+      await db.insert(workshops).values({ ...item, isActive: true, googleCalendarEventId: null, meetLink: null })
+      console.log(`✓ created ${item.slug} (past, no calendar event)`)
       continue
     }
 

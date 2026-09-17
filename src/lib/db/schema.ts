@@ -402,6 +402,8 @@ export const workshopRegistrations = pgTable("workshop_registrations", {
   userId: text("user_id").references(() => users.id, { onDelete: "cascade" }),
   userName: text("user_name").notNull(),
   userEmail: text("user_email").notNull(),
+  stage: varchar("stage", { length: 30 }),
+  sector: varchar("sector", { length: 30 }),
   razorpayOrderId: text("razorpay_order_id"),
   razorpayPaymentId: text("razorpay_payment_id"),
   amountPaid: integer("amount_paid"), // actual captured amount in paise
@@ -420,6 +422,16 @@ export const workshopRegistrations = pgTable("workshop_registrations", {
     .on(table.workshopId, table.userEmail)
     .where(sql`${table.status} <> 'cancelled'`),
 ])
+
+// Placeholder testimonials for past workshops - hand-entered per workshop,
+// not tied to an actual registration/review flow.
+export const workshopFeedback = pgTable("workshop_feedback", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  workshopId: uuid("workshop_id").notNull().references(() => workshops.id, { onDelete: "cascade" }),
+  name: text("name").notNull(),
+  message: text("message").notNull(),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+})
 
 export const serviceInquiries = pgTable("service_inquiries", {
   id: uuid("id").primaryKey().defaultRandom(),

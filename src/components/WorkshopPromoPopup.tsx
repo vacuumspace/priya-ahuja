@@ -1,9 +1,9 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Link from "next/link"
 import { X, GraduationCap } from "lucide-react"
-import { formatWorkshopTimeRange, formatWorkshopPrice } from "@/lib/workshop-time"
+import { formatWorkshopTimeRange, formatWorkshopPrice, formatWorkshopDate } from "@/lib/workshop-time"
 
 export type PromoWorkshop = {
   slug: string
@@ -15,25 +15,36 @@ export type PromoWorkshop = {
   thumbnailUrl: string | null
 }
 
-function formatDate(date: string) {
-  return new Date(`${date}T00:00:00+05:30`).toLocaleDateString("en-IN", {
-    weekday: "long", day: "numeric", month: "long", timeZone: "Asia/Kolkata",
-  })
-}
-
 export default function WorkshopPromoPopup({ workshop }: { workshop: PromoWorkshop | null }) {
   // No persisted dismissal - shows again every time this component mounts,
   // i.e. every landing on the home page, not just the first time.
   const [dismissed, setDismissed] = useState(false)
+  const [visible, setVisible] = useState(false)
+  const [animateIn, setAnimateIn] = useState(false)
 
-  if (!workshop || dismissed) return null
+  useEffect(() => {
+    if (!workshop) return
+    const showTimer = setTimeout(() => setVisible(true), 2000)
+    return () => clearTimeout(showTimer)
+  }, [workshop])
+
+  useEffect(() => {
+    if (!visible) return
+    const raf = requestAnimationFrame(() => setAnimateIn(true))
+    return () => cancelAnimationFrame(raf)
+  }, [visible])
+
+  if (!workshop || dismissed || !visible) return null
 
   const close = () => setDismissed(true)
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm px-4" onClick={close}>
+    <div
+      className={`fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm px-4 transition-opacity duration-1000 ease-out ${animateIn ? "opacity-100" : "opacity-0"}`}
+      onClick={close}
+    >
       <div
-        className="relative w-full max-w-sm bg-card border border-border rounded-2xl shadow-xl overflow-hidden"
+        className={`relative w-full max-w-sm bg-card border border-border rounded-2xl shadow-xl overflow-hidden transition-all duration-1000 ease-out ${animateIn ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 translate-y-4"}`}
         onClick={(e) => e.stopPropagation()}
       >
         <button
@@ -55,11 +66,11 @@ export default function WorkshopPromoPopup({ workshop }: { workshop: PromoWorksh
 
         <div className="p-6 text-center">
           <p className="text-[11px] font-sans font-semibold uppercase tracking-wide text-peach-dark mb-1">upcoming workshop</p>
-          <p className="font-heading text-lg font-700 text-ink normal-case mb-2">{workshop.title}</p>
-          <p className="font-sans text-sm text-ink/60 mb-1">
-            {formatDate(workshop.date)} · {formatWorkshopTimeRange(workshop.startTime, workshop.endTime)} IST
+          <p className="font-heading text-xl font-800 text-ink normal-case mb-2">{workshop.title}</p>
+          <p className="font-sans text-sm font-semibold text-ink/80 mb-1">
+            {formatWorkshopDate(workshop.date)} · {formatWorkshopTimeRange(workshop.startTime, workshop.endTime)} IST
           </p>
-          <p className="font-heading text-xl font-800 text-ink mb-5">{formatWorkshopPrice(workshop.price)}</p>
+          <p className="font-heading text-base font-600 text-ink/60 mb-5">{formatWorkshopPrice(workshop.price)}</p>
           <Link
             href={`/school/workshops/${workshop.slug}`}
             onClick={close}

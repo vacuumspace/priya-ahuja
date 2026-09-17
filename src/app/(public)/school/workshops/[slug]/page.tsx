@@ -3,7 +3,7 @@ import { notFound } from "next/navigation"
 import Link from "next/link"
 import { auth, isAdmin } from "@/lib/auth"
 import { db } from "@/lib/db"
-import { workshops, workshopRegistrations } from "@/lib/db/schema"
+import { workshops, workshopRegistrations, workshopFeedback } from "@/lib/db/schema"
 import { eq, and, notInArray } from "drizzle-orm"
 import { CalendarDays, Clock, ChevronLeft, GraduationCap, IndianRupee } from "lucide-react"
 import { formatWorkshopTimeRange, formatWorkshopPrice } from "@/lib/workshop-time"
@@ -74,6 +74,10 @@ export default async function WorkshopDetailPage({ params }: { params: Params })
     existingRegistration = reg ?? null
   }
 
+  const feedback = isPast
+    ? await db.select().from(workshopFeedback).where(eq(workshopFeedback.workshopId, workshop.id))
+    : []
+
   return (
     <div className="min-h-screen bg-cream">
       <div className="flex justify-between items-center px-4 md:px-10 py-4 text-[13px] text-ink/50 font-sans border-b border-border">
@@ -133,6 +137,22 @@ export default async function WorkshopDetailPage({ params }: { params: Params })
           <div className="font-sans text-[15px] text-ink/70 leading-relaxed whitespace-pre-line">
             {renderDescription(workshop.description)}
           </div>
+
+          {feedback.length > 0 && (
+            <div className="mt-10 pt-8 border-t border-border">
+              <p className="text-[12px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">
+                what founders said
+              </p>
+              <div className="grid sm:grid-cols-2 gap-4">
+                {feedback.map((f) => (
+                  <div key={f.id} className="bg-peach/20 border border-peach-dark/15 rounded-xl px-4 py-4">
+                    <p className="font-sans text-sm text-ink/70 leading-relaxed">&ldquo;{f.message}&rdquo;</p>
+                    <p className="font-sans text-[12px] font-semibold text-ink/40 mt-2">{f.name}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
           <div className="mt-10 pt-8 border-t border-border flex justify-center">
             <RegisterTrigger

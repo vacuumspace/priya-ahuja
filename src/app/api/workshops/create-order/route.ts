@@ -5,17 +5,26 @@ import { workshops, workshopRegistrations } from "@/lib/db/schema"
 import { getRazorpayInstance } from "@/lib/razorpay"
 import { eq, and, notInArray } from "drizzle-orm"
 import { finalizeWorkshopRegistration } from "@/lib/finalize-workshop-registration"
+import { WORKSHOP_STAGES, WORKSHOP_SECTORS } from "@/lib/workshop-form-options"
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+const VALID_STAGES = new Set(WORKSHOP_STAGES.map((s) => s.value))
+const VALID_SECTORS = new Set(WORKSHOP_SECTORS.map((s) => s.value))
 
 export async function POST(req: NextRequest) {
   try {
     const session = await auth()
     const body = await req.json()
-    const { workshopSlug, name } = body
+    const { workshopSlug, name, stage, sector } = body
 
     if (!workshopSlug || !name) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
+    }
+    if (!VALID_STAGES.has(stage)) {
+      return NextResponse.json({ error: "Select a valid stage" }, { status: 400 })
+    }
+    if (!VALID_SECTORS.has(sector)) {
+      return NextResponse.json({ error: "Select a valid sector" }, { status: 400 })
     }
 
     // Signed-in users register under their verified account email - a
@@ -75,6 +84,8 @@ export async function POST(req: NextRequest) {
           userId,
           userName: name,
           userEmail,
+          stage,
+          sector,
           status: "confirmed",
         }).returning()
       } catch (err: unknown) {
@@ -107,6 +118,8 @@ export async function POST(req: NextRequest) {
         userId,
         userName: name,
         userEmail,
+        stage,
+        sector,
         razorpayOrderId: order.id,
         status: "pending",
       }).returning({ id: workshopRegistrations.id })

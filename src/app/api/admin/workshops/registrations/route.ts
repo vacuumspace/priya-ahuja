@@ -19,6 +19,8 @@ export async function GET() {
       id: workshopRegistrations.id,
       userName: workshopRegistrations.userName,
       userEmail: workshopRegistrations.userEmail,
+      stage: workshopRegistrations.stage,
+      sector: workshopRegistrations.sector,
       status: workshopRegistrations.status,
       amountPaid: workshopRegistrations.amountPaid,
       razorpayPaymentId: workshopRegistrations.razorpayPaymentId,

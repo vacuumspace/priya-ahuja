@@ -134,7 +134,7 @@ export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEma
       </div>
 
       {/* Nav */}
-      <nav className={`flex-1 min-h-0 px-3 flex flex-col gap-1 overflow-y-auto scrollbar-none ${collapsed ? "hidden" : ""}`}>
+      <nav className={`flex-1 min-h-0 px-3 flex flex-col gap-1 overflow-y-auto overscroll-contain scrollbar-none ${collapsed ? "hidden" : ""}`}>
         {topItems.map((item) => {
           const isActive = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href)
           return (
@@ -382,8 +382,8 @@ export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEma
 
       {/* Mobile drawer */}
       <aside
-        className={`md:hidden fixed top-0 left-0 h-screen max-h-screen w-64 bg-peach flex flex-col z-50 border-r border-peach-dark/20 transition-transform duration-200 overflow-y-auto overscroll-contain ${
-          mobileOpen ? "translate-x-0" : "-translate-x-full"
+        className={`md:hidden fixed top-0 right-0 h-dvh max-h-dvh w-64 bg-peach flex flex-col z-50 border-l border-peach-dark/20 transition-transform duration-200 ${
+          mobileOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
         {sidebarContent}

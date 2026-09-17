@@ -4,6 +4,10 @@ import { useState, useEffect, useCallback } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { Trash2, Plus, X, ChevronDown, ChevronLeft, ChevronRight } from "lucide-react"
 import { formatWorkshopTimeRange } from "@/lib/workshop-time"
+import { WORKSHOP_STAGES, WORKSHOP_SECTORS } from "@/lib/workshop-form-options"
+
+const STAGE_LABELS = Object.fromEntries(WORKSHOP_STAGES.map((s) => [s.value, s.label]))
+const SECTOR_LABELS = Object.fromEntries(WORKSHOP_SECTORS.map((s) => [s.value, s.label]))
 
 type Workshop = {
   id: string
@@ -26,6 +30,8 @@ type Registration = {
   id: string
   userName: string
   userEmail: string
+  stage: string | null
+  sector: string | null
   status: string
   amountPaid: number | null
   razorpayPaymentId: string | null
@@ -435,10 +441,10 @@ function RegistrationsTab() {
         )}
       </div>
       <div className="overflow-x-auto rounded-2xl border border-border">
-        <table className="w-full min-w-[900px]">
+        <table className="w-full min-w-[1100px]">
           <thead>
             <tr className="border-b border-border bg-card">
-              {["Name", "Email", "Workshop", "Amount", "Payment ID", "Calendar Invite", "Registered", "Status"].map((h) => (
+              {["Name", "Email", "Stage", "Sector", "Workshop", "Amount", "Payment ID", "Calendar Invite", "Registered", "Status"].map((h) => (
                 <th key={h} className="py-3 px-4 text-left text-[10px] font-sans font-semibold text-ink/40 uppercase tracking-widest">
                   {h}
                 </th>
@@ -448,13 +454,15 @@ function RegistrationsTab() {
           <tbody>
             {pageRows.length === 0 ? (
               <tr>
-                <td colSpan={8} className="px-4 py-8 text-center text-ink/40 font-sans text-sm">No registrations yet</td>
+                <td colSpan={10} className="px-4 py-8 text-center text-ink/40 font-sans text-sm">No registrations yet</td>
               </tr>
             ) : (
               pageRows.map((r, i) => (
                 <tr key={r.id} className={i !== pageRows.length - 1 ? "border-b border-border" : ""}>
                   <td className="py-3 px-4 font-sans text-sm font-medium text-ink">{r.userName}</td>
                   <td className="py-3 px-4 font-sans text-sm text-ink/70">{r.userEmail}</td>
+                  <td className="py-3 px-4 font-sans text-xs text-ink/60">{r.stage ? STAGE_LABELS[r.stage] ?? r.stage : " - "}</td>
+                  <td className="py-3 px-4 font-sans text-xs text-ink/60">{r.sector ? SECTOR_LABELS[r.sector] ?? r.sector : " - "}</td>
                   <td className="py-3 px-4 font-sans text-xs text-ink/60">{r.workshopTitle ?? " - "}</td>
                   <td className="py-3 px-4 font-sans text-sm font-medium text-ink">{fmtAmount(r.amountPaid)}</td>
                   <td className="py-3 px-4 font-sans text-xs text-ink/50">{r.razorpayPaymentId ?? " - "}</td>

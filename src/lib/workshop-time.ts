@@ -21,6 +21,13 @@ export function formatWorkshopPrice(paise: number): string {
   return `₹${(paise / 100).toLocaleString("en-IN")}`
 }
 
+// "2026-09-27" -> "Sunday, 27 September" (IST)
+export function formatWorkshopDate(date: string): string {
+  return new Date(`${date}T00:00:00+05:30`).toLocaleDateString("en-IN", {
+    weekday: "long", day: "numeric", month: "long", timeZone: "Asia/Kolkata",
+  })
+}
+
 // The calendar event's description is deliberately just this - not the
 // workshop's own (often long) content description. Hardcoded to the
 // production domain (matching the canonical URLs elsewhere on these pages) -
