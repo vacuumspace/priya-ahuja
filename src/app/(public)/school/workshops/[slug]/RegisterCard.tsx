@@ -80,10 +80,13 @@ export function RegistrationProvider({
 }) {
   const [name, setName] = useState(initialName)
   const [email, setEmail] = useState(userEmail)
+  const [emailTouched, setEmailTouched] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
   const [success, setSuccess] = useState(existingStatus === "confirmed")
   const [meetLink, setMeetLink] = useState(initialMeetLink)
+
+  const emailInvalid = emailTouched && email.trim() !== "" && !EMAIL_PATTERN.test(email)
 
   // If someone chooses "sign in instead" from inside the modal, this resumes
   // straight back into it after the Google redirect, instead of making them
@@ -192,22 +195,30 @@ export function RegistrationProvider({
           <p className="font-heading text-lg font-700 text-ink mb-4">register for this workshop</p>
 
           <div className="mb-4">
-            <Label htmlFor="name" className="text-xs font-sans text-ink/60 mb-1 block">your name</Label>
+            <Label htmlFor="name" className="text-xs font-sans text-ink/60 mb-1 block">
+              your name <span className="text-red-400">*</span>
+            </Label>
             <Input id="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="ankit sharma" required className="bg-cream border-border text-sm" />
           </div>
 
           <div className="mb-4">
-            <Label htmlFor="email" className="text-xs font-sans text-ink/60 mb-1 block">your email</Label>
+            <Label htmlFor="email" className="text-xs font-sans text-ink/60 mb-1 block">
+              your email <span className="text-red-400">*</span>
+            </Label>
             <Input
               id="email"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              onBlur={() => setEmailTouched(true)}
               placeholder="you@example.com"
               required
               disabled={isSignedIn}
-              className="bg-cream border-border text-sm disabled:opacity-70"
+              className={`bg-cream text-sm disabled:opacity-70 ${emailInvalid ? "border-red-400 focus-visible:ring-red-400/30" : "border-border"}`}
             />
+            {emailInvalid && (
+              <p className="text-[12px] font-sans text-red-500 mt-1">enter a valid email address</p>
+            )}
             {!isSignedIn && (
               <p className="text-[12px] font-sans text-ink/40 mt-1.5">
                 the calendar invite and confirmation go here.{" "}

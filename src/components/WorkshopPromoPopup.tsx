@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import Link from "next/link"
 import { X, GraduationCap } from "lucide-react"
 import { formatWorkshopTimeRange, formatWorkshopPrice } from "@/lib/workshop-time"
@@ -22,27 +22,13 @@ function formatDate(date: string) {
 }
 
 export default function WorkshopPromoPopup({ workshop }: { workshop: PromoWorkshop | null }) {
-  const [open, setOpen] = useState(false)
+  // No persisted dismissal - shows again every time this component mounts,
+  // i.e. every landing on the home page, not just the first time.
+  const [dismissed, setDismissed] = useState(false)
 
-  useEffect(() => {
-    if (!workshop) return
-    let dismissed = false
-    try {
-      dismissed = sessionStorage.getItem(`workshop-promo-dismissed-${workshop.slug}`) === "1"
-    } catch {
-      // sessionStorage can throw in private browsing - just show the popup
-    }
-    if (!dismissed) setOpen(true)
-  }, [workshop])
+  if (!workshop || dismissed) return null
 
-  if (!workshop || !open) return null
-
-  const close = () => {
-    setOpen(false)
-    try {
-      sessionStorage.setItem(`workshop-promo-dismissed-${workshop.slug}`, "1")
-    } catch {}
-  }
+  const close = () => setDismissed(true)
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm px-4" onClick={close}>
@@ -79,7 +65,7 @@ export default function WorkshopPromoPopup({ workshop }: { workshop: PromoWorksh
             onClick={close}
             className="inline-flex items-center justify-center gap-2 w-full bg-ink text-cream font-sans font-semibold text-sm py-3 rounded-xl hover:bg-ink/80 transition-colors"
           >
-            view details →
+            view details
           </Link>
         </div>
       </div>
