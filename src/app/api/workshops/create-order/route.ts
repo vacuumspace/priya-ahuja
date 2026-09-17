@@ -6,16 +6,33 @@ import { getRazorpayInstance } from "@/lib/razorpay"
 import { eq, and, notInArray } from "drizzle-orm"
 import { finalizeWorkshopRegistration } from "@/lib/finalize-workshop-registration"
 
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
 export async function POST(req: NextRequest) {
   try {
     const session = await auth()
-    if (!session?.user?.id || !session.user.email) {
-      return NextResponse.json({ error: "Sign in required" }, { status: 401 })
-    }
+    const body = await req.json()
+    const { workshopSlug, name } = body
 
-    const { workshopSlug, name } = await req.json()
     if (!workshopSlug || !name) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
+    }
+
+    // Signed-in users register under their verified account email - a
+    // submitted email is only used for guest (no-account) checkout, so it
+    // can't be spoofed to register someone else while tied to your own account.
+    let userId: string | null = null
+    let userEmail: string
+
+    if (session?.user?.id && session.user.email) {
+      userId = session.user.id
+      userEmail = session.user.email
+    } else {
+      const email = typeof body.email === "string" ? body.email.trim() : ""
+      if (!email || !EMAIL_PATTERN.test(email)) {
+        return NextResponse.json({ error: "A valid email is required" }, { status: 400 })
+      }
+      userEmail = email
     }
 
     const [workshop] = await db
@@ -33,7 +50,7 @@ export async function POST(req: NextRequest) {
       .from(workshopRegistrations)
       .where(and(
         eq(workshopRegistrations.workshopId, workshop.id),
-        eq(workshopRegistrations.userId, session.user.id),
+        eq(workshopRegistrations.userEmail, userEmail),
         notInArray(workshopRegistrations.status, ["cancelled"]),
       ))
       .limit(1)
@@ -42,7 +59,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "You already have a registration for this workshop" }, { status: 409 })
     }
 
-    const adminUser = isAdmin(session.user.email)
+    const adminUser = userId ? isAdmin(session?.user?.email) : false
 
     // Admin bypass, matching the pitch-deck-analyser pattern: skip Razorpay
     // entirely, register directly with no order/payment ids (a clear signal
@@ -55,9 +72,9 @@ export async function POST(req: NextRequest) {
       try {
         [registration] = await db.insert(workshopRegistrations).values({
           workshopId: workshop.id,
-          userId: session.user.id,
+          userId,
           userName: name,
-          userEmail: session.user.email,
+          userEmail,
           status: "confirmed",
         }).returning()
       } catch (err: unknown) {
@@ -87,15 +104,15 @@ export async function POST(req: NextRequest) {
     try {
       [registration] = await db.insert(workshopRegistrations).values({
         workshopId: workshop.id,
-        userId: session.user.id,
+        userId,
         userName: name,
-        userEmail: session.user.email,
+        userEmail,
         razorpayOrderId: order.id,
         status: "pending",
       }).returning({ id: workshopRegistrations.id })
     } catch (err: unknown) {
       // Two concurrent submits can both pass the select-based check above -
-      // the partial unique index on (workshop_id, user_id) is the real guard.
+      // the partial unique index on (workshop_id, user_email) is the real guard.
       if (err && typeof err === "object" && "code" in err && (err as { code: string }).code === "23505") {
         return NextResponse.json({ error: "You already have a registration for this workshop" }, { status: 409 })
       }

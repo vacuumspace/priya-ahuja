@@ -1,6 +1,6 @@
 import { db } from "@/lib/db"
-import { pitchDeckUnlocks } from "@/lib/db/schema"
-import { eq, and, like } from "drizzle-orm"
+import { pitchDeckUnlocks, workshopRegistrations, workshops } from "@/lib/db/schema"
+import { eq, and, like, isNull } from "drizzle-orm"
 
 // Workshops whose registrants get a free, one-time (no expiry) unlock of the
 // pitch deck analyser - matches the "Free" perks listed in the workshop's
@@ -34,4 +34,34 @@ export async function grantWorkshopPitchDeckUnlock(workshopSlug: string, userId:
     amountPaise: 0,
     status: "paid",
   })
+}
+
+// Called from the auth signIn event on every sign-in. A guest checkout has
+// no account at registration time, so it can't be tied to a user or granted
+// an account-scoped perk yet - once that same email signs in (whether for
+// the first time ever, or as a returning user), this retroactively claims
+// any still-unlinked guest registrations for it and runs the perk grant that
+// was skipped back then.
+export async function linkGuestWorkshopRegistrations(userId: string, email: string) {
+  const guestRegs = await db
+    .select()
+    .from(workshopRegistrations)
+    .where(and(
+      isNull(workshopRegistrations.userId),
+      eq(workshopRegistrations.userEmail, email),
+      eq(workshopRegistrations.status, "confirmed"),
+    ))
+
+  for (const reg of guestRegs) {
+    await db.update(workshopRegistrations).set({ userId }).where(eq(workshopRegistrations.id, reg.id))
+
+    const [workshop] = await db.select({ slug: workshops.slug }).from(workshops).where(eq(workshops.id, reg.workshopId)).limit(1)
+    if (workshop) {
+      try {
+        await grantWorkshopPitchDeckUnlock(workshop.slug, userId, reg.id)
+      } catch (e) {
+        console.error("grantWorkshopPitchDeckUnlock (post-link) failed:", e)
+      }
+    }
+  }
 }

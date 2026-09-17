@@ -137,7 +137,7 @@ export default async function WorkshopDetailPage({ params }: { params: Params })
           <div className="mt-10 pt-8 border-t border-border flex justify-center">
             <RegisterTrigger
               label="Create Fundable Pitch Deck"
-              className="bg-peach-dark text-ink hover:bg-peach-dark/80 font-sans font-semibold text-base px-10 py-3.5 rounded-xl"
+              className="h-auto bg-peach-dark text-ink hover:bg-peach-dark/80 font-sans font-semibold text-sm px-10 py-3.5 rounded-xl"
             />
           </div>
         </RegistrationProvider>

@@ -9,9 +9,6 @@ import { finalizeWorkshopRegistration } from "@/lib/finalize-workshop-registrati
 export async function POST(req: NextRequest) {
   try {
     const session = await auth()
-    if (!session?.user?.id) {
-      return NextResponse.json({ error: "Sign in required" }, { status: 401 })
-    }
 
     const { registrationId, razorpayOrderId, razorpayPaymentId, razorpaySignature } = await req.json()
 
@@ -29,7 +26,11 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Registration not found" }, { status: 404 })
     }
 
-    if (registration.userId !== session.user.id) {
+    // A guest registration (no userId) has no session to check ownership
+    // against - it's secured instead by needing both the registrationId and
+    // a Razorpay signature that only the payer's own checkout would receive.
+    // A signed-in registration must still match the calling session.
+    if (registration.userId && registration.userId !== session?.user?.id) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 })
     }
     if (registration.razorpayOrderId !== razorpayOrderId) {

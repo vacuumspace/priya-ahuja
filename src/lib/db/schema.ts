@@ -394,7 +394,12 @@ export const workshopRegistrations = pgTable("workshop_registrations", {
   // (i.e. sales/attendance history) must not be deletable out from under
   // them; the admin delete route surfaces the resulting FK error instead.
   workshopId: uuid("workshop_id").notNull().references(() => workshops.id),
-  userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  // Nullable - registering doesn't require an account (guest checkout, just
+  // name + email). Set when the registrant is signed in, and backfilled
+  // later if a guest's email signs in afterwards (see
+  // linkGuestWorkshopRegistrations in workshop-perks.ts, called from the
+  // auth signIn event) - userEmail is the durable identity here, not userId.
+  userId: text("user_id").references(() => users.id, { onDelete: "cascade" }),
   userName: text("user_name").notNull(),
   userEmail: text("user_email").notNull(),
   razorpayOrderId: text("razorpay_order_id"),
@@ -407,9 +412,12 @@ export const workshopRegistrations = pgTable("workshop_registrations", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
 }, (table) => [
   // Guards against a double-submit race creating two live registrations for
-  // the same person - only one non-cancelled row per (workshop, user) at a time.
+  // the same person - only one non-cancelled row per (workshop, email) at a
+  // time. Keyed on email rather than userId since a guest registration has
+  // no userId at all, and email is the one identity guaranteed present
+  // whether or not the registrant ever signs in.
   uniqueIndex("workshop_registrations_active_unique")
-    .on(table.workshopId, table.userId)
+    .on(table.workshopId, table.userEmail)
     .where(sql`${table.status} <> 'cancelled'`),
 ])
 

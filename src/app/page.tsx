@@ -1,17 +1,50 @@
 ﻿import { Metadata } from "next"
 import { SidebarWithAuth } from "@/components/layout/SidebarWithAuth"
 import HomePage from "@/components/HomePage"
+import { db } from "@/lib/db"
+import { workshops } from "@/lib/db/schema"
+import { eq, asc } from "drizzle-orm"
+import type { PromoWorkshop } from "@/components/WorkshopPromoPopup"
 
 export const metadata: Metadata = {
   title: "Priya Ahuja - Startup & Fundraise Consultant",
 }
 
-export default function RootPage() {
+// Registration-cutoff is 2h before the workshop starts, computed from the
+// workshop row itself (the one source of truth) rather than a separate
+// hardcoded deadline that could drift from the actual start time.
+const PROMO_CUTOFF_MS_BEFORE_START = 2 * 60 * 60 * 1000
+
+export default async function RootPage() {
+  const [soonest] = await db
+    .select()
+    .from(workshops)
+    .where(eq(workshops.isActive, true))
+    .orderBy(asc(workshops.date), asc(workshops.startTime))
+    .limit(1)
+
+  let promoWorkshop: PromoWorkshop | null = null
+  if (soonest) {
+    const start = new Date(`${soonest.date}T${soonest.startTime}:00+05:30`)
+    const cutoff = new Date(start.getTime() - PROMO_CUTOFF_MS_BEFORE_START)
+    if (new Date() < cutoff) {
+      promoWorkshop = {
+        slug: soonest.slug,
+        title: soonest.title,
+        date: soonest.date,
+        startTime: soonest.startTime,
+        endTime: soonest.endTime,
+        price: soonest.price,
+        thumbnailUrl: soonest.thumbnailUrl,
+      }
+    }
+  }
+
   return (
     <div className="flex min-h-screen bg-cream">
       <SidebarWithAuth />
       <main className="flex-1 md:ml-[240px] min-h-screen pt-[52px] md:pt-0 overflow-x-hidden">
-        <HomePage />
+        <HomePage promoWorkshop={promoWorkshop} />
       </main>
     </div>
   )

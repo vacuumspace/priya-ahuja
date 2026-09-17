@@ -29,10 +29,15 @@ export async function finalizeWorkshopRegistration(
   workshop: Workshop,
   { sendEmail = true }: { sendEmail?: boolean } = {}
 ): Promise<{ meetLink: string | null }> {
-  try {
-    await grantWorkshopPitchDeckUnlock(workshop.slug, registration.userId, registration.id)
-  } catch (e) {
-    console.error("grantWorkshopPitchDeckUnlock failed:", e)
+  // Guests (no account) can't receive an account-tied perk yet - it's
+  // granted retroactively via linkGuestWorkshopRegistrations if they later
+  // sign in with the same email.
+  if (registration.userId) {
+    try {
+      await grantWorkshopPitchDeckUnlock(workshop.slug, registration.userId, registration.id)
+    } catch (e) {
+      console.error("grantWorkshopPitchDeckUnlock failed:", e)
+    }
   }
 
   let meetLink: string | null = workshop.meetLink

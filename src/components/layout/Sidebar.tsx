@@ -23,6 +23,13 @@ const INVESTOR_LIST_ITEMS = [
 
 const topicGroups = [
   {
+    label: "school",
+    prefix: "/school",
+    children: [
+      { label: "workshops", href: "/school/workshops" },
+    ],
+  },
+  {
     label: "startup",
     prefix: "/startup",
     children: [
@@ -53,13 +60,6 @@ const topicGroups = [
       { label: "branding", href: "/services/branding" },
       { label: "finance", href: "/services/accounting" },
       { label: "legal compliance", href: "/services/incorporation" },
-    ],
-  },
-  {
-    label: "school",
-    prefix: "/school",
-    children: [
-      { label: "workshops", href: "/school/workshops" },
     ],
   },
 ]

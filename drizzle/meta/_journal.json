@@ -281,6 +281,13 @@
       "when": 1789654781811,
       "tag": "0039_abnormal_infant_terrible",
       "breakpoints": true
+    },
+    {
+      "idx": 40,
+      "version": "7",
+      "when": 1789671578547,
+      "tag": "0040_tidy_wrecker",
+      "breakpoints": true
     }
   ]
 }

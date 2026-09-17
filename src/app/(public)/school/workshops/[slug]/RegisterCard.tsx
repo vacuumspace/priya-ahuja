@@ -2,9 +2,9 @@
 
 import { createContext, useContext, useState, useEffect, type ReactNode } from "react"
 import Link from "next/link"
-import { CheckCircle, Loader2, LogIn, ArrowRight, X, Video, GraduationCap } from "lucide-react"
+import { signIn } from "next-auth/react"
+import { CheckCircle, Loader2, ArrowRight, X, Video, GraduationCap } from "lucide-react"
 import { loadRazorpay } from "@/lib/load-razorpay"
-import SignInOptions from "@/components/SignInOptions"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
@@ -17,12 +17,15 @@ declare global {
   }
 }
 
-type ModalStep = "signin" | "info" | null
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+type ModalStep = "info" | null
 
 type RegistrationState = {
   isPast: boolean
   existingStatus: string | null
   success: boolean
+  isSignedIn: boolean
   loading: boolean
   meetLink: string | null
   openRegister: () => void
@@ -76,15 +79,17 @@ export function RegistrationProvider({
   children: ReactNode
 }) {
   const [name, setName] = useState(initialName)
+  const [email, setEmail] = useState(userEmail)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
   const [success, setSuccess] = useState(existingStatus === "confirmed")
   const [meetLink, setMeetLink] = useState(initialMeetLink)
 
-  // After the Google sign-in redirect lands back here, resume straight into
-  // the info + payment step rather than making the user click register again.
+  // If someone chooses "sign in instead" from inside the modal, this resumes
+  // straight back into it after the Google redirect, instead of making them
+  // click register again.
   const [modalStep, setModalStep] = useState<ModalStep>(() => {
-    if (!isSignedIn || typeof window === "undefined") return null
+    if (typeof window === "undefined") return null
     return new URLSearchParams(window.location.search).get("register") === "1" ? "info" : null
   })
 
@@ -98,10 +103,15 @@ export function RegistrationProvider({
     window.history.replaceState({}, "", window.location.pathname + (rest ? `?${rest}` : ""))
   }, [])
 
-  const openRegister = () => setModalStep(isSignedIn ? "info" : "signin")
+  const openRegister = () => setModalStep("info")
   const closeModal = () => { setModalStep(null); setError("") }
 
   async function handleRegister() {
+    if (!isSignedIn && !EMAIL_PATTERN.test(email)) {
+      setError("Enter a valid email")
+      return
+    }
+
     setLoading(true)
     setError("")
     let registrationId: string | undefined
@@ -109,7 +119,7 @@ export function RegistrationProvider({
       const orderRes = await fetch("/api/workshops/create-order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ workshopSlug, name }),
+        body: JSON.stringify({ workshopSlug, name, email }),
       })
       const orderData = await orderRes.json()
       if (!orderRes.ok) throw new Error(orderData.error || "Failed to create order")
@@ -131,7 +141,7 @@ export function RegistrationProvider({
           name: "Priya Ahuja",
           description: workshopTitle,
           order_id: orderData.orderId,
-          prefill: { name, email: userEmail },
+          prefill: { name, email },
           theme: { color: "#1a1a1a" },
           handler: async (response: { razorpay_order_id: string; razorpay_payment_id: string; razorpay_signature: string }) => {
             try {
@@ -174,24 +184,8 @@ export function RegistrationProvider({
   }
 
   return (
-    <RegistrationContext.Provider value={{ isPast, existingStatus, success, loading, meetLink, openRegister }}>
+    <RegistrationContext.Provider value={{ isPast, existingStatus, success, isSignedIn, loading, meetLink, openRegister }}>
       {children}
-
-      {modalStep === "signin" && (
-        <Modal onClose={closeModal}>
-          <div className="text-center pt-2">
-            <LogIn size={32} className="text-peach-dark mx-auto mb-3" />
-            <p className="font-heading text-base font-700 text-ink mb-1">sign in to register</p>
-            <p className="font-sans text-sm text-ink/60 leading-relaxed mb-5">
-              a free account is required to register for this workshop.
-            </p>
-            <SignInOptions
-              callbackUrl={typeof window !== "undefined" ? `${window.location.origin}${window.location.pathname}?register=1` : "/school/workshops"}
-              googleLabel="continue with google"
-            />
-          </div>
-        </Modal>
-      )}
 
       {modalStep === "info" && (
         <Modal onClose={closeModal}>
@@ -202,10 +196,31 @@ export function RegistrationProvider({
             <Input id="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="ankit sharma" required className="bg-cream border-border text-sm" />
           </div>
 
-          <div className="bg-peach/10 border border-peach-dark/20 rounded-xl px-3 py-2 mb-4">
-            <p className="text-[13px] font-sans text-ink/60">
-              registering as <span className="font-semibold text-ink">{userEmail}</span>
-            </p>
+          <div className="mb-4">
+            <Label htmlFor="email" className="text-xs font-sans text-ink/60 mb-1 block">your email</Label>
+            <Input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="you@example.com"
+              required
+              disabled={isSignedIn}
+              className="bg-cream border-border text-sm disabled:opacity-70"
+            />
+            {!isSignedIn && (
+              <p className="text-[12px] font-sans text-ink/40 mt-1.5">
+                the calendar invite and confirmation go here.{" "}
+                <button
+                  type="button"
+                  onClick={() => signIn("google", { callbackUrl: typeof window !== "undefined" ? `${window.location.origin}${window.location.pathname}?register=1` : "/school/workshops" })}
+                  className="text-peach-dark font-semibold hover:underline"
+                >
+                  sign in instead
+                </button>{" "}
+                to save this to your account.
+              </p>
+            )}
           </div>
 
           {isAdmin && (
@@ -218,8 +233,8 @@ export function RegistrationProvider({
 
           <Button
             onClick={handleRegister}
-            disabled={loading || !name.trim()}
-            className="w-full bg-ink text-cream hover:bg-ink/80 font-sans font-semibold text-sm py-3 rounded-xl disabled:opacity-40"
+            disabled={loading || !name.trim() || !email.trim()}
+            className="h-auto w-full bg-ink text-cream hover:bg-ink/80 font-sans font-semibold text-sm py-3 rounded-xl disabled:opacity-40"
           >
             {loading ? (
               <span className="flex items-center gap-2"><Loader2 size={14} className="animate-spin" />registering…</span>
@@ -239,7 +254,7 @@ export function RegistrationProvider({
 export function RegisterTrigger({ label = "register", className }: { label?: string; className?: string }) {
   const ctx = useContext(RegistrationContext)
   if (!ctx) return null
-  const { isPast, existingStatus, success, loading, meetLink, openRegister } = ctx
+  const { isPast, existingStatus, success, isSignedIn, loading, meetLink, openRegister } = ctx
 
   // Checked before isPast - someone who registered and attended should still
   // see their "registered" status (and their my-activity link) after the
@@ -258,14 +273,14 @@ export function RegisterTrigger({ label = "register", className }: { label?: str
           >
             <Video size={14} /> join on google meet
           </Link>
-        ) : (
+        ) : isSignedIn ? (
           <Link
             href="/my-activity?tab=workshops"
             className="inline-flex items-center gap-1.5 text-sm font-sans font-semibold text-ink/50 hover:text-ink transition-colors"
           >
             view in my activity <ArrowRight size={13} />
           </Link>
-        )}
+        ) : null}
       </div>
     )
   }
@@ -290,7 +305,7 @@ export function RegisterTrigger({ label = "register", className }: { label?: str
     <Button
       onClick={openRegister}
       disabled={loading}
-      className={className ?? "bg-ink text-cream hover:bg-ink/80 font-sans font-semibold text-sm px-8 py-2.5 rounded-xl flex-shrink-0"}
+      className={className ?? "h-auto bg-ink text-cream hover:bg-ink/80 font-sans font-semibold text-sm px-8 py-2.5 rounded-xl flex-shrink-0"}
     >
       {label}
     </Button>
@@ -321,7 +336,7 @@ export function PlaybookDownloadTrigger({ label }: { label: string }) {
             </p>
             <Button
               onClick={() => setOpen(false)}
-              className="w-full bg-ink text-cream hover:bg-ink/80 font-sans font-semibold text-sm py-2.5 rounded-xl"
+              className="h-auto w-full bg-ink text-cream hover:bg-ink/80 font-sans font-semibold text-sm py-2.5 rounded-xl"
             >
               got it
             </Button>

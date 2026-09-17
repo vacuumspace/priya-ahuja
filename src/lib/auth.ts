@@ -5,6 +5,7 @@ import { eq } from "drizzle-orm"
 import { db } from "@/lib/db"
 import { accounts, bannedIdentities, sessions, users, verificationTokens } from "@/lib/db/schema"
 import { addMinutes } from "@/lib/priya-gpt-time"
+import { linkGuestWorkshopRegistrations } from "@/lib/workshop-perks"
 
 const PRIYA_GPT_FREE_TRIAL_MINUTES = 5
 
@@ -49,6 +50,16 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       if (!user.id) return
       // gift every brand-new signup a few free PriyaGPT minutes so they can try it immediately
       await addMinutes(user.id, PRIYA_GPT_FREE_TRIAL_MINUTES, { reason: "free_trial" })
+    },
+    async signIn({ user }) {
+      // Fires on every sign-in, new account or returning - claims any guest
+      // workshop registrations made under this email before an account existed.
+      if (!user.id || !user.email) return
+      try {
+        await linkGuestWorkshopRegistrations(user.id, user.email)
+      } catch (e) {
+        console.error("linkGuestWorkshopRegistrations failed:", e)
+      }
     },
   },
 })
