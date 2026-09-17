@@ -595,7 +595,7 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
                         </p>
                         {w.workshopDate && (
                           <p className="font-sans text-[13px] text-ink/50 mt-1">
-                            {new Date(`${w.workshopDate}T00:00:00+05:30`).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}
+                            {new Date(`${w.workshopDate}T00:00:00+05:30`).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric", timeZone: "Asia/Kolkata" })}
                             {" · "}{w.workshopStartTime && w.workshopEndTime ? formatWorkshopTimeRange(w.workshopStartTime, w.workshopEndTime) : ""} IST
                           </p>
                         )}

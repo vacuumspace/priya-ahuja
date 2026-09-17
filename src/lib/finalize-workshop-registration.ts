@@ -10,8 +10,11 @@ type Workshop = typeof workshops.$inferSelect
 type Registration = typeof workshopRegistrations.$inferSelect
 
 function formatDateLabel(date: string) {
+  // Without an explicit timeZone this renders in the server's local time
+  // (UTC on Vercel), which rolls a midnight-IST date back a day - this label
+  // goes straight into the confirmation email, so it must be right there too.
   return new Date(`${date}T00:00:00+05:30`).toLocaleDateString("en-IN", {
-    day: "numeric", month: "long", year: "numeric",
+    day: "numeric", month: "long", year: "numeric", timeZone: "Asia/Kolkata",
   })
 }
 

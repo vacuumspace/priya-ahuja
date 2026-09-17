@@ -10,8 +10,11 @@ import { formatWorkshopTimeRange, formatWorkshopPrice } from "@/lib/workshop-tim
 import { RegistrationProvider, RegisterTrigger, PlaybookDownloadTrigger } from "./RegisterCard"
 
 function formatDate(date: string) {
+  // See identical comment in school/workshops/page.tsx - without an explicit
+  // timeZone, this renders in the server's local time (UTC on Vercel), which
+  // rolls a midnight-IST date back to the previous day.
   return new Date(`${date}T00:00:00+05:30`).toLocaleDateString("en-IN", {
-    weekday: "long", day: "numeric", month: "long", year: "numeric",
+    weekday: "long", day: "numeric", month: "long", year: "numeric", timeZone: "Asia/Kolkata",
   })
 }
 

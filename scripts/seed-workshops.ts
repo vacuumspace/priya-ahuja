@@ -4,6 +4,8 @@ import { workshops } from "../src/lib/db/schema"
 import { eq } from "drizzle-orm"
 import * as dotenv from "dotenv"
 import { resolve } from "path"
+import { createCalendarEvent, updateCalendarEvent, WORKSHOP_REMINDERS } from "../src/lib/google-calendar"
+import { formatWorkshopCalendarDescription } from "../src/lib/workshop-time"
 
 dotenv.config({ path: resolve(process.cwd(), ".env.local") })
 
@@ -12,9 +14,6 @@ const db = drizzle(sql, { schema: { workshops } })
 
 const items = [
   {
-    // Renamed from "investable-pitch-deck" - matched by previousSlug below
-    // so the existing row gets its slug updated rather than a duplicate created.
-    previousSlug: "investable-pitch-deck",
     slug: "fundable-pitch-deck",
     title: "Fundable Pitch Deck Workshop",
     description: `I've evaluated 1000+ pitch decks across fundraising rounds, and the pattern is always the same: investors don't reject a deck because the design is weak. They reject it because the story doesn't add up.
@@ -29,25 +28,51 @@ Gifts for Founders
 1. Investable Pitch Deck Playbook ([Download](#playbook))
 2. Pitch Deck Analysis Tool powered by AI, onetime access ([Tool Link](/fundraise/tools/pitch-deck-analyser))`,
     thumbnailUrl: "/workshops/fundable-pitch-deck.svg",
-    date: "2026-09-25",
-    startTime: "15:00",
-    endTime: "16:00",
+    date: "2026-09-27",
+    startTime: "12:00",
+    endTime: "13:00",
     price: 99900, // ₹999 in paise
   },
 ]
 
+// The workshop row is the one source of truth for date/time/title/description;
+// this keeps the shared calendar event in lockstep with it every time the
+// seed runs, the same way the admin edit route does - so re-running this
+// script can never leave the calendar showing a stale date like the DB once did.
 async function seed() {
-  for (const { previousSlug, ...item } of items) {
-    const lookupSlug = previousSlug ?? item.slug
-    const [existing] = await db.select().from(workshops).where(eq(workshops.slug, lookupSlug)).limit(1)
+  for (const item of items) {
+    const [existing] = await db.select().from(workshops).where(eq(workshops.slug, item.slug)).limit(1)
 
     if (existing) {
+      if (existing.googleCalendarEventId) {
+        await updateCalendarEvent({
+          eventId: existing.googleCalendarEventId,
+          date: item.date,
+          startTime: item.startTime,
+          endTime: item.endTime,
+          summary: item.title,
+          description: formatWorkshopCalendarDescription(item.slug),
+        })
+      }
       await db.update(workshops).set({ ...item, isActive: true }).where(eq(workshops.id, existing.id))
-      console.log(`✓ updated ${lookupSlug}${previousSlug ? ` -> ${item.slug}` : ""}`)
+      console.log(`✓ updated ${item.slug}`)
       continue
     }
 
-    await db.insert(workshops).values({ ...item, isActive: true })
+    const cal = await createCalendarEvent({
+      summary: item.title,
+      description: formatWorkshopCalendarDescription(item.slug),
+      date: item.date,
+      startTime: item.startTime,
+      endTime: item.endTime,
+      reminders: WORKSHOP_REMINDERS,
+    })
+    await db.insert(workshops).values({
+      ...item,
+      isActive: true,
+      googleCalendarEventId: cal.eventId,
+      meetLink: cal.meetLink,
+    })
     console.log(`✓ created ${item.slug}`)
   }
 

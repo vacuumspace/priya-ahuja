@@ -13,8 +13,12 @@ export const metadata: Metadata = {
 }
 
 function formatDate(date: string) {
+  // toLocaleDateString picks the calendar day using the *runtime's* local
+  // timezone unless told otherwise - on Vercel that's UTC, which rolls a
+  // midnight-IST anchor back to the previous day. Explicit timeZone fixes it
+  // regardless of what timezone the server happens to run in.
   return new Date(`${date}T00:00:00+05:30`).toLocaleDateString("en-IN", {
-    weekday: "short", day: "numeric", month: "short", year: "numeric",
+    weekday: "short", day: "numeric", month: "short", year: "numeric", timeZone: "Asia/Kolkata",
   })
 }
 
