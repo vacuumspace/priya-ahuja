@@ -1,0 +1,144 @@
+import type { Metadata } from "next"
+import { notFound } from "next/navigation"
+import Link from "next/link"
+import { auth, isAdmin } from "@/lib/auth"
+import { db } from "@/lib/db"
+import { workshops, workshopRegistrations } from "@/lib/db/schema"
+import { eq, and, notInArray } from "drizzle-orm"
+import { CalendarDays, Clock, ChevronLeft, GraduationCap, IndianRupee } from "lucide-react"
+import { formatWorkshopTimeRange, formatWorkshopPrice } from "@/lib/workshop-time"
+import { RegistrationProvider, RegisterTrigger, PlaybookDownloadTrigger } from "./RegisterCard"
+
+function formatDate(date: string) {
+  return new Date(`${date}T00:00:00+05:30`).toLocaleDateString("en-IN", {
+    weekday: "long", day: "numeric", month: "long", year: "numeric",
+  })
+}
+
+// Supports simple `[label](url)` markdown links inside the otherwise plain
+// description text, so admin-entered copy can link to a tool/page. A `url`
+// of "#playbook" renders a placeholder download trigger instead of a link,
+// since there's no file to serve yet.
+function renderDescription(text: string) {
+  return text.split(/(\[[^\]]+\]\([^)]+\))/g).map((part, i) => {
+    const match = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/)
+    if (!match) return part
+    const [, label, href] = match
+    if (href === "#playbook") {
+      return <PlaybookDownloadTrigger key={i} label={label} />
+    }
+    return (
+      <Link key={i} href={href} className="text-peach-dark font-semibold hover:underline">
+        {label}
+      </Link>
+    )
+  })
+}
+
+type Params = Promise<{ slug: string }>
+
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+  const { slug } = await params
+  const [workshop] = await db.select().from(workshops).where(eq(workshops.slug, slug)).limit(1)
+  if (!workshop) return {}
+  return {
+    title: `${workshop.title} - Workshop by Priya Ahuja`,
+    description: workshop.description.slice(0, 160),
+    alternates: { canonical: `https://priyaahuja.in/school/workshops/${slug}` },
+  }
+}
+
+export default async function WorkshopDetailPage({ params }: { params: Params }) {
+  const { slug } = await params
+  const session = await auth()
+
+  const [workshop] = await db.select().from(workshops).where(eq(workshops.slug, slug)).limit(1)
+  if (!workshop || !workshop.isActive) notFound()
+
+  const isPast = new Date(`${workshop.date}T${workshop.endTime}:00+05:30`) < new Date()
+
+  let existingRegistration: { status: string } | null = null
+  if (session?.user?.id) {
+    const [reg] = await db
+      .select({ status: workshopRegistrations.status })
+      .from(workshopRegistrations)
+      .where(and(
+        eq(workshopRegistrations.workshopId, workshop.id),
+        eq(workshopRegistrations.userId, session.user.id),
+        notInArray(workshopRegistrations.status, ["cancelled"]),
+      ))
+      .limit(1)
+    existingRegistration = reg ?? null
+  }
+
+  return (
+    <div className="min-h-screen bg-cream">
+      <div className="flex justify-between items-center px-4 md:px-10 py-4 text-[13px] text-ink/50 font-sans border-b border-border">
+        <Link href="/school/workshops" className="flex items-center gap-1 hover:text-ink transition-colors">
+          <ChevronLeft size={14} /> all workshops
+        </Link>
+        <span className="flex items-center gap-1.5"><GraduationCap size={14} /> school</span>
+      </div>
+
+      <div className="px-4 md:px-10 pt-10 pb-16 max-w-3xl mx-auto">
+        <div className="aspect-video w-full rounded-2xl overflow-hidden bg-peach/30 mb-6">
+          {workshop.thumbnailUrl ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={workshop.thumbnailUrl} alt={workshop.title} className="w-full h-full object-cover" />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center">
+              <GraduationCap size={48} className="text-peach-dark/50" />
+            </div>
+          )}
+        </div>
+
+        <h1 className="font-heading text-2xl md:text-3xl font-800 text-ink mb-4 normal-case">
+          {workshop.title}
+        </h1>
+
+        <RegistrationProvider
+          workshopSlug={workshop.slug}
+          workshopTitle={workshop.title}
+          price={workshop.price}
+          isPast={isPast}
+          isSignedIn={!!session?.user}
+          isAdmin={isAdmin(session?.user?.email)}
+          userName={session?.user?.name ?? ""}
+          userEmail={session?.user?.email ?? ""}
+          existingStatus={existingRegistration?.status ?? null}
+          initialMeetLink={workshop.meetLink}
+        >
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+            <div className="flex flex-col gap-1.5">
+              <div className="flex items-center gap-1.5 text-sm font-sans text-ink/70">
+                <CalendarDays size={14} className="text-peach-dark" />
+                {formatDate(workshop.date)}
+              </div>
+              <div className="flex items-center gap-1.5 text-sm font-sans text-ink/70">
+                <Clock size={14} className="text-peach-dark" />
+                {formatWorkshopTimeRange(workshop.startTime, workshop.endTime)} IST
+              </div>
+              <div className="flex items-center gap-1.5 text-sm font-sans text-ink/70">
+                <IndianRupee size={14} className="text-peach-dark" />
+                {formatWorkshopPrice(workshop.price)}
+              </div>
+            </div>
+
+            <RegisterTrigger />
+          </div>
+
+          <div className="font-sans text-[15px] text-ink/70 leading-relaxed whitespace-pre-line">
+            {renderDescription(workshop.description)}
+          </div>
+
+          <div className="mt-10 pt-8 border-t border-border flex justify-center">
+            <RegisterTrigger
+              label="Create Fundable Pitch Deck"
+              className="bg-peach-dark text-ink hover:bg-peach-dark/80 font-sans font-semibold text-base px-10 py-3.5 rounded-xl"
+            />
+          </div>
+        </RegistrationProvider>
+      </div>
+    </div>
+  )
+}

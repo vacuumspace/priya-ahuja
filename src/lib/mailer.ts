@@ -9,6 +9,7 @@ import BookingCancellationEmail from "@/emails/BookingCancellationEmail"
 import DownloadLinkEmail from "@/emails/DownloadLinkEmail"
 import FeedbackRequestEmail from "@/emails/FeedbackRequestEmail"
 import PurchaseWelcomeEmail from "@/emails/PurchaseWelcomeEmail"
+import WorkshopRegistrationEmail from "@/emails/WorkshopRegistrationEmail"
 
 const FROM_EMAIL = process.env.EMAIL_USER!
 const FROM_NAME = process.env.MAIL_FROM_NAME ?? "Priya Ahuja"
@@ -370,6 +371,63 @@ export async function sendSessionNotes({
   await sendMail({
     to,
     subject: `session notes - ${serviceName} · ${new Date().toLocaleDateString("en-IN", { day: "numeric", month: "short" })}`,
+    html,
+  })
+}
+
+export async function sendWorkshopRegistrationConfirmation({
+  to,
+  name,
+  workshopTitle,
+  date,
+  time,
+}: {
+  to: string
+  name: string
+  workshopTitle: string
+  date: string
+  time: string
+}) {
+  const s = await getEmailSettings(["email_confirmation_footer"])
+
+  const html = await render(
+    WorkshopRegistrationEmail({ name, workshopTitle, date, time, footer: s.email_confirmation_footer })
+  )
+
+  await sendMail({
+    to,
+    subject: `you're in! ${workshopTitle} - ${date}`,
+    html,
+  })
+}
+
+export async function sendAdminWorkshopNotification({
+  workshopTitle,
+  userName,
+  userEmail,
+  date,
+  time,
+}: {
+  workshopTitle: string
+  userName: string
+  userEmail: string
+  date: string
+  time: string
+}) {
+  const adminEmails = (process.env.ADMIN_EMAILS ?? "").split(",").map((e) => e.trim())
+  const html = `
+    <div style="font-family:Inter,sans-serif;max-width:560px;margin:0 auto;padding:32px 24px;background:#fff;border:1px solid #e8e8e8;border-radius:12px">
+      <p style="font-size:16px;font-weight:700;color:#2D2D2D;margin:0 0 8px">New Workshop Registration</p>
+      <p style="font-size:13px;color:#777;margin:0 0 20px">${workshopTitle} · ${date}, ${time}</p>
+      <div style="background:#fafafa;border:1px solid #efefef;border-radius:8px;padding:16px 20px">
+        <p style="font-size:13px;color:#555;margin:0 0 4px"><strong>${userName}</strong></p>
+        <p style="font-size:13px;color:#555;margin:0">${userEmail}</p>
+      </div>
+    </div>
+  `
+  await sendMail({
+    to: adminEmails,
+    subject: `New Registration: ${workshopTitle} - ${userName}`,
     html,
   })
 }

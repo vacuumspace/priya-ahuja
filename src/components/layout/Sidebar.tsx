@@ -55,6 +55,13 @@ const topicGroups = [
       { label: "legal compliance", href: "/services/incorporation" },
     ],
   },
+  {
+    label: "school",
+    prefix: "/school",
+    children: [
+      { label: "workshops", href: "/school/workshops" },
+    ],
+  },
 ]
 
 const bottomItems: { label: string; href: string; badge: null }[] = []
@@ -72,6 +79,7 @@ export function Sidebar({ isAdmin = false, isSignedIn = false, userName, userEma
     if (pathname.startsWith("/startup")) return "startup"
     if (pathname.startsWith("/fundraise")) return "fundraise"
     if (pathname.startsWith("/services")) return "services"
+    if (pathname.startsWith("/school")) return "school"
     return null
   })
 

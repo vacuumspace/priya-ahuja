@@ -1,10 +1,11 @@
 import { NextRequest, NextResponse } from "next/server"
 import { db } from "@/lib/db"
-import { bookings, availability, purchases, pitchDeckUnlocks, toolUnlocks, priyaGptTimeUnlocks, services as servicesTable } from "@/lib/db/schema"
+import { bookings, availability, purchases, pitchDeckUnlocks, toolUnlocks, priyaGptTimeUnlocks, services as servicesTable, workshopRegistrations, workshops } from "@/lib/db/schema"
 import { eq, and, ne, isNull } from "drizzle-orm"
 import { verifyWebhookSignature } from "@/lib/razorpay"
 import { createCalendarEvent } from "@/lib/google-calendar"
 import { sendBookingConfirmation, sendAdminBookingNotification } from "@/lib/mailer"
+import { finalizeWorkshopRegistration } from "@/lib/finalize-workshop-registration"
 import crypto from "crypto"
 
 export async function POST(req: NextRequest) {
@@ -188,6 +189,35 @@ export async function POST(req: NextRequest) {
         ...(amountCaptured ? { amountPaise: amountCaptured } : {}),
       })
       .where(and(eq(priyaGptTimeUnlocks.razorpayOrderId, orderId), ne(priyaGptTimeUnlocks.status, "consumed")))
+
+    // Same server-side confirmation + safety-net pattern as bookings above,
+    // for workshop registrations whose browser never made it back after checkout.
+    const [registration] = await db
+      .select()
+      .from(workshopRegistrations)
+      .where(eq(workshopRegistrations.razorpayOrderId, orderId))
+      .limit(1)
+
+    if (registration && registration.status !== "confirmed") {
+      await db
+        .update(workshopRegistrations)
+        .set({
+          status: "confirmed",
+          razorpayPaymentId: paymentId ?? registration.razorpayPaymentId,
+          amountPaid: amountCaptured ?? registration.amountPaid,
+        })
+        .where(eq(workshopRegistrations.id, registration.id))
+    }
+
+    if (registration) {
+      const [workshop] = await db.select().from(workshops).where(eq(workshops.id, registration.workshopId)).limit(1)
+
+      if (workshop) {
+        finalizeWorkshopRegistration(registration, workshop).catch((e) =>
+          console.error("[webhook] finalizeWorkshopRegistration failed:", e)
+        )
+      }
+    }
   }
 
   if (event.event === "payment.failed") {
@@ -204,6 +234,11 @@ export async function POST(req: NextRequest) {
       }
       await db.update(bookings).set({ status: "cancelled" }).where(eq(bookings.id, booking.id))
     }
+
+    await db
+      .update(workshopRegistrations)
+      .set({ status: "cancelled" })
+      .where(and(eq(workshopRegistrations.razorpayOrderId, orderId), eq(workshopRegistrations.status, "pending")))
   }
 
   return NextResponse.json({ ok: true })

@@ -11,6 +11,20 @@ function getCalendarClient() {
   return google.calendar({ version: "v3", auth })
 }
 
+type ReminderOverride = { method: "email" | "popup"; minutes: number }
+
+const DEFAULT_REMINDERS: ReminderOverride[] = [
+  { method: "popup", minutes: 1440 }, // 24h
+  { method: "popup", minutes: 60 },   // 1h
+  { method: "popup", minutes: 10 },   // 10min
+]
+
+export const WORKSHOP_REMINDERS: ReminderOverride[] = [
+  { method: "popup", minutes: 1440 }, // 24h before
+  { method: "popup", minutes: 60 },   // 1h before
+  { method: "popup", minutes: 10 },   // 10min before
+]
+
 export async function createCalendarEvent({
   summary,
   description,
@@ -19,14 +33,19 @@ export async function createCalendarEvent({
   endTime,
   attendeeEmail,
   attendeeName,
+  reminders = DEFAULT_REMINDERS,
 }: {
   summary: string
   description?: string
   date: string        // YYYY-MM-DD
   startTime: string   // HH:MM
   endTime: string     // HH:MM
-  attendeeEmail: string
-  attendeeName: string
+  // Optional so a shared event (e.g. a workshop) can be created up front with
+  // no one on it yet, and attendees added one at a time later via
+  // addAttendeeToCalendarEvent as people register.
+  attendeeEmail?: string
+  attendeeName?: string
+  reminders?: ReminderOverride[]
 }): Promise<{ eventId: string; meetLink: string | null }> {
   const calendar = getCalendarClient()
   const calendarId = process.env.GOOGLE_CALENDAR_ID!
@@ -43,9 +62,10 @@ export async function createCalendarEvent({
       description,
       start: { dateTime: startISO, timeZone: "Asia/Kolkata" },
       end:   { dateTime: endISO,   timeZone: "Asia/Kolkata" },
-      attendees: [
-        { email: attendeeEmail, displayName: attendeeName },
-      ],
+      attendees: attendeeEmail ? [{ email: attendeeEmail, displayName: attendeeName }] : [],
+      // Attendees on a shared event (workshops) must not see who else is
+      // registered - irrelevant for a 1-attendee booking, harmless to set.
+      guestsCanSeeOtherGuests: false,
       conferenceData: {
         createRequest: {
           requestId: `booking-${Date.now()}`,
@@ -54,12 +74,7 @@ export async function createCalendarEvent({
       },
       reminders: {
         useDefault: false,
-        overrides: [
-          { method: "email", minutes: 1440 }, // 24h
-          { method: "email", minutes: 60 },   // 1h
-          { method: "email", minutes: 10 },   // 10min
-          { method: "popup", minutes: 10 },
-        ],
+        overrides: reminders,
       },
     },
   })
@@ -71,16 +86,62 @@ export async function createCalendarEvent({
   return { eventId: event.id!, meetLink }
 }
 
+// Adds one more attendee to an existing shared event (a workshop) without
+// disturbing anyone already on it. Idempotent - re-adding the same email is
+// a no-op. sendUpdates:"all" means every existing attendee gets a routine
+// "event updated" notification when someone new joins; there's no Calendar
+// API option to notify only the new attendee on an update.
+export async function addAttendeeToCalendarEvent({
+  eventId,
+  attendeeEmail,
+  attendeeName,
+}: {
+  eventId: string
+  attendeeEmail: string
+  attendeeName: string
+}): Promise<{ meetLink: string | null }> {
+  const calendar = getCalendarClient()
+  const calendarId = process.env.GOOGLE_CALENDAR_ID!
+
+  const existing = await calendar.events.get({ calendarId, eventId })
+  const attendees = existing.data.attendees ?? []
+
+  const meetLinkFromExisting =
+    existing.data.conferenceData?.entryPoints?.find((e) => e.entryPointType === "video")?.uri ?? null
+
+  if (attendees.some((a) => a.email?.toLowerCase() === attendeeEmail.toLowerCase())) {
+    return { meetLink: meetLinkFromExisting }
+  }
+
+  const res = await calendar.events.patch({
+    calendarId,
+    eventId,
+    sendUpdates: "all",
+    requestBody: {
+      attendees: [...attendees, { email: attendeeEmail, displayName: attendeeName }],
+    },
+  })
+
+  const meetLink =
+    res.data.conferenceData?.entryPoints?.find((e) => e.entryPointType === "video")?.uri ?? meetLinkFromExisting
+
+  return { meetLink }
+}
+
 export async function updateCalendarEvent({
   eventId,
   date,
   startTime,
   endTime,
+  summary,
+  description,
 }: {
   eventId: string
   date: string
   startTime: string
   endTime: string
+  summary?: string
+  description?: string
 }): Promise<{ meetLink: string | null }> {
   const calendar = getCalendarClient()
   const calendarId = process.env.GOOGLE_CALENDAR_ID!
@@ -96,6 +157,8 @@ export async function updateCalendarEvent({
     requestBody: {
       start: { dateTime: startISO, timeZone: "Asia/Kolkata" },
       end:   { dateTime: endISO,   timeZone: "Asia/Kolkata" },
+      ...(summary !== undefined ? { summary } : {}),
+      ...(description !== undefined ? { description } : {}),
     },
   })
 

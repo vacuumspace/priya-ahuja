@@ -1,4 +1,5 @@
-import { pgTable, text, integer, boolean, timestamp, uuid, varchar, jsonb } from "drizzle-orm/pg-core"
+import { pgTable, text, integer, boolean, timestamp, uuid, varchar, jsonb, uniqueIndex } from "drizzle-orm/pg-core"
+import { sql } from "drizzle-orm"
 
 export const services = pgTable("services", {
   id: uuid("id").primaryKey().defaultRandom(),
@@ -361,6 +362,56 @@ export const priyaGptMessages = pgTable("priya_gpt_messages", {
   content: text("content").notNull(),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 })
+
+// ── School / Workshops ─────────────────────────────────────────────
+// One shared Google Calendar event per workshop (created when the workshop
+// itself is created, not per registration) - every registrant is added as an
+// attendee to this same event/Meet link, with guestsCanSeeOtherGuests off so
+// attendees can't see each other. See workshopRegistrations.calendarInviteSent.
+export const workshops = pgTable("workshops", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  slug: varchar("slug", { length: 100 }).notNull().unique(),
+  title: text("title").notNull(),
+  description: text("description").notNull(),
+  thumbnailUrl: text("thumbnail_url"),
+  date: varchar("date", { length: 10 }).notNull(), // YYYY-MM-DD
+  startTime: varchar("start_time", { length: 5 }).notNull(), // HH:MM (IST)
+  endTime: varchar("end_time", { length: 5 }).notNull(),     // HH:MM (IST)
+  price: integer("price").notNull(), // in paise
+  isActive: boolean("is_active").notNull().default(true),
+  googleCalendarEventId: text("google_calendar_event_id"),
+  meetLink: text("meet_link"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+})
+
+// Same single-row payment lifecycle as bookings (pending -> confirmed ->
+// cancelled) rather than the separate-unlock pattern used by pitch_deck_unlocks/
+// tool_unlocks - registering is the delivered product itself (a calendar invite +
+// confirmation email), there's no async "generate a result" step in between.
+export const workshopRegistrations = pgTable("workshop_registrations", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  // No onDelete cascade here on purpose - a workshop with registrations
+  // (i.e. sales/attendance history) must not be deletable out from under
+  // them; the admin delete route surfaces the resulting FK error instead.
+  workshopId: uuid("workshop_id").notNull().references(() => workshops.id),
+  userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  userName: text("user_name").notNull(),
+  userEmail: text("user_email").notNull(),
+  razorpayOrderId: text("razorpay_order_id"),
+  razorpayPaymentId: text("razorpay_payment_id"),
+  amountPaid: integer("amount_paid"), // actual captured amount in paise
+  status: varchar("status", { length: 20 }).notNull().default("pending"), // pending | confirmed | cancelled
+  calendarInviteSent: boolean("calendar_invite_sent").notNull().default(false),
+  confirmationEmailSent: boolean("confirmation_email_sent").notNull().default(false),
+  adminSeen: boolean("admin_seen").notNull().default(false),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+}, (table) => [
+  // Guards against a double-submit race creating two live registrations for
+  // the same person - only one non-cancelled row per (workshop, user) at a time.
+  uniqueIndex("workshop_registrations_active_unique")
+    .on(table.workshopId, table.userId)
+    .where(sql`${table.status} <> 'cancelled'`),
+])
 
 export const serviceInquiries = pgTable("service_inquiries", {
   id: uuid("id").primaryKey().defaultRandom(),

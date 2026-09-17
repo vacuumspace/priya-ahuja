@@ -1,9 +1,10 @@
 ﻿import { auth } from "@/lib/auth"
 import { db } from "@/lib/db"
-import { bookings, purchases, services as servicesTable, digitalProducts, startupScores, startupIdeaScores, pitchDeckAnalyses, availability, priyaGptTimeTransactions } from "@/lib/db/schema"
+import { bookings, purchases, services as servicesTable, digitalProducts, startupScores, startupIdeaScores, pitchDeckAnalyses, availability, priyaGptTimeTransactions, workshopRegistrations, workshops } from "@/lib/db/schema"
 import { eq, and, desc, isNotNull } from "drizzle-orm"
 import Link from "next/link"
-import { CalendarDays, FileText, LogIn, Lightbulb, ExternalLink, Bot } from "lucide-react"
+import { CalendarDays, FileText, LogIn, Lightbulb, ExternalLink, Bot, GraduationCap } from "lucide-react"
+import { formatWorkshopTimeRange } from "@/lib/workshop-time"
 import ViewTemplateButton from "@/components/templates/ViewTemplateButton"
 import SignInOptions from "@/components/SignInOptions"
 import BookingCard from "./BookingCard"
@@ -39,6 +40,7 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
     params.tab === "products" ? "products" :
     params.tab === "tools" ? "tools" :
     params.tab === "priyagpt" ? "priyagpt" :
+    params.tab === "workshops" ? "workshops" :
     "sessions"
   const activeToolSub =
     params.sub === "idea" ? "idea" :
@@ -62,7 +64,7 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
 
   const email = session.user.email
 
-  const [userBookingsRaw, userPurchases, userScores, userIdeaScores, userPitchDecks, userPriyaGptTxns] = await Promise.all([
+  const [userBookingsRaw, userPurchases, userScores, userIdeaScores, userPitchDecks, userPriyaGptTxns, userWorkshopRegistrations] = await Promise.all([
     db
       .select({
         id: bookings.id,
@@ -143,6 +145,24 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
       .from(priyaGptTimeTransactions)
       .where(and(eq(priyaGptTimeTransactions.userId, session.user.id!), eq(priyaGptTimeTransactions.reason, "purchase")))
       .orderBy(desc(priyaGptTimeTransactions.createdAt)),
+
+    db
+      .select({
+        id: workshopRegistrations.id,
+        status: workshopRegistrations.status,
+        amountPaid: workshopRegistrations.amountPaid,
+        calendarInviteSent: workshopRegistrations.calendarInviteSent,
+        createdAt: workshopRegistrations.createdAt,
+        workshopTitle: workshops.title,
+        workshopDate: workshops.date,
+        workshopStartTime: workshops.startTime,
+        workshopEndTime: workshops.endTime,
+        workshopMeetLink: workshops.meetLink,
+      })
+      .from(workshopRegistrations)
+      .leftJoin(workshops, eq(workshopRegistrations.workshopId, workshops.id))
+      .where(and(eq(workshopRegistrations.userId, session.user.id!), eq(workshopRegistrations.status, "confirmed")))
+      .orderBy(desc(workshopRegistrations.createdAt)),
   ])
 
   // Sort bookings: upcoming (active + future slot) first ASC by slot, then past DESC by slot
@@ -166,7 +186,7 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
     <div className="min-h-screen bg-cream">
       <div className="flex justify-between items-center px-4 md:px-10 py-4 text-[13px] text-ink/50 font-sans border-b border-border">
         <span>my activity</span>
-        <span>{userBookings.length + userPurchases.length + userScores.length + userIdeaScores.length + userPitchDecks.length + userPriyaGptTxns.length} total</span>
+        <span>{userBookings.length + userPurchases.length + userScores.length + userIdeaScores.length + userPitchDecks.length + userPriyaGptTxns.length + userWorkshopRegistrations.length} total</span>
       </div>
 
       <div className="px-4 md:px-10 pt-10 pb-16 max-w-2xl">
@@ -221,6 +241,18 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
             <Bot size={12} />
             priyagpt
             <span className="text-[12px] font-mono ml-0.5 opacity-60">{userPriyaGptTxns.length}</span>
+          </Link>
+          <Link
+            href="/my-activity?tab=workshops"
+            className={`flex items-center gap-1.5 px-4 py-2.5 text-xs font-sans font-semibold border-b-2 transition-colors -mb-px ${
+              activeTab === "workshops"
+                ? "border-ink text-ink"
+                : "border-transparent text-ink/40 hover:text-ink/70"
+            }`}
+          >
+            <GraduationCap size={12} />
+            workshops
+            <span className="text-[12px] font-mono ml-0.5 opacity-60">{userWorkshopRegistrations.length}</span>
           </Link>
         </div>
 
@@ -526,6 +558,64 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
                       <div className="flex-shrink-0 text-right">
                         <span className="font-heading text-xl font-bold text-ink">
                           {t.amountPaise != null ? `₹${(t.amountPaise / 100).toLocaleString("en-IN")}` : " - "}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </section>
+        )}
+
+        {/* Workshops tab */}
+        {activeTab === "workshops" && (
+          <section>
+            {userWorkshopRegistrations.length === 0 ? (
+              <div className="border border-dashed border-border rounded-2xl p-8 text-center">
+                <p className="font-sans text-sm text-ink/50 mb-3">no workshop registrations yet</p>
+                <Link href="/school/workshops" className="text-xs font-sans font-semibold text-peach-dark hover:underline">
+                  browse workshops →
+                </Link>
+              </div>
+            ) : (
+              <div className="flex flex-col gap-3">
+                {userWorkshopRegistrations.map((w) => (
+                  <div key={w.id} className="bg-card border border-border rounded-2xl p-5">
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="text-[12px] font-sans font-semibold px-2 py-0.5 rounded-full bg-green-100 text-green-700">
+                            confirmed
+                          </span>
+                          <span className="text-[12px] font-sans text-ink/30">{formatDate(w.createdAt)}</span>
+                        </div>
+                        <p className="font-heading text-base font-700 text-ink normal-case">
+                          {w.workshopTitle ?? "Workshop"}
+                        </p>
+                        {w.workshopDate && (
+                          <p className="font-sans text-[13px] text-ink/50 mt-1">
+                            {new Date(`${w.workshopDate}T00:00:00+05:30`).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}
+                            {" · "}{w.workshopStartTime && w.workshopEndTime ? formatWorkshopTimeRange(w.workshopStartTime, w.workshopEndTime) : ""} IST
+                          </p>
+                        )}
+                        <p className="font-sans text-[12px] text-ink/40 mt-1">
+                          {w.calendarInviteSent ? "calendar invite sent to your email" : "calendar invite on its way"}
+                        </p>
+                        {w.calendarInviteSent && w.workshopMeetLink && (
+                          <a
+                            href={w.workshopMeetLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-[12px] font-sans font-semibold text-peach-dark hover:underline mt-1 inline-block"
+                          >
+                            join on google meet →
+                          </a>
+                        )}
+                      </div>
+                      <div className="flex-shrink-0 text-right">
+                        <span className="font-heading text-lg font-bold text-ink">
+                          {w.amountPaid != null ? `₹${(w.amountPaid / 100).toLocaleString("en-IN")}` : " - "}
                         </span>
                       </div>
                     </div>

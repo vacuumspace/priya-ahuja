@@ -1,13 +1,20 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { isInAppBrowser, isAndroid, getAndroidIntentUrl, getInAppSource } from '@/lib/inAppBrowser'
+import { isInAppBrowser, isAndroid, getAndroidIntentUrl, getInAppSource, type InAppSource } from '@/lib/inAppBrowser'
 
 const DISMISSED_KEY = 'open-in-browser-dismissed'
 
-const iosInstructions: Record<ReturnType<typeof getInAppSource>, string> = {
+const iosInstructions: Record<InAppSource, string> = {
   instagram: 'Tap ··· → Open in Safari',
   linkedin: 'Tap ··· → Open in external browser',
+  facebook: 'Tap ··· → Open in Safari',
+  tiktok: 'Tap ··· → Open in Safari',
+  twitter: 'Tap ⋯ → Open in Safari',
+  snapchat: 'Tap the icon in the top-right → Open in Safari',
+  pinterest: 'Tap ··· → Open in Safari',
+  wechat: 'Tap ··· → Open in Safari',
+  line: 'Tap ··· → Open in browser',
   other: 'Tap the menu → Open in Safari',
 }
 

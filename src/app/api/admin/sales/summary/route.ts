@@ -1,6 +1,6 @@
 import { auth, isAdmin } from "@/lib/auth"
 import { db } from "@/lib/db"
-import { bookings, purchases, startupScores, startupIdeaScores, pitchDeckAnalyses, pitchDeckUnlocks, toolUnlocks, digitalProducts, priyaGptTimeTransactions, priyaGptTimeUnlocks } from "@/lib/db/schema"
+import { bookings, purchases, startupScores, startupIdeaScores, pitchDeckAnalyses, pitchDeckUnlocks, toolUnlocks, digitalProducts, priyaGptTimeTransactions, priyaGptTimeUnlocks, workshopRegistrations } from "@/lib/db/schema"
 import { and, eq, inArray, isNotNull, like } from "drizzle-orm"
 
 export async function GET() {
@@ -9,7 +9,7 @@ export async function GET() {
     return new Response("Forbidden", { status: 403 })
   }
 
-  const [allBookings, allPurchases, allScores, allIdeaScores, allPitchDecks, unusedPitchDeckUnlocks, priyaGptPurchases, unusedToolUnlocks, unusedPriyaGptUnlocks] = await Promise.all([
+  const [allBookings, allPurchases, allScores, allIdeaScores, allPitchDecks, unusedPitchDeckUnlocks, priyaGptPurchases, unusedToolUnlocks, unusedPriyaGptUnlocks, allWorkshopRegistrations] = await Promise.all([
     db
       .select({ createdAt: bookings.createdAt, amount: bookings.amountPaid })
       .from(bookings)
@@ -63,6 +63,11 @@ export async function GET() {
       .select({ createdAt: priyaGptTimeUnlocks.createdAt, amountPaise: priyaGptTimeUnlocks.amountPaise })
       .from(priyaGptTimeUnlocks)
       .where(eq(priyaGptTimeUnlocks.status, "paid")),
+
+    db
+      .select({ createdAt: workshopRegistrations.createdAt, amount: workshopRegistrations.amountPaid })
+      .from(workshopRegistrations)
+      .where(eq(workshopRegistrations.status, "confirmed")),
   ])
 
   function monthKey(d: Date) {
@@ -84,7 +89,7 @@ export async function GET() {
   }
 
   type Seg = { revenue: number; count: number }
-  type MonthData = { revenue: number; count: number; sessions: Seg; templates: Seg; investorList: Seg; priyagpt: Seg; pitchDeck: Seg; score: Seg }
+  type MonthData = { revenue: number; count: number; sessions: Seg; templates: Seg; investorList: Seg; priyagpt: Seg; pitchDeck: Seg; score: Seg; workshops: Seg }
   const monthly: Record<string, MonthData> = {}
   for (const k of months) {
     monthly[k] = {
@@ -95,6 +100,7 @@ export async function GET() {
       priyagpt: { revenue: 0, count: 0 },
       pitchDeck: { revenue: 0, count: 0 },
       score: { revenue: 0, count: 0 },
+      workshops: { revenue: 0, count: 0 },
     }
   }
 
@@ -168,11 +174,22 @@ export async function GET() {
     }
   }
 
+  let workshopRevenue = 0, workshopCount = 0
+  for (const r of allWorkshopRegistrations) {
+    const amt = r.amount ?? 0
+    workshopRevenue += amt; workshopCount++
+    const k = monthKey(r.createdAt)
+    if (monthly[k]) {
+      monthly[k].revenue += amt; monthly[k].count++
+      monthly[k].workshops.revenue += amt; monthly[k].workshops.count++
+    }
+  }
+
   const monthlyChart = months.map(k => ({ key: k, label: monthLabel(k), ...monthly[k] }))
 
   return Response.json({
-    totalRevenue: sessionRevenue + templateRevenue + investorListRevenue + priyaGptRevenue + pitchDeckRevenue + scoreRevenue,
-    totalTransactions: sessionCount + templateCount + investorListCount + scoreCount + priyaGptCount + pitchDeckCount,
+    totalRevenue: sessionRevenue + templateRevenue + investorListRevenue + priyaGptRevenue + pitchDeckRevenue + scoreRevenue + workshopRevenue,
+    totalTransactions: sessionCount + templateCount + investorListCount + scoreCount + priyaGptCount + pitchDeckCount + workshopCount,
     byType: [
       { label: "Sessions",      revenue: sessionRevenue,     count: sessionCount },
       { label: "Templates",     revenue: templateRevenue,    count: templateCount },
@@ -180,6 +197,7 @@ export async function GET() {
       { label: "Startup Score", revenue: scoreRevenue,       count: scoreCount },
       { label: "Pitch Deck",    revenue: pitchDeckRevenue,   count: pitchDeckCount },
       { label: "PriyaGPT",      revenue: priyaGptRevenue,    count: priyaGptCount },
+      { label: "Workshops",     revenue: workshopRevenue,    count: workshopCount },
     ],
     monthly: monthlyChart,
   })

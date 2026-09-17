@@ -1,6 +1,6 @@
 import { auth, isAdmin } from "@/lib/auth"
 import { db } from "@/lib/db"
-import { bookings, purchases, startupScores, startupIdeaScores, pitchDeckAnalyses, pitchDeckUnlocks, toolUnlocks, services, digitalProducts, users, priyaGptTimeTransactions, priyaGptTimeUnlocks } from "@/lib/db/schema"
+import { bookings, purchases, startupScores, startupIdeaScores, pitchDeckAnalyses, pitchDeckUnlocks, toolUnlocks, services, digitalProducts, users, priyaGptTimeTransactions, priyaGptTimeUnlocks, workshopRegistrations, workshops } from "@/lib/db/schema"
 import { and, eq, inArray, isNotNull, like } from "drizzle-orm"
 
 const OPEN_UNLOCK_STATUSES = ["paid", "refunded"] as const
@@ -19,7 +19,7 @@ export async function GET(req: Request) {
   const typeFilter = searchParams.get("type")
 
   // Fetch all sources
-  const [allBookings, allPurchases, allScores, allIdeaScores, allPitchDecks, unusedPitchDeckUnlocks, allPriyaGpt, unusedToolUnlocks, unusedPriyaGptUnlocks] = await Promise.all([
+  const [allBookings, allPurchases, allScores, allIdeaScores, allPitchDecks, unusedPitchDeckUnlocks, allPriyaGpt, unusedToolUnlocks, unusedPriyaGptUnlocks, allWorkshopRegistrations] = await Promise.all([
     db
       .select({
         id: bookings.id,
@@ -156,6 +156,20 @@ export async function GET(req: Request) {
       .from(priyaGptTimeUnlocks)
       .leftJoin(users, eq(priyaGptTimeUnlocks.userId, users.id))
       .where(inArray(priyaGptTimeUnlocks.status, OPEN_UNLOCK_STATUSES)),
+
+    db
+      .select({
+        id: workshopRegistrations.id,
+        userName: workshopRegistrations.userName,
+        userEmail: workshopRegistrations.userEmail,
+        razorpayPaymentId: workshopRegistrations.razorpayPaymentId,
+        createdAt: workshopRegistrations.createdAt,
+        itemName: workshops.title,
+        amount: workshopRegistrations.amountPaid,
+      })
+      .from(workshopRegistrations)
+      .leftJoin(workshops, eq(workshopRegistrations.workshopId, workshops.id))
+      .where(eq(workshopRegistrations.status, "confirmed")),
   ])
 
   type TxRow = {
@@ -268,6 +282,17 @@ export async function GET(req: Request) {
       amount: r.amountPaise,
       razorpayPaymentId: r.razorpayPaymentId,
       status: r.unlockStatus,
+      createdAt: r.createdAt,
+    })),
+    ...allWorkshopRegistrations.map((r) => ({
+      id: r.id,
+      type: "workshop",
+      userName: r.userName,
+      userEmail: r.userEmail ?? "",
+      itemName: r.itemName ?? "Workshop",
+      amount: r.amount ?? null,
+      razorpayPaymentId: r.razorpayPaymentId,
+      status: "paid",
       createdAt: r.createdAt,
     })),
   ]

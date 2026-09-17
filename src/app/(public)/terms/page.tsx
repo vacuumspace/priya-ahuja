@@ -11,12 +11,12 @@ export default function TermsPage() {
 
         <section>
           <h2 className="font-semibold text-ink mb-2">Services</h2>
-          <p>Priya Ahuja offers paid connect session sessions and digital products. All bookings are subject to availability and confirmed via email.</p>
+          <p>Priya Ahuja offers paid connect sessions, live workshops, and digital products. All bookings and workshop registrations are subject to availability and confirmed via email.</p>
         </section>
 
         <section>
           <h2 className="font-semibold text-ink mb-2">Payments & Refunds</h2>
-          <p>All payments are processed via Razorpay in INR. Consultation bookings are non-refundable once confirmed. Digital products are non-refundable after purchase.</p>
+          <p>All payments are processed via Razorpay in INR. All purchases - including consultation bookings, workshop registrations, and digital products - are final once payment is confirmed. There is no option to cancel a purchase, and no refunds are issued under any circumstances.</p>
         </section>
 
         <section>
