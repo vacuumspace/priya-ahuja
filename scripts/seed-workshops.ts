@@ -22,7 +22,7 @@ This workshop is a slide-by-slide breakdown of what makes a deck investable: how
 
 We'll cover every slide that belongs in an investable deck: problem, solution, market sizing, business model, traction, team, and the ask, plus the mistakes that lose investor interest in the first two minutes.
 
-It's hands-on, not a lecture. We'll work through real examples live, and you're welcome to bring questions from your own deck.
+This workshop is interactive, not a lecture. You can ask anything related to your own pitch deck, and we'll work through it together, live.
 
 Gifts for Founders
 1. Investable Pitch Deck Playbook ([Download](#playbook))
