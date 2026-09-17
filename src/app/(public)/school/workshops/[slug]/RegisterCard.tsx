@@ -246,20 +246,24 @@ export function RegisterTrigger({ label = "register", className }: { label?: str
   // workshop ends, not the generic "ended" message for people who never signed up.
   if (success) {
     return (
-      <div className="flex flex-wrap items-center gap-2">
-        <Link
-          href="/my-activity?tab=workshops"
-          className="inline-flex items-center gap-1.5 text-sm font-sans font-semibold text-green-700 bg-green-100 px-4 py-2.5 rounded-xl hover:bg-green-200/70 transition-colors"
-        >
-          <CheckCircle size={15} /> registered <ArrowRight size={13} />
-        </Link>
-        {meetLink && !isPast && (
+      <div className="flex flex-wrap items-center gap-3">
+        <span className="inline-flex items-center gap-1 text-xs font-sans font-semibold text-green-700 bg-green-100 px-2.5 py-1 rounded-full">
+          <CheckCircle size={12} /> registered
+        </span>
+        {meetLink && !isPast ? (
           <Link
             href={meetLink}
             target="_blank"
-            className="inline-flex items-center gap-1.5 text-sm font-sans font-semibold text-peach-dark hover:underline"
+            className="inline-flex items-center gap-1.5 text-sm font-sans font-semibold text-cream bg-peach-dark px-4 py-2.5 rounded-xl hover:bg-peach-dark/80 transition-colors"
           >
             <Video size={14} /> join on google meet
+          </Link>
+        ) : (
+          <Link
+            href="/my-activity?tab=workshops"
+            className="inline-flex items-center gap-1.5 text-sm font-sans font-semibold text-ink/50 hover:text-ink transition-colors"
+          >
+            view in my activity <ArrowRight size={13} />
           </Link>
         )}
       </div>
