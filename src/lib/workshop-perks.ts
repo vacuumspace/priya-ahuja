@@ -1,11 +1,14 @@
 import { db } from "@/lib/db"
-import { pitchDeckUnlocks, workshopRegistrations, workshops } from "@/lib/db/schema"
+import { pitchDeckUnlocks, toolUnlocks, workshopRegistrations, workshops } from "@/lib/db/schema"
 import { eq, and, like, isNull } from "drizzle-orm"
 
 // Workshops whose registrants get a free, one-time (no expiry) unlock of the
 // pitch deck analyser - matches the "Free" perks listed in the workshop's
 // own description, so keep both in sync if this list changes.
 const WORKSHOPS_GRANTING_PITCH_DECK_UNLOCK = ["fundable-pitch-deck"]
+
+// Same idea, for the startup idea score tool.
+const WORKSHOPS_GRANTING_IDEA_SCORE_UNLOCK = ["hunting-startup-idea-worth-building"]
 
 const WORKSHOP_FREE_ORDER_PREFIX = "workshop_free_"
 
@@ -29,6 +32,32 @@ export async function grantWorkshopPitchDeckUnlock(workshopSlug: string, userId:
   if (existing) return
 
   await db.insert(pitchDeckUnlocks).values({
+    userId,
+    razorpayOrderId: `${WORKSHOP_FREE_ORDER_PREFIX}${registrationId}`,
+    amountPaise: 0,
+    status: "paid",
+  })
+}
+
+// Same pattern as grantWorkshopPitchDeckUnlock, but for the startup idea
+// score tool (toolUnlocks, not pitchDeckUnlocks) - the route/page that
+// consumes it already knows how to find an unused paid `toolUnlocks` row.
+export async function grantWorkshopIdeaScoreUnlock(workshopSlug: string, userId: string, registrationId: string) {
+  if (!WORKSHOPS_GRANTING_IDEA_SCORE_UNLOCK.includes(workshopSlug)) return
+
+  const [existing] = await db
+    .select({ id: toolUnlocks.id })
+    .from(toolUnlocks)
+    .where(and(
+      eq(toolUnlocks.userId, userId),
+      eq(toolUnlocks.tool, "startup-idea-score"),
+      like(toolUnlocks.razorpayOrderId, `${WORKSHOP_FREE_ORDER_PREFIX}%`),
+    ))
+    .limit(1)
+  if (existing) return
+
+  await db.insert(toolUnlocks).values({
+    tool: "startup-idea-score",
     userId,
     razorpayOrderId: `${WORKSHOP_FREE_ORDER_PREFIX}${registrationId}`,
     amountPaise: 0,
@@ -61,6 +90,11 @@ export async function linkGuestWorkshopRegistrations(userId: string, email: stri
         await grantWorkshopPitchDeckUnlock(workshop.slug, userId, reg.id)
       } catch (e) {
         console.error("grantWorkshopPitchDeckUnlock (post-link) failed:", e)
+      }
+      try {
+        await grantWorkshopIdeaScoreUnlock(workshop.slug, userId, reg.id)
+      } catch (e) {
+        console.error("grantWorkshopIdeaScoreUnlock (post-link) failed:", e)
       }
     }
   }

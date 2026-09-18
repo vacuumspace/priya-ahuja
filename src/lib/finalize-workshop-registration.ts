@@ -4,7 +4,7 @@ import { eq, and, isNull } from "drizzle-orm"
 import { createCalendarEvent, addAttendeeToCalendarEvent, WORKSHOP_REMINDERS } from "@/lib/google-calendar"
 import { sendWorkshopRegistrationConfirmation, sendAdminWorkshopNotification } from "@/lib/mailer"
 import { formatWorkshopTimeRange, formatWorkshopCalendarDescription } from "@/lib/workshop-time"
-import { grantWorkshopPitchDeckUnlock } from "@/lib/workshop-perks"
+import { grantWorkshopPitchDeckUnlock, grantWorkshopIdeaScoreUnlock } from "@/lib/workshop-perks"
 
 type Workshop = typeof workshops.$inferSelect
 type Registration = typeof workshopRegistrations.$inferSelect
@@ -37,6 +37,11 @@ export async function finalizeWorkshopRegistration(
       await grantWorkshopPitchDeckUnlock(workshop.slug, registration.userId, registration.id)
     } catch (e) {
       console.error("grantWorkshopPitchDeckUnlock failed:", e)
+    }
+    try {
+      await grantWorkshopIdeaScoreUnlock(workshop.slug, registration.userId, registration.id)
+    } catch (e) {
+      console.error("grantWorkshopIdeaScoreUnlock failed:", e)
     }
   }
 

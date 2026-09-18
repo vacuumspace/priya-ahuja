@@ -18,6 +18,15 @@ function formatDate(date: string) {
   })
 }
 
+// Outcome-driven bottom CTA copy, by workshop slug - falls back to a generic
+// label for any workshop not listed here.
+const BOTTOM_CTA_LABELS: Record<string, string> = {
+  "fundable-pitch-deck": "Create Fundable Pitch Deck",
+  "fundable-pitch-deck-aug-2026": "Create Fundable Pitch Deck",
+  "fundable-pitch-deck-sep-2026": "Create Fundable Pitch Deck",
+  "hunting-startup-idea-worth-building": "Find Your Startup Idea",
+}
+
 // Supports simple `[label](url)` markdown links inside the otherwise plain
 // description text, so admin-entered copy can link to a tool/page. A `url`
 // of "#playbook" renders a placeholder download trigger instead of a link,
@@ -156,7 +165,7 @@ export default async function WorkshopDetailPage({ params }: { params: Params })
 
           <div className="mt-10 pt-8 border-t border-border flex justify-center">
             <RegisterTrigger
-              label="Create Fundable Pitch Deck"
+              label={BOTTOM_CTA_LABELS[workshop.slug] ?? "Register Now"}
               className="h-auto bg-peach-dark text-ink hover:bg-peach-dark/80 font-sans font-semibold text-sm px-10 py-3.5 rounded-xl"
             />
           </div>

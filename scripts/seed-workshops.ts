@@ -37,6 +37,28 @@ Gifts for Founders
     endTime: "13:00",
     price: 99900, // ₹999 in paise
   },
+  {
+    slug: "hunting-startup-idea-worth-building",
+    title: "How to find your Startup Idea & Validate it?",
+    description: `You know you want to start up. You just don't have the idea yet - and everyone around you seems to have one already.
+
+That gap is normal, and it's fixable. Good ideas aren't found by waiting for inspiration to strike; they're found by running a repeatable process - one that surfaces the problems worth solving instead of chasing whatever's trending that week.
+
+This workshop walks through that process end to end: where to actually go looking (your own frustrations, your workplace, your industry, adjacent markets), how to spot a real problem versus a fake one, how to size it up before you fall in love with it, and how to stress-test an idea against people who'd actually pay for it - so you can tell "worth building" apart from "sounds nice in a pitch."
+
+Built for anyone who wants to start something but is stuck at square one: students exploring their first venture, working professionals sitting on savings and a nagging itch to build, or anyone who's tried the "wait for the lightbulb moment" approach and found it doesn't work.
+
+This workshop is interactive. Bring your half-formed ideas, your frustrations, your "what if" - we'll pressure-test them live, together.
+
+Gifts for Founders
+1. Startup Idea Score Tool powered by AI, onetime free access ([Tool Link](/startup/tools/idea-score))
+2. Startup Idea Playbook ([Download](#playbook))`,
+    thumbnailUrl: "/workshops/startup-idea-workshop.svg",
+    date: "2026-10-04",
+    startTime: "12:00",
+    endTime: "13:00",
+    price: 99900, // ₹999 in paise
+  },
 ]
 
 // Historical record only - these two sessions were actually run live, just
