@@ -163,11 +163,12 @@ export default async function WorkshopDetailPage({ params }: { params: Params })
             </div>
           )}
 
-          <div className="mt-10 pt-8 border-t border-border flex justify-center">
+          <div className="mt-10 flex flex-col items-center">
             <RegisterTrigger
               label={BOTTOM_CTA_LABELS[workshop.slug] ?? "Register Now"}
               className="h-auto bg-peach-dark text-ink hover:bg-peach-dark/80 font-sans font-semibold text-sm px-10 py-3.5 rounded-xl"
             />
+            <div className="mt-8 pt-8 border-t border-border w-full" />
           </div>
         </RegistrationProvider>
       </div>
