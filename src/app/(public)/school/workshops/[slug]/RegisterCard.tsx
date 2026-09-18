@@ -10,7 +10,7 @@ import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { formatWorkshopPrice } from "@/lib/workshop-time"
-import { WORKSHOP_STAGES, WORKSHOP_SECTORS, type WorkshopStage, type WorkshopSector } from "@/lib/workshop-form-options"
+import { WORKSHOP_SECTORS, type WorkshopSector } from "@/lib/workshop-form-options"
 
 declare global {
   interface Window {
@@ -83,7 +83,6 @@ export function RegistrationProvider({
   const [name, setName] = useState(initialName)
   const [email, setEmail] = useState(userEmail)
   const [emailTouched, setEmailTouched] = useState(false)
-  const [stage, setStage] = useState<WorkshopStage | "">("")
   const [sector, setSector] = useState<WorkshopSector | "">("")
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
@@ -126,7 +125,7 @@ export function RegistrationProvider({
       const orderRes = await fetch("/api/workshops/create-order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ workshopSlug, name, email, stage, sector }),
+        body: JSON.stringify({ workshopSlug, name, email, sector }),
       })
       const orderData = await orderRes.json()
       if (!orderRes.ok) throw new Error(orderData.error || "Failed to create order")
@@ -238,37 +237,20 @@ export function RegistrationProvider({
             )}
           </div>
 
-          <div className="mb-4 grid grid-cols-2 gap-3">
-            <div>
-              <Label htmlFor="stage" className="text-xs font-sans text-ink/60 mb-1 block">
-                stage <span className="text-red-400">*</span>
-              </Label>
-              <Select value={stage} onValueChange={(v) => setStage(v as WorkshopStage)}>
-                <SelectTrigger id="stage" className="bg-cream border-border text-sm w-full">
-                  <SelectValue placeholder="select stage" />
-                </SelectTrigger>
-                <SelectContent>
-                  {WORKSHOP_STAGES.map((s) => (
-                    <SelectItem key={s.value} value={s.value}>{s.label}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-            <div>
-              <Label htmlFor="sector" className="text-xs font-sans text-ink/60 mb-1 block">
-                sector <span className="text-red-400">*</span>
-              </Label>
-              <Select value={sector} onValueChange={(v) => setSector(v as WorkshopSector)}>
-                <SelectTrigger id="sector" className="bg-cream border-border text-sm w-full">
-                  <SelectValue placeholder="select sector" />
-                </SelectTrigger>
-                <SelectContent>
-                  {WORKSHOP_SECTORS.map((s) => (
-                    <SelectItem key={s.value} value={s.value}>{s.label}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
+          <div className="mb-4">
+            <Label htmlFor="sector" className="text-xs font-sans text-ink/60 mb-1 block">
+              interested sector <span className="text-red-400">*</span>
+            </Label>
+            <Select value={sector} onValueChange={(v) => setSector(v as WorkshopSector)}>
+              <SelectTrigger id="sector" className="bg-cream border-border text-sm w-full">
+                <SelectValue placeholder="select sector" />
+              </SelectTrigger>
+              <SelectContent>
+                {WORKSHOP_SECTORS.map((s) => (
+                  <SelectItem key={s.value} value={s.value}>{s.label}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
 
           {isAdmin && (
@@ -281,7 +263,7 @@ export function RegistrationProvider({
 
           <Button
             onClick={handleRegister}
-            disabled={loading || !name.trim() || !email.trim() || !stage || !sector}
+            disabled={loading || !name.trim() || !email.trim() || !sector}
             className="h-auto w-full bg-ink text-cream hover:bg-ink/80 font-sans font-semibold text-sm py-3 rounded-xl disabled:opacity-40"
           >
             {loading ? (
