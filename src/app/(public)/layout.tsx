@@ -1,4 +1,5 @@
 import { SidebarWithAuth } from "@/components/layout/SidebarWithAuth"
+import { Footer } from "@/components/layout/Footer"
 import { AnalyticsTracker } from "@/components/AnalyticsTracker"
 
 export default function PublicLayout({ children }: { children: React.ReactNode }) {
@@ -9,8 +10,11 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
       <div className="print:hidden">
         <SidebarWithAuth />
       </div>
-      <main className="flex-1 min-w-0 md:ml-[240px] min-h-screen pt-[52px] md:pt-0 overflow-x-hidden print:ml-0! print:pt-0!">
-        {children}
+      <main className="flex-1 min-w-0 md:ml-[240px] min-h-screen pt-[52px] md:pt-0 overflow-x-hidden print:ml-0! print:pt-0! flex flex-col">
+        <div className="flex-1">{children}</div>
+        <div className="print:hidden">
+          <Footer />
+        </div>
       </main>
     </div>
   )

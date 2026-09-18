@@ -1,5 +1,6 @@
 ﻿import { Metadata } from "next"
 import { SidebarWithAuth } from "@/components/layout/SidebarWithAuth"
+import { Footer } from "@/components/layout/Footer"
 import HomePage from "@/components/HomePage"
 import { db } from "@/lib/db"
 import { workshops } from "@/lib/db/schema"
@@ -48,8 +49,11 @@ export default async function RootPage() {
   return (
     <div className="flex min-h-screen bg-cream">
       <SidebarWithAuth />
-      <main className="flex-1 md:ml-[240px] min-h-screen pt-[52px] md:pt-0 overflow-x-hidden">
-        <HomePage promoWorkshop={promoWorkshop} />
+      <main className="flex-1 md:ml-[240px] min-h-screen pt-[52px] md:pt-0 overflow-x-hidden flex flex-col">
+        <div className="flex-1">
+          <HomePage promoWorkshop={promoWorkshop} />
+        </div>
+        <Footer />
       </main>
     </div>
   )
