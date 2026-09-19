@@ -66,7 +66,7 @@ export async function GET(req: Request, { params }: { params: Promise<{ token: s
         </div>
 
         {/* middle: the buyer's one line, or the default */}
-        <div style={{ display: "flex", justifyContent: "center", textAlign: "center", fontSize: messageFontSize(message), lineHeight: 1.4, color: PEACH, maxWidth: 880, alignSelf: "center" }}>
+        <div style={{ display: "flex", justifyContent: "center", textAlign: "center", fontSize: messageFontSize(message), lineHeight: 1.4, color: PEACH, maxWidth: 880, alignSelf: "center", whiteSpace: "pre-line", wordBreak: "break-word" }}>
           {message}
         </div>
 

@@ -3,17 +3,31 @@
 
 export const CARD_NAME_MAX = 40
 export const CARD_MESSAGE_MAX = 160
+export const CARD_MESSAGE_MAX_LINES = 3
 
 // The card image can only draw English letters, so names and the message are
 // limited to them (plus everyday punctuation) instead of showing empty boxes.
 const NAME_RE = /^[A-Za-z][A-Za-z .'-]*$/
-const MESSAGE_RE = /^[A-Za-z0-9 .,!?'"’“”:;()&@#%+\-/]*$/
+const MESSAGE_RE = /^[A-Za-z0-9 .,!?'"’“”:;()&@#%+\-/\n]*$/
 
 export const CARD_ENGLISH_HINT = "English letters only, so the card shows correctly"
+export const CARD_MESSAGE_HINT = `${CARD_ENGLISH_HINT}. Press enter for a new line (up to ${CARD_MESSAGE_MAX_LINES}).`
 
 // Trim and collapse runs of spaces/newlines into single spaces.
 export function tidy(value: unknown): string {
   return typeof value === "string" ? value.replace(/\s+/g, " ").trim() : ""
+}
+
+// Like tidy, but keeps line breaks: each line is trimmed and squashed, and empty
+// lines are dropped. Enter in the message box becomes a new line on the card.
+export function tidyMessage(value: unknown): string {
+  if (typeof value !== "string") return ""
+  return value
+    .replace(/\r\n?/g, "\n")
+    .split("\n")
+    .map((line) => line.replace(/\s+/g, " ").trim())
+    .filter(Boolean)
+    .join("\n")
 }
 
 export function validateCardName(value: string, label: string): string | null {
@@ -26,6 +40,7 @@ export function validateCardName(value: string, label: string): string | null {
 export function validateCardMessage(value: string): string | null {
   if (!value) return null
   if (value.length > CARD_MESSAGE_MAX) return `The message can be up to ${CARD_MESSAGE_MAX} characters`
+  if (value.split("\n").length > CARD_MESSAGE_MAX_LINES) return `The message can be up to ${CARD_MESSAGE_MAX_LINES} lines`
   if (!MESSAGE_RE.test(value)) return `The message: ${CARD_ENGLISH_HINT}`
   return null
 }
@@ -58,7 +73,9 @@ export function nameFontSize(name: string): number {
 }
 
 export function messageFontSize(message: string): number {
-  if (message.length > 120) return 26
-  if (message.length > 70) return 30
+  const lines = message.split("\n")
+  const longest = Math.max(...lines.map((l) => l.length))
+  if (lines.length >= 3 || longest > 110) return 26
+  if (lines.length === 2 || longest > 70) return 30
   return 34
 }

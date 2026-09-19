@@ -1,7 +1,7 @@
 import { auth, isAdmin } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { bookings, purchases, startupScores, startupIdeaScores, pitchDeckAnalyses, pitchDeckUnlocks, toolUnlocks, digitalProducts, priyaGptTimeTransactions, priyaGptTimeUnlocks, workshopRegistrations, courseEnrollments, courseGifts } from "@/lib/db/schema"
-import { and, eq, inArray, isNotNull, like } from "drizzle-orm"
+import { and, eq, gt, inArray, isNotNull, isNull, like, or } from "drizzle-orm"
 
 export async function GET() {
   const session = await auth()
@@ -13,7 +13,9 @@ export async function GET() {
     db
       .select({ createdAt: bookings.createdAt, amount: bookings.amountPaid })
       .from(bookings)
-      .where(inArray(bookings.status, ["confirmed", "completed", "paid"])),
+      // A 100%-covered booking (course gift, referral) is not a sale - skip explicit
+      // zeros, but keep rows with no amount recorded at all.
+      .where(and(inArray(bookings.status, ["confirmed", "completed", "paid"]), or(isNull(bookings.amountPaid), gt(bookings.amountPaid, 0)))),
 
     db
       .select({
@@ -45,7 +47,7 @@ export async function GET() {
     db
       .select({ createdAt: pitchDeckUnlocks.createdAt, amountPaise: pitchDeckUnlocks.amountPaise })
       .from(pitchDeckUnlocks)
-      .where(eq(pitchDeckUnlocks.status, "paid")),
+      .where(and(eq(pitchDeckUnlocks.status, "paid"), gt(pitchDeckUnlocks.amountPaise, 0))),
 
     db
       .select({ createdAt: priyaGptTimeTransactions.createdAt, amountPaise: priyaGptTimeTransactions.amountPaise })
@@ -56,13 +58,13 @@ export async function GET() {
     db
       .select({ createdAt: toolUnlocks.createdAt, amountPaise: toolUnlocks.amountPaise })
       .from(toolUnlocks)
-      .where(eq(toolUnlocks.status, "paid")),
+      .where(and(eq(toolUnlocks.status, "paid"), gt(toolUnlocks.amountPaise, 0))),
 
     // Captured PriyaGPT time payments not yet applied to a balance
     db
       .select({ createdAt: priyaGptTimeUnlocks.createdAt, amountPaise: priyaGptTimeUnlocks.amountPaise })
       .from(priyaGptTimeUnlocks)
-      .where(eq(priyaGptTimeUnlocks.status, "paid")),
+      .where(and(eq(priyaGptTimeUnlocks.status, "paid"), gt(priyaGptTimeUnlocks.amountPaise, 0))),
 
     db
       .select({ createdAt: workshopRegistrations.createdAt, amount: workshopRegistrations.amountPaid })

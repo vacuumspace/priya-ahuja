@@ -3,7 +3,7 @@ import { auth } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { courseGifts } from "@/lib/db/schema"
 import { and, eq } from "drizzle-orm"
-import { cardVersion, tidy, validateCardMessage, validateCardName } from "@/lib/gift-card"
+import { cardVersion, tidy, tidyMessage, validateCardMessage, validateCardName } from "@/lib/gift-card"
 import { giftCardUrl } from "@/lib/course-gift"
 
 // Edits what is printed on the gift card - allowed by the buyer until the
@@ -30,7 +30,7 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
     const { fromName, recipientName, message } = await req.json()
     const from = tidy(fromName)
     const recipient = tidy(recipientName)
-    const note = tidy(message)
+    const note = tidyMessage(message)
     const problem =
       validateCardName(from, "your name") ?? validateCardName(recipient, "the name of the person you're gifting") ?? validateCardMessage(note)
     if (problem) return NextResponse.json({ error: problem }, { status: 400 })

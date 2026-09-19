@@ -37,8 +37,13 @@ export default function CoursesPage() {
               href={`/school/courses/${c.slug}`}
               className="group bg-card border border-border rounded-2xl overflow-hidden hover:border-peach-dark/50 transition-colors"
             >
-              <div className="relative aspect-video w-full overflow-hidden bg-peach/30 flex items-center justify-center">
-                <GraduationCap size={40} className="text-peach-dark/50" />
+              <div className="relative aspect-video w-full overflow-hidden bg-peach/30">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={c.thumbnailUrl}
+                  alt={c.title}
+                  className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-300"
+                />
                 <span className="absolute top-3 right-3 text-[11px] font-sans font-semibold px-2 py-0.5 rounded-full shadow-sm bg-green-100 text-green-700">
                   {courseLaunched(c) ? "open for enrolment" : courseOfferOpen(c) ? "founding offer open" : "launching soon"}
                 </span>

@@ -11,11 +11,12 @@ import { loadRazorpay } from "@/lib/load-razorpay"
 import { GiftLinkActions } from "@/components/GiftLinkActions"
 import { GiftCardPreview } from "@/components/GiftCardPreview"
 import {
-  CARD_ENGLISH_HINT,
+  CARD_MESSAGE_HINT,
   CARD_MESSAGE_MAX,
   DEFAULT_CARD_LINE,
   CARD_NAME_MAX,
   tidy,
+  tidyMessage,
   validateCardMessage,
   validateCardName,
 } from "@/lib/gift-card"
@@ -93,7 +94,7 @@ export function GiftProvider({
   }, [])
 
   const recipientClean = tidy(recipientName)
-  const messageClean = tidy(message)
+  const messageClean = tidyMessage(message)
   const fromClean = tidy(fromName)
   const recipientProblem = validateCardName(recipientClean, "the name of the person you're gifting")
   const fromProblem = validateCardName(fromClean, "your name")
@@ -308,7 +309,7 @@ export function GiftProvider({
                       className="bg-cream border-border text-sm resize-none"
                     />
                     <div className="flex justify-between mt-1">
-                      <p className="text-[12px] font-sans text-ink/40">{CARD_ENGLISH_HINT}</p>
+                      <p className="text-[12px] font-sans text-ink/40">{CARD_MESSAGE_HINT}</p>
                       <p className="text-[12px] font-sans text-ink/30">{messageClean.length}/{CARD_MESSAGE_MAX}</p>
                     </div>
                     {touched && messageProblem && <p className="text-[12px] font-sans text-red-500 mt-1">{messageProblem}</p>}
@@ -416,7 +417,7 @@ export function GiftTrigger({ variant = "link", className }: { variant?: "hero" 
 // The quiet section at the end of the page.
 export function GiftSection() {
   return (
-    <section className="mt-24 pt-10 border-t border-border text-center" aria-label="Gift this course">
+    <section className="mt-24 pb-10 border-b border-border text-center" aria-label="Gift this course">
       <p className="font-sans text-sm text-ink/60">Know someone who&apos;s dreaming of starting up?</p>
       <GiftTrigger variant="link" />
     </section>

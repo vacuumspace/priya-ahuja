@@ -61,7 +61,7 @@ export function GiftCardPreview({
           </span>
         </div>
 
-        <span style={{ display: "block", textAlign: "center", fontSize: u(messageFontSize(line)), lineHeight: 1.4, color: PEACH, maxWidth: u(880), alignSelf: "center", overflowWrap: "anywhere" }}>{line}</span>
+        <span style={{ display: "block", textAlign: "center", fontSize: u(messageFontSize(line)), lineHeight: 1.4, color: PEACH, maxWidth: u(880), alignSelf: "center", overflowWrap: "anywhere", whiteSpace: "pre-line" }}>{line}</span>
 
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
           <div style={{ display: "flex", flexDirection: "column", maxWidth: u(720) }}>

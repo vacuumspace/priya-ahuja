@@ -1,0 +1,15 @@
+<svg width="800" height="450" viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2A2420"/>
+      <stop offset="100%" stop-color="#1C1815"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="450" fill="url(#bg)"/>
+
+  <text x="64" y="205" font-family="Georgia, 'Times New Roman', serif" font-size="50" font-weight="700" fill="#FEF9E7">Finding Idea</text>
+  <text x="64" y="265" font-family="Georgia, 'Times New Roman', serif" font-size="50" font-weight="700" fill="#FEF9E7">to 100 Customers</text>
+
+  <text x="66" y="305" font-family="Arial, sans-serif" font-size="19" fill="#FFA07A">with Priya Ahuja</text>
+</svg>

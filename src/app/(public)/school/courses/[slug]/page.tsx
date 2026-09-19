@@ -133,6 +133,7 @@ export default async function CourseDetailPage({ params }: { params: Params }) {
 
           {/* About */}
           <section className="mb-24" aria-labelledby="promise-heading">
+            <p className="text-[12px] font-sans font-semibold text-peach-dark uppercase tracking-[0.18em] mb-3">why this course</p>
             <p className="font-heading text-xl md:text-2xl font-700 text-ink normal-case leading-snug max-w-2xl mb-5 text-balance">{course.lead}</p>
             <div className="flex flex-col gap-5 max-w-2xl mb-20">
               {course.description.split("\n\n").map((para, i) => (

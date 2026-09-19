@@ -7,7 +7,7 @@ import { getRazorpayInstance } from "@/lib/razorpay"
 import { coursePaise, getCourse } from "@/lib/courses-data"
 import { finalizeGift, giftPricePaise, giftUrl, giftCardUrl, newGiftToken } from "@/lib/course-gift"
 import { getSeatsTaken, holdsFoundingSeat } from "@/lib/course-enrollment"
-import { cardVersion, tidy, validateCardMessage, validateCardName } from "@/lib/gift-card"
+import { cardVersion, tidy, tidyMessage, validateCardMessage, validateCardName } from "@/lib/gift-card"
 
 // Starts a gift purchase. There's no limit on how many one person can buy.
 // The price is worked out here, never taken from the client: the founder price
@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
 
     const from = tidy(fromName)
     const recipient = tidy(recipientName)
-    const note = tidy(message)
+    const note = tidyMessage(message)
     const problem =
       validateCardName(from, "your name") ?? validateCardName(recipient, "the name of the person you're gifting") ?? validateCardMessage(note)
     if (problem) return NextResponse.json({ error: problem }, { status: 400 })

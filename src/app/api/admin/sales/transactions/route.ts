@@ -1,7 +1,7 @@
 import { auth, isAdmin } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { bookings, purchases, startupScores, startupIdeaScores, pitchDeckAnalyses, pitchDeckUnlocks, toolUnlocks, services, digitalProducts, users, priyaGptTimeTransactions, priyaGptTimeUnlocks, workshopRegistrations, workshops, courseEnrollments, courseGifts } from "@/lib/db/schema"
-import { and, eq, inArray, isNotNull, like } from "drizzle-orm"
+import { and, eq, gt, inArray, isNotNull, isNull, like, or } from "drizzle-orm"
 import { getCourse } from "@/lib/courses-data"
 
 const OPEN_UNLOCK_STATUSES = ["paid", "refunded"] as const
@@ -34,7 +34,9 @@ export async function GET(req: Request) {
       })
       .from(bookings)
       .leftJoin(services, eq(bookings.serviceId, services.id))
-      .where(inArray(bookings.status, ["confirmed", "completed", "paid"])),
+      // A 100%-covered booking (course gift, referral) is not a sale - skip explicit
+      // zeros, but keep rows with no amount recorded at all.
+      .where(and(inArray(bookings.status, ["confirmed", "completed", "paid"]), or(isNull(bookings.amountPaid), gt(bookings.amountPaid, 0)))),
 
     db
       .select({
@@ -108,7 +110,7 @@ export async function GET(req: Request) {
       })
       .from(pitchDeckUnlocks)
       .leftJoin(users, eq(pitchDeckUnlocks.userId, users.id))
-      .where(inArray(pitchDeckUnlocks.status, OPEN_UNLOCK_STATUSES)),
+      .where(and(inArray(pitchDeckUnlocks.status, OPEN_UNLOCK_STATUSES), gt(pitchDeckUnlocks.amountPaise, 0))),
 
     db
       .select({
@@ -139,7 +141,7 @@ export async function GET(req: Request) {
       })
       .from(toolUnlocks)
       .leftJoin(users, eq(toolUnlocks.userId, users.id))
-      .where(inArray(toolUnlocks.status, OPEN_UNLOCK_STATUSES)),
+      .where(and(inArray(toolUnlocks.status, OPEN_UNLOCK_STATUSES), gt(toolUnlocks.amountPaise, 0))),
 
     // Captured PriyaGPT time payments not yet applied to a balance, plus
     // any refunded before use
@@ -156,7 +158,7 @@ export async function GET(req: Request) {
       })
       .from(priyaGptTimeUnlocks)
       .leftJoin(users, eq(priyaGptTimeUnlocks.userId, users.id))
-      .where(inArray(priyaGptTimeUnlocks.status, OPEN_UNLOCK_STATUSES)),
+      .where(and(inArray(priyaGptTimeUnlocks.status, OPEN_UNLOCK_STATUSES), gt(priyaGptTimeUnlocks.amountPaise, 0))),
 
     db
       .select({

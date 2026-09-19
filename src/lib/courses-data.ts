@@ -15,6 +15,8 @@ export type CourseChapter = {
 export type Course = {
   slug: string
   title: string
+  // Card image on the courses list (served from /public).
+  thumbnailUrl: string
   tagline: string
   // Who it is for - shown right under the tagline so visitors can place themselves.
   audience: string
@@ -63,6 +65,7 @@ export const COURSE_GIFT_SERVICE_SLUG = "startup-idea-brainstorming"
 export const zeroToLaunch: Course = {
   slug: "zero-to-launch",
   title: "Finding Idea to 100 Customers",
+  thumbnailUrl: "/courses/finding-idea-to-100-customers.svg",
   tagline: "This course will guide you from figuring out your idea to launching and getting your first 100 paying customers.",
   audience: "For working professionals, first-time founders, and anyone with an idea, or without one yet.",
   lead: "Wanting to start is the easy part. Knowing what to do first is where most people get stuck.",

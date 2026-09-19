@@ -9,11 +9,12 @@ import { Textarea } from "@/components/ui/textarea"
 import { GiftLinkActions } from "@/components/GiftLinkActions"
 import { GiftCardPreview } from "@/components/GiftCardPreview"
 import {
-  CARD_ENGLISH_HINT,
+  CARD_MESSAGE_HINT,
   CARD_MESSAGE_MAX,
   DEFAULT_CARD_LINE,
   CARD_NAME_MAX,
   tidy,
+  tidyMessage,
   validateCardMessage,
   validateCardName,
 } from "@/lib/gift-card"
@@ -51,7 +52,7 @@ export function GiftManager({ gift }: { gift: GiftItem }) {
 
   const recipientProblem = validateCardName(tidy(draft.recipientName), "the name of the person you're gifting")
   const fromProblem = validateCardName(tidy(draft.fromName), "your name")
-  const messageProblem = validateCardMessage(tidy(draft.message))
+  const messageProblem = validateCardMessage(tidyMessage(draft.message))
   const formOk = !recipientProblem && !fromProblem && !messageProblem
 
   async function save() {
@@ -105,7 +106,7 @@ export function GiftManager({ gift }: { gift: GiftItem }) {
             <GiftCardPreview
               recipientName={tidy(draft.recipientName)}
               fromName={tidy(draft.fromName)}
-              message={tidy(draft.message)}
+              message={tidyMessage(draft.message)}
               courseTitle={gift.courseTitle}
             />
           </div>
@@ -134,7 +135,7 @@ export function GiftManager({ gift }: { gift: GiftItem }) {
                 placeholder={DEFAULT_CARD_LINE}
                 className="bg-cream border-border text-sm resize-none"
               />
-              <p className="text-[12px] font-sans text-ink/40 mt-1">{CARD_ENGLISH_HINT}</p>
+              <p className="text-[12px] font-sans text-ink/40 mt-1">{CARD_MESSAGE_HINT}</p>
               {touched && messageProblem && <p className="text-[12px] font-sans text-red-500 mt-1">{messageProblem}</p>}
             </div>
             <div>
