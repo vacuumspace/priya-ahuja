@@ -48,7 +48,13 @@ const testimonials = [
   },
 ]
 
-export default function HomePage({ promoWorkshop = null }: { promoWorkshop?: PromoWorkshop | null }) {
+export default function HomePage({
+  promoWorkshop = null,
+  upcomingWorkshops = [],
+}: {
+  promoWorkshop?: PromoWorkshop | null
+  upcomingWorkshops?: PromoWorkshop[]
+}) {
   const [idx, setIdx] = useState(0)
 
   const prev = () => setIdx((i) => (i - 1 + testimonials.length) % testimonials.length)
@@ -265,22 +271,31 @@ export default function HomePage({ promoWorkshop = null }: { promoWorkshop?: Pro
       </div>
 
       {/* ── Workshop ── */}
-      {promoWorkshop && (
+      {upcomingWorkshops.length > 0 && (
         <div className="mb-14">
-          <p className="text-[12px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">workshop</p>
-          <div className="bg-peach/20 border border-peach-dark/15 rounded-xl px-5 py-5 flex items-center justify-between gap-4 flex-wrap">
-            <div>
-              <p className="font-heading text-base font-700 text-ink normal-case mb-1">{promoWorkshop.title}</p>
-              <p className="font-sans text-[13px] text-ink/50">
-                {formatWorkshopDate(promoWorkshop.date)} · {formatWorkshopTimeRange(promoWorkshop.startTime, promoWorkshop.endTime)} IST
-              </p>
-            </div>
-            <Link
-              href={`/school/workshops/${promoWorkshop.slug}`}
-              className="inline-flex items-center bg-ink text-cream text-xs font-sans font-semibold px-4 py-2.5 rounded-lg hover:bg-ink/80 transition-colors flex-shrink-0"
-            >
-              view details
-            </Link>
+          <p className="text-[12px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">
+            {upcomingWorkshops.length > 1 ? "workshops" : "workshop"}
+          </p>
+          <div className="flex flex-col gap-3">
+            {upcomingWorkshops.map((w) => (
+              <div
+                key={w.slug}
+                className="bg-peach/20 border border-peach-dark/15 rounded-xl px-5 py-5 flex items-center justify-between gap-4 flex-wrap"
+              >
+                <div>
+                  <p className="font-heading text-base font-700 text-ink normal-case mb-1">{w.title}</p>
+                  <p className="font-sans text-[13px] text-ink/50">
+                    {formatWorkshopDate(w.date)} · {formatWorkshopTimeRange(w.startTime, w.endTime)} IST
+                  </p>
+                </div>
+                <Link
+                  href={`/school/workshops/${w.slug}`}
+                  className="inline-flex items-center bg-ink text-cream text-xs font-sans font-semibold px-4 py-2.5 rounded-lg hover:bg-ink/80 transition-colors flex-shrink-0"
+                >
+                  view details
+                </Link>
+              </div>
+            ))}
           </div>
         </div>
       )}

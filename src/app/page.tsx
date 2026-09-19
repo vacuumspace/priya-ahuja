@@ -27,31 +27,28 @@ export default async function RootPage() {
   // date alone would surface a past workshop (e.g. a historical record seeded
   // with an earlier date) ahead of the actual upcoming one.
   const now = new Date()
-  const soonest = active.find((w) => new Date(`${w.date}T${w.startTime}:00+05:30`) > now)
-
-  let promoWorkshop: PromoWorkshop | null = null
-  if (soonest) {
-    const start = new Date(`${soonest.date}T${soonest.startTime}:00+05:30`)
-    const cutoff = new Date(start.getTime() - PROMO_CUTOFF_MS_BEFORE_START)
-    if (now < cutoff) {
-      promoWorkshop = {
-        slug: soonest.slug,
-        title: soonest.title,
-        date: soonest.date,
-        startTime: soonest.startTime,
-        endTime: soonest.endTime,
-        price: soonest.price,
-        thumbnailUrl: soonest.thumbnailUrl,
-      }
-    }
-  }
+  const upcomingWorkshops: PromoWorkshop[] = active
+    .filter((w) => {
+      const start = new Date(`${w.date}T${w.startTime}:00+05:30`)
+      return now < new Date(start.getTime() - PROMO_CUTOFF_MS_BEFORE_START)
+    })
+    .map((w) => ({
+      slug: w.slug,
+      title: w.title,
+      date: w.date,
+      startTime: w.startTime,
+      endTime: w.endTime,
+      price: w.price,
+      thumbnailUrl: w.thumbnailUrl,
+    }))
+  const promoWorkshop = upcomingWorkshops[0] ?? null
 
   return (
     <div className="flex min-h-screen bg-cream">
       <SidebarWithAuth />
       <main className="flex-1 md:ml-[240px] min-h-screen pt-[52px] md:pt-0 overflow-x-hidden flex flex-col">
         <div className="flex-1">
-          <HomePage promoWorkshop={promoWorkshop} />
+          <HomePage promoWorkshop={promoWorkshop} upcomingWorkshops={upcomingWorkshops} />
         </div>
         <Footer />
       </main>
