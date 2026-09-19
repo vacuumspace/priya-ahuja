@@ -11,6 +11,7 @@ declare global {
 }
 import { useSession, signIn } from "next-auth/react"
 import { loadRazorpay } from "@/lib/load-razorpay"
+import { COURSE_GIFT_SERVICE_SLUG } from "@/lib/courses-data"
 import SignInOptions from "@/components/SignInOptions"
 import { Service } from "@/lib/services-data"
 import { Input } from "@/components/ui/input"
@@ -212,6 +213,18 @@ function BookingFormInner({ service }: { service: Service }) {
 
   const isRescheduleMode = !!rescheduleId
 
+  // A founder with a fully paid course gets the brainstorm session free -
+  // fill their code in so they don't have to find and type it.
+  useEffect(() => {
+    if (!session || service.slug !== COURSE_GIFT_SERVICE_SLUG || rescheduleId) return
+    let cancelled = false
+    fetch(`/api/bookings/course-gift?serviceSlug=${encodeURIComponent(service.slug)}`)
+      .then((r) => r.json())
+      .then((data) => { if (!cancelled && data.giftCode) setReferralCode(String(data.giftCode).toLowerCase()) })
+      .catch(() => {})
+    return () => { cancelled = true }
+  }, [session, service.slug, rescheduleId])
+
   // Checks the code shortly after typing stops so the discount shows
   // immediately; the cleanup drops stale responses if the input changes again.
   useEffect(() => {
@@ -297,6 +310,26 @@ function BookingFormInner({ service }: { service: Service }) {
         deckLink ? `Deck/Doc Link: ${deckLink}` : null,
         message || null,
       ].filter(Boolean).join("\n\n")
+
+      // A code that covers the whole session (course gift) has nothing to pay -
+      // book it directly instead of opening checkout.
+      if (referral.status === "valid" && referral.payablePaise <= 0) {
+        const giftRes = await fetch("/api/bookings/redeem-gift", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            serviceSlug: service.slug,
+            slotId: selectedSlot?.id ?? null,
+            name,
+            message: fullMessage || null,
+            referralCode: referralCode.trim(),
+          }),
+        })
+        const giftData = await giftRes.json()
+        if (!giftRes.ok) throw new Error(giftData.error || "Booking failed")
+        setSuccess(true)
+        return
+      }
 
       const orderRes = await fetch("/api/bookings/create-order", {
         method: "POST",
@@ -501,7 +534,9 @@ function BookingFormInner({ service }: { service: Service }) {
           )}
           {referral.status === "valid" && (
             <p className="text-[12px] text-green-700 mt-1 font-sans font-semibold">
-              ₹{(referral.discountPaise / 100).toLocaleString("en-IN")} off applied · you pay ₹{(referral.payablePaise / 100).toLocaleString("en-IN")}
+              {referral.payablePaise <= 0
+                ? "code applied · this session is free"
+                : `₹${(referral.discountPaise / 100).toLocaleString("en-IN")} off applied · you pay ₹${(referral.payablePaise / 100).toLocaleString("en-IN")}`}
             </p>
           )}
           {referral.status === "invalid" && (
@@ -523,13 +558,15 @@ function BookingFormInner({ service }: { service: Service }) {
           "select a slot to continue"
         ) : isRescheduleMode ? (
           "confirm reschedule"
+        ) : referral.status === "valid" && referral.payablePaise <= 0 ? (
+          "book free session"
         ) : referral.status === "valid" ? (
           `pay ₹${(referral.payablePaise / 100).toLocaleString("en-IN")} & book`
         ) : (
           "pay & book"
         )}
       </Button>
-      {!isRescheduleMode && (
+      {!isRescheduleMode && !(referral.status === "valid" && referral.payablePaise <= 0) && (
         <p className="text-[12px] text-ink/30 text-center font-sans">secure payment via razorpay</p>
       )}
     </form>

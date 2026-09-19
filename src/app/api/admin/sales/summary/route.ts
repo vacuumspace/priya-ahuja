@@ -1,6 +1,6 @@
 import { auth, isAdmin } from "@/lib/auth"
 import { db } from "@/lib/db"
-import { bookings, purchases, startupScores, startupIdeaScores, pitchDeckAnalyses, pitchDeckUnlocks, toolUnlocks, digitalProducts, priyaGptTimeTransactions, priyaGptTimeUnlocks, workshopRegistrations } from "@/lib/db/schema"
+import { bookings, purchases, startupScores, startupIdeaScores, pitchDeckAnalyses, pitchDeckUnlocks, toolUnlocks, digitalProducts, priyaGptTimeTransactions, priyaGptTimeUnlocks, workshopRegistrations, courseEnrollments, courseGifts } from "@/lib/db/schema"
 import { and, eq, inArray, isNotNull, like } from "drizzle-orm"
 
 export async function GET() {
@@ -9,7 +9,7 @@ export async function GET() {
     return new Response("Forbidden", { status: 403 })
   }
 
-  const [allBookings, allPurchases, allScores, allIdeaScores, allPitchDecks, unusedPitchDeckUnlocks, priyaGptPurchases, unusedToolUnlocks, unusedPriyaGptUnlocks, allWorkshopRegistrations] = await Promise.all([
+  const [allBookings, allPurchases, allScores, allIdeaScores, allPitchDecks, unusedPitchDeckUnlocks, priyaGptPurchases, unusedToolUnlocks, unusedPriyaGptUnlocks, allWorkshopRegistrations, allCourseEnrollments, allCourseGifts] = await Promise.all([
     db
       .select({ createdAt: bookings.createdAt, amount: bookings.amountPaid })
       .from(bookings)
@@ -68,6 +68,25 @@ export async function GET() {
       .select({ createdAt: workshopRegistrations.createdAt, amount: workshopRegistrations.amountPaid })
       .from(workshopRegistrations)
       .where(eq(workshopRegistrations.status, "confirmed")),
+
+    // Real payments only - admin test rows carry no payment ids.
+    db
+      .select({
+        preRegAt: courseEnrollments.preRegisteredAt,
+        preRegPaymentId: courseEnrollments.preRegPaymentId,
+        preRegAmount: courseEnrollments.preRegAmountPaid,
+        paidAt: courseEnrollments.paidAt,
+        balancePaymentId: courseEnrollments.balancePaymentId,
+        balanceAmount: courseEnrollments.balanceAmountPaid,
+        createdAt: courseEnrollments.createdAt,
+      })
+      .from(courseEnrollments)
+      .where(inArray(courseEnrollments.status, ["preregistered", "paid"])),
+
+    db
+      .select({ createdAt: courseGifts.createdAt, amount: courseGifts.amountPaid })
+      .from(courseGifts)
+      .where(and(inArray(courseGifts.status, ["paid", "redeemed"]), isNotNull(courseGifts.razorpayPaymentId))),
   ])
 
   function monthKey(d: Date) {
@@ -89,7 +108,7 @@ export async function GET() {
   }
 
   type Seg = { revenue: number; count: number }
-  type MonthData = { revenue: number; count: number; sessions: Seg; templates: Seg; investorList: Seg; priyagpt: Seg; pitchDeck: Seg; score: Seg; workshops: Seg }
+  type MonthData = { revenue: number; count: number; sessions: Seg; templates: Seg; investorList: Seg; priyagpt: Seg; pitchDeck: Seg; score: Seg; workshops: Seg; courses: Seg }
   const monthly: Record<string, MonthData> = {}
   for (const k of months) {
     monthly[k] = {
@@ -101,6 +120,7 @@ export async function GET() {
       pitchDeck: { revenue: 0, count: 0 },
       score: { revenue: 0, count: 0 },
       workshops: { revenue: 0, count: 0 },
+      courses: { revenue: 0, count: 0 },
     }
   }
 
@@ -185,11 +205,41 @@ export async function GET() {
     }
   }
 
+  // Each captured course payment (the pre-registration and, later, the
+  // balance) is its own sale in the month it was paid.
+  let courseRevenue = 0, courseCount = 0
+  for (const r of allCourseEnrollments) {
+    const payments = [
+      r.preRegPaymentId ? { at: r.preRegAt ?? r.createdAt, amt: r.preRegAmount ?? 0 } : null,
+      r.balancePaymentId ? { at: r.paidAt ?? r.createdAt, amt: r.balanceAmount ?? 0 } : null,
+    ]
+    for (const pay of payments) {
+      if (!pay) continue
+      courseRevenue += pay.amt; courseCount++
+      const k = monthKey(pay.at)
+      if (monthly[k]) {
+        monthly[k].revenue += pay.amt; monthly[k].count++
+        monthly[k].courses.revenue += pay.amt; monthly[k].courses.count++
+      }
+    }
+  }
+
+  // A gift purchase is a course sale in the month it was bought.
+  for (const g of allCourseGifts) {
+    const amt = g.amount ?? 0
+    courseRevenue += amt; courseCount++
+    const k = monthKey(g.createdAt)
+    if (monthly[k]) {
+      monthly[k].revenue += amt; monthly[k].count++
+      monthly[k].courses.revenue += amt; monthly[k].courses.count++
+    }
+  }
+
   const monthlyChart = months.map(k => ({ key: k, label: monthLabel(k), ...monthly[k] }))
 
   return Response.json({
-    totalRevenue: sessionRevenue + templateRevenue + investorListRevenue + priyaGptRevenue + pitchDeckRevenue + scoreRevenue + workshopRevenue,
-    totalTransactions: sessionCount + templateCount + investorListCount + scoreCount + priyaGptCount + pitchDeckCount + workshopCount,
+    totalRevenue: sessionRevenue + templateRevenue + investorListRevenue + priyaGptRevenue + pitchDeckRevenue + scoreRevenue + workshopRevenue + courseRevenue,
+    totalTransactions: sessionCount + templateCount + investorListCount + scoreCount + priyaGptCount + pitchDeckCount + workshopCount + courseCount,
     byType: [
       { label: "Sessions",      revenue: sessionRevenue,     count: sessionCount },
       { label: "Templates",     revenue: templateRevenue,    count: templateCount },
@@ -198,6 +248,7 @@ export async function GET() {
       { label: "Pitch Deck",    revenue: pitchDeckRevenue,   count: pitchDeckCount },
       { label: "PriyaGPT",      revenue: priyaGptRevenue,    count: priyaGptCount },
       { label: "Workshops",     revenue: workshopRevenue,    count: workshopCount },
+      { label: "Courses",       revenue: courseRevenue,      count: courseCount },
     ],
     monthly: monthlyChart,
   })

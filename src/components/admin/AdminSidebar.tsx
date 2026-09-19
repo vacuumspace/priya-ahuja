@@ -32,6 +32,7 @@ import {
   FileSearch,
   Shirt,
   GraduationCap,
+  BookOpen,
   type LucideIcon,
 } from "lucide-react"
 import { useState } from "react"
@@ -108,6 +109,11 @@ const navGroups: NavGroup[] = [
     label: "Workshops",
     directHref: "/admin/workshops",
     directIcon: GraduationCap,
+  },
+  {
+    label: "Courses",
+    directHref: "/admin/courses",
+    directIcon: BookOpen,
   },
   {
     label: "Research",

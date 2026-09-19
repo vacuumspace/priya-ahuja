@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Service not found" }, { status: 404 })
     }
 
-    const check = await checkReferralCode(referralCode, service.price)
+    const check = await checkReferralCode(referralCode, { slug: serviceSlug, price: service.price })
     if (!check.ok) {
       return NextResponse.json({ error: check.error }, { status: 400 })
     }

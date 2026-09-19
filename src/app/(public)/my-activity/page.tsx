@@ -1,10 +1,15 @@
 ﻿import { auth } from "@/lib/auth"
 import { db } from "@/lib/db"
-import { bookings, purchases, services as servicesTable, digitalProducts, startupScores, startupIdeaScores, pitchDeckAnalyses, availability, priyaGptTimeTransactions, workshopRegistrations, workshops } from "@/lib/db/schema"
-import { eq, and, desc, isNotNull } from "drizzle-orm"
+import { bookings, purchases, services as servicesTable, digitalProducts, startupScores, startupIdeaScores, pitchDeckAnalyses, availability, priyaGptTimeTransactions, workshopRegistrations, workshops, courseEnrollments, courseGifts } from "@/lib/db/schema"
+import { eq, and, desc, isNotNull, inArray } from "drizzle-orm"
 import Link from "next/link"
 import { CalendarDays, FileText, LogIn, Lightbulb, ExternalLink, Bot, GraduationCap } from "lucide-react"
 import { formatWorkshopTimeRange } from "@/lib/workshop-time"
+import { getCourse } from "@/lib/courses-data"
+import { balanceDuePaise } from "@/lib/course-enrollment"
+import { cardVersion } from "@/lib/gift-card"
+import { giftUrl } from "@/lib/course-gift"
+import { GiftManager, type GiftItem } from "./GiftManager"
 import ViewTemplateButton from "@/components/templates/ViewTemplateButton"
 import SignInOptions from "@/components/SignInOptions"
 import BookingCard from "./BookingCard"
@@ -41,6 +46,7 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
     params.tab === "tools" ? "tools" :
     params.tab === "priyagpt" ? "priyagpt" :
     params.tab === "workshops" ? "workshops" :
+    params.tab === "courses" ? "courses" :
     "sessions"
   const activeToolSub =
     params.sub === "idea" ? "idea" :
@@ -64,7 +70,7 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
 
   const email = session.user.email
 
-  const [userBookingsRaw, userPurchases, userScores, userIdeaScores, userPitchDecks, userPriyaGptTxns, userWorkshopRegistrations] = await Promise.all([
+  const [userBookingsRaw, userPurchases, userScores, userIdeaScores, userPitchDecks, userPriyaGptTxns, userWorkshopRegistrations, userCourses, userGiftsBought, userGiftsReceived] = await Promise.all([
     db
       .select({
         id: bookings.id,
@@ -163,7 +169,41 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
       .leftJoin(workshops, eq(workshopRegistrations.workshopId, workshops.id))
       .where(and(eq(workshopRegistrations.userId, session.user.id!), eq(workshopRegistrations.status, "confirmed")))
       .orderBy(desc(workshopRegistrations.createdAt)),
+
+    db
+      .select()
+      .from(courseEnrollments)
+      .where(and(eq(courseEnrollments.userId, session.user.id!), inArray(courseEnrollments.status, ["preregistered", "paid"])))
+      .orderBy(desc(courseEnrollments.createdAt)),
+
+    db
+      .select()
+      .from(courseGifts)
+      .where(and(eq(courseGifts.purchaserId, session.user.id!), inArray(courseGifts.status, ["paid", "redeemed"])))
+      .orderBy(desc(courseGifts.createdAt)),
+
+    db
+      .select({ enrollmentId: courseGifts.enrollmentId, purchaserName: courseGifts.purchaserName })
+      .from(courseGifts)
+      .where(and(eq(courseGifts.redeemedById, session.user.id!), eq(courseGifts.status, "redeemed"))),
   ])
+
+  // enrolment id -> who gifted it, for the "gifted by" label on courses I received
+  const giftedBy = new Map(userGiftsReceived.filter((g) => g.enrollmentId).map((g) => [g.enrollmentId as string, g.purchaserName]))
+  const giftItems: GiftItem[] = userGiftsBought.map((g) => ({
+    id: g.id,
+    courseTitle: getCourse(g.courseSlug)?.title ?? "Course",
+    status: g.status === "redeemed" ? "redeemed" : "paid",
+    recipientName: g.recipientName ?? "",
+    message: g.message ?? "",
+    fromName: g.purchaserName,
+    link: giftUrl(g.token),
+    cardBase: `/api/courses/gift/card/${g.token}`,
+    version: cardVersion(g),
+    createdAt: formatDate(g.createdAt),
+    redeemedByEmail: g.redeemedByEmail,
+    redeemedAt: g.redeemedAt ? formatDate(g.redeemedAt) : null,
+  }))
 
   // Sort bookings: upcoming (active + future slot) first ASC by slot, then past DESC by slot
   const now = new Date()
@@ -186,7 +226,7 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
     <div className="min-h-screen bg-cream">
       <div className="flex justify-between items-center px-4 md:px-10 py-4 text-[13px] text-ink/50 font-sans border-b border-border">
         <span>my activity</span>
-        <span>{userBookings.length + userPurchases.length + userScores.length + userIdeaScores.length + userPitchDecks.length + userPriyaGptTxns.length + userWorkshopRegistrations.length} total</span>
+        <span>{userBookings.length + userPurchases.length + userScores.length + userIdeaScores.length + userPitchDecks.length + userPriyaGptTxns.length + userWorkshopRegistrations.length + userCourses.length + giftItems.length} total</span>
       </div>
 
       <div className="px-4 md:px-10 pt-10 pb-16 max-w-2xl">
@@ -253,6 +293,18 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
             <GraduationCap size={12} />
             workshops
             <span className="text-[12px] font-mono ml-0.5 opacity-60">{userWorkshopRegistrations.length}</span>
+          </Link>
+          <Link
+            href="/my-activity?tab=courses"
+            className={`flex items-center gap-1.5 px-4 py-2.5 text-xs font-sans font-semibold border-b-2 transition-colors -mb-px ${
+              activeTab === "courses"
+                ? "border-ink text-ink"
+                : "border-transparent text-ink/40 hover:text-ink/70"
+            }`}
+          >
+            <GraduationCap size={12} />
+            courses
+            <span className="text-[12px] font-mono ml-0.5 opacity-60">{userCourses.length + giftItems.length}</span>
           </Link>
         </div>
 
@@ -563,6 +615,82 @@ export default async function MySessionsPage({ searchParams }: { searchParams: S
                     </div>
                   </div>
                 ))}
+              </div>
+            )}
+          </section>
+        )}
+
+        {/* Courses tab */}
+        {activeTab === "courses" && (
+          <section>
+            {userCourses.length === 0 && giftItems.length === 0 ? (
+              <div className="border border-dashed border-border rounded-2xl p-8 text-center">
+                <p className="font-sans text-sm text-ink/50 mb-3">no courses yet</p>
+                <Link href="/school/courses" className="text-xs font-sans font-semibold text-peach-dark hover:underline">
+                  browse courses →
+                </Link>
+              </div>
+            ) : (
+              <div className="flex flex-col gap-3">
+                {userCourses.map((c) => {
+                  const course = getCourse(c.courseSlug)
+                  const paidPaise = (c.preRegAmountPaid ?? 0) + (c.balanceAmountPaid ?? 0)
+                  const isPaid = c.status === "paid"
+                  return (
+                    <div key={c.id} className="bg-card border border-border rounded-2xl p-5">
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className={`text-[12px] font-sans font-semibold px-2 py-0.5 rounded-full ${isPaid ? "bg-green-100 text-green-700" : "bg-amber-100 text-amber-700"}`}>
+                              {isPaid ? "enrolled" : "pre-registered"}
+                            </span>
+                            <span className="text-[12px] font-sans text-ink/30">{formatDate(c.createdAt)}</span>
+                          </div>
+                          <p className="font-heading text-base font-700 text-ink normal-case">{course?.title ?? "Course"}</p>
+                          {giftedBy.has(c.id) && (
+                            <p className="font-sans text-[13px] text-ink/50 mt-1">gifted by {giftedBy.get(c.id)}</p>
+                          )}
+                          {!isPaid && course && (
+                            <p className="font-sans text-[13px] text-ink/50 mt-1">
+                              balance ₹{(balanceDuePaise(c) / 100).toLocaleString("en-IN")} due when the course launches on {course.launchLabel}
+                            </p>
+                          )}
+                          <div className="flex flex-col gap-1 mt-2">
+                            {isPaid && (
+                              <Link href="/fundraise/tools/fundability-score" className="text-[12px] font-sans font-semibold text-peach-dark hover:underline">
+                                free startup score unlocked →
+                              </Link>
+                            )}
+                            {isPaid && c.giftCode && (
+                              <Link href="/connect/startup-idea-brainstorming" className="text-[12px] font-sans font-semibold text-peach-dark hover:underline">
+                                book your free 1:1 brainstorm →
+                              </Link>
+                            )}
+                            {course && (
+                              <Link href={`/school/courses/${course.slug}`} className="text-[12px] font-sans text-ink/40 hover:text-ink hover:underline">
+                                course page
+                              </Link>
+                            )}
+                          </div>
+                        </div>
+                        <div className="flex-shrink-0 text-right">
+                          <span className="font-heading text-lg font-bold text-ink">
+                            {paidPaise > 0 ? `₹${(paidPaise / 100).toLocaleString("en-IN")}` : " - "}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  )
+                })}
+
+                {giftItems.length > 0 && (
+                  <>
+                    <p className="text-[12px] font-sans text-ink/30 uppercase tracking-[0.18em] mt-4 mb-1">gifts you&apos;ve bought</p>
+                    {giftItems.map((g) => (
+                      <GiftManager key={g.id} gift={g} />
+                    ))}
+                  </>
+                )}
               </div>
             )}
           </section>

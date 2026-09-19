@@ -6,6 +6,7 @@ import { Star, ChevronLeft, ChevronRight } from "lucide-react"
 import { useState } from "react"
 import WorkshopPromoPopup, { type PromoWorkshop } from "@/components/WorkshopPromoPopup"
 import { formatWorkshopDate, formatWorkshopTimeRange } from "@/lib/workshop-time"
+import { courseLaunched, courseOfferOpen, zeroToLaunch } from "@/lib/courses-data"
 
 const LinkedInIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
@@ -299,6 +300,33 @@ export default function HomePage({
           </div>
         </div>
       )}
+
+      {/* ── Course ── */}
+      <div className="mb-14">
+        <p className="text-[12px] font-sans text-ink/30 uppercase tracking-[0.18em] mb-5">course</p>
+        <div className="bg-peach/20 border border-peach-dark/15 rounded-xl px-5 py-5 flex items-center justify-between gap-4 flex-wrap">
+          <div>
+            <p className="font-heading text-base font-700 text-ink normal-case mb-1">
+              {zeroToLaunch.title}
+            </p>
+            <p className="font-sans text-[13px] text-ink/50">
+              {courseLaunched(zeroToLaunch)
+                ? "now open · "
+                : courseOfferOpen(zeroToLaunch)
+                  ? `pre-register for ₹${zeroToLaunch.preRegisterPrice} · launching ${zeroToLaunch.launchLabel} · `
+                  : `launching ${zeroToLaunch.launchLabel} · `}
+              ₹{zeroToLaunch.founderPrice.toLocaleString("en-IN")}{" "}
+              <span className="line-through text-ink/30">₹{zeroToLaunch.listPrice.toLocaleString("en-IN")}</span>
+            </p>
+          </div>
+          <Link
+            href={`/school/courses/${zeroToLaunch.slug}`}
+            className="inline-flex items-center bg-ink text-cream text-xs font-sans font-semibold px-4 py-2.5 rounded-lg hover:bg-ink/80 transition-colors flex-shrink-0"
+          >
+            view details
+          </Link>
+        </div>
+      </div>
 
       {/* ── Footer nav ── */}
       <div className="border-t border-peach-dark/15 pt-6 pb-2">

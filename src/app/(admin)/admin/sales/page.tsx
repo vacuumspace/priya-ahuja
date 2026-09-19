@@ -28,6 +28,7 @@ type MonthRow = {
   pitchDeck: { revenue: number; count: number }
   score: { revenue: number; count: number }
   workshops: { revenue: number; count: number }
+  courses: { revenue: number; count: number }
 }
 
 type SummaryData = {
@@ -55,6 +56,7 @@ const TYPE_LABELS: Record<string, string> = {
   priyagpt: "PriyaGPT",
   pitchdeck: "Pitch Deck",
   workshop: "Workshop",
+  course: "Course",
 }
 
 const TYPE_COLORS: Record<string, string> = {
@@ -66,6 +68,7 @@ const TYPE_COLORS: Record<string, string> = {
   priyagpt: "bg-[#A85D3A]/25 text-[#A85D3A]",
   pitchdeck: "bg-[#8C5E3C]/20 text-[#8C5E3C]",
   workshop: "bg-[#7A9E7E]/25 text-[#4F6F53]",
+  course:   "bg-[#6B8FB5]/25 text-[#3F6285]",
 }
 
 const STATUS_COLORS: Record<string, string> = {
@@ -87,6 +90,7 @@ const TYPE_FILTERS = [
   { value: "pitchdeck", label: "Pitch Deck" },
   { value: "priyagpt", label: "PriyaGPT" },
   { value: "workshop", label: "Workshop" },
+  { value: "course", label: "Course" },
 ]
 
 function TransactionsTab() {
@@ -247,6 +251,7 @@ const SEG = {
   pitchDeck:    { bar: "bg-[#8C5E3C]",     text: "text-[#8C5E3C]",  dot: "bg-[#8C5E3C]" },
   score:        { bar: "bg-gray-400",      text: "text-gray-500",  dot: "bg-gray-400" },
   workshops:    { bar: "bg-[#7A9E7E]",     text: "text-[#4F6F53]", dot: "bg-[#7A9E7E]" },
+  courses:      { bar: "bg-[#6B8FB5]",     text: "text-[#3F6285]", dot: "bg-[#6B8FB5]" },
 } as const
 
 const CHART_VIEWS = [
@@ -258,6 +263,7 @@ const CHART_VIEWS = [
   { key: "score",        label: "Score",        color: SEG.score.bar },
   { key: "priyagpt",     label: "PriyaGPT",     color: SEG.priyagpt.bar },
   { key: "workshops",    label: "Workshops",    color: SEG.workshops.bar },
+  { key: "courses",      label: "Courses",      color: SEG.courses.bar },
 ] as const
 
 type ChartViewKey = (typeof CHART_VIEWS)[number]["key"]
@@ -267,7 +273,7 @@ function getSegVal(m: MonthRow, view: ChartViewKey, field: "revenue" | "count"):
   return m[view][field]
 }
 
-const STACK_KEYS = ["sessions", "templates", "investorList", "pitchDeck", "score", "priyagpt", "workshops"] as const
+const STACK_KEYS = ["sessions", "templates", "investorList", "pitchDeck", "score", "priyagpt", "workshops", "courses"] as const
 
 function getStackSegments(m: MonthRow, field: "revenue" | "count") {
   return STACK_KEYS.map(key => ({ val: m[key][field], color: SEG[key].bar }))
@@ -350,6 +356,7 @@ function SummaryTab() {
     { label: "Score",        revenue: sel.score.revenue,        count: sel.score.count,        text: SEG.score.text,        dot: SEG.score.dot },
     { label: "PriyaGPT",     revenue: sel.priyagpt.revenue,     count: sel.priyagpt.count,     text: SEG.priyagpt.text,     dot: SEG.priyagpt.dot },
     { label: "Workshops",    revenue: sel.workshops.revenue,    count: sel.workshops.count,    text: SEG.workshops.text,    dot: SEG.workshops.dot },
+    { label: "Courses",      revenue: sel.courses.revenue,      count: sel.courses.count,      text: SEG.courses.text,      dot: SEG.courses.dot },
   ]
 
   return (

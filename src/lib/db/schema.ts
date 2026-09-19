@@ -455,3 +455,72 @@ export const serviceInquiries = pgTable("service_inquiries", {
   adminSeen: boolean("admin_seen").notNull().default(false),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 })
+
+// A person's enrolment in a course. Two possible payments on one row: the
+// small pre-registration deposit that locks the founder price, and the
+// balance paid once the course launches (or, for someone who never
+// pre-registered, the full price paid in one go - same balance_* columns).
+// Sign-in is required, so user_id is always present.
+export const courseEnrollments = pgTable("course_enrollments", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  courseSlug: varchar("course_slug", { length: 80 }).notNull(),
+  userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  userName: text("user_name").notNull(),
+  userEmail: text("user_email").notNull(),
+  // pending (order created, nothing paid) | preregistered | paid | cancelled
+  status: varchar("status", { length: 20 }).notNull().default("pending"),
+  // Total price this person owes, fixed when they enrol: the founder price if
+  // they pre-registered in time, the list price otherwise.
+  lockedPricePaise: integer("locked_price_paise").notNull(),
+  preRegOrderId: text("pre_reg_order_id"),
+  preRegPaymentId: text("pre_reg_payment_id"),
+  preRegAmountPaid: integer("pre_reg_amount_paid"), // paise
+  preRegisteredAt: timestamp("pre_registered_at"),
+  balanceOrderId: text("balance_order_id"),
+  balancePaymentId: text("balance_payment_id"),
+  balanceAmountPaid: integer("balance_amount_paid"), // paise
+  paidAt: timestamp("paid_at"),
+  // Personal code for the free 1:1 brainstorm gift, issued once fully paid.
+  giftCode: varchar("gift_code", { length: 20 }),
+  preRegEmailSent: boolean("pre_reg_email_sent").notNull().default(false),
+  enrolledEmailSent: boolean("enrolled_email_sent").notNull().default(false),
+  // Admin-created test rows skip Razorpay entirely (no payment ids).
+  adminSeen: boolean("admin_seen").notNull().default(false),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+}, (table) => [
+  uniqueIndex("course_enrollments_active_unique")
+    .on(table.courseSlug, table.userId)
+    .where(sql`${table.status} <> 'cancelled'`),
+  uniqueIndex("course_enrollments_gift_code_unique").on(table.giftCode),
+])
+
+// A course bought as a gift. The purchaser pays in full and gets a one-time
+// link (token); whoever opens it and signs in is enrolled as a normal, fully
+// paid student. The gift row carries the payment, the redeemed enrolment
+// carries none - so revenue is counted once, here.
+export const courseGifts = pgTable("course_gifts", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  courseSlug: varchar("course_slug", { length: 80 }).notNull(),
+  purchaserId: text("purchaser_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  purchaserName: text("purchaser_name").notNull(),
+  purchaserEmail: text("purchaser_email").notNull(),
+  // Who the gift is for and the note on the card the purchaser sends them.
+  recipientName: text("recipient_name"),
+  message: text("message"),
+  // The secret in the gift link.
+  token: varchar("token", { length: 64 }).notNull().unique(),
+  // What the purchaser was charged, fixed at purchase (offer price or list price).
+  pricePaise: integer("price_paise").notNull(),
+  razorpayOrderId: text("razorpay_order_id").unique(),
+  razorpayPaymentId: text("razorpay_payment_id"),
+  amountPaid: integer("amount_paid"), // paise actually captured
+  // pending (order created) | paid (link is live) | redeemed | cancelled
+  status: varchar("status", { length: 20 }).notNull().default("pending"),
+  redeemedById: text("redeemed_by_id").references(() => users.id, { onDelete: "set null" }),
+  redeemedByEmail: text("redeemed_by_email"),
+  redeemedAt: timestamp("redeemed_at"),
+  enrollmentId: uuid("enrollment_id"),
+  linkEmailSent: boolean("link_email_sent").notNull().default(false),
+  adminSeen: boolean("admin_seen").notNull().default(false),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+})

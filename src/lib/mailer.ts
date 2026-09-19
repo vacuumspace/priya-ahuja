@@ -10,6 +10,8 @@ import DownloadLinkEmail from "@/emails/DownloadLinkEmail"
 import FeedbackRequestEmail from "@/emails/FeedbackRequestEmail"
 import PurchaseWelcomeEmail from "@/emails/PurchaseWelcomeEmail"
 import WorkshopRegistrationEmail from "@/emails/WorkshopRegistrationEmail"
+import CourseEnrollmentEmail from "@/emails/CourseEnrollmentEmail"
+import CourseGiftEmail from "@/emails/CourseGiftEmail"
 
 const FROM_EMAIL = process.env.EMAIL_USER!
 const FROM_NAME = process.env.MAIL_FROM_NAME ?? "Priya Ahuja"
@@ -449,6 +451,99 @@ export async function sendFeedbackRequest({
   await sendMail({
     to,
     subject: `${name.split(" ")[0]}, how was your ${serviceName}? leave a quick review`,
+    html,
+  })
+}
+
+export async function sendCourseEnrollmentConfirmation({
+  to,
+  name,
+  courseTitle,
+  kind,
+  launchLabel,
+  balanceLabel,
+  giftCode,
+}: {
+  to: string
+  name: string
+  courseTitle: string
+  kind: "preregistered" | "enrolled"
+  launchLabel: string
+  balanceLabel?: string
+  giftCode?: string | null
+}) {
+  const s = await getEmailSettings(["email_confirmation_footer"])
+
+  const html = await render(
+    CourseEnrollmentEmail({ name, courseTitle, kind, launchLabel, balanceLabel, giftCode, footer: s.email_confirmation_footer })
+  )
+
+  await sendMail({
+    to,
+    subject: kind === "preregistered" ? `you're pre-registered! ${courseTitle}` : `you're enrolled! ${courseTitle}`,
+    html,
+  })
+}
+
+export async function sendAdminCourseNotification({
+  courseTitle,
+  kind,
+  userName,
+  userEmail,
+  amountLabel,
+}: {
+  courseTitle: string
+  kind: "preregistered" | "enrolled" | "gift"
+  userName: string
+  userEmail: string
+  amountLabel: string
+}) {
+  const adminEmails = (process.env.ADMIN_EMAILS ?? "").split(",").map((e) => e.trim())
+  const heading =
+    kind === "preregistered" ? "New Course Pre-registration" : kind === "gift" ? "New Course Gift Purchase" : "New Course Enrolment"
+  const html = `
+    <div style="font-family:Inter,sans-serif;max-width:560px;margin:0 auto;padding:32px 24px;background:#fff;border:1px solid #e8e8e8;border-radius:12px">
+      <p style="font-size:16px;font-weight:700;color:#2D2D2D;margin:0 0 8px">${heading}</p>
+      <p style="font-size:13px;color:#777;margin:0 0 20px">${courseTitle} · ${amountLabel}</p>
+      <div style="background:#fafafa;border:1px solid #efefef;border-radius:8px;padding:16px 20px">
+        <p style="font-size:13px;color:#555;margin:0 0 4px"><strong>${userName}</strong></p>
+        <p style="font-size:13px;color:#555;margin:0">${userEmail}</p>
+      </div>
+    </div>
+  `
+  await sendMail({
+    to: adminEmails,
+    subject: `${heading}: ${courseTitle} - ${userName}`,
+    html,
+  })
+}
+
+export async function sendCourseGiftLink({
+  to,
+  name,
+  courseTitle,
+  link,
+  cardUrl,
+  recipientName,
+  launchLabel,
+}: {
+  to: string
+  name: string
+  courseTitle: string
+  link: string
+  cardUrl: string
+  recipientName: string
+  launchLabel: string
+}) {
+  const s = await getEmailSettings(["email_confirmation_footer"])
+
+  const html = await render(
+    CourseGiftEmail({ name, courseTitle, link, cardUrl, recipientName, launchLabel, footer: s.email_confirmation_footer })
+  )
+
+  await sendMail({
+    to,
+    subject: `your gift link - ${courseTitle}`,
     html,
   })
 }

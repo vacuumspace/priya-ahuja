@@ -1,7 +1,8 @@
 import { auth, isAdmin } from "@/lib/auth"
 import { db } from "@/lib/db"
-import { bookings, purchases, startupScores, startupIdeaScores, pitchDeckAnalyses, pitchDeckUnlocks, toolUnlocks, services, digitalProducts, users, priyaGptTimeTransactions, priyaGptTimeUnlocks, workshopRegistrations, workshops } from "@/lib/db/schema"
+import { bookings, purchases, startupScores, startupIdeaScores, pitchDeckAnalyses, pitchDeckUnlocks, toolUnlocks, services, digitalProducts, users, priyaGptTimeTransactions, priyaGptTimeUnlocks, workshopRegistrations, workshops, courseEnrollments, courseGifts } from "@/lib/db/schema"
 import { and, eq, inArray, isNotNull, like } from "drizzle-orm"
+import { getCourse } from "@/lib/courses-data"
 
 const OPEN_UNLOCK_STATUSES = ["paid", "refunded"] as const
 
@@ -19,7 +20,7 @@ export async function GET(req: Request) {
   const typeFilter = searchParams.get("type")
 
   // Fetch all sources
-  const [allBookings, allPurchases, allScores, allIdeaScores, allPitchDecks, unusedPitchDeckUnlocks, allPriyaGpt, unusedToolUnlocks, unusedPriyaGptUnlocks, allWorkshopRegistrations] = await Promise.all([
+  const [allBookings, allPurchases, allScores, allIdeaScores, allPitchDecks, unusedPitchDeckUnlocks, allPriyaGpt, unusedToolUnlocks, unusedPriyaGptUnlocks, allWorkshopRegistrations, allCourseEnrollments, allCourseGifts] = await Promise.all([
     db
       .select({
         id: bookings.id,
@@ -170,6 +171,18 @@ export async function GET(req: Request) {
       .from(workshopRegistrations)
       .leftJoin(workshops, eq(workshopRegistrations.workshopId, workshops.id))
       .where(eq(workshopRegistrations.status, "confirmed")),
+
+    // Real payments only - admin test rows carry no payment ids.
+    db
+      .select()
+      .from(courseEnrollments)
+      .where(inArray(courseEnrollments.status, ["preregistered", "paid"])),
+
+    // Gift purchases with a captured payment (admin test gifts carry none).
+    db
+      .select()
+      .from(courseGifts)
+      .where(and(inArray(courseGifts.status, ["paid", "redeemed"]), isNotNull(courseGifts.razorpayPaymentId))),
   ])
 
   type TxRow = {
@@ -291,6 +304,31 @@ export async function GET(req: Request) {
       userEmail: r.userEmail ?? "",
       itemName: r.itemName ?? "Workshop",
       amount: r.amount ?? null,
+      razorpayPaymentId: r.razorpayPaymentId,
+      status: "paid",
+      createdAt: r.createdAt,
+    })),
+    // A course enrolment can hold two captured payments - the pre-registration
+    // and the balance - each listed as its own transaction.
+    ...allCourseEnrollments.flatMap((r) => {
+      const title = getCourse(r.courseSlug)?.title ?? "Course"
+      const base = { type: "course", userName: r.userName, userEmail: r.userEmail, status: "paid" }
+      return [
+        r.preRegPaymentId
+          ? { ...base, id: `${r.id}-pre`, itemName: `${title} - pre-registration`, amount: r.preRegAmountPaid, razorpayPaymentId: r.preRegPaymentId, createdAt: r.preRegisteredAt ?? r.createdAt }
+          : null,
+        r.balancePaymentId
+          ? { ...base, id: `${r.id}-bal`, itemName: `${title} - ${r.preRegPaymentId ? "balance" : "enrolment"}`, amount: r.balanceAmountPaid, razorpayPaymentId: r.balancePaymentId, createdAt: r.paidAt ?? r.createdAt }
+          : null,
+      ].filter((x): x is NonNullable<typeof x> => x !== null)
+    }),
+    ...allCourseGifts.map((r) => ({
+      id: r.id,
+      type: "course",
+      userName: r.purchaserName,
+      userEmail: r.purchaserEmail,
+      itemName: `${getCourse(r.courseSlug)?.title ?? "Course"} - gift for ${r.recipientName ?? "someone"}`,
+      amount: r.amountPaid,
       razorpayPaymentId: r.razorpayPaymentId,
       status: "paid",
       createdAt: r.createdAt,

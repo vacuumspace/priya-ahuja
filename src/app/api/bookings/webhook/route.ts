@@ -1,11 +1,13 @@
 import { NextRequest, NextResponse } from "next/server"
 import { db } from "@/lib/db"
-import { bookings, availability, purchases, pitchDeckUnlocks, toolUnlocks, priyaGptTimeUnlocks, services as servicesTable, workshopRegistrations, workshops } from "@/lib/db/schema"
-import { eq, and, ne, isNull } from "drizzle-orm"
+import { bookings, availability, purchases, pitchDeckUnlocks, toolUnlocks, priyaGptTimeUnlocks, services as servicesTable, workshopRegistrations, workshops, courseEnrollments, courseGifts } from "@/lib/db/schema"
+import { eq, and, ne, isNull, or } from "drizzle-orm"
 import { verifyWebhookSignature } from "@/lib/razorpay"
 import { createCalendarEvent } from "@/lib/google-calendar"
 import { sendBookingConfirmation, sendAdminBookingNotification } from "@/lib/mailer"
 import { finalizeWorkshopRegistration } from "@/lib/finalize-workshop-registration"
+import { confirmCoursePayment } from "@/lib/course-enrollment"
+import { confirmGiftPayment } from "@/lib/course-gift"
 import crypto from "crypto"
 
 export async function POST(req: NextRequest) {
@@ -218,6 +220,38 @@ export async function POST(req: NextRequest) {
         )
       }
     }
+
+    // Same safety net for course payments: a pre-registration or balance
+    // order whose browser never made it back. Matched on either order id, and
+    // confirmed even if the row was since cancelled - money has landed, so it
+    // wins (confirmCoursePayment is idempotent against the verify route).
+    if (paymentId && amountCaptured) {
+      const [enrollment] = await db
+        .select()
+        .from(courseEnrollments)
+        .where(or(eq(courseEnrollments.preRegOrderId, orderId), eq(courseEnrollments.balanceOrderId, orderId)))
+        .limit(1)
+
+      if (enrollment) {
+        const stage = enrollment.preRegOrderId === orderId ? "preregister" : "balance"
+        try {
+          await confirmCoursePayment(enrollment, stage, paymentId, amountCaptured)
+        } catch (e) {
+          console.error("[webhook] confirmCoursePayment failed:", e)
+        }
+      }
+
+      // Same for a course bought as a gift: the link goes live even if the
+      // buyer's browser never came back.
+      const [gift] = await db.select().from(courseGifts).where(eq(courseGifts.razorpayOrderId, orderId)).limit(1)
+      if (gift) {
+        try {
+          await confirmGiftPayment(gift, paymentId, amountCaptured)
+        } catch (e) {
+          console.error("[webhook] confirmGiftPayment failed:", e)
+        }
+      }
+    }
   }
 
   if (event.event === "payment.failed") {
@@ -239,6 +273,21 @@ export async function POST(req: NextRequest) {
       .update(workshopRegistrations)
       .set({ status: "cancelled" })
       .where(and(eq(workshopRegistrations.razorpayOrderId, orderId), eq(workshopRegistrations.status, "pending")))
+
+    // Only a never-paid checkout is cancelled - a failed balance attempt on an
+    // already pre-registered row leaves it pre-registered, free to retry.
+    await db
+      .update(courseEnrollments)
+      .set({ status: "cancelled" })
+      .where(and(
+        eq(courseEnrollments.status, "pending"),
+        or(eq(courseEnrollments.preRegOrderId, orderId), eq(courseEnrollments.balanceOrderId, orderId)),
+      ))
+
+    await db
+      .update(courseGifts)
+      .set({ status: "cancelled" })
+      .where(and(eq(courseGifts.razorpayOrderId, orderId), eq(courseGifts.status, "pending")))
   }
 
   return NextResponse.json({ ok: true })

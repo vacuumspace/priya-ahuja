@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
     let appliedCode: string | null = null
     let discountPaise = 0
     if (normalizeReferralCode(referralCode)) {
-      const check = await checkReferralCode(referralCode, service.price)
+      const check = await checkReferralCode(referralCode, { slug: service.slug, price: service.price })
       if (!check.ok) {
         return NextResponse.json({ error: check.error }, { status: 400 })
       }
@@ -45,6 +45,11 @@ export async function POST(req: NextRequest) {
       discountPaise = check.discountPaise
     }
     const payablePaise = service.price - discountPaise
+    // A fully-covered booking (course gift code) has nothing to charge - Razorpay
+    // rejects a zero order, so it goes through the free redemption route instead.
+    if (payablePaise < 100) {
+      return NextResponse.json({ error: "This code covers the full session - book it with the free option" }, { status: 400 })
+    }
 
     let resolvedSlotId: string | null = slotId ?? null
 

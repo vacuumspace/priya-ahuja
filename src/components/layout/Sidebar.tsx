@@ -27,6 +27,7 @@ const topicGroups = [
     prefix: "/school",
     children: [
       { label: "workshops", href: "/school/workshops" },
+      { label: "courses", href: "/school/courses" },
     ],
   },
   {
