@@ -291,7 +291,7 @@ export function RegistrationProvider({
   )
 }
 
-// Inline in the "₹999 off a 1:1" gift line of the description (via the
+// Inline in the "₹1000 off a 1:1" gift line of the description (via the
 // `[..](#referral)` token) - renders nothing until the visitor has registered
 // and has a code to show.
 export function ReferralCodeInline() {

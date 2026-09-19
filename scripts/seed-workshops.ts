@@ -31,7 +31,7 @@ This workshop is interactive, not a lecture. You can ask anything related to you
 Gifts for Founders (no expiry)
 1. Investable Pitch Deck Playbook ([Download](#playbook))
 2. Pitch Deck Analysis Tool powered by AI, onetime access, worth ₹199 ([Tool Link](/fundraise/tools/pitch-deck-analyser))
-3. ₹999 off on any 1:1 session, one time ([Book a session](/connect))[code](#referral)`,
+3. ₹1000 off on any 1:1 session, one time ([Book a session](/connect))[code](#referral)`,
     thumbnailUrl: "/workshops/fundable-pitch-deck.svg",
     date: "2026-09-27",
     startTime: "12:00",
@@ -56,7 +56,7 @@ This workshop is interactive. Bring your half formed ideas, your frustrations, y
 Gifts for Founders (no expiry)
 1. Startup Idea Playbook ([Download](#playbook))
 2. Startup Idea Score Tool powered by AI, onetime free access, worth ₹199 ([Tool Link](/startup/tools/idea-score))
-3. ₹999 off on any 1:1 session, one time ([Book a session](/connect))[code](#referral)`,
+3. ₹1000 off on any 1:1 session, one time ([Book a session](/connect))[code](#referral)`,
     thumbnailUrl: "/workshops/startup-idea-workshop.svg",
     date: "2026-10-04",
     startTime: "12:00",

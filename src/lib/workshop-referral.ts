@@ -3,8 +3,8 @@ import { db } from "@/lib/db"
 import { bookings, workshopRegistrations } from "@/lib/db/schema"
 import { and, eq, isNotNull, ne } from "drizzle-orm"
 
-// ₹999 off one 1:1 session, per workshop registrant.
-export const REFERRAL_DISCOUNT_PAISE = 99900
+// ₹1000 off one 1:1 session, per workshop registrant.
+export const REFERRAL_DISCOUNT_PAISE = 100000
 
 // Razorpay rejects orders under ₹1, so a discount never takes a booking below that.
 const MIN_PAYABLE_PAISE = 100

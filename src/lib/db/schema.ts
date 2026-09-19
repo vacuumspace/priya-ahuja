@@ -409,7 +409,7 @@ export const workshopRegistrations = pgTable("workshop_registrations", {
   userEmail: text("user_email").notNull(),
   stage: varchar("stage", { length: 30 }),
   sector: varchar("sector", { length: 30 }),
-  // Personal code for the workshop's "₹999 off a 1:1" gift, shared across all
+  // Personal code for the workshop's "₹1000 off a 1:1" gift, shared across all
   // of one email's registrations (see ensureReferralCode).
   referralCode: varchar("referral_code", { length: 20 }),
   razorpayOrderId: text("razorpay_order_id"),
