@@ -53,6 +53,11 @@ export const bookings = pgTable("bookings", {
   rescheduleCount: integer("reschedule_count").notNull().default(0),
   adminSeen: boolean("admin_seen").notNull().default(false),
   confirmationEmailSent: boolean("confirmation_email_sent").notNull().default(false),
+  // Workshop referral code applied at checkout (see workshop-referral.ts) and
+  // the amount it took off, in paise. A code counts as redeemed while any
+  // non-cancelled booking carries it.
+  referralCode: varchar("referral_code", { length: 20 }),
+  discountAmount: integer("discount_amount"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 })
 
@@ -404,6 +409,9 @@ export const workshopRegistrations = pgTable("workshop_registrations", {
   userEmail: text("user_email").notNull(),
   stage: varchar("stage", { length: 30 }),
   sector: varchar("sector", { length: 30 }),
+  // Personal code for the workshop's "₹999 off a 1:1" gift, shared across all
+  // of one email's registrations (see ensureReferralCode).
+  referralCode: varchar("referral_code", { length: 20 }),
   razorpayOrderId: text("razorpay_order_id"),
   razorpayPaymentId: text("razorpay_payment_id"),
   amountPaid: integer("amount_paid"), // actual captured amount in paise

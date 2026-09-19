@@ -5,6 +5,7 @@ import { createCalendarEvent, addAttendeeToCalendarEvent, WORKSHOP_REMINDERS } f
 import { sendWorkshopRegistrationConfirmation, sendAdminWorkshopNotification } from "@/lib/mailer"
 import { formatWorkshopTimeRange, formatWorkshopCalendarDescription } from "@/lib/workshop-time"
 import { grantWorkshopPitchDeckUnlock, grantWorkshopIdeaScoreUnlock } from "@/lib/workshop-perks"
+import { ensureReferralCode } from "@/lib/workshop-referral"
 
 type Workshop = typeof workshops.$inferSelect
 type Registration = typeof workshopRegistrations.$inferSelect
@@ -28,7 +29,14 @@ export async function finalizeWorkshopRegistration(
   registration: Registration,
   workshop: Workshop,
   { sendEmail = true }: { sendEmail?: boolean } = {}
-): Promise<{ meetLink: string | null }> {
+): Promise<{ meetLink: string | null; referralCode: string | null }> {
+  let referralCode: string | null = registration.referralCode
+  try {
+    referralCode = await ensureReferralCode(registration)
+  } catch (e) {
+    console.error("ensureReferralCode failed:", e)
+  }
+
   // Guests (no account) can't receive an account-tied perk yet - it's
   // granted retroactively via linkGuestWorkshopRegistrations if they later
   // sign in with the same email.
@@ -134,5 +142,5 @@ export async function finalizeWorkshopRegistration(
     }
   }
 
-  return { meetLink }
+  return { meetLink, referralCode }
 }

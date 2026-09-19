@@ -5,9 +5,9 @@ import { auth, isAdmin } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { workshops, workshopRegistrations, workshopFeedback } from "@/lib/db/schema"
 import { eq, and, notInArray } from "drizzle-orm"
-import { CalendarDays, Clock, ChevronLeft, GraduationCap, IndianRupee } from "lucide-react"
-import { formatWorkshopTimeRange, formatWorkshopPrice } from "@/lib/workshop-time"
-import { RegistrationProvider, RegisterTrigger, PlaybookDownloadTrigger } from "./RegisterCard"
+import { CalendarDays, Clock, ChevronLeft, GraduationCap } from "lucide-react"
+import { formatWorkshopTimeRange } from "@/lib/workshop-time"
+import { RegistrationProvider, RegisterTrigger, PlaybookDownloadTrigger, PriceOrRegistered, ReferralCodeInline } from "./RegisterCard"
 
 function formatDate(date: string) {
   // See identical comment in school/workshops/page.tsx - without an explicit
@@ -39,6 +39,9 @@ function renderDescription(text: string) {
     if (href === "#playbook") {
       return <PlaybookDownloadTrigger key={i} label={label} />
     }
+    if (href === "#referral") {
+      return <ReferralCodeInline key={i} />
+    }
     return (
       <Link key={i} href={href} className="text-peach-dark font-semibold hover:underline">
         {label}
@@ -69,10 +72,10 @@ export default async function WorkshopDetailPage({ params }: { params: Params })
 
   const isPast = new Date(`${workshop.date}T${workshop.endTime}:00+05:30`) < new Date()
 
-  let existingRegistration: { status: string } | null = null
+  let existingRegistration: { status: string; referralCode: string | null } | null = null
   if (session?.user?.id) {
     const [reg] = await db
-      .select({ status: workshopRegistrations.status })
+      .select({ status: workshopRegistrations.status, referralCode: workshopRegistrations.referralCode })
       .from(workshopRegistrations)
       .where(and(
         eq(workshopRegistrations.workshopId, workshop.id),
@@ -123,6 +126,8 @@ export default async function WorkshopDetailPage({ params }: { params: Params })
           userEmail={session?.user?.email ?? ""}
           existingStatus={existingRegistration?.status ?? null}
           initialMeetLink={workshop.meetLink}
+          initialReferralCode={existingRegistration?.status === "confirmed" ? existingRegistration.referralCode : null}
+          startsAt={new Date(`${workshop.date}T${workshop.startTime}:00+05:30`).toISOString()}
         >
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
             <div className="flex flex-col gap-1.5">
@@ -134,10 +139,7 @@ export default async function WorkshopDetailPage({ params }: { params: Params })
                 <Clock size={14} className="text-peach-dark" />
                 {formatWorkshopTimeRange(workshop.startTime, workshop.endTime)} IST
               </div>
-              <div className="flex items-center gap-1.5 text-sm font-sans text-ink/70">
-                <IndianRupee size={14} className="text-peach-dark" />
-                {formatWorkshopPrice(workshop.price)}
-              </div>
+              <PriceOrRegistered price={workshop.price} />
             </div>
 
             <RegisterTrigger />
@@ -165,6 +167,7 @@ export default async function WorkshopDetailPage({ params }: { params: Params })
 
           <div className="mt-10 flex flex-col items-center">
             <RegisterTrigger
+              align="center"
               label={BOTTOM_CTA_LABELS[workshop.slug] ?? "Register Now"}
               className="h-auto bg-peach-dark text-ink hover:bg-peach-dark/80 font-sans font-semibold text-sm px-10 py-3.5 rounded-xl"
             />

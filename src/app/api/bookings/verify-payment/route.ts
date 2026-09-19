@@ -68,14 +68,15 @@ export async function POST(req: NextRequest) {
     if (service) {
       try {
         const rzOrder = await fetchRazorpayOrder(razorpayOrderId)
-        if (rzOrder.amount !== service.price) {
-          console.error(`Amount mismatch: expected ${service.price}, got ${rzOrder.amount} for order ${razorpayOrderId}`)
+        const expected = service.price - (booking.discountAmount ?? 0)
+        if (rzOrder.amount !== expected) {
+          console.error(`Amount mismatch: expected ${expected}, got ${rzOrder.amount} for order ${razorpayOrderId}`)
           return NextResponse.json({ error: "Payment amount mismatch" }, { status: 400 })
         }
         amountPaid = rzOrder.amount
       } catch (err) {
         console.error("Razorpay order fetch failed (continuing):", err)
-        amountPaid = service.price
+        amountPaid = service.price - (booking.discountAmount ?? 0)
       }
     }
 

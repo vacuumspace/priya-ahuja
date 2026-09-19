@@ -44,7 +44,7 @@ export async function POST(req: NextRequest) {
 
     // Idempotency: if already confirmed AND post-payment side-effects completed, short-circuit
     if (registration.status === "confirmed" && registration.razorpayPaymentId && registration.calendarInviteSent) {
-      return NextResponse.json({ success: true, meetLink: workshop.meetLink })
+      return NextResponse.json({ success: true, meetLink: workshop.meetLink, referralCode: registration.referralCode })
     }
 
     const isValid = verifyPaymentSignature(razorpayOrderId, razorpayPaymentId, razorpaySignature)
@@ -74,9 +74,9 @@ export async function POST(req: NextRequest) {
       .where(eq(workshopRegistrations.id, registrationId))
       .returning()
 
-    const { meetLink } = await finalizeWorkshopRegistration(confirmed, workshop)
+    const { meetLink, referralCode } = await finalizeWorkshopRegistration(confirmed, workshop)
 
-    return NextResponse.json({ success: true, meetLink })
+    return NextResponse.json({ success: true, meetLink, referralCode })
   } catch (err) {
     console.error("workshop verify-payment error:", err)
     return NextResponse.json({ error: "Internal server error" }, { status: 500 })

@@ -4,6 +4,7 @@ import { db } from "@/lib/db"
 import { bookings, services as servicesTable, availability } from "@/lib/db/schema"
 import { getRazorpayInstance } from "@/lib/razorpay"
 import { eq, and } from "drizzle-orm"
+import { checkReferralCode, normalizeReferralCode } from "@/lib/workshop-referral"
 
 export async function POST(req: NextRequest) {
   try {
@@ -12,7 +13,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Sign in required" }, { status: 401 })
     }
 
-    const { serviceSlug, slotId, name, message } = await req.json()
+    const { serviceSlug, slotId, name, message, referralCode } = await req.json()
 
     if (!serviceSlug || !name) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
@@ -31,6 +32,19 @@ export async function POST(req: NextRequest) {
     if (service.type === "call" && !slotId) {
       return NextResponse.json({ error: "Please select a time slot" }, { status: 400 })
     }
+
+    // Checked before the slot is locked so a bad code doesn't leave a slot held.
+    let appliedCode: string | null = null
+    let discountPaise = 0
+    if (normalizeReferralCode(referralCode)) {
+      const check = await checkReferralCode(referralCode, service.price)
+      if (!check.ok) {
+        return NextResponse.json({ error: check.error }, { status: 400 })
+      }
+      appliedCode = check.code
+      discountPaise = check.discountPaise
+    }
+    const payablePaise = service.price - discountPaise
 
     let resolvedSlotId: string | null = slotId ?? null
 
@@ -84,7 +98,7 @@ export async function POST(req: NextRequest) {
 
     const razorpay = getRazorpayInstance()
     const order = await razorpay.orders.create({
-      amount: service.price,
+      amount: payablePaise,
       currency: "INR",
       receipt: `booking_${Date.now()}`,
     })
@@ -96,12 +110,14 @@ export async function POST(req: NextRequest) {
       userEmail: session.user.email,
       message: message || null,
       razorpayOrderId: order.id,
+      referralCode: appliedCode,
+      discountAmount: appliedCode ? discountPaise : null,
       status: "pending",
     }).returning({ id: bookings.id })
 
     return NextResponse.json({
       orderId: order.id,
-      amount: service.price,
+      amount: payablePaise,
       keyId: process.env.RAZORPAY_KEY_ID,
       bookingId: booking.id,
     })

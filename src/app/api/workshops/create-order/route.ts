@@ -90,12 +90,13 @@ export async function POST(req: NextRequest) {
         throw err
       }
 
-      const { meetLink } = await finalizeWorkshopRegistration(registration, workshop, { sendEmail: false })
+      const { meetLink, referralCode } = await finalizeWorkshopRegistration(registration, workshop, { sendEmail: false })
 
       return NextResponse.json({
         skipPayment: true,
         registrationId: registration.id,
         meetLink,
+        referralCode,
       })
     }
 

@@ -193,6 +193,12 @@ function BookingFormInner({ service }: { service: Service }) {
   const [name, setName] = useState("")
   const [message, setMessage] = useState("")
   const [deckLink, setDeckLink] = useState("")
+  const [referralCode, setReferralCode] = useState("")
+  const [referral, setReferral] = useState<
+    | { status: "idle" | "checking" }
+    | { status: "valid"; discountPaise: number; payablePaise: number }
+    | { status: "invalid"; error: string }
+  >({ status: "idle" })
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
   const [error, setError] = useState("")
@@ -206,6 +212,32 @@ function BookingFormInner({ service }: { service: Service }) {
 
   const isRescheduleMode = !!rescheduleId
 
+  // Checks the code shortly after typing stops so the discount shows
+  // immediately; the cleanup drops stale responses if the input changes again.
+  useEffect(() => {
+    const code = referralCode.trim()
+    if (!code) { setReferral({ status: "idle" }); return }
+    setReferral({ status: "checking" })
+    let cancelled = false
+    const timer = setTimeout(async () => {
+      try {
+        const res = await fetch("/api/bookings/validate-referral", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ serviceSlug: service.slug, referralCode: code }),
+        })
+        const data = await res.json()
+        if (cancelled) return
+        setReferral(res.ok
+          ? { status: "valid", discountPaise: data.discountPaise, payablePaise: data.payablePaise }
+          : { status: "invalid", error: data.error || "Invalid referral code" })
+      } catch {
+        if (!cancelled) setReferral({ status: "invalid", error: "Couldn't check the code, try again" })
+      }
+    }, 500)
+    return () => { cancelled = true; clearTimeout(timer) }
+  }, [referralCode, service.slug])
+
   useEffect(() => {
     if (!rescheduleId || !session) return
     fetch(`/api/bookings/${rescheduleId}`)
@@ -214,7 +246,8 @@ function BookingFormInner({ service }: { service: Service }) {
       .catch(() => setRescheduleCount(0))
   }, [rescheduleId, session])
   const needsSlot = service.type === "call"
-  const canSubmit = needsSlot ? selectedSlot !== null : true
+  const referralBlocksSubmit = !isRescheduleMode && (referral.status === "checking" || referral.status === "invalid")
+  const canSubmit = (needsSlot ? selectedSlot !== null : true) && !referralBlocksSubmit
 
   if (status === "unauthenticated") {
     return (
@@ -273,6 +306,7 @@ function BookingFormInner({ service }: { service: Service }) {
           slotId: selectedSlot?.id ?? null,
           name,
           message: fullMessage || null,
+          referralCode: referralCode.trim() || null,
         }),
       })
       const orderData = await orderRes.json()
@@ -450,6 +484,36 @@ function BookingFormInner({ service }: { service: Service }) {
         </div>
       )}
 
+      {!isRescheduleMode && (
+        <div>
+          <Label htmlFor="referralCode" className="text-xs font-sans text-ink/60 mb-1 block">
+            referral code <span className="text-ink/30">(optional)</span>
+          </Label>
+          <Input
+            id="referralCode"
+            value={referralCode}
+            onChange={(e) => setReferralCode(e.target.value.toUpperCase())}
+            placeholder="PRIYA-XXXXXX"
+            autoComplete="off"
+            className="bg-cream border-border text-sm"
+          />
+          {referral.status === "checking" && (
+            <p className="text-[12px] text-ink/40 mt-1 font-sans flex items-center gap-1.5"><Loader2 size={11} className="animate-spin" />checking code…</p>
+          )}
+          {referral.status === "valid" && (
+            <p className="text-[12px] text-green-700 mt-1 font-sans font-semibold">
+              ₹{(referral.discountPaise / 100).toLocaleString("en-IN")} off applied · you pay ₹{(referral.payablePaise / 100).toLocaleString("en-IN")}
+            </p>
+          )}
+          {referral.status === "invalid" && (
+            <p className="text-[12px] text-red-500 mt-1 font-sans">{referral.error}</p>
+          )}
+          {referral.status === "idle" && (
+            <p className="text-[12px] text-ink/40 mt-1 font-sans">workshop attendees get ₹999 off one session</p>
+          )}
+        </div>
+      )}
+
       {error && <p className="text-xs font-sans text-red-500 bg-red-50 px-3 py-2 rounded-lg">{error}</p>}
 
       <Button
@@ -463,6 +527,8 @@ function BookingFormInner({ service }: { service: Service }) {
           "select a slot to continue"
         ) : isRescheduleMode ? (
           "confirm reschedule"
+        ) : referral.status === "valid" ? (
+          `pay ₹${(referral.payablePaise / 100).toLocaleString("en-IN")} & book`
         ) : (
           "pay & book"
         )}

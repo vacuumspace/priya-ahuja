@@ -3,7 +3,7 @@
 import { createContext, useContext, useState, useEffect, type ReactNode } from "react"
 import Link from "next/link"
 import { signIn } from "next-auth/react"
-import { CheckCircle, Loader2, ArrowRight, X, Video, GraduationCap } from "lucide-react"
+import { CheckCircle, Loader2, ArrowRight, X, Video, GraduationCap, IndianRupee } from "lucide-react"
 import { loadRazorpay } from "@/lib/load-razorpay"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -30,6 +30,8 @@ type RegistrationState = {
   isSignedIn: boolean
   loading: boolean
   meetLink: string | null
+  referralCode: string | null
+  startsAt: string
   openRegister: () => void
 }
 
@@ -66,6 +68,8 @@ export function RegistrationProvider({
   userEmail,
   existingStatus,
   initialMeetLink,
+  initialReferralCode,
+  startsAt,
   children,
 }: {
   workshopSlug: string
@@ -78,6 +82,8 @@ export function RegistrationProvider({
   userEmail: string
   existingStatus: string | null
   initialMeetLink: string | null
+  initialReferralCode: string | null
+  startsAt: string
   children: ReactNode
 }) {
   const [name, setName] = useState(initialName)
@@ -88,6 +94,7 @@ export function RegistrationProvider({
   const [error, setError] = useState("")
   const [success, setSuccess] = useState(existingStatus === "confirmed")
   const [meetLink, setMeetLink] = useState(initialMeetLink)
+  const [referralCode, setReferralCode] = useState(initialReferralCode)
 
   const emailInvalid = emailTouched && email.trim() !== "" && !EMAIL_PATTERN.test(email)
 
@@ -133,6 +140,7 @@ export function RegistrationProvider({
 
       if (orderData.skipPayment) {
         if (orderData.meetLink) setMeetLink(orderData.meetLink)
+        if (orderData.referralCode) setReferralCode(orderData.referralCode)
         setSuccess(true)
         setModalStep(null)
         return
@@ -164,6 +172,7 @@ export function RegistrationProvider({
               const verifyData = await verifyRes.json()
               if (!verifyRes.ok) throw new Error(verifyData.error || "Payment verification failed")
               if (verifyData.meetLink) setMeetLink(verifyData.meetLink)
+              if (verifyData.referralCode) setReferralCode(verifyData.referralCode)
               resolve()
             } catch (err) {
               reject(err)
@@ -190,7 +199,7 @@ export function RegistrationProvider({
   }
 
   return (
-    <RegistrationContext.Provider value={{ isPast, existingStatus, success, isSignedIn, loading, meetLink, openRegister }}>
+    <RegistrationContext.Provider value={{ isPast, existingStatus, success, isSignedIn, loading, meetLink, referralCode, startsAt, openRegister }}>
       {children}
 
       {modalStep === "info" && (
@@ -281,9 +290,103 @@ export function RegistrationProvider({
   )
 }
 
-export function RegisterTrigger({ label = "register", className }: { label?: string; className?: string }) {
+// Inline in the "₹999 off a 1:1" gift line of the description (via the
+// `[..](#referral)` token) - renders nothing until the visitor has registered
+// and has a code to show.
+export function ReferralCodeInline() {
+  const ctx = useContext(RegistrationContext)
+  const [copied, setCopied] = useState(false)
+  if (!ctx?.success || !ctx.referralCode) return null
+  const code = ctx.referralCode
+
+  return (
+    <>
+      {" "}· code:{" "}
+      <button
+        type="button"
+        onClick={() => {
+          navigator.clipboard?.writeText(code).then(() => {
+            setCopied(true)
+            setTimeout(() => setCopied(false), 1500)
+          }).catch(() => {})
+        }}
+        className="text-peach-dark font-semibold hover:underline"
+        title="copy code"
+      >
+        {code}
+      </button>
+      {copied && <span className="text-[12px] text-ink/40"> copied</span>}
+    </>
+  )
+}
+
+// Price row in the details list - swapped for a "registered" tag once the
+// visitor has registered, since the price no longer matters to them.
+export function PriceOrRegistered({ price }: { price: number }) {
+  const ctx = useContext(RegistrationContext)
+  if (ctx?.success) {
+    return (
+      <span className="inline-flex items-center gap-1 text-xs font-sans font-semibold text-green-700 bg-green-100 px-2.5 py-1 rounded-full">
+        <CheckCircle size={12} /> registered
+      </span>
+    )
+  }
+  return (
+    <div className="flex items-center gap-1.5 text-sm font-sans text-ink/70">
+      <IndianRupee size={14} className="text-peach-dark" />
+      {formatWorkshopPrice(price)}
+    </div>
+  )
+}
+
+function formatTimeLeft(ms: number) {
+  const totalMins = Math.floor(ms / 60_000)
+  const d = Math.floor(totalMins / 1440)
+  const h = Math.floor((totalMins % 1440) / 60)
+  const m = totalMins % 60
+  return [d > 0 && `${d}d`, (d > 0 || h > 0) && `${h}h`, `${m}m`].filter(Boolean).join(" ")
+}
+
+// Rendered only after mount so the server's "now" can't disagree with the
+// client's and cause a hydration mismatch.
+function StartsInCountdown({ startsAt }: { startsAt: string }) {
+  const [now, setNow] = useState<number | null>(null)
+
+  useEffect(() => {
+    setNow(Date.now())
+    const id = setInterval(() => setNow(Date.now()), 30_000)
+    return () => clearInterval(id)
+  }, [])
+
+  if (now === null) return null
+  const msLeft = new Date(startsAt).getTime() - now
+  return (
+    <p className="text-[13px] font-sans font-semibold text-peach-dark">
+      {msLeft > 0 ? `starting in ${formatTimeLeft(msLeft)}` : "happening now"}
+    </p>
+  )
+}
+
+export function RegisterTrigger({
+  label = "register",
+  className,
+  align = "end",
+}: {
+  label?: string
+  className?: string
+  align?: "end" | "center"
+}) {
   const ctx = useContext(RegistrationContext)
   if (!ctx) return null
+  return (
+    <div className={`flex flex-col gap-2 ${align === "center" ? "items-center" : "items-start sm:items-end"}`}>
+      {!ctx.isPast && <StartsInCountdown startsAt={ctx.startsAt} />}
+      <RegisterAction ctx={ctx} label={label} className={className} />
+    </div>
+  )
+}
+
+function RegisterAction({ ctx, label, className }: { ctx: RegistrationState; label: string; className?: string }) {
   const { isPast, existingStatus, success, isSignedIn, loading, meetLink, openRegister } = ctx
 
   // Checked before isPast - someone who registered and attended should still
@@ -292,9 +395,6 @@ export function RegisterTrigger({ label = "register", className }: { label?: str
   if (success) {
     return (
       <div className="flex flex-wrap items-center gap-3">
-        <span className="inline-flex items-center gap-1 text-xs font-sans font-semibold text-green-700 bg-green-100 px-2.5 py-1 rounded-full">
-          <CheckCircle size={12} /> registered
-        </span>
         {meetLink && !isPast ? (
           <Link
             href={meetLink}
