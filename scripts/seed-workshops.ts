@@ -28,10 +28,10 @@ Built for early stage founders across all sectors - b2b, b2c, saas, d2c, fintech
 
 This workshop is interactive, not a lecture. You can ask anything related to your own pitch deck, and we'll work through it together, live.
 
-Gifts for Founders
+Gifts for Founders (no expiry)
 1. Investable Pitch Deck Playbook ([Download](#playbook))
-2. Pitch Deck Analysis Tool powered by AI, onetime access ([Tool Link](/fundraise/tools/pitch-deck-analyser))
-3. Rs.999 off on any 1:1 session, one time ([Book a session](/connect))[code](#referral)`,
+2. Pitch Deck Analysis Tool powered by AI, onetime access, worth ₹199 ([Tool Link](/fundraise/tools/pitch-deck-analyser))
+3. ₹999 off on any 1:1 session, one time ([Book a session](/connect))[code](#referral)`,
     thumbnailUrl: "/workshops/fundable-pitch-deck.svg",
     date: "2026-09-27",
     startTime: "12:00",
@@ -53,10 +53,10 @@ Built for anyone stuck at square one, whether that's not having an idea at all, 
 
 This workshop is interactive. Bring your half formed ideas, your frustrations, your "what if", we'll pressure test them live, together.
 
-Gifts for Founders
-1. Startup Idea Score Tool powered by AI, onetime free access ([Tool Link](/startup/tools/idea-score))
-2. Startup Idea Playbook ([Download](#playbook))
-3. Rs.999 off on any 1:1 session, one time ([Book a session](/connect))[code](#referral)`,
+Gifts for Founders (no expiry)
+1. Startup Idea Playbook ([Download](#playbook))
+2. Startup Idea Score Tool powered by AI, onetime free access, worth ₹199 ([Tool Link](/startup/tools/idea-score))
+3. ₹999 off on any 1:1 session, one time ([Book a session](/connect))[code](#referral)`,
     thumbnailUrl: "/workshops/startup-idea-workshop.svg",
     date: "2026-10-04",
     startTime: "12:00",

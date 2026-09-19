@@ -25,7 +25,7 @@ const CODE_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"
 function generateCode() {
   let suffix = ""
   for (let i = 0; i < 6; i++) suffix += CODE_ALPHABET[randomInt(CODE_ALPHABET.length)]
-  return `PRIYA-${suffix}`
+  return suffix
 }
 
 async function backfill() {

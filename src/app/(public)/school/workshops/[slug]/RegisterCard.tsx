@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { formatWorkshopPrice } from "@/lib/workshop-time"
 import { WORKSHOP_SECTORS, type WorkshopSector } from "@/lib/workshop-form-options"
+import { StartsInCountdown } from "@/components/StartsInCountdown"
 
 declare global {
   interface Window {
@@ -297,7 +298,7 @@ export function ReferralCodeInline() {
   const ctx = useContext(RegistrationContext)
   const [copied, setCopied] = useState(false)
   if (!ctx?.success || !ctx.referralCode) return null
-  const code = ctx.referralCode
+  const code = ctx.referralCode.toLowerCase()
 
   return (
     <>
@@ -326,7 +327,7 @@ export function PriceOrRegistered({ price }: { price: number }) {
   const ctx = useContext(RegistrationContext)
   if (ctx?.success) {
     return (
-      <span className="inline-flex items-center gap-1 text-xs font-sans font-semibold text-green-700 bg-green-100 px-2.5 py-1 rounded-full">
+      <span className="inline-flex self-start items-center gap-1 text-xs font-sans font-semibold text-green-700 bg-green-100 px-2.5 py-1 rounded-full">
         <CheckCircle size={12} /> registered
       </span>
     )
@@ -336,34 +337,6 @@ export function PriceOrRegistered({ price }: { price: number }) {
       <IndianRupee size={14} className="text-peach-dark" />
       {formatWorkshopPrice(price)}
     </div>
-  )
-}
-
-function formatTimeLeft(ms: number) {
-  const totalMins = Math.floor(ms / 60_000)
-  const d = Math.floor(totalMins / 1440)
-  const h = Math.floor((totalMins % 1440) / 60)
-  const m = totalMins % 60
-  return [d > 0 && `${d}d`, (d > 0 || h > 0) && `${h}h`, `${m}m`].filter(Boolean).join(" ")
-}
-
-// Rendered only after mount so the server's "now" can't disagree with the
-// client's and cause a hydration mismatch.
-function StartsInCountdown({ startsAt }: { startsAt: string }) {
-  const [now, setNow] = useState<number | null>(null)
-
-  useEffect(() => {
-    setNow(Date.now())
-    const id = setInterval(() => setNow(Date.now()), 30_000)
-    return () => clearInterval(id)
-  }, [])
-
-  if (now === null) return null
-  const msLeft = new Date(startsAt).getTime() - now
-  return (
-    <p className="text-[13px] font-sans font-semibold text-peach-dark">
-      {msLeft > 0 ? `starting in ${formatTimeLeft(msLeft)}` : "happening now"}
-    </p>
   )
 }
 

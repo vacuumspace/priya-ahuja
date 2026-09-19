@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import Link from "next/link"
 import { X, GraduationCap } from "lucide-react"
+import { StartsInCountdown } from "@/components/StartsInCountdown"
 import { formatWorkshopTimeRange, formatWorkshopPrice, formatWorkshopDate } from "@/lib/workshop-time"
 
 export type PromoWorkshop = {
@@ -70,6 +71,10 @@ export default function WorkshopPromoPopup({ workshop }: { workshop: PromoWorksh
           <p className="font-sans text-sm font-semibold text-ink/80 mb-1">
             {formatWorkshopDate(workshop.date)} · {formatWorkshopTimeRange(workshop.startTime, workshop.endTime)} IST
           </p>
+          <StartsInCountdown
+            startsAt={new Date(`${workshop.date}T${workshop.startTime}:00+05:30`).toISOString()}
+            className="text-[13px] font-sans font-semibold text-peach-dark mb-1"
+          />
           <p className="font-heading text-base font-600 text-ink/60 mb-5">{formatWorkshopPrice(workshop.price)}</p>
           <Link
             href={`/school/workshops/${workshop.slug}`}

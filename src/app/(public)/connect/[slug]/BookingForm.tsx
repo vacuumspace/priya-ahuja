@@ -492,8 +492,7 @@ function BookingFormInner({ service }: { service: Service }) {
           <Input
             id="referralCode"
             value={referralCode}
-            onChange={(e) => setReferralCode(e.target.value.toUpperCase())}
-            placeholder="PRIYA-XXXXXX"
+            onChange={(e) => setReferralCode(e.target.value.toLowerCase())}
             autoComplete="off"
             className="bg-cream border-border text-sm"
           />
@@ -507,9 +506,6 @@ function BookingFormInner({ service }: { service: Service }) {
           )}
           {referral.status === "invalid" && (
             <p className="text-[12px] text-red-500 mt-1 font-sans">{referral.error}</p>
-          )}
-          {referral.status === "idle" && (
-            <p className="text-[12px] text-ink/40 mt-1 font-sans">workshop attendees get ₹999 off one session</p>
           )}
         </div>
       )}

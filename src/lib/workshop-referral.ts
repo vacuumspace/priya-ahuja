@@ -19,7 +19,7 @@ export function normalizeReferralCode(input: unknown): string {
 function generateCode() {
   let suffix = ""
   for (let i = 0; i < 6; i++) suffix += CODE_ALPHABET[randomInt(CODE_ALPHABET.length)]
-  return `PRIYA-${suffix}`
+  return suffix
 }
 
 // One code per person (keyed on email, like the registrations themselves),
