@@ -1,6 +1,6 @@
 import { db } from "@/lib/db"
 import { workshops, workshopRegistrations } from "@/lib/db/schema"
-import { desc, count, eq, sum } from "drizzle-orm"
+import { desc, count, eq, sum, notInArray } from "drizzle-orm"
 import WorkshopsClient from "./WorkshopsClient"
 
 type SearchParams = Promise<{ tab?: string }>
@@ -10,7 +10,7 @@ export default async function AdminWorkshopsPage({ searchParams }: { searchParam
 
   const [allWorkshops, registrationCount, perWorkshopStats] = await Promise.all([
     db.select().from(workshops).orderBy(desc(workshops.createdAt)),
-    db.select({ count: count() }).from(workshopRegistrations),
+    db.select({ count: count() }).from(workshopRegistrations).where(notInArray(workshopRegistrations.status, ["pending", "cancelled"])),
     // Registered + sales (actual amount captured, not the workshop's listed
     // price) per workshop, for the list tab's columns.
     db

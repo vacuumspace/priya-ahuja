@@ -31,6 +31,7 @@ export async function GET() {
     })
     .from(workshopRegistrations)
     .leftJoin(workshops, eq(workshopRegistrations.workshopId, workshops.id))
+    .where(notInArray(workshopRegistrations.status, ["pending", "cancelled"]))
     .orderBy(desc(workshopRegistrations.createdAt))
 
   const serialized = rows.map((r) => ({
