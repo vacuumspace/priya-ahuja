@@ -66,6 +66,9 @@ export async function createCalendarEvent({
       // Attendees on a shared event (workshops) must not see who else is
       // registered - irrelevant for a 1-attendee booking, harmless to set.
       guestsCanSeeOtherGuests: false,
+      // Google defaults this to true, which lets any guest forward the invite
+      // and have the forwardee accept straight onto the guest list, bypassing payment.
+      guestsCanInviteOthers: false,
       conferenceData: {
         createRequest: {
           requestId: `booking-${Date.now()}`,
@@ -119,6 +122,8 @@ export async function addAttendeeToCalendarEvent({
     sendUpdates: "all",
     requestBody: {
       attendees: [...attendees, { email: attendeeEmail, displayName: attendeeName }],
+      // Also locks down events created before this flag was set on creation.
+      guestsCanInviteOthers: false,
     },
   })
 
