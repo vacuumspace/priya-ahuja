@@ -198,6 +198,7 @@ function WhyModal({ onClose }: { onClose: () => void }) {
           <p>founders rarely notice their own daily wins. building a startup is an extremely slow process - progress rarely feels like progress in the moment.</p>
           <p>this is a place to mark the small stuff as it happens, one line a day. not for anyone else - for your own future reference, and for daily reflection.</p>
           <p>100 days of proof that you moved forward, even on the days it didn&apos;t feel like it.</p>
+          <p>we started this the day exactly 100 days were left in 2026 - to build the habit ourselves too. we&apos;ll see how it goes.</p>
         </div>
       </div>
     </div>
