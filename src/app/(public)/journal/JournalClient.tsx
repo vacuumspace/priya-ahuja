@@ -124,7 +124,7 @@ export function JournalClient({
                       : ""
                   } ${
                     entry
-                      ? "bg-ink text-cream"
+                      ? "bg-peach-dark text-ink"
                       : fillable
                         ? "bg-peach-dark/20 text-ink/40 hover:bg-peach-dark/40 cursor-pointer"
                         : "bg-ink/5 text-ink/20 cursor-not-allowed"
@@ -140,7 +140,7 @@ export function JournalClient({
           </div>
 
           <div className="flex items-center gap-3 mt-3 text-[11px] font-sans text-ink/50">
-            <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-sm bg-ink inline-block" /> posted</span>
+            <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-sm bg-peach-dark inline-block" /> posted</span>
             <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-sm bg-peach-dark/20 inline-block" /> pending</span>
             <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-sm bg-ink/5 inline-block" /> locked</span>
           </div>
