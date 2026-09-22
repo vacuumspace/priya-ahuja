@@ -344,6 +344,13 @@
       "when": 1790089089153,
       "tag": "0048_outstanding_hercules",
       "breakpoints": true
+    },
+    {
+      "idx": 49,
+      "version": "7",
+      "when": 1790096457000,
+      "tag": "0049_scheduled_at_timestamptz",
+      "breakpoints": true
     }
   ]
 }

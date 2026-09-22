@@ -517,7 +517,10 @@ export const dailyWinEntries = pgTable("daily_win_entries", {
   // Only set by scripts/seed-synthetic-wall.ts, so a pre-loaded synthetic
   // entry doesn't appear on the public wall until this real-world instant -
   // see the scheduledAt filter in lib/journal-wall.ts.
-  scheduledAt: timestamp("scheduled_at"),
+  // withTimezone: true - a naive timestamp here gets misread by ~5:30h on any
+  // machine/runtime whose local zone is IST (the pg driver parses the naive
+  // string in local time), which silently unlocked synthetic posts early.
+  scheduledAt: timestamp("scheduled_at", { withTimezone: true }),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 }, (table) => [

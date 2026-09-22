@@ -30,7 +30,7 @@ const db = drizzle(sql)
 // Each persona posts on a random subset of days, at its own activity rate -
 // some are near-daily, some post every couple of days, like a real cohort.
 const PERSONAS: { name: string; activity: number }[] = [
-  { name: "Rahul Ahuja", activity: 0.9 },
+  { name: "Rhea Kapadia", activity: 0.9 },
   { name: "Ananya Iyer", activity: 0.7 },
   { name: "Karan Mehta", activity: 0.6 },
   { name: "Priya Shah", activity: 0.75 },
