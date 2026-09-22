@@ -12,6 +12,7 @@ type SidebarProps = { isAdmin?: boolean; isSignedIn?: boolean; userName?: string
 
 const topItems = [
   { label: "home", href: "/", badge: null },
+  { label: "100 days", href: "/journal", badge: null },
 ]
 
 const INVESTOR_LIST_ITEMS = [

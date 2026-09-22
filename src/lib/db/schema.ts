@@ -213,6 +213,13 @@ export const userProfiles = pgTable("user_profiles", {
   instagramHandle: text("instagram_handle"),
   linkedinUrl: text("linkedin_url"),
   twitterHandle: text("twitter_handle"),
+  // Shown on the public "100 days" journal wall instead of the real Google
+  // name/photo - set the first time a user makes their journal public.
+  journalDisplayName: text("journal_display_name"),
+  // Whole-journal setting, not per entry - "public" puts every non-flagged
+  // entry on the wall, "private" hides all of them regardless of individual
+  // entry content.
+  journalVisibility: varchar("journal_visibility", { length: 10 }).notNull().default("private"),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 })
 
@@ -492,6 +499,29 @@ export const courseEnrollments = pgTable("course_enrollments", {
     .on(table.courseSlug, table.userId)
     .where(sql`${table.status} <> 'cancelled'`),
   uniqueIndex("course_enrollments_gift_code_unique").on(table.giftCode),
+])
+
+// "100 days" daily-win journal. One row per user per calendar day within the
+// fixed challenge window (see lib/daily-win-journal.ts) - late joiners can
+// backfill any past day in that window, so entryDate is not tied to signup.
+export const dailyWinEntries = pgTable("daily_win_entries", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  entryDate: varchar("entry_date", { length: 10 }).notNull(), // YYYY-MM-DD
+  points: text("points").array().notNull().default([]), // up to 3 one-liners, ≤180 chars each
+  // Checked on every save (regardless of the journal's current public/private
+  // setting) so a later switch to public never surfaces unmoderated
+  // wording that was written while the journal was still private.
+  moderationFlagged: boolean("moderation_flagged").notNull().default(false),
+  // Null for every real, user-written entry (always visible once posted).
+  // Only set by scripts/seed-synthetic-wall.ts, so a pre-loaded synthetic
+  // entry doesn't appear on the public wall until this real-world instant -
+  // see the scheduledAt filter in lib/journal-wall.ts.
+  scheduledAt: timestamp("scheduled_at"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+}, (table) => [
+  uniqueIndex("daily_win_entries_user_date_unique").on(table.userId, table.entryDate),
 ])
 
 // A course bought as a gift. The purchaser pays in full and gets a one-time

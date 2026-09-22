@@ -1,0 +1,1 @@
+ALTER TABLE "daily_win_entries" ADD COLUMN "scheduled_at" timestamp;
