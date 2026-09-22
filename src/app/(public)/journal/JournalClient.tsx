@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useMemo, useRef, useState } from "react"
-import { ChevronLeft, ChevronRight, Globe, Info, Lock, Loader2, Pencil, Trash2, X } from "lucide-react"
+import { ChevronLeft, ChevronRight, Globe, HelpCircle, Info, Lock, Loader2, Pencil, Trash2, X } from "lucide-react"
 import {
   addDays,
   allChallengeDates,
@@ -64,6 +64,7 @@ export function JournalClient({
   const [displayName, setDisplayName] = useState(journalDisplayName)
   const [visibility, setVisibility] = useState(journalVisibility)
   const [wallRefreshToken, setWallRefreshToken] = useState(0)
+  const [showWhy, setShowWhy] = useState(false)
 
   const todayDayNumber = dayNumberForDate(today) ?? 0
   const postedDates = useMemo(() => dates.filter((d) => byDate[d]), [dates, byDate])
@@ -89,7 +90,12 @@ export function JournalClient({
       </div>
 
       <div className="px-4 md:px-10 pt-8 pb-16 max-w-6xl mx-auto">
-        <h1 className="font-heading text-3xl font-800 text-peach-dark mb-2">challenge 100 days = 100 wins</h1>
+        <div className="flex items-center gap-2 mb-2">
+          <h1 className="font-heading text-3xl font-800 text-peach-dark">challenge 100 days = 100 wins</h1>
+          <button onClick={() => setShowWhy(true)} className="text-ink/30 hover:text-ink flex-shrink-0" aria-label="why this exists">
+            <HelpCircle size={18} />
+          </button>
+        </div>
         <p className="font-sans text-sm text-ink/60 mb-2">
           post everyday&apos;s win. day {todayDayNumber}
         </p>
@@ -174,6 +180,26 @@ export function JournalClient({
           }}
         />
       )}
+
+      {showWhy && <WhyModal onClose={() => setShowWhy(false)} />}
+    </div>
+  )
+}
+
+function WhyModal({ onClose }: { onClose: () => void }) {
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm px-4" onClick={onClose}>
+      <div className="w-96 max-w-full border border-border rounded-xl bg-cream shadow-xl p-5" onClick={(e) => e.stopPropagation()}>
+        <div className="flex items-center justify-between mb-3">
+          <h3 className="font-heading text-lg font-800 text-ink">why this exists</h3>
+          <button onClick={onClose} className="text-ink/40 hover:text-ink"><X size={16} /></button>
+        </div>
+        <div className="flex flex-col gap-3 font-sans text-sm text-ink/70 leading-relaxed">
+          <p>founders rarely notice their own daily wins. building a startup is an extremely slow process - progress rarely feels like progress in the moment.</p>
+          <p>this is a place to mark the small stuff as it happens, one line a day. not for anyone else - for your own future reference, and for daily reflection.</p>
+          <p>100 days of proof that you moved forward, even on the days it didn&apos;t feel like it.</p>
+        </div>
+      </div>
     </div>
   )
 }
