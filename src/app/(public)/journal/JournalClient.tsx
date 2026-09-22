@@ -15,6 +15,7 @@ import {
   MAX_POINT_LENGTH,
 } from "@/lib/daily-win-journal"
 import { type WallRow } from "@/lib/journal-wall"
+import SignInOptions from "@/components/SignInOptions"
 
 type Entry = { date: string; points: string[]; moderationFlagged: boolean }
 
@@ -30,8 +31,20 @@ function formatDate(date: string): string {
   })
 }
 
+function restoreDraft(isSignedIn: boolean, date: string, setText: (text: string) => void) {
+  try {
+    const raw = sessionStorage.getItem("journal-draft")
+    if (!raw) return
+    sessionStorage.removeItem("journal-draft")
+    const draft = JSON.parse(raw) as { date: string; text: string }
+    if (isSignedIn && draft.date === date) setText(draft.text)
+  } catch {
+    // ignore malformed/inaccessible storage
+  }
+}
+
 export function JournalClient({
-  entries, journalDisplayName, accountName, journalVisibility, wallEntries, wallDate,
+  entries, journalDisplayName, accountName, journalVisibility, wallEntries, wallDate, isSignedIn,
 }: {
   entries: Entry[]
   journalDisplayName: string
@@ -39,6 +52,7 @@ export function JournalClient({
   journalVisibility: "public" | "private"
   wallEntries: WallRow[]
   wallDate: string
+  isSignedIn: boolean
 }) {
   const dates = useMemo(() => allChallengeDates(), [])
   const today = todayIST()
@@ -90,18 +104,20 @@ export function JournalClient({
         <p className="font-sans text-[11px] text-ink/40 mt-1">{Math.round((filledCount / CHALLENGE_DAYS) * 100)}% complete</p>
 
         <div className="mt-6">
-          <div className="flex justify-end mb-3">
-            <VisibilityControl
-              visibility={visibility}
-              displayName={displayName}
-              accountName={accountName}
-              onChanged={(v, name) => {
-                setVisibility(v)
-                if (name) setDisplayName(name)
-                setWallRefreshToken((n) => n + 1)
-              }}
-            />
-          </div>
+          {isSignedIn && (
+            <div className="flex justify-end mb-3">
+              <VisibilityControl
+                visibility={visibility}
+                displayName={displayName}
+                accountName={accountName}
+                onChanged={(v, name) => {
+                  setVisibility(v)
+                  if (name) setDisplayName(name)
+                  setWallRefreshToken((n) => n + 1)
+                }}
+              />
+            </div>
+          )}
 
           <span className="font-sans text-[10px] text-ink/30 block mb-1">{formatShortDate(CHALLENGE_START_DATE)}</span>
           <div className="grid gap-1.5 grid-cols-10 sm:grid-cols-15 lg:grid-cols-20 xl:grid-cols-25">
@@ -146,7 +162,7 @@ export function JournalClient({
           </div>
 
           <div className="max-w-md mt-8">
-            <RecordCard date={selected} entry={byDate[selected]} onSaved={handleEntrySaved} />
+            <RecordCard date={selected} entry={byDate[selected]} onSaved={handleEntrySaved} isSignedIn={isSignedIn} />
           </div>
         </div>
 
@@ -376,15 +392,17 @@ function VisibilityControl({
 }
 
 function RecordCard({
-  date, entry, onSaved,
+  date, entry, onSaved, isSignedIn,
 }: {
   date: string
   entry: Entry | undefined
   onSaved: (entry: Entry) => void
+  isSignedIn: boolean
 }) {
   const [text, setText] = useState("")
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState("")
+  const [showSignIn, setShowSignIn] = useState(false)
 
   const dayNum = dayNumberForDate(date)
 
@@ -397,7 +415,25 @@ function RecordCard({
     setError("")
   }
 
+  // Restores a draft stashed just before a sign-in redirect (see handleSave
+  // below) - only on first mount, so a freshly loaded page after signing in
+  // picks it back up if it's still for this same day.
+  useEffect(() => {
+    restoreDraft(isSignedIn, date, setText)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   async function handleSave() {
+    if (!isSignedIn) {
+      try {
+        sessionStorage.setItem("journal-draft", JSON.stringify({ date, text }))
+      } catch {
+        // ignore - sign-in still proceeds, just without the draft restored
+      }
+      setShowSignIn(true)
+      return
+    }
+
     setError("")
     const cleaned = text.split("\n").map((p) => p.trim()).filter(Boolean).slice(0, MAX_POINTS_PER_ENTRY)
     if (cleaned.length === 0) {
@@ -479,6 +515,20 @@ function RecordCard({
       </div>
 
       {error && <p className="font-sans text-xs text-red-500 mt-2">{error}</p>}
+
+      {showSignIn && <SignInPrompt onClose={() => setShowSignIn(false)} />}
+    </div>
+  )
+}
+
+function SignInPrompt({ onClose }: { onClose: () => void }) {
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm px-4" onClick={onClose}>
+      <div className="w-80 max-w-full border border-border rounded-xl bg-cream shadow-xl p-5 text-center" onClick={(e) => e.stopPropagation()}>
+        <h3 className="font-heading text-lg font-800 text-ink mb-1.5">sign in to post</h3>
+        <p className="font-sans text-sm text-ink/60 mb-5">your win is saved here once you sign in - free, takes a few seconds.</p>
+        <SignInOptions callbackUrl="/journal" />
+      </div>
     </div>
   )
 }
