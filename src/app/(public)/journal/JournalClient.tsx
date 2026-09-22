@@ -10,7 +10,6 @@ import {
   todayIST,
   CHALLENGE_START_DATE,
   CHALLENGE_END_DATE,
-  CHALLENGE_DAYS,
   MAX_POINTS_PER_ENTRY,
   MAX_POINT_LENGTH,
 } from "@/lib/daily-win-journal"
@@ -66,7 +65,6 @@ export function JournalClient({
   const [visibility, setVisibility] = useState(journalVisibility)
   const [wallRefreshToken, setWallRefreshToken] = useState(0)
 
-  const filledCount = Object.keys(byDate).length
   const todayDayNumber = dayNumberForDate(today) ?? 0
   const postedDates = useMemo(() => dates.filter((d) => byDate[d]), [dates, byDate])
 
@@ -95,14 +93,6 @@ export function JournalClient({
         <p className="font-sans text-sm text-ink/60 mb-2">
           post everyday&apos;s win. day {todayDayNumber}
         </p>
-        <div className="w-full max-w-xs h-1.5 rounded-full bg-peach-dark/20 overflow-hidden">
-          <div
-            className="h-full bg-ink rounded-full transition-all"
-            style={{ width: `${Math.min(100, (filledCount / CHALLENGE_DAYS) * 100)}%` }}
-          />
-        </div>
-        <p className="font-sans text-[11px] text-ink/40 mt-1">{Math.round((filledCount / CHALLENGE_DAYS) * 100)}% complete</p>
-
         <div className="mt-6">
           {isSignedIn && (
             <div className="flex justify-end mb-3">
