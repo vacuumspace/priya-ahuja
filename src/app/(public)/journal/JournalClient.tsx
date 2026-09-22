@@ -100,8 +100,13 @@ export function JournalClient({
           post everyday&apos;s win. day {todayDayNumber}
         </p>
         <div className="mt-6">
-          {isSignedIn && (
-            <div className="flex justify-end mb-3">
+          <div className="flex items-center justify-end gap-4 flex-wrap mb-3">
+            <div className="flex items-center gap-3 text-[11px] font-sans text-ink/50">
+              <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-sm bg-peach-dark inline-block" /> posted</span>
+              <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-sm bg-peach-dark/20 inline-block" /> pending</span>
+              <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-sm bg-ink/5 inline-block" /> locked</span>
+            </div>
+            {isSignedIn && (
               <VisibilityControl
                 visibility={visibility}
                 displayName={displayName}
@@ -112,8 +117,8 @@ export function JournalClient({
                   setWallRefreshToken((n) => n + 1)
                 }}
               />
-            </div>
-          )}
+            )}
+          </div>
 
           <span className="font-sans text-[10px] text-ink/30 block mb-1">{formatShortDate(CHALLENGE_START_DATE)}</span>
           <div className="grid gap-1.5 grid-cols-10 sm:grid-cols-15 lg:grid-cols-20 xl:grid-cols-25">
@@ -130,7 +135,7 @@ export function JournalClient({
                   disabled={!fillable && !entry}
                   onClick={() => (entry ? setViewingDate(date) : setSelected(date))}
                   title={`day ${dayNum} · ${formatDate(date)}`}
-                  className={`aspect-square w-full rounded-sm text-[9px] font-sans font-semibold flex items-center justify-center transition-colors ${
+                  className={`aspect-square w-full rounded-sm border border-border text-[9px] font-sans font-semibold flex items-center justify-center transition-colors ${
                     isSelected
                       ? "ring-2 ring-ink ring-offset-1 ring-offset-cream"
                       : ""
@@ -149,12 +154,6 @@ export function JournalClient({
             <span className="h-full flex items-center font-sans text-[10px] text-ink/30 pl-1">
               {formatShortDate(CHALLENGE_END_DATE)}
             </span>
-          </div>
-
-          <div className="flex items-center gap-3 mt-3 text-[11px] font-sans text-ink/50">
-            <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-sm bg-peach-dark inline-block" /> posted</span>
-            <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-sm bg-peach-dark/20 inline-block" /> pending</span>
-            <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-sm bg-ink/5 inline-block" /> locked</span>
           </div>
 
           <div className="max-w-md mt-8">
