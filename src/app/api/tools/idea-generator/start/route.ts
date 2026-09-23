@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { auth } from "@/lib/auth"
+import { auth, isAdmin } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { ideaGenReports, toolUnlocks } from "@/lib/db/schema"
 import { and, eq } from "drizzle-orm"
@@ -7,13 +7,16 @@ import { sendPurchaseWelcome } from "@/lib/mailer"
 
 // Consumes a paid unlock and creates the draft answer row. If the user
 // already has an unfinished draft (closed tab mid-wizard), resume it instead
-// of consuming another unlock or creating a duplicate.
+// of consuming another unlock or creating a duplicate. Admins skip the
+// payment requirement entirely - same "admin test run" pattern as the other
+// paid tools (amountPaid null, no razorpay ids, no purchase email).
 export async function POST() {
   const session = await auth()
   if (!session?.user?.id) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   }
   const userId = session.user.id
+  const adminUser = isAdmin(session.user.email)
 
   const [existingDraft] = await db
     .select({ id: ideaGenReports.id })
@@ -22,6 +25,14 @@ export async function POST() {
     .limit(1)
   if (existingDraft) {
     return NextResponse.json({ id: existingDraft.id })
+  }
+
+  if (adminUser) {
+    const [row] = await db
+      .insert(ideaGenReports)
+      .values({ userId })
+      .returning({ id: ideaGenReports.id })
+    return NextResponse.json({ id: row.id })
   }
 
   const [unlock] = await db

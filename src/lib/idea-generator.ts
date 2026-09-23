@@ -29,6 +29,7 @@ export type GeneratedIdea = {
   keyCompetitors: string[]
   differentiation: string
   businessModel: string
+  mvp: string
   gtmPlan: GtmPhase[]
   capitalNeeded: string
   timeToFirstRevenue: string
@@ -189,6 +190,7 @@ Respond with ONLY this JSON structure, no markdown fences:
       "keyCompetitors": ["<2-4 short entries, each 'name - one line on their gap'>"],
       "differentiation": "<2-3 sentences: the specific wedge/differentiation, grounded in the founder's advantage, not a generic claim>",
       "businessModel": "<2-3 sentences: how this actually makes money - pricing model, unit economics logic>",
+      "mvp": "<3-4 sentences: the smallest version of this actually worth building first - the exact minimum scope/feature set to test the core idea, and just as importantly what to deliberately leave out at this stage>",
       "gtmPlan": [
         {"phase": "days 1-30", "steps": ["<2-4 concrete steps>"]},
         {"phase": "days 31-60", "steps": ["<2-4 concrete steps>"]},
@@ -228,6 +230,7 @@ Respond with ONLY this JSON structure, no markdown fences:
         keyCompetitors: strArr(i?.keyCompetitors, 4),
         differentiation: str(i?.differentiation),
         businessModel: str(i?.businessModel),
+        mvp: str(i?.mvp),
         gtmPlan,
         capitalNeeded: str(i?.capitalNeeded),
         timeToFirstRevenue: str(i?.timeToFirstRevenue),

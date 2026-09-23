@@ -1,4 +1,4 @@
-import { auth } from "@/lib/auth"
+import { auth, isAdmin } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { ideaGenReports, siteSettings, toolUnlocks } from "@/lib/db/schema"
 import { and, desc, eq } from "drizzle-orm"
@@ -50,7 +50,7 @@ export default async function IdeaGeneratorPage() {
       price={price}
       resumeId={resumeId}
       existingReportId={existingReportId}
-      hasPaidUnlock={hasPaidUnlock}
+      hasPaidUnlock={hasPaidUnlock || isAdmin(email)}
     />
   )
 }

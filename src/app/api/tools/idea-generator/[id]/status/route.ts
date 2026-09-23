@@ -32,7 +32,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
 
   // Progress bar is purely time-paced against the random reveal target -
   // decoupled from whether the real report is actually done generating yet.
-  let progressPct = Math.min(99, Math.round((elapsed / target) * 100))
+  const progressPct = Math.min(99, Math.round((elapsed / target) * 100))
   const overdue = now > revealAt + 15 * 60_000 // 15 min grace past target with nothing to show
 
   if (isReady && now >= revealAt) {
@@ -47,11 +47,8 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
     return NextResponse.json({ status: "failed", progressPct })
   }
 
-  if (isReady) {
-    // Real report is done, but still pacing the reveal timer for effect.
-    progressPct = Math.max(progressPct, 90)
-  }
-
+  // progressPct stays purely time-paced even after the real report is
+  // done (isReady) - it must never leak how fast Gemini actually finished.
   const stageIdx = Math.min(STAGE_LABELS.length - 1, Math.floor((progressPct / 100) * STAGE_LABELS.length))
 
   return NextResponse.json({

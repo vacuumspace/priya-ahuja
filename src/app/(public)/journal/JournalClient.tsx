@@ -146,8 +146,13 @@ export function JournalClient({
                 </button>
               )
             })}
+            {/* End date sits in the grid right after the last box: beside it
+                when the last row has room (100 days in 15 cols leaves 5), else
+                on its own row under it, right-aligned. */}
+            <span className="col-span-full sm:col-span-5 lg:col-span-full flex items-center justify-end sm:justify-start lg:justify-end font-sans text-[10px] text-ink/50 whitespace-nowrap">
+              {formatShortDate(CHALLENGE_END_DATE)}
+            </span>
           </div>
-          <span className="font-sans text-[10px] text-ink/30 block mt-1 text-right">{formatShortDate(CHALLENGE_END_DATE)}</span>
 
           <div className="flex items-center justify-end gap-3 text-[11px] font-sans text-ink/50 mt-2">
             <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-sm bg-peach-dark inline-block" /> posted</span>

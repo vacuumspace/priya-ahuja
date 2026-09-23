@@ -106,12 +106,18 @@ function Wizard({
   const [answers, setAnswers] = useState<Record<string, string | string[]>>(initialAnswers)
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState("")
+  // On the last question, saving the answer and submitting the whole report
+  // are two separate confirmations. Tracking which step was last saved
+  // (rather than a plain boolean) means moving off the step - or editing the
+  // answer again - naturally invalidates it with no extra effect needed.
+  const [lastSavedStep, setLastSavedStep] = useState<number | null>(null)
 
   const question = IDEA_GEN_QUESTIONS[step]
   const value = answers[question.id]
   const hasValue = Array.isArray(value) ? value.length > 0 : !!(value && value.trim?.() !== "")
   const canAdvance = question.optional || hasValue
   const isLast = step === IDEA_GEN_QUESTIONS.length - 1
+  const lastSaved = lastSavedStep === step
 
   async function saveAnswer(nextStep: number) {
     setSaving(true)
@@ -126,21 +132,29 @@ function Wizard({
     }
   }
 
+  async function handleSubmitReport() {
+    setSaving(true)
+    setError("")
+    try {
+      const res = await fetch(`/api/tools/idea-generator/${id}/submit`, { method: "POST" })
+      const data = await res.json()
+      if (!res.ok) throw new Error(data.error || "Something went wrong")
+      onSubmitted()
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong")
+      setSaving(false)
+    }
+  }
+
   async function handleNext() {
     if (!canAdvance) return
     if (isLast) {
-      await saveAnswer(step)
-      setSaving(true)
-      setError("")
-      try {
-        const res = await fetch(`/api/tools/idea-generator/${id}/submit`, { method: "POST" })
-        const data = await res.json()
-        if (!res.ok) throw new Error(data.error || "Something went wrong")
-        onSubmitted()
-      } catch (err) {
-        setError(err instanceof Error ? err.message : "Something went wrong")
-        setSaving(false)
+      if (!lastSaved) {
+        await saveAnswer(step)
+        setLastSavedStep(step)
+        return
       }
+      await handleSubmitReport()
       return
     }
     const nextStep = step + 1
@@ -152,6 +166,29 @@ function Wizard({
     if (step === 0) return
     setStep(step - 1)
   }
+
+  function handleAnswerChange(v: string | string[]) {
+    setAnswers((prev) => ({ ...prev, [question.id]: v }))
+    if (lastSaved) setLastSavedStep(null)
+  }
+
+  // Enter advances to the next question (Shift+Enter still makes a newline
+  // in the textarea questions). handleNext is read via a ref, kept current
+  // after every render, so the listener itself only attaches once.
+  const handleNextRef = useRef(handleNext)
+  useEffect(() => {
+    handleNextRef.current = handleNext
+  })
+
+  useEffect(() => {
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key !== "Enter" || e.shiftKey || e.isComposing) return
+      e.preventDefault()
+      handleNextRef.current()
+    }
+    window.addEventListener("keydown", onKeyDown)
+    return () => window.removeEventListener("keydown", onKeyDown)
+  }, [])
 
   const totalAnswered = IDEA_GEN_QUESTIONS.filter((q) => {
     const v = answers[q.id]
@@ -182,10 +219,15 @@ function Wizard({
         </p>
         {question.helper && <p className="font-sans text-xs text-ink/45 mb-4 leading-relaxed">{question.helper}</p>}
         <div className={question.helper ? "" : "mt-4"}>
-          <QuestionInput question={question} value={value} onChange={(v) => setAnswers((prev) => ({ ...prev, [question.id]: v }))} />
+          <QuestionInput question={question} value={value} onChange={handleAnswerChange} />
         </div>
       </div>
 
+      {isLast && lastSaved && !saving && (
+        <p className="font-sans text-xs text-amber-700 mt-3">
+          saved. submitting locks all your answers for good - you won&apos;t be able to check or edit them again.
+        </p>
+      )}
       {error && <p className="font-sans text-xs text-red-600 mt-3">{error}</p>}
 
       <div className="flex items-center justify-between mt-6">
@@ -205,7 +247,7 @@ function Wizard({
             canAdvance && !saving ? "bg-ink text-cream hover:bg-ink/80" : "bg-ink/20 text-ink/40 cursor-not-allowed"
           )}
         >
-          {saving ? "saving..." : isLast ? "submit - lock in my answers" : "next"}
+          {saving ? "saving..." : isLast ? (lastSaved ? "submit - lock in my answers" : "save answer") : "next"}
           {!saving && <ArrowRight size={14} />}
         </button>
       </div>
@@ -227,7 +269,7 @@ function ProgressView({
       <div className="w-14 h-14 rounded-2xl bg-peach/40 flex items-center justify-center mx-auto mb-6">
         <Sparkles size={24} className="text-peach-dark" />
       </div>
-      <h1 className="font-heading text-2xl font-bold text-ink mb-2 lowercase">researching your report</h1>
+      <h1 className="font-heading text-2xl font-bold text-ink mb-2 lowercase">this could be the beginning of something big</h1>
       <p key={stageLabel} className="font-sans text-sm text-ink/55 mb-8 animate-in fade-in duration-500">{stageLabel}</p>
 
       <div className="w-full bg-border rounded-full h-3 mb-2">
@@ -238,9 +280,18 @@ function ProgressView({
       </div>
       <p className="font-sans text-xs text-ink/40">{progressPct}%</p>
 
-      <p className="font-sans text-xs text-ink/35 mt-8 leading-relaxed">
-        this takes 45-60 minutes - we&apos;re actually researching your market and competitors, not showing a spinner. you can close this tab and come back anytime; your report will be waiting.
-      </p>
+      <ul className="text-left max-w-sm mx-auto mt-8 space-y-2">
+        {[
+          "this takes 45-60 minutes - real research on your market and competitors",
+          "you can close this tab and come back anytime; your report will be waiting",
+          "your answers are locked now - you can't check or edit them anymore",
+        ].map((point, i) => (
+          <li key={i} className="flex gap-2 font-sans text-xs text-ink/40 leading-relaxed">
+            <span className="text-peach-dark flex-shrink-0">•</span>
+            {point}
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }
@@ -279,6 +330,17 @@ function IdeaCard({ idea, index }: { idea: GeneratedIdea; index: number }) {
           <p className="font-sans text-sm text-ink/60 leading-relaxed">{idea.oneLiner}</p>
         </div>
 
+        <div className="grid grid-cols-2 gap-3 pb-2">
+          <div>
+            <p className="text-[11px] font-sans text-ink/30 uppercase tracking-wide">capital needed</p>
+            <p className="font-sans text-sm font-semibold text-ink">{idea.capitalNeeded}</p>
+          </div>
+          <div>
+            <p className="text-[11px] font-sans text-ink/30 uppercase tracking-wide">time to first revenue</p>
+            <p className="font-sans text-sm font-semibold text-ink">{idea.timeToFirstRevenue}</p>
+          </div>
+        </div>
+
         {[
           ["why this fits you", idea.whyThisFitsYou],
           ["the problem", idea.theProblem],
@@ -308,6 +370,7 @@ function IdeaCard({ idea, index }: { idea: GeneratedIdea; index: number }) {
         {[
           ["differentiation", idea.differentiation],
           ["business model", idea.businessModel],
+          ["mvp - what to build first", idea.mvp],
         ].map(([label, text]) => text && (
           <Section key={label} label={label}>
             <p className="font-sans text-[13px] text-ink/70 leading-relaxed">{text}</p>
@@ -333,17 +396,6 @@ function IdeaCard({ idea, index }: { idea: GeneratedIdea; index: number }) {
             </div>
           </Section>
         )}
-
-        <div className="grid grid-cols-2 gap-3 pt-3">
-          <div>
-            <p className="text-[11px] font-sans text-ink/30 uppercase tracking-wide">capital needed</p>
-            <p className="font-sans text-sm font-semibold text-ink">{idea.capitalNeeded}</p>
-          </div>
-          <div>
-            <p className="text-[11px] font-sans text-ink/30 uppercase tracking-wide">time to first revenue</p>
-            <p className="font-sans text-sm font-semibold text-ink">{idea.timeToFirstRevenue}</p>
-          </div>
-        </div>
 
         {idea.biggestRisk && (
           <Section label="biggest risk">

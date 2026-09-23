@@ -138,7 +138,11 @@ export const IDEA_GEN_QUESTIONS: GenQuestion[] = [
     id: "businessTypePreference",
     prompt: "any preference on the type of business?",
     type: "multiselect",
-    options: ["D2C / brand", "SaaS / tech", "services", "marketplace", "content / media", "deep tech", "no preference"],
+    options: [
+      "D2C / brand", "SaaS / tech", "consumer app", "services", "marketplace",
+      "fintech", "healthtech", "edtech", "agritech", "manufacturing / hardware",
+      "content / media / creator economy", "deep tech", "no preference",
+    ],
     optional: true,
   },
   {

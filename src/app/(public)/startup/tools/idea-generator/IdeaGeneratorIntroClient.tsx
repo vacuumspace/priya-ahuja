@@ -2,10 +2,10 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { signIn } from "next-auth/react"
 import { loadRazorpay } from "@/lib/load-razorpay"
-import { ArrowRight, CheckCircle, MessageCircleQuestion, Search, FileText, ChevronDown, ChevronUp } from "lucide-react"
+import { ArrowRight, CheckCircle, MessageCircleQuestion, Search, FileText, ChevronDown, ChevronUp, X } from "lucide-react"
 import SampleReportBanner from "@/components/SampleReportBanner"
+import SignInOptions from "@/components/SignInOptions"
 import { trackCta } from "@/lib/analytics"
 
 declare global {
@@ -30,6 +30,7 @@ const SAMPLE_IDEA = {
   keyCompetitors: ["Camera-based home monitoring brands - functional but parents resent the surveillance feel and often unplug them", "Human caregiver placement services - trustworthy but expensive, hard to verify remotely, and don't scale"],
   differentiation: "The wedge is dignity: no camera, no constant video feed, just a warm daily digest built from ambient listening - designed to feel like care, not surveillance, which is precisely what makes elderly parents willing to actually keep it on.",
   businessModel: "Sell the pendant hardware near cost to remove the adoption barrier, and make the real margin on a monthly subscription for the AI digest and family app - similar to how connected fitness hardware monetizes on the ongoing service, not the device.",
+  mvp: "A single hardware prototype with one feature only: ambient listening that produces one daily text digest, sent to the child over WhatsApp. No app, no dashboard, no mood-scoring algorithm yet - just enough to test whether the digest itself, however roughly generated, changes behavior and earns trust. Everything else (a polished app, multiple family members, health integrations) waits until this core loop is proven.",
   gtmPlan: [
     { phase: "days 1-30", steps: ["Build a working pendant prototype with a single core feature: the daily digest", "Recruit 10 NRI families personally for a paid pilot"] },
     { phase: "days 31-60", steps: ["Refine the digest based on real pilot feedback on tone and false alerts", "Start word-of-mouth referrals through NRI community WhatsApp and Facebook groups"] },
@@ -79,6 +80,17 @@ function SampleReport() {
             <p className="font-sans text-sm text-ink/60 leading-relaxed">{SAMPLE_IDEA.oneLiner}</p>
           </div>
 
+          <div className="grid grid-cols-2 gap-3 pb-2">
+            <div>
+              <p className="text-[11px] font-sans text-ink/30 uppercase tracking-wide">capital needed</p>
+              <p className="font-sans text-sm font-semibold text-ink">{SAMPLE_IDEA.capitalNeeded}</p>
+            </div>
+            <div>
+              <p className="text-[11px] font-sans text-ink/30 uppercase tracking-wide">time to first revenue</p>
+              <p className="font-sans text-sm font-semibold text-ink">{SAMPLE_IDEA.timeToFirstRevenue}</p>
+            </div>
+          </div>
+
           {[
             ["why this fits you", SAMPLE_IDEA.whyThisFitsYou],
             ["the problem", SAMPLE_IDEA.theProblem],
@@ -106,6 +118,7 @@ function SampleReport() {
           {[
             ["differentiation", SAMPLE_IDEA.differentiation],
             ["business model", SAMPLE_IDEA.businessModel],
+            ["mvp - what to build first", SAMPLE_IDEA.mvp],
           ].map(([label, text]) => (
             <Section key={label} label={label}>
               <p className="font-sans text-[13px] text-ink/70 leading-relaxed">{text}</p>
@@ -129,17 +142,6 @@ function SampleReport() {
               ))}
             </div>
           </Section>
-
-          <div className="grid grid-cols-2 gap-3 pt-3">
-            <div>
-              <p className="text-[11px] font-sans text-ink/30 uppercase tracking-wide">capital needed</p>
-              <p className="font-sans text-sm font-semibold text-ink">{SAMPLE_IDEA.capitalNeeded}</p>
-            </div>
-            <div>
-              <p className="text-[11px] font-sans text-ink/30 uppercase tracking-wide">time to first revenue</p>
-              <p className="font-sans text-sm font-semibold text-ink">{SAMPLE_IDEA.timeToFirstRevenue}</p>
-            </div>
-          </div>
 
           <Section label="biggest risk">
             <div className="space-y-2">
@@ -179,6 +181,7 @@ export default function IdeaGeneratorIntroClient({
   const isSignedIn = !!userEmail
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
+  const [showSignIn, setShowSignIn] = useState(false)
 
   async function goToWizard() {
     setLoading(true)
@@ -255,18 +258,18 @@ export default function IdeaGeneratorIntroClient({
     <button
       onClick={
         !isSignedIn
-          ? () => signIn("google", { callbackUrl: "/startup/tools/idea-generator" })
+          ? () => setShowSignIn(true)
           : hasPaidUnlock
           ? goToWizard
           : handlePay
       }
       disabled={loading}
       className={cn(
-        "w-full inline-flex items-center justify-center gap-2 bg-ink text-cream font-sans text-base font-bold px-6 py-4 rounded-xl hover:bg-ink/80 transition-colors shadow-md disabled:opacity-60",
+        "w-full inline-flex items-center justify-center gap-2 bg-ink text-cream font-sans text-sm font-bold px-5 py-2.5 rounded-xl hover:bg-ink/80 transition-colors shadow-md disabled:opacity-60",
         className
       )}
     >
-      {!isSignedIn ? "Sign in to start" : loading ? "please wait..." : "Get personalised startup ideas"}
+      {loading ? "please wait..." : "Get personalised startup ideas"}
       <ArrowRight size={18} />
     </button>
   )
@@ -302,6 +305,7 @@ export default function IdeaGeneratorIntroClient({
               "market evidence, not guesses",
               "named competitors & the gap",
               "how it actually makes money",
+              "the MVP - what to build first",
               "a 30/60/90-day plan",
               "the biggest risk, and the fix",
               "the cheapest way to test it",
@@ -334,6 +338,26 @@ export default function IdeaGeneratorIntroClient({
 
         <SampleReport />
       </div>
+
+      {showSignIn && (
+        <div
+          className="fixed inset-0 bg-ink/40 backdrop-blur-sm z-50 flex items-end sm:items-center justify-center p-4"
+          onClick={(e) => { if (e.target === e.currentTarget) setShowSignIn(false) }}
+        >
+          <div className="bg-cream rounded-2xl w-full max-w-sm shadow-xl p-6">
+            <div className="flex items-start justify-between mb-4">
+              <h3 className="font-heading text-xl font-700 text-ink">sign in to continue</h3>
+              <button onClick={() => setShowSignIn(false)} className="text-ink/40 hover:text-ink transition-colors">
+                <X size={18} />
+              </button>
+            </div>
+            <p className="font-sans text-sm text-ink/60 mb-5 leading-relaxed">
+              sign in to pay and start your personalised startup ideas report.
+            </p>
+            <SignInOptions callbackUrl="/startup/tools/idea-generator" compact />
+          </div>
+        </div>
+      )}
     </div>
   )
 }
