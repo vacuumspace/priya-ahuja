@@ -98,6 +98,14 @@ export default function ToolsAdminClient({
       description: "Gemini-powered PDF pitch deck analysis - score, 20-section audit, story rewrites. Paid, sign-in required.",
       href: "/admin/pitch-decks",
     },
+    {
+      key: "tool_startup_idea_generator_live",
+      priceKey: "price_idea_generator",
+      defaultPrice: 99900,
+      label: "Personalised Startup Idea Generator",
+      description: "Pay-first, one-question-at-a-time intake, then a Gemini deep-research pipeline producing 5 personalised startup ideas over a 45-60min paced reveal.",
+      href: "/admin/idea-generator",
+    },
   ]
 
   return (

@@ -122,6 +122,19 @@ const content: Record<string, {
     ctaLabel: "View your full report",
     ctaPath: "/my-activity?tab=tools&sub=pitchdeck",
   },
+  "startup-idea-generator": {
+    subject: "Payment received - your intake questions are next",
+    headline: "You're in. Now let's build your report.",
+    body: "Head back and answer the intake questions one at a time - be specific, especially about your background and any personal pain points. The sharper your answers, the sharper your ideas.",
+    steps: [
+      "Answer honestly and in detail - vague answers produce generic ideas.",
+      "Once you submit, your answers lock - you can edit them right up until then, so take your time.",
+      "The research takes 45-60 minutes. You can close this and come back - your report will be waiting.",
+      "You'll get 5 ideas, each tied to a specific advantage from your background - not a generic list.",
+    ],
+    ctaLabel: "Continue to your questions",
+    ctaPath: "/startup/tools/idea-generator",
+  },
   default: {
     subject: "You're all set - here's how to get the most out of your purchase",
     headline: "You're in. Here's what to do next.",

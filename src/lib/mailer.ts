@@ -281,6 +281,7 @@ export async function sendPurchaseWelcome({
     "incubators-list":      "Your Incubator and Accelerator List - how to apply well",
     "startup-ideas-2026":   "Your 100 startup ideas - what to do next",
     "pitch-deck-analyser":  "Your pitch deck analysis is ready - here's how to use it",
+    "startup-idea-generator": "Payment received - your intake questions are next",
   }
   await sendMail({
     to,

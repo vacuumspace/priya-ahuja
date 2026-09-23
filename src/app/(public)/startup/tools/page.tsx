@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { Lightbulb } from "lucide-react"
+import { Lightbulb, Sparkles } from "lucide-react"
 
 const tools = [
   {
@@ -12,6 +12,14 @@ const tools = [
     tag: "ideation",
     icon: Lightbulb,
     href: "/startup/tools/idea-score",
+  },
+  {
+    slug: "idea-generator",
+    title: "Personalised Startup Idea Generator",
+    description: "Don't have an idea yet? Tell us your background, education, work experience, skills, and constraints - capital, time, risk appetite, whether you want to bootstrap or go venture-scale. We deep-research your specific unfair advantages against real market and competitor data and hand you 5 niche, non-obvious ideas built around what only you can execute.",
+    tag: "ideation",
+    icon: Sparkles,
+    href: "/startup/tools/idea-generator",
   },
 ]
 

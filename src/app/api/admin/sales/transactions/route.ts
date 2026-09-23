@@ -1,6 +1,6 @@
 import { auth, isAdmin } from "@/lib/auth"
 import { db } from "@/lib/db"
-import { bookings, purchases, startupScores, startupIdeaScores, pitchDeckAnalyses, pitchDeckUnlocks, toolUnlocks, services, digitalProducts, users, priyaGptTimeTransactions, priyaGptTimeUnlocks, workshopRegistrations, workshops, courseEnrollments, courseGifts } from "@/lib/db/schema"
+import { bookings, purchases, startupScores, startupIdeaScores, pitchDeckAnalyses, pitchDeckUnlocks, toolUnlocks, services, digitalProducts, users, priyaGptTimeTransactions, priyaGptTimeUnlocks, workshopRegistrations, workshops, courseEnrollments, courseGifts, ideaGenReports } from "@/lib/db/schema"
 import { and, eq, gt, inArray, isNotNull, isNull, like, or } from "drizzle-orm"
 import { getCourse } from "@/lib/courses-data"
 
@@ -20,7 +20,7 @@ export async function GET(req: Request) {
   const typeFilter = searchParams.get("type")
 
   // Fetch all sources
-  const [allBookings, allPurchases, allScores, allIdeaScores, allPitchDecks, unusedPitchDeckUnlocks, allPriyaGpt, unusedToolUnlocks, unusedPriyaGptUnlocks, allWorkshopRegistrations, allCourseEnrollments, allCourseGifts] = await Promise.all([
+  const [allBookings, allPurchases, allScores, allIdeaScores, allPitchDecks, unusedPitchDeckUnlocks, allPriyaGpt, unusedToolUnlocks, unusedPriyaGptUnlocks, allWorkshopRegistrations, allCourseEnrollments, allCourseGifts, allIdeaGenReports] = await Promise.all([
     db
       .select({
         id: bookings.id,
@@ -185,6 +185,21 @@ export async function GET(req: Request) {
       .select()
       .from(courseGifts)
       .where(and(inArray(courseGifts.status, ["paid", "redeemed"]), isNotNull(courseGifts.razorpayPaymentId))),
+
+    // Pay-first tool - every row already represents a captured payment,
+    // regardless of where the user got to (answering/locked/ready/failed).
+    db
+      .select({
+        id: ideaGenReports.id,
+        status: ideaGenReports.status,
+        amountPaid: ideaGenReports.amountPaid,
+        razorpayPaymentId: ideaGenReports.razorpayPaymentId,
+        createdAt: ideaGenReports.createdAt,
+        userName: users.name,
+        userEmail: users.email,
+      })
+      .from(ideaGenReports)
+      .leftJoin(users, eq(ideaGenReports.userId, users.id)),
   ])
 
   type TxRow = {
@@ -266,17 +281,21 @@ export async function GET(req: Request) {
       status: r.unlockStatus,
       createdAt: r.createdAt,
     })),
-    ...unusedToolUnlocks.map((r) => ({
-      id: r.id,
-      type: r.tool === "startup-idea-score" ? "ideascore" : "score",
-      userName: r.userName ?? "Unknown",
-      userEmail: r.userEmail ?? "",
-      itemName: `${r.tool === "startup-idea-score" ? "Startup Idea Score" : "Startup Score"} ${r.unlockStatus === "refunded" ? "(refunded, not taken)" : "(paid, not taken yet)"}`,
-      amount: r.amountPaise,
-      razorpayPaymentId: r.razorpayPaymentId,
-      status: r.unlockStatus,
-      createdAt: r.createdAt,
-    })),
+    ...unusedToolUnlocks.map((r) => {
+      const toolLabel = r.tool === "startup-idea-score" ? "Startup Idea Score" : r.tool === "startup-idea-generator" ? "Idea Generator" : "Startup Score"
+      const toolType = r.tool === "startup-idea-score" ? "ideascore" : r.tool === "startup-idea-generator" ? "ideagenerator" : "score"
+      return {
+        id: r.id,
+        type: toolType,
+        userName: r.userName ?? "Unknown",
+        userEmail: r.userEmail ?? "",
+        itemName: `${toolLabel} ${r.unlockStatus === "refunded" ? "(refunded, not started)" : "(paid, not started yet)"}`,
+        amount: r.amountPaise,
+        razorpayPaymentId: r.razorpayPaymentId,
+        status: r.unlockStatus,
+        createdAt: r.createdAt,
+      }
+    }),
     ...allPriyaGpt.map((r) => ({
       id: r.id,
       type: "priyagpt",
@@ -330,6 +349,17 @@ export async function GET(req: Request) {
       userName: r.purchaserName,
       userEmail: r.purchaserEmail,
       itemName: `${getCourse(r.courseSlug)?.title ?? "Course"} - gift for ${r.recipientName ?? "someone"}`,
+      amount: r.amountPaid,
+      razorpayPaymentId: r.razorpayPaymentId,
+      status: "paid",
+      createdAt: r.createdAt,
+    })),
+    ...allIdeaGenReports.map((r) => ({
+      id: r.id,
+      type: "ideagenerator",
+      userName: r.userName ?? "Unknown",
+      userEmail: r.userEmail ?? "",
+      itemName: `Idea Generator${r.status !== "ready" ? ` (${r.status})` : ""}`,
       amount: r.amountPaid,
       razorpayPaymentId: r.razorpayPaymentId,
       status: "paid",

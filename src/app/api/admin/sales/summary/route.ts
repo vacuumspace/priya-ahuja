@@ -1,6 +1,6 @@
 import { auth, isAdmin } from "@/lib/auth"
 import { db } from "@/lib/db"
-import { bookings, purchases, startupScores, startupIdeaScores, pitchDeckAnalyses, pitchDeckUnlocks, toolUnlocks, digitalProducts, priyaGptTimeTransactions, priyaGptTimeUnlocks, workshopRegistrations, courseEnrollments, courseGifts } from "@/lib/db/schema"
+import { bookings, purchases, startupScores, startupIdeaScores, pitchDeckAnalyses, pitchDeckUnlocks, toolUnlocks, digitalProducts, priyaGptTimeTransactions, priyaGptTimeUnlocks, workshopRegistrations, courseEnrollments, courseGifts, ideaGenReports } from "@/lib/db/schema"
 import { and, eq, gt, inArray, isNotNull, isNull, like, or } from "drizzle-orm"
 
 export async function GET() {
@@ -9,7 +9,7 @@ export async function GET() {
     return new Response("Forbidden", { status: 403 })
   }
 
-  const [allBookings, allPurchases, allScores, allIdeaScores, allPitchDecks, unusedPitchDeckUnlocks, priyaGptPurchases, unusedToolUnlocks, unusedPriyaGptUnlocks, allWorkshopRegistrations, allCourseEnrollments, allCourseGifts] = await Promise.all([
+  const [allBookings, allPurchases, allScores, allIdeaScores, allPitchDecks, unusedPitchDeckUnlocks, priyaGptPurchases, unusedToolUnlocks, unusedPriyaGptUnlocks, allWorkshopRegistrations, allCourseEnrollments, allCourseGifts, allIdeaGenReports] = await Promise.all([
     db
       .select({ createdAt: bookings.createdAt, amount: bookings.amountPaid })
       .from(bookings)
@@ -89,6 +89,11 @@ export async function GET() {
       .select({ createdAt: courseGifts.createdAt, amount: courseGifts.amountPaid })
       .from(courseGifts)
       .where(and(inArray(courseGifts.status, ["paid", "redeemed"]), isNotNull(courseGifts.razorpayPaymentId))),
+
+    // Pay-first tool - every row here already represents a captured payment.
+    db
+      .select({ createdAt: ideaGenReports.createdAt, amountPaid: ideaGenReports.amountPaid })
+      .from(ideaGenReports),
   ])
 
   function monthKey(d: Date) {
@@ -110,7 +115,7 @@ export async function GET() {
   }
 
   type Seg = { revenue: number; count: number }
-  type MonthData = { revenue: number; count: number; sessions: Seg; templates: Seg; investorList: Seg; priyagpt: Seg; pitchDeck: Seg; score: Seg; workshops: Seg; courses: Seg }
+  type MonthData = { revenue: number; count: number; sessions: Seg; templates: Seg; investorList: Seg; priyagpt: Seg; pitchDeck: Seg; score: Seg; workshops: Seg; courses: Seg; ideaGenerator: Seg }
   const monthly: Record<string, MonthData> = {}
   for (const k of months) {
     monthly[k] = {
@@ -123,6 +128,7 @@ export async function GET() {
       score: { revenue: 0, count: 0 },
       workshops: { revenue: 0, count: 0 },
       courses: { revenue: 0, count: 0 },
+      ideaGenerator: { revenue: 0, count: 0 },
     }
   }
 
@@ -237,11 +243,22 @@ export async function GET() {
     }
   }
 
+  let ideaGeneratorRevenue = 0, ideaGeneratorCount = 0
+  for (const r of allIdeaGenReports) {
+    const amt = r.amountPaid ?? 0
+    ideaGeneratorRevenue += amt; ideaGeneratorCount++
+    const k = monthKey(r.createdAt)
+    if (monthly[k]) {
+      monthly[k].revenue += amt; monthly[k].count++
+      monthly[k].ideaGenerator.revenue += amt; monthly[k].ideaGenerator.count++
+    }
+  }
+
   const monthlyChart = months.map(k => ({ key: k, label: monthLabel(k), ...monthly[k] }))
 
   return Response.json({
-    totalRevenue: sessionRevenue + templateRevenue + investorListRevenue + priyaGptRevenue + pitchDeckRevenue + scoreRevenue + workshopRevenue + courseRevenue,
-    totalTransactions: sessionCount + templateCount + investorListCount + scoreCount + priyaGptCount + pitchDeckCount + workshopCount + courseCount,
+    totalRevenue: sessionRevenue + templateRevenue + investorListRevenue + priyaGptRevenue + pitchDeckRevenue + scoreRevenue + workshopRevenue + courseRevenue + ideaGeneratorRevenue,
+    totalTransactions: sessionCount + templateCount + investorListCount + scoreCount + priyaGptCount + pitchDeckCount + workshopCount + courseCount + ideaGeneratorCount,
     byType: [
       { label: "Sessions",      revenue: sessionRevenue,     count: sessionCount },
       { label: "Templates",     revenue: templateRevenue,    count: templateCount },
@@ -251,6 +268,7 @@ export async function GET() {
       { label: "PriyaGPT",      revenue: priyaGptRevenue,    count: priyaGptCount },
       { label: "Workshops",     revenue: workshopRevenue,    count: workshopCount },
       { label: "Courses",       revenue: courseRevenue,      count: courseCount },
+      { label: "Idea Generator", revenue: ideaGeneratorRevenue, count: ideaGeneratorCount },
     ],
     monthly: monthlyChart,
   })

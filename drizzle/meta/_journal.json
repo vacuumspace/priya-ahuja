@@ -351,6 +351,13 @@
       "when": 1790096457000,
       "tag": "0049_scheduled_at_timestamptz",
       "breakpoints": true
+    },
+    {
+      "idx": 50,
+      "version": "7",
+      "when": 1790100263801,
+      "tag": "0050_parallel_jack_flag",
+      "breakpoints": true
     }
   ]
 }

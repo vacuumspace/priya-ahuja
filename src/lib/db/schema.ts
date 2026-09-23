@@ -253,6 +253,30 @@ export const startupIdeaScores = pgTable("startup_idea_scores", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
 })
 
+// Personalised Startup Idea Generator. Pay-first (see tool_unlocks, tool =
+// 'startup-idea-generator') - the wizard only unlocks after payment. Answers
+// are write-once: editable while status = 'answering', then locked forever
+// once submitted so the questions themselves stay a moat (never re-shown,
+// never referenced in the generated report's own text).
+export const ideaGenReports = pgTable("idea_gen_reports", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  status: varchar("status", { length: 20 }).notNull().default("answering"), // answering | locked | ready | failed
+  answers: jsonb("answers").notNull().default({}), // draft while answering; frozen at submit
+  currentStep: integer("current_step").notNull().default(0),
+  submittedAt: timestamp("submitted_at"),
+  // Random 45-60min target set at submit time - purely a UI pacing device for
+  // the progress bar, decoupled from how long Gemini actually takes.
+  revealAt: timestamp("reveal_at"),
+  report: jsonb("report"), // final IdeaGenReport JSON once generation finishes
+  generationError: text("generation_error"),
+  amountPaid: integer("amount_paid"), // paise actually captured
+  razorpayOrderId: text("razorpay_order_id"),
+  razorpayPaymentId: text("razorpay_payment_id"),
+  adminSeen: boolean("admin_seen").notNull().default(false),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+})
+
 export const pitchDeckAnalyses = pgTable("pitch_deck_analyses", {
   id: uuid("id").primaryKey().defaultRandom(),
   userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
